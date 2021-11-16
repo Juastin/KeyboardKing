@@ -8,7 +8,7 @@ using System.Windows.Controls;
 
 namespace KeyboardKing.core
 {
-    public class JumpPage : Page
+    public abstract class JumpPage : Page
     {
         /// <summary>
         /// Parent Window that contains the Frame.
