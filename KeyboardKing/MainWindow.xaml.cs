@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -30,6 +31,13 @@ namespace KeyboardKing
         private Frame _mainFrame {get;set;}
 
         /// <summary>
+        /// Used to handle background tasks.
+        /// </summary>
+        private Timer _timer {get;set;}
+
+        private string _currentPage {get;set;}
+
+        /// <summary>
         /// Dictionary of pages that are used in the app.
         /// </summary>
         private Dictionary<string, JumpPage> _pages {get;set;}
@@ -37,6 +45,11 @@ namespace KeyboardKing
         public MainWindow()
         {
             InitializeComponent();
+
+            _timer = new Timer();
+            _timer.Elapsed += new ElapsedEventHandler(Tick);
+            _timer.Interval = 1000;
+            _timer.Start();
 
             _mainFrame = MainFrame;
             _pages = new()
@@ -66,6 +79,20 @@ namespace KeyboardKing
         public void Navigate(string pageName)
         {
             _mainFrame.Navigate(_pages[pageName]);
+            _currentPage = pageName;
+        }
+
+        public void Navigate(JumpPage oldPage, string pageName)
+        {
+            oldPage.OnShadow();
+            _mainFrame.Navigate(_pages[pageName]);
+            _pages[pageName].OnLoad();
+            _currentPage = pageName;
+        }
+
+        private void Tick(object sender, EventArgs e)
+        {
+            _pages[_currentPage].OnTick();
         }
     }
 }
