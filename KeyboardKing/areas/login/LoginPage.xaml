@@ -9,6 +9,6 @@
       Title="LoginPage">
     <Grid>
         <Label Content="LoginPage" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"/>
-        <Button Content="Ga naar register" Tag="RegisterPage1" Click="ButtonNavigate" HorizontalAlignment="Left" Margin="49,114,0,0" VerticalAlignment="Top" Height="81" Width="227" Background="#FF363636" BorderBrush="White" Foreground="White" FontSize="20"/>
+        <Button Content="Ga naar register" Tag="RegisterPage" Click="ButtonNavigate" HorizontalAlignment="Left" Margin="49,114,0,0" VerticalAlignment="Top" Height="81" Width="227" Background="#FF363636" BorderBrush="White" Foreground="White" FontSize="20"/>
     </Grid>
 </local:JumpPage>

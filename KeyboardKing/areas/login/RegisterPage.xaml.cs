@@ -17,11 +17,11 @@ using System.Windows.Shapes;
 namespace KeyboardKing.areas.login
 {
     /// <summary>
-    /// Interaction logic for RegisterPage2.xaml
+    /// Interaction logic for RegisterPage.xaml
     /// </summary>
-    public partial class RegisterPage2 : JumpPage
+    public partial class RegisterPage : JumpPage
     {
-        public RegisterPage2(MainWindow w) : base(w)
+        public RegisterPage(MainWindow w) : base(w)
         {
             InitializeComponent();
         }

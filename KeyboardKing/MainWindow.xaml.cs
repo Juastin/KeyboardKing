@@ -43,7 +43,7 @@ namespace KeyboardKing
             {
                 // login area
                 {"LoginPage", new LoginPage(this)},
-                {"RegisterPage1", new RegisterPage1(this)},
+                {"RegisterPage", new RegisterPage(this)},
                 {"RegisterPage2", new RegisterPage2(this)},
 
                 // main area
