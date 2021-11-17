@@ -25,5 +25,17 @@ namespace KeyboardKing.areas.main
         {
             InitializeComponent();
         }
+
+        public override void OnLoad()
+        {
+        }
+
+        public override void OnShadow()
+        {
+        }
+
+        public override void OnTick()
+        {
+        }
     }
 }

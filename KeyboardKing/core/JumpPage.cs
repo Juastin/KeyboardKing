@@ -25,7 +25,7 @@ namespace KeyboardKing.core
         /// </summary>
         public void Navigate(string pageName)
         {
-            _window.Navigate(pageName);
+            _window.Navigate(this, pageName);
         }
 
         /// <summary>
@@ -36,8 +36,23 @@ namespace KeyboardKing.core
         {
             if (sender is Button)
             {
-                _window.Navigate("" + ((Button)sender).Tag);
+                _window.Navigate(this, "" + ((Button)sender).Tag);
             }
         }
+
+        /// <summary>
+        /// Method that is called upon entering the view.
+        /// </summary>
+        public abstract void OnLoad();
+
+        /// <summary>
+        /// Method that is called upon leaving the view.
+        /// </summary>
+        public abstract void OnShadow();
+
+        /// <summary>
+        /// Method that is called every x seconds.
+        /// </summary>
+        public abstract void OnTick();
     }
 }
