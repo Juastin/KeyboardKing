@@ -19,11 +19,23 @@ namespace KeyboardKing.areas.login
     /// <summary>
     /// Interaction logic for RegistrationSkillPage.xaml
     /// </summary>
-    public partial class RegistrationSkillPage : JumpPage
+    public partial class RegisterSkillPage : JumpPage
     {
-        public RegistrationSkillPage(MainWindow w) : base(w)
+        public RegisterSkillPage(MainWindow w) : base(w)
         {
             InitializeComponent();
+        }
+
+        public override void OnLoad()
+        {
+        }
+
+        public override void OnShadow()
+        {
+        }
+
+        public override void OnTick()
+        {
         }
     }
 }
