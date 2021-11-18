@@ -36,6 +36,7 @@ namespace KeyboardKing.core
         {
             if (sender is Button)
             {
+                AudioPlayer.Play(AudioPlayer.Sound.click);
                 _window.Navigate(this, "" + ((Button)sender).Tag);
             }
         }
