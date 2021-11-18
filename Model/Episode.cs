@@ -9,5 +9,7 @@ namespace Model
     public class Episode
     {
         public List<EpisodeStep> EpisodeSteps { get; set; }
+        public int Mistakes { get; set; }
+        public int PassThreshold { get; set; }
     }
 }

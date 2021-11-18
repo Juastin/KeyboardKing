@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public class EpisodeStep
+    public class EpisodeResult
     {
-        public string Word { get; set; }
+        public int Mistakes { get; set; }
+        public int Score { get; set; }
+
     }
 }
