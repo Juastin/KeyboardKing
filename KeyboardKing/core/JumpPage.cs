@@ -54,5 +54,7 @@ namespace KeyboardKing.core
         /// Method that is called every x seconds.
         /// </summary>
         public abstract void OnTick();
+
+     
     }
 }

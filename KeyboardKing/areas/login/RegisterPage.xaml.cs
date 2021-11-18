@@ -28,6 +28,7 @@ namespace KeyboardKing.areas.login
 
         public override void OnLoad()
         {
+            
         }
 
         public override void OnShadow()
