@@ -41,11 +41,12 @@ namespace KeyboardKing.areas.login
 
         public void BLogin(object sender, RoutedEventArgs e)
         {
-            string email = txtEmail.Text;
-            string password = txtPassword.Text;
+            string email = txtEmail.Text.ToString();
+            // Compare password in a function in Controller (hashing etc.)
+            string password = boxPassword.Password;
 
-            // Gegevens ophalen vanuit DB && Password & email vergelijken 
-            if (email == "hello" && password == "123")
+            // Get data from DB and compare data of password and email
+            if (email == "" &&  password == "")
             {
                 txtEmail.Text = "Succes!";
                 //ButtonNavigate(sender, e);
