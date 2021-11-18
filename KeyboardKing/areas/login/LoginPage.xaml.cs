@@ -38,5 +38,19 @@ namespace KeyboardKing.areas.login
         public override void OnTick()
         {
         }
+
+        public void BLogin(object sender, RoutedEventArgs e)
+        {
+            string email = txtEmail.Text;
+            string password = txtPassword.Text;
+
+            // Gegevens ophalen vanuit DB && Password & email vergelijken 
+            if (email == "hello" && password == "123")
+            {
+                txtEmail.Text = "Succes!";
+                //ButtonNavigate(sender, e);
+            }
+        }
+
     }
 }

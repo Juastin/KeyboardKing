@@ -9,6 +9,13 @@
       Title="LoginPage">
     <Grid>
         <Label Content="LoginPage" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"/>
-        <Button Content="Ga naar register" Tag="RegisterPage" Click="ButtonNavigate" HorizontalAlignment="Left" Margin="49,114,0,0" VerticalAlignment="Top" Height="81" Width="227" Background="#FF363636" BorderBrush="White" Foreground="White" FontSize="20"/>
+        <Label Content="Email" HorizontalAlignment="Left" Margin="61,124,0,0" VerticalAlignment="Top" Foreground="White" FontSize="25" Height="42" Width="128"/>
+        <TextBox Name="txtEmail" HorizontalAlignment="Left" Margin="61,175,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="28"/>
+        <Label Content="Password" HorizontalAlignment="Left" Margin="61,214,0,0" VerticalAlignment="Top" Foreground="White" FontSize="25" Height="42" Width="128"/>
+        <TextBox Name="txtPassword" HorizontalAlignment="Left" Margin="61,265,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="28"/>
+
+        <Button Content="Login" Tag="SettingsPage" Click="BLogin" HorizontalAlignment="Left" Margin="61,335,0,0" VerticalAlignment="Top" Height="53" Width="150" Background="#FF363636" BorderBrush="White" Foreground="White" FontSize="20"/>
+        <Button Content="Registreer" Tag="RegisterPage" Click="ButtonNavigate" HorizontalAlignment="Left" Margin="266,335,0,0" VerticalAlignment="Top" Height="53" Width="150" Background="#FF363636" BorderBrush="White" Foreground="White" FontSize="20"/>
+
     </Grid>
 </local:JumpPage>
