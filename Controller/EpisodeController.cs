@@ -19,10 +19,23 @@ namespace Controller
         {
             _currentEpisode = episode;
             _wordIndex = 0;
-            if (episode.EpisodeSteps.TryDequeue(out EpisodeStep step))
+            NextEpisodeStep();
+        }
+        public static void NextEpisodeStep()
+        {
+            if(_currentEpisode.EpisodeSteps.TryDequeue(out EpisodeStep step))
                 _currentEpisodeStep = step;
             else
                 throw new Exception("TryDequeue went wrong");
+        }
+        public static bool CheckInput(char input)
+        {
+            if (_currentEpisodeStep.Word[_wordIndex].Equals(input))
+                _wordIndex++;
+            else
+                return false;
+
+            return true;
         }
     }
 }
