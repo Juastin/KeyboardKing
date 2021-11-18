@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace Controller
 {
@@ -11,7 +12,7 @@ namespace Controller
         /// <summary>
         /// Database connection.
         /// </summary>
-        private static SqlConnection _connection {get;set;} = new SqlConnection("Data Source=127.0.0.1;Initial Catalog=KeyboardKing;User ID=sa;Password=OOSDDd4S1157279");
+        private static SqlConnection _connection {get;set;} = new SqlConnection(TripleDES.Decrypt(ConfigurationManager.AppSettings["connectionString"], "332cc6da-d757-4e80-a726-0bf6b615df09"));
 
         /// <summary>
         /// Used to query the DB.

@@ -75,8 +75,6 @@ namespace KeyboardKing
 
             // Navigate to the first view.
             Navigate("LoginPage");
-
-            DBHandler.test();
         }
 
         public void Navigate(string pageName)
