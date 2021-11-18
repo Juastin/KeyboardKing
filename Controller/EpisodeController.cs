@@ -13,6 +13,16 @@ namespace Controller
         private static EpisodeStep _currentEpisodeStep;
         private static int _wordIndex;
 
-        public static string Word { get => _currentEpisodeStep.Word; }
+        public static string Word { get => _currentEpisodeStep?.Word; }
+
+        public static void Initialise(Episode episode)
+        {
+            _currentEpisode = episode;
+            _wordIndex = 0;
+            if (episode.EpisodeSteps.TryDequeue(out EpisodeStep step))
+                _currentEpisodeStep = step;
+            else
+                throw new Exception("TryDequeue went wrong");
+        }
     }
 }
