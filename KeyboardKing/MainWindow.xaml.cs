@@ -1,4 +1,5 @@
-﻿using KeyboardKing.areas.login;
+﻿using Controller;
+using KeyboardKing.areas.login;
 using KeyboardKing.areas.main;
 using KeyboardKing.areas.play;
 using KeyboardKing.core;
