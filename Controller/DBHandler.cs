@@ -7,6 +7,7 @@ using System.Configuration;
 
 namespace Controller
 {
+    /// !!! NEVER USE THIS CLASS DIRECTLY, ONLY THROUGH DBQueries !!!
     internal static class DBHandler
     {
         /// <summary>
