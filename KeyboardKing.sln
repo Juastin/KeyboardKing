@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KeyboardKing", "KeyboardKin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controller", "Controller\Controller.csproj", "{38982C77-595B-4BD2-A734-9CB2A546A5C7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{F9B9C0FD-672A-465A-88ED-DCD7B336495D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +19,14 @@ Global
 		{1616F9BF-38CD-42B7-A463-5A4D836A7360}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1616F9BF-38CD-42B7-A463-5A4D836A7360}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1616F9BF-38CD-42B7-A463-5A4D836A7360}.Release|Any CPU.Build.0 = Release|Any CPU
-		{38982C77-595B-4BD2-A734-9CB2A546A5C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{38982C77-595B-4BD2-A734-9CB2A546A5C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{38982C77-595B-4BD2-A734-9CB2A546A5C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{38982C77-595B-4BD2-A734-9CB2A546A5C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21029D69-11BB-4D54-9D77-91576AD24447}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21029D69-11BB-4D54-9D77-91576AD24447}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21029D69-11BB-4D54-9D77-91576AD24447}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21029D69-11BB-4D54-9D77-91576AD24447}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9B9C0FD-672A-465A-88ED-DCD7B336495D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9B9C0FD-672A-465A-88ED-DCD7B336495D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9B9C0FD-672A-465A-88ED-DCD7B336495D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9B9C0FD-672A-465A-88ED-DCD7B336495D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
