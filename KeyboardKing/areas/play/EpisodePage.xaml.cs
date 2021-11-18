@@ -37,5 +37,15 @@ namespace KeyboardKing.areas.play
         public override void OnTick()
         {
         }
+
+        private void EpisodePage_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            var window = Window.GetWindow(this);
+            window.KeyDown += HandleKeyPress;
+        }
+        private void HandleKeyPress(object sender, KeyEventArgs e)
+        {
+            e.Key.ToString();
+        }
     }
 }

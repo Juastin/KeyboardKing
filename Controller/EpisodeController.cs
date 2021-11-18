@@ -30,6 +30,7 @@ namespace Controller
         }
         public static bool CheckInput(char input)
         {
+
             if (_currentEpisodeStep.Word[_wordIndex].Equals(input))
                 _wordIndex++;
             else
