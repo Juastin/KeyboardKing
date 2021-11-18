@@ -10,7 +10,7 @@
     <Grid>
         <Label Content="LoginPage" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"/>
         <Label Content="E-mail:" HorizontalAlignment="Left" Margin="70,155,0,0" VerticalAlignment="Top" Foreground="White" FontSize="25" Height="40" Width="82"/>
-        <Label Content="Wachtwoord:" HorizontalAlignment="Left" Margin="70,232,0,0" VerticalAlignment="Top" Foreground="White" FontSize="25" Height="40" Width="128"/>
+        <Label Content="Wachtwoord:" HorizontalAlignment="Left" Margin="70,232,0,0" VerticalAlignment="Top" Foreground="White" FontSize="25" Height="40" Width="155"/>
 
         <TextBox Name="txtEmail" HorizontalAlignment="Left" Margin="309,155,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="334" Height="48" FontSize="20" Foreground="White"  Background="#FF363636"  BorderBrush="White" VerticalContentAlignment="Center" Padding="10"/>
         <PasswordBox Name="boxPassword" HorizontalAlignment="Left" Margin="309,232,0,0" VerticalAlignment="Top" Width="334" Height="48" FontSize="20" Foreground="White"  Background="#FF363636"  BorderBrush="White" VerticalContentAlignment="Center" Padding="10"/>
