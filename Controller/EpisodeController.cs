@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Model;
 
 namespace Controller
@@ -30,13 +31,20 @@ namespace Controller
         }
         public static bool CheckInput(char input)
         {
-
             if (_currentEpisodeStep.Word[_wordIndex].Equals(input))
                 _wordIndex++;
             else
                 return false;
 
             return true;
+        }
+
+        public static void CheckInput(KeyEventArgs input)
+        {
+            if (input.Key == Key.A)
+            {
+                return;
+            }
         }
     }
 }
