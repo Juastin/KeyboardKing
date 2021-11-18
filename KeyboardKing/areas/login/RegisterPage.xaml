@@ -8,17 +8,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="RegisterPage1">
     <Grid>
-        <Label Content="RegisterPage" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"/>
-        <Label Content="E-mail:" HorizontalAlignment="Left" Margin="70,145,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" Height="40" Width="82"/>
-        <Label Content="Gebruikersnaam:" HorizontalAlignment="Left" Margin="70,222,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" Height="40" Width="161"/>
-        <Label Content="Wachtwoord:" HorizontalAlignment="Left" Margin="70,298,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" Height="40" Width="161"/>
-
-        <TextBox HorizontalAlignment="Left" Margin="309,145,0,0" Text="s1156321@student.windesheim.nl" TextWrapping="Wrap" VerticalAlignment="Top" Width="334" Height="48" FontSize="20" Foreground="White"  Background="#FF363636"  BorderBrush="White" VerticalContentAlignment="Center"  Padding="10"/>
-        <TextBox HorizontalAlignment="Left" Margin="309,222,0,0" Text="mareinvz" TextWrapping="Wrap" VerticalAlignment="Top" Width="199" Height="48" FontSize="20" Foreground="White"  Background="#FF363636"  BorderBrush="White" VerticalContentAlignment="Center" Padding="10"/>
-        <TextBox HorizontalAlignment="Left" Margin="309,298,0,0" Text=""  TextWrapping="Wrap" VerticalAlignment="Top" Width="199" Height="48" FontSize="20" Foreground="White"  Background="#FF363636"  BorderBrush="White" VerticalContentAlignment="Center"  Padding="10" />
-        <TextBox HorizontalAlignment="Left" Margin="556,298,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="199" Height="48" FontSize="20" Foreground="White"  Background="#FF363636"  BorderBrush="White" VerticalContentAlignment="Center" Padding="10" RenderTransformOrigin="0.548,1.021"/>
-
-        <Button Content="Ga naar login" Tag="LoginPage" Click="ButtonNavigate" HorizontalAlignment="Left" Margin="49,376,0,0" VerticalAlignment="Top" Height="51" Width="164" Background="#FF363636" BorderBrush="White" Foreground="White" FontSize="20"/>
-        <Button Content="Registreer" Tag="LoginPage" Click="ButtonNavigate" HorizontalAlignment="Left" Margin="591,376,0,0" VerticalAlignment="Top" Height="51" Width="164" Background="#FF363636" BorderBrush="White" Foreground="White" FontSize="20"/>
+        <Label Content="RegisterPage1" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"/>
+        <Button Content="Ga naar login" Tag="LoginPage" Click="ButtonNavigate" HorizontalAlignment="Left" Margin="49,114,0,0" VerticalAlignment="Top" Height="81" Width="227" Background="#FF363636" BorderBrush="White" Foreground="White" FontSize="20"/>
     </Grid>
 </local:JumpPage>
