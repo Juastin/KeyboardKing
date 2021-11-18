@@ -7,7 +7,7 @@ using System.Configuration;
 
 namespace Controller
 {
-    public static class DBHandler
+    internal static class DBHandler
     {
         /// <summary>
         /// Database connection.
