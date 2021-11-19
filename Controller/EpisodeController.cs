@@ -13,22 +13,26 @@ namespace Controller
     {
         private static Episode _currentEpisode;
         private static EpisodeStep _currentEpisodeStep;
-        public static int _wordIndex;
+        private static int _wordIndex;
+        private static int _wrongIndex;
 
         public static event EventHandler WordChanged;
 
         public static string Word { get => _currentEpisodeStep?.Word; }
-        public static string WordOverlay { get =>_currentEpisodeStep?.Word.Substring(0, _wordIndex); }
+        public static string WordOverlayCorrect { get =>_currentEpisodeStep?.Word.Substring(0, _wordIndex); }
+        public static string WordOverlayWrong { get =>_currentEpisodeStep?.Word.Substring(0, _wrongIndex); }
 
         public static void Initialise(Episode episode)
         {
             _currentEpisode = episode;
             _wordIndex = 0;
+            _wrongIndex = 0;
             NextEpisodeStep();
         }
         private static void NextEpisodeStep()
         {
             _wordIndex = 0;
+            _wrongIndex = 0;
             if(_currentEpisode.EpisodeSteps.TryDequeue(out EpisodeStep step))
                 _currentEpisodeStep = step;
             else
@@ -37,23 +41,21 @@ namespace Controller
             WordChanged?.Invoke(null, new EventArgs());
         }
 
-        private static void NextLetter()
+        private static void NextLetter(bool isCorrect)
         {
-            _wordIndex++;
+            if (isCorrect)
+                _wordIndex++;
+            else
+                _wrongIndex = _wordIndex + 1;
             if (_wordIndex >= _currentEpisodeStep.Word.Length)
                 NextEpisodeStep();
             else
                 WordChanged?.Invoke(null, new EventArgs());
         }
 
-        public static bool CheckInput(char input)
+        public static void CheckInput(char input)
         {
-            if (_currentEpisodeStep.Word[_wordIndex].Equals(input))
-                NextLetter();
-            else
-                return false;
-
-            return true;
+            NextLetter(_currentEpisodeStep.Word[_wordIndex].Equals(input));
         }
     }
 }

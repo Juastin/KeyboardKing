@@ -21,7 +21,8 @@
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0" x:Name="Word" Content="{Binding Word}" Foreground="White" FontSize="50"/>
-            <Label Grid.Column="0" x:Name="WordOverlay" Content="{Binding WordOverlay}" Foreground="Green" FontSize="50" Panel.ZIndex="10"/>
+            <Label Grid.Column="0" x:Name="WordOverlayWrong" Content="{Binding WordOverlayWrong}" Foreground="Red" FontSize="50"/>
+            <Label Grid.Column="0" x:Name="WordOverlayCorrect" Content="{Binding WordOverlayCorrect}" Foreground="Green" FontSize="50"/>
         </Grid>
     </Grid>
 </local:JumpPage>
