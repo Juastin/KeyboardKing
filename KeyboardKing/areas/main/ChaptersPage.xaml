@@ -61,6 +61,5 @@
                 </GroupStyle>
             </ListView.GroupStyle>
         </ListView>
-        <Button Content="Refresh" Tag="ChaptersPage" Click="Refresh_Click" HorizontalAlignment="Left" Margin="640,72,0,0" VerticalAlignment="Top" Height="37" Width="111" Background="#FF363636" BorderBrush="White" Foreground="White" FontSize="20"/>
     </Grid>
 </local:JumpPage>

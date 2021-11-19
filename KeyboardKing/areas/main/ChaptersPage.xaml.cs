@@ -41,11 +41,6 @@ namespace KeyboardKing.areas.main
         {
         }
 
-        private void Refresh_Click(object sender, RoutedEventArgs e)
-        {
-            LoadAllEpisodes();
-        }
-
         public void LoadAllEpisodes()
         {
             this.Dispatcher.Invoke(() =>
