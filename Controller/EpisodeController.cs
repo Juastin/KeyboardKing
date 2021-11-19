@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,29 +23,32 @@ namespace Controller
             _wordIndex = 0;
             NextEpisodeStep();
         }
-        public static void NextEpisodeStep()
+        private static void NextEpisodeStep()
         {
+            _wordIndex = 0;
             if(_currentEpisode.EpisodeSteps.TryDequeue(out EpisodeStep step))
                 _currentEpisodeStep = step;
             else
                 throw new Exception("TryDequeue went wrong");
+
+            Trace.WriteLine("NextEpsidoe");
         }
+
+        private static void NextLetter()
+        {
+            _wordIndex++;
+            if (_wordIndex >= _currentEpisodeStep.Word.Length)
+                NextEpisodeStep();
+        }
+
         public static bool CheckInput(char input)
         {
             if (_currentEpisodeStep.Word[_wordIndex].Equals(input))
-                _wordIndex++;
+                NextLetter();
             else
                 return false;
 
             return true;
-        }
-
-        public static void CheckInput(KeyEventArgs input)
-        {
-            if (input.Key == Key.A)
-            {
-                return;
-            }
         }
     }
 }

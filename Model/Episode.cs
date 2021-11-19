@@ -10,5 +10,10 @@ namespace Model
     {
         public Queue<EpisodeStep> EpisodeSteps { get; set; }
         public int PassThreshold { get; set; }
+
+        public Episode()
+        {
+            EpisodeSteps = new Queue<EpisodeStep>();
+        }
     }
 }
