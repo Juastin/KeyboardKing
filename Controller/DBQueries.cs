@@ -15,5 +15,12 @@ namespace Controller
         {
             return DBHandler.Query("SELECT id, username FROM [dbo].[User]");
         }
+
+        public static List<List<string>> GetAllEpisodes()
+        {
+            return DBHandler.Query("SELECT [dbo].[Chapter].name, episode, [dbo].[Episode].name FROM [dbo].[Episode]" +
+                                   "LEFT JOIN [dbo].[Chapter]" +
+                                   "ON [dbo].[Episode].chapterid = [dbo].[Chapter].id");
+        }
     }
 }
