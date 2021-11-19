@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Controller;
 
 namespace KeyboardKing.areas.login
 {
@@ -36,6 +37,23 @@ namespace KeyboardKing.areas.login
 
         public override void OnTick()
         {
+        }
+
+        public void BRegister(object sender, RoutedEventArgs e)
+        {
+            string email = txtemail.Text.ToString();
+            string username = txtusername.Text.ToString();
+            
+            string password = password1.Password;
+            string passwordcheck = password2.Password;
+            if (password.Equals(passwordcheck))
+            {
+                bool Adduser = DBQueries.AddUser(email, username, password);
+                if (Adduser)
+                {
+                    Navigate("LoginPage");
+                }
+            }
         }
     }
 }
