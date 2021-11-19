@@ -17,12 +17,9 @@
         <TextBox x:Name="UserInput" Background="Transparent" Foreground="Transparent" Grid.Column="0" LostFocus="UserInput_LostFocus" Text="" TextChanged="UserInput_TextChanged"/>
         <Label x:Name="Label" Content="EpisodePage" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"/>
         <Grid HorizontalAlignment="Center" VerticalAlignment="Center" TextOptions.TextFormattingMode="Display">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" x:Name="Word" Content="{Binding Word}" Foreground="White" FontSize="50"/>
-            <Label Grid.Column="0" x:Name="WordOverlayWrong" Content="{Binding WordOverlayWrong}" Foreground="Red" FontSize="50"/>
-            <Label Grid.Column="0" x:Name="WordOverlayCorrect" Content="{Binding WordOverlayCorrect}" Foreground="Green" FontSize="50"/>
+            <Label x:Name="Word" Content="{Binding Word}" Foreground="White" FontSize="50"/>
+            <Label x:Name="WordOverlayWrong" Content="{Binding WordOverlayWrong}" Foreground="Red" FontSize="50"/>
+            <Label x:Name="WordOverlayCorrect" Content="{Binding WordOverlayCorrect}" Foreground="Green" FontSize="50"/>
         </Grid>
     </Grid>
 </local:JumpPage>

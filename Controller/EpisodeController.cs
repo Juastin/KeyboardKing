@@ -52,7 +52,6 @@ namespace Controller
                 _wrongIndex = _wordIndex + 1;
                 _currentEpisodeResult.Mistakes++;
             }
-            Trace.WriteLine(_currentEpisodeResult.Mistakes);
                 
             if (_wordIndex >= _currentEpisodeStep.Word.Length)
                 NextEpisodeStep();
