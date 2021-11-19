@@ -6,9 +6,10 @@
       xmlns:local="clr-namespace:KeyboardKing.core"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="EpisodePage" Loaded="EpisodePage_OnLoaded">
+      Title="EpisodePage">
 
-    <Grid>
-        <Label Content="EpisodePage" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"/>
+    <Grid x:Name="Container">
+        <TextBox x:Name="UserInput" Background="Transparent" Foreground="Transparent" Grid.Column="0" LostFocus="UserInput_LostFocus" Text="" TextChanged="UserInput_TextChanged"/>
+        <Label x:Name="Label" Content="EpisodePage" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"/>
     </Grid>
 </local:JumpPage>

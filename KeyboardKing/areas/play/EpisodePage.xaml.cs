@@ -1,8 +1,10 @@
 ﻿using KeyboardKing.core;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -24,6 +26,7 @@ namespace KeyboardKing.areas.play
         public EpisodePage(MainWindow w) : base(w)
         {
             InitializeComponent();
+            this.UserInput.Focus();
         }
 
         public override void OnLoad()
@@ -38,14 +41,18 @@ namespace KeyboardKing.areas.play
         {
         }
 
-        private void EpisodePage_OnLoaded(object sender, RoutedEventArgs e)
+        private void UserInput_LostFocus(object sender, RoutedEventArgs e)
         {
-            var window = Window.GetWindow(this);
-            window.KeyDown += HandleKeyPress;
+            this.UserInput.Focus();
         }
-        private void HandleKeyPress(object sender, KeyEventArgs e)
+
+        private void UserInput_TextChanged(object sender, TextChangedEventArgs e)
         {
-            e.Key.ToString();
+            string txt = this.UserInput.Text;
+            char character = txt[^1];
+
+            if (character != 'a')
+                throw new Exception("wrong");
         }
     }
 }
