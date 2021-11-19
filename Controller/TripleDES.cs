@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
+using Konscious.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -37,6 +38,34 @@ namespace Controller
                     return Encoding.UTF8.GetString(tripleDESCryptoService.CreateDecryptor().TransformFinalBlock(data, 0, data.Length));
                 }
             }
+        }
+
+        // Argon2
+        //https://github.com/kmaragon/Konscious.Security.Cryptography
+        public static byte[] HashPassword(string password)
+        {
+            Argon2id argon2 = new Argon2id(Encoding.UTF8.GetBytes(password));
+            argon2.Salt = CreateSalt();
+            argon2.DegreeOfParallelism = 16;
+            argon2.Iterations = 40;
+            argon2.MemorySize = 8192;
+            return argon2.GetBytes(16);
+        }
+
+        public static bool VerifyHash(string email, string password)
+        {
+            // Change code to compare hash with DB data.
+            byte[] userHash = Array.Empty<byte>(); // get hash from db
+            byte[] loginHash = HashPassword(password); // hash password from LoginPage
+            return userHash.SequenceEqual(loginHash); //
+        }
+
+        private static byte[] CreateSalt()
+        {
+            byte[] buffer = new byte[16];
+            RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
+            rng.GetBytes(buffer);
+            return buffer;
         }
     }
 }
