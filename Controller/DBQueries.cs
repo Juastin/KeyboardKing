@@ -15,50 +15,29 @@ namespace Controller
         /// Example query.
         /// </summary>
         /// 
-        private static SqlConnection _connection { get; set; } = new SqlConnection(TripleDES.Decrypt(ConfigurationManager.AppSettings["connectionString"], "332cc6da-d757-4e80-a726-0bf6b615df09"));
 
         public static List<List<string>> GetAllUsers()
         {
-            return DBHandler.Query("SELECT id, username FROM [dbo].[User]");
+            return DBHandler.SelectQuery(new SqlCommand("INSERT INTO [dbo].[User] (username, email, password) VALUES (@username, @email, @password)", null));
         }
 
         public static bool AddUser(string username, string email, string password)
         {
+            SqlCommand cmd = new SqlCommand("INSERT INTO [dbo].[User] (username, email, password) VALUES (@username, @email, @password)", null);
+            SqlParameter usernameParam = new SqlParameter("@username", SqlDbType.VarChar, 255);
+            SqlParameter emailParam = new SqlParameter("@email", SqlDbType.VarChar, 255);
+            SqlParameter passwordParam = new SqlParameter("@password", SqlDbType.VarChar, 255);
 
-            /*  DBHandler.Query($"INSERT INTO User (username, email, password) VALUES ({username}, {email}, {password})");*/
+            usernameParam.Value = username;
+            emailParam.Value = email;
+            passwordParam.Value = password;
 
-            try
-            {
-                _connection.Open();
-                SqlCommand cmd = new SqlCommand("INSERT INTO [dbo].[User] (username, email, password) VALUES (@username, @email, @password)", _connection);
-                
+            cmd.Parameters.Add(usernameParam);
+            cmd.Parameters.Add(emailParam);
+            cmd.Parameters.Add(passwordParam);
 
-                SqlParameter usernameParam = new SqlParameter("@username", SqlDbType.VarChar, 255);
-                SqlParameter emailParam = new SqlParameter("@email", SqlDbType.VarChar, 255);
-                SqlParameter passwordParam = new SqlParameter("@password", SqlDbType.VarChar, 255);
-
-                usernameParam.Value = username;
-                emailParam.Value = email;
-                passwordParam.Value = password;
-
-                cmd.Parameters.Add(usernameParam);
-                cmd.Parameters.Add(emailParam);
-                cmd.Parameters.Add(passwordParam);
-
-                cmd.Prepare();
-                cmd.ExecuteNonQuery();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-            finally
-            {
-
-                if (_connection != null) { _connection.Close(); }
-            }
-
+            return DBHandler.InsertQuery(cmd);
         }
+
     }
 }

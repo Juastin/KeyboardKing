@@ -19,6 +19,6 @@
         <PasswordBox HorizontalAlignment="Left" Margin="556,298,0,0" Name="password2"  VerticalAlignment="Top" Width="199" Height="48" FontSize="20" Foreground="White"  Background="#FF363636"  BorderBrush="White" VerticalContentAlignment="Center" Padding="10" RenderTransformOrigin="0.548,1.021"/>
 
         <Button Content="Ga naar login" Tag="LoginPage" Click="ButtonNavigate" HorizontalAlignment="Left" Margin="49,376,0,0" VerticalAlignment="Top" Height="51" Width="164" Background="#FF363636" BorderBrush="White" Foreground="White" FontSize="20"/>
-        <Button Content="Registreer" Tag="LoginPage"  Click="BRegister" HorizontalAlignment="Left" Margin="591,376,0,0" VerticalAlignment="Top" Height="51" Width="164" Background="#FF363636" BorderBrush="White" Foreground="White" FontSize="20"/>
+        <Button Content="Registreer" Tag=""  Click="BRegister" HorizontalAlignment="Left" Margin="591,376,0,0" VerticalAlignment="Top" Height="51" Width="164" Background="#FF363636" BorderBrush="White" Foreground="White" FontSize="20"/>
     </Grid>
 </local:JumpPage>
