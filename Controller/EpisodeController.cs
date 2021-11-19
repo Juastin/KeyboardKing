@@ -13,11 +13,12 @@ namespace Controller
     {
         private static Episode _currentEpisode;
         private static EpisodeStep _currentEpisodeStep;
-        private static int _wordIndex;
+        public static int _wordIndex;
 
         public static event EventHandler WordChanged;
 
         public static string Word { get => _currentEpisodeStep?.Word; }
+        public static string WordOverlay { get =>_currentEpisodeStep?.Word.Substring(0, _wordIndex); }
 
         public static void Initialise(Episode episode)
         {
@@ -41,6 +42,8 @@ namespace Controller
             _wordIndex++;
             if (_wordIndex >= _currentEpisodeStep.Word.Length)
                 NextEpisodeStep();
+            else
+                WordChanged?.Invoke(null, new EventArgs());
         }
 
         public static bool CheckInput(char input)
