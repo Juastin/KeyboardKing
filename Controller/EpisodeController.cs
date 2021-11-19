@@ -13,6 +13,7 @@ namespace Controller
     {
         private static Episode _currentEpisode;
         private static EpisodeStep _currentEpisodeStep;
+        private static EpisodeResult _currentEpisodeResult;
         private static int _wordIndex;
         private static int _wrongIndex;
 
@@ -25,6 +26,7 @@ namespace Controller
         public static void Initialise(Episode episode)
         {
             _currentEpisode = episode;
+            _currentEpisodeResult = new EpisodeResult();
             _wordIndex = 0;
             _wrongIndex = 0;
             NextEpisodeStep();
@@ -46,7 +48,12 @@ namespace Controller
             if (isCorrect)
                 _wordIndex++;
             else
+            {
                 _wrongIndex = _wordIndex + 1;
+                _currentEpisodeResult.Mistakes++;
+            }
+            Trace.WriteLine(_currentEpisodeResult.Mistakes);
+                
             if (_wordIndex >= _currentEpisodeStep.Word.Length)
                 NextEpisodeStep();
             else
