@@ -36,7 +36,8 @@ namespace Controller
                 _connection.Open();
                 SqlCommand cmd = new SqlCommand(query, _connection);
                 rdr = cmd.ExecuteReader();
-                while (rdr.Read()) {
+                while (rdr.Read())
+                {
                     List<string> temp = new List<string>();
                     for (int i = 0; i < rdr.FieldCount; i++)
                     {
