@@ -1,4 +1,5 @@
-﻿using KeyboardKing.areas.login;
+﻿using Controller;
+using KeyboardKing.areas.login;
 using KeyboardKing.areas.main;
 using KeyboardKing.areas.play;
 using KeyboardKing.core;
@@ -73,7 +74,7 @@ namespace KeyboardKing
             };
 
             // Navigate to the first view.
-            Navigate("LoginPage");
+            Navigate("EpisodePage");
         }
 
         public void Navigate(string pageName)

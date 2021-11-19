@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Controller;
 
 namespace KeyboardKing.areas.main
 {
@@ -24,10 +25,12 @@ namespace KeyboardKing.areas.main
         public ChaptersPage(MainWindow w) : base(w)
         {
             InitializeComponent();
+            LoadAllEpisodes();
         }
 
         public override void OnLoad()
         {
+            LoadAllEpisodes();
         }
 
         public override void OnShadow()
@@ -36,6 +39,20 @@ namespace KeyboardKing.areas.main
 
         public override void OnTick()
         {
+        }
+
+        public void LoadAllEpisodes()
+        {
+            this.Dispatcher.Invoke(() =>
+            {
+                List<List<string>> Episodes = DBQueries.GetAllEpisodes();
+                EpOverview.ItemsSource = Episodes;
+
+                CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(EpOverview.ItemsSource);
+                PropertyGroupDescription groupDescription = new PropertyGroupDescription("[0]");
+                view.GroupDescriptions.Add(groupDescription);
+                EpOverview.Items.Refresh();
+            });
         }
     }
 }
