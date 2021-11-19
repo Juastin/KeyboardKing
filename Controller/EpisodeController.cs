@@ -15,6 +15,8 @@ namespace Controller
         private static EpisodeStep _currentEpisodeStep;
         private static int _wordIndex;
 
+        public static event EventHandler WordChanged;
+
         public static string Word { get => _currentEpisodeStep?.Word; }
 
         public static void Initialise(Episode episode)
@@ -31,7 +33,7 @@ namespace Controller
             else
                 throw new Exception("TryDequeue went wrong");
 
-            Trace.WriteLine("NextEpsidoe");
+            WordChanged?.Invoke(null, new EventArgs());
         }
 
         private static void NextLetter()
