@@ -54,5 +54,22 @@ namespace KeyboardKing.areas.main
                 EpOverview.Items.Refresh();
             });
         }
+
+        //Executes method when PlayButton is fired in the EpOverview ListBox.
+        private void EpOverview_PlayClick(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            if (button.DataContext is List<string>)
+            {
+                //Gets the selected row data
+                List<string> row = (List<string>)button.DataContext;
+
+                //Do something with row data
+                MessageBox.Show($"Chapter: {row[0]}\n" +
+                $"Episode: {row[1]}\n" +
+                $"Name: {row[2]}");
+
+            }
+        }
     }
 }

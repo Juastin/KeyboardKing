@@ -10,6 +10,7 @@
     <None Remove="audio\click.wav" />
     <None Remove="audio\congratulations.wav" />
     <None Remove="audio\failure.wav" />
+    <None Remove="Images\play-button.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,6 +22,9 @@
     </Content>
     <Content Include="audio\failure.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\play-button.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <ProjectReference Include="..\Controller\Controller.csproj" />
   </ItemGroup>

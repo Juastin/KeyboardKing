@@ -7,42 +7,71 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ChaptersPage">
-    <Grid>
+    <Page.Resources>
+        <Style x:Key="PlayButtonTemplate" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Ellipse x:Name="Test" Fill="LightGray"/>
+                            <Image HorizontalAlignment="Center" Width="25" Source="../../Images/play-button.png" VerticalAlignment="Center" Panel.ZIndex="100" OpacityMask="White"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Test" Property="Fill" Value="#FFA3A3A3"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="Test" Property="Fill" Value="Gray"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Page.Resources>
+
+    <Grid Background="Black">
         <TextBlock Text="Geen episodes beschikbaar" TextWrapping="Wrap" Foreground="White" Margin="55,121,49,49" FontWeight="Bold" FontSize="15"/>
         <Label Content="ChaptersPage" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"/>
-        <ListView Name="EpOverview" Margin="49,114,49,49" HorizontalContentAlignment="Stretch" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" >
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Border BorderThickness="0" Margin="3 5 3 5" CornerRadius="5" Padding="2" Background="White">
-                        <StackPanel >
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="50"/>
-                                </Grid.RowDefinitions>
+        <ListBox Name="EpOverview" Margin="49,114,49,49" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
 
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                    <TextBlock Text="Episode " FontWeight="Bold" FontSize="18"/>
-                                    <TextBlock Text="{Binding [1]}" HorizontalAlignment="Left" FontWeight="Bold" FontSize="18"/>
-                                    <TextBlock Text=" "/>
-                                    <TextBlock Text="{Binding [2]}" HorizontalAlignment="Left" FontSize="15" VerticalAlignment="Center"/>
-                                </StackPanel>
-                            </Grid>
-                        </StackPanel>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border Height="75" Width="300" BorderThickness="0" CornerRadius="5" Background="White">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="75*"/>
+                                <ColumnDefinition Width="225*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Border CornerRadius="5, 0, 0, 5" Width="75" Grid.RowSpan="3" HorizontalAlignment="Left" Background="#FFD9534F">
+                                <TextBlock Text="{Binding [1]}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="48" Foreground="White"/>
+                            </Border>
+                            <TextBlock Text="{Binding [2]}" Grid.Column="1" Grid.RowSpan="3" Margin="10, 0, 0, 0" FontSize="16" VerticalAlignment="Center" Foreground="Black"/>
+                            <Button Click="EpOverview_PlayClick" Grid.Column="1" Grid.RowSpan="3"  Width="50" Height="50" HorizontalAlignment="Right" Margin="0,0,10,0" Style="{DynamicResource PlayButtonTemplate}"/>
+                        </Grid>
                     </Border>
                 </DataTemplate>
-            </ListView.ItemTemplate>
+            </ListBox.ItemTemplate>
 
-            <ListView.GroupStyle>
+            <ListBox.GroupStyle>
                 <GroupStyle>
                     <GroupStyle.ContainerStyle>
                         <Style TargetType="{x:Type GroupItem}">
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate>
-                                        <Expander IsExpanded="False" Background="LightGray">
+                                        <Expander IsExpanded="False" Background="#FFD6D6D6" Padding="10">
                                             <Expander.Header>
                                                 <StackPanel Orientation="Horizontal">
                                                     <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="22"/>
@@ -59,7 +88,7 @@
                         </Style>
                     </GroupStyle.ContainerStyle>
                 </GroupStyle>
-            </ListView.GroupStyle>
-        </ListView>
+            </ListBox.GroupStyle>
+        </ListBox>
     </Grid>
 </local:JumpPage>
