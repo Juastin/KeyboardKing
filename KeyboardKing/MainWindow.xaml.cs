@@ -74,7 +74,7 @@ namespace KeyboardKing
             };
 
             // Navigate to the first view.
-            Navigate("ChaptersPage");
+            Navigate("EpisodePage");
         }
 
         public void Navigate(string pageName)
