@@ -48,21 +48,23 @@ namespace KeyboardKing.areas.login
             string password = password1.Password;
             string passwordcheck = password2.Password;
                 
-            if(!string.IsNullOrEmpty(password) && !string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(username))
+            if(!string.IsNullOrEmpty(password) && !string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(username)) //Checking if user has entered all the information
             {
-                if (new EmailAddressAttribute().IsValid(email))
+                if (new EmailAddressAttribute().IsValid(email)) //Checking if the given email has emailformat
                 {
-                    if (password.Equals(passwordcheck))
+                    if (password.Equals(passwordcheck)) //Checking if the user has entered the password correctly
                     {
-                        byte[] passHashed = TripleDES.HashPassword(password);
-                        bool Adduser = DBQueries.AddUser(email, username, Convert.ToBase64String(passHashed));
+                        byte[] passHashed = TripleDES.HashPassword(password); //Hashing the password
+                        bool Adduser = DBQueries.AddUser(email, username, Convert.ToBase64String(passHashed)); //Adding new user to database
                         if (Adduser)
                         {
-                            Navigate("LoginPage");
+                            Navigate("LoginPage"); //Returning to loginpage
                         }
-                    }
+                    }else { error.Content = "Error: Wachtwoorden komen niet overeen"; }
                 }
+                else { error.Content = "Error: Geen geldige E-mail"; }
             }
+            else { error.Content = "Error: Lege velden"; }
         }
     }
 }
