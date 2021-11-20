@@ -18,27 +18,58 @@ namespace Controller
 
         public static List<List<string>> GetAllUsers()
         {
-            return DBHandler.Query("SELECT id, username FROM [dbo].[User]");
+            return DBHandler.SelectQuery(new SqlCommand("SELECT id, username FROM [dbo].[User]", null));
         }
 
         public static bool AddUser(string username, string email, string password)
         {
-
-                SqlCommand cmd = new SqlCommand("INSERT INTO [dbo].[User] (username, email, password) VALUES (@username, @email, @password)", null);
+            SqlCommand cmd = new SqlCommand("INSERT INTO [dbo].[User] (username, email, password) VALUES (@username, @email, @password)", null);
                 
-                SqlParameter usernameParam = new SqlParameter("@username", SqlDbType.Text, 255);
-                SqlParameter emailParam = new SqlParameter("@email", SqlDbType.Text, 255);
-                SqlParameter passwordParam = new SqlParameter("@password", SqlDbType.Text, 255);
+            SqlParameter usernameParam = new SqlParameter("@username", SqlDbType.Text, 255);
+            SqlParameter emailParam = new SqlParameter("@email", SqlDbType.Text, 255);
+            SqlParameter passwordParam = new SqlParameter("@password", SqlDbType.Text, 255);
 
-                usernameParam.Value = username;
-                emailParam.Value = email;
-                passwordParam.Value = password;
+            usernameParam.Value = username;
+            emailParam.Value = email;
+            passwordParam.Value = password;
 
-                cmd.Parameters.Add(usernameParam);
-                cmd.Parameters.Add(emailParam);
-                cmd.Parameters.Add(passwordParam);
+            cmd.Parameters.Add(usernameParam);
+            cmd.Parameters.Add(emailParam);
+            cmd.Parameters.Add(passwordParam);
 
-            return DBHandler.InsertQuery(cmd);
+            return DBHandler.Query(cmd);
         }
+
+        public static string GetEmail(string email)
+        {
+            SqlCommand cmd = new SqlCommand("SELECT email FROM[dbo].[User] WHERE email = @email", null);
+
+            SqlParameter emailParam = new SqlParameter("@email", SqlDbType.VarChar, 255);
+            emailParam.Value = email;
+            cmd.Parameters.Add(emailParam);
+
+            List<List<string>> result = DBHandler.SelectQuery(cmd);
+            if (result.Count == 1 && result[0].Count == 1)
+            {
+                return result[0][0];
+            }
+            return "F";
+        }
+
+        public static string GetPassword(string email)
+        {
+            SqlCommand cmd = new SqlCommand("SELECT password FROM[dbo].[User] WHERE email = @email", null);
+            SqlParameter emailParam = new SqlParameter("@email", SqlDbType.VarChar, 255);
+            emailParam.Value = email;
+            cmd.Parameters.Add(emailParam);
+
+            List<List<string>> result = DBHandler.SelectQuery(cmd);
+            if (result.Count == 1 && result[0].Count == 1)
+            {
+                return result[0][0];
+            }
+            return "F";
+        }
+
     }
 }
