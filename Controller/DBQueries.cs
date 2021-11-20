@@ -15,7 +15,6 @@ namespace Controller
         /// Example query.
         /// </summary>
         /// 
-        private static SqlConnection _connection { get; set; } = new SqlConnection(TripleDES.Decrypt(ConfigurationManager.AppSettings["connectionString"], "332cc6da-d757-4e80-a726-0bf6b615df09"));
 
         public static List<List<string>> GetAllUsers()
         {

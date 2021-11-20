@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Controller;
+using System.ComponentModel.DataAnnotations;
 
 namespace KeyboardKing.areas.login
 {
@@ -46,12 +47,20 @@ namespace KeyboardKing.areas.login
             
             string password = password1.Password;
             string passwordcheck = password2.Password;
-            if (password.Equals(passwordcheck))
+                
+            if(!string.IsNullOrEmpty(password) && !string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(username))
             {
-                bool Adduser = DBQueries.AddUser(email, username, password);
-                if (Adduser)
+                if (new EmailAddressAttribute().IsValid(email))
                 {
-                    Navigate("LoginPage");
+                    if (password.Equals(passwordcheck))
+                    {
+                        byte[] passHashed = TripleDES.HashPassword(password);
+                        bool Adduser = DBQueries.AddUser(email, username, Convert.ToBase64String(passHashed));
+                        if (Adduser)
+                        {
+                            Navigate("LoginPage");
+                        }
+                    }
                 }
             }
         }

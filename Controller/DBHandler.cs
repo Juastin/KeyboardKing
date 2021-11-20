@@ -59,7 +59,7 @@ namespace Controller
             try
             {
                 _connection.Open();
-                cmd.Connection.Open();
+                cmd.Connection = _connection;
 
                 cmd.Prepare();
                 cmd.ExecuteNonQuery();
