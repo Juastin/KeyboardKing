@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Controller;
 
 namespace KeyboardKing.areas.login
 {
@@ -39,19 +40,34 @@ namespace KeyboardKing.areas.login
         {
         }
 
+
         public void BLogin(object sender, RoutedEventArgs e)
         {
             string email = txtEmail.Text.ToString();
-            // Compare password in a function in Controller (hashing etc.)
-            string password = boxPassword.Password;
-
-            // Get data from DB and compare data of password and email
-            if (email == "" &&  password == "")
+            string emailResult = DBQueries.GetEmail(email); // Get data from DB and compare data of email
+            if (!emailResult.Equals(new string("F"), StringComparison.Ordinal))
             {
-                txtEmail.Text = "Succes!";
-                //ButtonNavigate(sender, e);
+                if (email.Equals(emailResult, StringComparison.Ordinal))
+                {
+                    if (!DBQueries.GetPassword(boxPassword.Password.ToString()).Equals("F", StringComparison.Ordinal))
+                    {
+                        bool passwordResult = TripleDES.VerifyHash(email, boxPassword.Password.ToString());
+                        if (passwordResult)
+                        {
+                            error.Content = "Login is succesful!";
+                        }
+                        else
+                        {
+                            error.Content = "Password is incorrect.";
+                        }
+
+                    }
+                }
+            }
+            else
+            {
+                error.Content = "Email is incorrect";
             }
         }
-
     }
 }
