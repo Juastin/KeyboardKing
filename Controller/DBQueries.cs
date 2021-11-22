@@ -33,7 +33,7 @@ namespace Controller
             usernameParam.Value = username;
             emailParam.Value = email;
             passwordParam.Value = password;
-            saltParam.Value = password;
+            saltParam.Value = salt;
 
             cmd.Parameters.Add(usernameParam);
             cmd.Parameters.Add(emailParam);
