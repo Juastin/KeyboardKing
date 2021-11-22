@@ -33,7 +33,7 @@ namespace Controller
             usernameParam.Value = username;
             emailParam.Value = email;
             passwordParam.Value = password;
-            saltParam.Value = password;
+            saltParam.Value = salt;
 
             cmd.Parameters.Add(usernameParam);
             cmd.Parameters.Add(emailParam);
@@ -63,7 +63,7 @@ namespace Controller
             cmd.Parameters.Add(emailParam);
 
             List<List<string>> result = DBHandler.SelectQuery(cmd);
-            return result.Count == 1 && result[0].Count == 1 ? Encoding.ASCII.GetBytes(result[0][0]) : Array.Empty<byte>();
+            return result.Count == 1 && result[0].Count == 1 ? Convert.FromBase64String(result[0][0]) : Array.Empty<byte>();
         }
 
         public static byte[] GetSalt(string email)
@@ -74,7 +74,7 @@ namespace Controller
             cmd.Parameters.Add(emailParam);
 
             List<List<string>> result = DBHandler.SelectQuery(cmd);
-            return result.Count == 1 && result[0].Count == 1 ? Encoding.ASCII.GetBytes(result[0][0]) : Array.Empty<byte>();
+            return result.Count == 1 && result[0].Count == 1 ? Convert.FromBase64String(result[0][0]) : Array.Empty<byte>();
         }
 
     }

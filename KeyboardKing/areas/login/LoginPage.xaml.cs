@@ -43,18 +43,15 @@ namespace KeyboardKing.areas.login
         public void BLogin(object sender, RoutedEventArgs e)
         {
             string email = txtEmail.Text.ToString();
-            string emailResult = DBQueries.GetEmail(email); // Get data from DB and compare data of email
+            string emailResult = DBQueries.GetEmail(email);
             if (!email.Equals("", StringComparison.Ordinal) || email != null)
             {
                 if (email.Equals(emailResult, StringComparison.Ordinal))
                 {
                     if (!boxPassword.Password.Equals("", StringComparison.Ordinal) || boxPassword.Password != null)
                     {
-                        if (DBQueries.GetPassword(boxPassword.Password.ToString()).Length > 0)
-                        {
-                            bool passwordResult = TripleDES.VerifyHash(email, boxPassword.Password.ToString());
-                            error.Content = passwordResult ? "Login is succesvol!" : "Wachtwoord is incorrect!";
-                        }
+                        bool passwordResult = TripleDES.VerifyHash(email, boxPassword.Password);
+                        error.Content = passwordResult ? "Login is succesvol!" : "Wachtwoord is incorrect!";
                     }
                     else { error.Content = "Wachtwoord is leeg"; }
                 }
