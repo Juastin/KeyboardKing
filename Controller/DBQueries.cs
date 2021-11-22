@@ -21,25 +21,24 @@ namespace Controller
             return DBHandler.SelectQuery(new SqlCommand("SELECT id, username FROM [dbo].[User]", null));
         }
 
-        public static bool AddUser(string username, string email, string password)
+        public static bool AddUser(string username, string email, string password, string salt)
         {
-<<<<<<< HEAD
-                SqlCommand cmd = new SqlCommand("INSERT INTO [dbo].[User] (username, email, password) VALUES (@username, @email, @password)", null);
-=======
-            SqlCommand cmd = new SqlCommand("INSERT INTO [dbo].[User] (username, email, password) VALUES (@username, @email, @password)", null);
->>>>>>> db7369eba4cd9fa93bf91bd92b7d7baa71dc1551
-                
+            SqlCommand cmd = new SqlCommand("INSERT INTO [dbo].[User] (username, email, password, salt) VALUES (@username, @email, @password, @salt)", null);
+
             SqlParameter usernameParam = new SqlParameter("@username", SqlDbType.Text, 255);
             SqlParameter emailParam = new SqlParameter("@email", SqlDbType.Text, 255);
             SqlParameter passwordParam = new SqlParameter("@password", SqlDbType.Text, 255);
+            SqlParameter saltParam = new SqlParameter("@salt", SqlDbType.Text, 255);
 
             usernameParam.Value = username;
             emailParam.Value = email;
             passwordParam.Value = password;
+            saltParam.Value = password;
 
             cmd.Parameters.Add(usernameParam);
             cmd.Parameters.Add(emailParam);
             cmd.Parameters.Add(passwordParam);
+            cmd.Parameters.Add(saltParam);
 
             return DBHandler.Query(cmd);
         }
@@ -53,14 +52,10 @@ namespace Controller
             cmd.Parameters.Add(emailParam);
 
             List<List<string>> result = DBHandler.SelectQuery(cmd);
-            if (result.Count == 1 && result[0].Count == 1)
-            {
-                return result[0][0];
-            }
-            return "F";
+            return result.Count == 1 && result[0].Count == 1 ? result[0][0] : "F";
         }
 
-        public static string GetPassword(string email)
+        public static byte[] GetPassword(string email)
         {
             SqlCommand cmd = new SqlCommand("SELECT password FROM[dbo].[User] WHERE email = @email", null);
             SqlParameter emailParam = new SqlParameter("@email", SqlDbType.VarChar, 255);
@@ -68,11 +63,18 @@ namespace Controller
             cmd.Parameters.Add(emailParam);
 
             List<List<string>> result = DBHandler.SelectQuery(cmd);
-            if (result.Count == 1 && result[0].Count == 1)
-            {
-                return result[0][0];
-            }
-            return "F";
+            return result.Count == 1 && result[0].Count == 1 ? Encoding.ASCII.GetBytes(result[0][0]) : Array.Empty<byte>();
+        }
+
+        public static byte[] GetSalt(string email)
+        {
+            SqlCommand cmd = new SqlCommand("SELECT salt FROM[dbo].[User] WHERE email = @email", null);
+            SqlParameter emailParam = new SqlParameter("@email", SqlDbType.VarChar, 255);
+            emailParam.Value = email;
+            cmd.Parameters.Add(emailParam);
+
+            List<List<string>> result = DBHandler.SelectQuery(cmd);
+            return result.Count == 1 && result[0].Count == 1 ? Encoding.ASCII.GetBytes(result[0][0]) : Array.Empty<byte>();
         }
 
     }

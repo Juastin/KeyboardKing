@@ -40,34 +40,28 @@ namespace KeyboardKing.areas.login
         {
         }
 
-
         public void BLogin(object sender, RoutedEventArgs e)
         {
             string email = txtEmail.Text.ToString();
             string emailResult = DBQueries.GetEmail(email); // Get data from DB and compare data of email
-            if (!emailResult.Equals(new string("F"), StringComparison.Ordinal))
+            if (!email.Equals("", StringComparison.Ordinal) || email != null)
             {
                 if (email.Equals(emailResult, StringComparison.Ordinal))
                 {
-                    if (!DBQueries.GetPassword(boxPassword.Password.ToString()).Equals("F", StringComparison.Ordinal))
+                    if (!boxPassword.Password.Equals("", StringComparison.Ordinal) || boxPassword.Password != null)
                     {
-                        bool passwordResult = TripleDES.VerifyHash(email, boxPassword.Password.ToString());
-                        if (passwordResult)
+                        if (DBQueries.GetPassword(boxPassword.Password.ToString()).Length > 0)
                         {
-                            error.Content = "Login is succesful!";
+                            bool passwordResult = TripleDES.VerifyHash(email, boxPassword.Password.ToString());
+                            error.Content = passwordResult ? "Login is succesvol!" : "Wachtwoord is incorrect!";
                         }
-                        else
-                        {
-                            error.Content = "Password is incorrect.";
-                        }
-
                     }
+                    else { error.Content = "Wachtwoord is leeg"; }
                 }
+                else { error.Content = "Email is niet correct!"; }
             }
-            else
-            {
-                error.Content = "Email is incorrect";
-            }
+            else { error.Content = "Email is leeg!"; }
         }
+
     }
 }

@@ -42,7 +42,7 @@ namespace Controller
 
         // Argon2
         //https://github.com/kmaragon/Konscious.Security.Cryptography
-        public static byte[] HashPassword(string password)
+        public static byte[] HashPassword(string password, byte[] salt)
         {
             Argon2id argon2 = new Argon2id(Encoding.UTF8.GetBytes(password));
             argon2.Salt = CreateSalt();
@@ -54,13 +54,13 @@ namespace Controller
 
         public static bool VerifyHash(string email, string loginPw)
         {
-            // Change code to compare hash with DB data.
-            byte[] userHashPw = Encoding.ASCII.GetBytes(DBQueries.GetPassword(email)); // get hash from db
-            byte[] loginHashPw = HashPassword(loginPw); // hash password from LoginPage
+            byte[] salt = DBQueries.GetSalt(email); // get salt from hashed pw in db
+            byte[] loginHashPw = HashPassword(loginPw, salt); // hash pw from LoginPage
+            byte[] userHashPw = DBQueries.GetPassword(email); // get hashed pw from db
             return loginHashPw.SequenceEqual(userHashPw);
         }
 
-        private static byte[] CreateSalt()
+        public static byte[] CreateSalt()
         {
             byte[] buffer = new byte[16];
             RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
