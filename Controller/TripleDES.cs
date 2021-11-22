@@ -45,7 +45,7 @@ namespace Controller
         public static byte[] HashPassword(string password, byte[] salt)
         {
             Argon2id argon2 = new Argon2id(Encoding.UTF8.GetBytes(password));
-            argon2.Salt = CreateSalt();
+            argon2.Salt = salt;
             argon2.DegreeOfParallelism = 16;
             argon2.Iterations = 40;
             argon2.MemorySize = 8192;
