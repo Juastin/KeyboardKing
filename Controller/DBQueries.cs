@@ -79,9 +79,11 @@ namespace Controller
 
         public static List<List<string>> GetAllEpisodes()
         {
-            return DBHandler.Query("SELECT [dbo].[Chapter].name, episode, [dbo].[Episode].name FROM [dbo].[Episode]" +
+            SqlCommand cmd = new SqlCommand("SELECT [dbo].[Chapter].name, episode, [dbo].[Episode].name " +
+                                    "FROM [dbo].[Episode]" +
                                    "LEFT JOIN [dbo].[Chapter]" +
-                                   "ON [dbo].[Episode].chapterid = [dbo].[Chapter].id");
+                                   "ON [dbo].[Episode].chapterid = [dbo].[Chapter].id", null);
+            return DBHandler.SelectQuery(cmd);
         }
 
     }
