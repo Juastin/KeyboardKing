@@ -77,5 +77,12 @@ namespace Controller
             return result.Count == 1 && result[0].Count == 1 ? Convert.FromBase64String(result[0][0]) : Array.Empty<byte>();
         }
 
+        public static List<List<string>> GetAllEpisodes()
+        {
+            return DBHandler.Query("SELECT [dbo].[Chapter].name, episode, [dbo].[Episode].name FROM [dbo].[Episode]" +
+                                   "LEFT JOIN [dbo].[Chapter]" +
+                                   "ON [dbo].[Episode].chapterid = [dbo].[Chapter].id");
+        }
+
     }
 }

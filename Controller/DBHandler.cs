@@ -37,7 +37,8 @@ namespace Controller
                 _connection.Open();
                 cmd.Connection = _connection;
                 rdr = cmd.ExecuteReader();
-                while (rdr.Read()) {
+                while (rdr.Read())
+                {
                     List<string> temp = new List<string>();
                     for (int i = 0; i < rdr.FieldCount; i++)
                     {
