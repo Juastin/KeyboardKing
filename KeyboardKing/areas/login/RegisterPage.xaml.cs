@@ -60,7 +60,7 @@ namespace KeyboardKing.areas.login
                         {
                             Navigate("LoginPage"); //Returning to loginpage
                         }
-                        else { error.Content = "Error: Service op dit moment onberijkbaar"; }
+                        else { error.Content = "Error: Service onberijkbaar / Bestaande gebruiker"; }
                     }
                     else { error.Content = "Error: Wachtwoorden komen niet overeen"; }
                 }

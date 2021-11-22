@@ -23,7 +23,6 @@ namespace Controller
 
         public static bool AddUser(string username, string email, string password)
         {
-
                 SqlCommand cmd = new SqlCommand("INSERT INTO [dbo].[User] (username, email, password) VALUES (@username, @email, @password)", null);
                 
                 SqlParameter usernameParam = new SqlParameter("@username", SqlDbType.Text, 255);
