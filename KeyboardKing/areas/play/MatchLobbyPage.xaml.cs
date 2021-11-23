@@ -21,6 +21,10 @@ namespace KeyboardKing.areas.play
     /// </summary>
     public partial class MatchLobbyPage : JumpPage
     {
+        /// <summary>
+        /// Controller for <see cref="MatchLobbyPage"/>
+        /// </summary>
+        /// <param name="w"></param>
         public MatchLobbyPage(MainWindow w) : base(w)
         {
             InitializeComponent();

@@ -26,7 +26,7 @@ namespace KeyboardKing.areas.play
     public partial class EpisodePage : JumpPage
     {
         /// <summary>
-        /// Constructor of <c>EpisodePage</c>
+        /// Constructor of <see cref="EpisodePage"/>
         /// </summary>
         /// <param name="w"></param>
         public EpisodePage(MainWindow w) : base(w)
@@ -64,7 +64,7 @@ namespace KeyboardKing.areas.play
         {
         }
         /// <summary>
-        /// Event that fires each time when focus of window has been lost.
+        /// <para>Event that fires each time when focus of window has been lost.</para>
         /// This way the UserInput field is always focused and can always be filled in.
         /// </summary>
         /// <param name="sender"></param>
