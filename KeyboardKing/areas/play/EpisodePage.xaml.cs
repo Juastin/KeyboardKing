@@ -25,6 +25,10 @@ namespace KeyboardKing.areas.play
     /// </summary>
     public partial class EpisodePage : JumpPage
     {
+        /// <summary>
+        /// Constructor of class EpisodePage
+        /// </summary>
+        /// <param name="w"></param>
         public EpisodePage(MainWindow w) : base(w)
         {
             InitializeComponent();
