@@ -52,11 +52,10 @@ namespace Controller
             return argon2.GetBytes(16);
         }
 
-        public static bool VerifyHash(string email, string loginPw)
+        public static bool VerifyHash(string loginPw, string salt, string userPw)
         {
-            byte[] salt = DBQueries.GetSalt(email); // get salt from hashed pw in db
-            byte[] loginHashPw = HashPassword(loginPw, salt); // hash pw from LoginPage
-            byte[] userHashPw = DBQueries.GetPassword(email); // get hashed pw from db
+            byte[] loginHashPw = HashPassword(loginPw, Convert.FromBase64String(salt));
+            byte[] userHashPw = Convert.FromBase64String(userPw); 
             return loginHashPw.SequenceEqual(userHashPw);
         }
 

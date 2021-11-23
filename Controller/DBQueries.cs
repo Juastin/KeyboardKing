@@ -43,38 +43,16 @@ namespace Controller
             return DBHandler.Query(cmd);
         }
 
-        public static string GetEmail(string email)
+        public static List<List<string>> GetUserInfo(string email)
         {
-            SqlCommand cmd = new SqlCommand("SELECT email FROM[dbo].[User] WHERE email = @email", null);
+            SqlCommand cmd = new SqlCommand("SELECT email, password, salt FROM[dbo].[User] WHERE email = @email", null);
 
             SqlParameter emailParam = new SqlParameter("@email", SqlDbType.VarChar, 255);
             emailParam.Value = email;
             cmd.Parameters.Add(emailParam);
 
             List<List<string>> result = DBHandler.SelectQuery(cmd);
-            return result.Count == 1 && result[0].Count == 1 ? result[0][0] : "F";
-        }
-
-        public static byte[] GetPassword(string email)
-        {
-            SqlCommand cmd = new SqlCommand("SELECT password FROM[dbo].[User] WHERE email = @email", null);
-            SqlParameter emailParam = new SqlParameter("@email", SqlDbType.VarChar, 255);
-            emailParam.Value = email;
-            cmd.Parameters.Add(emailParam);
-
-            List<List<string>> result = DBHandler.SelectQuery(cmd);
-            return result.Count == 1 && result[0].Count == 1 ? Convert.FromBase64String(result[0][0]) : Array.Empty<byte>();
-        }
-
-        public static byte[] GetSalt(string email)
-        {
-            SqlCommand cmd = new SqlCommand("SELECT salt FROM[dbo].[User] WHERE email = @email", null);
-            SqlParameter emailParam = new SqlParameter("@email", SqlDbType.VarChar, 255);
-            emailParam.Value = email;
-            cmd.Parameters.Add(emailParam);
-
-            List<List<string>> result = DBHandler.SelectQuery(cmd);
-            return result.Count == 1 && result[0].Count == 1 ? Convert.FromBase64String(result[0][0]) : Array.Empty<byte>();
+            return result.Count == 1 && result[0].Count == 3 ? result : new List<List<string>>();
         }
 
         public static List<List<string>> GetAllEpisodes()

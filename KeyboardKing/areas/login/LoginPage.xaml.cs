@@ -43,22 +43,26 @@ namespace KeyboardKing.areas.login
         public void BLogin(object sender, RoutedEventArgs e)
         {
             string email = txtEmail.Text.ToString();
-            string emailResult = DBQueries.GetEmail(email);
-            if (!email.Equals("", StringComparison.Ordinal) || email != null)
+            string message = "Error: ";
+            if (!email.Equals("", StringComparison.Ordinal) && email != null
+                && !boxPassword.Password.Equals("", StringComparison.Ordinal) && boxPassword.Password != null)
             {
-                if (email.Equals(emailResult, StringComparison.Ordinal))
+                List<List<string>> results = DBQueries.GetUserInfo(email);
+                if (results.Any())
                 {
-                    if (!boxPassword.Password.Equals("", StringComparison.Ordinal) || boxPassword.Password != null)
+                    bool passwordResult = TripleDES.VerifyHash(boxPassword.Password, results[0][2], results[0][1]);
+                    if (passwordResult)
                     {
-                        bool passwordResult = TripleDES.VerifyHash(email, boxPassword.Password);
-                        error.Content = passwordResult ? "Login is succesvol!" : "Wachtwoord is incorrect!";
+                        txtEmail.Clear();
+                        boxPassword.Clear();
+                        Navigate("ChaptersPage");
                     }
-                    else { error.Content = "Wachtwoord is leeg"; }
+                    else { message += "Wachtwoord is incorrect"; }
                 }
-                else { error.Content = "Email is niet correct!"; }
+                else { message += "Email is incorrect"; }
             }
-            else { error.Content = "Email is leeg!"; }
+            else { message += "Email of wachtwoord is niet ingevuld"; }
+            error.Content = message;
         }
-
     }
 }
