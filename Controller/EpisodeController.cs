@@ -21,6 +21,7 @@ namespace Controller
         private static int _wrongIndex;
 
         public static event EventHandler WordChanged;
+        public static event EventHandler EpisodeFinished;
 
         public static string Word { get => _currentEpisodeStep?.Word; }
         public static string WordOverlayCorrect { get =>_currentEpisodeStep?.Word.Substring(0, _wordIndex); }
@@ -52,7 +53,7 @@ namespace Controller
             if(_currentEpisode.EpisodeSteps.TryDequeue(out EpisodeStep step))
                 _currentEpisodeStep = step;
             else
-                throw new Exception("TryDequeue went wrong");
+                EpisodeFinished?.Invoke(null, new EventArgs());
 
             WordChanged?.Invoke(null, new EventArgs());
         }
@@ -78,6 +79,11 @@ namespace Controller
                 WordChanged?.Invoke(null, new EventArgs());
         }
 
+        /// <summary>
+        /// Creates a new Episode object with all corresponding EpisodeSteps
+        /// </summary>
+        /// <param name="episodeId">episode id from the requested episode</param>
+        /// <returns></returns>
         public static Episode ParseEpisode(string episodeId)
         {
             List<List<string>> results = DBQueries.GetAllEpisodeStepsFromEpisode(episodeId);
