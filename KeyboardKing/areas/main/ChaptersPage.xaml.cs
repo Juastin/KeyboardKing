@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Controller;
+using Model;
 
 namespace KeyboardKing.areas.main
 {
@@ -63,11 +64,14 @@ namespace KeyboardKing.areas.main
             {
                 //Gets the selected row data
                 List<string> row = (List<string>)button.DataContext;
+                Episode episode = EpisodeController.ParseEpisode(row[3]);
+                EpisodeController.Initialise(episode);
 
+                Navigate("EpisodePage");
                 //Do something with row data
-                MessageBox.Show($"Chapter: {row[0]}\n" +
-                $"Episode: {row[1]}\n" +
-                $"Name: {row[2]}");
+                //MessageBox.Show($"Chapter: {row[0]}\n" +
+                //$"Episode: {row[1]}\n" +
+                //$"Name: {row[2]}");
 
             }
         }

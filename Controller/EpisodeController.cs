@@ -78,6 +78,20 @@ namespace Controller
                 WordChanged?.Invoke(null, new EventArgs());
         }
 
+        public static Episode ParseEpisode(string episodeId)
+        {
+            List<List<string>> results = DBQueries.GetAllEpisodeStepsFromEpisode(episodeId);
+            Episode episode = new Episode();
+
+            foreach (List<string> word in results)
+            {
+                EpisodeStep es = new EpisodeStep() { Word = word[0] };
+                episode.EpisodeSteps.Enqueue(es);
+            }
+
+            return episode;
+        }
+
         /// <summary>
         /// Checks user input and parses the result to <see cref="NextLetter(bool)"/>
         /// </summary>
