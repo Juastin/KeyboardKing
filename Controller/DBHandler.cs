@@ -26,7 +26,8 @@ namespace Controller
         ///     {"3", "Username3"}
         /// }
         /// </summary>
-        public static List<List<string>> Query(string query)
+        
+        public static List<List<string>> SelectQuery(SqlCommand cmd)
         {
             SqlDataReader rdr = null;
             List<List<string>> result = new List<List<string>>();
@@ -34,7 +35,7 @@ namespace Controller
             try
             {
                 _connection.Open();
-                SqlCommand cmd = new SqlCommand(query, _connection);
+                cmd.Connection = _connection;
                 rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
@@ -51,8 +52,28 @@ namespace Controller
                 if (rdr != null) { rdr.Close(); }
                 if (_connection != null) { _connection.Close(); }
             }
-            
             return result;
         }
+
+        // Query for Insert, Update and Delete
+        public static bool Query(SqlCommand cmd)
+        {
+            try
+            {
+                _connection.Open();
+                cmd.Connection = _connection;
+                cmd.Prepare();
+                cmd.ExecuteNonQuery();
+                return true;
+            } catch
+            {
+                return false;
+            }
+            finally
+            {
+                if (_connection != null) { _connection.Close(); }
+            }
+        }
+
     }
 }
