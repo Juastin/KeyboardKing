@@ -25,6 +25,10 @@ namespace KeyboardKing.areas.play
     /// </summary>
     public partial class EpisodePage : JumpPage
     {
+        /// <summary>
+        /// Constructor of <see cref="EpisodePage"/>
+        /// </summary>
+        /// <param name="w"></param>
         public EpisodePage(MainWindow w) : base(w)
         {
             InitializeComponent();
@@ -59,12 +63,23 @@ namespace KeyboardKing.areas.play
         public override void OnTick()
         {
         }
-
+        /// <summary>
+        /// <para>Event that fires each time when focus of window has been lost.</para>
+        /// This way the UserInput field is always focused and can always be filled in.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UserInput_LostFocus(object sender, RoutedEventArgs e)
         {
             this.UserInput.Focus();
         }
-
+        /// <summary>
+        /// <para>Event that fires when the UserInput changes.</para>
+        /// Method gets the last character in the UserInput.
+        /// <para>This input is then passed to the method <see cref="EpisodeController.CheckInput"/></para>
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UserInput_TextChanged(object sender, TextChangedEventArgs e)
         {
             string txt = this.UserInput.Text;
