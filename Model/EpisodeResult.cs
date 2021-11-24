@@ -10,6 +10,7 @@ namespace Model
     {
         public int Mistakes { get; set; }
         public int Score { get; set; }
-
+        public int MaxScore { get; set; }
+        public TimeSpan Time { get; set; }
     }
 }

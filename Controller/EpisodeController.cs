@@ -19,6 +19,7 @@ namespace Controller
         private static EpisodeResult _currentEpisodeResult;
         private static int _wordIndex;
         private static int _wrongIndex;
+        private static DateTime _startTime;
 
         public static event EventHandler WordChanged;
 
@@ -37,9 +38,12 @@ namespace Controller
         {
             _currentEpisode = episode;
             _currentEpisodeResult = new EpisodeResult();
+            _startTime = new DateTime();
             _wordIndex = 0;
             _wrongIndex = 0;
+            _currentEpisodeResult.MaxScore = CalculateMaxScore(episode);
             NextEpisodeStep();
+            _startTime = DateTime.Now;
         }
 
         /// <summary>
@@ -52,7 +56,9 @@ namespace Controller
             if(_currentEpisode.EpisodeSteps.TryDequeue(out EpisodeStep step))
                 _currentEpisodeStep = step;
             else
-                throw new Exception("TryDequeue went wrong");
+                FinishEpisode();
+                
+                //throw new Exception("TryDequeue went wrong");
 
             WordChanged?.Invoke(null, new EventArgs());
         }
@@ -85,6 +91,27 @@ namespace Controller
         public static void CheckInput(char input)
         {
             NextLetter(_currentEpisodeStep.Word[_wordIndex].Equals(input));
+        }
+
+        public static void FinishEpisode()
+        {
+            _currentEpisodeResult.Time = CalculateTime(_startTime);
+            _currentEpisodeResult.Score = CalculateScore(_currentEpisodeResult.MaxScore, _currentEpisodeResult.Mistakes);
+        }
+
+        public static TimeSpan CalculateTime(DateTime startTime)
+        {
+            return startTime - DateTime.Now;
+        }
+
+        public static int CalculateScore(int maxScore, int mistakes)
+        {
+           return (int)((double)mistakes / maxScore * 100);
+        }
+
+        public static int CalculateMaxScore(Episode episode)
+        {
+            return episode.EpisodeSteps.Sum(episodeStep => episodeStep.Word.Length);
         }
     }
 }
