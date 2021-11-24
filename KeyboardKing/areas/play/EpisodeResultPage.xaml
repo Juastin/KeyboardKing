@@ -23,6 +23,7 @@
             <Label Content="{Binding Score}" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"/>
             <Label Content="{Binding Time}" HorizontalAlignment="Left" Margin="49,114,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"></Label>
             <Label Content="{Binding Mistakes}" HorizontalAlignment="Left" Margin="49,181,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"></Label>
+            <Button Content="Voltooi episode" Tag="ChaptersPage" Click="ButtonNavigate" HorizontalAlignment="Left" Margin="49,266,0,0" VerticalAlignment="Top" Height="51" Width="164" Background="#FF363636" BorderBrush="White" Foreground="White" FontSize="20"/>
         </Grid>
 
 
