@@ -23,12 +23,12 @@ namespace Controller
 
         public static bool AddUser(string username, string email, string password, string salt)
         {
-            SqlCommand cmd = new SqlCommand("INSERT INTO [dbo].[User] (username, email, password, salt) VALUES (@username, @email, @password, @salt)", null);
+            SqlCommand cmd = new SqlCommand("INSERT INTO [dbo].[User] (username, email, password, salt) VALUES (@username, @email, @password, @salt)");
 
-            SqlParameter usernameParam = new SqlParameter("@username", SqlDbType.Text, 255);
-            SqlParameter emailParam = new SqlParameter("@email", SqlDbType.Text, 255);
-            SqlParameter passwordParam = new SqlParameter("@password", SqlDbType.Text, 255);
-            SqlParameter saltParam = new SqlParameter("@salt", SqlDbType.Text, 255);
+            SqlParameter usernameParam = new SqlParameter("@username", SqlDbType.VarChar, 255);
+            SqlParameter emailParam = new SqlParameter("@email", SqlDbType.VarChar, 255);
+            SqlParameter passwordParam = new SqlParameter("@password", SqlDbType.VarChar, 255);
+            SqlParameter saltParam = new SqlParameter("@salt", SqlDbType.VarChar, 255);
 
             usernameParam.Value = username;
             emailParam.Value = email;
@@ -39,6 +39,19 @@ namespace Controller
             cmd.Parameters.Add(emailParam);
             cmd.Parameters.Add(passwordParam);
             cmd.Parameters.Add(saltParam);
+
+            return DBHandler.Query(cmd);
+        }
+
+        public static bool AddSkill(string skilllevel)
+        {
+            SqlCommand cmd = new SqlCommand("INSERT INTO [dbo].[UserSettings] (skilllevel) VALUES (@skill)");
+
+            SqlParameter skilllevelParam = new SqlParameter("@skill", SqlDbType.VarChar, 255);
+
+            skilllevelParam.Value = skilllevel;
+
+            cmd.Parameters.Add(skilllevelParam);
 
             return DBHandler.Query(cmd);
         }
