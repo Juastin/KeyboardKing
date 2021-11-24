@@ -33,23 +33,6 @@ namespace KeyboardKing.areas.play
         {
             InitializeComponent();
             this.UserInput.Focus();
-
-            //Dummy data
-            Episode e = new Episode();
-            EpisodeStep step1 = new EpisodeStep() { Word = "aaa" };
-            EpisodeStep step2 = new EpisodeStep() { Word = "bbb" };
-            EpisodeStep step3 = new EpisodeStep() { Word = "ccc" };
-            EpisodeStep step4 = new EpisodeStep() { Word = "ddd" };
-            EpisodeStep step5 = new EpisodeStep() { Word = "abc" };
-            EpisodeStep step6 = new EpisodeStep() { Word = "cba" };
-            e.EpisodeSteps.Enqueue(step1);
-            e.EpisodeSteps.Enqueue(step2);
-            e.EpisodeSteps.Enqueue(step3);
-            e.EpisodeSteps.Enqueue(step4);
-            e.EpisodeSteps.Enqueue(step5);
-            e.EpisodeSteps.Enqueue(step6);
-
-            EpisodeController.Initialise(e);
         }
 
         public override void OnLoad()

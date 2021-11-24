@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Controller;
+using Model;
 
 namespace KeyboardKing.areas.main
 {
@@ -64,12 +65,20 @@ namespace KeyboardKing.areas.main
                 //Gets the selected row data
                 List<string> row = (List<string>)button.DataContext;
 
-                //Do something with row data
-                MessageBox.Show($"Chapter: {row[0]}\n" +
-                $"Episode: {row[1]}\n" +
-                $"Name: {row[2]}");
+                //When the episode is finished this event will trigger.
+                //Since we can only call Navigate() inside the View this is needed.
+                EpisodeController.EpisodeFinished += OnEpisodeFinished;
+                Episode episode = EpisodeController.ParseEpisode(row[3]);
+                EpisodeController.Initialise(episode);
 
+                Navigate("EpisodePage");
             }
+        }
+
+        private void OnEpisodeFinished(object sender, EventArgs e)
+        {
+            EpisodeController.EpisodeFinished -= OnEpisodeFinished;
+            Navigate("ChaptersPage");
         }
     }
 }

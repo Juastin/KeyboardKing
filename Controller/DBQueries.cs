@@ -57,10 +57,23 @@ namespace Controller
 
         public static List<List<string>> GetAllEpisodes()
         {
-            SqlCommand cmd = new SqlCommand("SELECT [dbo].[Chapter].name, episode, [dbo].[Episode].name " +
+            SqlCommand cmd = new SqlCommand("SELECT [dbo].[Chapter].name, episode, [dbo].[Episode].name, [dbo].[Episode].id " +
                                     "FROM [dbo].[Episode]" +
                                    "LEFT JOIN [dbo].[Chapter]" +
                                    "ON [dbo].[Episode].chapterid = [dbo].[Chapter].id", null);
+            return DBHandler.SelectQuery(cmd);
+        }
+
+        public static List<List<string>> GetAllEpisodeStepsFromEpisode(string id)
+        {
+            SqlCommand cmd = new SqlCommand("SELECT word " +
+                "FROM [dbo].[EpisodeStep] " +
+                "WHERE episodeid = @id", null);
+
+            SqlParameter episodeIdParam = new SqlParameter("@id", SqlDbType.Int, 255);
+            episodeIdParam.Value = id;
+            cmd.Parameters.Add(episodeIdParam);
+
             return DBHandler.SelectQuery(cmd);
         }
 
