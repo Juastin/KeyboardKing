@@ -14,8 +14,17 @@
     </local:JumpPage.DataContext>
 
     <Grid>
-        <Label Content="{Binding Score}" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"/>
-        <Label Content="{Binding Time}" HorizontalAlignment="Left" Margin="49,114,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"></Label>
-        <Label Content="{Binding Mistakes}" HorizontalAlignment="Left" Margin="49,181,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"></Label>
+        <Grid Margin="0,0,400,0">
+            <Label Content="Score" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"></Label>
+            <Label Content="Tijd" HorizontalAlignment="Left" Margin="49,114,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"></Label>
+            <Label Content="Fouten" HorizontalAlignment="Left" Margin="49,181,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"></Label>
+        </Grid>
+        <Grid Margin="400,0,0,0">
+            <Label Content="{Binding Score}" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"/>
+            <Label Content="{Binding Time}" HorizontalAlignment="Left" Margin="49,114,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"></Label>
+            <Label Content="{Binding Mistakes}" HorizontalAlignment="Left" Margin="49,181,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"></Label>
+        </Grid>
+
+
     </Grid>
 </local:JumpPage>

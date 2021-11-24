@@ -123,7 +123,7 @@ namespace Controller
         }
         public static int CalculateScore(int maxScore, int mistakes)
         {
-            return (int)((double)mistakes / maxScore * 100);
+            return (int)((double)(maxScore-mistakes) / maxScore * 100);
         }
         public static int CalculateMaxScore(Episode episode)
         {

@@ -12,9 +12,10 @@ namespace Model
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public int Score { get => EpisodeController.CurrentEpisodeResult?.Score ?? 0; }
+        public string Score { get => $"{EpisodeController.CurrentEpisodeResult?.Score ?? 0}%"; }
         public int Mistakes { get => EpisodeController.CurrentEpisodeResult?.Mistakes ?? 0; }
-        public TimeSpan Time { get => EpisodeController.CurrentEpisodeResult?.Time ?? TimeSpan.Zero; }
+        //public TimeSpan Time { get => EpisodeController.CurrentEpisodeResult?.Time ?? TimeSpan.Zero; }
+        public string Time { get => FormatTimespan(); }
         public EpisodeResultPageDataContext()
         {
             EpisodeController.EpisodeFinished += OnEpisodeFinished;
@@ -24,6 +25,14 @@ namespace Model
         private void OnEpisodeFinished(object sender, EventArgs e)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(""));
+        }
+
+        private string FormatTimespan()
+        {
+            TimeSpan span = EpisodeController.CurrentEpisodeResult?.Time ?? TimeSpan.Zero;
+            return string.Format("{0}min {1}sec",
+                (int)span.TotalMinutes,
+                span.Seconds);
         }
     }
 }
