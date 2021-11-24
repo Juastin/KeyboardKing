@@ -65,6 +65,8 @@ namespace KeyboardKing.areas.main
                 //Gets the selected row data
                 List<string> row = (List<string>)button.DataContext;
 
+                //When the episode is finished this event will trigger.
+                //Since we can only call Navigate() inside the View this is needed.
                 EpisodeController.EpisodeFinished += OnEpisodeFinished;
                 Episode episode = EpisodeController.ParseEpisode(row[3]);
                 EpisodeController.Initialise(episode);
