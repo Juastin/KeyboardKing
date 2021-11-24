@@ -12,11 +12,9 @@ namespace Model
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public int Score
-        {
-            get => EpisodeController.CurrentEpisodeResult?.Score ?? 0;
-        }
-
+        public int Score { get => EpisodeController.CurrentEpisodeResult?.Score ?? 0; }
+        public int Mistakes { get => EpisodeController.CurrentEpisodeResult?.Mistakes ?? 0; }
+        public TimeSpan Time { get => EpisodeController.CurrentEpisodeResult?.Time ?? TimeSpan.Zero; }
         public EpisodeResultPageDataContext()
         {
             EpisodeController.EpisodeFinished += OnEpisodeFinished;

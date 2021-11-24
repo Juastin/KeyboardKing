@@ -119,7 +119,7 @@ namespace Controller
         }
         public static TimeSpan CalculateTime(DateTime startTime)
         {
-            return startTime - DateTime.Now;
+            return DateTime.Now - startTime;
         }
         public static int CalculateScore(int maxScore, int mistakes)
         {
