@@ -14,12 +14,11 @@ namespace Model
 
         public string Score { get => $"{EpisodeController.CurrentEpisodeResult?.Score ?? 0}%"; }
         public int Mistakes { get => EpisodeController.CurrentEpisodeResult?.Mistakes ?? 0; }
-        //public TimeSpan Time { get => EpisodeController.CurrentEpisodeResult?.Time ?? TimeSpan.Zero; }
         public string Time { get => FormatTimespan(); }
+        public double LettersPerMinute { get => EpisodeController.CurrentEpisodeResult?.LettersPerMinute ?? 0; }
         public EpisodeResultPageDataContext()
         {
             EpisodeController.EpisodeFinished += OnEpisodeFinished;
-            //EpisodeController.WordChanged += OnWordChanged;
         }
 
         private void OnEpisodeFinished(object sender, EventArgs e)

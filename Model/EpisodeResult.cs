@@ -12,5 +12,6 @@ namespace Model
         public int Score { get; set; }
         public int MaxScore { get; set; }
         public TimeSpan Time { get; set; }
+        public double LettersPerMinute { get; set; }
     }
 }

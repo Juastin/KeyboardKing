@@ -115,6 +115,7 @@ namespace Controller
         {
             CurrentEpisodeResult.Time = CalculateTime(_startTime);
             CurrentEpisodeResult.Score = CalculateScore(CurrentEpisodeResult.MaxScore, CurrentEpisodeResult.Mistakes);
+            CurrentEpisodeResult.LettersPerMinute = CalculateLetterPerMinute(CurrentEpisodeResult.Time, CurrentEpisodeResult.MaxScore);
             EpisodeFinished?.Invoke(null, EventArgs.Empty);
         }
         public static TimeSpan CalculateTime(DateTime startTime)
@@ -128,6 +129,11 @@ namespace Controller
         public static int CalculateMaxScore(Episode episode)
         {
             return episode.EpisodeSteps.Sum(episodeStep => episodeStep.Word.Length);
+        }
+
+        public static double CalculateLetterPerMinute(TimeSpan time, int letters)
+        {
+            return Math.Round(letters / time.TotalMinutes);
         }
     }
 }
