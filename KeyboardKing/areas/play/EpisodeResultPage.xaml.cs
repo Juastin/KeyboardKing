@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Controller;
 
 namespace KeyboardKing.areas.play
 {
@@ -28,6 +29,7 @@ namespace KeyboardKing.areas.play
         public EpisodeResultPage(MainWindow w) : base(w)
         {
             InitializeComponent();
+            //EpisodeController.CurrentEpisodeResult;
         }
 
         public override void OnLoad()

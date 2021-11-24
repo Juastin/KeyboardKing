@@ -15,8 +15,8 @@ namespace Controller
     public static class EpisodeController
     {
         private static Episode _currentEpisode;
-        private static EpisodeStep _currentEpisodeStep;
-        private static EpisodeResult _currentEpisodeResult;
+        public static EpisodeStep CurrentEpisodeStep { get; private set; }
+        public static EpisodeResult CurrentEpisodeResult { get; private set; }
         private static int _wordIndex;
         private static int _wrongIndex;
         private static DateTime _startTime;
@@ -24,9 +24,9 @@ namespace Controller
         public static event EventHandler WordChanged;
         public static event EventHandler EpisodeFinished;
 
-        public static string Word { get => _currentEpisodeStep?.Word; }
-        public static string WordOverlayCorrect { get =>_currentEpisodeStep?.Word.Substring(0, _wordIndex); }
-        public static string WordOverlayWrong { get =>_currentEpisodeStep?.Word.Substring(0, _wrongIndex); }
+        public static string Word { get => CurrentEpisodeStep?.Word; }
+        public static string WordOverlayCorrect { get =>CurrentEpisodeStep?.Word.Substring(0, _wordIndex); }
+        public static string WordOverlayWrong { get =>CurrentEpisodeStep?.Word.Substring(0, _wrongIndex); }
 
         /// <summary>
         /// <para>
@@ -38,11 +38,11 @@ namespace Controller
         public static void Initialise(Episode episode)
         {
             _currentEpisode = episode;
-            _currentEpisodeResult = new EpisodeResult();
+            CurrentEpisodeResult = new EpisodeResult();
             _startTime = new DateTime();
             _wordIndex = 0;
             _wrongIndex = 0;
-            _currentEpisodeResult.MaxScore = CalculateMaxScore(episode);
+            CurrentEpisodeResult.MaxScore = CalculateMaxScore(episode);
             NextEpisodeStep();
             _startTime = DateTime.Now;
         }
@@ -55,9 +55,9 @@ namespace Controller
             _wordIndex = 0;
             _wrongIndex = 0;
             if(_currentEpisode.EpisodeSteps.TryDequeue(out EpisodeStep step))
-                _currentEpisodeStep = step;
+                CurrentEpisodeStep = step;
             else
-                EpisodeFinished?.Invoke(null, new EventArgs());
+                FinishEpisode();
 
             WordChanged?.Invoke(null, new EventArgs());
         }
@@ -74,10 +74,10 @@ namespace Controller
             else
             {
                 _wrongIndex = _wordIndex + 1;
-                _currentEpisodeResult.Mistakes++;
+                CurrentEpisodeResult.Mistakes++;
             }
                 
-            if (_wordIndex >= _currentEpisodeStep.Word.Length)
+            if (_wordIndex >= CurrentEpisodeStep.Word.Length)
                 NextEpisodeStep();
             else
                 WordChanged?.Invoke(null, new EventArgs());
@@ -108,13 +108,14 @@ namespace Controller
         /// <param name="input">Input from the user</param>
         public static void CheckInput(char input)
         {
-            NextLetter(_currentEpisodeStep.Word[_wordIndex].Equals(input));
+            NextLetter(CurrentEpisodeStep.Word[_wordIndex].Equals(input));
         }
 
         public static void FinishEpisode()
         {
-            _currentEpisodeResult.Time = CalculateTime(_startTime);
-            _currentEpisodeResult.Score = CalculateScore(_currentEpisodeResult.MaxScore, _currentEpisodeResult.Mistakes);
+            CurrentEpisodeResult.Time = CalculateTime(_startTime);
+            CurrentEpisodeResult.Score = CalculateScore(CurrentEpisodeResult.MaxScore, CurrentEpisodeResult.Mistakes);
+            EpisodeFinished?.Invoke(null, EventArgs.Empty);
         }
         public static TimeSpan CalculateTime(DateTime startTime)
         {
@@ -122,7 +123,7 @@ namespace Controller
         }
         public static int CalculateScore(int maxScore, int mistakes)
         {
-           return (int)((double)mistakes / maxScore * 100);
+            return (int)((double)mistakes / maxScore * 100);
         }
         public static int CalculateMaxScore(Episode episode)
         {
