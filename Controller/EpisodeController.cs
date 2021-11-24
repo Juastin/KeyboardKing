@@ -118,19 +118,40 @@ namespace Controller
             CurrentEpisodeResult.LettersPerMinute = CalculateLetterPerMinute(CurrentEpisodeResult.Time, CurrentEpisodeResult.MaxScore);
             EpisodeFinished?.Invoke(null, EventArgs.Empty);
         }
+        /// <summary>
+        /// Returns the time difference between the given parameter and the time of now.
+        /// </summary>
+        /// <param name="startTime"></param>
+        /// <returns></returns>
         public static TimeSpan CalculateTime(DateTime startTime)
         {
             return DateTime.Now - startTime;
         }
+        /// <summary>
+        /// Returns a percentage of the correct typed letters based on the mistakes and the max amount of letters.
+        /// </summary>
+        /// <param name="maxScore"></param>
+        /// <param name="mistakes"></param>
+        /// <returns></returns>
         public static int CalculateScore(int maxScore, int mistakes)
         {
             return (int)((double)(maxScore-mistakes) / maxScore * 100);
         }
+        /// <summary>
+        /// Calculates the max amount of store possible by getting the total amount of letters that can be written.
+        /// </summary>
+        /// <param name="episode"></param>
+        /// <returns></returns>
         public static int CalculateMaxScore(Episode episode)
         {
             return episode.EpisodeSteps.Sum(episodeStep => episodeStep.Word.Length);
         }
-
+        /// <summary>
+        /// Calculates the letters that are written per minute by dividing the amount of letters possible by the time spend on the episode.
+        /// </summary>
+        /// <param name="time"></param>
+        /// <param name="letters"></param>
+        /// <returns></returns>
         public static double CalculateLetterPerMinute(TimeSpan time, int letters)
         {
             return Math.Round(letters / time.TotalMinutes);
