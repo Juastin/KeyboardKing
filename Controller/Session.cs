@@ -8,7 +8,7 @@ namespace Controller
 {
     public static class Session
     {
-        public static Dictionary<string, object> Data {get;set;} = new Dictionary<string, object>();
+        private static Dictionary<string, object> Data {get;set;} = new Dictionary<string, object>();
 
         public static object Get(string key)
         {

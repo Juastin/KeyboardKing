@@ -20,6 +20,16 @@ namespace Controller
         {
             return DBHandler.SelectQuery(new SqlCommand("SELECT id, username FROM [dbo].[User]", null));
         }
+        public static List<List<string>> GetSkillLevel(string id)
+        {
+            SqlCommand cmd = new SqlCommand("SELECT skilllevel FROM[dbo].[UserSettings] WHERE userid = @id", null);
+
+            SqlParameter idParam = new SqlParameter("@id", SqlDbType.Int, 0);
+            idParam.Value = id;
+            cmd.Parameters.Add(idParam);
+
+            return DBHandler.SelectQuery(cmd);
+        }
 
         public static bool AddUser(string username, string email, string password, string salt)
         {
@@ -43,29 +53,33 @@ namespace Controller
             return DBHandler.Query(cmd);
         }
 
-        public static bool AddSkill(string skilllevel)
+        public static bool AddSkill(string skilllevel, string[] Data)
         {
-            SqlCommand cmd = new SqlCommand("INSERT INTO [dbo].[UserSettings] (skilllevel) VALUES (@skill)");
+            SqlCommand cmd = new SqlCommand("INSERT INTO [dbo].[UserSettings] (skilllevel) VALUES (@skill) WHERE userid = @id");
 
             SqlParameter skilllevelParam = new SqlParameter("@skill", SqlDbType.VarChar, 255);
+            SqlParameter idParam = new SqlParameter("@id", SqlDbType.Int, 0);
+
 
             skilllevelParam.Value = skilllevel;
+            idParam.Value = Data[0];
 
             cmd.Parameters.Add(skilllevelParam);
+            cmd.Parameters.Add(idParam);
 
             return DBHandler.Query(cmd);
         }
 
         public static List<List<string>> GetUserInfo(string email)
         {
-            SqlCommand cmd = new SqlCommand("SELECT email, password, salt FROM[dbo].[User] WHERE email = @email", null);
+            SqlCommand cmd = new SqlCommand("SELECT id, username, email, password, salt FROM[dbo].[User] WHERE email = @email", null);
 
             SqlParameter emailParam = new SqlParameter("@email", SqlDbType.VarChar, 255);
             emailParam.Value = email;
             cmd.Parameters.Add(emailParam);
 
             List<List<string>> result = DBHandler.SelectQuery(cmd);
-            return result.Count == 1 && result[0].Count == 3 ? result : new List<List<string>>();
+            return result.Count == 1 && result[0].Count == 5 ? result : new List<List<string>>();
         }
 
         public static List<List<string>> GetAllEpisodes()

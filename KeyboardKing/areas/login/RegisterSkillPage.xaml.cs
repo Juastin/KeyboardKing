@@ -42,17 +42,23 @@ namespace KeyboardKing.areas.login
 
         private void Button_Click_Beginner(object sender, RoutedEventArgs e)
         {
-            DBQueries.AddSkill("beginner");
+            string[] result = (string[])Session.Get("student");
+            DBQueries.AddSkill("beginner", result);
+            Navigate("ChaptersPage");
         }
 
         private void Button_Click_Gemiddeld(object sender, RoutedEventArgs e)
         {
-            DBQueries.AddSkill("gemiddeld");
+            string[] result = (string[])Session.Get("student");
+            DBQueries.AddSkill("gemiddeld", result);
+            Navigate("ChaptersPage");
         }
 
         private void Button_Click_Gevorderd(object sender, RoutedEventArgs e)
         {
-            DBQueries.AddSkill("gevorderd");
+            string[] result = (string[])Session.Get("student");
+            DBQueries.AddSkill("gevorderd", result);
+            Navigate("ChaptersPage");
         }
     }
 }
