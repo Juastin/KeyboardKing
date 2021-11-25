@@ -30,9 +30,9 @@ namespace Controller
 
         /// <summary>
         /// <para>
-        ///     <c>Initilise</c> needs to be called before starting an episode.  
+        ///     <c>Initialise</c> needs to be called before starting an episode.  
         /// </para>
-        /// Initialises all variables needed to play and keep track of the episode.
+        /// Initializes all variables needed to play and keep track of the episode.
         /// </summary>
         /// <param name="episode">The episode that is going to be played</param>
         public static void Initialise(Episode episode)
@@ -63,7 +63,7 @@ namespace Controller
         }
 
         /// <summary>
-        /// <para>Proccesses the given bool.</para>
+        /// <para>Processes the given bool.</para>
         /// Will call <see cref="NextEpisodeStep"/> once the word has been correctly and fully typed.
         /// </summary>
         /// <param name="isCorrect"></param>
@@ -116,8 +116,12 @@ namespace Controller
             CurrentEpisodeResult.Time = CalculateTime(_startTime);
             CurrentEpisodeResult.Score = CalculateScore(CurrentEpisodeResult.MaxScore, CurrentEpisodeResult.Mistakes);
             CurrentEpisodeResult.LettersPerMinute = CalculateLetterPerMinute(CurrentEpisodeResult.Time, CurrentEpisodeResult.MaxScore);
+
+            DBQueries.SaveResult(CurrentEpisodeResult, episodeId, userId);
+
             EpisodeFinished?.Invoke(null, EventArgs.Empty);
         }
+
         /// <summary>
         /// Returns the time difference between the given parameter and the time of now.
         /// </summary>
