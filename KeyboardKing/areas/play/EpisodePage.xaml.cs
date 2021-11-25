@@ -56,6 +56,7 @@ namespace KeyboardKing.areas.play
         {
             this.UserInput.Focus();
         }
+
         /// <summary>
         /// <para>Event that fires when the UserInput changes.</para>
         /// Method gets the last character in the UserInput.
@@ -66,9 +67,21 @@ namespace KeyboardKing.areas.play
         private void UserInput_TextChanged(object sender, TextChangedEventArgs e)
         {
             string txt = this.UserInput.Text;
-            char character = txt[^1];
+            if (txt.Length > 0)
+                EpisodeController.CheckInput(txt[0]);
 
-            EpisodeController.CheckInput(character);
+            this.UserInput.Clear();
+        }
+
+        /// <summary>
+        /// Prevents tab from interfering with the focus on the TextBox.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PreventTab_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Tab)
+                e.Handled = true;
         }
     }
 }
