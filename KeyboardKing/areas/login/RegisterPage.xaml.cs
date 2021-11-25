@@ -59,6 +59,7 @@ namespace KeyboardKing.areas.login
                         bool Adduser = DBQueries.AddUser(username, email, Convert.ToBase64String(passHashed), Convert.ToBase64String(salt)); //Adding new user to database
                         if (Adduser)
                         {
+
                             Navigate("LoginPage"); //Returning to loginpage
                         }
                         else { error.Content = "Error: Service onberijkbaar / Bestaande gebruiker"; }

@@ -61,7 +61,7 @@ namespace KeyboardKing.areas.login
 
                         List<List<string>> skill = DBQueries.GetSkillLevel(results[0][0]);
 
-                        if (skill.Count == 0)
+                        if (skill[0][0] == string.Empty)
                         {
                             Navigate("RegisterSkillPage");
                         }

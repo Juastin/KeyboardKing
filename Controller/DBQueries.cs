@@ -35,6 +35,7 @@ namespace Controller
         {
             SqlCommand cmd = new SqlCommand("INSERT INTO [dbo].[User] (username, email, password, salt) VALUES (@username, @email, @password, @salt)");
 
+
             SqlParameter usernameParam = new SqlParameter("@username", SqlDbType.VarChar, 255);
             SqlParameter emailParam = new SqlParameter("@email", SqlDbType.VarChar, 255);
             SqlParameter passwordParam = new SqlParameter("@password", SqlDbType.VarChar, 255);
@@ -53,9 +54,11 @@ namespace Controller
             return DBHandler.Query(cmd);
         }
 
+   
+
         public static bool AddSkill(string skilllevel, string[] Data)
         {
-            SqlCommand cmd = new SqlCommand("INSERT INTO [dbo].[UserSettings] (skilllevel) VALUES (@skill) WHERE userid = @id");
+            SqlCommand cmd = new SqlCommand("UPDATE [dbo].[UserSettings] set skilllevel = @skill WHERE userid = @id");
 
             SqlParameter skilllevelParam = new SqlParameter("@skill", SqlDbType.VarChar, 255);
             SqlParameter idParam = new SqlParameter("@id", SqlDbType.Int, 0);
