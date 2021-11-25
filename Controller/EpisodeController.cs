@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Microsoft.VisualBasic.CompilerServices;
 using Model;
 
 namespace Controller
@@ -91,6 +92,8 @@ namespace Controller
         public static Episode ParseEpisode(string episodeId)
         {
             List<List<string>> results = DBQueries.GetAllEpisodeStepsFromEpisode(episodeId);
+            Session.Add("episodeId", episodeId);
+
             Episode episode = new Episode();
 
             foreach (List<string> word in results)
@@ -116,6 +119,9 @@ namespace Controller
             CurrentEpisodeResult.Time = CalculateTime(_startTime);
             CurrentEpisodeResult.Score = CalculateScore(CurrentEpisodeResult.MaxScore, CurrentEpisodeResult.Mistakes);
             CurrentEpisodeResult.LettersPerMinute = CalculateLetterPerMinute(CurrentEpisodeResult.Time, CurrentEpisodeResult.MaxScore);
+
+            int userId = IntegerType.FromString(((string[])Session.Get("student"))[0]);
+            int episodeId = IntegerType.FromString((string)Session.Get("episodeId"));
             
             DBQueries.SaveResult(CurrentEpisodeResult, episodeId, userId);
 
