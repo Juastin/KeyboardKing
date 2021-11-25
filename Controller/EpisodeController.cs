@@ -116,7 +116,7 @@ namespace Controller
             CurrentEpisodeResult.Time = CalculateTime(_startTime);
             CurrentEpisodeResult.Score = CalculateScore(CurrentEpisodeResult.MaxScore, CurrentEpisodeResult.Mistakes);
             CurrentEpisodeResult.LettersPerMinute = CalculateLetterPerMinute(CurrentEpisodeResult.Time, CurrentEpisodeResult.MaxScore);
-
+            
             DBQueries.SaveResult(CurrentEpisodeResult, episodeId, userId);
 
             EpisodeFinished?.Invoke(null, EventArgs.Empty);
