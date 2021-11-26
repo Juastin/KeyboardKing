@@ -29,7 +29,6 @@ namespace KeyboardKing.areas.play
         public EpisodeResultPage(MainWindow w) : base(w)
         {
             InitializeComponent();
-            //EpisodeController.CurrentEpisodeResult;
         }
 
         public override void OnLoad()
