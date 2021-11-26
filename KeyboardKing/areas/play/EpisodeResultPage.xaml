@@ -14,7 +14,6 @@
     </local:JumpPage.DataContext>
 
     <Grid>
-<<<<<<< HEAD
         <Grid Margin="0,0,400,0">
             <Label Content="Score" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top" Foreground="White" FontSize="28"></Label>
             <Label Content="Tijd" HorizontalAlignment="Left" Margin="49,114,0,0" VerticalAlignment="Top" Foreground="White" FontSize="28"></Label>
@@ -28,10 +27,5 @@
             <Label Content="{Binding LettersPerMinute}" HorizontalAlignment="Left" Margin="49,240,0,0" VerticalAlignment="Top" Foreground="White" FontSize="28"></Label>
             <Button Content="Voltooi episode" Tag="ChaptersPage" Click="ButtonNavigate" HorizontalAlignment="Center" Margin="0,331,0,0" VerticalAlignment="Top" Height="51" Width="164" Background="#FF363636" BorderBrush="White" Foreground="White" FontSize="20"/>
         </Grid>
-
-
-=======
-        <Label Content="Resultaten" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"/>
->>>>>>> development
     </Grid>
 </local:JumpPage>
