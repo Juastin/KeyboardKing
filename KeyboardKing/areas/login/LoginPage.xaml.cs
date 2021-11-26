@@ -56,7 +56,7 @@ namespace KeyboardKing.areas.login
                         txtEmail.Clear();
                         boxPassword.Clear();
 
-                        string[] Items = {results[0][0], results[0][1], results[0][2]};
+                        string[] Items = {results[0][0], results[0][1], results[0][2], results[0][5]};
                         Session.Add("student", Items);
 
                         if (results[0][5] == string.Empty)
