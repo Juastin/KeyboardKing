@@ -8,9 +8,9 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="RegisterPage2">
     <Grid>
-        <Label Content="RegisterPage2" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"/>
-        <Button Content="Beginner" HorizontalAlignment="Center" Margin="0,154,0,0" VerticalAlignment="Top" Height="54" Width="248" Background="#FF363636" BorderBrush="White" Foreground="White" FontSize="20" Click="Button_Click_Beginner"/>
-        <Button Content="Gemiddeld" HorizontalAlignment="Center" Margin="0,238,0,0" VerticalAlignment="Top" Height="54" Width="248" Background="#FF363636" BorderBrush="White" Foreground="White" FontSize="20" Click="Button_Click_Gemiddeld"/>
-        <Button Content="Gevorderd" HorizontalAlignment="Center" Margin="0,323,0,0" VerticalAlignment="Top" Height="54" Width="248" Background="#FF363636" BorderBrush="White" Foreground="White" FontSize="20" Click="Button_Click_Gevorderd"/>
+        <Label Content="Kies je niveau" HorizontalAlignment="Center" Margin="0,58,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"/>
+        <Button Content="Beginner" HorizontalAlignment="Center" Margin="0,154,0,0" VerticalAlignment="Top" Height="54" Width="248" Background="#FF363636" BorderBrush="White" Foreground="White" FontSize="20" Click="Button_Click_Skill" Tag="beginner"/>
+        <Button Content="Gemiddeld" HorizontalAlignment="Center" Margin="0,238,0,0" VerticalAlignment="Top" Height="54" Width="248" Background="#FF363636" BorderBrush="White" Foreground="White" FontSize="20" Click="Button_Click_Skill" Tag="gemiddeld"/>
+        <Button Content="Gevorderd" HorizontalAlignment="Center" Margin="0,323,0,0" VerticalAlignment="Top" Height="54" Width="248" Background="#FF363636" BorderBrush="White" Foreground="White" FontSize="20" Click="Button_Click_Skill" Tag="gevorderd"/>
     </Grid>
 </local:JumpPage>

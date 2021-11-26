@@ -14,6 +14,7 @@
     </local:JumpPage.DataContext>
 
     <Grid>
+<<<<<<< HEAD
         <Grid Margin="0,0,400,0">
             <Label Content="Score" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top" Foreground="White" FontSize="28"></Label>
             <Label Content="Tijd" HorizontalAlignment="Left" Margin="49,114,0,0" VerticalAlignment="Top" Foreground="White" FontSize="28"></Label>
@@ -29,5 +30,8 @@
         </Grid>
 
 
+=======
+        <Label Content="Resultaten" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"/>
+>>>>>>> development
     </Grid>
 </local:JumpPage>

@@ -9,6 +9,6 @@
       Title="FavoritesPage">
 
     <Grid>
-        <Label Content="FavoritesPage" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"/>
+        <Label Content="Favorieten" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"/>
     </Grid>
 </local:JumpPage>
