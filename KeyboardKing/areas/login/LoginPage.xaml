@@ -9,7 +9,8 @@
       Title="LoginPage">
     <Grid>
         <TextBox x:Name="error" HorizontalAlignment="Left" Margin="296,69,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="450" Height="56" Background="{x:Null}" BorderBrush="Black" FontSize="20" Foreground="White" IsReadOnly="True" IsHitTestVisible="False"/>
-        <Label Content="LoginPage" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"/>
+        <Label Content="Inloggen" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"/>
+
         <Label Content="E-mail:" HorizontalAlignment="Left" Margin="70,155,0,0" VerticalAlignment="Top" Foreground="White" FontSize="25" Height="40" Width="82"/>
         <Label Content="Wachtwoord:" HorizontalAlignment="Left" Margin="70,232,0,0" VerticalAlignment="Top" Foreground="White" FontSize="25" Height="40" Width="155"/>
 

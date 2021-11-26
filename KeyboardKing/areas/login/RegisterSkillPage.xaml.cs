@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Controller;
+
 
 namespace KeyboardKing.areas.login
 {
@@ -36,6 +38,13 @@ namespace KeyboardKing.areas.login
 
         public override void OnTick()
         {
+        }
+
+        private void Button_Click_Skill(object sender, RoutedEventArgs e) 
+        {
+            string[] result = (string[])Session.Get("student");
+            DBQueries.AddSkill(((Button)sender).Tag.ToString(), result);
+            Navigate("ChaptersPage");
         }
     }
 }

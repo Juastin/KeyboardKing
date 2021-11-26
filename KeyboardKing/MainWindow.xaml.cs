@@ -95,5 +95,74 @@ namespace KeyboardKing
         {
             _pages[_currentPage].OnTick();
         }
+
+        // Switch between minimized and maximized window with the right values.
+        private void SwitchWindowState()
+        {
+            switch (WindowState)
+            {
+                case WindowState.Normal:
+                    {
+                        MainBorder.CornerRadius = new System.Windows.CornerRadius(0);
+                        Application.Current.MainWindow.BorderThickness = new System.Windows.Thickness(6);
+                        Application.Current.MainWindow.WindowState = WindowState.Maximized;
+                        break;
+                    }
+                case WindowState.Maximized:
+                    {
+                        MainBorder.CornerRadius = new System.Windows.CornerRadius(8);
+                        Application.Current.MainWindow.BorderThickness = new System.Windows.Thickness(0);
+                        Application.Current.MainWindow.WindowState = WindowState.Normal;
+                        break;
+                    }
+            }
+        }
+
+        // Titlebar area MouseDown event
+        private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            // If titlebar area is held down and window is maximized, minimize en set titlebar on mouseposition.
+            if (e.LeftButton == MouseButtonState.Pressed && Application.Current.MainWindow.WindowState == WindowState.Maximized)
+            {
+                // Calculates the position where the application should be, according to mouseposition.
+                var point = PointToScreen(e.MouseDevice.GetPosition(this));
+
+                if (point.X <= RestoreBounds.Width / 2)
+                    Left = 0;
+
+                else if (point.X >= RestoreBounds.Width)
+                    Left = point.X - (RestoreBounds.Width - (this.ActualWidth - point.X));
+
+                else
+                    Left = point.X - (RestoreBounds.Width / 2);
+
+                Top = point.Y - (((FrameworkElement)sender).ActualHeight / 2);
+
+                SwitchWindowState();
+                DragMove();
+            }
+            else if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                DragMove();
+            }
+        }
+
+        //Titlebar minimize button event
+        private void ButtonMinimize_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow.WindowState = WindowState.Minimized;
+        }
+
+        //Titlebar minimize button event
+        private void ButtonMaximize_Click(object sender, RoutedEventArgs e)
+        {
+            SwitchWindowState();
+        }
+
+        //Titlebar minimize button event
+        private void CloseWindow_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
     }
 }
