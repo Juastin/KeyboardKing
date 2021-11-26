@@ -50,12 +50,10 @@ namespace KeyboardKing.areas.login
                 List<List<string>> results = DBQueries.GetUserInfo(email);
                 if (results.Any())
                 {
-                    bool passwordResult = TripleDES.VerifyHash(boxPassword.Password, results[0][4], results[0][3]);
+                    bool passwordResult = Encryption.VerifyHash(boxPassword.Password, results[0][4], results[0][3]);
                     if (passwordResult)
                     {
-                        txtEmail.Clear();
-                        boxPassword.Clear();
-
+                        ClearText();
                         string[] Items = {results[0][0], results[0][1], results[0][2], results[0][5]};
                         Session.Add("student", Items);
 
@@ -73,7 +71,19 @@ namespace KeyboardKing.areas.login
                 else { message += "Email is incorrect"; }
             }
             else { message += "Email of wachtwoord is niet ingevuld"; }
-            error.Content = message;
+            error.Text = message;
+        }
+
+        public void BToRegistration(object sender, RoutedEventArgs e)
+        {
+            ClearText();
+            ButtonNavigate(sender, e);
+        }
+
+        private void ClearText()
+        {
+            txtEmail.Clear();
+            error.Text = "";
         }
     }
 }
