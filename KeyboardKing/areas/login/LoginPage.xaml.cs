@@ -50,7 +50,7 @@ namespace KeyboardKing.areas.login
                 List<List<string>> results = DBQueries.GetUserInfo(email);
                 if (results.Any())
                 {
-                    bool passwordResult = TripleDES.VerifyHash(boxPassword.Password, results[0][2], results[0][1]);
+                    bool passwordResult = Encryption.VerifyHash(boxPassword.Password, results[0][2], results[0][1]);
                     if (passwordResult)
                     {
                         ClearText();

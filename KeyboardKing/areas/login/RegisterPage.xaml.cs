@@ -57,9 +57,9 @@ namespace KeyboardKing.areas.login
                     {
                         if (IsPasswordValid(password))
                         {
-                            byte[] salt = TripleDES.CreateSalt();
-                            byte[] passHashed = TripleDES.HashPassword(password, salt); //Hashing the password
-                            bool Adduser = DBQueries.AddUser(username, email, Convert.ToBase64String(passHashed), Convert.ToBase64String(salt)); //Adding new user to database
+                            string salt = Encryption.CreateSalt();
+                            string passHashed = Encryption.HashPassword(password, salt); //Hashing the password
+                            bool Adduser = DBQueries.AddUser(username, email, passHashed, salt); //Adding new user to database
                             if (Adduser)
                             {
                                 ClearText();
