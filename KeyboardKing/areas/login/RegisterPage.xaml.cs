@@ -65,15 +65,18 @@ namespace KeyboardKing.areas.login
                                 ClearText();
                                 Navigate("LoginPage"); //Returning to loginpage
                             }
-                            else { error.Content = "Error: Service onberijkbaar / Bestaande gebruiker"; }
+                            else { error.Text = "Error: Service onbereikbaar / Bestaande gebruiker"; }
                         }
-                        else { error.Content = "Error: Wachtwoord bevat geen kleine of grote letter, nummer of minstens 8 tekens"; }
+                        else
+                        {
+                            error.Text = "Error: Wachtwoord bevat geen kleine of grote letter, nummer of minstens 8 tekens";
+                        }
                     }
-                    else { error.Content = "Error: Wachtwoorden komen niet overeen"; }
+                    else { error.Text = "Error: Wachtwoorden komen niet overeen"; }
                 }
-                else { error.Content = "Error: Geen geldige E-mail"; }
+                else { error.Text = "Error: Geen geldige E-mail"; }
             }
-            else { error.Content = "Error: Lege velden"; }
+            else { error.Text = "Error: Lege velden"; }
         }
 
         private static bool IsPasswordValid(string password)
@@ -96,9 +99,8 @@ namespace KeyboardKing.areas.login
         {
             txtemail.Clear();
             txtusername.Clear();
-            error.Content = "";
+            error.Text = "";
         }
-
 
     }
 }

@@ -9,7 +9,7 @@
       Title="RegisterPage1">
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
 
-        <Label Name="error" Content="" HorizontalAlignment="Left" Margin="327,60,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" Height="40" Width="450"/>
+        <TextBox Name="error" HorizontalAlignment="Left" Margin="296,69,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="450" Height="56" Background="{x:Null}" BorderBrush="Black" FontSize="20" Foreground="White" IsReadOnly="True" IsHitTestVisible="False"/>
 
         <Label Content="RegisterPage" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"/>
         <Label Content="E-mail:" HorizontalAlignment="Left" Margin="70,145,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" Height="40" Width="82"/>

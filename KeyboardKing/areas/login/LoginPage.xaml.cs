@@ -61,7 +61,7 @@ namespace KeyboardKing.areas.login
                 else { message += "Email is incorrect"; }
             }
             else { message += "Email of wachtwoord is niet ingevuld"; }
-            error.Content = message;
+            error.Text = message;
         }
 
         public void BToRegistration(object sender, RoutedEventArgs e)
@@ -73,7 +73,7 @@ namespace KeyboardKing.areas.login
         private void ClearText()
         {
             txtEmail.Clear();
-            error.Content = "";
+            error.Text = "";
         }
     }
 }
