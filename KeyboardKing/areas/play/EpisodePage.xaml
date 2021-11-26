@@ -7,7 +7,7 @@
       xmlns:Model="clr-namespace:Model" x:Class="KeyboardKing.areas.play.EpisodePage"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="EpisodePage">
+      Title="EpisodePage" PreviewKeyDown="PreventTab_PreviewKeyDown" ForceCursor="True" Cursor="Arrow">
 
     <local:JumpPage.DataContext>
         <Model:EpisodePageDataContext/>
