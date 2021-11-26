@@ -93,7 +93,8 @@ namespace Controller
         {
             SqlCommand cmd = new SqlCommand("SELECT word " +
                 "FROM [dbo].[EpisodeStep] " +
-                "WHERE episodeid = @id", null);
+                "WHERE episodeid = @id " +
+                "ORDER BY NEWID()", null);
 
             SqlParameter episodeIdParam = new SqlParameter("@id", SqlDbType.Int, 255);
             episodeIdParam.Value = id;
