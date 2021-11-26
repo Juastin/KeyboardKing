@@ -53,8 +53,7 @@ namespace KeyboardKing.areas.login
                     bool passwordResult = TripleDES.VerifyHash(boxPassword.Password, results[0][2], results[0][1]);
                     if (passwordResult)
                     {
-                        txtEmail.Clear();
-                        boxPassword.Clear();
+                        ClearText();
                         Navigate("ChaptersPage");
                     }
                     else { message += "Wachtwoord is incorrect"; }
@@ -63,6 +62,18 @@ namespace KeyboardKing.areas.login
             }
             else { message += "Email of wachtwoord is niet ingevuld"; }
             error.Content = message;
+        }
+
+        public void BToRegistration(object sender, RoutedEventArgs e)
+        {
+            ClearText();
+            ButtonNavigate(sender, e);
+        }
+
+        private void ClearText()
+        {
+            txtEmail.Clear();
+            error.Content = "";
         }
     }
 }
