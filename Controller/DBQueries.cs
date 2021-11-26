@@ -20,16 +20,7 @@ namespace Controller
         {
             return DBHandler.SelectQuery(new SqlCommand("SELECT id, username FROM [dbo].[User]", null));
         }
-        public static List<List<string>> GetSkillLevel(string id)
-        {
-            SqlCommand cmd = new SqlCommand("SELECT skilllevel FROM[dbo].[UserSettings] WHERE userid = @id", null);
-
-            SqlParameter idParam = new SqlParameter("@id", SqlDbType.Int, 0);
-            idParam.Value = id;
-            cmd.Parameters.Add(idParam);
-
-            return DBHandler.SelectQuery(cmd);
-        }
+       
 
         public static bool AddUser(string username, string email, string password, string salt)
         {
@@ -75,14 +66,18 @@ namespace Controller
 
         public static List<List<string>> GetUserInfo(string email)
         {
-            SqlCommand cmd = new SqlCommand("SELECT id, username, email, password, salt FROM[dbo].[User] WHERE email = @email", null);
+            SqlCommand cmd = new SqlCommand("SELECT id, username, email, password, salt, skilllevel " +
+                                            "FROM[dbo].[User] " +
+                                            "LEFT JOIN [dbo].[UserSettings] " +
+                                            "ON [dbo].[User].id = [dbo].[UserSettings].userid " +
+                                            "WHERE email = @email", null);
 
             SqlParameter emailParam = new SqlParameter("@email", SqlDbType.VarChar, 255);
             emailParam.Value = email;
             cmd.Parameters.Add(emailParam);
 
             List<List<string>> result = DBHandler.SelectQuery(cmd);
-            return result.Count == 1 && result[0].Count == 5 ? result : new List<List<string>>();
+            return result.Count == 1 && result[0].Count == 6 ? result : new List<List<string>>();
         }
 
         public static List<List<string>> GetAllEpisodes()
