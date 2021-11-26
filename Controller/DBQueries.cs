@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Model;
 
 namespace Controller
 {
@@ -60,6 +61,34 @@ namespace Controller
 
             cmd.Parameters.Add(skilllevelParam);
             cmd.Parameters.Add(idParam);
+
+            return DBHandler.Query(cmd);
+        }
+
+        public static bool SaveResult(EpisodeResult es, int episodeId, int userId)
+        {
+            SqlCommand cmd = new SqlCommand("INSERT INTO [dbo].[EpisodeResult] (episodeid, userid, score, mistakes, lettersperminute, time) " +
+                                            "VALUES (@episodeid, @userid, @score, @mistakes, @lpm, @time)", null);
+            SqlParameter episodeidParam = new SqlParameter("@episodeid", SqlDbType.Int, 0);
+            SqlParameter useridParam = new SqlParameter("@userid", SqlDbType.Int, 0);
+            SqlParameter mistakesParam = new SqlParameter("@score", SqlDbType.Int, 0);
+            SqlParameter scoreParam = new SqlParameter("@mistakes", SqlDbType.Int, 0);
+            SqlParameter lpmParam = new SqlParameter("@lpm", SqlDbType.Int, 0);
+            SqlParameter timeParam = new SqlParameter("@time", SqlDbType.BigInt, 0);
+
+            episodeidParam.Value = episodeId;
+            useridParam.Value = userId;
+            mistakesParam.Value = es.Mistakes;
+            scoreParam.Value = es.Score;
+            lpmParam.Value = es.LettersPerMinute;
+            timeParam.Value = es.Time.Ticks;
+
+            cmd.Parameters.Add(episodeidParam);
+            cmd.Parameters.Add(useridParam);
+            cmd.Parameters.Add(mistakesParam);
+            cmd.Parameters.Add(scoreParam);
+            cmd.Parameters.Add(lpmParam);
+            cmd.Parameters.Add(timeParam);
 
             return DBHandler.Query(cmd);
         }

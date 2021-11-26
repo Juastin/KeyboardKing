@@ -78,7 +78,7 @@ namespace KeyboardKing.areas.main
         private void OnEpisodeFinished(object sender, EventArgs e)
         {
             EpisodeController.EpisodeFinished -= OnEpisodeFinished;
-            Navigate("ChaptersPage");
+            Navigate("EpisodeResultPage");
         }
     }
 }

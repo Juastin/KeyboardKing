@@ -1,14 +1,31 @@
-﻿<local:JumpPage x:Class="KeyboardKing.areas.play.EpisodeResultPage"
+﻿<local:JumpPage
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:KeyboardKing.core"
+      xmlns:Model="clr-namespace:Model" x:Class="KeyboardKing.areas.play.EpisodeResultPage"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="EpisodeResultPage">
 
+    <local:JumpPage.DataContext>
+        <Model:EpisodeResultPageDataContext/>
+    </local:JumpPage.DataContext>
+
     <Grid>
-        <Label Content="Resultaten" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"/>
+        <Grid Margin="0,0,400,0">
+            <Label Content="Score" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top" Foreground="White" FontSize="28"></Label>
+            <Label Content="Tijd" HorizontalAlignment="Left" Margin="49,114,0,0" VerticalAlignment="Top" Foreground="White" FontSize="28"></Label>
+            <Label Content="Fouten" HorizontalAlignment="Left" Margin="49,177,0,0" VerticalAlignment="Top" Foreground="White" FontSize="28"></Label>
+            <Label Content="Letters per minuut" HorizontalAlignment="Left" Margin="49,240,0,0" VerticalAlignment="Top" Foreground="White" FontSize="28"></Label>
+        </Grid>
+        <Grid Margin="400,0,0,0">
+            <Label Content="{Binding Score}" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top" Foreground="White" FontSize="28"/>
+            <Label Content="{Binding Time}" HorizontalAlignment="Left" Margin="49,114,0,0" VerticalAlignment="Top" Foreground="White" FontSize="28"></Label>
+            <Label Content="{Binding Mistakes}" HorizontalAlignment="Left" Margin="49,177,0,0" VerticalAlignment="Top" Foreground="White" FontSize="28"></Label>
+            <Label Content="{Binding LettersPerMinute}" HorizontalAlignment="Left" Margin="49,240,0,0" VerticalAlignment="Top" Foreground="White" FontSize="28"></Label>
+            <Button Content="Voltooi episode" Tag="ChaptersPage" Click="ButtonNavigate" HorizontalAlignment="Center" Margin="0,331,0,0" VerticalAlignment="Top" Height="51" Width="164" Background="#FF363636" BorderBrush="White" Foreground="White" FontSize="20"/>
+        </Grid>
     </Grid>
 </local:JumpPage>
