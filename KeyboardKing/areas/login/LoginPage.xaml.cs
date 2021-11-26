@@ -50,12 +50,23 @@ namespace KeyboardKing.areas.login
                 List<List<string>> results = DBQueries.GetUserInfo(email);
                 if (results.Any())
                 {
-                    bool passwordResult = TripleDES.VerifyHash(boxPassword.Password, results[0][2], results[0][1]);
+                    bool passwordResult = TripleDES.VerifyHash(boxPassword.Password, results[0][4], results[0][3]);
                     if (passwordResult)
                     {
                         txtEmail.Clear();
                         boxPassword.Clear();
-                        Navigate("ChaptersPage");
+
+                        string[] Items = {results[0][0], results[0][1], results[0][2], results[0][5]};
+                        Session.Add("student", Items);
+
+                        if (results[0][5] == string.Empty)
+                        {
+                            Navigate("RegisterSkillPage");
+                        }
+                        else
+                        {
+                            Navigate("ChaptersPage");
+                        }
                     }
                     else { message += "Wachtwoord is incorrect"; }
                 }

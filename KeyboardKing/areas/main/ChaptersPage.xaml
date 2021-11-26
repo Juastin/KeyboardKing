@@ -33,7 +33,7 @@
 
     <Grid Background="Black">
         <TextBlock Text="Geen episodes beschikbaar" TextWrapping="Wrap" Foreground="White" Margin="55,121,49,49" FontWeight="Bold" FontSize="15"/>
-        <Label Content="ChaptersPage" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"/>
+        <Label Content="Chapters" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"/>
         <ListBox Name="EpOverview" Margin="49,114,49,49" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>

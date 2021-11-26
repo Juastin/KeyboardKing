@@ -11,7 +11,7 @@
 
         <Label Name="error" Content="" HorizontalAlignment="Left" Margin="327,60,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" Height="40" Width="450"/>
 
-        <Label Content="RegisterPage" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"/>
+        <Label Content="Registreren" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"/>
         <Label Content="E-mail:" HorizontalAlignment="Left" Margin="70,145,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" Height="40" Width="82"/>
         <Label Content="Gebruikersnaam:" HorizontalAlignment="Left" Margin="70,222,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" Height="40" Width="161"/>
         <Label Content="Wachtwoord:" HorizontalAlignment="Left" Margin="70,298,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" Height="40" Width="161"/>
