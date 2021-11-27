@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Controller
 {
-    public static class TripleDES
+    public static class Encryption
     {
         public static string Encrypt(string source, string key)
         {
@@ -40,31 +40,37 @@ namespace Controller
             }
         }
 
+        private static string TripleDes(string source, bool encrypt)
+        {
+            return encrypt ? Encrypt(source, "332cc6da-d757-4e80-a726-0bf6b615df09") : Decrypt(source, "332cc6da-d757-4e80-a726-0bf6b615df09");
+        }
+
         // Argon2
         //https://github.com/kmaragon/Konscious.Security.Cryptography
-        public static byte[] HashPassword(string password, byte[] salt)
+        public static string HashPassword(string password, string salt)
         {
-            Argon2id argon2 = new Argon2id(Encoding.UTF8.GetBytes(password));
-            argon2.Salt = salt;
+            Argon2id argon2 = new(Encoding.UTF8.GetBytes(password));
+            argon2.Salt = Convert.FromBase64String(TripleDes(salt, false));
             argon2.DegreeOfParallelism = 16;
             argon2.Iterations = 40;
             argon2.MemorySize = 8192;
-            return argon2.GetBytes(16);
+            return TripleDes(Convert.ToBase64String(argon2.GetBytes(16)), true);
         }
 
         public static bool VerifyHash(string loginPw, string salt, string userPw)
         {
-            byte[] loginHashPw = HashPassword(loginPw, Convert.FromBase64String(salt));
-            byte[] userHashPw = Convert.FromBase64String(userPw); 
+            byte[] loginHashPw = Convert.FromBase64String(TripleDes(HashPassword(loginPw, salt), false));
+            byte[] userHashPw = Convert.FromBase64String(TripleDes(userPw, false));
             return loginHashPw.SequenceEqual(userHashPw);
         }
 
-        public static byte[] CreateSalt()
+        public static string CreateSalt()
         {
-            byte[] buffer = new byte[16];
+            byte[] salt = new byte[16];
             RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
-            rng.GetBytes(buffer);
-            return buffer;
+            rng.GetBytes(salt);
+            return TripleDes(Convert.ToBase64String(salt), true);
         }
+
     }
 }
