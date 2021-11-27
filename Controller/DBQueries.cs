@@ -71,8 +71,8 @@ namespace Controller
                                             "VALUES (@episodeid, @userid, @score, @mistakes, @lpm, @time)", null);
             SqlParameter episodeidParam = new SqlParameter("@episodeid", SqlDbType.Int, 0);
             SqlParameter useridParam = new SqlParameter("@userid", SqlDbType.Int, 0);
-            SqlParameter mistakesParam = new SqlParameter("@score", SqlDbType.Int, 0);
-            SqlParameter scoreParam = new SqlParameter("@mistakes", SqlDbType.Int, 0);
+            SqlParameter scoreParam = new SqlParameter("@score", SqlDbType.Int, 0);
+            SqlParameter mistakesParam = new SqlParameter("@mistakes", SqlDbType.Int, 0);
             SqlParameter lpmParam = new SqlParameter("@lpm", SqlDbType.Int, 0);
             SqlParameter timeParam = new SqlParameter("@time", SqlDbType.BigInt, 0);
 
