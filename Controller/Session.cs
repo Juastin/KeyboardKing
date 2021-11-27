@@ -18,13 +18,10 @@ namespace Controller
         public static bool Add(string key, object o)
         {
             if (Data.ContainsKey(key))
-            {
                 Data.Remove(key);
-            } else
-            {
-                Data.Add(key, o);
+
+            Data.Add(key, o);
                 return true;
-            }
         }
 
         public static bool Remove(string key)
