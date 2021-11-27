@@ -19,7 +19,7 @@ namespace Controller
         {
             if (Data.ContainsKey(key))
             {
-                return false;
+                Data.Remove(key);
             } else
             {
                 Data.Add(key, o);
