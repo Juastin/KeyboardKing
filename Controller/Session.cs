@@ -18,25 +18,19 @@ namespace Controller
         public static bool Add(string key, object o)
         {
             if (Data.ContainsKey(key))
-            {
-                return false;
-            } else
-            {
-                Data.Add(key, o);
+                Data.Remove(key);
+
+            Data.Add(key, o);
                 return true;
-            }
         }
 
         public static bool Remove(string key)
         {
-            if (Data.ContainsKey(key))
-            {
-                Data.Remove(key);
-                return true;
-            } else
-            {
-                return true;
-            }
+            if (!Data.ContainsKey(key)) return false;
+
+            Data.Remove(key);
+            return true;
+
         }
 
         public static void Flush()
