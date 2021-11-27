@@ -26,14 +26,11 @@ namespace Controller
 
         public static bool Remove(string key)
         {
-            if (Data.ContainsKey(key))
-            {
-                Data.Remove(key);
-                return true;
-            } else
-            {
-                return true;
-            }
+            if (!Data.ContainsKey(key)) return false;
+
+            Data.Remove(key);
+            return true;
+
         }
 
         public static void Flush()
