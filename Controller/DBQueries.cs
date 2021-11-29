@@ -144,5 +144,15 @@ namespace Controller
             return DBHandler.SelectQuery(cmd);
         }
 
+        public static List<List<string>> GetAllActiveMatches()
+        {
+            SqlCommand cmd = new SqlCommand("SELECT COUNT(mp.id) playercount, u.username as host, m.id, e.name " +
+                "FROM [dbo].[Match] m " +
+                "LEFT JOIN [dbo].[MatchProgress] mp ON m.id = mp.matchid " +
+                "LEFT JOIN [dbo].[User] u ON m.creatorid = u.id " +
+                "LEFT JOIN [dbo].[Episode] e ON m.episodeid = e.id " +
+                "GROUP BY m.id, u.username, m.id, e.name", null);
+            return DBHandler.SelectQuery(cmd);
+        }
     }
 }
