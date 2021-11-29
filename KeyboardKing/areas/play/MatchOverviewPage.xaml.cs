@@ -22,6 +22,8 @@ namespace KeyboardKing.areas.play
     /// </summary>
     public partial class MatchOverviewPage : JumpPage
     {
+        private DateTime _tickCheck {get;set;} = DateTime.Now;
+
         public MatchOverviewPage(MainWindow w) : base(w)
         {
             InitializeComponent();
@@ -38,7 +40,12 @@ namespace KeyboardKing.areas.play
 
         public override void OnTick()
         {
-            LoadAllMatches();
+            DateTime now = DateTime.Now;
+            if (_tickCheck.AddSeconds(5) < now) // if 5 seconds have passed
+            {
+                _tickCheck = now;
+                LoadAllMatches();
+            }
         }
 
         public void LoadAllMatches()
@@ -57,7 +64,6 @@ namespace KeyboardKing.areas.play
             Button button = (Button)sender;
             if (button.DataContext is List<string>)
             {
-                //Gets the selected row data
                 List<string> row = (List<string>)button.DataContext;
                 MessageBox.Show(row[0]);
                 //Navigate("MatchLobbyPage");

@@ -84,7 +84,7 @@
     <Grid>
 
         <!-- Match* overview ListBox -->
-        <ListBox Name="MatchOverview" Margin="49,50,49,113" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" 
+        <ListBox Name="MatchOverview" Margin="49,51,49,169" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" 
                  HorizontalContentAlignment="Stretch"
                  ItemContainerStyle="{DynamicResource ListBoxItemTemplate}">
             <ListBox.ItemsPanel>
@@ -100,7 +100,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate>
-                                            <ItemsPresenter />
+                                        <ItemsPresenter />
                                     </ControlTemplate>
                                 </Setter.Value>
                             </Setter>
@@ -120,5 +120,6 @@
             </Menu>
             <StackPanel></StackPanel>
         </DockPanel>
+        <Button Content="Klik hier om een match te maken" Tag="MatchCreatePage" Click="ButtonNavigate" HorizontalAlignment="Center" Margin="0,0,0,112" VerticalAlignment="Bottom" Height="40" Width="220" Background="#FF363636" BorderBrush="White" Foreground="White" FontSize="14"/>
     </Grid>
 </local:JumpPage>
