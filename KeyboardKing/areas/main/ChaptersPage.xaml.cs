@@ -26,7 +26,6 @@ namespace KeyboardKing.areas.main
         public ChaptersPage(MainWindow w) : base(w)
         {
             InitializeComponent();
-            LoadAllEpisodes();
         }
 
         public override void OnLoad()
@@ -42,13 +41,20 @@ namespace KeyboardKing.areas.main
         {
         }
 
+        /// <summary>
+        /// <para>Load all chapters and episodes with the highscore of the corresponding user.</para>
+        /// This data is used for the listbox in ChaptersPage.xaml
+        /// </summary>
         public void LoadAllEpisodes()
         {
             this.Dispatcher.Invoke(() =>
             {
-                List<List<string>> Episodes = DBQueries.GetAllEpisodes();
+                // Get logged in user data for the GetAllEpisodes query and set it to the itemsource of the overview ListBox.
+                string[] User = (string[])Session.Get("student");
+                List<List<string>> Episodes = DBQueries.GetAllEpisodes(User);
                 EpOverview.ItemsSource = Episodes;
 
+                // Add a GroupDescription so that the chapters with it's episodes will be split.
                 CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(EpOverview.ItemsSource);
                 PropertyGroupDescription groupDescription = new PropertyGroupDescription("[0]");
                 view.GroupDescriptions.Add(groupDescription);
@@ -56,7 +62,9 @@ namespace KeyboardKing.areas.main
             });
         }
 
-        //Executes method when PlayButton is fired in the EpOverview ListBox.
+        /// <summary>
+        /// <para>Executes method when PlayButton is fired in the EpOverview ListBoxItem.</para>
+        /// </summary>
         private void EpOverview_PlayClick(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;

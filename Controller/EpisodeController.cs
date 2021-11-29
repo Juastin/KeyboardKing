@@ -92,6 +92,7 @@ namespace Controller
         public static Episode ParseEpisode(string episodeId)
         {
             List<List<string>> results = DBQueries.GetAllEpisodeStepsFromEpisode(episodeId);
+            Session.Remove("episodeId");
             Session.Add("episodeId", episodeId);
 
             Episode episode = new Episode();
