@@ -40,7 +40,7 @@ namespace Controller
             }
         }
 
-        private static string TripleDes(string source, bool encrypt)
+        public static string TripleDes(string source, bool encrypt)
         {
             return encrypt ? Encrypt(source, "332cc6da-d757-4e80-a726-0bf6b615df09") : Decrypt(source, "332cc6da-d757-4e80-a726-0bf6b615df09");
         }
