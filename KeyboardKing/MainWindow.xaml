@@ -91,7 +91,7 @@
             </Border>
 
             <!-- Screen content -->
-            <Frame x:Name="MainFrame" Grid.Row="1" NavigationUIVisibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Frame x:Name="MainFrame" Grid.Row="1" NavigationUIVisibility="Hidden"/>
         </Grid>
     </Border>
 </Window>

@@ -26,7 +26,6 @@ namespace KeyboardKing.areas.main
         public ChaptersPage(MainWindow w) : base(w)
         {
             InitializeComponent();
-            LoadAllEpisodes();
         }
 
         public override void OnLoad()
