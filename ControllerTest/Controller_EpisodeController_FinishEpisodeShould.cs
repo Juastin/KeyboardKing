@@ -13,10 +13,12 @@ namespace ControllerTest
     {
         public DateTime StartTime { get; set; }
         public Episode Episode { get; set; }
+        public TimeSpan TwoMinute { get; set; }
         [SetUp]
         public void SetUp()
         {
             StartTime = DateTime.Now;
+            TwoMinute = TimeSpan.FromMinutes(2);
             Episode = new Episode();
             EpisodeStep e1 = new EpisodeStep();
             EpisodeStep e2 = new EpisodeStep();
@@ -47,6 +49,13 @@ namespace ControllerTest
         {
             int maxScore = EpisodeController.CalculateMaxScore(Episode);
             Assert.AreEqual(10, maxScore);
+        }
+
+        [Test]
+        public void CalculateLPM_ReturnCorrect()
+        { 
+            double lpm = EpisodeController.CalculateLetterPerMinute(TwoMinute,EpisodeController.CalculateMaxScore(Episode));
+            Assert.AreEqual(5.0, lpm);
         }
     }
 }
