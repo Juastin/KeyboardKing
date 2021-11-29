@@ -22,11 +22,30 @@ namespace ControllerTest
             Episode = new Episode();
             EpisodeStep e1 = new EpisodeStep();
             EpisodeStep e2 = new EpisodeStep();
+            
             e1.Word = "kaas";
             e2.Word = "koekje";
             Episode.EpisodeSteps.Enqueue(e1);
             Episode.EpisodeSteps.Enqueue(e2);
+
+            //EpisodeController.CurrentEpisodeResult.MaxScore = EpisodeController.CalculateMaxScore(Episode);
+
+            //User User = new User();
+            //Session.Add("student",User);
+            //Session.Add("episodeId", "3");
+
+            EpisodeController.Initialise(Episode);
         }
+
+        //[Test]
+        //public void FinishEpisode_FillsEpisodeResult()
+        //{
+        //    var emptyEpisodeResults = EpisodeController.CurrentEpisodeResult;
+        //    EpisodeController.FinishEpisode();
+        //    var filledEpisodeResults = EpisodeController.CurrentEpisodeResult;
+        //    Assert.AreNotEqual(emptyEpisodeResults,filledEpisodeResults);
+        //
+        //}
 
         [Test]
         public void CalculateTime_ReturnsCorrect()
@@ -39,22 +58,20 @@ namespace ControllerTest
         [Test]
         public void CalculateScore_ReturnCorrect()
         {
-            int maxScore = EpisodeController.CalculateMaxScore(Episode);
-            int score = EpisodeController.CalculateScore(maxScore, 5);
+            int score = EpisodeController.CalculateScore(EpisodeController.CurrentEpisodeResult.MaxScore, 5);
             Assert.AreEqual(50, score);
         }
 
         [Test]
         public void CalculateMaxScore_ReturnCorrect()
         {
-            int maxScore = EpisodeController.CalculateMaxScore(Episode);
-            Assert.AreEqual(10, maxScore);
+            Assert.AreEqual(10, EpisodeController.CurrentEpisodeResult.MaxScore);
         }
 
         [Test]
         public void CalculateLPM_ReturnCorrect()
         { 
-            double lpm = EpisodeController.CalculateLetterPerMinute(TwoMinute,EpisodeController.CalculateMaxScore(Episode));
+            double lpm = EpisodeController.CalculateLetterPerMinute(TwoMinute,EpisodeController.CurrentEpisodeResult.MaxScore);
             Assert.AreEqual(5.0, lpm);
         }
     }
