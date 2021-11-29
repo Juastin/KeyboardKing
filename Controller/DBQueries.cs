@@ -109,12 +109,24 @@ namespace Controller
             return result.Count == 1 && result[0].Count == 6 ? result : new List<List<string>>();
         }
 
-        public static List<List<string>> GetAllEpisodes()
+        public static List<List<string>> GetAllEpisodes(string[] User)
         {
-            SqlCommand cmd = new SqlCommand("SELECT [dbo].[Chapter].name, episode, [dbo].[Episode].name, [dbo].[Episode].id " +
-                                    "FROM [dbo].[Episode]" +
-                                   "LEFT JOIN [dbo].[Chapter]" +
-                                   "ON [dbo].[Episode].chapterid = [dbo].[Chapter].id", null);
+            SqlCommand cmd = new SqlCommand("SELECT [dbo].[Chapter].name, episode, [dbo].[Episode].name, [dbo].[Episode].id, " +
+                "CASE WHEN [dbo].[EpisodeResult].userid IS NULL THEN 'False' ELSE 'True' END AS completed, " +
+                "MAX([dbo].[EpisodeResult].score) AS highscore " +
+                "FROM [dbo].[Episode] " +
+                "LEFT JOIN [dbo].[Chapter] " +
+                "ON [dbo].[Episode].chapterid = [dbo].[Chapter].id " +
+                "LEFT JOIN [dbo].[EpisodeResult] " +
+                "ON [dbo].[EpisodeResult].episodeid = [dbo].[Episode].id " +
+                "AND [dbo].[EpisodeResult].userid = @userid " +
+                "GROUP BY [dbo].[Chapter].name, episode, [dbo].[Episode].name, [dbo].[Episode].id, [dbo].[EpisodeResult].userid");
+
+            SqlParameter UserIdParam = new SqlParameter("@userid", SqlDbType.Int, 0);
+            UserIdParam.Value = User[0];
+
+            cmd.Parameters.Add(UserIdParam);
+
             return DBHandler.SelectQuery(cmd);
         }
 
