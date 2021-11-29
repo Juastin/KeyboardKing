@@ -25,7 +25,6 @@ namespace KeyboardKing.areas.play
         public MatchOverviewPage(MainWindow w) : base(w)
         {
             InitializeComponent();
-            LoadAllMatches();
         }
 
         public override void OnLoad()
@@ -39,6 +38,7 @@ namespace KeyboardKing.areas.play
 
         public override void OnTick()
         {
+            LoadAllMatches();
         }
 
         public void LoadAllMatches()
