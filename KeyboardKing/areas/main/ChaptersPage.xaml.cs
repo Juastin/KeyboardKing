@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Controller;
+using Model;
 
 namespace KeyboardKing.areas.main
 {
@@ -28,6 +30,7 @@ namespace KeyboardKing.areas.main
 
         public override void OnLoad()
         {
+            LoadAllEpisodes();
         }
 
         public override void OnShadow()
@@ -36,6 +39,54 @@ namespace KeyboardKing.areas.main
 
         public override void OnTick()
         {
+        }
+
+        /// <summary>
+        /// <para>Load all chapters and episodes with the highscore of the corresponding user.</para>
+        /// This data is used for the listbox in ChaptersPage.xaml
+        /// </summary>
+        public void LoadAllEpisodes()
+        {
+            this.Dispatcher.Invoke(() =>
+            {
+                // Get logged in user data for the GetAllEpisodes query and set it to the itemsource of the overview ListBox.
+                string[] User = (string[])Session.Get("student");
+                List<List<string>> Episodes = DBQueries.GetAllEpisodes(User);
+                EpOverview.ItemsSource = Episodes;
+
+                // Add a GroupDescription so that the chapters with it's episodes will be split.
+                CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(EpOverview.ItemsSource);
+                PropertyGroupDescription groupDescription = new PropertyGroupDescription("[0]");
+                view.GroupDescriptions.Add(groupDescription);
+                EpOverview.Items.Refresh();
+            });
+        }
+
+        /// <summary>
+        /// <para>Executes method when PlayButton is fired in the EpOverview ListBoxItem.</para>
+        /// </summary>
+        private void EpOverview_PlayClick(object sender, RoutedEventArgs e)
+        {
+            Button button = (Button)sender;
+            if (button.DataContext is List<string>)
+            {
+                //Gets the selected row data
+                List<string> row = (List<string>)button.DataContext;
+
+                //When the episode is finished this event will trigger.
+                //Since we can only call Navigate() inside the View this is needed.
+                EpisodeController.EpisodeFinished += OnEpisodeFinished;
+                Episode episode = EpisodeController.ParseEpisode(row[3]);
+                EpisodeController.Initialise(episode);
+
+                Navigate("EpisodePage");
+            }
+        }
+
+        private void OnEpisodeFinished(object sender, EventArgs e)
+        {
+            EpisodeController.EpisodeFinished -= OnEpisodeFinished;
+            Navigate("EpisodeResultPage");
         }
     }
 }

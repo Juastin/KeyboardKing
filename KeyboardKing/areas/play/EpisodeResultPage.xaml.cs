@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Controller;
 
 namespace KeyboardKing.areas.play
 {
@@ -21,6 +22,10 @@ namespace KeyboardKing.areas.play
     /// </summary>
     public partial class EpisodeResultPage : JumpPage
     {
+        /// <summary>
+        /// Controller for <see cref="EpisodeResultPage"/>
+        /// </summary>
+        /// <param name="w"></param>
         public EpisodeResultPage(MainWindow w) : base(w)
         {
             InitializeComponent();
