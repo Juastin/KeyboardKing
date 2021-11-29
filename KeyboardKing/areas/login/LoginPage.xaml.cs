@@ -33,7 +33,6 @@ namespace KeyboardKing.areas.login
 
         public override void OnShadow()
         {
-            Console.WriteLine("test");
         }
 
         public override void OnTick()
