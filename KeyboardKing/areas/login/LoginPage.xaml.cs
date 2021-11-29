@@ -59,10 +59,12 @@ namespace KeyboardKing.areas.login
                         if (results[0][5] == string.Empty)
                         {
                             Navigate("RegisterSkillPage");
+                            return;
                         }
                         else
                         {
                             Navigate("ChaptersPage");
+                            return;
                         }
                     }
                     else { message += "Wachtwoord is incorrect"; }
