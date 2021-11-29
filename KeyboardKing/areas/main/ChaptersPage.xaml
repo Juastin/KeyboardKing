@@ -78,7 +78,7 @@
 
     <!-- CONTENT -->
     <Grid>
-        <Label Content="ChaptersPage" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"/>
+        <Label Content="Chapters" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"/>
 
         <!-- Chapter overview ListBox -->
         <ListBox Name="EpOverview" Margin="49,114,49,49" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" 
