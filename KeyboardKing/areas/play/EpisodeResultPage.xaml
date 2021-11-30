@@ -7,7 +7,7 @@
       xmlns:Model="clr-namespace:Model" x:Class="KeyboardKing.areas.play.EpisodeResultPage"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="EpisodeResultPage">
+      Title="EpisodeResultPage" HorizontalAlignment="Center" VerticalAlignment="Center">
 
     <local:JumpPage.DataContext>
         <Model:EpisodeResultPageDataContext/>
