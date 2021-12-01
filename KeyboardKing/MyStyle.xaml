@@ -135,6 +135,7 @@
         <Setter Property="Foreground" Value="{DynamicResource Color1}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Color1}"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
 
     <Style x:Key="Card" TargetType="{x:Type Border}">
         <Setter Property="Background" Value="{DynamicResource Color6}" />
