@@ -54,7 +54,6 @@ namespace KeyboardKing.areas.play
             {
                 List<List<string>> Matches = DBQueries.GetAllActiveMatches();
                 MatchOverview.ItemsSource = Matches;
-                CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(MatchOverview.ItemsSource);
                 MatchOverview.Items.Refresh();
             });
         }
