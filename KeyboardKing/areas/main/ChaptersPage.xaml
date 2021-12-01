@@ -118,6 +118,6 @@
             </ListBox.GroupStyle>
         </ListBox>
 
-        <components:Navbar CurrentPage="ChaptersPage"/>
+        <components:Navbar CurrentPage="MatchOverviewPage"/>
     </Grid>
 </local:JumpPage>

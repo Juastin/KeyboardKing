@@ -10,6 +10,8 @@
         <Style x:Key="NavButton" TargetType="Button">
             <Setter Property="OverridesDefaultStyle" Value="True"/>
             <Setter Property="Margin" Value="5"/>
+            <Setter Property="Width" Value="80"/>
+            <Setter Property="Height" Value="80"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -30,11 +32,11 @@
     <Grid>
         <DockPanel>
             <Menu DockPanel.Dock="Bottom" Width="520" Height="92" Background="{x:Null}" Margin="0,0,0,10">
-                <Button Style="{StaticResource NavButton}" Width="80" Height="80" Background="White" Foreground="Black" Content="▶" FontSize="36" FontFamily="Arial"/>
-                <Button Style="{StaticResource NavButton}" Width="80" Height="80" Background="Black" Foreground="White" Content="🔄" FontSize="30" FontFamily="Arial"/>
-                <Button Style="{StaticResource NavButton}" Tag="MatchOverviewPage" Width="80" Height="80" Background="Black" Foreground="White" Content="⚔" FontSize="30" FontFamily="Arial"/>
-                <Button Style="{StaticResource NavButton}" Width="80" Height="80" Background="Black" Foreground="White" Content="⚙" FontSize="30" FontFamily="Arial"/>
-                <Button Style="{StaticResource NavButton}" Tag="LoginPage" Width="80" Height="80" Background="Black" Foreground="White" Content="🚪" FontSize="30" FontFamily="Arial"/>
+                <Button Style="{StaticResource NavButton}" Background="{Binding ElementName=root, Path=ChaptersPageBackground}" Foreground="{Binding ElementName=root, Path=ChaptersPageForground}" Content="▶" FontSize="36" FontFamily="Arial"/>
+                <Button Style="{StaticResource NavButton}" Background="{Binding ElementName=root, Path=FavoritesPageBackground}" Foreground="{Binding ElementName=root, Path=FavoritesPageForground}" Content="🔄" FontSize="30" FontFamily="Arial"/>
+                <Button Style="{StaticResource NavButton}" Tag="MatchOverviewPage" Background="{Binding ElementName=root, Path=MatchOverviewPageBackground}" Foreground="{Binding ElementName=root, Path=MatchOverviewPageForground}" Content="⚔" FontSize="30" FontFamily="Arial"/>
+                <Button Style="{StaticResource NavButton}" Background="{Binding ElementName=root, Path=SettingsPageBackground}" Foreground="{Binding ElementName=root, Path=SettingsPageForground}" Content="⚙" FontSize="30" FontFamily="Arial"/>
+                <Button Style="{StaticResource NavButton}" Tag="LoginPage" Background="Transparent" Foreground="White" Content="🚪" FontSize="30" FontFamily="Arial"/>
             </Menu>
             <StackPanel></StackPanel>
         </DockPanel>

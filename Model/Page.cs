@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public enum Pages
+    public enum Page
     {
         LoginPage,
         RegisterPage,
