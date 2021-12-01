@@ -26,7 +26,7 @@
                                         <RowDefinition/>
                                         <RowDefinition/>
                                     </Grid.RowDefinitions>
-                                    <Border x:Name="EpisodeNumberBox" CornerRadius="5, 0, 0, 5" Width="75" Grid.RowSpan="3" HorizontalAlignment="Left" Background="#FFD9534F">
+                                <Border x:Name="EpisodeNumberBox" CornerRadius="5, 0, 0, 5" Width="75" Grid.RowSpan="3" HorizontalAlignment="Left" Background="{DynamicResource Failed}">
                                         <TextBlock Text="{Binding [1]}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="48" Foreground="White"/>
                                     </Border>
                                     <TextBlock Text="{Binding [2]}" Grid.Column="1" Grid.RowSpan="3" Margin="10, 0, 0, 0" FontSize="16" VerticalAlignment="Center" Foreground="Black"/>
@@ -41,7 +41,7 @@
                                 <DataTrigger Binding="{Binding [4]}"
                                  Value="True">
                                     <Setter TargetName="EpisodeNumberBox" Property="Background"
-                                Value="#70AD47" />
+                                Value="{DynamicResource Succes}" />
                                     <Setter TargetName="HighscoreBlock" Property="Visibility"
                                 Value="Visible" />
                                     <Setter TargetName="Highscore" Property="Text"
