@@ -29,6 +29,9 @@ namespace KeyboardKing.areas.login
 
         public override void OnLoad()
         {
+            if (Session.Get("student") is not null) {
+                Session.Flush();
+            }
         }
 
         public override void OnShadow()
@@ -59,10 +62,12 @@ namespace KeyboardKing.areas.login
                         if (results[0][5] == string.Empty)
                         {
                             Navigate("RegisterSkillPage");
+                            return;
                         }
                         else
                         {
                             Navigate("ChaptersPage");
+                            return;
                         }
                     }
                     else { message += "Wachtwoord is incorrect"; }

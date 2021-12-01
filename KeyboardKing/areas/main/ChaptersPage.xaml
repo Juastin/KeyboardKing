@@ -74,6 +74,25 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <Style x:Key="NavButton" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" 
+                            BorderThickness="1"
+                            Padding="4,2" 
+                            BorderBrush="DarkGray" 
+                            CornerRadius="3" 
+                            Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Page.Resources>
 
     <!-- CONTENT -->
@@ -81,8 +100,8 @@
         <Label Content="Chapters" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"/>
 
         <!-- Chapter overview ListBox -->
-        <ListBox Name="EpOverview" Margin="49,114,49,49" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" 
-                 HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch"
+        <ListBox Name="EpOverview" Margin="49,114,49,112" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" 
+                 HorizontalContentAlignment="Stretch"
                  ItemContainerStyle="{DynamicResource ListBoxItemTemplate}">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -116,5 +135,16 @@
                 </GroupStyle>
             </ListBox.GroupStyle>
         </ListBox>
+
+        <DockPanel>
+            <Menu DockPanel.Dock="Bottom" Width="520" Height="92" Background="{x:Null}" Margin="0,0,0,10">
+                <Button Style="{StaticResource NavButton}" Width="80" Height="80" Background="White" Foreground="Black" Content="▶" FontSize="36" FontFamily="Arial"/>
+                <Button Style="{StaticResource NavButton}" Width="80" Height="80" Background="Black" Foreground="White" Content="🔄" FontSize="30" FontFamily="Arial"/>
+                <Button Style="{StaticResource NavButton}" Tag="MatchOverviewPage" Click="ButtonNavigate" Width="80" Height="80" Background="Black" Foreground="White" Content="⚔" FontSize="30" FontFamily="Arial"/>
+                <Button Style="{StaticResource NavButton}" Width="80" Height="80" Background="Black" Foreground="White" Content="⚙" FontSize="30" FontFamily="Arial"/>
+                <Button Style="{StaticResource NavButton}" Tag="LoginPage" Click="ButtonNavigate" Width="80" Height="80" Background="Black" Foreground="White" Content="🚪" FontSize="30" FontFamily="Arial"/>
+            </Menu>
+            <StackPanel></StackPanel>
+        </DockPanel>
     </Grid>
 </local:JumpPage>
