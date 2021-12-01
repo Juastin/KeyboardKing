@@ -68,6 +68,7 @@ namespace KeyboardKing
                 // play area
                 {"EpisodePage", new EpisodePage(this)},
                 {"EpisodeResultPage", new EpisodeResultPage(this)},
+                {"MatchOverviewPage", new MatchOverviewPage(this)},
                 {"MatchLobbyPage", new MatchLobbyPage(this)},
                 {"MatchPlayingPage", new MatchPlayingPage(this)},
                 {"MatchResultPage", new MatchResultPage(this)},
