@@ -35,6 +35,9 @@ namespace KeyboardKing.areas.login
 
         public override void OnShadow()
         {
+            txtemail.Clear();
+            txtusername.Clear();
+            error.Text = "";
         }
 
         public override void OnTick()
@@ -62,7 +65,6 @@ namespace KeyboardKing.areas.login
                             bool Adduser = DBQueries.AddUser(username, email, passHashed, salt); //Adding new user to database
                             if (Adduser)
                             {
-                                ClearText();
                                 Navigate("LoginPage"); //Returning to loginpage
                             }
                             else { error.Text = "Error: Service onbereikbaar / Bestaande gebruiker"; }
@@ -87,19 +89,6 @@ namespace KeyboardKing.areas.login
             Regex containMinLength8Char = new(@".{8,}");
 
             return containNumber.IsMatch(password) && containUpperCase.IsMatch(password) && containLowerCase.IsMatch(password) && containMinLength8Char.IsMatch(password);
-        }
-
-        private void BToLogin(object sender, RoutedEventArgs e)
-        {
-            ClearText();
-            ButtonNavigate(sender, e);
-        }
-
-        private void ClearText()
-        {
-            txtemail.Clear();
-            txtusername.Clear();
-            error.Text = "";
         }
 
     }
