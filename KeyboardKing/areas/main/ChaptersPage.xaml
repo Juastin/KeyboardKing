@@ -140,9 +140,9 @@
             <Menu DockPanel.Dock="Bottom" Width="520" Height="92" Background="{x:Null}" Margin="0,0,0,10">
                 <Button Style="{StaticResource NavButton}" Width="80" Height="80" Background="White" Foreground="Black" Content="▶" FontSize="36" FontFamily="Arial"/>
                 <Button Style="{StaticResource NavButton}" Width="80" Height="80" Background="Black" Foreground="White" Content="🔄" FontSize="30" FontFamily="Arial"/>
-                <Button Style="{StaticResource NavButton}" Width="80" Height="80" Background="Black" Foreground="White" Content="⚔" FontSize="30" FontFamily="Arial"/>
+                <Button Style="{StaticResource NavButton}" Tag="MatchOverviewPage" Click="ButtonNavigate" Width="80" Height="80" Background="Black" Foreground="White" Content="⚔" FontSize="30" FontFamily="Arial"/>
                 <Button Style="{StaticResource NavButton}" Width="80" Height="80" Background="Black" Foreground="White" Content="⚙" FontSize="30" FontFamily="Arial"/>
-                <Button Style="{StaticResource NavButton}" Tag="LogoutPage" Click="ButtonNavigate" Width="80" Height="80" Background="Black" Foreground="White" Content="🚪" FontSize="30" FontFamily="Arial"/>
+                <Button Style="{StaticResource NavButton}" Tag="LoginPage" Click="ButtonNavigate" Width="80" Height="80" Background="Black" Foreground="White" Content="🚪" FontSize="30" FontFamily="Arial"/>
             </Menu>
             <StackPanel></StackPanel>
         </DockPanel>

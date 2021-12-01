@@ -59,7 +59,6 @@ namespace KeyboardKing
                 {"LoginPage", new LoginPage(this)},
                 {"RegisterPage", new RegisterPage(this)},
                 {"RegisterSkillPage", new RegisterSkillPage(this)},
-                {"LogoutPage", new LogoutPage(this)},
 
                 // main area
                 {"ChaptersPage", new ChaptersPage(this)},
