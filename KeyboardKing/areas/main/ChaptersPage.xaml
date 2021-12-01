@@ -10,89 +10,48 @@
       MinWidth="400">
     <!-- STYLING TEMPLATES -->
     <Page.Resources>
-        <!-- Play button template -->
-        <Style x:Key="PlayButtonTemplate" TargetType="{x:Type Button}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Grid>
-                            <Ellipse x:Name="Ellipse_PlayButton" Fill="LightGray"/>
-                            <Image HorizontalAlignment="Center" Width="25" Source="../../images/play-button.png" VerticalAlignment="Center" Panel.ZIndex="100" OpacityMask="White"/>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Ellipse_PlayButton" Property="Fill" Value="#FFA3A3A3"/>
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="Ellipse_PlayButton" Property="Fill" Value="Gray"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
         <!-- ListBoxItem template -->
-        <Style x:Key="ListBoxItemTemplate" TargetType="{x:Type ListBoxItem}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ListBoxItem">
-                        <Border Margin="10" Height="75" Width="300" BorderThickness="0" CornerRadius="5" Background="White">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="75*"/>
-                                    <ColumnDefinition Width="225"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                    <RowDefinition/>
-                                </Grid.RowDefinitions>
-                                <Border x:Name="EpisodeNumberBox" CornerRadius="5, 0, 0, 5" Width="75" Grid.RowSpan="3" HorizontalAlignment="Left" Background="#FFD9534F">
-                                    <TextBlock Text="{Binding [1]}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="48" Foreground="White"/>
-                                </Border>
-                                <TextBlock Text="{Binding [2]}" Grid.Column="1" Grid.RowSpan="3" Margin="10, 0, 0, 0" FontSize="16" VerticalAlignment="Center" Foreground="Black"/>
-                                <TextBlock x:Name="HighscoreBlock" Visibility="Hidden" Grid.Column="1" Grid.Row="2" Margin="10, 0, 0, 0" FontSize="12" VerticalAlignment="Top" Foreground="Black">
-                                    <Run Text="Highscore: "/>
-                                    <Run x:Name="Highscore"/>
-                                </TextBlock>
-                                <Button Click="EpOverview_PlayClick" Grid.Column="1" Grid.RowSpan="3"  Width="50" Height="50" HorizontalAlignment="Right" Margin="0,0,10,0" Style="{DynamicResource PlayButtonTemplate}"/>
-                            </Grid>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <DataTrigger Binding="{Binding [4]}"
-                             Value="True">
-                                <Setter TargetName="EpisodeNumberBox" Property="Background"
-                            Value="#70AD47" />
-                                <Setter TargetName="HighscoreBlock" Property="Visibility"
-                            Value="Visible" />
-                                <Setter TargetName="Highscore" Property="Text"
-                            Value="{Binding [5]}" />
-                            </DataTrigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <Style x:Key="NavButton" TargetType="Button">
-            <Setter Property="OverridesDefaultStyle" Value="True"/>
-            <Setter Property="Margin" Value="5"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border Name="border" 
-                            BorderThickness="1"
-                            Padding="4,2" 
-                            BorderBrush="DarkGray" 
-                            CornerRadius="3" 
-                            Background="{TemplateBinding Background}">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+            <Style x:Key="ListBoxItemTemplate" TargetType="{x:Type ListBoxItem}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ListBoxItem">
+                            <Border Margin="10" Height="75" Width="300" BorderThickness="0" CornerRadius="5" Background="White">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="75*"/>
+                                        <ColumnDefinition Width="225"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Border x:Name="EpisodeNumberBox" CornerRadius="5, 0, 0, 5" Width="75" Grid.RowSpan="3" HorizontalAlignment="Left" Background="#FFD9534F">
+                                        <TextBlock Text="{Binding [1]}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="48" Foreground="White"/>
+                                    </Border>
+                                    <TextBlock Text="{Binding [2]}" Grid.Column="1" Grid.RowSpan="3" Margin="10, 0, 0, 0" FontSize="16" VerticalAlignment="Center" Foreground="Black"/>
+                                    <TextBlock x:Name="HighscoreBlock" Visibility="Hidden" Grid.Column="1" Grid.Row="2" Margin="10, 0, 0, 0" FontSize="12" VerticalAlignment="Top" Foreground="Black">
+                                        <Run Text="Highscore: "/>
+                                        <Run x:Name="Highscore"/>
+                                    </TextBlock>
+                                    <Button Click="EpOverview_PlayClick" Grid.Column="1" Grid.RowSpan="3"  Width="50" Height="50" HorizontalAlignment="Right" Margin="0,0,10,0" Style="{DynamicResource PlayButtonTemplate}"/>
+                                </Grid>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <DataTrigger Binding="{Binding [4]}"
+                                 Value="True">
+                                    <Setter TargetName="EpisodeNumberBox" Property="Background"
+                                Value="#70AD47" />
+                                    <Setter TargetName="HighscoreBlock" Property="Visibility"
+                                Value="Visible" />
+                                    <Setter TargetName="Highscore" Property="Text"
+                                Value="{Binding [5]}" />
+                                </DataTrigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
     </Page.Resources>
 
     <!-- CONTENT -->
