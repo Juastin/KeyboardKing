@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,50 +24,35 @@ namespace KeyboardKing.components
     /// </summary>
     public partial class Navbar : UserControl
     {
-        public static readonly DependencyProperty CurrentPageProperty =
-            DependencyProperty.Register(
-                "CurrentPage", typeof(Model.Page),
-                typeof(Navbar)
-            );
-
-        public Model.Page CurrentPage
-        {
-            get { return (Model.Page)GetValue(CurrentPageProperty); }
-            set { SetValue(CurrentPageProperty, value); }
-        }
-
-        public Brush ChaptersPageBackground { get => CurrentPage == Model.Page.ChaptersPage ? Brushes.White : Brushes.Transparent; }
-        public Brush FavoritesPageBackground { get => CurrentPage == Model.Page.FavoritesPage ? Brushes.White : Brushes.Transparent; }
-        public Brush MatchOverviewPageBackground { get => CurrentPage == Model.Page.MatchOverviewPage ? Brushes.White : Brushes.Transparent; }
-        public Brush SettingsPageBackground { get => CurrentPage == Model.Page.SettingsPage ? Brushes.White : Brushes.Transparent; }
-
-        public Brush ChaptersPageForground { get => CurrentPage == Model.Page.ChaptersPage ? Brushes.Black : Brushes.White; }
-        public Brush FavoritesPageForground { get => CurrentPage == Model.Page.FavoritesPage ? Brushes.Black : Brushes.White; }
-        public Brush MatchOverviewPageForground { get => CurrentPage == Model.Page.MatchOverviewPage ? Brushes.Black : Brushes.White; }
-        public Brush SettingsPageForground { get => CurrentPage == Model.Page.SettingsPage ? Brushes.Black : Brushes.White; }
+        public Pages CurrentPage { get; set; }
 
         public Navbar()
         {
             InitializeComponent();
-            //switch (CurrentPage)
-            //{
-            //    case Pages.ChaptersPage:
-            //        Button_ChaptersPage.Background = Brushes.Black;
-            //        Button_ChaptersPage.Foreground = Brushes.White;
-            //        break;
-            //    case Pages.FavoritesPage:
-            //        Button_ChaptersPage.Background = Brushes.Black;
-            //        Button_ChaptersPage.Foreground = Brushes.White;
-            //        break;
-            //    case Pages.MatchOverviewPage:
-            //        Button_ChaptersPage.Background = Brushes.Black;
-            //        Button_ChaptersPage.Foreground = Brushes.White;
-            //        break;
-            //    case Pages.SettingsPage:
-            //        Button_ChaptersPage.Background = Brushes.Black;
-            //        Button_ChaptersPage.Foreground = Brushes.White;
-            //        break;
-            //}
+            Loaded += OnLoaded;
+        }
+
+        public void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            switch (CurrentPage)
+            {
+                case Pages.ChaptersPage:
+                    Button_ChaptersPage.Background = Brushes.White;
+                    Button_ChaptersPage.Foreground = Brushes.Black;
+                    break;
+                case Pages.FavoritesPage:
+                    Button_FavoritesPage.Background = Brushes.White;
+                    Button_FavoritesPage.Foreground = Brushes.Black;
+                    break;
+                case Pages.MatchOverviewPage:
+                    Button_MatchOverviewPage.Background = Brushes.White;
+                    Button_MatchOverviewPage.Foreground = Brushes.Black;
+                    break;
+                case Pages.SettingsPage:
+                    Button_SettingsPage.Background = Brushes.White;
+                    Button_SettingsPage.Foreground = Brushes.Black;
+                    break;
+            }
         }
     }
 }
