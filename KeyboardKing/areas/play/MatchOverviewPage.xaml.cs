@@ -64,7 +64,7 @@ namespace KeyboardKing.areas.play
             if (button.DataContext is List<string>)
             {
                 List<string> row = (List<string>)button.DataContext;
-                MessageBox.Show(row[0]);
+                MessageBox.Show(row[2]);
                 //Navigate("MatchLobbyPage");
             }
         }
