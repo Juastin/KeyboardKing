@@ -101,7 +101,7 @@
                 <Button Style="{StaticResource NavButton}" Width="80" Height="80" Background="Black" Foreground="White" Content="🔄" FontSize="30" FontFamily="Arial"/>
                 <Button Style="{StaticResource NavButton}" Width="80" Height="80" Background="White" Foreground="Black" Content="⚔" FontSize="30" FontFamily="Arial"/>
                 <Button Style="{StaticResource NavButton}" Width="80" Height="80" Background="Black" Foreground="White" Content="⚙" FontSize="30" FontFamily="Arial"/>
-                <Button Style="{StaticResource NavButton}" Tag="LogoutPage" Click="ButtonNavigate" Width="80" Height="80" Background="Black" Foreground="White" Content="🚪" FontSize="30" FontFamily="Arial"/>
+                <Button Style="{StaticResource NavButton}" Tag="LoginPage" Click="ButtonNavigate" Width="80" Height="80" Background="Black" Foreground="White" Content="🚪" FontSize="30" FontFamily="Arial"/>
             </Menu>
             <StackPanel></StackPanel>
         </DockPanel>
