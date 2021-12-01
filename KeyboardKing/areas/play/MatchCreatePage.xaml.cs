@@ -1,4 +1,5 @@
 ﻿using KeyboardKing.core;
+using Controller;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,14 @@ namespace KeyboardKing.areas.play
 
         public override void OnLoad()
         {
+            string[] User = (string[])Session.Get("student");
+            List<List<string>> Episodes = DBQueries.GetAllEpisodes(User);
+            int counter = 0;
+            while (counter < Episodes.Count)
+            {
+                chapterEpisode.Items.Add($"{Episodes[counter][0]} - Episode {Episodes[counter][1]} ({Episodes[counter][2]})");
+                counter++;
+            }
         }
 
         public override void OnShadow()
