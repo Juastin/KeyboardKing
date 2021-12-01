@@ -65,7 +65,10 @@
     </Window.Resources>
 
     <!-- CONTENT -->
-    <Border x:Name="MainBorder" CornerRadius="8" Background="Black" >
+    <Border x:Name="MainBorder" CornerRadius="8" >
+        <Border.Background>
+            <ImageBrush ImageSource="C:\Users\marei\OneDrive\Documenten\GitHub\KeyboardKing\KeyboardKing\Images\kingbackground"/>
+        </Border.Background>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="25"/>

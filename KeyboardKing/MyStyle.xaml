@@ -14,14 +14,6 @@
     <SolidColorBrush x:Key="Failed" Color="#FFD9534F"/>
     
     
-    <Style TargetType="Grid">
-        <Setter Property="Background" Value="{StaticResource Color6}"></Setter>
-    </Style>
-
-    <Style TargetType="Label">
-        <Setter Property="Foreground" Value="{StaticResource Color5}"></Setter>
-    </Style>
-    
     <!-- Play button template -->
     <Style x:Key="PlayButtonTemplate" TargetType="{x:Type Button}">
         <Setter Property="Template">
@@ -71,7 +63,7 @@
                         <Border x:Name="border" CornerRadius="5" Background="{DynamicResource Color4}">
                             <Label FontWeight="Bold" Content="{TemplateBinding Content}" Foreground="{DynamicResource Color1}" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
                             <Border.Effect>
-                                <DropShadowEffect ShadowDepth="0" BlurRadius="10"/>
+                                <DropShadowEffect ShadowDepth="0" BlurRadius="10" Color="#FFB0B0B0"/>
                             </Border.Effect>
                         </Border>
                     </Grid>
@@ -89,7 +81,7 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>
+    </Style> 
 
     <Style x:Key="Button2" TargetType="Button">
         <Setter Property="Template">
@@ -118,4 +110,44 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style x:Key="GridBorder" TargetType="{x:Type Border}">
+        <Setter Property="Background" Value="{DynamicResource Color6}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Color4}" />
+        <Setter Property="CornerRadius" Value="0" />
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect ShadowDepth="0" BlurRadius="10" Color="#FFB0B0B0"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderThickness" Value="0, 10, 0, 0"></Setter>
+    </Style>
+
+    <Style x:Key="TextBox" TargetType="{x:Type TextBox}">
+        <Setter Property="Background" Value="{DynamicResource Color6}" />
+        <Setter Property="Foreground" Value="{DynamicResource Color1}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Color1}"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Key="PasswordBox" TargetType="{x:Type PasswordBox}">
+        <Setter Property="Background" Value="{DynamicResource Color6}" />
+        <Setter Property="Foreground" Value="{DynamicResource Color1}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Color1}"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Key="H1" TargetType="{x:Type Label}">
+        <Setter Property="FontSize" Value="36"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Foreground" Value="{DynamicResource Color1}"/>
+    </Style>
+
+    <Style x:Key="H3" TargetType="{x:Type Label}">
+        <Setter Property="FontSize" Value="26"/>
+        <Setter Property="Foreground" Value="{DynamicResource Color1}"/>
+    </Style>
+
+
+
 </ResourceDictionary>
