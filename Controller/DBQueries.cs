@@ -21,7 +21,6 @@ namespace Controller
         {
             return DBHandler.SelectQuery(new SqlCommand("SELECT id, username FROM [dbo].[User]", null));
         }
-       
 
         public static bool AddUser(string username, string email, string password, string salt)
         {
@@ -157,9 +156,9 @@ namespace Controller
 
         public static bool AddMatch(int episodeid, string[] User)
         {
-/*            SqlCommand cmd = new SqlCommand("INSERT INTO [dbo].[Match] (episodeid, creatorid, finished) VALUES (@episodeid, @creatorid, 0");
+            SqlCommand cmd = new SqlCommand("INSERT INTO [dbo].[Match] (episodeid, creatorid) VALUES (@episodeid, @creatorid)", null);
 
-            SqlParameter episodeId = new SqlParameter("@episodeid", SqlDbType.Int, 0);
+            SqlParameter episodeId = new SqlParameter("@episodeid", SqlDbType.Int, 255);
             SqlParameter creatorId = new SqlParameter("@creatorid", SqlDbType.Int, 0);
 
             episodeId.Value = episodeid;
@@ -168,8 +167,7 @@ namespace Controller
             cmd.Parameters.Add(episodeId);
             cmd.Parameters.Add(creatorId);
 
-            return DBHandler.Query(cmd);*/
-            return false;
+            return DBHandler.Query(cmd);
         }
     }
 }

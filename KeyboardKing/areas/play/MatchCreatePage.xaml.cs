@@ -61,13 +61,10 @@ namespace KeyboardKing.areas.play
             bool result = DBQueries.AddMatch((int)CBEpisode.SelectedValue, (string[])Session.Get("student"));
             if (result)
             {
+                MessageBox.Show("Aanmaken match is gelukt");
                 ButtonNavigate(sender, e);
             }
-            else
-            {
-                MessageBox.Show("Aanmaken match is gefaald");
-            }
-            
+            else { MessageBox.Show("Aanmaken match is gefaald"); }
         }
 
     }
