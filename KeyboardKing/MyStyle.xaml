@@ -13,8 +13,7 @@
 
     <SolidColorBrush x:Key="Succes" Color="#70AD47"/>
     <SolidColorBrush x:Key="Failed" Color="#FFD9534F"/>
-    
-    
+
     <!-- Play button template -->
     <Style x:Key="PlayButtonTemplate" TargetType="{x:Type Button}">
         <Setter Property="Template">
@@ -22,7 +21,7 @@
                 <ControlTemplate TargetType="Button">
                     <Grid>
                         <Ellipse x:Name="Ellipse_PlayButton" Fill="LightGray"/>
-                        <Image HorizontalAlignment="Center" Width="25" Source="../../images/play-button.png" VerticalAlignment="Center" Panel.ZIndex="100" OpacityMask="White"/>
+                        <Image HorizontalAlignment="Center" Width="25" Source="/KeyBoardking;component/resources/images/play-button.png" VerticalAlignment="Center" Panel.ZIndex="100" OpacityMask="White"/>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
