@@ -14,7 +14,7 @@ namespace KeyboardKing
         public static bool ShouldPlay {get;set;} = false;
 
         /// <summary>
-        /// List of all sounds, reflects the files of KeyboardKing/audio
+        /// List of all sounds, reflects the files of KeyboardKing/resources/audio
         /// </summary>
         public enum Sound
         {
@@ -30,7 +30,7 @@ namespace KeyboardKing
         {
             if (ShouldPlay)
             {
-                System.Media.SoundPlayer player = new System.Media.SoundPlayer($@"./audio/{s}.wav");
+                System.Media.SoundPlayer player = new System.Media.SoundPlayer($@"./resources/audio/{s}.wav");
                 player.Play();
             }
         }
