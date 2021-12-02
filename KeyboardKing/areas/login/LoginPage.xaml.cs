@@ -68,6 +68,7 @@ namespace KeyboardKing.areas.login
                         }
                         else
                         {
+                            MusicPlayer.PlayNextFrom("menu_music");
                             NavigateController.NavigateToPage(Pages.ChaptersPage);
                             return;
                         }
