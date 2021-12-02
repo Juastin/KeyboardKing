@@ -7,7 +7,10 @@
       mc:Ignorable="d" 
       Title="ChaptersPage"
       MinHeight="450"
-      MinWidth="400">
+      MinWidth="400"
+      MaxHeight="600"
+      MaxWidth="1450">
+
     <!-- STYLING TEMPLATES -->
     <Page.Resources>
         <!-- ListBoxItem template -->
@@ -56,7 +59,10 @@
 
     <!-- CONTENT -->
     <Grid>
-        <Label Content="Chapters" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"/>
+        <Border Style="{DynamicResource GridBorder}"></Border>
+        <Label Content="Chapters" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top" Background="White" Foreground="Black" FontSize="36">
+            
+        </Label>
 
         <!-- Chapter overview ListBox -->
         <ListBox Name="EpOverview" Margin="49,114,49,112" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" 
@@ -75,7 +81,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate>
-                                        <Expander IsExpanded="False" Background="#FFD6D6D6" Padding="10">
+                                        <Expander IsExpanded="False" Background="#FFFFFF" Padding="10">
                                             <Expander.Header>
                                                 <StackPanel Orientation="Horizontal" >
                                                     <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="22"/>

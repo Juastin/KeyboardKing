@@ -266,14 +266,15 @@
         <Setter Property="Foreground" Value="{DynamicResource Color1}"/>
     </Style>
     
-    <Style TargetType="{x:Type TextBox}">
-        <Setter Property="Background" Value="{DynamicResource Color6}" />
-        <Setter Property="Foreground" Value="{DynamicResource Color1}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource Color1}"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
+    
+    <Style x:Key="Shadow" TargetType="{x:Type Label}">
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect ShadowDepth="0" BlurRadius="20" Color="#FFB0B0B0"  />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderThickness" Value="0, 0, 0, 0"></Setter>
+      
     </Style>
 
-    <Style TargetType="ProgressBar">
-        <Setter Property="Background" Value="AliceBlue"/>
-    </Style>
 </ResourceDictionary>
