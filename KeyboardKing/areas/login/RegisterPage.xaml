@@ -17,12 +17,12 @@
         <Label Style="{DynamicResource H3}" Content="Gebruikersnaam:" HorizontalAlignment="Left" Margin="60,230,0,159"  Height="40" Width="210"/>
         <Label Style="{DynamicResource H3}" Content="Wachtwoord:" HorizontalAlignment="Left" Margin="60,302,0,87"  Height="40" Width="161"/>
 
-        <TextBox Style="{DynamicResource TextBox}" Margin="312,149,109,232" Name="txtemail"  Width="334" Height="48" FontSize="20"/>
-        <TextBox Style="{DynamicResource TextBox}" Margin="312,226,244,155" Name="txtusername"  Width="199" Height="48" FontSize="20"/>
+        <TextBox Style="{DynamicResource TextBox}" Margin="312,149,109,232" Name="txtemail"  Width="334" Height="48"/>
+        <TextBox Style="{DynamicResource TextBox}" Margin="312,226,244,155" Name="txtusername"  Width="199" Height="48"/>
 
 
-        <PasswordBox Style="{DynamicResource PasswordBox}" Margin="312,298,244,83" Name="password1"  Width="199" Height="48" FontSize="20"/>
-        <PasswordBox Style="{DynamicResource PasswordBox}" HorizontalAlignment="Left" Margin="536,298,0,83" Name="password2"  Width="199" Height="48" FontSize="20"/>
+        <PasswordBox Style="{DynamicResource PasswordBox}" Margin="312,298,244,83" Name="password1"  Width="199" Height="48"/>
+        <PasswordBox Style="{DynamicResource PasswordBox}" HorizontalAlignment="Left" Margin="536,298,0,83" Name="password2"  Width="199" Height="48"/>
 
         <Button Style="{DynamicResource Button1}" Content="Ga naar login" Tag="LoginPage" Click="BToLogin" Margin="57,368,534,10" Height="51" Width="164" FontSize="20"/>
         <Button Style="{DynamicResource Button1}" Content="Registreer" Tag="" Click="BRegister" HorizontalAlignment="Left" Margin="571,368,0,10"  Height="51" Width="164" FontSize="20"/>
