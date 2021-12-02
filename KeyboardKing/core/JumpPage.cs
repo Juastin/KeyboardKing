@@ -21,27 +21,6 @@ namespace KeyboardKing.core
         }
 
         /// <summary>
-        /// Use the parent window to navigate by name.
-        /// </summary>
-        public void Navigate(string pageName)
-        {
-            _window.Navigate(this, pageName);
-        }
-
-        /// <summary>
-        /// Use the parent window to navigate by button tag.
-        /// Tag="TargetPageName" Click="ButtonNavigate"
-        /// </summary>
-        public void ButtonNavigate(object sender, RoutedEventArgs e)
-        {
-            if (sender is Button)
-            {
-                AudioPlayer.Play(AudioPlayer.Sound.click);
-                _window.Navigate(this, "" + ((Button)sender).Tag);
-            }
-        }
-
-        /// <summary>
         /// Method that is called upon entering the view.
         /// </summary>
         public abstract void OnLoad();
