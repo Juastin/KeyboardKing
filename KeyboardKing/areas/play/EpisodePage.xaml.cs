@@ -17,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Model;
 using Controller;
+using System.Windows.Threading;
 
 namespace KeyboardKing.areas.play
 {
@@ -29,6 +30,10 @@ namespace KeyboardKing.areas.play
         /// Constructor of <see cref="EpisodePage"/>
         /// </summary>
         /// <param name="w"></param>
+        /// 
+
+        public int increment { get; set; }
+        private DispatcherTimer dt = new DispatcherTimer();
         public EpisodePage(MainWindow w) : base(w)
         {
             InitializeComponent();
@@ -37,7 +42,8 @@ namespace KeyboardKing.areas.play
 
         public override void OnLoad()
         {
-            MusicPlayer.PlayNextFrom("intense_music");
+            TimerTextBox.Text = "00:00";
+            MusicPlayer.PlayNextFrom("intense_music"); 
         }
 
         public override void OnShadow()
@@ -46,6 +52,7 @@ namespace KeyboardKing.areas.play
 
         public override void OnTick()
         {
+           
         }
         /// <summary>
         /// <para>Event that fires each time when focus of window has been lost.</para>
@@ -84,5 +91,23 @@ namespace KeyboardKing.areas.play
             if (e.Key == Key.Tab)
                 e.Handled = true;
         }
+
+        private void TimerTextBox_Loaded(object sender, RoutedEventArgs e)
+        {
+            increment = 0;
+            dt.Tick -= dtTicker;
+            dt.Interval = TimeSpan.FromSeconds(1);
+            dt.Tick += dtTicker;
+            dt.Start();
+            increment = 0;
+        }
+       
+        private void dtTicker(object sender, EventArgs e)
+        {
+            increment++;
+            TimeSpan result = TimeSpan.FromSeconds(increment);
+            TimerTextBox.Text = result.ToString("mm':'ss");
+        }
+
     }
 }

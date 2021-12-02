@@ -202,7 +202,17 @@
         </Setter>
     </Style>
 
-    <Style x:Key="PasswordBox" TargetType="{x:Type PasswordBox}">
+    <Style x:Key="TextBox2" TargetType="{x:Type TextBox}">
+        <Setter Property="Background" Value="{DynamicResource Color6}" />
+        <Setter Property="Foreground" Value="{DynamicResource Color1}" />
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="10, 0"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="FontSize" Value="32"/>
+    </Style>
+        
+
+        <Style x:Key="PasswordBox" TargetType="{x:Type PasswordBox}">
         <Setter Property="Background" Value="{DynamicResource Color6}" />
         <Setter Property="Foreground" Value="{DynamicResource Color1}" />
         <Setter Property="Padding" Value="10, 0"/>
