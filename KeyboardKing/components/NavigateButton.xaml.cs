@@ -23,6 +23,8 @@ namespace KeyboardKing.components
     public partial class NavigateButton : UserControl
     {
         public Pages ToPage { get; set; }
+        public string Text { get; set; }
+
         public NavigateButton()
         {
             InitializeComponent();

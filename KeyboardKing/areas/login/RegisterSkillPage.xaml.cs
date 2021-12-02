@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Controller;
+using Model;
 
 
 namespace KeyboardKing.areas.login
@@ -44,7 +45,7 @@ namespace KeyboardKing.areas.login
         {
             string[] result = (string[])Session.Get("student");
             DBQueries.AddSkill(((Button)sender).Tag.ToString(), result);
-            Navigate("ChaptersPage");
+            NavigateController.NavigateToPage(Pages.ChaptersPage);
         }
     }
 }

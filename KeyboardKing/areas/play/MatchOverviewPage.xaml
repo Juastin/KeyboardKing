@@ -76,7 +76,10 @@
             </ListBox.ItemsPanel>
         </ListBox>
 
+        <components:NavigateButton ToPage="MatchCreatePage" Content="Klik hier om een match te maken" HorizontalAlignment="Center" Margin="0,0,0,112" VerticalAlignment="Bottom" Height="40" Width="220" Background="#FF363636" BorderBrush="White" Foreground="White" FontSize="14"/>
+        <!--
         <Button Content="Klik hier om een match te maken" Tag="MatchCreatePage" Click="ButtonNavigate" HorizontalAlignment="Center" Margin="0,0,0,112" VerticalAlignment="Bottom" Height="40" Width="220" Background="#FF363636" BorderBrush="White" Foreground="White" FontSize="14"/>
+        -->
         <components:Navbar CurrentPage="MatchOverviewPage"/>
     </Grid>
 </local:JumpPage>

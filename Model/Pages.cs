@@ -18,6 +18,7 @@ namespace Model
         EpisodePage,
         EpisodeResultPage,
         MatchLobbyPage,
+        MatchCreatePage,
         MatchOverviewPage,
         MatchPlayingPage,
         MatchResultPage
