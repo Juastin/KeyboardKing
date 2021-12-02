@@ -17,7 +17,7 @@
                     <ControlTemplate TargetType="Button">
                         <Grid>
                             <Ellipse x:Name="Ellipse_PlayButton" Fill="LightGray"/>
-                            <Image HorizontalAlignment="Center" Width="25" Source="../../images/play-button.png" VerticalAlignment="Center" Panel.ZIndex="100" OpacityMask="White"/>
+                            <Image HorizontalAlignment="Center" Width="25" Source="../../resources/images/play-button.png" VerticalAlignment="Center" Panel.ZIndex="100" OpacityMask="White"/>
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
