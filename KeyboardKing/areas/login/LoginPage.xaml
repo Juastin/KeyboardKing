@@ -9,15 +9,15 @@
       Title="LoginPage">
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
 
-        <Border Style="{DynamicResource GridBorder}"></Border>
-        <TextBox Style="{DynamicResource TextBox}" x:Name="error" Margin="247,53,10,320"  Width="450" Height="56"  FontSize="20"  IsHitTestVisible="False" BorderBrush="{x:Null}"/>
+        <Border Style="{DynamicResource GridBorder}" ></Border>
+        <TextBox x:Name="error" Margin="247,53,10,320"  Width="450" Height="56"  FontSize="20"  IsHitTestVisible="False" BorderBrush="{x:Null}"/>
         <Label Style="{DynamicResource H1}"  Content="Inloggen" Margin="54,53,469,305"/>
 
         <Label Style="{DynamicResource H3}" Content="E-mail:" Margin="70,155,538,234"/>
         <Label Style="{DynamicResource H3}" Content="Wachtwoord:" Margin="70,232,469,154"/>
 
-        <TextBox Style="{DynamicResource TextBox}" Name="txtEmail"  Margin="286,152,23,234" FontSize="20"/>
-        <PasswordBox Style="{DynamicResource PasswordBox}" Name="boxPassword" Margin="286,235,23,154" FontSize="20" />
+        <TextBox Style="{DynamicResource TextBox}" Name="txtEmail"  Margin="286,152,23,234"/>
+        <PasswordBox Style="{DynamicResource PasswordBox}" Name="boxPassword" Margin="286,235,23,154"/>
 
         <Button Style="{DynamicResource Button1}"  Content="Login" Tag="SettingsPage" Click="BLogin"  Margin="534,357,23,24" Height="53" Width="150" FontSize="20"/>
         <Button Style="{DynamicResource Button1}" Content="Registreer" Tag="RegisterPage" Click="BToRegistration" Margin="44,357,513,24" Height="53" Width="150" FontSize="20"/>
