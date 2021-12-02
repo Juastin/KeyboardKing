@@ -37,6 +37,7 @@ namespace KeyboardKing.areas.play
 
         public override void OnLoad()
         {
+            MusicPlayer.PlayNextFrom("intense_music");
         }
 
         public override void OnShadow()

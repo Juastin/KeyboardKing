@@ -8,16 +8,18 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="LoginPage">
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-        <TextBox x:Name="error" HorizontalAlignment="Left" Margin="296,69,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="450" Height="56" Background="{x:Null}" BorderBrush="Black" FontSize="20" Foreground="White" IsReadOnly="True" IsHitTestVisible="False"/>
-        <Label Content="Inloggen" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"/>
 
-        <Label Content="E-mail:" HorizontalAlignment="Left" Margin="70,155,0,0" VerticalAlignment="Top" Foreground="White" FontSize="25" Height="40" Width="82"/>
-        <Label Content="Wachtwoord:" HorizontalAlignment="Left" Margin="70,232,0,0" VerticalAlignment="Top" Foreground="White" FontSize="25" Height="40" Width="155"/>
+        <Border Style="{DynamicResource GridBorder}" ></Border>
+        <TextBox x:Name="error" Margin="247,53,10,320"  Width="450" Height="56"  FontSize="20"  IsHitTestVisible="False" BorderBrush="{x:Null}"/>
+        <Label Style="{DynamicResource H1}"  Content="Inloggen" Margin="54,53,469,305"/>
 
-        <TextBox Name="txtEmail" HorizontalAlignment="Left" Margin="309,155,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="398" Height="48" FontSize="20" Foreground="White"  Background="#FF363636"  BorderBrush="White" VerticalContentAlignment="Center" Padding="10"/>
-        <PasswordBox Name="boxPassword" HorizontalAlignment="Left" Margin="309,232,0,0" VerticalAlignment="Top" Width="398" Height="48" FontSize="20" Foreground="White"  Background="#FF363636"  BorderBrush="White" VerticalContentAlignment="Center" Padding="10"/>
+        <Label Style="{DynamicResource H3}" Content="E-mail:" Margin="70,155,538,234"/>
+        <Label Style="{DynamicResource H3}" Content="Wachtwoord:" Margin="70,232,469,154"/>
+      
+        <TextBox Style="{DynamicResource TextBox}" Name="txtEmail"  Margin="286,152,23,234"/>
+        <PasswordBox Style="{DynamicResource PasswordBox}" KeyDown="OnKeyDownLogin" Name="boxPassword" Margin="286,235,23,154"/>
 
-        <Button Content="Login" Tag="SettingsPage" Click="BLogin" HorizontalAlignment="Left" Margin="591,376,0,0" VerticalAlignment="Top" Height="53" Width="150" Background="#FF363636" BorderBrush="White" Foreground="White" FontSize="20"/>
-        <Button Content="Registreer" Tag="RegisterPage" Click="BToRegistration" HorizontalAlignment="Left" Margin="49,376,0,0" VerticalAlignment="Top" Height="51" Width="164" Background="#FF363636" BorderBrush="White" Foreground="White" FontSize="20"/>
+        <Button Style="{DynamicResource Button1}"  Content="Login" Tag="SettingsPage" Click="BLogin"  Margin="534,357,23,24" Height="53" Width="150" FontSize="20"/>
+        <Button Style="{DynamicResource Button1}" Content="Registreer" Tag="RegisterPage" Click="ButtonNavigate" Margin="44,357,513,24" Height="53" Width="150" FontSize="20"/>
     </Grid>
 </local:JumpPage>

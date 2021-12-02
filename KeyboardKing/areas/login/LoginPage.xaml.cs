@@ -36,6 +36,8 @@ namespace KeyboardKing.areas.login
 
         public override void OnShadow()
         {
+            txtEmail.Clear();
+            error.Text = "";
         }
 
         public override void OnTick()
@@ -55,7 +57,6 @@ namespace KeyboardKing.areas.login
                     bool passwordResult = Encryption.VerifyHash(boxPassword.Password, results[0][4], results[0][3]);
                     if (passwordResult)
                     {
-                        ClearText();
                         string[] Items = {results[0][0], results[0][1], results[0][2], results[0][5]};
                         Session.Add("student", Items);
 
@@ -66,6 +67,7 @@ namespace KeyboardKing.areas.login
                         }
                         else
                         {
+                            MusicPlayer.PlayNextFrom("menu_music");
                             Navigate("ChaptersPage");
                             return;
                         }
@@ -78,16 +80,9 @@ namespace KeyboardKing.areas.login
             error.Text = message;
         }
 
-        public void BToRegistration(object sender, RoutedEventArgs e)
+        private void OnKeyDownLogin(object sender, KeyEventArgs e)
         {
-            ClearText();
-            ButtonNavigate(sender, e);
-        }
-
-        private void ClearText()
-        {
-            txtEmail.Clear();
-            error.Text = "";
+            if (e.Key == Key.Enter) { BLogin(null, new RoutedEventArgs()); }
         }
     }
 }

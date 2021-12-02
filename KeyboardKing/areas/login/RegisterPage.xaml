@@ -9,21 +9,22 @@
       Title="RegisterPage1">
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
 
-        <TextBox Name="error" HorizontalAlignment="Left" Margin="296,69,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="450" Height="56" Background="{x:Null}" BorderBrush="Black" FontSize="20" Foreground="White" IsReadOnly="True" IsHitTestVisible="False"/>
+        <Border Style="{DynamicResource GridBorder}"></Border>
+        <TextBox Style="{DynamicResource TextBox}" x:Name="error" Margin="247,53,10,320"  Width="450" Height="56"  FontSize="20"  IsHitTestVisible="False" BorderBrush="{x:Null}"/>
 
-        <Label Content="Registreren" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"/>
-        <Label Content="E-mail:" HorizontalAlignment="Left" Margin="70,145,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" Height="40" Width="82"/>
-        <Label Content="Gebruikersnaam:" HorizontalAlignment="Left" Margin="70,222,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" Height="40" Width="161"/>
-        <Label Content="Wachtwoord:" HorizontalAlignment="Left" Margin="70,298,0,0" VerticalAlignment="Top" Foreground="White" FontSize="20" Height="40" Width="161"/>
+        <Label Style="{DynamicResource H1}" Margin="49,53,474,305" Content="Registreren"/>
+        <Label Style="{DynamicResource H3}" Content="E-mail:"  Margin="60,149,589,240"  Height="40"/>
+        <Label Style="{DynamicResource H3}" Content="Gebruikersnaam:" HorizontalAlignment="Left" Margin="60,230,0,159"  Height="40" Width="210"/>
+        <Label Style="{DynamicResource H3}" Content="Wachtwoord:" HorizontalAlignment="Left" Margin="60,302,0,87"  Height="40" Width="161"/>
 
-        <TextBox HorizontalAlignment="Left" Margin="309,145,0,0" Name="txtemail"  TextWrapping="Wrap" VerticalAlignment="Top" Width="334" Height="48" FontSize="20" Foreground="White"  Background="#FF363636"  BorderBrush="White" VerticalContentAlignment="Center"  Padding="10"/>
-        <TextBox HorizontalAlignment="Left" Margin="309,222,0,0" Name="txtusername"  TextWrapping="Wrap" VerticalAlignment="Top" Width="199" Height="48" FontSize="20" Foreground="White"  Background="#FF363636"  BorderBrush="White" VerticalContentAlignment="Center" Padding="10"/>
+        <TextBox Style="{DynamicResource TextBox}" Margin="312,149,109,232" Name="txtemail"  Width="334" Height="48"/>
+        <TextBox Style="{DynamicResource TextBox}" Margin="312,226,244,155" Name="txtusername"  Width="199" Height="48"/>
 
 
-        <PasswordBox HorizontalAlignment="Left" Margin="309,298,0,0" Name="password1"  VerticalAlignment="Top" Width="199" Height="48" FontSize="20" Foreground="White"  Background="#FF363636"  BorderBrush="White" VerticalContentAlignment="Center"  Padding="10" />
-        <PasswordBox HorizontalAlignment="Left" Margin="556,298,0,0" Name="password2"  VerticalAlignment="Top" Width="199" Height="48" FontSize="20" Foreground="White"  Background="#FF363636"  BorderBrush="White" VerticalContentAlignment="Center" Padding="10" RenderTransformOrigin="0.548,1.021"/>
+        <PasswordBox Style="{DynamicResource PasswordBox}" Margin="312,298,244,83" Name="password1"  Width="199" Height="48"/>
+        <PasswordBox Style="{DynamicResource PasswordBox}" HorizontalAlignment="Left" Margin="536,298,0,83" Name="password2"  Width="199" Height="48"/>
 
-        <Button Content="Ga naar login" Tag="LoginPage" Click="BToLogin" HorizontalAlignment="Left" Margin="49,376,0,0" VerticalAlignment="Top" Height="51" Width="164" Background="#FF363636" BorderBrush="White" Foreground="White" FontSize="20"/>
-        <Button Content="Registreer" Tag=""  Click="BRegister" HorizontalAlignment="Left" Margin="591,376,0,0" VerticalAlignment="Top" Height="51" Width="164" Background="#FF363636" BorderBrush="White" Foreground="White" FontSize="20"/>
+        <Button Style="{DynamicResource Button1}" Content="Ga naar login" Click="ButtonNavigate" Tag="LoginPage" Margin="57,368,534,10" Height="51" Width="164" FontSize="20"/>
+        <Button Style="{DynamicResource Button1}" Content="Registreer" Tag="" Click="BRegister" HorizontalAlignment="Left" Margin="571,368,0,10"  Height="51" Width="164" FontSize="20"/>
     </Grid>
 </local:JumpPage>

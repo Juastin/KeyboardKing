@@ -6,30 +6,10 @@
       xmlns:local="clr-namespace:KeyboardKing.core"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
+      MaxHeight="600"
+      MaxWidth="1450"
       Title="MatchOverviewPage">
     <Page.Resources>
-        <!-- Play button template -->
-        <Style x:Key="PlayButtonTemplate" TargetType="{x:Type Button}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Grid>
-                            <Ellipse x:Name="Ellipse_PlayButton" Fill="LightGray"/>
-                            <Image HorizontalAlignment="Center" Width="25" Source="../../images/play-button.png" VerticalAlignment="Center" Panel.ZIndex="100" OpacityMask="White"/>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Ellipse_PlayButton" Property="Fill" Value="#FFA3A3A3"/>
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="Ellipse_PlayButton" Property="Fill" Value="Gray"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
         <!-- ListBoxItem template -->
         <Style x:Key="ListBoxItemTemplate" TargetType="{x:Type ListBoxItem}">
             <Setter Property="OverridesDefaultStyle" Value="True"/>
@@ -54,10 +34,15 @@
                                 <TextBlock x:Name="EpisodeBlock" Visibility="Visible" Grid.Column="1" Grid.Row="2" Margin="10, 0, 0, 0" FontSize="12" VerticalAlignment="Top" Foreground="Black">
                                     <Run x:Name="Episode" Text="{Binding [3]}"/>
                                 </TextBlock>
-                                <Button Click="MatchOverview_PlayClick" Grid.Column="1" Grid.RowSpan="3"  Width="50" Height="50" HorizontalAlignment="Right" Margin="0,0,10,0" Style="{DynamicResource PlayButtonTemplate}"/>
+                                <Button Style="{DynamicResource PlayButtonTemplate}" Click="MatchOverview_PlayClick" Grid.Column="1" Grid.RowSpan="3"  Width="50" Height="50" HorizontalAlignment="Right" Margin="0,0,10,0"/>
                             </Grid>
                         </Border>
                     </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Border.Effect">
+                <Setter.Value>
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="20" Color="#FFB0B0B0" />
                 </Setter.Value>
             </Setter>
         </Style>
@@ -83,7 +68,7 @@
     </Page.Resources>
 
     <Grid>
-
+        <Border Style="{DynamicResource GridBorder}"></Border>
         <!-- Match* overview ListBox -->
         <ListBox Name="MatchOverview" Margin="49,51,49,169" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" 
                  HorizontalContentAlignment="Stretch"
