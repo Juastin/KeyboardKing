@@ -6,6 +6,8 @@
       xmlns:local="clr-namespace:KeyboardKing.core"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
+      MaxHeight="600"
+      MaxWidth="1450"
       Title="MatchOverviewPage">
     <Page.Resources>
         <!-- Play button template -->
@@ -83,7 +85,7 @@
     </Page.Resources>
 
     <Grid>
-
+        <Border Style="{DynamicResource GridBorder}"></Border>
         <!-- Match* overview ListBox -->
         <ListBox Name="MatchOverview" Margin="49,51,49,169" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" 
                  HorizontalContentAlignment="Stretch"

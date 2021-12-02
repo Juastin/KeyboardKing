@@ -114,10 +114,10 @@
     <Style x:Key="GridBorder" TargetType="{x:Type Border}">
         <Setter Property="Background" Value="{DynamicResource Color6}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Color4}" />
-        <Setter Property="CornerRadius" Value="0" />
+        <Setter Property="CornerRadius" Value="5" />
         <Setter Property="Effect">
             <Setter.Value>
-                <DropShadowEffect ShadowDepth="0" BlurRadius="10" Color="#FFB0B0B0"/>
+                <DropShadowEffect ShadowDepth="0" BlurRadius="20" Color="#FFB0B0B0"/>
             </Setter.Value>
         </Setter>
         <Setter Property="BorderThickness" Value="0, 10, 0, 0"></Setter>
@@ -127,12 +127,14 @@
         <Setter Property="Background" Value="{DynamicResource Color6}" />
         <Setter Property="Foreground" Value="{DynamicResource Color1}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Color1}"/>
+        <Setter Property="Padding" Value="10"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
     </Style>
 
     <Style x:Key="PasswordBox" TargetType="{x:Type PasswordBox}">
         <Setter Property="Background" Value="{DynamicResource Color6}" />
         <Setter Property="Foreground" Value="{DynamicResource Color1}" />
+        <Setter Property="Padding" Value="10"/>
         <Setter Property="BorderBrush" Value="{DynamicResource Color1}"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
     </Style>
@@ -172,10 +174,15 @@
         <Setter Property="Foreground" Value="{DynamicResource Color1}"/>
     </Style>
     
-    <Style TargetType="{x:Type TextBox}">
-        <Setter Property="Background" Value="{DynamicResource Color6}" />
-        <Setter Property="Foreground" Value="{DynamicResource Color1}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource Color1}"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
+    
+    <Style x:Key="Shadow" TargetType="{x:Type Label}">
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect ShadowDepth="0" BlurRadius="20" Color="#FFB0B0B0"  />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderThickness" Value="0, 0, 0, 0"></Setter>
+      
     </Style>
+
 </ResourceDictionary>
