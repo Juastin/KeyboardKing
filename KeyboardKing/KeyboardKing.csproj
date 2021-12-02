@@ -7,21 +7,37 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="resources\audio\click.wav" />
     <None Remove="resources\audio\congratulations.wav" />
     <None Remove="resources\audio\failure.wav" />
+    <None Remove="resources\audio\music\Coffee.wav" />
+    <None Remove="resources\audio\music\Fiber.wav" />
+    <None Remove="resources\audio\music\Page.wav" />
+    <None Remove="resources\audio\music\Riverside.wav" />
+    <None Remove="resources\audio\music\Sunday.wav" />
     <None Remove="resources\images\icon.png" />
     <None Remove="resources\images\play-button.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="resources\audio\click.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="resources\audio\congratulations.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\audio\failure.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\audio\music\Coffee.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\audio\music\Fiber.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\audio\music\Page.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\audio\music\Riverside.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\audio\music\Sunday.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\images\icon.png">
