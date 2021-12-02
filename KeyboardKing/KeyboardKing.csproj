@@ -12,6 +12,8 @@
     <None Remove="audio\failure.wav" />
     <None Remove="images\icon.png" />
     <None Remove="Images\kingbackground.png" />
+    <None Remove="Images\kk_background_1080.png" />
+    <None Remove="Images\kk_background_4K.png" />
     <None Remove="images\play-button.png" />
   </ItemGroup>
 
@@ -29,6 +31,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\kingbackground.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\kk_background_1080.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\kk_background_4K.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="images\play-button.png">

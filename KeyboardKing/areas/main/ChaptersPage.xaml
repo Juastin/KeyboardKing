@@ -14,55 +14,53 @@
     <!-- STYLING TEMPLATES -->
     <Page.Resources>
         <!-- ListBoxItem template -->
-            <Style x:Key="ListBoxItemTemplate" TargetType="{x:Type ListBoxItem}">
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="ListBoxItem">
-                            <Border Margin="10" Height="75" Width="300" BorderThickness="0" CornerRadius="5" Background="White">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="75*"/>
-                                        <ColumnDefinition Width="225"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition/>
-                                        <RowDefinition/>
-                                        <RowDefinition/>
-                                    </Grid.RowDefinitions>
+        <Style x:Key="ListBoxItemTemplate" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border Margin="10" Height="75" Width="300" BorderThickness="0" CornerRadius="5" Background="White">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="75*"/>
+                                    <ColumnDefinition Width="225"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
                                 <Border x:Name="EpisodeNumberBox" CornerRadius="5, 0, 0, 5" Width="75" Grid.RowSpan="3" HorizontalAlignment="Left" Background="{DynamicResource Failed}">
-                                        <TextBlock Text="{Binding [1]}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="48" Foreground="White"/>
-                                    </Border>
-                                    <TextBlock Text="{Binding [2]}" Grid.Column="1" Grid.RowSpan="3" Margin="10, 0, 0, 0" FontSize="16" VerticalAlignment="Center" Foreground="Black"/>
-                                    <TextBlock x:Name="HighscoreBlock" Visibility="Hidden" Grid.Column="1" Grid.Row="2" Margin="10, 0, 0, 0" FontSize="12" VerticalAlignment="Top" Foreground="Black">
+                                    <TextBlock Text="{Binding [1]}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="48" Foreground="White"/>
+                                </Border>
+                                <TextBlock Text="{Binding [2]}" Grid.Column="1" Grid.RowSpan="3" Margin="10, 0, 0, 0" FontSize="16" VerticalAlignment="Center" Foreground="Black"/>
+                                <TextBlock x:Name="HighscoreBlock" Visibility="Hidden" Grid.Column="1" Grid.Row="2" Margin="10, 0, 0, 0" FontSize="12" VerticalAlignment="Top" Foreground="Black">
                                         <Run Text="Highscore: "/>
                                         <Run x:Name="Highscore"/>
-                                    </TextBlock>
-                                    <Button Click="EpOverview_PlayClick" Grid.Column="1" Grid.RowSpan="3"  Width="50" Height="50" HorizontalAlignment="Right" Margin="0,0,10,0" Style="{DynamicResource PlayButtonTemplate}"/>
-                                </Grid>
-                            </Border>
-                            <ControlTemplate.Triggers>
-                                <DataTrigger Binding="{Binding [4]}"
+                                </TextBlock>
+                                <Button Click="EpOverview_PlayClick" Grid.Column="1" Grid.RowSpan="3"  Width="50" Height="50" HorizontalAlignment="Right" Margin="0,0,10,0" Style="{DynamicResource PlayButtonTemplate}"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <DataTrigger Binding="{Binding [4]}"
                                  Value="True">
-                                    <Setter TargetName="EpisodeNumberBox" Property="Background"
+                                <Setter TargetName="EpisodeNumberBox" Property="Background"
                                 Value="{DynamicResource Succes}" />
-                                    <Setter TargetName="HighscoreBlock" Property="Visibility"
+                                <Setter TargetName="HighscoreBlock" Property="Visibility"
                                 Value="Visible" />
-                                    <Setter TargetName="Highscore" Property="Text"
+                                <Setter TargetName="Highscore" Property="Text"
                                 Value="{Binding [5]}" />
-                                </DataTrigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
+                            </DataTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Page.Resources>
 
     <!-- CONTENT -->
     <Grid>
         <Border Style="{DynamicResource GridBorder}"></Border>
-        <Label Content="Chapters" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top" Background="White" Foreground="Black" FontSize="36">
-            
-        </Label>
+        <Label Style="{DynamicResource H1}" Content="Chapters" Margin="49,51,301,336"/>
 
         <!-- Chapter overview ListBox -->
         <ListBox Name="EpOverview" Margin="49,114,49,112" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" 

@@ -67,7 +67,7 @@
     <!-- CONTENT -->
     <Border x:Name="MainBorder" CornerRadius="8" >
         <Border.Background>
-            <ImageBrush ImageSource="\Images\kingbackground.png"/>
+            <ImageBrush ImageSource="/Images/kk_background_4K.png"/>
         </Border.Background>
         <Grid>
             <Grid.RowDefinitions>
