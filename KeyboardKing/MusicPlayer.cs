@@ -9,6 +9,8 @@ namespace KeyboardKing
 {
     public static class MusicPlayer
     {
+        public static bool ShouldPlay = true;
+
         public static Dictionary<string, Dictionary<string, int>> Playlists {get;set;} = new Dictionary<string, Dictionary<string, int>>() {
             {
                 "menu_music",
@@ -62,18 +64,21 @@ namespace KeyboardKing
 
         public static void PlayNext()
         {
-            NextIndex();
+            if (ShouldPlay)
+            {
+                NextIndex();
 
-            _timer?.Stop();
-            _timer = new Timer();
-            _timer.Elapsed += new ElapsedEventHandler(Tick);
-            _timer.Interval = 1000;
-            _timer.Start();
+                _timer?.Stop();
+                _timer = new Timer();
+                _timer.Elapsed += new ElapsedEventHandler(Tick);
+                _timer.Interval = 1000;
+                _timer.Start();
 
-            CurrentSong = Playlists[CurrentPlaylist].Keys.ElementAt(Index);
+                CurrentSong = Playlists[CurrentPlaylist].Keys.ElementAt(Index);
 
-            Player = new SoundPlayer($@"./resources/audio/music/{CurrentSong}.wav");
-            Player.Play();
+                Player = new SoundPlayer($@"./resources/audio/music/{CurrentSong}.wav");
+                Player.Play();
+            }
         }
 
         public static void Stop()
