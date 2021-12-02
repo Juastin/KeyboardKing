@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -18,8 +19,10 @@ namespace Controller
         private static Episode _currentEpisode;
         public static EpisodeStep CurrentEpisodeStep { get; private set; }
         public static EpisodeResult CurrentEpisodeResult { get; private set; }
+        public static int LettersTyped { get; private set; }
         private static int _wordIndex;
         private static int _wrongIndex;
+        
         private static DateTime _startTime;
 
         public static event EventHandler WordChanged;
@@ -43,6 +46,7 @@ namespace Controller
             _startTime = new DateTime();
             _wordIndex = 0;
             _wrongIndex = 0;
+            LettersTyped = 0;
             CurrentEpisodeResult.MaxScore = CalculateMaxScore(episode);
             NextEpisodeStep();
             _startTime = DateTime.Now;
@@ -71,7 +75,11 @@ namespace Controller
         private static void NextLetter(bool isCorrect)
         {
             if (isCorrect)
+            {
                 _wordIndex++;
+                LettersTyped++;
+            }
+                 
             else
             {
                 _wrongIndex = _wordIndex + 1;

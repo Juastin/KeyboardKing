@@ -21,7 +21,8 @@
             <Label x:Name="WordOverlayCorrect" Content="{Binding WordOverlayCorrect}" Foreground="Green" FontSize="50"/>
         </Grid>
         <Grid>
-            <ProgressBar VerticalAlignment="Bottom" Height="20" Value="50"></ProgressBar>
+            <Label Content="{Binding Progress}" Margin="35,285,510,43"></Label>
+            <ProgressBar VerticalAlignment="Bottom" Height="20" Minimum="0" Maximum="{Binding MaxLetters}" Value="{Binding LettersTyped, Mode=OneWay}"></ProgressBar>
         </Grid>
     </Grid>
 </local:JumpPage>
