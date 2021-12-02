@@ -28,6 +28,12 @@ namespace KeyboardKing.components
         public NavigateButton()
         {
             InitializeComponent();
+            Loaded += OnLoaded;
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            button.Content = Text;
         }
 
         private void Navigate_Button_Click(object sender, RoutedEventArgs e)
