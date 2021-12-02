@@ -25,7 +25,10 @@
             <Label x:Name="WordOverlayCorrect" Content="{Binding WordOverlayCorrect}" Foreground="Green" FontSize="50"/>
         </Grid>
         <Grid>
-            <ProgressBar VerticalAlignment="Bottom" Height="20" Minimum="0" Maximum="{Binding MaxLetters}" Value="{Binding LettersTyped, Mode=OneWay}"/>
+            <ProgressBar Template="{DynamicResource ProgressBar}" 
+                         VerticalAlignment="Bottom" Height="20" Minimum="0" 
+                         Maximum="{Binding MaxLetters}" 
+                         Value="{Binding LettersTyped, Mode=OneWay}"/>
         </Grid>
     </Grid>
 </local:JumpPage>
