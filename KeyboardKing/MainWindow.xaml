@@ -66,6 +66,9 @@
 
     <!-- CONTENT -->
     <Border x:Name="MainBorder" CornerRadius="8" >
+        <Border.Effect>
+            <DropShadowEffect ShadowDepth="0" BlurRadius="20" Color="#FFB0B0B0" />
+        </Border.Effect>
         <Border.Background>
             <ImageBrush ImageSource="/Images/kk_background_4K.png"/>
         </Border.Background>

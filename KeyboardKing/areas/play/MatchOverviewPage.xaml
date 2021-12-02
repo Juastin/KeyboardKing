@@ -62,6 +62,11 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            <Setter Property="Border.Effect">
+                <Setter.Value>
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="20" Color="#FFB0B0B0" />
+                </Setter.Value>
+            </Setter>
         </Style>
 
         <Style x:Key="NavButton" TargetType="Button">
