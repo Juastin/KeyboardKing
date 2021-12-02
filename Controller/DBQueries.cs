@@ -155,9 +155,9 @@ namespace Controller
             return DBHandler.SelectQuery(cmd);
         }
 
-        public static void AddMatch(string chapterName, int episodeid, string[] User)
+        public static bool AddMatch(int episodeid, string[] User)
         {
-            SqlCommand cmd = new SqlCommand("INSERT INTO [dbo].[Match] (episodeid, creatorid, finished) VALUES (@episodeid, @creatorid, 0");
+/*            SqlCommand cmd = new SqlCommand("INSERT INTO [dbo].[Match] (episodeid, creatorid, finished) VALUES (@episodeid, @creatorid, 0");
 
             SqlParameter episodeId = new SqlParameter("@episodeid", SqlDbType.Int, 0);
             SqlParameter creatorId = new SqlParameter("@creatorid", SqlDbType.Int, 0);
@@ -167,8 +167,9 @@ namespace Controller
 
             cmd.Parameters.Add(episodeId);
             cmd.Parameters.Add(creatorId);
-            //cmd.Parameters.Add();
-            throw new NotImplementedException();
+
+            return DBHandler.Query(cmd);*/
+            return false;
         }
     }
 }

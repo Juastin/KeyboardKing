@@ -14,6 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+// Source: https://stackoverflow.com/questions/561166/binding-a-wpf-combobox-to-a-custom-list
+
 namespace KeyboardKing.areas.play
 {
     /// <summary>
@@ -32,13 +34,16 @@ namespace KeyboardKing.areas.play
             string[] User = (string[])Session.Get("student");
             List<List<string>> Episodes = DBQueries.GetAllEpisodes(User);
             int counter = 0;
+            List<ComboBoxData> ListData = new List<ComboBoxData>();
+
             while (counter < Episodes.Count)
             {
-                //if (counter % 10 == 0) { CBChapter.Items.Add(Episodes[counter][0]); }
-                CBEpisode.Items.Add(Episodes[counter][2]);
-                //CBEpisode.Items.Add(Episodes[counter][1]);
+                ListData.Add(new ComboBoxData { EpisodeId = int.Parse(Episodes[counter][3]), EpisodeName = Episodes[counter][2] });
                 counter++;
             }
+            CBEpisode.ItemsSource = ListData;
+            CBEpisode.DisplayMemberPath = "EpisodeName";
+            CBEpisode.SelectedValuePath = "EpisodeId";
         }
 
         public override void OnShadow()
@@ -51,19 +56,18 @@ namespace KeyboardKing.areas.play
 
         private void BCreateMatch(object sender, RoutedEventArgs e)
         {
-            // Not done
-            string chapterName = CBChapter.Text;
-            string[] episodeString = CBEpisode.Text.Split(' ');
-            int episodeNr = -1;
-            for (int i = 0; i < episodeString.Length; i++)
+            // Code for when match can be created
+            // Get data EpisodeId from CBEpisode is not yet implemented
+            bool result = DBQueries.AddMatch((int)CBEpisode.SelectedValue, (string[])Session.Get("student"));
+            if (result)
             {
-                bool succes = int.TryParse(episodeString[i], out episodeNr);
-                if (succes)
-                {
-                    DBQueries.AddMatch(chapterName, episodeNr, (string[])Session.Get("student"));
-                    ButtonNavigate(sender, e);
-                }
+                ButtonNavigate(sender, e);
             }
+            else
+            {
+                MessageBox.Show("Aanmaken match is gefaald");
+            }
+            
         }
 
     }
