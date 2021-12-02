@@ -34,9 +34,9 @@ namespace KeyboardKing.areas.play
             int counter = 0;
             while (counter < Episodes.Count)
             {
-                if (counter % 10 == 0) { CBChapter.Items.Add(Episodes[counter][0]); }
-                //episode.Items.Add($"Episode {Episodes[counter][1]} ({Episodes[counter][2]})");
-                if (counter < 10) CBEpisode.Items.Add(Episodes[counter][1]);
+                //if (counter % 10 == 0) { CBChapter.Items.Add(Episodes[counter][0]); }
+                CBEpisode.Items.Add(Episodes[counter][2]);
+                //CBEpisode.Items.Add(Episodes[counter][1]);
                 counter++;
             }
         }

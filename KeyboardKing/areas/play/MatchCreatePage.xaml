@@ -11,9 +11,7 @@
     <Grid>
         <Label Content="Create match" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"/>
         <Label Content="Selecteer een episode" HorizontalAlignment="Center" Margin="0,149,0,0" VerticalAlignment="Top" Width="268" Height="52" Foreground="White" FontSize="25"/>
-
-        <ComboBox Name="CBChapter" HorizontalAlignment="Left" VerticalAlignment="Top" Width="236" Height="42" FontSize="18" Margin="199,236,0,0"/>
-        <ComboBox Name="CBEpisode" HorizontalAlignment="Left" VerticalAlignment="Top" Width="150" Height="42" FontSize="18" Margin="435,236,0,0"/>
+        <ComboBox Name="CBEpisode" HorizontalAlignment="Center" VerticalAlignment="Top" Width="336" Height="42" FontSize="18" Margin="0,240,0,0"/>
 
         <Button Content="Create match" HorizontalAlignment="Center" Click="BCreateMatch" Margin="0,357,0,0" VerticalAlignment="Top" Height="55" Width="184" Background="#FF363636" BorderBrush="White" Foreground="White" FontSize="20"/>
         <Button Content="Match Overview" Tag="MatchOverviewPage" Click="ButtonNavigate" HorizontalAlignment="Left" Margin="605,66,0,0" VerticalAlignment="Top" Height="43" Width="161" Background="#FF363636" BorderBrush="White" Foreground="White" FontSize="15"/>
