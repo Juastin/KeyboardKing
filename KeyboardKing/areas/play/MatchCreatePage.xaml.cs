@@ -32,6 +32,7 @@ namespace KeyboardKing.areas.play
         {
             // ! check if user is already in match/lobby
             string[] User = (string[])Session.Get("student");
+
             List<List<string>> Episodes = DBQueries.GetAllEpisodes(User);
             int counter = 0;
             List<ComboBoxData> ListData = new List<ComboBoxData>();
@@ -45,6 +46,7 @@ namespace KeyboardKing.areas.play
             CBEpisode.DisplayMemberPath = "EpisodeName";
             CBEpisode.SelectedValuePath = "EpisodeId";
         }
+
 
         public override void OnShadow()
         {

@@ -154,6 +154,18 @@ namespace Controller
             return DBHandler.SelectQuery(cmd);
         }
 
+        public static bool IsUserInMatch(string[] User)
+        {
+            SqlCommand cmd = new SqlCommand("SELECT episodeid, creatorid FROM [dbo].[Match] WHERE finished = 0 AND userid = @userid", null);
+
+            SqlParameter userId = new SqlParameter("@userid", SqlDbType.Int, 0);
+            userId.Value = User[0];
+            cmd.Parameters.Add(userId);
+
+            List<List<string>> results = DBHandler.SelectQuery(cmd);
+            return results.Count == 0;
+        }
+
         public static bool AddMatch(int episodeid, string[] User)
         {
             SqlCommand cmd = new SqlCommand("INSERT INTO [dbo].[Match] (episodeid, creatorid) VALUES (@episodeid, @creatorid)", null);
