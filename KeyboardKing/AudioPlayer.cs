@@ -12,7 +12,7 @@ namespace KeyboardKing
         /// <summary>
         /// Used to globally mute all audio.
         /// </summary>
-        public static bool ShouldPlay {get;set;} = false;
+        public static bool ShouldPlay {get;set;} = true;
 
         /// <summary>
         /// List of all sounds, reflects the files of KeyboardKing/resources/audio
@@ -27,15 +27,13 @@ namespace KeyboardKing
         /// <summary>
         /// Used to play sound, expects a Sound enum.
         /// </summary>
-        public static SoundPlayer Play(Sound s)
+        public static void Play(Sound s)
         {
             if (ShouldPlay)
             {
                 SoundPlayer player = new SoundPlayer($@"./resources/audio/{s}.wav");
                 player.Play();
-                return player;
             }
-            return null;
         }
     }
 }

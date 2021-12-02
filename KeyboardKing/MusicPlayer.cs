@@ -76,6 +76,16 @@ namespace KeyboardKing
             Player.Play();
         }
 
+        public static void Stop()
+        {
+            Player.Stop();
+        }
+
+        public static void Start()
+        {
+            Player.Play();
+        }
+
         public static void PlayNextFrom(string playlist_name)
         {
             CurrentPlaylist = playlist_name;
