@@ -7,14 +7,15 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="MatchCreatePage">
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
 
-    <Grid>
-        <Label Content="Create match" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"/>
-        <Label Content="Selecteer een episode" HorizontalAlignment="Center" Margin="0,149,0,0" VerticalAlignment="Top" Width="268" Height="52" Foreground="White" FontSize="25"/>
-        
-        <ComboBox Name="CBEpisode" HorizontalAlignment="Center" VerticalAlignment="Top" Width="336" Height="42" FontSize="18" Margin="0,240,0,0"/>
+        <Border Style="{DynamicResource GridBorder}" Margin="14,0,0,0" HorizontalAlignment="Left" Width="675" ></Border>
+        <Label Style="{DynamicResource H1}" Content="Create match" HorizontalAlignment="Left" Margin="54,51,0,0" VerticalAlignment="Top" Width="258"/>
+        <Label Style="{DynamicResource H2}" Content="Selecteer een episode" HorizontalAlignment="Center" Margin="0,149,0,0" VerticalAlignment="Top" Width="255" Height="52"/>
 
-        <Button Content="Create match" Tag="MatchLobbyPage" HorizontalAlignment="Center" Click="BCreateMatch" Margin="0,357,0,0" VerticalAlignment="Top" Height="55" Width="184" Background="#FF363636" BorderBrush="White" Foreground="White" FontSize="20"/>
-        <Button Content="Match Overview" Tag="MatchOverviewPage" Click="ButtonNavigate" HorizontalAlignment="Left" Margin="605,66,0,0" VerticalAlignment="Top" Height="43" Width="161" Background="#FF363636" BorderBrush="White" Foreground="White" FontSize="15"/>
+        <ComboBox Name="CBEpisode" HorizontalAlignment="Center" VerticalAlignment="Top" Width="336" Height="42" FontSize="18" Margin="0,219,0,0"/>
+
+        <Button Style="{DynamicResource Button1}" Content="Create match" Tag="MatchLobbyPage" HorizontalAlignment="Center" Click="BCreateMatch" Margin="0,298,0,0" Height="53" Width="150" FontSize="20" VerticalAlignment="Top"/>
+        <Button Style="{DynamicResource Button1}" Content="Match Overview" Tag="MatchOverviewPage" Click="ButtonNavigate" Margin="0,65,10,251" Height="53" Width="150" FontSize="18" HorizontalAlignment="Right"/>
     </Grid>
 </local:JumpPage>
