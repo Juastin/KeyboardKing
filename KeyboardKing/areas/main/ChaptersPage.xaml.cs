@@ -30,7 +30,6 @@ namespace KeyboardKing.areas.main
 
         public override void OnLoad()
         {
-            MusicPlayer.PlayNextFrom("menu_music");
             LoadAllEpisodes();
         }
 
