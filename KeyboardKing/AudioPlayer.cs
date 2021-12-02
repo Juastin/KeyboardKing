@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Media;
 
 namespace KeyboardKing
 {
@@ -26,13 +27,15 @@ namespace KeyboardKing
         /// <summary>
         /// Used to play sound, expects a Sound enum.
         /// </summary>
-        public static void Play(Sound s)
+        public static SoundPlayer Play(Sound s)
         {
             if (ShouldPlay)
             {
-                System.Media.SoundPlayer player = new System.Media.SoundPlayer($@"./resources/audio/{s}.wav");
+                SoundPlayer player = new SoundPlayer($@"./resources/audio/{s}.wav");
                 player.Play();
+                return player;
             }
+            return null;
         }
     }
 }
