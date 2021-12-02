@@ -75,6 +75,7 @@ namespace KeyboardKing
             };
 
             // Navigate to the first view.
+            MusicPlayer.PlayNext();
             Navigate("LoginPage");
         }
 

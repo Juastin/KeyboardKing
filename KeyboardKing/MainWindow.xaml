@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Height="475" Width="800"
         MinWidth="250" MinHeight="50"
-        Icon="resources/images/icon.png"
+        Icon="./resources/images/icon.png"
         WindowStyle="None"
         AllowsTransparency="True">
     
@@ -79,7 +79,7 @@
             <Border MouseDown="TitleBar_MouseDown" CornerRadius="8, 8, 0, 0" Grid.Row="0" Background="#FF2B2B2B">
                 <Grid>
                     <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal">
-                        <Image Source="resources/images/icon.png"  Width="20" Height="20" Margin="10,0,0,0"/>
+                        <Image Source="./resources/images/icon.png"  Width="20" Height="20" Margin="10,0,0,0"/>
                         <Label Foreground="#5e5e5e" Content="KeyboardKing" FontWeight="Bold"/>
                     </StackPanel>
                     <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">

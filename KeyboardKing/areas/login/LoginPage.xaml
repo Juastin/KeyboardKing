@@ -15,7 +15,7 @@
 
         <Label Style="{DynamicResource H3}" Content="E-mail:" Margin="70,155,538,234"/>
         <Label Style="{DynamicResource H3}" Content="Wachtwoord:" Margin="70,232,469,154"/>
-
+      
         <TextBox Style="{DynamicResource TextBox}" Name="txtEmail"  Margin="286,152,23,234"/>
         <PasswordBox Style="{DynamicResource PasswordBox}" Name="boxPassword" Margin="286,235,23,154"/>
 
