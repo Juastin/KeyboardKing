@@ -20,6 +20,6 @@
         <PasswordBox Style="{DynamicResource PasswordBox}" Name="boxPassword" Margin="286,235,23,154"/>
 
         <Button Style="{DynamicResource Button1}"  Content="Login" Tag="SettingsPage" Click="BLogin"  Margin="534,357,23,24" Height="53" Width="150" FontSize="20"/>
-        <Button Style="{DynamicResource Button1}" Content="Registreer" Tag="RegisterPage" Margin="44,357,513,24" Height="53" Width="150" FontSize="20"/>
+        <Button Style="{DynamicResource Button1}" Content="Registreer" Tag="RegisterPage" Click="ButtonNavigate" Margin="44,357,513,24" Height="53" Width="150" FontSize="20"/>
     </Grid>
 </local:JumpPage>
