@@ -29,8 +29,8 @@
                          VerticalAlignment="Bottom" Height="20" Minimum="0" 
                          Maximum="{Binding MaxLetters}" 
                          Value="{Binding LettersTyped, Mode=OneWay}"/>
+            <TextBox x:Name="TimerTextBox" Style="{DynamicResource TextBox2}" VerticalAlignment="Top" Background="Transparent"  Text="00:00" Loaded="TimerTextBox_Loaded" Height="53"  Margin="0,11,115,0"/>
+            <Button Style="{DynamicResource Button1}" Content="Exit" VerticalAlignment="Top" HorizontalAlignment="Right" Tag="ChaptersPage" Click="ButtonNavigate" FontSize="26" Margin="690,10,0,386"  Height="54" Width="110"/>
         </Grid>
-        <TextBox x:Name="TimerTextBox" Style="{DynamicResource TextBox2}" Background="Transparent"  Text="00:00" Loaded="TimerTextBox_Loaded"  Margin="0,10,110,386" Width="690"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="690,10,0,0" VerticalAlignment="Top" Height="54" Width="110"/>
     </Grid>
 </local:JumpPage>
