@@ -15,6 +15,7 @@
     <None Remove="resources\audio\music\Page.wav" />
     <None Remove="resources\audio\music\Riverside.wav" />
     <None Remove="resources\audio\music\Sunday.wav" />
+    <None Remove="resources\audio\music\There Was A King.wav" />
     <None Remove="resources\Images\icon.png" />
     <None Remove="resources\Images\kingbackground.png" />
     <None Remove="resources\Images\kk_background_1080.png" />
@@ -45,6 +46,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\audio\music\Sunday.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\audio\music\There Was A King.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\Images\icon.png">
