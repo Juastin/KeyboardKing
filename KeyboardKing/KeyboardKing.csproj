@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="resources\audio\click.wav" />
     <None Remove="resources\audio\congratulations.wav" />
     <None Remove="resources\audio\failure.wav" />
     <None Remove="resources\audio\music\Coffee.wav" />
@@ -14,11 +15,17 @@
     <None Remove="resources\audio\music\Page.wav" />
     <None Remove="resources\audio\music\Riverside.wav" />
     <None Remove="resources\audio\music\Sunday.wav" />
-    <None Remove="resources\images\icon.png" />
-    <None Remove="resources\images\play-button.png" />
+    <None Remove="resources\Images\icon.png" />
+    <None Remove="resources\Images\kingbackground.png" />
+    <None Remove="resources\Images\kk_background_1080.png" />
+    <None Remove="resources\Images\kk_background_4K.png" />
+    <None Remove="resources\Images\play-button.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="resources\audio\click.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="resources\audio\congratulations.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -40,10 +47,19 @@
     <Content Include="resources\audio\music\Sunday.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="resources\images\icon.png">
+    <Content Include="resources\Images\icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="resources\images\play-button.png">
+    <Content Include="resources\Images\kingbackground.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\Images\kk_background_1080.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\Images\kk_background_4K.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\Images\play-button.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <ProjectReference Include="..\Controller\Controller.csproj" />
