@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Media;
 
 namespace KeyboardKing
 {
@@ -11,10 +12,10 @@ namespace KeyboardKing
         /// <summary>
         /// Used to globally mute all audio.
         /// </summary>
-        public static bool ShouldPlay {get;set;} = false;
+        public static bool ShouldPlay {get;set;} = true;
 
         /// <summary>
-        /// List of all sounds, reflects the files of KeyboardKing/audio
+        /// List of all sounds, reflects the files of KeyboardKing/resources/audio
         /// </summary>
         public enum Sound
         {
@@ -30,7 +31,7 @@ namespace KeyboardKing
         {
             if (ShouldPlay)
             {
-                System.Media.SoundPlayer player = new System.Media.SoundPlayer($@"./audio/{s}.wav");
+                SoundPlayer player = new SoundPlayer($@"./resources/audio/{s}.wav");
                 player.Play();
             }
         }
