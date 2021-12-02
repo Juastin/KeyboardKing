@@ -63,7 +63,6 @@ namespace KeyboardKing
         {
             if (Seconds>=Playlists[CurrentPlaylist][CurrentSong])
             {
-                Seconds = 0;
                 PlayNext();
             } else
             {
@@ -100,6 +99,7 @@ namespace KeyboardKing
                 _timer.Start();
 
                 CurrentSong = Playlists[CurrentPlaylist].Keys.ElementAt(Index);
+                Seconds = 0;
 
                 Player = new SoundPlayer($@"./resources/audio/music/{CurrentSong}.wav");
                 Player.Play();
