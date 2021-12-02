@@ -35,6 +35,13 @@ namespace KeyboardKing
                     {"Riverside", 161},
                     {"Sunday", 163},
                 }
+            },
+            {
+                "intense_music",
+                new Dictionary<string, int>()
+                {
+                    {"There Was A King", 157}
+                }
             }
         };
 
@@ -44,23 +51,22 @@ namespace KeyboardKing
 
         public static Random Random = new Random();
 
-        public static int Seconds {get;set;}
+        public static double Seconds {get;set;}
 
         public static string CurrentSong {get;set;} = "";
 
         public static string CurrentPlaylist {get;set;} = Playlists.Keys.First();
 
-        public static int Index {get;set;} = Random.Next(0, Playlists["menu_music"].Count-1);
+        public static int Index {get;set;} = Random.Next(0, Playlists[Playlists.First().Key].Count-1);
 
         public static void Tick(object sender, EventArgs e)
         {
             if (Seconds>=Playlists[CurrentPlaylist][CurrentSong])
             {
-                Seconds = 0;
                 PlayNext();
             } else
             {
-                Seconds++;
+                Seconds += 0.100;
             }
         }
 
@@ -75,6 +81,11 @@ namespace KeyboardKing
             }
         }
 
+        public static void RandomizeIndex()
+        {
+            Index = Random.Next(0, Playlists[CurrentPlaylist].Count-1);
+        }
+
         public static void PlayNext()
         {
             if (ShouldPlay)
@@ -84,14 +95,22 @@ namespace KeyboardKing
                 _timer?.Stop();
                 _timer = new Timer();
                 _timer.Elapsed += new ElapsedEventHandler(Tick);
-                _timer.Interval = 1000;
+                _timer.Interval = 100;
                 _timer.Start();
 
                 CurrentSong = Playlists[CurrentPlaylist].Keys.ElementAt(Index);
+                Seconds = 0;
 
                 Player = new SoundPlayer($@"./resources/audio/music/{CurrentSong}.wav");
                 Player.Play();
             }
+        }
+
+        public static void PlayNextFrom(string playlist_name)
+        {
+            CurrentPlaylist = playlist_name;
+            RandomizeIndex();
+            PlayNext();
         }
 
         public static void Stop()
@@ -102,12 +121,6 @@ namespace KeyboardKing
         public static void Start()
         {
             Player.Play();
-        }
-
-        public static void PlayNextFrom(string playlist_name)
-        {
-            CurrentPlaylist = playlist_name;
-            PlayNext();
         }
     }
 }

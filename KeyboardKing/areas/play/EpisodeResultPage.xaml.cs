@@ -39,7 +39,7 @@ namespace KeyboardKing.areas.play
 
         public override void OnShadow()
         {
-            MusicPlayer.PlayNext();
+            MusicPlayer.PlayNextFrom("menu_music");
         }
 
         public override void OnTick()
