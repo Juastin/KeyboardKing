@@ -9,7 +9,20 @@ namespace KeyboardKing
 {
     public static class MusicPlayer
     {
-        public static bool ShouldPlay = true;
+        private static bool _shouldplay {get;set;} = true;
+        public static bool ShouldPlay
+        {
+            get
+            {
+                return _shouldplay;
+            }
+            set
+            {
+                _shouldplay = value;
+                if (!value) {Stop();}
+            }
+
+        }
 
         public static Dictionary<string, Dictionary<string, int>> Playlists {get;set;} = new Dictionary<string, Dictionary<string, int>>() {
             {
