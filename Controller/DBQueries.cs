@@ -154,5 +154,21 @@ namespace Controller
                 "GROUP BY m.id, u.username, m.id, e.name", null);
             return DBHandler.SelectQuery(cmd);
         }
+
+        public static void AddMatch(string chapterName, int episodeid, string[] User)
+        {
+            SqlCommand cmd = new SqlCommand("INSERT INTO [dbo].[Match] (episodeid, creatorid, finished) VALUES (@episodeid, @creatorid, 0");
+
+            SqlParameter episodeId = new SqlParameter("@episodeid", SqlDbType.Int, 0);
+            SqlParameter creatorId = new SqlParameter("@creatorid", SqlDbType.Int, 0);
+
+            episodeId.Value = episodeid;
+            creatorId.Value = User[0];
+
+            cmd.Parameters.Add(episodeId);
+            cmd.Parameters.Add(creatorId);
+            //cmd.Parameters.Add();
+            throw new NotImplementedException();
+        }
     }
 }
