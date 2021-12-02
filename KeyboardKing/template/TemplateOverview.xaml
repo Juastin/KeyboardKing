@@ -7,11 +7,6 @@
         mc:Ignorable="d"
         Title="TemplateOverview" Height="450" Width="800" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
     <Grid HorizontalAlignment="Left" Width="800">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="103*"/>
-            <ColumnDefinition Width="18*"/>
-            <ColumnDefinition Width="39*"/>
-        </Grid.ColumnDefinitions>
         <Button Style="{DynamicResource Button1}" Width="100" Height="40" Content="Button1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,12,0,0"></Button>
         <Button Style="{DynamicResource Button2}" Width="100" Height="40" Content="Button2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,12,0,0"></Button>
         <Border Height="100" Width="200" Style="{DynamicResource Card}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,77,0,0" >
@@ -34,9 +29,15 @@
             Text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
 molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum" Width="299" Height="51" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="2">
         </TextBox>
-        <TextBox Style="{DynamicResource TextBox}" Height="50" Width="200" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center"/>
+        <TextBox Style="{DynamicResource TextBox}" Width="200" Height="50" Margin="10,192,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <PasswordBox Style="{DynamicResource PasswordBox}" Name="boxPassword" Margin="11,264,0,0" FontSize="20" HorizontalAlignment="Left" Width="199" Height="45" VerticalAlignment="Top" />
-        <ProgressBar Template="{DynamicResource ProgressBar}" Value="50" Height="20" Margin="11,334,305,80"/>
+        <ProgressBar Template="{DynamicResource ProgressBar}" Value="50" Margin="11,334,0,0" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="199"/>
+        <ComboBox ItemContainerStyle="{DynamicResource ComboBoxItem}" Template="{DynamicResource ComboBox}" Height="20" Width="200" BorderBrush="Black" HorizontalAlignment="Left" Margin="11,375,0,0" VerticalAlignment="Top">
+            <ComboBoxItem>ComboBox Item #1</ComboBoxItem>
+            <ComboBoxItem IsSelected="True">ComboBox Item #2</ComboBoxItem>
+            <ComboBoxItem>ComboBox Item #3</ComboBoxItem>
+            <ComboBoxItem>ComboBox Item #3</ComboBoxItem>
+        </ComboBox>
     </Grid>
 
 </Window>
