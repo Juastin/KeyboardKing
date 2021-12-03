@@ -42,9 +42,7 @@ namespace KeyboardKing.areas.play
 
         public override void OnLoad()
         {
-            TimerTextBox.Text = "00:00";
-            points.Text = "0p";
-            EpisodeController.Points = 0;
+            Initialize();
             MusicPlayer.PlayNextFrom("intense_music"); 
         }
 
@@ -57,6 +55,14 @@ namespace KeyboardKing.areas.play
         {
            
         }
+
+        private void Initialize()
+        {
+            TimerTextBox.Text = "00:00";
+            points.Text = "0p";
+            EpisodeController.Points = 0;
+        }
+
         /// <summary>
         /// <para>Event that fires each time when focus of window has been lost.</para>
         /// This way the UserInput field is always focused and can always be filled in.
