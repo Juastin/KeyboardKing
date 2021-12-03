@@ -33,11 +33,11 @@ namespace KeyboardKing.areas.play
         {
             // ! check if user is already in match/lobby
             string[] user = (string[])Session.Get("student");
-            if (MatchController.CheckIfUserExists())
-            {
+            //if (MatchController.CheckIfUserExists())
+            //{
                 // TODO: Show error, you are already in a match.
-                Navigate("ChaptersPage");
-            }
+            //    Navigate("ChaptersPage");
+            //}
 
             List<List<string>> episodes = DBQueries.GetAllEpisodes(user);
             int counter = 0;
@@ -67,8 +67,8 @@ namespace KeyboardKing.areas.play
             // Code for when match can be created
             // Get data EpisodeId from CBEpisode is not yet implemented
             int matchid = DBQueries.AddMatch((int)CBEpisode.SelectedValue, (string[])Session.Get("student"));
-            return;
 
+            DBQueries.AddMatchProgress(matchid, (string[]) Session.Get("student"));
 
             //if (result)
             //{

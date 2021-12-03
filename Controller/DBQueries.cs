@@ -163,7 +163,7 @@ namespace Controller
             return DBHandler.SelectQuery(cmd);
         }
 
-        public static int AddMatch(int episodeid, string[] User)
+        public static int AddMatch(int episodeid, string[] user)
         {
             SqlCommand cmd = new SqlCommand("INSERT INTO [dbo].[Match] (episodeid, creatorid) output INSERTED.id VALUES(@episodeid, @creatorid)");
 
@@ -171,7 +171,7 @@ namespace Controller
             SqlParameter creatorId = new SqlParameter("@creatorid", SqlDbType.Int, 0);
 
             episodeId.Value = episodeid;
-            creatorId.Value = User[0];
+            creatorId.Value = user[0];
 
             cmd.Parameters.Add(episodeId);
             cmd.Parameters.Add(creatorId);
@@ -179,10 +179,24 @@ namespace Controller
             return DBHandler.QueryScalar(cmd);
         }
 
-        public static bool AddMatchProgress(int matchid, string[] User)
+        public static bool AddMatchProgress(int matchid, string[] user)
         {
-            SqlCommand cmd = new SqlCommand("INSERT INTO [dbo].[MatchProgress] (matchid, userid, progress) VALUES (@matchid, @userid, 0)", null);
-            return true;
+            SqlCommand cmd = new SqlCommand("INSERT INTO [dbo].[MatchProgress] (matchid, userid, progress,score,mistakes,lettersperminute,time) " +
+                                            "VALUES (@matchid, @userid, @progress, 0, 0, 0, 0)", null);
+
+            SqlParameter matchId = new SqlParameter("@matchid", SqlDbType.Int, 255);
+            SqlParameter userId = new SqlParameter("@userid", SqlDbType.Int, 0);
+            SqlParameter progress = new SqlParameter("@progress", SqlDbType.Int, 0);
+
+            matchId.Value = matchid;
+            userId.Value = user[0];
+            progress.Value = 0;
+
+            cmd.Parameters.Add(matchId);
+            cmd.Parameters.Add(userId);
+            cmd.Parameters.Add(progress);
+
+            return DBHandler.Query(cmd);
         }
     }
 }
