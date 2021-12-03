@@ -29,15 +29,15 @@
                          VerticalAlignment="Bottom" Height="20" Minimum="0" 
                          Maximum="{Binding MaxLetters}" 
                          Value="{Binding LettersTyped, Mode=OneWay}"/>
-            <TextBox x:Name="TimerTextBox" Style="{DynamicResource TextBox2}" VerticalAlignment="Top" Background="Transparent"  Text="00:00" Loaded="TimerTextBox_Loaded" Height="53"  Margin="0,11,133,0"/>
+            <TextBox x:Name="TimerTextBox" Style="{DynamicResource TextBox2}" VerticalAlignment="Top" Background="Transparent"  Text="00:00" Loaded="TimerTextBox_Loaded" Height="53"  Margin="10,11,133,0"/>
             <Button Style="{DynamicResource Button1}" Content="Exit" VerticalAlignment="Top" HorizontalAlignment="Right" Tag="ChaptersPage" Click="ButtonNavigate" FontSize="26" Margin="0,11,10,0"  Height="54" Width="110"/>
         </Grid>
         <Border CornerRadius="80" Background="#ffffff" BorderBrush="#2a3b57" 
-                BorderThickness="5" Height="78" Margin="335,82,335,0" 
-                Name="Border1" VerticalAlignment="Top" >
-            <TextBlock Background="#ffffff" HorizontalAlignment="Center"
-                       VerticalAlignment="Center" Height="40" Width="83"
-                       TextWrapping="Wrap" Text="999p" FontSize="32" TextAlignment="Center">
+                BorderThickness="5" Height="91" Margin="0,82,0,0" 
+                Name="Border1" VerticalAlignment="Top" HorizontalAlignment="Center" Width="136">
+            <TextBlock x:Name="points" Background="Transparent" HorizontalAlignment="Center"
+                       VerticalAlignment="Center" Height="40" Width="116"
+                       TextWrapping="Wrap" Text="0p" FontSize="32" TextAlignment="Center">
 
             </TextBlock>
         </Border>
