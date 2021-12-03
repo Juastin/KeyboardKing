@@ -24,10 +24,10 @@ namespace KeyboardKing
 
         }
 
-        public static Dictionary<string, Dictionary<string, int>> Playlists {get;set;} = new Dictionary<string, Dictionary<string, int>>() {
+        public static Dictionary<string, Dictionary<string, double>> Playlists {get;set;} = new Dictionary<string, Dictionary<string, double>>() {
             {
                 "menu_music",
-                new Dictionary<string, int>()
+                new Dictionary<string, double>()
                 {
                     {"Coffee", 125},
                     {"Fiber", 145},
@@ -38,7 +38,7 @@ namespace KeyboardKing
             },
             {
                 "intense_music",
-                new Dictionary<string, int>()
+                new Dictionary<string, double>()
                 {
                     {"There Was A King", 157},
                     {"Underdog", 139},
@@ -46,9 +46,9 @@ namespace KeyboardKing
             },
             {
                 "waiting",
-                new Dictionary<string, int>()
+                new Dictionary<string, double>()
                 {
-                    {"break", 2},
+                    {"break", 2.1},
                 }
             }
         };
