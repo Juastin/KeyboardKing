@@ -19,7 +19,6 @@ namespace KeyboardKing
         /// </summary>
         public enum Sound
         {
-            click,
             congratulations,
             failure
         }

@@ -86,10 +86,7 @@ namespace KeyboardKing
         {
 
             if (e.OldPage != Pages.Empty)
-            {
-                AudioPlayer.Play(AudioPlayer.Sound.click);
                 _pages[e.OldPage].OnShadow();
-            }
 
             _mainFrame.Navigate(_pages[e.NewPage]);
             _pages[e.NewPage].OnLoad();
