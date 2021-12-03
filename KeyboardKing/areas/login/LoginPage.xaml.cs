@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Controller;
+using Model;
 
 namespace KeyboardKing.areas.login
 {
@@ -29,6 +30,7 @@ namespace KeyboardKing.areas.login
 
         public override void OnLoad()
         {
+            MusicPlayer.Stop();
             if (Session.Get("student") is not null) {
                 Session.Flush();
             }
@@ -62,13 +64,13 @@ namespace KeyboardKing.areas.login
 
                         if (results[0][5] == string.Empty)
                         {
-                            Navigate("RegisterSkillPage");
+                            NavigationController.NavigateToPage(Pages.RegisterSkillPage);
                             return;
                         }
                         else
                         {
                             MusicPlayer.PlayNextFrom("menu_music");
-                            Navigate("ChaptersPage");
+                            NavigationController.NavigateToPage(Pages.ChaptersPage);
                             return;
                         }
                     }

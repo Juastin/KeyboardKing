@@ -17,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Model;
 using Controller;
+using System.Windows.Threading;
 
 namespace KeyboardKing.areas.play
 {
@@ -29,24 +30,40 @@ namespace KeyboardKing.areas.play
         /// Constructor of <see cref="EpisodePage"/>
         /// </summary>
         /// <param name="w"></param>
+        /// 
+
+        public int increment { get; set; }
+        private DispatcherTimer dt = new DispatcherTimer();
         public EpisodePage(MainWindow w) : base(w)
         {
             InitializeComponent();
-            this.UserInput.Focus();
         }
 
         public override void OnLoad()
         {
+            Initialize();
             MusicPlayer.PlayNextFrom("intense_music");
+            EpisodeController.Start();
+            this.UserInput.Focus();
         }
 
         public override void OnShadow()
         {
+            
         }
 
         public override void OnTick()
         {
+           
         }
+
+        private void Initialize()
+        {
+            TimerTextBox.Text = "00:00";
+            points.Text = "0p";
+            EpisodeController.Points = 0;
+        }
+
         /// <summary>
         /// <para>Event that fires each time when focus of window has been lost.</para>
         /// This way the UserInput field is always focused and can always be filled in.
@@ -69,8 +86,10 @@ namespace KeyboardKing.areas.play
         {
             string txt = this.UserInput.Text;
             if (txt.Length > 0)
+            {
                 EpisodeController.CheckInput(txt[0]);
-
+            }
+            points.Text = EpisodeController.Points.ToString() + "p";
             this.UserInput.Clear();
         }
 
@@ -83,6 +102,28 @@ namespace KeyboardKing.areas.play
         {
             if (e.Key == Key.Tab)
                 e.Handled = true;
+        }
+
+        private void TimerTextBox_Loaded(object sender, RoutedEventArgs e)
+        {
+            increment = 0;
+            dt.Tick -= dtTicker;
+            dt.Interval = TimeSpan.FromSeconds(1);
+            dt.Tick += dtTicker;
+            dt.Start();
+        }
+       
+        private void dtTicker(object sender, EventArgs e)
+        {
+            increment++;
+            TimeSpan result = TimeSpan.FromSeconds(increment);
+            TimerTextBox.Text = result.ToString("mm':'ss");
+        }
+
+        private void ButtonExit(object sender, EventArgs e)
+        {
+            MusicPlayer.PlayNextFrom("menu_music");
+            NavigationController.NavigateToPage(Pages.ChaptersPage);
         }
     }
 }

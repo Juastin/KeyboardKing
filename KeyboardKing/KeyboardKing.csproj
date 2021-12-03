@@ -7,30 +7,31 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="resources\audio\click.wav" />
     <None Remove="resources\audio\congratulations.wav" />
     <None Remove="resources\audio\failure.wav" />
+    <None Remove="resources\audio\music\break.wav" />
     <None Remove="resources\audio\music\Coffee.wav" />
     <None Remove="resources\audio\music\Fiber.wav" />
     <None Remove="resources\audio\music\Page.wav" />
     <None Remove="resources\audio\music\Riverside.wav" />
     <None Remove="resources\audio\music\Sunday.wav" />
     <None Remove="resources\audio\music\There Was A King.wav" />
-    <None Remove="resources\Images\icon.png" />
-    <None Remove="resources\Images\kingbackground.png" />
-    <None Remove="resources\Images\kk_background_1080.png" />
-    <None Remove="resources\Images\kk_background_4K.png" />
-    <None Remove="resources\Images\play-button.png" />
+    <None Remove="resources\audio\music\Underdog.wav" />
+    <None Remove="resources\images\icon.png" />
+    <None Remove="resources\images\kingbackground.png" />
+    <None Remove="resources\images\kk_background_1080.png" />
+    <None Remove="resources\images\kk_background_4K.png" />
+    <None Remove="resources\images\play-button.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="resources\audio\click.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="resources\audio\congratulations.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\audio\failure.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\audio\music\break.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\audio\music\Coffee.wav">
@@ -51,19 +52,22 @@
     <Content Include="resources\audio\music\There Was A King.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="resources\Images\icon.png">
+    <Content Include="resources\audio\music\Underdog.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="resources\Images\kingbackground.png">
+    <Content Include="resources\images\icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\kingbackground.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="resources\Images\kk_background_1080.png">
+    <Content Include="resources\images\kk_background_1080.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="resources\Images\kk_background_4K.png">
+    <Content Include="resources\images\kk_background_4K.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="resources\Images\play-button.png">
+    <Content Include="resources\images\play-button.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <ProjectReference Include="..\Controller\Controller.csproj" />
