@@ -66,7 +66,7 @@
     <!-- CONTENT -->
     <Border x:Name="MainBorder" CornerRadius="8" >
         <Border.Background>
-            <ImageBrush ImageSource="resources/images/kk_background_4K.png"/>
+            <ImageBrush Stretch="Fill" ImageSource="resources/images/kk_background_4K.png"/>
         </Border.Background>
         <Grid>
             <Grid.RowDefinitions>
