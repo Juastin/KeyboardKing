@@ -65,7 +65,7 @@ namespace KeyboardKing
 
         public static string CurrentPlaylist {get;set;} = Playlists.Keys.First();
 
-        public static int Index {get;set;} = _random.Next(0, Playlists[Playlists.First().Key].Count-1);
+        public static int Index {get;set;}
 
         private static void _tick(object sender, EventArgs e)
         {
@@ -91,7 +91,7 @@ namespace KeyboardKing
 
         public static void RandomizeIndex()
         {
-            Index = _random.Next(0, Playlists[CurrentPlaylist].Count-1);
+            Index = _random.Next(Playlists[CurrentPlaylist].Count);
         }
 
         public static void PlayNext()
