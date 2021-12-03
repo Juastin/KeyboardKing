@@ -182,19 +182,16 @@ namespace Controller
         public static bool AddMatchProgress(int matchid, string[] user)
         {
             SqlCommand cmd = new SqlCommand("INSERT INTO [dbo].[MatchProgress] (matchid, userid, progress,score,mistakes,lettersperminute,time) " +
-                                            "VALUES (@matchid, @userid, @progress, 0, 0, 0, 0)", null);
+                                            "VALUES (@matchid, @userid, 0, 0, 0, 0, 0)", null);
 
             SqlParameter matchId = new SqlParameter("@matchid", SqlDbType.Int, 255);
             SqlParameter userId = new SqlParameter("@userid", SqlDbType.Int, 0);
-            SqlParameter progress = new SqlParameter("@progress", SqlDbType.Int, 0);
 
             matchId.Value = matchid;
             userId.Value = user[0];
-            progress.Value = 0;
 
             cmd.Parameters.Add(matchId);
             cmd.Parameters.Add(userId);
-            cmd.Parameters.Add(progress);
 
             return DBHandler.Query(cmd);
         }
