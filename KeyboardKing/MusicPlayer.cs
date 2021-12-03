@@ -48,7 +48,7 @@ namespace KeyboardKing
                 "waiting",
                 new Dictionary<string, int>()
                 {
-                    {"waiting", 2},
+                    {"break", 2},
                 }
             }
         };

@@ -79,7 +79,7 @@ namespace KeyboardKing.areas.main
                 Episode episode = EpisodeController.ParseEpisode(row[3]);
                 EpisodeController.Initialise(episode);
 
-                Navigate("EpisodePage");
+                Navigate("EpisodeReadyUpPage");
             }
         }
 

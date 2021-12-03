@@ -66,6 +66,7 @@ namespace KeyboardKing
                 {"SettingsPage", new SettingsPage(this)},
 
                 // play area
+                {"EpisodeReadyUpPage", new EpisodeReadyUpPage(this)},
                 {"EpisodePage", new EpisodePage(this)},
                 {"EpisodeResultPage", new EpisodeResultPage(this)},
                 {"MatchOverviewPage", new MatchOverviewPage(this)},
@@ -75,7 +76,8 @@ namespace KeyboardKing
             };
 
             // Navigate to the first view.
-            Navigate("LoginPage");
+            Session.Add("student", new string[4]{"9", "tester", "test@test.com", "beginner"});
+            Navigate("EpisodeResultPage");
         }
 
         public void Navigate(string pageName)
