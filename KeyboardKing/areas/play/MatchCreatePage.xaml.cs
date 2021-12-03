@@ -32,18 +32,18 @@ namespace KeyboardKing.areas.play
         public override void OnLoad()
         {
             // ! check if user is already in match/lobby
-            string[] User = (string[])Session.Get("student");
+            string[] user = (string[])Session.Get("student");
 
-            List<List<string>> Episodes = DBQueries.GetAllEpisodes(User);
+            List<List<string>> episodes = DBQueries.GetAllEpisodes(user);
             int counter = 0;
-            List<EpisodeData> ListData = new List<EpisodeData>();
+            List<EpisodeData> listData = new List<EpisodeData>();
 
-            while (counter < Episodes.Count)
+            while (counter < episodes.Count)
             {
-                ListData.Add(new EpisodeData { EpisodeId = int.Parse(Episodes[counter][3]), EpisodeName = Episodes[counter][2] });
+                listData.Add(new EpisodeData { EpisodeId = int.Parse(episodes[counter][3]), EpisodeName = episodes[counter][2] });
                 counter++;
             }
-            CBEpisode.ItemsSource = ListData;
+            CBEpisode.ItemsSource = listData;
             CBEpisode.DisplayMemberPath = "EpisodeName";
             CBEpisode.SelectedValuePath = "EpisodeId";
         }

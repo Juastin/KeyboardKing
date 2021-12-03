@@ -108,7 +108,7 @@ namespace Controller
             return result.Count == 1 && result[0].Count == 6 ? result : new List<List<string>>();
         }
 
-        public static List<List<string>> GetAllEpisodes(string[] User)
+        public static List<List<string>> GetAllEpisodes(string[] user)
         {
             SqlCommand cmd = new SqlCommand("SELECT [dbo].[Chapter].name, episode, [dbo].[Episode].name, [dbo].[Episode].id, " +
                 "CASE WHEN [dbo].[EpisodeResult].userid IS NULL THEN 'False' ELSE 'True' END AS completed, " +
@@ -122,7 +122,7 @@ namespace Controller
                 "GROUP BY [dbo].[Chapter].name, episode, [dbo].[Episode].name, [dbo].[Episode].id, [dbo].[EpisodeResult].userid");
 
             SqlParameter UserIdParam = new SqlParameter("@userid", SqlDbType.Int, 0);
-            UserIdParam.Value = User[0];
+            UserIdParam.Value = user[0];
 
             cmd.Parameters.Add(UserIdParam);
 
