@@ -63,6 +63,7 @@ namespace KeyboardKing.areas.play
         private void BCreateMatch(object sender, RoutedEventArgs e)
         {
             MatchController.MakeMatch((int) CBEpisode.SelectedValue);
+            NavigationController.NavigateToPage(Pages.MatchLobbyPage);
         }
 
     }
