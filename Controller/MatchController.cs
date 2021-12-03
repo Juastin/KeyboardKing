@@ -13,5 +13,9 @@ namespace Controller
             string[] user = (string[])Session.Get("student");
             return DBQueries.GetAllUsersInMatch().Select(match => match.Contains(user[0])).FirstOrDefault();
         }
+        public static void MakeMatch(int selectedValue)
+        {
+            DBQueries.AddMatchProgress(DBQueries.AddMatch(selectedValue, (string[])Session.Get("student")), (string[])Session.Get("student"));
+        }
     }
 }

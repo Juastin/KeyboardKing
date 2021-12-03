@@ -31,14 +31,13 @@ namespace KeyboardKing.areas.play
 
         public override void OnLoad()
         {
-            // ! check if user is already in match/lobby
+            if (MatchController.CheckIfUserExists())
+            {
+                MessageBox.Show("Je zit al in een match");
+                Navigate("MatchOverviewPage");
+            }
+            
             string[] user = (string[])Session.Get("student");
-            //if (MatchController.CheckIfUserExists())
-            //{
-                // TODO: Show error, you are already in a match.
-            //    Navigate("ChaptersPage");
-            //}
-
             List<List<string>> episodes = DBQueries.GetAllEpisodes(user);
             int counter = 0;
             List<EpisodeData> listData = new List<EpisodeData>();
@@ -66,9 +65,7 @@ namespace KeyboardKing.areas.play
         {
             // Code for when match can be created
             // Get data EpisodeId from CBEpisode is not yet implemented
-            int matchid = DBQueries.AddMatch((int)CBEpisode.SelectedValue, (string[])Session.Get("student"));
-
-            DBQueries.AddMatchProgress(matchid, (string[]) Session.Get("student"));
+            MatchController.MakeMatch((int) CBEpisode.SelectedValue);
 
             //if (result)
             //{

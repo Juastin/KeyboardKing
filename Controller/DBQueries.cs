@@ -158,7 +158,7 @@ namespace Controller
         {
             SqlCommand cmd = new SqlCommand("SELECT userid " +
                                             "FROM [dbo].[Match] m " +
-                                            "LEFT JOIN [dbo].[MatchProgress] mp ON m.id = mp.matchid " +
+                                            "RIGHT JOIN [dbo].[MatchProgress] mp ON m.id = mp.matchid " +
                                             "WHERE m.state != 2 ", null);
             return DBHandler.SelectQuery(cmd);
         }
