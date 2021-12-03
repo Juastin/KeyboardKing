@@ -8,5 +8,10 @@ namespace Controller
 {
     public static class MatchController
     {
+        public static bool CheckIfUserExists()
+        {
+            string[] user = (string[])Session.Get("student");
+            return DBQueries.GetAllUsersInMatch().Select(match => match.Contains(user[0])).FirstOrDefault();
+        }
     }
 }

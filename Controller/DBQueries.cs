@@ -154,21 +154,18 @@ namespace Controller
             return DBHandler.SelectQuery(cmd);
         }
 
-        public static bool IsUserInMatch(string[] User)
+        public static List<List<string>> GetAllUsersInMatch()
         {
-            SqlCommand cmd = new SqlCommand("SELECT episodeid, creatorid FROM [dbo].[Match] WHERE finished = 0 AND userid = @userid", null);
-
-            SqlParameter userId = new SqlParameter("@userid", SqlDbType.Int, 0);
-            userId.Value = User[0];
-            cmd.Parameters.Add(userId);
-
-            List<List<string>> results = DBHandler.SelectQuery(cmd);
-            return results.Count == 0;
+            SqlCommand cmd = new SqlCommand("SELECT userid " +
+                                            "FROM [dbo].[Match] m " +
+                                            "LEFT JOIN [dbo].[MatchProgress] mp ON m.id = mp.matchid " +
+                                            "WHERE m.state != 2 ", null);
+            return DBHandler.SelectQuery(cmd);
         }
 
-        public static bool AddMatch(int episodeid, string[] User)
+        public static int AddMatch(int episodeid, string[] User)
         {
-            SqlCommand cmd = new SqlCommand("INSERT INTO [dbo].[Match] (episodeid, creatorid) VALUES (@episodeid, @creatorid)", null);
+            SqlCommand cmd = new SqlCommand("INSERT INTO [dbo].[Match] (episodeid, creatorid) output INSERTED.id VALUES(@episodeid, @creatorid)");
 
             SqlParameter episodeId = new SqlParameter("@episodeid", SqlDbType.Int, 255);
             SqlParameter creatorId = new SqlParameter("@creatorid", SqlDbType.Int, 0);
@@ -179,7 +176,13 @@ namespace Controller
             cmd.Parameters.Add(episodeId);
             cmd.Parameters.Add(creatorId);
 
-            return DBHandler.Query(cmd);
+            return DBHandler.QueryScalar(cmd);
+        }
+
+        public static bool AddMatchProgress(int matchid, string[] User)
+        {
+            SqlCommand cmd = new SqlCommand("INSERT INTO [dbo].[MatchProgress] (matchid, userid, progress) VALUES (@matchid, @userid, 0)", null);
+            return true;
         }
     }
 }
