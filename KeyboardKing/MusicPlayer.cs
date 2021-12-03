@@ -41,7 +41,7 @@ namespace KeyboardKing
                 new Dictionary<string, int>()
                 {
                     {"There Was A King", 157},
-                    {"Underdog", 149},
+                    {"Underdog", 139},
                 }
             },
             {
