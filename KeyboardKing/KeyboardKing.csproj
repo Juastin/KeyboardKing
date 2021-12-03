@@ -7,9 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="resources\audio\click.wav" />
     <None Remove="resources\audio\congratulations.wav" />
     <None Remove="resources\audio\failure.wav" />
+    <None Remove="resources\audio\music\break.wav" />
     <None Remove="resources\audio\music\Coffee.wav" />
     <None Remove="resources\audio\music\Fiber.wav" />
     <None Remove="resources\audio\music\Page.wav" />
@@ -25,13 +25,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="resources\audio\click.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="resources\audio\congratulations.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\audio\failure.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\audio\music\break.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\audio\music\Coffee.wav">

@@ -37,13 +37,14 @@ namespace KeyboardKing.areas.play
         public EpisodePage(MainWindow w) : base(w)
         {
             InitializeComponent();
-            this.UserInput.Focus();
         }
 
         public override void OnLoad()
         {
             Initialize();
-            MusicPlayer.PlayNextFrom("intense_music"); 
+            MusicPlayer.PlayNextFrom("intense_music");
+            EpisodeController.Start();
+            this.UserInput.Focus();
         }
 
         public override void OnShadow()
@@ -119,5 +120,10 @@ namespace KeyboardKing.areas.play
             TimerTextBox.Text = result.ToString("mm':'ss");
         }
 
+        private void ButtonExit(object sender, EventArgs e)
+        {
+            MusicPlayer.PlayNextFrom("menu_music");
+            Navigate("ChaptersPage");
+        }
     }
 }

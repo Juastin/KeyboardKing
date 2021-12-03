@@ -69,6 +69,7 @@ namespace KeyboardKing
                 {Pages.SettingsPage, new SettingsPage(this)},
 
                 // play area
+                {Pages.EpisodeReadyUpPage, new EpisodeReadyUpPage(this)},
                 {Pages.EpisodePage, new EpisodePage(this)},
                 {Pages.EpisodeResultPage, new EpisodeResultPage(this)},
                 {Pages.MatchOverviewPage, new MatchOverviewPage(this)},

@@ -34,6 +34,11 @@ namespace Controller
         public static string WordOverlayCorrect { get =>CurrentEpisodeStep?.Word.Substring(0, _wordIndex); }
         public static string WordOverlayWrong { get =>CurrentEpisodeStep?.Word.Substring(0, _wrongIndex); }
 
+        public static void Start()
+        {
+            _startTime = DateTime.Now;
+        }
+
         /// <summary>
         /// <para>
         ///     <c>Initialise</c> needs to be called before starting an episode.  
@@ -51,7 +56,6 @@ namespace Controller
             LettersTyped = 0;
             CurrentEpisodeResult.MaxScore = CalculateMaxScore(episode);
             NextEpisodeStep();
-            _startTime = DateTime.Now;
         }
 
         /// <summary>
