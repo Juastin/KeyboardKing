@@ -16,10 +16,9 @@ namespace Controller
         public static bool CheckIfUserExists()
         {
             string[] user = (string[])Session.Get("student");
-/*            foreach (var result in DBQueries.GetAllUsersInMatch().SelectMany(result => result.Where(data => data.Equals(user[0], StringComparison.Ordinal)).Select(data => new { })))
+            foreach (var result in DBQueries.GetAllUsersInMatch().SelectMany(result => result.Where(data => data.Equals(user[0], StringComparison.Ordinal)).Select(data => new { })))
                 return true;
-            return false;*/
-            return DBQueries.GetAllUsersInMatch().Select(match => match.Contains(user[0])).FirstOrDefault();
+            return false;
         }
         /// <summary>
         /// <para>This method will make a match by adding a Match, and a MatchProgress to the database</para>
