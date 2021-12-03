@@ -3,14 +3,15 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:KeyboardKing.core" xmlns:components="clr-namespace:KeyboardKing.components"
-                mc:Ignorable="d" 
+      xmlns:local="clr-namespace:KeyboardKing.core"
+      xmlns:Components="clr-namespace:KeyboardKing.components"
+      mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="FavoritesPage">
 
     <Grid>
         <Label Content="Favorieten" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"/>
 
-        <components:Navbar CurrentPage="FavoritesPage"/>
+        <Components:Navbar CurrentPage="FavoritesPage"/>
     </Grid>
 </local:JumpPage>

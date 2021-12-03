@@ -26,9 +26,14 @@ namespace KeyboardKing.components
     {
         public Pages CurrentPage { get; set; }
 
+        private SolidColorBrush _backgroundColor { get; set; }
+        private SolidColorBrush _foregroundColor { get; set; }
+
         public Navbar()
         {
             InitializeComponent();
+            _backgroundColor = FindResource("Color5") as SolidColorBrush;
+            _foregroundColor = FindResource("Color6") as SolidColorBrush;
             Loaded += OnLoaded;
         }
 
@@ -37,20 +42,20 @@ namespace KeyboardKing.components
             switch (CurrentPage)
             {
                 case Pages.ChaptersPage:
-                    Button_ChaptersPage.Background = Brushes.White;
-                    Button_ChaptersPage.Foreground = Brushes.Black;
+                    Button_ChaptersPage.Background = _backgroundColor;
+                    Button_ChaptersPage.Foreground = _foregroundColor;
                     break;
                 case Pages.FavoritesPage:
-                    Button_FavoritesPage.Background = Brushes.White;
-                    Button_FavoritesPage.Foreground = Brushes.Black;
+                    Button_FavoritesPage.Background = _backgroundColor;
+                    Button_FavoritesPage.Foreground = _foregroundColor;
                     break;
                 case Pages.MatchOverviewPage:
-                    Button_MatchOverviewPage.Background = Brushes.White;
-                    Button_MatchOverviewPage.Foreground = Brushes.Black;
+                    Button_MatchOverviewPage.Background = _backgroundColor;
+                    Button_MatchOverviewPage.Foreground = _foregroundColor;
                     break;
                 case Pages.SettingsPage:
-                    Button_SettingsPage.Background = Brushes.White;
-                    Button_SettingsPage.Foreground = Brushes.Black;
+                    Button_SettingsPage.Background = _backgroundColor;
+                    Button_SettingsPage.Foreground = _foregroundColor;
                     break;
             }
         }

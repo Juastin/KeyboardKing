@@ -79,14 +79,14 @@ namespace KeyboardKing.areas.main
                 Episode episode = EpisodeController.ParseEpisode(row[3]);
                 EpisodeController.Initialise(episode);
 
-                NavigateController.NavigateToPage(Pages.EpisodePage);
+                NavigationController.NavigateToPage(Pages.EpisodePage);
             }
         }
 
         private void OnEpisodeFinished(object sender, EventArgs e)
         {
             EpisodeController.EpisodeFinished -= OnEpisodeFinished;
-            NavigateController.NavigateToPage(Pages.EpisodeResultPage);
+            NavigationController.NavigateToPage(Pages.EpisodeResultPage);
         }
     }
 }

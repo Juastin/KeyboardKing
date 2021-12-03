@@ -78,8 +78,8 @@ namespace KeyboardKing
             };
 
             // Navigate to the first view.
-            NavigateController.Navigate += OnNavigate;
-            NavigateController.NavigateToPage(Pages.LoginPage);
+            NavigationController.Navigate += OnNavigate;
+            NavigationController.NavigateToPage(Pages.LoginPage);
         }
 
         public void OnNavigate(NavigateEventArgs e)
@@ -97,7 +97,7 @@ namespace KeyboardKing
 
         private void Tick(object sender, EventArgs e)
         {
-            _pages[NavigateController.CurrentPage].OnTick();
+            _pages[NavigationController.CurrentPage].OnTick();
         }
 
         // Switch between minimized and maximized window with the right values.

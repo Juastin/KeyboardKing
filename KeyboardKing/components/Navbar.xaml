@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:Components="clr-namespace:KeyboardKing.components"
              mc:Ignorable="d" 
              x:Name="root"
              d:DesignHeight="450" d:DesignWidth="800">
@@ -12,13 +13,16 @@
             <Setter Property="Margin" Value="5"/>
             <Setter Property="Width" Value="80"/>
             <Setter Property="Height" Value="80"/>
+            <Setter Property="Foreground" Value="{DynamicResource Color4}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="FontFamily" Value="Arial"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border Name="border" 
                         BorderThickness="1"
                         Padding="4,2" 
-                        BorderBrush="DarkGray" 
+                        BorderBrush="{DynamicResource Color4}" 
                         CornerRadius="3" 
                         Background="{TemplateBinding Background}">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
@@ -32,11 +36,11 @@
     <Grid>
         <DockPanel>
             <Menu DockPanel.Dock="Bottom" Width="520" Height="92" Background="{x:Null}" Margin="0,0,0,10">
-                <Button Style="{StaticResource NavButton}" x:Name="Button_ChaptersPage" Background="Transparent" Foreground="White" Content="▶" FontSize="36" FontFamily="Arial"/>
-                <Button Style="{StaticResource NavButton}" x:Name="Button_FavoritesPage" Background="Transparent" Foreground="White" Content="🔄" FontSize="30" FontFamily="Arial"/>
-                <Button Style="{StaticResource NavButton}" x:Name="Button_MatchOverviewPage" Tag="MatchOverviewPage" Background="Transparent" Foreground="White" Content="⚔" FontSize="30" FontFamily="Arial"/>
-                <Button Style="{StaticResource NavButton}" x:Name="Button_SettingsPage" Background="Transparent" Foreground="White" Content="⚙" FontSize="30" FontFamily="Arial"/>
-                <Button Style="{StaticResource NavButton}" Tag="LoginPage" Background="Transparent" Foreground="White" Content="🚪" FontSize="30" FontFamily="Arial"/>
+                <Components:NavigationButton ToPage="ChaptersPage" Style="{StaticResource NavButton}" x:Name="Button_ChaptersPage" Content="▶" FontSize="36"/>
+                <Components:NavigationButton ToPage="FavoritesPage" Style="{StaticResource NavButton}" x:Name="Button_FavoritesPage" Content="🔄" FontSize="30"/>
+                <Components:NavigationButton ToPage="MatchOverviewPage" Style="{StaticResource NavButton}" x:Name="Button_MatchOverviewPage" Content="⚔" FontSize="30"/>
+                <Components:NavigationButton ToPage="SettingsPage" Style="{StaticResource NavButton}" x:Name="Button_SettingsPage" Content="⚙" FontSize="30"/>
+                <Components:NavigationButton ToPage="LoginPage" Style="{StaticResource NavButton}" Content="🚪" FontSize="30"/>
             </Menu>
             <StackPanel></StackPanel>
         </DockPanel>

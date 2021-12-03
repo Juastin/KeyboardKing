@@ -8,7 +8,7 @@ using Model.event_args;
 
 namespace Controller
 {
-    public static class NavigateController
+    public static class NavigationController
     {
         public static event NavigateHandler Navigate;
         public static Pages CurrentPage { get; set; } = Pages.Empty;

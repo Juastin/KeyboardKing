@@ -63,13 +63,13 @@ namespace KeyboardKing.areas.login
 
                         if (results[0][5] == string.Empty)
                         {
-                            NavigateController.NavigateToPage(Pages.RegisterSkillPage);
+                            NavigationController.NavigateToPage(Pages.RegisterSkillPage);
                             return;
                         }
                         else
                         {
                             MusicPlayer.PlayNextFrom("menu_music");
-                            NavigateController.NavigateToPage(Pages.ChaptersPage);
+                            NavigationController.NavigateToPage(Pages.ChaptersPage);
                             return;
                         }
                     }

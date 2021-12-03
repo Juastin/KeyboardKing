@@ -45,7 +45,7 @@ namespace KeyboardKing.areas.login
         {
             string[] result = (string[])Session.Get("student");
             DBQueries.AddSkill(((Button)sender).Tag.ToString(), result);
-            NavigateController.NavigateToPage(Pages.ChaptersPage);
+            NavigationController.NavigateToPage(Pages.ChaptersPage);
         }
     }
 }

@@ -65,7 +65,7 @@ namespace KeyboardKing.areas.login
                             string passHashed = Encryption.HashPassword(password, salt); //Hashing the password
                             bool Adduser = DBQueries.AddUser(username, email, passHashed, salt); //Adding new user to database
                             if (Adduser)
-                                NavigateController.NavigateToPage(Pages.LoginPage); //Returning to loginpage
+                                NavigationController.NavigateToPage(Pages.LoginPage); //Returning to loginpage
                             else { error.Text = "Error: Service onbereikbaar / Bestaande gebruiker"; }
                         }
                         else { error.Text = "Error: Wachtwoord bevat geen kleine of grote letter, nummer of minstens 8 tekens"; }
