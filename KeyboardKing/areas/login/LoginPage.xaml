@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:KeyboardKing.core"
+      xmlns:Components="clr-namespace:KeyboardKing.components"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="LoginPage">
@@ -19,7 +20,7 @@
         <TextBox Style="{DynamicResource TextBox}" Name="txtEmail"  Margin="286,152,23,234"/>
         <PasswordBox Style="{DynamicResource PasswordBox}" KeyDown="OnKeyDownLogin" Name="boxPassword" Margin="286,235,23,154"/>
 
-        <Button Style="{DynamicResource Button1}"  Content="Login" Tag="SettingsPage" Click="BLogin"  Margin="534,357,23,24" Height="53" Width="150" FontSize="20"/>
-        <Button Style="{DynamicResource Button1}" Content="Registreer" Tag="RegisterPage" Click="ButtonNavigate" Margin="44,357,513,24" Height="53" Width="150" FontSize="20"/>
+        <Button Style="{DynamicResource Button1}" Content="Login" Tag="SettingsPage" Click="BLogin"  Margin="534,357,23,24" Height="53" Width="150" FontSize="20"/>
+        <Components:NavigationButton Style="{DynamicResource Button1}" ToPage="RegisterPage" Content="Registreer" Margin="44,357,513,24" Height="53" Width="150" FontSize="20"/>
     </Grid>
 </local:JumpPage>

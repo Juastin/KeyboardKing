@@ -18,6 +18,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Controller;
+using Model;
+using Model.event_args;
 
 namespace KeyboardKing
 {
@@ -41,7 +44,7 @@ namespace KeyboardKing
         /// <summary>
         /// Dictionary of pages that are used in the app.
         /// </summary>
-        private Dictionary<string, JumpPage> _pages {get;set;}
+        private Dictionary<Pages, JumpPage> _pages {get;set;}
 
         public MainWindow()
         {
@@ -56,46 +59,43 @@ namespace KeyboardKing
             _pages = new()
             {
                 // login area
-                {"LoginPage", new LoginPage(this)},
-                {"RegisterPage", new RegisterPage(this)},
-                {"RegisterSkillPage", new RegisterSkillPage(this)},
+                {Pages.LoginPage, new LoginPage(this)},
+                {Pages.RegisterPage, new RegisterPage(this)},
+                {Pages.RegisterSkillPage, new RegisterSkillPage(this)},
 
                 // main area
-                {"ChaptersPage", new ChaptersPage(this)},
-                {"FavoritesPage", new FavoritesPage(this)},
-                {"SettingsPage", new SettingsPage(this)},
+                {Pages.ChaptersPage, new ChaptersPage(this)},
+                {Pages.FavoritesPage, new FavoritesPage(this)},
+                {Pages.SettingsPage, new SettingsPage(this)},
 
                 // play area
-                {"EpisodeReadyUpPage", new EpisodeReadyUpPage(this)},
-                {"EpisodePage", new EpisodePage(this)},
-                {"EpisodeResultPage", new EpisodeResultPage(this)},
-                {"MatchOverviewPage", new MatchOverviewPage(this)},
-                {"MatchLobbyPage", new MatchLobbyPage(this)},
-                {"MatchPlayingPage", new MatchPlayingPage(this)},
-                {"MatchResultPage", new MatchResultPage(this)},
+                {Pages.EpisodeReadyUpPage, new EpisodeReadyUpPage(this)},
+                {Pages.EpisodePage, new EpisodePage(this)},
+                {Pages.EpisodeResultPage, new EpisodeResultPage(this)},
+                {Pages.MatchOverviewPage, new MatchOverviewPage(this)},
+                {Pages.MatchLobbyPage, new MatchLobbyPage(this)},
+                {Pages.MatchPlayingPage, new MatchPlayingPage(this)},
+                {Pages.MatchResultPage, new MatchResultPage(this)},
             };
 
             // Navigate to the first view.
-            Navigate("LoginPage");
+            NavigationController.Navigate += OnNavigate;
+            NavigationController.NavigateToPage(Pages.LoginPage);
         }
 
-        public void Navigate(string pageName)
+        public void OnNavigate(NavigateEventArgs e)
         {
-            _mainFrame.Navigate(_pages[pageName]);
-            _currentPage = pageName;
-        }
 
-        public void Navigate(JumpPage oldPage, string pageName)
-        {
-            oldPage.OnShadow();
-            _mainFrame.Navigate(_pages[pageName]);
-            _pages[pageName].OnLoad();
-            _currentPage = pageName;
+            if (e.OldPage != Pages.Empty)
+                _pages[e.OldPage].OnShadow();
+
+            _mainFrame.Navigate(_pages[e.NewPage]);
+            _pages[e.NewPage].OnLoad();
         }
 
         private void Tick(object sender, EventArgs e)
         {
-            _pages[_currentPage].OnTick();
+            _pages[NavigationController.CurrentPage].OnTick();
         }
 
         // Switch between minimized and maximized window with the right values.

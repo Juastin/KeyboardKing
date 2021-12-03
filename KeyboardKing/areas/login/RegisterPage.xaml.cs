@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Controller;
+using Model;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 
@@ -64,15 +65,10 @@ namespace KeyboardKing.areas.login
                             string passHashed = Encryption.HashPassword(password, salt); //Hashing the password
                             bool Adduser = DBQueries.AddUser(username, email, passHashed, salt); //Adding new user to database
                             if (Adduser)
-                            {
-                                Navigate("LoginPage"); //Returning to loginpage
-                            }
+                                NavigationController.NavigateToPage(Pages.LoginPage); //Returning to loginpage
                             else { error.Text = "Error: Service onbereikbaar / Bestaande gebruiker"; }
                         }
-                        else
-                        {
-                            error.Text = "Error: Wachtwoord bevat geen kleine of grote letter, nummer of minstens 8 tekens";
-                        }
+                        else { error.Text = "Error: Wachtwoord bevat geen kleine of grote letter, nummer of minstens 8 tekens"; }
                     }
                     else { error.Text = "Error: Wachtwoorden komen niet overeen"; }
                 }

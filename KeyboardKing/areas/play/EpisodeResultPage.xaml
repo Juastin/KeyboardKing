@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:KeyboardKing.core"
+      xmlns:Components="clr-namespace:KeyboardKing.components"
       xmlns:Model="clr-namespace:Model" x:Class="KeyboardKing.areas.play.EpisodeResultPage"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
@@ -27,7 +28,7 @@
             <Label Content="{Binding Time}" HorizontalAlignment="Left" Margin="49,178,0,0" VerticalAlignment="Top" Foreground="Black" FontSize="28"></Label>
             <Label Content="{Binding Mistakes}" HorizontalAlignment="Left" Margin="48,236,0,0" VerticalAlignment="Top" Foreground="Black" FontSize="28" RenderTransformOrigin="0.565,2.108"></Label>
             <Label Content="{Binding LettersPerMinute}" HorizontalAlignment="Left" Margin="49,302,0,0" VerticalAlignment="Top" Foreground="Black" FontSize="28" RenderTransformOrigin="-3.459,0.645"></Label>
-            <Button Style="{DynamicResource Button1}" Content="Voltooi episode" Tag="ChaptersPage" Click="ButtonNavigate" Margin="164,366,72,33" Height="51" Width="164" FontSize="20"/>
+            <Components:NavigationButton ToPage="ChaptersPage" Style="{DynamicResource Button1}" Content="Voltooi episode" Margin="164,366,72,33" Height="51" Width="164" FontSize="20"/>
         </Grid>
     </Grid>
 </local:JumpPage>
