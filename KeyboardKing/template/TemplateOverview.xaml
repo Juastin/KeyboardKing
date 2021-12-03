@@ -39,7 +39,7 @@ molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum" Wid
             <ComboBoxItem>ComboBox Item #3</ComboBoxItem>
             <ComboBoxItem>ComboBox Item #3</ComboBoxItem>
         </ComboBox>
-        <ScrollBar Style="{DynamicResource ScrollBarStyle}" HorizontalAlignment="Left" Margin="228,229,0,0" VerticalAlignment="Top" Height="80"/>
+        <ScrollBar HorizontalAlignment="Left" Margin="228,229,0,0" VerticalAlignment="Top" Height="80"/>
     </Grid>
 
 </Window>

@@ -269,13 +269,13 @@
     <!-- NavButton template -->
     <Style x:Key="NavButton" TargetType="Button">
         <Setter Property="OverridesDefaultStyle" Value="True"/>
-        <Setter Property="Margin" Value="5"/>
+        <Setter Property="Margin" Value="5, 0"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Border Name="border" 
                             BorderThickness="1"
-                            Padding="4,2" 
+                            Padding="4, 2" 
                             BorderBrush="DarkGray" 
                             CornerRadius="3" 
                             Background="{TemplateBinding Background}">
@@ -664,7 +664,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style x:Key="ScrollBarStyle" TargetType="{x:Type ScrollBar}">
+    <Style TargetType="{x:Type ScrollBar}">
         <Setter Property="Stylus.IsPressAndHoldEnabled" Value="false"/>
         <Setter Property="Stylus.IsFlicksEnabled" Value="false"/>
         <Setter Property="Background" Value="{StaticResource ScrollBar.Static.Background}"/>

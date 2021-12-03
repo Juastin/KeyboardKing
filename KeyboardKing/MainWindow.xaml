@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:KeyboardKing"
         mc:Ignorable="d"
         Height="475" Width="800"
+        MinHeight="475" MinWidth="800"
         Icon="./resources/images/icon.png"
         WindowStyle="None"
         AllowsTransparency="True">
@@ -66,7 +67,7 @@
     <!-- CONTENT -->
     <Border x:Name="MainBorder" CornerRadius="8" >
         <Border.Background>
-            <ImageBrush Stretch="Fill" ImageSource="resources/images/kk_background_4K.png"/>
+            <ImageBrush Stretch="UniformToFill" ImageSource="resources/images/kk_background_4K.png"/>
         </Border.Background>
         <Grid>
             <Grid.RowDefinitions>
