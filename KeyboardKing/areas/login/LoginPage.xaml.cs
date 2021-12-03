@@ -30,6 +30,7 @@ namespace KeyboardKing.areas.login
 
         public override void OnLoad()
         {
+            MusicPlayer.Stop();
             if (Session.Get("student") is not null) {
                 Session.Flush();
             }

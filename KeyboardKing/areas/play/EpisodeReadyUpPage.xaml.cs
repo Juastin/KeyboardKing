@@ -1,5 +1,6 @@
 ﻿using Controller;
 using KeyboardKing.core;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,7 +46,7 @@ namespace KeyboardKing.areas.play
         {
             if (e.Key == Key.Space)
             {
-                Navigate("EpisodePage");
+                NavigationController.NavigateToPage(Pages.EpisodePage);
             }
         }
 
