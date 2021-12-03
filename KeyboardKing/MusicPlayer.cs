@@ -40,7 +40,15 @@ namespace KeyboardKing
                 "intense_music",
                 new Dictionary<string, int>()
                 {
-                    {"There Was A King", 157}
+                    {"There Was A King", 157},
+                    {"Underdog", 149},
+                }
+            },
+            {
+                "waiting",
+                new Dictionary<string, int>()
+                {
+                    {"waiting", 2},
                 }
             }
         };
