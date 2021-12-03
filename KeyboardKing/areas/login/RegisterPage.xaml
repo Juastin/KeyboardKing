@@ -24,7 +24,8 @@
         <PasswordBox Style="{DynamicResource PasswordBox}" Margin="312,298,244,83" Name="password1"  Width="199" Height="48"/>
         <PasswordBox Style="{DynamicResource PasswordBox}" HorizontalAlignment="Left" Margin="536,298,0,83" Name="password2"  Width="199" Height="48"/>
 
-        <Button Style="{DynamicResource Button1}" Content="Ga naar login" Tag="LoginPage" Click="ButtonNavigate" Margin="57,368,534,10" Height="51" Width="164" FontSize="20"/>
+
+        <Button Style="{DynamicResource Button1}" Content="Ga naar login" Click="ButtonNavigate" Tag="LoginPage" Margin="57,368,534,10" Height="51" Width="164" FontSize="20"/>
         <Button Style="{DynamicResource Button1}" Content="Registreer" Tag="" Click="BRegister" HorizontalAlignment="Left" Margin="571,368,0,10"  Height="51" Width="164" FontSize="20"/>
     </Grid>
 </local:JumpPage>

@@ -79,5 +79,10 @@ namespace KeyboardKing.areas.login
             else { message += "Email of wachtwoord is niet ingevuld"; }
             error.Text = message;
         }
+
+        private void OnKeyDownLogin(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter) { BLogin(null, new RoutedEventArgs()); }
+        }
     }
 }
