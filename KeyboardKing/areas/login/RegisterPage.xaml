@@ -7,28 +7,51 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="RegisterPage1">
-    <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" Width="750">
 
-        <Border Style="{DynamicResource GridBorder}">
-            <Grid>
-                <TextBox x:Name="error" Margin="247,53,10,320"  Width="450" Height="56"  FontSize="20"  IsHitTestVisible="False" BorderBrush="{x:Null}"/>
-
-                <Label Style="{DynamicResource H1}" Margin="50,30,0,0" Content="Registreren" HorizontalAlignment="Left" Width="277" Height="60" VerticalAlignment="Top"/>
-                <Label Style="{DynamicResource H3}" Content="E-mail:"  Margin="50,90,0,0"  Height="50" HorizontalAlignment="Left" Width="101" VerticalAlignment="Top"/>
-                <Label Style="{DynamicResource H3}" Content="Gebruikersnaam:" Margin="50,160,0,0" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left" Width="210"/>
-                <Label Style="{DynamicResource H3}" Content="Wachtwoord:" HorizontalAlignment="Left" Margin="50,230,0,0" Width="161" Height="50" VerticalAlignment="Top"/>
-
-                <TextBox Style="{DynamicResource TextBox}" Margin="0,90,50,0" Name="txtemail" Height="50" HorizontalAlignment="Right" Width="420" VerticalAlignment="Top"/>
-                <TextBox Style="{DynamicResource TextBox}" Margin="280,160,0,0" Name="txtusername"  Width="420" Height="50" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-
-
-                <PasswordBox Style="{DynamicResource PasswordBox}" Margin="280,230,0,0" Name="password1"  Width="200" Height="50" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <PasswordBox Style="{DynamicResource PasswordBox}" Margin="0,230,50,0" Name="password2" Height="50" HorizontalAlignment="Right" Width="200" VerticalAlignment="Top"/>
-
-                <Button Style="{DynamicResource Button1}" Content="Ga naar login" Click="ButtonNavigate" Tag="LoginPage" Margin="50,0,0,30" Height="50" FontSize="20" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="150"/>
-                <Button Style="{DynamicResource Button1}" Content="Registreer" Tag="RegisterPage" Click="BRegister" Margin="0,0,50,30"  Height="50" FontSize="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="150"/>
-
+    <Border Style="{DynamicResource GridBorder}" 
+            Padding="30"
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center" Height="400" Width="750">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" VerticalAlignment="Center">
+                <Label Style="{DynamicResource H1}" Content="Registreren" HorizontalAlignment="Left"/>
+                <TextBox x:Name="error" VerticalContentAlignment="Center" HorizontalAlignment="Right" Width="450" Height="55"  FontSize="20" IsHitTestVisible="False" BorderBrush="{x:Null}" HorizontalContentAlignment="Right"/>
             </Grid>
-        </Border>
-    </Grid>
+            <Grid Grid.Row="1">
+                <StackPanel Orientation="Vertical">
+                    <DockPanel Margin="0, 10">
+                        <Label Style="{DynamicResource H3}" Content="E-mail:" 
+                               VerticalAlignment="Center"/>
+                        <TextBox Style="{DynamicResource TextBox}" Name="txtemail" 
+                                 HorizontalAlignment="Right" Width="400"/>
+                    </DockPanel>
+                    <DockPanel Margin="0, 10">
+                        <Label Style="{DynamicResource H3}" Content="Gebruikersnaam:" 
+                               VerticalAlignment="Center"/>
+                        <TextBox Style="{DynamicResource TextBox}" Name="txtusername"  
+                                 HorizontalAlignment="Right" Width="400"/>
+                    </DockPanel>
+                    <DockPanel Margin="0, 10">
+                        <Label Style="{DynamicResource H3}" Content="Wachtwoord:" 
+                               VerticalAlignment="Center"/>
+                        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                            <PasswordBox Style="{DynamicResource PasswordBox}" Name="password1"  Width="190" 
+                                     HorizontalAlignment="Right" Margin="20, 0"/>
+                            <PasswordBox Style="{DynamicResource PasswordBox}" Name="password2" 
+                                     DockPanel.Dock="Right" Width="190"/>
+                        </StackPanel>
+                    </DockPanel>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Row="2" VerticalAlignment="Bottom">
+                <Button Style="{DynamicResource Button1}" Content="Ga naar login" Click="ButtonNavigate" Tag="LoginPage"  HorizontalAlignment="Left" Width="150"/>
+                <Button Style="{DynamicResource Button1}" Content="Registreer" Tag="RegisterPage" Click="BRegister" HorizontalAlignment="Right" Width="150"/>
+            </Grid>
+        </Grid>
+    </Border>
 </local:JumpPage>
