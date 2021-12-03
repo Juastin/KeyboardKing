@@ -3,7 +3,8 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:KeyboardKing.core"
+      xmlns:local="clr-namespace:KeyboardKing.core" 
+      xmlns:Components="clr-namespace:KeyboardKing.components"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="MatchCreatePage">
@@ -16,6 +17,6 @@
         <ComboBox Name="CBEpisode" HorizontalAlignment="Center" VerticalAlignment="Top" Width="336" Height="42" FontSize="18" Margin="0,219,0,0"/>
 
         <Button Style="{DynamicResource Button1}" Content="Create match" Tag="MatchLobbyPage" HorizontalAlignment="Center" Click="BCreateMatch" Margin="0,298,0,0" Height="53" Width="150" FontSize="20" VerticalAlignment="Top"/>
-        <Button Style="{DynamicResource Button1}" Content="Match Overview" Tag="MatchOverviewPage" Click="ButtonNavigate" Margin="0,65,10,251" Height="53" Width="150" FontSize="18" HorizontalAlignment="Right"/>
+        <Components:NavigationButton Style="{DynamicResource Button1}" ToPage="MatchOverviewPage" Content="Match Overview" Margin="0,65,10,251" Height="53" Width="150" FontSize="18" HorizontalAlignment="Right"/>
     </Grid>
 </local:JumpPage>
