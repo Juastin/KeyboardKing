@@ -36,11 +36,6 @@ namespace KeyboardKing.areas.play
 
         public override void OnShadow()
         {
-  /*          string[] User = (string[])Session.Get("student");
-            if (DBQueries.IsUserInMatch(User))
-            {
-                MessageBox.Show("Je zit al in een match");
-            }*/
         }
 
         public override void OnTick()

@@ -36,7 +36,7 @@ namespace KeyboardKing.areas.play
                 MessageBox.Show("Je zit al in een match");
                 Navigate("MatchOverviewPage");
             }
-            
+
             string[] user = (string[])Session.Get("student");
             List<List<string>> episodes = DBQueries.GetAllEpisodes(user);
             int counter = 0;
@@ -52,7 +52,6 @@ namespace KeyboardKing.areas.play
             CBEpisode.SelectedValuePath = "EpisodeId";
         }
 
-
         public override void OnShadow()
         {
         }
@@ -63,16 +62,7 @@ namespace KeyboardKing.areas.play
 
         private void BCreateMatch(object sender, RoutedEventArgs e)
         {
-            // Code for when match can be created
-            // Get data EpisodeId from CBEpisode is not yet implemented
             MatchController.MakeMatch((int) CBEpisode.SelectedValue);
-
-            //if (result)
-            //{
-            //    MessageBox.Show("Aanmaken match is gelukt");
-            //    ButtonNavigate(sender, e);
-            //}
-            //else { MessageBox.Show("Aanmaken match is gefaald"); }
         }
 
     }
