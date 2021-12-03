@@ -35,6 +35,7 @@ namespace KeyboardKing.areas.play
             {
                 MessageBox.Show("Je zit al in een match");
                 Navigate("MatchOverviewPage");
+                //NavigationController.NavigateToPage(Pages.MatchOverviewPage);
             }
 
             string[] user = (string[])Session.Get("student");
