@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Model;
 
 // Source: https://stackoverflow.com/questions/561166/binding-a-wpf-combobox-to-a-custom-list
 
@@ -35,11 +36,11 @@ namespace KeyboardKing.areas.play
 
             List<List<string>> Episodes = DBQueries.GetAllEpisodes(User);
             int counter = 0;
-            List<ComboBoxData> ListData = new List<ComboBoxData>();
+            List<EpisodeData> ListData = new List<EpisodeData>();
 
             while (counter < Episodes.Count)
             {
-                ListData.Add(new ComboBoxData { EpisodeId = int.Parse(Episodes[counter][3]), EpisodeName = Episodes[counter][2] });
+                ListData.Add(new EpisodeData { EpisodeId = int.Parse(Episodes[counter][3]), EpisodeName = Episodes[counter][2] });
                 counter++;
             }
             CBEpisode.ItemsSource = ListData;
