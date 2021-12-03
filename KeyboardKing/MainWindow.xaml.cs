@@ -76,8 +76,7 @@ namespace KeyboardKing
             };
 
             // Navigate to the first view.
-            Session.Add("student", new string[4]{"9", "tester", "test@test.com", "beginner"});
-            Navigate("EpisodeResultPage");
+            Navigate("LoginPage");
         }
 
         public void Navigate(string pageName)
