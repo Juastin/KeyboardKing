@@ -73,7 +73,7 @@ namespace KeyboardKing
                 {Pages.EpisodePage, new EpisodePage(this)},
                 {Pages.EpisodeResultPage, new EpisodeResultPage(this)},
                 {Pages.MatchOverviewPage, new MatchOverviewPage(this)},
-                {Pages.MatchCreatePage, new MatchOverviewPage(this)},
+                {Pages.MatchCreatePage, new MatchCreatePage(this)},
                 {Pages.MatchLobbyPage, new MatchLobbyPage(this)},
                 {Pages.MatchPlayingPage, new MatchPlayingPage(this)},
                 {Pages.MatchResultPage, new MatchResultPage(this)},
