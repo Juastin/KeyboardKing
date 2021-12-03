@@ -15,6 +15,7 @@ namespace Model
         ChaptersPage,
         FavoritesPage,
         SettingsPage,
+        EpisodeReadyUpPage,
         EpisodePage,
         EpisodeResultPage,
         MatchLobbyPage,
