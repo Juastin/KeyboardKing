@@ -123,7 +123,7 @@ namespace KeyboardKing.areas.play
         private void ButtonExit(object sender, EventArgs e)
         {
             MusicPlayer.PlayNextFrom("menu_music");
-            Navigate("ChaptersPage");
+            NavigationController.NavigateToPage(Pages.ChaptersPage);
         }
     }
 }
