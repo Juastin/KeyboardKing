@@ -6,10 +6,11 @@
       xmlns:local="clr-namespace:KeyboardKing.core"
       xmlns:Components="clr-namespace:KeyboardKing.components"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      MaxHeight="600"
-      MaxWidth="1450"
+      MinHeight="450"
+      MinWidth="400"
+      MaxWidth="1420"
       Title="MatchOverviewPage">
+    
     <Page.Resources>
         <!-- ListBoxItem template -->
         <Style x:Key="ListBoxItemTemplate" TargetType="{x:Type ListBoxItem}">
@@ -43,26 +44,68 @@
             </Setter>
             <Setter Property="Border.Effect">
                 <Setter.Value>
-                    <DropShadowEffect ShadowDepth="0" BlurRadius="20" Color="#FFB0B0B0" />
+
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="20" Color="#e8e8e8"/>
                 </Setter.Value>
             </Setter>
         </Style>
     </Page.Resources>
 
-    <Grid>
-        <Border Style="{DynamicResource GridBorder}"></Border>
-        <!-- Match* overview ListBox -->
-        <ListBox Name="MatchOverview" Margin="49,51,49,169" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" 
-                 HorizontalContentAlignment="Stretch"
-                 ItemContainerStyle="{DynamicResource ListBoxItemTemplate}">
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel/>
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
-        </ListBox>
+    
+    
+        <Grid Margin="25">
+        <Border Style="{DynamicResource GridBorder}"
+            Padding="30">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" VerticalAlignment="Center">
+                    <Label Style="{DynamicResource H1}" Content="Matches" HorizontalAlignment="Left"/>
+                    <Button Style="{DynamicResource Button1}"
+                        Content="Klik hier om een match te maken" Tag="MatchCreatePage" Click="ButtonNavigate" HorizontalAlignment="Center"
+                            VerticalAlignment="Center" Background="#FF363636" BorderBrush="White" Foreground="White" FontSize="14"/>
+                </Grid>
+                <Grid Grid.Row="1" VerticalAlignment="Top">
+                    <!-- Match* overview ListBox -->
+                    <ListBox Name="MatchOverview" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderBrush="{x:Null}" Foreground="White" 
+                             HorizontalContentAlignment="Stretch" ItemContainerStyle="{DynamicResource ListBoxItemTemplate}" Margin="-2, 0">
+                        <ListBox.OpacityMask>
+                            <LinearGradientBrush EndPoint="0,1"
+                             StartPoint="0,0">
+                                <GradientStop Color="Transparent"
+                                              Offset="0" />
+                                <GradientStop Color="White"
+                                              Offset="0.07" />
+                                <GradientStop Color="White"
+                                              Offset="0.93" />
+                                <GradientStop Color="Transparent" 
+                                              Offset="1"/>
+                            </LinearGradientBrush>
+                        </ListBox.OpacityMask>
 
         <Components:NavigationButton ToPage="MatchCreatePage" Content="Klik hier om een match te maken" Style="{DynamicResource Button1}" HorizontalAlignment="Center" Margin="0,0,0,112" VerticalAlignment="Bottom" Height="40" Width="250" Background="#FF363636" BorderBrush="White" Foreground="White" FontSize="14"/>
         <Components:Navbar CurrentPage="MatchOverviewPage"/>
+
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel/>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                    </ListBox>
+                </Grid>
+                <Grid Grid.Row="2" HorizontalAlignment="Center">
+                    <StackPanel Orientation="Horizontal">
+                        <Button Style="{StaticResource NavButton}" Tag="ChaptersPage" Click="ButtonNavigate" Width="80" Height="80" Background="Black" Foreground="White" Content="▶" FontSize="36" FontFamily="Arial"/>
+                        <Button Style="{StaticResource NavButton}" Width="80" Height="80" Background="Black" Foreground="White" Content="🔄" FontSize="30" FontFamily="Arial"/>
+                        <Button Style="{StaticResource NavButton}" Width="80" Height="80" Background="White" Foreground="Black" Content="⚔" FontSize="30" FontFamily="Arial"/>
+                        <Button Style="{StaticResource NavButton}" Width="80" Height="80" Background="Black" Foreground="White" Content="⚙" FontSize="30" FontFamily="Arial"/>
+                        <Button Style="{StaticResource NavButton}" Tag="LoginPage" Click="ButtonNavigate" Width="80" Height="80" Background="Black" Foreground="White" Content="🚪" FontSize="30" FontFamily="Arial"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Border>
     </Grid>
 </local:JumpPage>

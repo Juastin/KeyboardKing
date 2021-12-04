@@ -1,4 +1,4 @@
-﻿<local:JumpPage x:Class="KeyboardKing.areas.main.ChaptersPage"
+<local:JumpPage x:Class="KeyboardKing.areas.main.ChaptersPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -9,8 +9,7 @@
       Title="ChaptersPage"
       MinHeight="450"
       MinWidth="400"
-      MaxHeight="600"
-      MaxWidth="1450">
+      MaxWidth="1420">
 
     <!-- STYLING TEMPLATES -->
     <Page.Resources>
@@ -58,54 +57,87 @@
             </Setter>
             <Setter Property="Border.Effect">
                 <Setter.Value>
-                    <DropShadowEffect ShadowDepth="0" BlurRadius="20" Color="#FFB0B0B0" />
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="20" Color="#e8e8e8" />
                 </Setter.Value>
             </Setter>
         </Style>
     </Page.Resources>
 
     <!-- CONTENT -->
-    <Grid>
-        <Border Style="{DynamicResource GridBorder}"></Border>
-        <Label Style="{DynamicResource H1}" Content="Chapters" Margin="49,51,301,336"/>
+    <Grid Margin="25">
+        <Border Style="{DynamicResource GridBorder}"
+            Padding="30">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" VerticalAlignment="Center">
+                    <Label Style="{DynamicResource H1}" Content="Chapters" HorizontalAlignment="Left"/>
+                </Grid>
+                <Grid Grid.Row="1" VerticalAlignment="Top">
+                    <!-- Chapter overview ListBox -->
+                    <ListBox Name="EpOverview" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderBrush="{x:Null}" Foreground="White" 
+                             HorizontalContentAlignment="Stretch" ItemContainerStyle="{DynamicResource ListBoxItemTemplate}" Margin="-2, 0">
+                        <ListBox.OpacityMask>
+                            <LinearGradientBrush EndPoint="0,1"
+                             StartPoint="0,0">
+                                <GradientStop Color="Transparent"
+                                              Offset="0" />
+                                <GradientStop Color="White"
+                                              Offset="0.07" />
+                                <GradientStop Color="White"
+                                              Offset="0.93" />
+                                <GradientStop Color="Transparent" 
+                                              Offset="1"/>
+                            </LinearGradientBrush>
+                        </ListBox.OpacityMask>
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel HorizontalAlignment="Left"/>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
 
-        <!-- Chapter overview ListBox -->
-        <ListBox Name="EpOverview" Margin="49,114,49,112" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" 
-                 HorizontalContentAlignment="Stretch"
-                 ItemContainerStyle="{DynamicResource ListBoxItemTemplate}">
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel/>
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
+                        <ListBox.GroupStyle>
+                            <GroupStyle>
+                                <GroupStyle.ContainerStyle>
+                                    <Style TargetType="{x:Type GroupItem}">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate>
+                                                    <Expander Background="#f3f3f3" Margin="0, 10" BorderThickness="2" BorderBrush="{DynamicResource Color4}" IsExpanded="False" Padding="10">
+                                                        <Expander.Header>
+                                                            <StackPanel Orientation="Horizontal" >
+                                                                <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="22"/>
+                                                                <TextBlock Text=" - " FontSize="22"/>
+                                                                <TextBlock Text="{Binding ItemCount}" FontSize="22" FontStyle="Italic"/>
+                                                                <TextBlock Text=" episode(s) " FontSize="22" FontStyle="Italic"/>
+                                                            </StackPanel>
+                                                        </Expander.Header>
+                                                        <ItemsPresenter />
+                                                    </Expander>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </GroupStyle.ContainerStyle>
+                            </GroupStyle>
+                        </ListBox.GroupStyle>
+                    </ListBox>
+                </Grid>
+                <Grid Grid.Row="2" HorizontalAlignment="Center">
+                    <StackPanel Orientation="Horizontal">
+                        <Button Style="{StaticResource NavButton}" Width="80" Height="80" Background="White" Foreground="Black" Content="▶" FontSize="36" FontFamily="Arial"/>
+                        <Button Style="{StaticResource NavButton}" Width="80" Height="80" Background="Black" Foreground="White" Content="🔄" FontSize="30" FontFamily="Arial"/>
+                        <Button Style="{StaticResource NavButton}" Tag="MatchOverviewPage" Click="ButtonNavigate" Width="80" Height="80" Background="Black" Foreground="White" Content="⚔" FontSize="30" FontFamily="Arial"/>
+                        <Button Style="{StaticResource NavButton}" Width="80" Height="80" Background="Black" Foreground="White" Content="⚙" FontSize="30" FontFamily="Arial"/>
+                        <Button Style="{StaticResource NavButton}" Tag="LoginPage" Click="ButtonNavigate" Width="80" Height="80" Background="Black" Foreground="White" Content="🚪" FontSize="30" FontFamily="Arial"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Border>
 
-            <ListBox.GroupStyle>
-                <GroupStyle>
-                    <GroupStyle.ContainerStyle>
-                        <Style TargetType="{x:Type GroupItem}">
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate>
-                                        <Expander Margin="0, 10" BorderThickness="2" BorderBrush="{DynamicResource Color4}" IsExpanded="False" Background="#FFFFFF" Padding="10">
-                                            <Expander.Header>
-                                                <StackPanel Orientation="Horizontal" >
-                                                    <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="22"/>
-                                                    <TextBlock Text=" - " FontSize="22"/>
-                                                    <TextBlock Text="{Binding ItemCount}" FontSize="22" FontStyle="Italic"/>
-                                                    <TextBlock Text=" episode(s) " FontSize="22" FontStyle="Italic"/>
-                                                </StackPanel>
-                                            </Expander.Header>
-                                            <ItemsPresenter />
-                                        </Expander>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </GroupStyle.ContainerStyle>
-                </GroupStyle>
-            </ListBox.GroupStyle>
-        </ListBox>
-
-        <Components:Navbar CurrentPage="ChaptersPage"/>
+            <Components:Navbar CurrentPage="ChaptersPage"/>
     </Grid>
 </local:JumpPage>

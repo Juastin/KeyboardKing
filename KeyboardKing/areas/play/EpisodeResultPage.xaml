@@ -15,20 +15,51 @@
     </local:JumpPage.DataContext>
 
     <Grid>
-        <Border Style="{DynamicResource GridBorder}"></Border>
-        <Label Style="{DynamicResource H1}" Content="Results" Margin="45,45,305,342"/>
-        <Grid Margin="0,0,400,0">
-            <Label Content="Score:" HorizontalAlignment="Left" Margin="49,117,0,0" VerticalAlignment="Top" Foreground="Black" FontSize="28"></Label>
-            <Label Content="Tijd:" HorizontalAlignment="Left" Margin="49,178,0,0" VerticalAlignment="Top" Foreground="Black" FontSize="28"></Label>
-            <Label Content="Fouten:" HorizontalAlignment="Left" Margin="49,237,0,0" VerticalAlignment="Top" Foreground="Black" FontSize="28"></Label>
-            <Label Content="Letters per minuut:" HorizontalAlignment="Left" Margin="49,303,0,0" VerticalAlignment="Top" Foreground="Black" FontSize="28" RenderTransformOrigin="0.48,1.773"></Label>
-        </Grid>
-        <Grid Margin="400,0,0,0">
-            <Label Content="{Binding Score}" HorizontalAlignment="Left" Margin="49,116,0,0" VerticalAlignment="Top" Foreground="Black" FontSize="28" RenderTransformOrigin="0.592,2.219"/>
-            <Label Content="{Binding Time}" HorizontalAlignment="Left" Margin="49,178,0,0" VerticalAlignment="Top" Foreground="Black" FontSize="28"></Label>
-            <Label Content="{Binding Mistakes}" HorizontalAlignment="Left" Margin="48,236,0,0" VerticalAlignment="Top" Foreground="Black" FontSize="28" RenderTransformOrigin="0.565,2.108"></Label>
-            <Label Content="{Binding LettersPerMinute}" HorizontalAlignment="Left" Margin="49,302,0,0" VerticalAlignment="Top" Foreground="Black" FontSize="28" RenderTransformOrigin="-3.459,0.645"></Label>
-            <Components:NavigationButton ToPage="ChaptersPage" Style="{DynamicResource Button1}" Content="Voltooi episode" Margin="164,366,72,33" Height="51" Width="164" FontSize="20"/>
-        </Grid>
+        <Border Style="{DynamicResource GridBorder}"
+            Padding="30" 
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center" 
+            Height="400" Width="750" >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" VerticalAlignment="Center">
+                    <Label Style="{DynamicResource H1}" HorizontalAlignment="Left" Content="Results"/>
+                </Grid>
+                <Grid Grid.Row="1" VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Orientation="Vertical">
+                        <Label  Style="{DynamicResource H3}" Content="Score:" 
+                               VerticalAlignment="Center"/>
+                        <Label  Style="{DynamicResource H3}" Content="Tijd:" 
+                               VerticalAlignment="Center"/>
+                        <Label  Style="{DynamicResource H3}" Content="Fouten" 
+                               VerticalAlignment="Center"/>
+                        <Label  Style="{DynamicResource H3}" Content="Letters per minuut:" 
+                               VerticalAlignment="Center"/>
+                        
+                    </StackPanel>
+                    <StackPanel Margin="10, 0"  Grid.Column="1" Orientation="Vertical">
+                        <Label Style="{DynamicResource H3}" Content="{Binding Score}" HorizontalAlignment="Left"/>
+                        <Label Style="{DynamicResource H3}" Content="{Binding Time}" HorizontalAlignment="Left"/>
+                        <Label Style="{DynamicResource H3}" Content="{Binding Mistakes}" HorizontalAlignment="Left"/>
+                        <Label Style="{DynamicResource H3}" Content="{Binding LettersPerMinute}" HorizontalAlignment="Left"/>
+                    </StackPanel>
+                    <Border Style="{DynamicResource GridBorder}" CornerRadius="5" Grid.Column="2" >
+                        <!-- CONTENT SPACE FOR THE PODIUM -->
+                    </Border>
+                </Grid>
+                <Grid Grid.Row="2" VerticalAlignment="Bottom">
+                    <Components:NavigationButton ToPage="ChaptersPage" Style="{DynamicResource Button1}" Content="Voltooi episode" HorizontalAlignment="Right"/>
+                </Grid>
+            </Grid>
+        </Border>
     </Grid>
 </local:JumpPage>
