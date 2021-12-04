@@ -20,7 +20,7 @@
         <Label Style="{DynamicResource H1}" Content="" Margin="49,51,301,336"/>
         <TextBox x:Name="UserInput" Background="Transparent" Foreground="Transparent" Grid.Column="0" LostKeyboardFocus="UserInput_LostFocus" Text="" TextChanged="UserInput_TextChanged" SelectionBrush="{x:Null}" BorderThickness="0,0,0,0"/>
         <Grid HorizontalAlignment="Center" VerticalAlignment="Center" TextOptions.TextFormattingMode="Display">
-            <Label x:Name="Word" Content="{Binding Word}" Foreground="Black" FontSize="50"/>
+            <Label x:Name="Word" Content="{Binding Word}" Foreground="{DynamicResource TextColor}" FontSize="50"/>
             <Label x:Name="WordOverlayWrong" Content="{Binding WordOverlayWrong}" Foreground="Red" FontSize="50"/>
             <Label x:Name="WordOverlayCorrect" Content="{Binding WordOverlayCorrect}" Foreground="Green" FontSize="50"/>
         </Grid>

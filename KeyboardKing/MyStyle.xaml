@@ -3,26 +3,102 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
 
-    <!-- COLOR SCHEMES -->
-    <SolidColorBrush x:Key="Color1" Color="{DynamicResource SColor1}"/>
-    <SolidColorBrush x:Key="Color2" Color="{DynamicResource SColor2}"/>
-    <SolidColorBrush x:Key="Color3" Color="{DynamicResource SColor3}"/>
-    <SolidColorBrush x:Key="Color4" Color="{DynamicResource SColor4}"/>
-    <SolidColorBrush x:Key="Color5" Color="{DynamicResource SColor5}"/>
-    <SolidColorBrush x:Key="Color6" Color="{DynamicResource SColor6}"/>
-    <SolidColorBrush x:Key="Color7" Color="{DynamicResource SColor7}"/>
-
-    <Color x:Key="SColor1">#000814</Color>
-    <Color x:Key="SColor2">#001D3D</Color>
-    <Color x:Key="SColor3">#003566</Color>
-    <Color x:Key="SColor4">#FFC300</Color>
-    <Color x:Key="SColor5">#FFCF33</Color>
-    <Color x:Key="SColor6">#FFFFFF</Color>
-    <Color x:Key="SColor7">#bdbdbd</Color>
-
+    
     <SolidColorBrush x:Key="Succes" Color="#70AD47"/>
     <SolidColorBrush x:Key="Failed" Color="#FFD9534F"/>
 
+    <!-- H1 template -->
+    <Style x:Key="H1" TargetType="{x:Type Label}">
+        <Setter Property="FontSize" Value="36"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
+    </Style>
+
+
+    <!-- H2 template -->
+    <Style x:Key="H2" TargetType="{x:Type Label}">
+        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
+    </Style>
+
+
+    <!-- H3 template -->
+    <Style x:Key="H3" TargetType="{x:Type Label}">
+        <Setter Property="FontSize" Value="26"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
+    </Style>
+
+
+    <!-- Text template -->
+    <Style x:Key="Text" TargetType="{x:Type TextBox}">
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
+    </Style>
+
+    <!-- Error TextBox template -->
+    <Style x:Key="ErrorTextBox" TargetType="{x:Type TextBox}">
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="IsHitTestVisible" Value="False"/>
+        <Setter Property="HorizontalContentAlignment" Value="Right"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
+    </Style>
+
+    <!-- Titlebar ButtonTemplate -->
+    <Style x:Key="TitleBarButtonTemplate" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="Transparent" BorderBrush="Transparent" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" x:Name="Button">
+                        <Grid>
+                            <Label Foreground="{DynamicResource TextColor}" FontSize="{TemplateBinding FontSize}" Content="{TemplateBinding Content}" HorizontalAlignment="Center" Padding="0"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource Color5}" TargetName="Button"/>
+                            <Setter Property="Opacity" Value="0.8" TargetName="Button"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource Color4}" TargetName="Button"/>
+                            <Setter Property="Opacity" Value="0.8" TargetName="Button"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    
+    <!-- Titlebar topright ButtonTemplate -->
+    <Style x:Key="LastTitleBarButtonTemplate" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="Transparent" BorderBrush="Transparent" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" x:Name="Button" CornerRadius="0, 8, 0, 0">
+                        <Grid>
+                            <Label Foreground="{DynamicResource TextColor}" FontSize="{TemplateBinding FontSize}" Content="{TemplateBinding Content}" HorizontalAlignment="Center" Padding="0"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#a83232" TargetName="Button"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" Value="#b84d4d" TargetName="Button"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    
     <!-- Play button template -->
     <Style x:Key="PlayButtonTemplate" TargetType="{x:Type Button}">
         <Setter Property="Template">
@@ -44,6 +120,235 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
+    
+    <!-- ProgressBar template -->
+    <ControlTemplate x:Key="ProgressBar" TargetType="{x:Type ProgressBar}">
+        <Grid x:Name="TemplateRoot">
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Determinate"/>
+                    <VisualState x:Name="Indeterminate">
+                        <Storyboard RepeatBehavior="Forever">
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Animation" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="0.25"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0.25"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="0.25"/>
+                            </DoubleAnimationUsingKeyFrames>
+                            <PointAnimationUsingKeyFrames Storyboard.TargetName="Animation" Storyboard.TargetProperty="(UIElement.RenderTransformOrigin)">
+                                <EasingPointKeyFrame KeyTime="0" Value="-0.5,0.5"/>
+                                <EasingPointKeyFrame KeyTime="0:0:1" Value="0.5,0.5"/>
+                                <EasingPointKeyFrame KeyTime="0:0:2" Value="1.5,0.5"/>
+                            </PointAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            <Border Background="{DynamicResource BackgroundColor}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{DynamicResource Color7}"/>
+            <Rectangle x:Name="PART_Track"/>
+            <Grid x:Name="PART_Indicator" ClipToBounds="true" HorizontalAlignment="Left">
+                <Rectangle x:Name="Indicator" Fill="{DynamicResource Color4}"/>
+                <Rectangle x:Name="Animation" Fill="{DynamicResource Color4}" RenderTransformOrigin="0.5,0.5">
+                    <Rectangle.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+            </Grid>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="Orientation" Value="Vertical">
+                <Setter Property="LayoutTransform" TargetName="TemplateRoot">
+                    <Setter.Value>
+                        <RotateTransform Angle="-90"/>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger Property="IsIndeterminate" Value="true">
+                <Setter Property="Visibility" TargetName="Indicator" Value="Collapsed"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    
+    <!-- NavButton template -->
+    <Style x:Key="NavButton" TargetType="Button">
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="Margin" Value="5, 0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Name="border" 
+                            BorderThickness="1"
+                            Padding="4, 2" 
+                            BorderBrush="DarkGray" 
+                            CornerRadius="3" 
+                            Background="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    
+    <!-- Button1 template -->
+    <Style x:Key="Button1" TargetType="Button">
+        <Setter Property="Height" Value="50"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid x:Name="grid" Background="{x:Null}">
+                        <Border x:Name="border" CornerRadius="5" Background="{DynamicResource Color4}">
+                            <Label FontWeight="Bold" Content="{TemplateBinding Content}" Foreground="{DynamicResource TextColor}" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                            <Border.Effect>
+                                <DropShadowEffect ShadowDepth="0" BlurRadius="10" Color="#FFB0B0B0"/>
+                            </Border.Effect>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource Color5}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource Color4}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" TargetName="grid" Value="0.80"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    
+    <!-- Button2 template -->
+    <Style x:Key="Button2" TargetType="Button">
+        <Setter Property="Height" Value="50"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid x:Name="grid" Background="{x:Null}">
+                        <Border x:Name="border" CornerRadius="5" Background="{DynamicResource Color2}">
+                            <Label FontWeight="Bold" Content="{TemplateBinding Content}" Foreground="{DynamicResource Color4}" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                            <Border.Effect>
+                                <DropShadowEffect ShadowDepth="0" BlurRadius="10" Color="#FFB0B0B0"/>
+                            </Border.Effect>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource Color2}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource Color1}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" TargetName="grid" Value="0.80"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    
+    <!-- GridBorder template -->
+    <Style x:Key="GridBorder" TargetType="{x:Type Border}">
+        <Setter Property="Background" Value="{DynamicResource BackgroundColor}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Color4}" />
+        <Setter Property="CornerRadius" Value="5" />
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect ShadowDepth="0" BlurRadius="20" Color="#FFB0B0B0"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderThickness" Value="0, 10, 0, 0"></Setter>
+    </Style>
+
+    
+    <!-- TextBox template -->
+    <Style x:Key="TextBox" TargetType="{x:Type TextBox}">
+        <Setter Property="Height" Value="50"/>
+        <Setter Property="Background" Value="{DynamicResource BackgroundColor}" />
+        <Setter Property="Foreground" Value="{DynamicResource TextColor}" />
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="10, 0"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <Border x:Name="border" CornerRadius="5" BorderBrush="{DynamicResource Color7}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                        <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource BorderColor}"/>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="true">
+                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource BorderColor}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    
+    <!-- PassworkBox template -->
+    <Style x:Key="PasswordBox" TargetType="{x:Type PasswordBox}">
+        <Setter Property="Height" Value="50"></Setter>
+        <Setter Property="Background" Value="{DynamicResource BackgroundColor}" />
+        <Setter Property="Foreground" Value="{DynamicResource TextColor}" />
+        <Setter Property="Padding" Value="10, 0"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type PasswordBox}">
+                    <Border x:Name="border" CornerRadius="5" BorderBrush="{DynamicResource Color7}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                        <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource BorderColor}"/>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="true">
+                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource BorderColor}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    
+    <!-- Card template -->
+    <Style x:Key="Card" TargetType="{x:Type Border}">
+        <Setter Property="Background" Value="{DynamicResource BackgroundColor}" />
+        <Setter Property="CornerRadius" Value="3"/>
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect ShadowDepth="0" BlurRadius="20" Color="#FFB0B0B0"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderThickness" Value="0, 0, 0, 0"></Setter>
+    </Style>
+
 
     <!-- ComboBox template -->
     <SolidColorBrush x:Key="ComboBox.Static.Background" Color="{DynamicResource SColor6}"/>
@@ -214,254 +519,7 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <!-- ProgressBar template -->
-    <ControlTemplate x:Key="ProgressBar" TargetType="{x:Type ProgressBar}">
-        <Grid x:Name="TemplateRoot">
-            <VisualStateManager.VisualStateGroups>
-                <VisualStateGroup x:Name="CommonStates">
-                    <VisualState x:Name="Determinate"/>
-                    <VisualState x:Name="Indeterminate">
-                        <Storyboard RepeatBehavior="Forever">
-                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Animation" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
-                                <EasingDoubleKeyFrame KeyTime="0" Value="0.25"/>
-                                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0.25"/>
-                                <EasingDoubleKeyFrame KeyTime="0:0:2" Value="0.25"/>
-                            </DoubleAnimationUsingKeyFrames>
-                            <PointAnimationUsingKeyFrames Storyboard.TargetName="Animation" Storyboard.TargetProperty="(UIElement.RenderTransformOrigin)">
-                                <EasingPointKeyFrame KeyTime="0" Value="-0.5,0.5"/>
-                                <EasingPointKeyFrame KeyTime="0:0:1" Value="0.5,0.5"/>
-                                <EasingPointKeyFrame KeyTime="0:0:2" Value="1.5,0.5"/>
-                            </PointAnimationUsingKeyFrames>
-                        </Storyboard>
-                    </VisualState>
-                </VisualStateGroup>
-            </VisualStateManager.VisualStateGroups>
-            <Border Background="{DynamicResource Color6}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{DynamicResource Color7}"/>
-            <Rectangle x:Name="PART_Track"/>
-            <Grid x:Name="PART_Indicator" ClipToBounds="true" HorizontalAlignment="Left">
-                <Rectangle x:Name="Indicator" Fill="{DynamicResource Color4}"/>
-                <Rectangle x:Name="Animation" Fill="{DynamicResource Color4}" RenderTransformOrigin="0.5,0.5">
-                    <Rectangle.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Rectangle.RenderTransform>
-                </Rectangle>
-            </Grid>
-        </Grid>
-        <ControlTemplate.Triggers>
-            <Trigger Property="Orientation" Value="Vertical">
-                <Setter Property="LayoutTransform" TargetName="TemplateRoot">
-                    <Setter.Value>
-                        <RotateTransform Angle="-90"/>
-                    </Setter.Value>
-                </Setter>
-            </Trigger>
-            <Trigger Property="IsIndeterminate" Value="true">
-                <Setter Property="Visibility" TargetName="Indicator" Value="Collapsed"/>
-            </Trigger>
-        </ControlTemplate.Triggers>
-    </ControlTemplate>
-
-    <!-- NavButton template -->
-    <Style x:Key="NavButton" TargetType="Button">
-        <Setter Property="OverridesDefaultStyle" Value="True"/>
-        <Setter Property="Margin" Value="5, 0"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <Border Name="border" 
-                            BorderThickness="1"
-                            Padding="4, 2" 
-                            BorderBrush="DarkGray" 
-                            CornerRadius="3" 
-                            Background="{TemplateBinding Background}">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <!-- Button1 template -->
-    <Style x:Key="Button1" TargetType="Button">
-        <Setter Property="Height" Value="50"/>
-        <Setter Property="FontSize" Value="20"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Grid x:Name="grid" Background="{x:Null}">
-                        <Border x:Name="border" CornerRadius="5" Background="{DynamicResource Color4}">
-                            <Label FontWeight="Bold" Content="{TemplateBinding Content}" Foreground="{DynamicResource Color1}" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
-                            <Border.Effect>
-                                <DropShadowEffect ShadowDepth="0" BlurRadius="10" Color="#FFB0B0B0"/>
-                            </Border.Effect>
-                        </Border>
-                    </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" TargetName="border" Value="{StaticResource Color5}"/>
-                        </Trigger>
-                        <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" TargetName="border" Value="{StaticResource Color4}"/>
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Opacity" TargetName="grid" Value="0.80"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <!-- Button2 template -->
-    <Style x:Key="Button2" TargetType="Button">
-        <Setter Property="Height" Value="50"/>
-        <Setter Property="FontSize" Value="20"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Grid x:Name="grid" Background="{x:Null}">
-                        <Border x:Name="border" CornerRadius="5" Background="{DynamicResource Color1}">
-                            <Label FontWeight="Bold" Content="{TemplateBinding Content}" Foreground="{DynamicResource Color4}" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
-                            <Border.Effect>
-                                <DropShadowEffect ShadowDepth="0" BlurRadius="10" Color="#FFB0B0B0"/>
-                            </Border.Effect>
-                        </Border>
-                    </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" TargetName="border" Value="{StaticResource Color2}"/>
-                        </Trigger>
-                        <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" TargetName="border" Value="{StaticResource Color1}"/>
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Opacity" TargetName="grid" Value="0.80"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <!-- GridBorder template -->
-    <Style x:Key="GridBorder" TargetType="{x:Type Border}">
-        <Setter Property="Background" Value="{DynamicResource Color6}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource Color4}" />
-        <Setter Property="CornerRadius" Value="5" />
-        <Setter Property="Effect">
-            <Setter.Value>
-                <DropShadowEffect ShadowDepth="0" BlurRadius="20" Color="#FFB0B0B0"/>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="BorderThickness" Value="0, 10, 0, 0"></Setter>
-    </Style>
-
-    <!-- TextBox template -->
-    <Style x:Key="TextBox" TargetType="{x:Type TextBox}">
-        <Setter Property="Height" Value="50"></Setter>
-        <Setter Property="Background" Value="{DynamicResource Color6}" />
-        <Setter Property="Foreground" Value="{DynamicResource Color1}" />
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Padding" Value="10, 0"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="FontSize" Value="20"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type TextBox}">
-                    <Border x:Name="border" CornerRadius="5" BorderBrush="{DynamicResource Color7}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
-                        <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Opacity" TargetName="border" Value="0.56"/>
-                        </Trigger>
-                        <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource Color1}"/>
-                        </Trigger>
-                        <Trigger Property="IsKeyboardFocused" Value="true">
-                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource Color1}"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <!-- PassworkBox template -->
-    <Style x:Key="PasswordBox" TargetType="{x:Type PasswordBox}">
-        <Setter Property="Height" Value="50"></Setter>
-        <Setter Property="Background" Value="{DynamicResource Color6}" />
-        <Setter Property="Foreground" Value="{DynamicResource Color1}" />
-        <Setter Property="Padding" Value="10, 0"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="FontSize" Value="20"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type PasswordBox}">
-                    <Border x:Name="border" CornerRadius="5" BorderBrush="{DynamicResource Color7}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
-                        <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Opacity" TargetName="border" Value="0.56"/>
-                        </Trigger>
-                        <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource Color1}"/>
-                        </Trigger>
-                        <Trigger Property="IsKeyboardFocused" Value="true">
-                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource Color1}"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <!-- Card template -->
-    <Style x:Key="Card" TargetType="{x:Type Border}">
-        <Setter Property="Background" Value="{DynamicResource Color6}" />
-        <Setter Property="CornerRadius" Value="3"/>
-        <Setter Property="Effect">
-            <Setter.Value>
-                <DropShadowEffect ShadowDepth="0" BlurRadius="20" Color="#FFB0B0B0"/>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="BorderThickness" Value="0, 0, 0, 0"></Setter>
-    </Style>
-
-    <!-- H1 template -->
-    <Style x:Key="H1" TargetType="{x:Type Label}">
-        <Setter Property="FontSize" Value="36"/>
-        <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="Foreground" Value="{DynamicResource Color1}"/>
-    </Style>
-
-    <!-- H2 template -->
-    <Style x:Key="H2" TargetType="{x:Type Label}">
-        <Setter Property="FontSize" Value="24"/>
-        <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="Foreground" Value="{DynamicResource Color1}"/>
-    </Style>
-
-    <!-- H3 template -->
-    <Style x:Key="H3" TargetType="{x:Type Label}">
-        <Setter Property="FontSize" Value="26"/>
-        <Setter Property="Foreground" Value="{DynamicResource Color1}"/>
-    </Style>
-
-    <!-- Text template -->
-    <Style x:Key="Text" TargetType="{x:Type TextBox}">
-        <Setter Property="TextWrapping" Value="Wrap"/>
-        <Setter Property="FontSize" Value="12"/>
-        <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Foreground" Value="{DynamicResource Color1}"/>
-    </Style>
-
+    
     <!-- ComboBoxItem template -->
     <Style x:Key="FocusVisual">
         <Setter Property="Control.Template">
@@ -562,9 +620,7 @@
     </Style>
 
 
-
-
-
+    <!-- ScrollBar template -->
     <SolidColorBrush x:Key="ScrollBar.Static.Background" Color="#F0F0F0"/>
     <SolidColorBrush x:Key="ScrollBar.Static.Border" Color="#F0F0F0"/>
     <SolidColorBrush x:Key="ScrollBar.Static.Glyph" Color="#606060"/>
@@ -813,4 +869,5 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+    
 </ResourceDictionary>

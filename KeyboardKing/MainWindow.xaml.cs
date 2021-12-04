@@ -5,6 +5,7 @@ using KeyboardKing.areas.play;
 using KeyboardKing.core;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,6 +43,8 @@ namespace KeyboardKing
         /// Dictionary of pages that are used in the app.
         /// </summary>
         private Dictionary<string, JumpPage> _pages {get;set;}
+
+        private ResourceDictionary themeDictionary = Application.Current.Resources.MergedDictionaries[0];
 
         public MainWindow()
         {
@@ -164,6 +167,33 @@ namespace KeyboardKing
         private void CloseWindow_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        //ThemeToggle Unchecked event
+        private void OnThemeToggle_Unchecked(object sender, RoutedEventArgs e)
+        {
+            Uri themePath = new Uri("resources/themes/LightTheme.xaml", UriKind.Relative);
+            Uri BackgroundImagePath = new Uri(@"resources/images/kk_background_4K.png", UriKind.Relative);
+            ChangeTheme("Light", themePath, BackgroundImagePath);
+        }
+
+        //ThemeToggle Checked event
+        private void OnThemeToggle_Checked(object sender, RoutedEventArgs e)
+        {
+          
+            Uri themePath = new Uri("resources/themes/DarkTheme.xaml", UriKind.Relative);
+            Uri BackgroundImagePath = new Uri(@"resources/images/kk_background_dark.png", UriKind.Relative);
+            ChangeTheme("Dark", themePath, BackgroundImagePath);
+        }
+
+        //Switch from theme according to the given paths.
+        private void ChangeTheme(String themeTitle, Uri theme, Uri background)
+        {
+            ThemeToggle.Content = themeTitle;
+
+            themeDictionary.Clear();
+            themeDictionary.MergedDictionaries.Add(new ResourceDictionary() { Source = theme });
+            MainBackground.ImageSource = new BitmapImage(background);
         }
     }
 }
