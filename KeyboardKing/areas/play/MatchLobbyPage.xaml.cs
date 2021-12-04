@@ -1,4 +1,5 @@
 ﻿using KeyboardKing.core;
+using Controller;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +33,8 @@ namespace KeyboardKing.areas.play
 
         public override void OnLoad()
         {
+            /* Useful for later: query for getting matchProgressData with MatchId*/
+            lMatchId.Content = "MatchId: " + MatchController.GetMatchId();
         }
 
         public override void OnShadow()
