@@ -21,6 +21,7 @@ using System.Windows.Shapes;
 using Controller;
 using Model;
 using Model.event_args;
+using KeyboardKing.areas.info;
 
 namespace KeyboardKing
 {
@@ -58,6 +59,9 @@ namespace KeyboardKing
             _mainFrame = MainFrame;
             _pages = new()
             {
+                // info area
+                {Pages.MessagePage, new MessagePage(this)},
+
                 // login area
                 {Pages.LoginPage, new LoginPage(this)},
                 {Pages.RegisterPage, new RegisterPage(this)},

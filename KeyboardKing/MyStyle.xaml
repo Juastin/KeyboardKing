@@ -13,6 +13,8 @@
 
     <SolidColorBrush x:Key="Succes" Color="#70AD47"/>
     <SolidColorBrush x:Key="Failed" Color="#FFD9534F"/>
+    <SolidColorBrush x:Key="Info" Color="#FF0051FF"/>
+    <SolidColorBrush x:Key="InfoLight" Color="#FF3374FF"/>
 
     <!-- Play button template -->
     <Style x:Key="PlayButtonTemplate" TargetType="{x:Type Button}">
@@ -161,6 +163,34 @@
         </Setter>
     </Style>
 
+    <Style x:Key="InfoButton1" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid x:Name="grid" Background="{x:Null}">
+                        <Border x:Name="border" CornerRadius="5" Background="{DynamicResource Info}">
+                            <Label FontWeight="Bold" Content="{TemplateBinding Content}" Foreground="#fff" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                            <Border.Effect>
+                                <DropShadowEffect ShadowDepth="0" BlurRadius="10" Color="#FFB0B0B0"/>
+                            </Border.Effect>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource InfoLight}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource Info}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" TargetName="grid" Value="0.80"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style> 
+    
     <Style x:Key="GridBorder" TargetType="{x:Type Border}">
         <Setter Property="Background" Value="{DynamicResource Color6}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Color4}" />
