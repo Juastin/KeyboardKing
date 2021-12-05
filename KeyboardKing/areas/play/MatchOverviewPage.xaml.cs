@@ -1,5 +1,6 @@
 ﻿using Controller;
 using KeyboardKing.core;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,7 @@ namespace KeyboardKing.areas.play
     public partial class MatchOverviewPage : JumpPage
     {
         private DateTime _tickCheck {get;set;} = DateTime.Now;
+        private bool _isInMatch;
 
         public MatchOverviewPage(MainWindow w) : base(w)
         {
@@ -45,6 +47,7 @@ namespace KeyboardKing.areas.play
             {
                 _tickCheck = now;
                 LoadAllMatches();
+                _isInMatch = MatchController.CheckIfUserExists();
             }
         }
 
@@ -60,13 +63,17 @@ namespace KeyboardKing.areas.play
 
         private void MatchOverview_PlayClick(object sender, RoutedEventArgs e)
         {
-            Button button = (Button)sender;
-            if (button.DataContext is List<string>)
+            if (!_isInMatch)
             {
-                List<string> row = (List<string>)button.DataContext;
-                MessageBox.Show(row[2]);
-                //Navigate("MatchLobbyPage");
+                Button button = (Button)sender;
+                if (button.DataContext is List<string>)
+                {
+                    List<string> row = (List<string>)button.DataContext;
+                    MatchController.AddUserInMatchProgress(row[2]);
+                    NavigationController.NavigateToPage(Pages.MatchLobbyPage);
+                }
             }
+            else { MessageBox.Show("Je zit al in een match"); }
         }
     }
 }
