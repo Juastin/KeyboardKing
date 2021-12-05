@@ -9,6 +9,7 @@
       Title="ChaptersPage"
       MinHeight="450"
       MinWidth="400"
+      MaxHeight="750"
       MaxWidth="1420">
 
     <!-- STYLING TEMPLATES -->
@@ -126,18 +127,8 @@
                         </ListBox.GroupStyle>
                     </ListBox>
                 </Grid>
-                <Grid Grid.Row="2" HorizontalAlignment="Center">
-                    <StackPanel Orientation="Horizontal">
-                        <Button Style="{StaticResource NavButton}" Width="80" Height="80" Background="White" Foreground="Black" Content="▶" FontSize="36" FontFamily="Arial"/>
-                        <Button Style="{StaticResource NavButton}" Width="80" Height="80" Background="Black" Foreground="White" Content="🔄" FontSize="30" FontFamily="Arial"/>
-                        <Button Style="{StaticResource NavButton}" Tag="MatchOverviewPage" Click="ButtonNavigate" Width="80" Height="80" Background="Black" Foreground="White" Content="⚔" FontSize="30" FontFamily="Arial"/>
-                        <Button Style="{StaticResource NavButton}" Width="80" Height="80" Background="Black" Foreground="White" Content="⚙" FontSize="30" FontFamily="Arial"/>
-                        <Button Style="{StaticResource NavButton}" Tag="LoginPage" Click="ButtonNavigate" Width="80" Height="80" Background="Black" Foreground="White" Content="🚪" FontSize="30" FontFamily="Arial"/>
-                    </StackPanel>
-                </Grid>
             </Grid>
         </Border>
-
-            <Components:Navbar CurrentPage="ChaptersPage"/>
+        <Components:Navbar CurrentPage="ChaptersPage"/>
     </Grid>
 </local:JumpPage>

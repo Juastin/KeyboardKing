@@ -3,12 +3,65 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:KeyboardKing.core"
-      mc:Ignorable="d" 
+      xmlns:local="clr-namespace:KeyboardKing.core" xmlns:Components="clr-namespace:KeyboardKing.components" xmlns:Model="clr-namespace:Model"
+                mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="MatchResultPage">
+      Title="MatchResultPage" HorizontalAlignment="Center" VerticalAlignment="Center">
 
+
+    <local:JumpPage.DataContext>
+        <Model:EpisodeResultPageDataContext/>
+    </local:JumpPage.DataContext>
+    
     <Grid>
-        <Label Content="MatchResultPage" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"/>
+        <Border Style="{DynamicResource GridBorder}"
+            Padding="30" 
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center" 
+            Height="400" Width="750" >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" VerticalAlignment="Center">
+                    <Label Style="{DynamicResource H1}" HorizontalAlignment="Left" Content="Results"/>
+                    <Label Style="{DynamicResource H1}" HorizontalAlignment="Left" Content="Winner" Margin="466,0,0,0"/>
+                </Grid>
+                <Grid Grid.Row="1" VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Orientation="Vertical">
+                        <Label  Style="{DynamicResource H3}" Content="Score:" 
+                               VerticalAlignment="Center"/>
+                        <Label  Style="{DynamicResource H3}" Content="Tijd:" 
+                               VerticalAlignment="Center"/>
+                        <Label  Style="{DynamicResource H3}" Content="Fouten" 
+                               VerticalAlignment="Center"/>
+                        <Label  Style="{DynamicResource H3}" Content="Letters per minuut:" 
+                               VerticalAlignment="Center"/>
+
+                    </StackPanel>
+                    <StackPanel Margin="10, 0"  Grid.Column="1" Orientation="Vertical">
+                        <Label Style="{DynamicResource H3}" Content="{Binding Score}" HorizontalAlignment="Left"/>
+                        <Label Style="{DynamicResource H3}" Content="{Binding Time}" HorizontalAlignment="Left"/>
+                        <Label Style="{DynamicResource H3}" Content="{Binding Mistakes}" HorizontalAlignment="Left"/>
+                        <Label Style="{DynamicResource H3}" Content="{Binding LettersPerMinute}" HorizontalAlignment="Left"/>
+                    </StackPanel>
+                    <Border Style="{DynamicResource GridBorder}" CornerRadius="5" Grid.Column="2" >
+                        <!-- CONTENT SPACE FOR THE PODIUM -->
+                        <Image Source="/resources/images/podium.png" Margin="34,47,33,-10"/>
+
+                    </Border>
+                </Grid>
+                <Grid Grid.Row="2" VerticalAlignment="Bottom">
+                    <Components:NavigationButton ToPage="ChaptersPage" Style="{DynamicResource Button1}" Content="Voltooi episode" HorizontalAlignment="Right"/>
+                </Grid>
+            </Grid>
+        </Border>
     </Grid>
 </local:JumpPage>

@@ -28,6 +28,7 @@
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0" VerticalAlignment="Center">
                     <Label Style="{DynamicResource H1}" HorizontalAlignment="Left" Content="Results"/>
+                    <Label Style="{DynamicResource H1}" HorizontalAlignment="Left" Content="Winner" Margin="466,0,0,0"/>
                 </Grid>
                 <Grid Grid.Row="1" VerticalAlignment="Center">
                     <Grid.ColumnDefinitions>
@@ -44,7 +45,7 @@
                                VerticalAlignment="Center"/>
                         <Label  Style="{DynamicResource H3}" Content="Letters per minuut:" 
                                VerticalAlignment="Center"/>
-                        
+
                     </StackPanel>
                     <StackPanel Margin="10, 0"  Grid.Column="1" Orientation="Vertical">
                         <Label Style="{DynamicResource H3}" Content="{Binding Score}" HorizontalAlignment="Left"/>
@@ -54,6 +55,44 @@
                     </StackPanel>
                     <Border Style="{DynamicResource GridBorder}" CornerRadius="5" Grid.Column="2" >
                         <!-- CONTENT SPACE FOR THE PODIUM -->
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.RowSpan="2" Grid.ColumnSpan="3">
+                                <Image Source="/resources/images/podium.png"  VerticalAlignment="Top" HorizontalAlignment="Center" Height="119" Margin="0,49,0,0" Width="276" Panel.ZIndex="1"/>
+                            </Grid>
+                            <Grid VerticalAlignment="Bottom" HorizontalAlignment="Center" Grid.Column="0">
+                                <TextBlock TextWrapping="Wrap" Margin="-24,-3,-60,3" TextAlignment="Center">
+                                    <Run Text="annelin"/>
+                                </TextBlock>
+                                <TextBlock TextWrapping="Wrap" Margin="-24,74,-60,-73" TextAlignment="Center">
+                                    <Run Text="940p"/>
+                                </TextBlock>
+                            </Grid>
+                            <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1">
+                                <TextBlock TextWrapping="Wrap" Margin="-42,0,-42,4" TextAlignment="Center">
+                                    <Run Text="is mijn"/>
+                                </TextBlock>
+                                <TextBlock TextWrapping="Wrap" Margin="-42,109,-42,-106" TextAlignment="Center">
+                                    <Run Text="1040p"/>
+                                </TextBlock>
+                            </Grid>
+                            <Grid VerticalAlignment="Bottom" HorizontalAlignment="Center" Grid.Column="2">
+                                <TextBlock TextWrapping="Wrap" Margin="-62,18,-22,-17" TextAlignment="Center">
+                                    <Run Text="schatje"/>
+                                </TextBlock>
+                                <TextBlock TextWrapping="Wrap" Margin="-62,74,-22,-72" TextAlignment="Center">
+                                    <Run Text="720p"/>
+                                </TextBlock>
+                            </Grid>
+                        </Grid>
                     </Border>
                 </Grid>
                 <Grid Grid.Row="2" VerticalAlignment="Bottom">

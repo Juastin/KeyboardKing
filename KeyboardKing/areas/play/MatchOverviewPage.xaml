@@ -10,7 +10,7 @@
       MinWidth="400"
       MaxWidth="1420"
       Title="MatchOverviewPage">
-    
+
     <Page.Resources>
         <!-- ListBoxItem template -->
         <Style x:Key="ListBoxItemTemplate" TargetType="{x:Type ListBoxItem}">
@@ -50,10 +50,7 @@
             </Setter>
         </Style>
     </Page.Resources>
-
-    
-    
-        <Grid Margin="25">
+    <Grid Margin="25">
         <Border Style="{DynamicResource GridBorder}"
             Padding="30">
             <Grid>
@@ -64,9 +61,7 @@
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0" VerticalAlignment="Center">
                     <Label Style="{DynamicResource H1}" Content="Matches" HorizontalAlignment="Left"/>
-                    <Button Style="{DynamicResource Button1}"
-                        Content="Klik hier om een match te maken" Tag="MatchCreatePage" Click="ButtonNavigate" HorizontalAlignment="Center"
-                            VerticalAlignment="Center" Background="#FF363636" BorderBrush="White" Foreground="White" FontSize="14"/>
+                    
                 </Grid>
                 <Grid Grid.Row="1" VerticalAlignment="Top">
                     <!-- Match* overview ListBox -->
@@ -85,10 +80,6 @@
                                               Offset="1"/>
                             </LinearGradientBrush>
                         </ListBox.OpacityMask>
-
-        <Components:NavigationButton ToPage="MatchCreatePage" Content="Klik hier om een match te maken" Style="{DynamicResource Button1}" HorizontalAlignment="Center" Margin="0,0,0,112" VerticalAlignment="Bottom" Height="40" Width="250" Background="#FF363636" BorderBrush="White" Foreground="White" FontSize="14"/>
-        <Components:Navbar CurrentPage="MatchOverviewPage"/>
-
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <WrapPanel/>
@@ -96,16 +87,9 @@
                         </ListBox.ItemsPanel>
                     </ListBox>
                 </Grid>
-                <Grid Grid.Row="2" HorizontalAlignment="Center">
-                    <StackPanel Orientation="Horizontal">
-                        <Button Style="{StaticResource NavButton}" Tag="ChaptersPage" Click="ButtonNavigate" Width="80" Height="80" Background="Black" Foreground="White" Content="▶" FontSize="36" FontFamily="Arial"/>
-                        <Button Style="{StaticResource NavButton}" Width="80" Height="80" Background="Black" Foreground="White" Content="🔄" FontSize="30" FontFamily="Arial"/>
-                        <Button Style="{StaticResource NavButton}" Width="80" Height="80" Background="White" Foreground="Black" Content="⚔" FontSize="30" FontFamily="Arial"/>
-                        <Button Style="{StaticResource NavButton}" Width="80" Height="80" Background="Black" Foreground="White" Content="⚙" FontSize="30" FontFamily="Arial"/>
-                        <Button Style="{StaticResource NavButton}" Tag="LoginPage" Click="ButtonNavigate" Width="80" Height="80" Background="Black" Foreground="White" Content="🚪" FontSize="30" FontFamily="Arial"/>
-                    </StackPanel>
-                </Grid>
             </Grid>
         </Border>
+        <Components:NavigationButton ToPage="MatchCreatePage" Content="Klik hier om een match te maken" Style="{DynamicResource Button1}" HorizontalAlignment="Center" Margin="0,0,0,112" VerticalAlignment="Bottom" Height="40" Width="250" Background="#FF363636" BorderBrush="White" Foreground="White" FontSize="14"/>
+        <Components:Navbar CurrentPage="MatchOverviewPage"/>
     </Grid>
 </local:JumpPage>
