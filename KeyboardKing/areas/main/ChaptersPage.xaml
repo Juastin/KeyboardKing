@@ -8,7 +8,8 @@
       Title="ChaptersPage"
       MinHeight="450"
       MinWidth="400"
-      MaxWidth="1420">
+      MaxWidth="1420"
+      MaxHeight="750">
 
     <!-- STYLING TEMPLATES -->
     <Page.Resources>

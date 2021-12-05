@@ -47,12 +47,38 @@
                     </StackPanel>
                     <StackPanel Margin="10, 0"  Grid.Column="1" Orientation="Vertical">
                         <Label Style="{DynamicResource H3}" Content="{Binding Score}" HorizontalAlignment="Left"/>
-                        <Label Style="{DynamicResource H3}" Content="{Binding Time}" HorizontalAlignment="Left"/>
+                        <Label Style="{DynamicResource H3}" Content="20min 59 s" HorizontalAlignment="Left"/>
                         <Label Style="{DynamicResource H3}" Content="{Binding Mistakes}" HorizontalAlignment="Left"/>
                         <Label Style="{DynamicResource H3}" Content="{Binding LettersPerMinute}" HorizontalAlignment="Left"/>
                     </StackPanel>
                     <Border Style="{DynamicResource GridBorder}" CornerRadius="5" Grid.Column="2" >
                         <!-- CONTENT SPACE FOR THE PODIUM -->
+                        <Grid Width="275">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="100"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid VerticalAlignment="Bottom" Margin="0, 0" HorizontalAlignment="Center" Grid.Column="0">
+                                <TextBlock TextWrapping="Wrap">
+                                    <Run Text="test"/>
+                                </TextBlock>
+                            </Grid>
+                            <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1">
+                                <TextBlock TextWrapping="Wrap">
+                                    <Run Text="test"/>
+                                </TextBlock>
+                            </Grid>
+                            <Grid VerticalAlignment="Bottom" HorizontalAlignment="Center" Grid.Column="2">
+                                <TextBlock TextWrapping="Wrap">
+                                    <Run Text="test"/>
+                                </TextBlock>
+                            </Grid>
+                        </Grid>
                     </Border>
                 </Grid>
                 <Grid Grid.Row="2" VerticalAlignment="Bottom">

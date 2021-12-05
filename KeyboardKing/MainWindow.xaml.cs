@@ -19,6 +19,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Model;
 
 namespace KeyboardKing
 {
@@ -43,6 +44,8 @@ namespace KeyboardKing
         /// Dictionary of pages that are used in the app.
         /// </summary>
         private Dictionary<string, JumpPage> _pages {get;set;}
+
+        private Dictionary<string, Theme> _themes;
 
         private ResourceDictionary themeDictionary = Application.Current.Resources.MergedDictionaries[0];
 
@@ -76,6 +79,17 @@ namespace KeyboardKing
                 {"MatchPlayingPage", new MatchPlayingPage(this)},
                 {"MatchResultPage", new MatchResultPage(this)},
             };
+
+            _themes = new()
+            {
+                {"Light", new Theme("Light Theme", "resources/themes/LightTheme.xaml", "resources/images/kk_background_4K.png")},
+                {"Dark", new Theme("Dark Theme", "resources/themes/DarkTheme.xaml", "resources/images/kk_background_dark.png")},
+            };
+
+            CBTheme.ItemsSource = _themes;
+            CBTheme.SelectedValue = "Light";
+            CBTheme.DisplayMemberPath = "Value.ThemeTitle";
+            CBTheme.SelectedValuePath = "Key";
 
             // Navigate to the first view.
             Navigate("LoginPage");
@@ -169,31 +183,22 @@ namespace KeyboardKing
             Application.Current.Shutdown();
         }
 
-        //ThemeToggle Unchecked event
-        private void OnThemeToggle_Unchecked(object sender, RoutedEventArgs e)
-        {
-            Uri themePath = new Uri("resources/themes/LightTheme.xaml", UriKind.Relative);
-            Uri BackgroundImagePath = new Uri(@"resources/images/kk_background_4K.png", UriKind.Relative);
-            ChangeTheme("Light", themePath, BackgroundImagePath);
-        }
-
-        //ThemeToggle Checked event
-        private void OnThemeToggle_Checked(object sender, RoutedEventArgs e)
-        {
-          
-            Uri themePath = new Uri("resources/themes/DarkTheme.xaml", UriKind.Relative);
-            Uri BackgroundImagePath = new Uri(@"resources/images/kk_background_dark.png", UriKind.Relative);
-            ChangeTheme("Dark", themePath, BackgroundImagePath);
-        }
-
         //Switch from theme according to the given paths.
-        private void ChangeTheme(String themeTitle, Uri theme, Uri background)
+        private void ChangeTheme(Theme theme)
         {
-            ThemeToggle.Content = themeTitle;
-
             themeDictionary.Clear();
-            themeDictionary.MergedDictionaries.Add(new ResourceDictionary() { Source = theme });
-            MainBackground.ImageSource = new BitmapImage(background);
+            themeDictionary.MergedDictionaries.Add(new ResourceDictionary() { Source = theme.ThemeUri });
+            MainBackground.ImageSource = new BitmapImage(theme.BackgroundUri);
+        }
+
+        private void CBTheme_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            object value = CBTheme.SelectedValue;
+            Theme theme;
+            if (_themes.TryGetValue((string)value, out theme))
+            {
+                ChangeTheme(theme);
+            }
         }
     }
 }

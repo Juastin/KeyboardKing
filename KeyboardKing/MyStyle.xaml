@@ -351,14 +351,14 @@
 
 
     <!-- ComboBox template -->
-    <SolidColorBrush x:Key="ComboBox.Static.Background" Color="{DynamicResource SColor6}"/>
+    <SolidColorBrush x:Key="ComboBox.Static.Background" Color="{DynamicResource SBackground}"/>
     <SolidColorBrush x:Key="ComboBox.MouseOver.Background" Color="{DynamicResource SColor5}"/>
     <SolidColorBrush x:Key="ComboBox.MouseOver.Editable.Button.Background" Color="{DynamicResource SColor5}"/>
     <SolidColorBrush x:Key="ComboBox.Pressed.Background" Color="{DynamicResource SColor5}"/>
     <SolidColorBrush x:Key="ComboBox.Pressed.Editable.Button.Background" Color="{DynamicResource SColor5}"/>
 
     <SolidColorBrush x:Key="ComboBox.Static.Border" Color="#FFACACAC"/>
-    <SolidColorBrush x:Key="ComboBox.Static.Glyph" Color="#FF606060"/>
+    <SolidColorBrush x:Key="ComboBox.Static.Glyph" Color="{DynamicResource SText}"/>
     <SolidColorBrush x:Key="ComboBox.Static.Editable.Background" Color="#FFFFFFFF"/>
     <SolidColorBrush x:Key="ComboBox.Static.Editable.Border" Color="#FFABADB3"/>
 
@@ -389,9 +389,9 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
-                    <Border x:Name="templateRoot" CornerRadius="5" Background="{StaticResource ComboBox.Static.Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{DynamicResource Color7}" SnapsToDevicePixels="true">
+                    <Border x:Name="templateRoot" CornerRadius="5" Background="{DynamicResource BackgroundColor}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{DynamicResource Color7}" SnapsToDevicePixels="true">
                         <Border x:Name="splitBorder" BorderThickness="1" BorderBrush="Transparent" HorizontalAlignment="Right" Margin="0" SnapsToDevicePixels="true" Width="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}">
-                            <Path x:Name="arrow" Data="F1 M 0,0 L 2.667,2.66665 L 5.3334,0 L 5.3334,-1.78168 L 2.6667,0.88501 L0,-1.78168 L0,0 Z" Fill="{StaticResource ComboBox.Static.Glyph}" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center"/>
+                            <Path x:Name="arrow" Data="F1 M 0,0 L 2.667,2.66665 L 5.3334,0 L 5.3334,-1.78168 L 2.6667,0.88501 L0,-1.78168 L0,0 Z" Fill="{DynamicResource TextColor}" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center"/>
                         </Border>
                     </Border>
                     <ControlTemplate.Triggers>
@@ -483,7 +483,7 @@
             </Grid.ColumnDefinitions>
             <Popup x:Name="PART_Popup" AllowsTransparency="true" Grid.ColumnSpan="2" IsOpen="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Margin="1" Placement="Bottom" PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}">
                 <theme:SystemDropShadowChrome x:Name="shadow" Color="Transparent" MinWidth="{Binding ActualWidth, ElementName=templateRoot}" MaxHeight="{TemplateBinding MaxDropDownHeight}">
-                    <Border Margin="5" x:Name="dropDownBorder" CornerRadius="5" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" BorderThickness="1" BorderBrush="{DynamicResource Color7}">
+                    <Border Margin="5" x:Name="dropDownBorder" CornerRadius="5" Background="{DynamicResource BackgroundColor}" BorderThickness="1" BorderBrush="{DynamicResource Color7}">
                         <ScrollViewer x:Name="DropDownScrollViewer">
                             <Grid x:Name="grid" RenderOptions.ClearTypeHint="Enabled">
                                 <Canvas x:Name="canvas" HorizontalAlignment="Left" Height="0" VerticalAlignment="Top" Width="0">
@@ -496,7 +496,7 @@
                 </theme:SystemDropShadowChrome>
             </Popup>
             <ToggleButton x:Name="toggleButton" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Grid.ColumnSpan="2" IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Style="{StaticResource ComboBoxToggleButton}"/>
-            <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" Content="{TemplateBinding SelectionBoxItem}" ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" ContentStringFormat="{TemplateBinding SelectionBoxItemStringFormat}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" IsHitTestVisible="false" Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            <ContentPresenter TextBlock.Foreground="{DynamicResource TextColor}" x:Name="contentPresenter" ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" Content="{TemplateBinding SelectionBoxItem}" ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" ContentStringFormat="{TemplateBinding SelectionBoxItemStringFormat}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" IsHitTestVisible="false" Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="HasDropShadow" SourceName="PART_Popup" Value="true">
@@ -555,7 +555,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ComboBoxItem}">
                     <Border x:Name="Bd" Margin="2" CornerRadius="3" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
-                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        <ContentPresenter TextBlock.Foreground="{DynamicResource TextColor}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="False">
