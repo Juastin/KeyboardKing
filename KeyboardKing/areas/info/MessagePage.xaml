@@ -10,7 +10,7 @@
 
     <Border x:Name="MainBorder">
         <Border.Background>
-            <ImageBrush ImageSource="../../resources/images/blur_background_4K.png"/>
+            <ImageBrush Stretch="UniformToFill" ImageSource="../../resources/images/blur_background_4K.png"/>
         </Border.Background>
 
         <Grid HorizontalAlignment="Center" VerticalAlignment="Center" MinHeight="434" MinWidth="707" MaxHeight="434" MaxWidth="707">

@@ -12,7 +12,7 @@ namespace KeyboardKing.areas.info
     {
         private Pages TargetLocation {get;set;}
         
-        private int AutoRedirectTime {get;set;}
+        private int? AutoRedirectTime {get;set;}
 
         public MessagePage(MainWindow w) : base(w)
         {
@@ -25,7 +25,7 @@ namespace KeyboardKing.areas.info
 
             TitleLabel.Text = (string)vars[0];
             TargetLocation = (Pages)vars[1];
-            AutoRedirectTime = (int)vars[2]!=0 ? (int)vars[2] : 9999999;
+            AutoRedirectTime = (int?)vars[2];
 
             UpdateButtonText();
         }
@@ -43,17 +43,19 @@ namespace KeyboardKing.areas.info
 
         public override void OnTick()
         {
-            // Redirect when time runs out
-            if (AutoRedirectTime<0)
+            if (AutoRedirectTime!=null)
             {
-                Dispatcher.Invoke(() =>
+                // Redirect when time runs out
+                if (AutoRedirectTime<0)
                 {
-                    NavigationController.NavigateToPage(TargetLocation);
-                });
+                    Dispatcher.Invoke(() =>
+                    {
+                        NavigationController.NavigateToPage(TargetLocation);
+                    });
+                }
+                UpdateButtonText();
+                AutoRedirectTime--;
             }
-
-            UpdateButtonText();
-            AutoRedirectTime--;
         }
 
         public void UpdateButtonText()
