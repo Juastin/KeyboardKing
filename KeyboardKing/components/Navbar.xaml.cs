@@ -24,7 +24,7 @@ namespace KeyboardKing.components
     /// </summary>
     public partial class Navbar : UserControl
     {
-        public Pages CurrentPage { get; set; }
+        public Pages CurrentPage { get; set; } = Pages.ChaptersPage;
 
         private SolidColorBrush _backgroundColor { get; set; }
         private SolidColorBrush _foregroundColor { get; set; }
@@ -39,25 +39,25 @@ namespace KeyboardKing.components
 
         public void OnLoaded(object sender, RoutedEventArgs e)
         {
-            switch (CurrentPage)
-            {
-                case Pages.ChaptersPage:
-                    Button_ChaptersPage.Background = _backgroundColor;
-                    Button_ChaptersPage.Foreground = _foregroundColor;
-                    break;
-                case Pages.FavoritesPage:
-                    Button_FavoritesPage.Background = _backgroundColor;
-                    Button_FavoritesPage.Foreground = _foregroundColor;
-                    break;
-                case Pages.MatchOverviewPage:
-                    Button_MatchOverviewPage.Background = _backgroundColor;
-                    Button_MatchOverviewPage.Foreground = _foregroundColor;
-                    break;
-                case Pages.SettingsPage:
-                    Button_SettingsPage.Background = _backgroundColor;
-                    Button_SettingsPage.Foreground = _foregroundColor;
-                    break;
-            }
+            //switch (CurrentPage)
+            //{
+            //    case Pages.ChaptersPage:
+            //        Button_ChaptersPage.Background = _backgroundColor;
+            //        Button_ChaptersPage.Foreground = _foregroundColor;
+            //        break;
+            //    case Pages.FavoritesPage:
+            //        Button_FavoritesPage.Background = _backgroundColor;
+            //        Button_FavoritesPage.Foreground = _foregroundColor;
+            //        break;
+            //    case Pages.MatchOverviewPage:
+            //        Button_MatchOverviewPage.Background = _backgroundColor;
+            //        Button_MatchOverviewPage.Foreground = _foregroundColor;
+            //        break;
+            //    case Pages.SettingsPage:
+            //        Button_SettingsPage.Background = _backgroundColor;
+            //        Button_SettingsPage.Foreground = _foregroundColor;
+            //        break;
+            //}
         }
     }
 }

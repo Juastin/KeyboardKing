@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:Components="clr-namespace:KeyboardKing.components"
+             xmlns:model="clr-namespace:Model;assembly=Model"
              mc:Ignorable="d" 
              x:Name="root"
              d:DesignHeight="450" d:DesignWidth="800">
@@ -31,8 +32,16 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style TargetType="Button" x:Key="Button_ChaptersPage">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=root, Path=CurrentPage}" Value="{x:Static model:Pages.ChaptersPage}">
+                    <Setter Property="Foreground" Value="{DynamicResource Color6}"/>
+                    <Setter Property="Background" Value="{DynamicResource Color5}"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
     </UserControl.Resources>
-    
+
     <Grid>
         <DockPanel>
             <Menu DockPanel.Dock="Bottom" Width="520" Height="92" Background="{x:Null}" Margin="0,0,0,10">
