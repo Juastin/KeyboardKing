@@ -31,8 +31,8 @@ namespace Controller
         public static string Word { get => CurrentEpisodeStep?.Word; }
 
         public static int Points { get; set; }
-        public static string WordOverlayCorrect { get =>CurrentEpisodeStep?.Word.Substring(0, _wordIndex); }
-        public static string WordOverlayWrong { get =>CurrentEpisodeStep?.Word.Substring(0, _wrongIndex); }
+        public static string WordOverlayCorrect { get =>CurrentEpisodeStep?.Word.Substring(_wordIndex); }
+        public static string WordOverlayWrong { get =>CurrentEpisodeStep?.Word.Substring(_wordIndex, _wrongIndex); }
 
         public static void Start()
         {
@@ -84,11 +84,12 @@ namespace Controller
             {
                 _wordIndex++;
                 LettersTyped++;
+                _wrongIndex = 0;
             }
                  
             else
             {
-                _wrongIndex = _wordIndex + 1;
+                _wrongIndex = 1;
                 CurrentEpisodeResult.Mistakes++;
             }
                 

@@ -25,11 +25,6 @@
         </Border>
         <Label Style="{DynamicResource H1}" Content="H1 Main Heading" Margin="245,0,0,0" Height="60" VerticalAlignment="Top" HorizontalAlignment="Left" Width="307" Grid.ColumnSpan="2"/>
         <Label Style="{DynamicResource H2}" Content="H2 Sub Heading" Margin="245,56,0,0" Height="40" Width="200" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <TextBox 
-             Style="{DynamicResource Text}" Margin="249,116,0,0"
-            Text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
-molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum" Width="299" Height="51" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.ColumnSpan="2">
-        </TextBox>
         <TextBox Style="{DynamicResource TextBox}" Width="200" Height="50" Margin="10,192,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <PasswordBox Style="{DynamicResource PasswordBox}" Name="boxPassword" Margin="11,264,0,0" FontSize="20" HorizontalAlignment="Left" Width="199" Height="45" VerticalAlignment="Top" />
         <ProgressBar Template="{DynamicResource ProgressBar}" Value="50" Margin="11,334,0,0" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="199"/>
