@@ -22,6 +22,7 @@
     <None Remove="resources\images\kingbackground.png" />
     <None Remove="resources\images\kk_background_1080.png" />
     <None Remove="resources\images\kk_background_4K.png" />
+    <None Remove="resources\images\kk_background_dark.png" />
     <None Remove="resources\images\play-button.png" />
   </ItemGroup>
 
@@ -69,6 +70,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\images\kk_background_4K.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\kk_background_dark.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\images\play-button.png">
@@ -76,6 +80,12 @@
     </Content>
     <ProjectReference Include="..\Controller\Controller.csproj" />
     <ProjectReference Include="..\Model\Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="resources\themes\ThemeTemplate.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
   </ItemGroup>
 
 </Project>

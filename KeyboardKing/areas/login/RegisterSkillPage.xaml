@@ -7,10 +7,25 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="RegisterPage2">
-    <Grid>
-        <Label Content="Kies je niveau" HorizontalAlignment="Center" Margin="0,58,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"/>
-        <Button Content="Beginner" HorizontalAlignment="Center" Margin="0,154,0,0" VerticalAlignment="Top" Height="54" Width="248" Background="#FF363636" BorderBrush="White" Foreground="White" FontSize="20" Click="Button_Click_Skill" Tag="beginner"/>
-        <Button Content="Gemiddeld" HorizontalAlignment="Center" Margin="0,238,0,0" VerticalAlignment="Top" Height="54" Width="248" Background="#FF363636" BorderBrush="White" Foreground="White" FontSize="20" Click="Button_Click_Skill" Tag="gemiddeld"/>
-        <Button Content="Gevorderd" HorizontalAlignment="Center" Margin="0,323,0,0" VerticalAlignment="Top" Height="54" Width="248" Background="#FF363636" BorderBrush="White" Foreground="White" FontSize="20" Click="Button_Click_Skill" Tag="gevorderd"/>
-    </Grid>
+    <Border Style="{DynamicResource GridBorder}"
+            Padding="30" 
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center" 
+            Height="400" Width="750">
+        <Grid>
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
+                <Label Content="Kies je niveau" Style="{DynamicResource H1}" FontSize="36"
+                       Margin="0, 0, 0, 20"/>
+                <Button Style="{DynamicResource Button1}" Content="Beginner" 
+                        Click="Button_Click_Skill" Tag="beginner"
+                        Margin="0, 10"/>
+                <Button Style="{DynamicResource Button1}" Content="Gemiddeld" 
+                        Click="Button_Click_Skill" Tag="gemiddeld"
+                        Margin="0, 10"/>
+                <Button Style="{DynamicResource Button1}" Content="Gevorderd" 
+                        Click="Button_Click_Skill" Tag="gevorderd"
+                         Margin="0, 10"/>
+            </StackPanel>
+        </Grid>
+    </Border>
 </local:JumpPage>
