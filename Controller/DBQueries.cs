@@ -176,7 +176,7 @@ namespace Controller
             cmd.Parameters.Add(episodeId);
             cmd.Parameters.Add(creatorId);
 
-            return DBHandler.QueryScalar(cmd);
+            return DBHandler.QueryScalar<int>(cmd);
         }
 
         public static bool AddMatchProgress(int matchid, string[] user)
