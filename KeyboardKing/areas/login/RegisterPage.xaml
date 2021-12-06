@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:KeyboardKing.core"
+      xmlns:Components="clr-namespace:KeyboardKing.components"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="RegisterPage1">
@@ -49,7 +50,7 @@
                 </StackPanel>
             </Grid>
             <Grid Grid.Row="2" VerticalAlignment="Bottom">
-                <Button Style="{DynamicResource Button1}" Content="Ga naar login" Click="ButtonNavigate" Tag="LoginPage"  HorizontalAlignment="Left" Width="150"/>
+                <Components:NavigationButton Style="{DynamicResource Button1}" ToPage="LoginPage" Content="Ga naar login" Click="ButtonNavigate" Tag="LoginPage"  HorizontalAlignment="Left" Width="150"/>
                 <Button Style="{DynamicResource Button1}" Content="Registreer" Tag="RegisterPage" Click="BRegister" HorizontalAlignment="Right" Width="150"/>
             </Grid>
         </Grid>

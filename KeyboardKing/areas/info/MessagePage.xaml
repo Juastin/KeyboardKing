@@ -1,0 +1,24 @@
+﻿<local:JumpPage x:Class="KeyboardKing.areas.info.MessagePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:KeyboardKing.core"
+      mc:Ignorable="d"
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="MessagePage">
+
+    <Border x:Name="MainBorder">
+        <Border.Background>
+            <ImageBrush Stretch="UniformToFill" ImageSource="../../resources/images/blur_background_4K.png"/>
+        </Border.Background>
+
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" MinHeight="434" MinWidth="707" MaxHeight="434" MaxWidth="707">
+            <Border Style="{DynamicResource GridBorder}" BorderBrush="{StaticResource Info}"></Border>
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center" TextOptions.TextFormattingMode="Display">
+                <TextBlock TextWrapping="WrapWithOverflow" x:Name="TitleLabel" Margin="50,29,50,71" Foreground="Black" FontSize="30"/>
+            </Grid>
+            <Button x:Name="RedirectButton" Style="{DynamicResource InfoButton1}" Width="152" Height="53" Click="Redirect" Content="Oke" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,357,0,0" FontSize="20"/>
+        </Grid>
+    </Border>
+</local:JumpPage>

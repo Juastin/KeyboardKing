@@ -10,5 +10,6 @@
 
     <Grid>
         <Label Content="MatchLobbyPage" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"/>
+        <Label Name="lMatchId" HorizontalAlignment="Left" Height="52" Margin="223,140,0,0" VerticalAlignment="Top" Width="311"/>
     </Grid>
 </local:JumpPage>

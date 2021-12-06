@@ -29,8 +29,15 @@ namespace Controller
         public static event EventHandler EpisodeFinished;
 
         public static string Word { get => CurrentEpisodeStep?.Word; }
+
+        public static int Points { get; set; }
         public static string WordOverlayCorrect { get =>CurrentEpisodeStep?.Word.Substring(0, _wordIndex); }
         public static string WordOverlayWrong { get =>CurrentEpisodeStep?.Word.Substring(0, _wrongIndex); }
+
+        public static void Start()
+        {
+            _startTime = DateTime.Now;
+        }
 
         /// <summary>
         /// <para>
@@ -49,7 +56,6 @@ namespace Controller
             LettersTyped = 0;
             CurrentEpisodeResult.MaxScore = CalculateMaxScore(episode);
             NextEpisodeStep();
-            _startTime = DateTime.Now;
         }
 
         /// <summary>
@@ -87,9 +93,14 @@ namespace Controller
             }
                 
             if (_wordIndex >= CurrentEpisodeStep.Word.Length)
+            {
                 NextEpisodeStep();
+                Points = Points + 10;
+            }
             else
+            {
                 WordChanged?.Invoke(null, new EventArgs());
+            }
         }
 
         /// <summary>

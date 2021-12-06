@@ -25,6 +25,8 @@
         <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
     </Style>
 
+    <SolidColorBrush x:Key="Info" Color="#FF0051FF"/>
+    <SolidColorBrush x:Key="InfoLight" Color="#FF3374FF"/>
 
     <!-- Text template -->
     <Style x:Key="Text" TargetType="{x:Type TextBox}">
@@ -255,8 +257,35 @@
         </Setter>
     </Style>
 
-    
-    <!-- GridBorder template -->
+    <Style x:Key="InfoButton1" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid x:Name="grid" Background="{x:Null}">
+                        <Border x:Name="border" CornerRadius="5" Background="{DynamicResource Info}">
+                            <Label FontWeight="Bold" Content="{TemplateBinding Content}" Foreground="#fff" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                            <Border.Effect>
+                                <DropShadowEffect ShadowDepth="0" BlurRadius="10" Color="#FFB0B0B0"/>
+                            </Border.Effect>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource InfoLight}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource Info}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" TargetName="grid" Value="0.80"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style> 
+
+ <!-- GridBorder template -->
     <Style x:Key="GridBorder" TargetType="{x:Type Border}">
         <Setter Property="Background" Value="{DynamicResource BackgroundColor}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Color4}" />
@@ -301,7 +330,17 @@
         </Setter>
     </Style>
 
-    
+   
+    <Style x:Key="TextBox2" TargetType="{x:Type TextBox}">
+        <Setter Property="Background" Value="{DynamicResource Color6}" />
+        <Setter Property="Foreground" Value="{DynamicResource Color1}" />
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="10, 0"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="FontSize" Value="32"/>
+    </Style>
+        
+
     <!-- PassworkBox template -->
     <Style x:Key="PasswordBox" TargetType="{x:Type PasswordBox}">
         <Setter Property="Height" Value="50"></Setter>

@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:KeyboardKing.core"
+      xmlns:Components="clr-namespace:KeyboardKing.components"
       mc:Ignorable="d" 
       MinHeight="450"
       MinWidth="400"
@@ -63,9 +64,9 @@
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0" VerticalAlignment="Center">
                     <Label Style="{DynamicResource H1}" Content="Matches" HorizontalAlignment="Left"/>
-                    <Button Style="{DynamicResource Button1}"
-                        Content="Klik hier om een match te maken" Tag="MatchCreatePage" Click="ButtonNavigate" HorizontalAlignment="Center"
-                            VerticalAlignment="Center" Background="#FF363636" BorderBrush="White" Foreground="White" FontSize="14"/>
+                    <Components:NavigationButton ToPage="MatchCreatePage" Style="{DynamicResource Button1}"
+                                                 Content="Klik hier om een match te maken" Tag="MatchCreatePage" Click="ButtonNavigate" HorizontalAlignment="Center"
+                                                 VerticalAlignment="Center" Background="#FF363636" BorderBrush="White" Foreground="White" FontSize="14"/>
                 </Grid>
                 <Grid Grid.Row="1" VerticalAlignment="Top">
                     <!-- Match* overview ListBox -->
@@ -84,7 +85,6 @@
                                               Offset="1"/>
                             </LinearGradientBrush>
                         </ListBox.OpacityMask>
-
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <WrapPanel/>
@@ -93,13 +93,7 @@
                     </ListBox>
                 </Grid>
                 <Grid Grid.Row="2" HorizontalAlignment="Center">
-                    <StackPanel Orientation="Horizontal">
-                        <Button Style="{StaticResource NavButton}" Tag="ChaptersPage" Click="ButtonNavigate" Width="80" Height="80" Background="Black" Foreground="White" Content="▶" FontSize="36" FontFamily="Arial"/>
-                        <Button Style="{StaticResource NavButton}" Width="80" Height="80" Background="Black" Foreground="White" Content="🔄" FontSize="30" FontFamily="Arial"/>
-                        <Button Style="{StaticResource NavButton}" Width="80" Height="80" Background="White" Foreground="Black" Content="⚔" FontSize="30" FontFamily="Arial"/>
-                        <Button Style="{StaticResource NavButton}" Width="80" Height="80" Background="Black" Foreground="White" Content="⚙" FontSize="30" FontFamily="Arial"/>
-                        <Button Style="{StaticResource NavButton}" Tag="LoginPage" Click="ButtonNavigate" Width="80" Height="80" Background="Black" Foreground="White" Content="🚪" FontSize="30" FontFamily="Arial"/>
-                    </StackPanel>
+                    <Components:Navbar CurrentPage="MatchOverviewPage"/>
                 </Grid>
             </Grid>
         </Border>

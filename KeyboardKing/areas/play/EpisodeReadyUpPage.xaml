@@ -1,0 +1,26 @@
+﻿<local:JumpPage x:Class="KeyboardKing.areas.play.EpisodeReadyUpPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:KeyboardKing.core"
+      xmlns:Model="clr-namespace:Model"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      MaxHeight="600"
+      MaxWidth="1450"
+      Title="EpisodeReadyUpPage" PreviewKeyDown="KeyDownHandler">
+
+    <local:JumpPage.DataContext>
+        <Model:EpisodePageDataContext/>
+    </local:JumpPage.DataContext>
+    
+    <Grid x:Name="Container">
+        <Border Style="{DynamicResource GridBorder}"/>
+        <Label Style="{DynamicResource H1}" Content="" Margin="49,51,301,336"/>
+        <TextBox x:Name="UserInput" Background="Transparent" Foreground="Transparent" CaretBrush="Transparent" Grid.Column="0" LostKeyboardFocus="UserInput_LostFocus" Text="" TextChanged="UserInput_TextChanged" SelectionBrush="{x:Null}" BorderThickness="0,0,0,0"/>
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" TextOptions.TextFormattingMode="Display">
+            <Label x:Name="Word" Content="Klik 'spatie' om te beginnen!" Margin="50,50,50,50" Foreground="Black" FontSize="50"/>
+        </Grid>
+    </Grid>
+</local:JumpPage>

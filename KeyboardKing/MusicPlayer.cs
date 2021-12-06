@@ -24,10 +24,10 @@ namespace KeyboardKing
 
         }
 
-        public static Dictionary<string, Dictionary<string, int>> Playlists {get;set;} = new Dictionary<string, Dictionary<string, int>>() {
+        public static Dictionary<string, Dictionary<string, double>> Playlists {get;set;} = new Dictionary<string, Dictionary<string, double>>() {
             {
                 "menu_music",
-                new Dictionary<string, int>()
+                new Dictionary<string, double>()
                 {
                     {"Coffee", 125},
                     {"Fiber", 145},
@@ -38,18 +38,26 @@ namespace KeyboardKing
             },
             {
                 "intense_music",
-                new Dictionary<string, int>()
+                new Dictionary<string, double>()
                 {
-                    {"There Was A King", 157}
+                    {"There Was A King", 157},
+                    {"Underdog", 139},
+                }
+            },
+            {
+                "waiting",
+                new Dictionary<string, double>()
+                {
+                    {"break", 2.1},
                 }
             }
         };
 
-        public static SoundPlayer Player {get;set;} = new SoundPlayer();
+        private static SoundPlayer _player {get;set;} = new SoundPlayer();
 
         private static Timer _timer {get;set;}
 
-        public static Random Random = new Random();
+        private static Random _random = new Random();
 
         public static double Seconds {get;set;}
 
@@ -57,9 +65,9 @@ namespace KeyboardKing
 
         public static string CurrentPlaylist {get;set;} = Playlists.Keys.First();
 
-        public static int Index {get;set;} = Random.Next(0, Playlists[Playlists.First().Key].Count-1);
+        public static int Index {get;set;}
 
-        public static void Tick(object sender, EventArgs e)
+        private static void _tick(object sender, EventArgs e)
         {
             if (Seconds>=Playlists[CurrentPlaylist][CurrentSong])
             {
@@ -83,7 +91,7 @@ namespace KeyboardKing
 
         public static void RandomizeIndex()
         {
-            Index = Random.Next(0, Playlists[CurrentPlaylist].Count-1);
+            Index = _random.Next(Playlists[CurrentPlaylist].Count);
         }
 
         public static void PlayNext()
@@ -94,15 +102,15 @@ namespace KeyboardKing
 
                 _timer?.Stop();
                 _timer = new Timer();
-                _timer.Elapsed += new ElapsedEventHandler(Tick);
+                _timer.Elapsed += new ElapsedEventHandler(_tick);
                 _timer.Interval = 100;
                 _timer.Start();
 
                 CurrentSong = Playlists[CurrentPlaylist].Keys.ElementAt(Index);
                 Seconds = 0;
 
-                Player = new SoundPlayer($@"./resources/audio/music/{CurrentSong}.wav");
-                Player.Play();
+                _player = new SoundPlayer($@"./resources/audio/music/{CurrentSong}.wav");
+                _player.Play();
             }
         }
 
@@ -115,12 +123,12 @@ namespace KeyboardKing
 
         public static void Stop()
         {
-            Player.Stop();
+            _player.Stop();
         }
 
         public static void Start()
         {
-            Player.Play();
+            _player.Play();
         }
     }
 }

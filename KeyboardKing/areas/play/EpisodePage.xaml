@@ -4,7 +4,9 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:KeyboardKing.core"
-      xmlns:Model="clr-namespace:Model" x:Class="KeyboardKing.areas.play.EpisodePage"
+      xmlns:Model="clr-namespace:Model"
+      x:Class="KeyboardKing.areas.play.EpisodePage"
+      xmlns:Components="clr-namespace:KeyboardKing.components"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       MaxHeight="600"
@@ -18,7 +20,7 @@
     <Grid x:Name="Container">
         <Border Style="{DynamicResource GridBorder}"/>
         <Label Style="{DynamicResource H1}" Content="" Margin="49,51,301,336"/>
-        <TextBox x:Name="UserInput" Background="Transparent" Foreground="Transparent" Grid.Column="0" LostKeyboardFocus="UserInput_LostFocus" Text="" TextChanged="UserInput_TextChanged" SelectionBrush="{x:Null}" BorderThickness="0,0,0,0"/>
+        <TextBox x:Name="UserInput" Background="Transparent" Foreground="Transparent" CaretBrush="Transparent" Grid.Column="0" LostKeyboardFocus="UserInput_LostFocus" Text="" TextChanged="UserInput_TextChanged" SelectionBrush="{x:Null}" BorderThickness="0,0,0,0"/>
         <Grid HorizontalAlignment="Center" VerticalAlignment="Center" TextOptions.TextFormattingMode="Display">
             <Label x:Name="Word" Content="{Binding Word}" Foreground="{DynamicResource TextColor}" FontSize="50"/>
             <Label x:Name="WordOverlayWrong" Content="{Binding WordOverlayWrong}" Foreground="Red" FontSize="50"/>
@@ -29,6 +31,17 @@
                          VerticalAlignment="Bottom" Height="20" Minimum="0" 
                          Maximum="{Binding MaxLetters}" 
                          Value="{Binding LettersTyped, Mode=OneWay}"/>
+            <TextBox x:Name="TimerTextBox" Style="{DynamicResource TextBox2}" VerticalAlignment="Top" Background="Transparent"  Text="00:00" Loaded="TimerTextBox_Loaded" Height="53"  Margin="10,11,133,0"/>
+            <Button Style="{DynamicResource Button1}" Content="Exit" VerticalAlignment="Top" HorizontalAlignment="Right" Click="ButtonExit" FontSize="26" Margin="0,11,10,0"  Height="54" Width="110"/>
         </Grid>
+        <Border CornerRadius="80" Background="#ffffff" BorderBrush="#2a3b57" 
+                BorderThickness="5" Height="91" Margin="0,82,0,0" 
+                Name="Border1" VerticalAlignment="Top" HorizontalAlignment="Center" Width="136">
+            <TextBlock x:Name="points" Background="Transparent" HorizontalAlignment="Center"
+                       VerticalAlignment="Center" Height="40" Width="116"
+                       TextWrapping="Wrap" Text="0p" FontSize="32" TextAlignment="Center">
+
+            </TextBlock>
+        </Border>
     </Grid>
 </local:JumpPage>
