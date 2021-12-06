@@ -45,8 +45,6 @@ namespace Controller
             return DBHandler.Query(cmd);
         }
 
-   
-
         public static bool AddSkill(string skilllevel, string[] Data)
         {
             SqlCommand cmd = new SqlCommand("UPDATE [dbo].[UserSettings] set skilllevel = @skill WHERE userid = @id");
@@ -194,6 +192,21 @@ namespace Controller
             cmd.Parameters.Add(userId);
 
             return DBHandler.Query(cmd);
+        }
+
+        public static List<List<string>> GetMatchProgress(int matchid)
+        {
+            SqlCommand cmd = new SqlCommand("SELECT mp.matchid, u.username, e.name, mp.progress, mp.score, mp.mistakes, mp.lettersperminute, mp.time " +
+                "FROM [dbo].[MatchProgress] mp " +
+                "LEFT JOIN [dbo].[Match] m ON mp.matchid = m.id " +
+                "LEFT JOIN [dbo].[Episode] e ON m.episodeid = e.id " +
+                "LEFT JOIN [dbo].[User] u ON mp.userid = u.id " +
+                "WHERE mp.matchid = @matchid", null);
+
+            SqlParameter matchId = new SqlParameter("@matchid", SqlDbType.Int, 255);
+            matchId.Value = matchid;
+            cmd.Parameters.Add(matchId);
+            return DBHandler.SelectQuery(cmd);
         }
     }
 }
