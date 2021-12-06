@@ -50,7 +50,7 @@ namespace KeyboardKing.areas.main
             this.Dispatcher.Invoke(() =>
             {
                 // Get logged in user data for the GetAllEpisodes query and set it to the itemsource of the overview ListBox.
-                string[] User = (string[])Session.Get("student");
+                UList User = (UList)Session.Get("student");
                 List<List<string>> Episodes = DBQueries.GetAllEpisodes(User);
                 EpOverview.ItemsSource = Episodes;
 
@@ -76,7 +76,7 @@ namespace KeyboardKing.areas.main
                 //When the episode is finished this event will trigger.
                 //Since we can only call Navigate() inside the View this is needed.
                 EpisodeController.EpisodeFinished += OnEpisodeFinished;
-                Episode episode = EpisodeController.ParseEpisode(row[3]);
+                Episode episode = EpisodeController.ParseEpisode(int.Parse(row[3]));
                 EpisodeController.Initialise(episode);
 
                 NavigationController.NavigateToPage(Pages.EpisodeReadyUpPage);

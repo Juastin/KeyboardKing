@@ -18,8 +18,8 @@ namespace Controller
         /// <returns></returns>
         public static bool CheckIfUserExists()
         {
-            string[] user = (string[])Session.Get("student");
-            return DBQueries.GetAllUsersInMatch().SelectMany(result => result.Where(data => data.Equals(user[0], StringComparison.Ordinal)).Select(data => new { })).Any();
+            UList student = (UList)Session.Get("student");
+            return DBQueries.GetAllUsersInMatch().SelectMany(result => result.Where(data => data.Equals(student.Get<string>(0), StringComparison.Ordinal)).Select(data => new { })).Any();
         }
         /// <summary>
         /// <para>This method will make a match by adding a Match, and a MatchProgress to the database</para>
@@ -28,8 +28,9 @@ namespace Controller
         /// <param name="selectedValue"></param>
         public static void MakeMatch(int selectedValue)
         {
-            _currentMatchId = DBQueries.AddMatch(selectedValue, (string[])Session.Get("student"));
-            DBQueries.AddMatchProgress(_currentMatchId, (string[])Session.Get("student"));
+            UList student = (UList)Session.Get("student");
+            _currentMatchId = DBQueries.AddMatch(selectedValue, student);
+            DBQueries.AddMatchProgress(_currentMatchId, student);
         }
 
         public static int GetMatchId() { return _currentMatchId; }
