@@ -38,15 +38,8 @@ namespace KeyboardKing.areas.play
         {
             List<List<string>> matchInfo = DBQueries.GetMatchProgress(MatchController.GetMatchId());
             lEpisodeMatch.Content = matchInfo[0][2];
-            // check if creatorid == useris -> button is visible
-            List<MatchLobbyData> items = new List<MatchLobbyData>();
-            int counter = 0;
-            while (counter < matchInfo.Count)
-            {
-                items.Add(new MatchLobbyData() { Username = matchInfo[counter][2] });
-                counter++;
-            }
-            LvMatch.ItemsSource = items;
+            UpdateListView();
+            //TODO: check if creatorid == userid -> startmatchbutton is visible for creator
         }
 
         public override void OnShadow()
@@ -59,16 +52,7 @@ namespace KeyboardKing.areas.play
             if (_tickCheck.AddSeconds(5) < now) // if 5 seconds have passed
             {
                 _tickCheck = now;
-                List<List<string>> matchInfo = DBQueries.GetMatchProgress(MatchController.GetMatchId());
-                List<MatchLobbyData> items = new List<MatchLobbyData>();
-                int counter = 0;
-                while (counter < matchInfo.Count)
-                {
-                    items.Add(new MatchLobbyData() { Username = matchInfo[counter][2] });
-                    counter++;
-                }
-                LvMatch.ItemsSource = null;
-                LvMatch.ItemsSource = items;
+                UpdateListView();
             }
         }
 
@@ -77,5 +61,28 @@ namespace KeyboardKing.areas.play
             MessageBox.Show("Start de match");
         }
 
+        private void BExitMatch(object sender, EventArgs e)
+        {
+            MessageBox.Show("Verlaat de Match");
+        }
+
+        private void UpdateListView()
+        {
+            List<List<string>> matchInfo = DBQueries.GetMatchProgress(MatchController.GetMatchId());
+            List<MatchLobbyData> items = new List<MatchLobbyData>();
+            int counter = 0;
+            while (counter < matchInfo.Count)
+            {
+                items.Add(new MatchLobbyData() { Username = matchInfo[counter][1] });
+                counter++;
+            }
+            LvMatch.ItemsSource = null;
+            LvMatch.ItemsSource = items;
+        }
+
+        private void BStartMatch_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
