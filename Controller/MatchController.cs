@@ -34,5 +34,11 @@ namespace Controller
         }
 
         public static int GetMatchId() { return _currentMatchId; }
+
+        public static void AddUserInMatchProgress(string selectedValue)
+        {
+            _currentMatchId = int.Parse(selectedValue);
+            DBQueries.AddMatchProgress(_currentMatchId, (UList)Session.Get("student"));
+        }
     }
 }
