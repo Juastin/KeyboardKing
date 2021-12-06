@@ -3,10 +3,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
 
-    
-    <SolidColorBrush x:Key="Succes" Color="#70AD47"/>
-    <SolidColorBrush x:Key="Failed" Color="#FFD9534F"/>
-
     <!-- H1 template -->
     <Style x:Key="H1" TargetType="{x:Type Label}">
         <Setter Property="FontSize" Value="36"/>
