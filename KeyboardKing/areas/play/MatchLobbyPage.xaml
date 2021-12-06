@@ -10,6 +10,10 @@
 
     <Grid>
         <Label Content="MatchLobbyPage" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"/>
-        <Label Name="lMatchId" HorizontalAlignment="Left" Height="52" Margin="223,140,0,0" VerticalAlignment="Top" Width="311"/>
+        <Label Name="lEpisodeMatch" HorizontalAlignment="Center" Height="222" VerticalAlignment="Center" Width="408">
+            <ListBox x:Name="listData"/>
+        </Label>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="638,45,0,0" VerticalAlignment="Top" Height="50" Width="73"/>
+        <Button Content="Start Match" Click="BStartMatch" HorizontalAlignment="Left" Height="67" Margin="330,373,0,0" VerticalAlignment="Top" Width="175" Visibility="Hidden"/>
     </Grid>
 </local:JumpPage>

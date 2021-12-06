@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Model;
 
 namespace KeyboardKing.areas.play
 {
@@ -22,6 +23,8 @@ namespace KeyboardKing.areas.play
     /// </summary>
     public partial class MatchLobbyPage : JumpPage
     {
+        private DateTime _tickCheck { get; set; } = DateTime.Now;
+
         /// <summary>
         /// Controller for <see cref="MatchLobbyPage"/>
         /// </summary>
@@ -33,8 +36,9 @@ namespace KeyboardKing.areas.play
 
         public override void OnLoad()
         {
-            /* Useful for later: query for getting matchProgressData with MatchId*/
-            lMatchId.Content = "MatchId: " + MatchController.GetMatchId();
+            List<List<string>> matchInfo = DBQueries.GetMatchProgress(MatchController.GetMatchId());
+            lEpisodeMatch.Content = matchInfo[0][2];
+            // check if creatorid == useris -> button is visible
         }
 
         public override void OnShadow()
@@ -43,6 +47,27 @@ namespace KeyboardKing.areas.play
 
         public override void OnTick()
         {
+            DateTime now = DateTime.Now;
+            if (_tickCheck.AddSeconds(5) < now) // if 5 seconds have passed
+            {
+                _tickCheck = now;
+                List<List<string>> matchInfo = DBQueries.GetMatchProgress(MatchController.GetMatchId());
+                List<string> items = new List<string>();
+                int counter = 0;
+                while (counter < matchInfo.Count)
+                {
+                    items.Add(matchInfo[counter][1]);
+                    counter++;
+                }
+                //listData.ItemsSource = items;
+            }
         }
+
+        
+        private void BStartMatch(object sender, EventArgs e)
+        {
+            MessageBox.Show("Start de match");
+        }
+
     }
 }
