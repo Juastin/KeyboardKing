@@ -21,11 +21,11 @@ namespace KeyboardKing.areas.info
 
         public override void OnLoad()
         {
-            object[] vars = (object[])Session.Get("MessagePageInfo");
+            UList vars = (UList)Session.Get("MessagePageInfo");
 
-            TitleLabel.Text = (string)vars[0];
-            TargetLocation = (Pages)vars[1];
-            AutoRedirectTime = (int?)vars[2];
+            TitleLabel.Text = vars.Get<string>(0);
+            TargetLocation = vars.Get<Pages>(1);
+            AutoRedirectTime = vars.Get<int?>(2);
 
             UpdateButtonText();
         }
