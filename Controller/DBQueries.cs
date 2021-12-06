@@ -45,8 +45,6 @@ namespace Controller
             return DBHandler.Query(cmd);
         }
 
-   
-
         public static bool AddSkill(string skilllevel, UList data)
         {
             SqlCommand cmd = new SqlCommand("UPDATE [dbo].[UserSettings] set skilllevel = @skill WHERE userid = @id");
