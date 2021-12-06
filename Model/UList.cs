@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-
+    /// <summary>
+    /// Uniquely Typed List, list of objects that can be of any type.
+    /// </summary>
     public class UList
     {
         /// <summary>
