@@ -108,9 +108,10 @@ namespace Controller
         /// </summary>
         /// <param name="episodeId">episode id from the requested episode</param>
         /// <returns></returns>
-        public static Episode ParseEpisode(string episodeId)
+        public static Episode ParseEpisode(int episodeId)
         {
             List<List<string>> results = DBQueries.GetAllEpisodeStepsFromEpisode(episodeId);
+
             Session.Remove("episodeId");
             Session.Add("episodeId", episodeId);
 
@@ -140,8 +141,10 @@ namespace Controller
             CurrentEpisodeResult.Score = CalculateScore(CurrentEpisodeResult.MaxScore, CurrentEpisodeResult.Mistakes);
             CurrentEpisodeResult.LettersPerMinute = CalculateLetterPerMinute(CurrentEpisodeResult.Time, CurrentEpisodeResult.MaxScore);
 
-            int userId = IntegerType.FromString(((string[])Session.Get("student"))[0]);
-            int episodeId = IntegerType.FromString((string)Session.Get("episodeId"));
+            UList student = (UList)Session.Get("student");
+
+            int userId = student.Get<int>(0);
+            int episodeId = (int)Session.Get("episodeId");
             
             DBQueries.SaveResult(CurrentEpisodeResult, episodeId, userId);
 
