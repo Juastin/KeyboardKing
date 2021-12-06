@@ -37,7 +37,7 @@ namespace KeyboardKing.areas.play
                 NavigationController.NavigateToPage(Pages.MatchOverviewPage);
             }
 
-            string[] user = (string[])Session.Get("student");
+            UList user = (UList)Session.Get("student");
             List<List<string>> episodes = DBQueries.GetAllEpisodes(user);
             int counter = 0;
             List<EpisodeData> listData = new List<EpisodeData>();
