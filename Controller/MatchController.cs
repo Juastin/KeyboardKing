@@ -38,7 +38,7 @@ namespace Controller
         public static void AddUserInMatchProgress(string selectedValue)
         {
             _currentMatchId = int.Parse(selectedValue);
-            DBQueries.AddMatchProgress(_currentMatchId, (string[])Session.Get("student"));
+            DBQueries.AddMatchProgress(_currentMatchId, (UList)Session.Get("student"));
         }
     }
 }
