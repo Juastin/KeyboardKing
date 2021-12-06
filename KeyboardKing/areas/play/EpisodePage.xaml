@@ -53,7 +53,7 @@
                 </Grid.OpacityMask>
                 <Border BorderThickness="3, 0, 0, 0">
                     <Border.BorderBrush>
-                        <DrawingBrush Viewport="0,0,8,17" ViewportUnits="Absolute" TileMode="Tile">
+                        <DrawingBrush Viewport="0,0,8,22" ViewportUnits="Absolute" TileMode="Tile">
                             <DrawingBrush.Drawing>
                                 <DrawingGroup>
                                     <GeometryDrawing Brush="{DynamicResource TextColor}">
@@ -69,7 +69,7 @@
                         </DrawingBrush>
                     </Border.BorderBrush>
                     <Grid>
-                        <Label FontSize="50" x:Name="WordOverlayCorrect" Content="ff" Foreground="{DynamicResource TextColor}"/>
+                        <Label FontSize="50" x:Name="WordOverlayCorrect" Content="{Binding WordOverlayCorrect}" Foreground="{DynamicResource TextColor}"/>
                         <Label FontSize="50" x:Name="WordOverlayWrong" Content="{Binding WordOverlayWrong}" Foreground="Red"/>
                     </Grid>
                 </Border>
