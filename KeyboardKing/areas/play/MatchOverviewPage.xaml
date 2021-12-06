@@ -65,7 +65,7 @@
                 <Grid Grid.Row="0" VerticalAlignment="Center">
                     <Label Style="{DynamicResource H1}" Content="Matches" HorizontalAlignment="Left"/>
                     <Components:NavigationButton ToPage="MatchCreatePage" Style="{DynamicResource Button1}"
-                                                 Content="Klik hier om een match te maken" Tag="MatchCreatePage" Click="ButtonNavigate" HorizontalAlignment="Center"
+                                                 Content="Klik hier om een match te maken" HorizontalAlignment="Center"
                                                  VerticalAlignment="Center" Background="#FF363636" BorderBrush="White" Foreground="White" FontSize="14"/>
                 </Grid>
                 <Grid Grid.Row="1" VerticalAlignment="Top">

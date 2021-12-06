@@ -43,7 +43,7 @@
             </Grid>
             <Grid Grid.Row="2" VerticalAlignment="Bottom">
                 <Components:NavigationButton Style="{DynamicResource Button1}" Content="Registreer" 
-                        Click="ButtonNavigate" Tag="RegisterPage" ToPage="RegisterPage"
+                        ToPage="RegisterPage"
                         HorizontalAlignment="Left" Width="150"/>         
                 <Button Style="{DynamicResource Button1}"  Content="Login" Tag="SettingsPage" 
                         Click="BLogin" HorizontalAlignment="Right" Width="150"/>

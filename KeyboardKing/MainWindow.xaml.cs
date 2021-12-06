@@ -19,7 +19,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Controller;
 using Model;
 using Model.event_args;
 using KeyboardKing.areas.info;

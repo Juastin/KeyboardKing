@@ -50,7 +50,7 @@
                 </StackPanel>
             </Grid>
             <Grid Grid.Row="2" VerticalAlignment="Bottom">
-                <Components:NavigationButton Style="{DynamicResource Button1}" ToPage="LoginPage" Content="Ga naar login" Click="ButtonNavigate" Tag="LoginPage"  HorizontalAlignment="Left" Width="150"/>
+                <Components:NavigationButton Style="{DynamicResource Button1}" ToPage="LoginPage" Content="Ga naar login" HorizontalAlignment="Left" Width="150"/>
                 <Button Style="{DynamicResource Button1}" Content="Registreer" Tag="RegisterPage" Click="BRegister" HorizontalAlignment="Right" Width="150"/>
             </Grid>
         </Grid>
