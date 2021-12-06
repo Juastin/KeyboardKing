@@ -86,9 +86,9 @@
                                 <GradientStop Color="Transparent"
                                               Offset="0" />
                                 <GradientStop Color="White"
-                                              Offset="0.07" />
+                                              Offset="0.02" />
                                 <GradientStop Color="White"
-                                              Offset="0.93" />
+                                              Offset="0.98" />
                                 <GradientStop Color="Transparent" 
                                               Offset="1"/>
                             </LinearGradientBrush>
@@ -110,10 +110,10 @@
                                                     <Expander Background="{DynamicResource BackgroundColor}" Margin="0, 10" BorderThickness="2" BorderBrush="{DynamicResource Color4}" IsExpanded="False" Padding="10">
                                                         <Expander.Header>
                                                             <StackPanel Orientation="Horizontal" >
-                                                                <Label Style="{DynamicResource H3}" Content="{Binding Name}" FontWeight="Bold" FontSize="22"/>
-                                                                <Label Style="{DynamicResource H3}" Content=" - " FontSize="22"/>
-                                                                <Label Style="{DynamicResource H3}" Content="{Binding ItemCount}" FontSize="22" FontStyle="Italic"/>
-                                                                <Label Style="{DynamicResource H3}" Content=" episode(s) " FontSize="22" FontStyle="Italic"/>
+                                                                <Label Style="{DynamicResource H3}" Content="{Binding Name}" FontWeight="Bold"/>
+                                                                <Label Style="{DynamicResource H3}" Content="-"/>
+                                                                <Label Style="{DynamicResource H3}" Content="{Binding ItemCount}" FontStyle="Italic"/>
+                                                                <Label Style="{DynamicResource H3}" Content="episode(s)" FontStyle="Italic"/>
                                                             </StackPanel>
                                                         </Expander.Header>
                                                         <ItemsPresenter />

@@ -77,9 +77,9 @@
                                 <GradientStop Color="Transparent"
                                               Offset="0" />
                                 <GradientStop Color="White"
-                                              Offset="0.07" />
+                                              Offset="0.02" />
                                 <GradientStop Color="White"
-                                              Offset="0.93" />
+                                              Offset="0.98" />
                                 <GradientStop Color="Transparent" 
                                               Offset="1"/>
                             </LinearGradientBrush>

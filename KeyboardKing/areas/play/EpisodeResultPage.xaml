@@ -47,7 +47,7 @@
                     </StackPanel>
                     <StackPanel Margin="10, 0"  Grid.Column="1" Orientation="Vertical">
                         <Label Style="{DynamicResource H3}" Content="{Binding Score}" HorizontalAlignment="Left"/>
-                        <Label Style="{DynamicResource H3}" Content="20min 59 s" HorizontalAlignment="Left"/>
+                        <Label Style="{DynamicResource H3}" Content="{Binding Time}" HorizontalAlignment="Left"/>
                         <Label Style="{DynamicResource H3}" Content="{Binding Mistakes}" HorizontalAlignment="Left"/>
                         <Label Style="{DynamicResource H3}" Content="{Binding LettersPerMinute}" HorizontalAlignment="Left"/>
                     </StackPanel>
