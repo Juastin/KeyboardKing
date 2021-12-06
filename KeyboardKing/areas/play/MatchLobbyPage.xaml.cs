@@ -39,6 +39,14 @@ namespace KeyboardKing.areas.play
             List<List<string>> matchInfo = DBQueries.GetMatchProgress(MatchController.GetMatchId());
             lEpisodeMatch.Content = matchInfo[0][2];
             // check if creatorid == useris -> button is visible
+            List<MatchLobbyData> items = new List<MatchLobbyData>();
+            int counter = 0;
+            while (counter < matchInfo.Count)
+            {
+                items.Add(new MatchLobbyData() { Username = matchInfo[counter][2] });
+                counter++;
+            }
+            LvMatch.ItemsSource = items;
         }
 
         public override void OnShadow()
@@ -52,18 +60,18 @@ namespace KeyboardKing.areas.play
             {
                 _tickCheck = now;
                 List<List<string>> matchInfo = DBQueries.GetMatchProgress(MatchController.GetMatchId());
-                List<string> items = new List<string>();
+                List<MatchLobbyData> items = new List<MatchLobbyData>();
                 int counter = 0;
                 while (counter < matchInfo.Count)
                 {
-                    items.Add(matchInfo[counter][1]);
+                    items.Add(new MatchLobbyData() { Username = matchInfo[counter][2] });
                     counter++;
                 }
-                //listData.ItemsSource = items;
+                LvMatch.ItemsSource = null;
+                LvMatch.ItemsSource = items;
             }
         }
 
-        
         private void BStartMatch(object sender, EventArgs e)
         {
             MessageBox.Show("Start de match");
