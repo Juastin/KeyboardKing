@@ -75,18 +75,18 @@ namespace Controller
             }
         }
         // Query for scalar queries
-        public static int QueryScalar(SqlCommand cmd)
+        public static T QueryScalar<T>(SqlCommand cmd)
         {
             try
             {
                 _connection.Open();
                 cmd.Connection = _connection;
                 cmd.Prepare();
-                return (int)cmd.ExecuteScalar();
+                return (T)cmd.ExecuteScalar();
             }
             catch
             {
-                return 0;
+                return default;
             }
             finally
             {

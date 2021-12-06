@@ -9,6 +9,7 @@ namespace Model
     public enum Pages
     {
         Empty,
+        MessagePage,
         LoginPage,
         RegisterPage,
         RegisterSkillPage,

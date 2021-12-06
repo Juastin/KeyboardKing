@@ -6,68 +6,19 @@
         xmlns:local="clr-namespace:KeyboardKing"
         mc:Ignorable="d"
         Height="475" Width="800"
-        MinWidth="250" MinHeight="50"
+        MinHeight="475" MinWidth="800"
         Icon="./resources/images/icon.png"
         WindowStyle="None"
         AllowsTransparency="True">
-    
+
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="0"/>
     </WindowChrome.WindowChrome>
 
-    <!-- STYLING TEMPLATES -->
-    <Window.Resources>
-        <!-- Titlebar other ButtonTemplate -->
-        <Style x:Key="TitleBarButtonTemplate" TargetType="{x:Type Button}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" x:Name="Button">
-                            <Grid>
-                                <Label Foreground="{TemplateBinding Foreground}" FontSize="{TemplateBinding FontSize}" Content="{TemplateBinding Content}" HorizontalAlignment="Center" Padding="{TemplateBinding Padding}"/>
-                            </Grid>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#4a4a4a" TargetName="Button"/>
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Background" Value="#5e5e5e" TargetName="Button"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <!-- Titlebar topright ButtonTemplate -->
-        <Style x:Key="LastTitleBarButtonTemplate" TargetType="{x:Type Button}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" x:Name="Button" CornerRadius="0, 8, 0, 0">
-                            <Grid>
-                                <Label Foreground="{TemplateBinding Foreground}" FontSize="{TemplateBinding FontSize}" Content="{TemplateBinding Content}" HorizontalAlignment="Center" Padding="{TemplateBinding Padding}"/>
-                            </Grid>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#a83232" TargetName="Button"/>
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Background" Value="#b84d4d" TargetName="Button"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Window.Resources>
-
     <!-- CONTENT -->
     <Border x:Name="MainBorder" CornerRadius="8" >
         <Border.Background>
-            <ImageBrush ImageSource="resources/images/kk_background_4K.png"/>
+            <ImageBrush x:Name="MainBackground" Stretch="UniformToFill" ImageSource="resources/images/kk_background_4K.png"/>
         </Border.Background>
         <Grid>
             <Grid.RowDefinitions>
@@ -76,18 +27,19 @@
             </Grid.RowDefinitions>
 
             <!-- Titlebar layout -->
-            <Border MouseDown="TitleBar_MouseDown" CornerRadius="8, 8, 0, 0" Grid.Row="0" Background="#FF2B2B2B">
+            <Border MouseDown="TitleBar_MouseDown" CornerRadius="8, 8, 0, 0" Grid.Row="0" Background="{DynamicResource BackgroundColor}">
                 <Grid>
                     <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal">
                         <Image Source="./resources/images/icon.png"  Width="20" Height="20" Margin="10,0,0,0"/>
                         <Label Foreground="#5e5e5e" Content="KeyboardKing" FontWeight="Bold"/>
                     </StackPanel>
                     <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-                        <Button Padding="0" FontSize="20" Foreground="LightGray" Width="45" Height="25" Content="–" Background="Transparent" BorderBrush="Transparent" 
+                        <ComboBox  x:Name="CBTheme" VerticalAlignment="Center" Width="150" ItemContainerStyle="{DynamicResource ComboBoxItem}" Template="{DynamicResource ComboBox}" SelectionChanged="CBTheme_SelectionChanged"/>
+                        <Button FontSize="20" Width="45" Height="25" Content="–" 
                                 Style="{DynamicResource TitleBarButtonTemplate}" Click="ButtonMinimize_Click"/>
-                        <Button Padding="0" FontSize="20" Foreground="LightGray" Width="45" Height="25" Content="☐" Background="Transparent" BorderBrush="Transparent" 
+                        <Button FontSize="20" Width="45" Height="25" Content="☐"
                                 Style="{DynamicResource TitleBarButtonTemplate}" Click="ButtonMaximize_Click"/>
-                        <Button Padding="0" FontSize="20" Foreground="LightGray" Width="45" Height="25" Content="✕" Background="Transparent" BorderBrush="Transparent" 
+                        <Button FontSize="20" Width="45" Height="25" Content="✕"
                                 Style="{DynamicResource LastTitleBarButtonTemplate}" Click="CloseWindow_Click"/>
                     </StackPanel>
                 </Grid>
