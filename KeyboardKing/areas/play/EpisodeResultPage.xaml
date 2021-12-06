@@ -32,8 +32,8 @@
                 </Grid>
                 <Grid Grid.Row="1" VerticalAlignment="Center">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto" MinWidth="220"/>
+                        <ColumnDefinition Width="auto" MinWidth="151.77"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="0" Orientation="Vertical">
@@ -47,7 +47,7 @@
                                VerticalAlignment="Center"/>
 
                     </StackPanel>
-                    <StackPanel Margin="10, 0"  Grid.Column="1" Orientation="Vertical">
+                    <StackPanel Margin="10,0,10,0"  Grid.Column="1" Orientation="Vertical">
                         <Label Style="{DynamicResource H3}" Content="{Binding Score}" HorizontalAlignment="Left"/>
                         <Label Style="{DynamicResource H3}" Content="{Binding Time}" HorizontalAlignment="Left"/>
                         <Label Style="{DynamicResource H3}" Content="{Binding Mistakes}" HorizontalAlignment="Left"/>
@@ -70,7 +70,7 @@
                             </Grid>
                             <Grid VerticalAlignment="Bottom" HorizontalAlignment="Center" Grid.Column="0">
                                 <TextBlock TextWrapping="Wrap" Margin="-24,-3,-60,3" TextAlignment="Center">
-                                    <Run Text="annelin"/>
+                                    <Run Text="winnaar2"/>
                                 </TextBlock>
                                 <TextBlock TextWrapping="Wrap" Margin="-24,74,-60,-73" TextAlignment="Center">
                                     <Run Text="940p"/>
@@ -78,7 +78,7 @@
                             </Grid>
                             <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1">
                                 <TextBlock TextWrapping="Wrap" Margin="-42,0,-42,4" TextAlignment="Center">
-                                    <Run Text="is mijn"/>
+                                    <Run Text="winnaar1"/>
                                 </TextBlock>
                                 <TextBlock TextWrapping="Wrap" Margin="-42,109,-42,-106" TextAlignment="Center">
                                     <Run Text="1040p"/>
@@ -86,7 +86,7 @@
                             </Grid>
                             <Grid VerticalAlignment="Bottom" HorizontalAlignment="Center" Grid.Column="2">
                                 <TextBlock TextWrapping="Wrap" Margin="-62,18,-22,-17" TextAlignment="Center">
-                                    <Run Text="schatje"/>
+                                    <Run Text="winnaar3"/>
                                 </TextBlock>
                                 <TextBlock TextWrapping="Wrap" Margin="-62,74,-22,-72" TextAlignment="Center">
                                     <Run Text="720p"/>
