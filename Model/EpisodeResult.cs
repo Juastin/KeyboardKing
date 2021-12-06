@@ -16,13 +16,8 @@ namespace Model
                 return _score; 
             } 
             set 
-            { 
-                if (value >= 0 || value <= 100) 
-                    _score = value;
-                if (value < 0)
-                    _score = 0;
-                if (value > 100)
-                    _score = 100;
+            {
+                _score = value;
             } 
         }
         public int MaxScore { get; set; }

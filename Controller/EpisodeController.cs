@@ -31,6 +31,8 @@ namespace Controller
         public static string Word { get => CurrentEpisodeStep?.Word; }
 
         public static int Points { get; set; }
+
+        private static bool _repeatmistake;
         public static string WordOverlayCorrect { get =>CurrentEpisodeStep?.Word.Substring(0, _wordIndex); }
         public static string WordOverlayWrong { get =>CurrentEpisodeStep?.Word.Substring(0, _wrongIndex); }
 
@@ -53,6 +55,7 @@ namespace Controller
             _startTime = new DateTime();
             _wordIndex = 0;
             _wrongIndex = 0;
+            _repeatmistake = false;
             LettersTyped = 0;
             CurrentEpisodeResult.MaxScore = CalculateMaxScore(episode);
             NextEpisodeStep();
@@ -84,18 +87,24 @@ namespace Controller
             {
                 _wordIndex++;
                 LettersTyped++;
+                Points = Points + 10;
+                _repeatmistake = false;
             }
                  
             else
             {
                 _wrongIndex = _wordIndex + 1;
                 CurrentEpisodeResult.Mistakes++;
+                if (_repeatmistake == false && Points > 0) 
+                {
+                    Points = Points - 30;
+                    _repeatmistake = true;
+                }
             }
                 
             if (_wordIndex >= CurrentEpisodeStep.Word.Length)
             {
                 NextEpisodeStep();
-                Points = Points + 10;
             }
             else
             {
@@ -138,7 +147,7 @@ namespace Controller
         public static void FinishEpisode()
         {
             CurrentEpisodeResult.Time = CalculateTime(_startTime);
-            CurrentEpisodeResult.Score = CalculateScore(CurrentEpisodeResult.MaxScore, CurrentEpisodeResult.Mistakes);
+            CurrentEpisodeResult.Score = CalculateScore(CalculateLetterPerMinute(CurrentEpisodeResult.Time, CurrentEpisodeResult.MaxScore));
             CurrentEpisodeResult.LettersPerMinute = CalculateLetterPerMinute(CurrentEpisodeResult.Time, CurrentEpisodeResult.MaxScore);
 
             UList student = (UList)Session.Get("student");
@@ -166,9 +175,9 @@ namespace Controller
         /// <param name="maxScore"></param>
         /// <param name="mistakes"></param>
         /// <returns></returns>
-        public static int CalculateScore(int maxScore, int mistakes)
+        public static int CalculateScore(double LettersPerMinute)
         {
-            return (int)((double)(maxScore-mistakes) / maxScore * 100);
+            return (int)(Points * LettersPerMinute);
         }
         /// <summary>
         /// Calculates the max amount of store possible by getting the total amount of letters that can be written.
