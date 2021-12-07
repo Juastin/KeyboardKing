@@ -31,11 +31,11 @@ namespace KeyboardKing.areas.play
 
         public override void OnLoad()
         {
-            /*if (MatchController.CheckIfUserExists())
+            if (MatchController.CheckIfUserExists())
             {
                 MessageBox.Show("Je zit al in een match");
                 NavigationController.NavigateToPage(Pages.MatchOverviewPage);
-            }*/
+            }
 
             UList user = (UList)Session.Get("student");
             List<List<string>> episodes = DBQueries.GetAllEpisodes(user);
