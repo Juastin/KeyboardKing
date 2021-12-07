@@ -1,20 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using KeyboardKing.core;
 using Model;
 
 namespace KeyboardKing.components
@@ -24,7 +13,7 @@ namespace KeyboardKing.components
     /// </summary>
     public partial class Navbar : UserControl
     {
-        public Pages CurrentPage { get; set; } = Pages.ChaptersPage;
+        public static Pages CurrentPage { get; set; } = Pages.ChaptersPage;
 
         private SolidColorBrush _backgroundColor { get; set; }
         private SolidColorBrush _foregroundColor { get; set; }
@@ -58,6 +47,23 @@ namespace KeyboardKing.components
             //        Button_SettingsPage.Foreground = _foregroundColor;
             //        break;
             //}
+        }
+    }
+    public class PageConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            //if (value == null) return false;
+            //if (value.ToString().Length == 0) return false;
+            //Pages page;
+            //if (Enum.TryParse(value.ToString(), out page))
+            //    return page == Navbar.CurrentPage;
+            return false;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return false;
         }
     }
 }
