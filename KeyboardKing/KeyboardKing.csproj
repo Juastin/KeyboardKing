@@ -23,6 +23,7 @@
     <None Remove="resources\images\kk_background_1080.png" />
     <None Remove="resources\images\kk_background_4K.png" />
     <None Remove="resources\images\kk_background_dark.png" />
+    <None Remove="resources\images\paint_theme_background.png" />
     <None Remove="resources\images\play-button.png" />
     <None Remove="resources\images\space_theme_background.png" />
   </ItemGroup>
@@ -76,6 +77,9 @@
     <Content Include="resources\images\kk_background_dark.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="resources\images\paint_theme_background.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="resources\images\play-button.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -87,6 +91,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="resources\themes\PaintTheme.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
     <Page Update="resources\themes\ThemeTemplate.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>
