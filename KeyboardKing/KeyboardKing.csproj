@@ -18,11 +18,14 @@
     <None Remove="resources\audio\music\There Was A King.wav" />
     <None Remove="resources\audio\music\Underdog.wav" />
     <None Remove="resources\images\blur_background_4K.png" />
+    <None Remove="resources\images\hellogun.jpg" />
+    <None Remove="resources\images\hellokittykikker.jpg" />
     <None Remove="resources\images\icon.png" />
     <None Remove="resources\images\kingbackground.png" />
     <None Remove="resources\images\kk_background_1080.png" />
     <None Remove="resources\images\kk_background_4K.png" />
     <None Remove="resources\images\kk_background_dark.png" />
+    <None Remove="resources\images\kk_background_hellokitty.png" />
     <None Remove="resources\images\play-button.png" />
     <None Remove="resources\images\space_theme_background.png" />
   </ItemGroup>
@@ -61,6 +64,12 @@
     <Content Include="resources\images\blur_background_4K.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="resources\images\hellogun.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\hellokittykikker.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="resources\images\icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -74,6 +83,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\images\kk_background_dark.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\kk_background_hellokitty.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\images\play-button.png">

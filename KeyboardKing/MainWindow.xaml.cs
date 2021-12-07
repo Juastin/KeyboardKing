@@ -92,10 +92,11 @@ namespace KeyboardKing
                 {"Light", new Theme("Light Theme", "resources/themes/LightTheme.xaml", "resources/images/kk_background_4K.png")},
                 {"Dark", new Theme("Dark Theme", "resources/themes/DarkTheme.xaml", "resources/images/kk_background_dark.png")},
                 {"Space", new Theme("Space Theme", "resources/themes/SpaceTheme.xaml", "resources/images/space_theme_background.png")},
+                {"Kitty", new Theme("Kitty Theme", "resources/themes/KittyTheme.xaml", "resources/images/hellokittykikker.jpg") },
             };
 
             CBTheme.ItemsSource = _themes;
-            CBTheme.SelectedValue = "Light";
+            CBTheme.SelectedValue = "Kitty";
             CBTheme.DisplayMemberPath = "Value.ThemeTitle";
             CBTheme.SelectedValuePath = "Key";
 
