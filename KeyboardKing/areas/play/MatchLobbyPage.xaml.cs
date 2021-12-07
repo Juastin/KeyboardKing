@@ -76,8 +76,12 @@ namespace KeyboardKing.areas.play
                 items.Add(new MatchLobbyData() { Username = matchInfo[counter][1] });
                 counter++;
             }
-            LvMatch.ItemsSource = null;
-            LvMatch.ItemsSource = items;
+            this.Dispatcher.Invoke(() =>
+            {
+                LvMatch.ItemsSource = items;
+            });
+            //LvMatch.ItemsSource = null;
+            
         }
     }
 }
