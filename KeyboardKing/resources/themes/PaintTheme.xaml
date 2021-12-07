@@ -1,0 +1,40 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+ 
+    <!-- COLOR SCHEMES -->
+    <Color x:Key="SColor1">#000814</Color>
+    <Color x:Key="SColor2">#001D3D</Color>
+    <Color x:Key="SColor3">#003566</Color>
+    <Color x:Key="SColor4">#e1b4ff</Color>
+    <Color x:Key="SColor5">#ffc0ad</Color>
+
+    <!-- Tints -->
+    <Color x:Key="SColor6">#FFFFFF</Color>
+    <Color x:Key="SColor7">#bdbdbd</Color>
+
+    <!-- MAIN COLORS -->
+    <Color x:Key="SText">Black</Color>
+    <Color x:Key="SBackground">White</Color>
+    <Color x:Key="SBorder">Black</Color>
+
+    <SolidColorBrush x:Key="Succes" Color="#6691ff"/>
+    <SolidColorBrush x:Key="Failed" Color="#ff9666"/>
+
+
+    <!-- BRUSHES (DO NOT CHANGE THESE VALUES!) -->
+    <SolidColorBrush x:Key="Color1" Color="{DynamicResource SColor1}"/>
+    <SolidColorBrush x:Key="Color2" Color="{DynamicResource SColor2}"/>
+    <SolidColorBrush x:Key="Color3" Color="{DynamicResource SColor3}"/>
+    <SolidColorBrush x:Key="Color4" Color="{DynamicResource SColor4}"/>
+    <SolidColorBrush x:Key="Color5" Color="{DynamicResource SColor5}"/>
+
+    <!-- Tints -->
+    <SolidColorBrush x:Key="Color6" Color="{DynamicResource SColor6}"/>
+    <SolidColorBrush x:Key="Color7" Color="{DynamicResource SColor7}"/>
+
+    <!-- MAIN COLORS -->
+    <SolidColorBrush x:Key="TextColor" Color="{DynamicResource SText}"/>
+    <SolidColorBrush x:Key="BackgroundColor" Color="{DynamicResource SBackground}"/>
+    <SolidColorBrush x:Key="BorderColor" Color="{DynamicResource SBorder}"/>
+
+</ResourceDictionary>
