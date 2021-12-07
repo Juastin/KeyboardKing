@@ -33,7 +33,7 @@ namespace Controller
         public static int Difficulty { get; set; }
         public static int Points { get; set; }
 
-        private static bool _repeatmistake;
+        private static bool _repeatMistake;
         public static string WordOverlayCorrect { get =>CurrentEpisodeStep?.Word.Substring(0, _wordIndex); }
         public static string WordOverlayWrong { get =>CurrentEpisodeStep?.Word.Substring(0, _wrongIndex); }
 
@@ -51,13 +51,13 @@ namespace Controller
         /// <param name="episode">The episode that is going to be played</param>
         public static void Initialise(Episode episode)
         {
-            Difficulty = 10;
+            Difficulty = 30;
             _currentEpisode = episode;
             CurrentEpisodeResult = new EpisodeResult();
             _startTime = new DateTime();
             _wordIndex = 0;
             _wrongIndex = 0;
-            _repeatmistake = false;
+            _repeatMistake = false;
             LettersTyped = 0;
             CurrentEpisodeResult.MaxScore = CalculateMaxScore(episode);
             NextEpisodeStep();
@@ -90,17 +90,17 @@ namespace Controller
                 _wordIndex++;
                 LettersTyped++;
                 Points = Points + 10;
-                _repeatmistake = false;
+                _repeatMistake = false;
             }
                  
             else
             {
                 _wrongIndex = _wordIndex + 1;
                 CurrentEpisodeResult.Mistakes++;
-                if (_repeatmistake == false && Points >= Difficulty) 
+                if (_repeatMistake == false && Points >= Difficulty) 
                 {
                     Points = Points - Difficulty;
-                    _repeatmistake = true;
+                    _repeatMistake = true;
                 }
             }
                 
