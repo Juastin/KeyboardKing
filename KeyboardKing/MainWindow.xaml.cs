@@ -91,11 +91,12 @@ namespace KeyboardKing
             {
                 {"Light", new Theme("Light Theme", "resources/themes/LightTheme.xaml")},
                 {"Dark", new Theme("Dark Theme", "resources/themes/DarkTheme.xaml")},
-                {"Space", new Theme("Space Theme", "resources/themes/SpaceTheme.xaml")}
+                {"Space", new Theme("Space Theme", "resources/themes/SpaceTheme.xaml")},
+                {"Chinese", new Theme("Chinese Theme", "resources/themes/ChineseTheme.xaml")}
             };
 
             CBTheme.ItemsSource = _themes;
-            CBTheme.SelectedValue = "Light";
+            CBTheme.SelectedValue = "Chinese";
             CBTheme.DisplayMemberPath = "Value.ThemeTitle";
             CBTheme.SelectedValuePath = "Key";
 

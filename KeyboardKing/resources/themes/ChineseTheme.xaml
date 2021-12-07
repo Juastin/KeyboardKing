@@ -1,0 +1,45 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <!-- IMAGES -->
+    <BitmapImage x:Key="Wallpaper" UriSource="/resources/images/red_chinese_background.png"/>
+    <BitmapImage x:Key="MessageWallpaper" UriSource="/resources/images/red_chinese_background.png"/>
+
+    <!-- COLOR SCHEMES -->
+    <!-- Source color: https://www.schemecolor.com/chinese-red.php -->
+    <Color x:Key="SColor1">#000814</Color>
+    <Color x:Key="SColor2">#001D3D</Color>
+    <Color x:Key="SColor3">#003566</Color>
+    <Color x:Key="SColor4">#A50009</Color>
+    <Color x:Key="SColor5">#DD1C1C</Color>
+
+    <!-- Tints -->
+    <Color x:Key="SColor6">#FFFFFF</Color>
+    <Color x:Key="SColor7">#bdbdbd</Color>
+
+    <!-- MAIN COLORS -->
+    <Color x:Key="SText">#FFCA62</Color>
+    <Color x:Key="SBackground">#360003</Color>
+    <Color x:Key="SBorder">White</Color>
+
+    <SolidColorBrush x:Key="Succes" Color="#70AD47"/>
+    <SolidColorBrush x:Key="Failed" Color="#FFD9534F"/>
+
+
+    <!-- BRUSHES (DO NOT CHANGE THESE VALUES!) -->
+    <SolidColorBrush x:Key="Color1" Color="{DynamicResource SColor1}"/>
+    <SolidColorBrush x:Key="Color2" Color="{DynamicResource SColor2}"/>
+    <SolidColorBrush x:Key="Color3" Color="{DynamicResource SColor3}"/>
+    <SolidColorBrush x:Key="Color4" Color="{DynamicResource SColor4}"/>
+    <SolidColorBrush x:Key="Color5" Color="{DynamicResource SColor5}"/>
+
+    <!-- Tints -->
+    <SolidColorBrush x:Key="Color6" Color="{DynamicResource SColor6}"/>
+    <SolidColorBrush x:Key="Color7" Color="{DynamicResource SColor7}"/>
+
+    <!-- MAIN COLORS -->
+    <SolidColorBrush x:Key="TextColor" Color="{DynamicResource SText}"/>
+    <SolidColorBrush x:Key="BackgroundColor" Color="{DynamicResource SBackground}"/>
+    <SolidColorBrush x:Key="BorderColor" Color="{DynamicResource SBorder}"/>
+    
+</ResourceDictionary>
