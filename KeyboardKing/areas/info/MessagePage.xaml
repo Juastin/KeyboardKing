@@ -8,9 +8,9 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="MessagePage">
 
-    <Border x:Name="MainBorder">
+    <Border x:Name="MainBorder" CornerRadius="8">
         <Border.Background>
-            <ImageBrush Stretch="UniformToFill" ImageSource="../../resources/images/blur_background_4K.png"/>
+            <ImageBrush Stretch="UniformToFill" ImageSource="{DynamicResource MessageWallpaper}"/>
         </Border.Background>
 
         <Grid HorizontalAlignment="Center" VerticalAlignment="Center" MinHeight="434" MinWidth="707" MaxHeight="434" MaxWidth="707">
