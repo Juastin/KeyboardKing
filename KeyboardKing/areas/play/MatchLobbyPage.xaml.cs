@@ -79,10 +79,5 @@ namespace KeyboardKing.areas.play
             LvMatch.ItemsSource = null;
             LvMatch.ItemsSource = items;
         }
-
-        private void BStartMatch_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }
