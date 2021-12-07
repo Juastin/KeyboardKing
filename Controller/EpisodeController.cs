@@ -51,7 +51,7 @@ namespace Controller
         /// <param name="episode">The episode that is going to be played</param>
         public static void Initialise(Episode episode)
         {
-            Difficulty = 30;
+            Difficulty = 10;
             _currentEpisode = episode;
             CurrentEpisodeResult = new EpisodeResult();
             _startTime = new DateTime();
@@ -97,7 +97,7 @@ namespace Controller
             {
                 _wrongIndex = _wordIndex + 1;
                 CurrentEpisodeResult.Mistakes++;
-                if (_repeatmistake == false && Points > 0) 
+                if (_repeatmistake == false && Points >= Difficulty) 
                 {
                     Points = Points - Difficulty;
                     _repeatmistake = true;
