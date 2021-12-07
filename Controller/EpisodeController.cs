@@ -30,6 +30,7 @@ namespace Controller
 
         public static string Word { get => CurrentEpisodeStep?.Word; }
 
+        public static int Difficulty { get; set; }
         public static int Points { get; set; }
 
         private static bool _repeatmistake;
@@ -50,6 +51,7 @@ namespace Controller
         /// <param name="episode">The episode that is going to be played</param>
         public static void Initialise(Episode episode)
         {
+            Difficulty = 30;
             _currentEpisode = episode;
             CurrentEpisodeResult = new EpisodeResult();
             _startTime = new DateTime();
@@ -97,7 +99,7 @@ namespace Controller
                 CurrentEpisodeResult.Mistakes++;
                 if (_repeatmistake == false && Points > 0) 
                 {
-                    Points = Points - 30;
+                    Points = Points - Difficulty;
                     _repeatmistake = true;
                 }
             }
