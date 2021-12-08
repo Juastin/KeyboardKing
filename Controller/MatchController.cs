@@ -11,6 +11,7 @@ namespace Controller
     {
         private static int _currentMatchId;
         private static string _creatorId;
+        private static int _amountOfPlayers;
 
         /// <summary>
         /// <para>This method checks if there is already a user in a match.</para>
@@ -46,24 +47,38 @@ namespace Controller
 
         /// <summary>
         /// <para>This method will remove a user in MatchProgress to the database</para>
-        /// It does this by getting the id of the Match the user joined and delete it in MatchProgress.
+        /// It does this by giving the Match and User id to the method to delete the MatchProgress.
         /// </summary>
         public static void RemoveUserInMatchProgress()
         {
             DBQueries.RemoveUserInMatch(_currentMatchId, (UList)Session.Get("student"));
         }
 
+        /// <summary>
+        /// <para>This method get current MatchProgressInfo</para>
+        /// It does this by giving the Match id to get info from MatchProgress.
+        /// </summary>
         public static List<List<string>> GetMatchProgressInfo()
         {
             List<List<string>> matchInfo = DBQueries.GetMatchProgress(_currentMatchId);
-            _creatorId = matchInfo[0][8];
+            _amountOfPlayers = matchInfo.Count();
+            if (_amountOfPlayers != 0) _creatorId = matchInfo[0][8];
             return matchInfo;
         }
-        public static bool CheckIfUserIsCreator()
+
+        public static bool CheckUserIsCreator()
         {
             UList student = (UList)Session.Get("student");
             return student.Get<string>(0).Equals(_creatorId, StringComparison.Ordinal);
         }
+
+        public static void DeleteMatch()
+        {
+            DBQueries.RemoveUserInMatch(_currentMatchId, (UList)Session.Get("student"));
+            DBQueries.DeleteMatch(_currentMatchId);
+        }
+
+        public static bool CheckCreatorIsAloneInMatch() { return _amountOfPlayers == 1; }
 
         public static int GetMatchId() { return _currentMatchId; }
     }

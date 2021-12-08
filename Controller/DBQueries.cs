@@ -224,5 +224,16 @@ namespace Controller
 
             return DBHandler.Query(cmd);
         }
+
+        public static bool DeleteMatch(int matchid)
+        {
+            SqlCommand cmd = new SqlCommand("DELETE FROM [dbo].[Match] WHERE matchid = @matchid;");
+
+            SqlParameter matchId = new SqlParameter("@matchid", SqlDbType.Int, 255);
+            matchId.Value = matchid;
+            cmd.Parameters.Add(matchId);
+            return DBHandler.Query(cmd);
+        }
+
     }
 }

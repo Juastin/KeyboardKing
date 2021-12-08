@@ -79,9 +79,15 @@ namespace KeyboardKing.areas.play
 
         private void BExitMatch(object sender, EventArgs e)
         {
-            if (MatchController.CheckIfUserIsCreator())
+            if (MatchController.CheckUserIsCreator())
             {
-                MessageBox.Show("Je kan momenteel niet de match verlaten. Je bent de creator");
+                if (MatchController.CheckCreatorIsAloneInMatch())
+                {
+                    MatchController.DeleteMatch();
+                    MessageBox.Show("Match is deleted");
+                    NavigationController.NavigateToPage(Pages.MatchOverviewPage);
+                }
+                else { MessageBox.Show("Je kan momenteel niet de match verlaten. Je bent de creator"); }
             }
             else
             {
