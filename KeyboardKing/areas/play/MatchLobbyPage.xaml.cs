@@ -81,8 +81,8 @@ namespace KeyboardKing.areas.play
             {
                 LvMatch.ItemsSource = items;
             });
-            //LvMatch.ItemsSource = null;
-            
+
+
         }
     }
 }
