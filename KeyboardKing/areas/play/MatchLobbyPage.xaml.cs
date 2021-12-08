@@ -25,6 +25,8 @@ namespace KeyboardKing.areas.play
     {
         private DateTime _tickCheck { get; set; } = DateTime.Now;
 
+        private List<List<string>> _matchInfoLoad;
+
         /// <summary>
         /// Controller for <see cref="MatchLobbyPage"/>
         /// </summary>
@@ -36,14 +38,15 @@ namespace KeyboardKing.areas.play
 
         public override void OnLoad()
         {
-            List<List<string>> matchInfo = DBQueries.GetMatchProgress(MatchController.GetMatchId());
-            lEpisodeMatch.Content = matchInfo[0][2];
+            _matchInfoLoad = DBQueries.GetMatchProgress(MatchController.GetMatchId());
+            lEpisodeMatch.Content = _matchInfoLoad[0][2];
             UpdateListView();
             //TODO: check if creatorid == userid -> startmatchbutton is visible for creator
         }
 
         public override void OnShadow()
         {
+
         }
 
         public override void OnTick()
@@ -56,9 +59,18 @@ namespace KeyboardKing.areas.play
             }
         }
 
-        private void BStartMatch(object sender, EventArgs e)
+        private void EpOverview_PlayClick(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Start de match");
+            MatchController.EpisodeFinished += OnEpisodeFinished;
+            Episode episode = MatchController.ParseEpisode(int.Parse(_matchInfoLoad[0][9]));
+            MatchController.Initialise(episode);
+            NavigationController.NavigateToPage(Pages.MatchPlayingPage);
+        }
+
+        private void OnEpisodeFinished(object sender, EventArgs e)
+        {
+            MatchController.EpisodeFinished -= OnEpisodeFinished;
+            NavigationController.NavigateToPage(Pages.MatchResultPage);
         }
 
         private void BExitMatch(object sender, EventArgs e)

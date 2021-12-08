@@ -3,12 +3,40 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:KeyboardKing.core"
-      mc:Ignorable="d" 
+      xmlns:local="clr-namespace:KeyboardKing.core" xmlns:model="clr-namespace:Model" d:DataContext="{d:DesignInstance Type=model:MatchPageDataContext}"
+                mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="MatchPlayingPage">
+      Title="MatchPlayingPage" PreviewKeyDown="PreventTab_PreviewKeyDown" ForceCursor="True" Cursor="Arrow">
+    <local:JumpPage.DataContext>
+        <model:MatchPageDataContext/>
+    </local:JumpPage.DataContext>
 
-    <Grid>
-        <Label Content="MatchPlayingPage" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"/>
+    <Grid x:Name="Container">
+        <Border Style="{DynamicResource GridBorder}"/>
+        <Label Style="{DynamicResource H1}" Content="" Margin="49,51,301,336"/>
+        <TextBox x:Name="UserInput" Background="Transparent" Foreground="Transparent" CaretBrush="Transparent" Grid.Column="0" LostKeyboardFocus="UserInput_LostFocus" Text="" TextChanged="UserInput_TextChanged" SelectionBrush="{x:Null}" BorderThickness="0,0,0,0">
+        </TextBox>
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" TextOptions.TextFormattingMode="Display">
+            <Label x:Name="Word" Content="{Binding Word}" Foreground="{DynamicResource TextColor}" FontSize="50"/>
+            <Label x:Name="WordOverlayWrong" Content="{Binding WordOverlayWrong}" Foreground="Red" FontSize="50"/>
+            <Label x:Name="WordOverlayCorrect" Content="{Binding WordOverlayCorrect}" Foreground="Green" FontSize="50"/>
+        </Grid>
+        <Grid>
+            <ProgressBar Template="{DynamicResource ProgressBar}" 
+                         VerticalAlignment="Bottom" Height="20" Minimum="0" 
+                         Maximum="{Binding MaxLetters}" 
+                         Value="{Binding LettersTyped, Mode=OneWay}"/>
+            <TextBox x:Name="TimerTextBox" Style="{DynamicResource TextBox2}" VerticalAlignment="Top" Background="Transparent"  Text="00:00" Loaded="TimerTextBox_Loaded" Height="53"  Margin="10,11,133,0"/>
+            <Button Style="{DynamicResource Button1}" Content="Exit" VerticalAlignment="Top" HorizontalAlignment="Right" Click="ButtonExit" FontSize="26" Margin="0,11,10,0"  Height="54" Width="110"/>
+        </Grid>
+        <Border CornerRadius="80" Background="Transparent" BorderBrush="#2a3b57" 
+                BorderThickness="5" Height="91" Margin="0,82,0,0" 
+                Name="Border1" VerticalAlignment="Top" HorizontalAlignment="Center" Width="136">
+            <TextBlock Style="{DynamicResource TextBlock}" Background="Transparent" x:Name="points" HorizontalAlignment="Center"
+                       VerticalAlignment="Center" Height="40" Width="116"
+                       TextWrapping="Wrap" Text="0p" TextAlignment="Center">
+
+            </TextBlock>
+        </Border>
     </Grid>
 </local:JumpPage>

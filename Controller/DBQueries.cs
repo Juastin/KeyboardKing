@@ -196,12 +196,12 @@ namespace Controller
 
         public static List<List<string>> GetMatchProgress(int matchid)
         {
-            SqlCommand cmd = new SqlCommand("SELECT mp.matchid, u.username, e.name, mp.progress, mp.score, mp.mistakes, mp.lettersperminute, mp.time, m.creatorid " +
-                "FROM [dbo].[MatchProgress] mp " +
-                "LEFT JOIN [dbo].[Match] m ON mp.matchid = m.id " +
-                "LEFT JOIN [dbo].[Episode] e ON m.episodeid = e.id " +
-                "LEFT JOIN [dbo].[User] u ON mp.userid = u.id " +
-                "WHERE mp.matchid = @matchid", null);
+            SqlCommand cmd = new SqlCommand("SELECT mp.matchid, u.username, e.name, mp.progress, mp.score, mp.mistakes, mp.lettersperminute, mp.time, m.creatorid, m.episodeid " +
+             "FROM [dbo].[MatchProgress] mp " +
+             "LEFT JOIN [dbo].[Match] m ON mp.matchid = m.id " +
+             "LEFT JOIN [dbo].[Episode] e ON m.episodeid = e.id " +
+             "LEFT JOIN [dbo].[User] u ON mp.userid = u.id " +
+             "WHERE mp.matchid = @matchid", null);
 
             SqlParameter matchId = new SqlParameter("@matchid", SqlDbType.Int, 255);
             matchId.Value = matchid;

@@ -96,7 +96,7 @@ namespace KeyboardKing
             };
 
             CBTheme.ItemsSource = _themes;
-            CBTheme.SelectedValue = "Light";
+            CBTheme.SelectedValue = "Space";
             CBTheme.DisplayMemberPath = "Value.ThemeTitle";
             CBTheme.SelectedValuePath = "Key";
 
