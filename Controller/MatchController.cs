@@ -35,6 +35,10 @@ namespace Controller
 
         public static int GetMatchId() { return _currentMatchId; }
 
+        /// <summary>
+        /// <para>This method will add a user in MatchProgress to the database</para>
+        /// It does this by getting the id of the chosen Match and inserting it into MatchProgress with the logged user.
+        /// </summary>
         public static void AddUserInMatchProgress(string selectedValue)
         {
             _currentMatchId = int.Parse(selectedValue);

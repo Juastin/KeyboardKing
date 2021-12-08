@@ -208,5 +208,21 @@ namespace Controller
             cmd.Parameters.Add(matchId);
             return DBHandler.SelectQuery(cmd);
         }
+
+        public static bool RemoveUserInMatch(int matchid, UList user)
+        {
+            SqlCommand cmd = new SqlCommand("DELETE FROM [dbo].[MatchProgress] WHERE matchid = @matchid AND userid = @userid;");
+
+            SqlParameter matchId = new SqlParameter("@matchid", SqlDbType.Int, 255);
+            SqlParameter userId = new SqlParameter("@userid", SqlDbType.Int, 0);
+
+            matchId.Value = matchid;
+            userId.Value = user.Get<int>(0);
+
+            cmd.Parameters.Add(matchId);
+            cmd.Parameters.Add(userId);
+
+            return DBHandler.Query(cmd);
+        }
     }
 }
