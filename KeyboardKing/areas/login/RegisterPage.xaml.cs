@@ -61,12 +61,16 @@ namespace KeyboardKing.areas.login
                     {
                         if (IsPasswordValid(password))
                         {
-                            string salt = Encryption.CreateSalt();
-                            string passHashed = Encryption.HashPassword(password, salt); //Hashing the password
-                            bool Adduser = DBQueries.AddUser(username, email, passHashed, salt); //Adding new user to database
-                            if (Adduser)
-                                NavigationController.NavigateToPage(Pages.LoginPage); //Returning to loginpage
-                            else { error.Text = "Error: Service onbereikbaar / Bestaande gebruiker"; }
+                            if (username.Length <= 20)
+                            {
+                                string salt = Encryption.CreateSalt();
+                                string passHashed = Encryption.HashPassword(password, salt); //Hashing the password
+                                bool Adduser = DBQueries.AddUser(username, email, passHashed, salt); //Adding new user to database
+                                if (Adduser)
+                                    NavigationController.NavigateToPage(Pages.LoginPage); //Returning to loginpage
+                                else { error.Text = "Error: Service onbereikbaar / Bestaande gebruiker"; }
+                            }
+                            else { error.Text = "Error: Gebruikersnaam is te lang (max 20 tekens)"; }
                         }
                         else { error.Text = "Error: Wachtwoord bevat geen kleine of grote letter, nummer of minstens 8 tekens"; }
                     }
