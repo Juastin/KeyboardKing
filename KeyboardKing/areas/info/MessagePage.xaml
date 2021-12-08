@@ -8,15 +8,15 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="MessagePage">
 
-    <Border x:Name="MainBorder">
+    <Border x:Name="MainBorder" CornerRadius="8">
         <Border.Background>
-            <ImageBrush Stretch="UniformToFill" ImageSource="../../resources/images/blur_background_4K.png"/>
+            <ImageBrush Stretch="UniformToFill" ImageSource="{DynamicResource MessageWallpaper}"/>
         </Border.Background>
 
         <Grid HorizontalAlignment="Center" VerticalAlignment="Center" MinHeight="434" MinWidth="707" MaxHeight="434" MaxWidth="707">
             <Border Style="{DynamicResource GridBorder}" BorderBrush="{StaticResource Info}"></Border>
             <Grid HorizontalAlignment="Center" VerticalAlignment="Center" TextOptions.TextFormattingMode="Display">
-                <TextBlock TextWrapping="WrapWithOverflow" x:Name="TitleLabel" Margin="50,29,50,71" Foreground="Black" FontSize="30"/>
+                <TextBlock TextWrapping="WrapWithOverflow" x:Name="TitleLabel" Margin="50,29,50,71" Foreground="{DynamicResource TextColor}" FontSize="30"/>
             </Grid>
             <Button x:Name="RedirectButton" Style="{DynamicResource InfoButton1}" Width="152" Height="53" Click="Redirect" Content="Oke" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,357,0,0" FontSize="20"/>
         </Grid>
