@@ -53,5 +53,11 @@ namespace Controller
         {
             DBQueries.RemoveUserInMatch(_currentMatchId, (UList)Session.Get("student"));
         }
+
+        public static bool CheckUserIsCreator(string creatorId)
+        {
+            UList student = (UList)Session.Get("student");
+            return student.Get<string>(0).Equals(creatorId, StringComparison.Ordinal);
+        }
     }
 }
