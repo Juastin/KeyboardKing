@@ -11,7 +11,7 @@
       MaxWidth="1420"
       MaxHeight="750"
       Title="MatchOverviewPage">
-    
+
     <Page.Resources>
         <!-- ListBoxItem template -->
         <Style x:Key="ListBoxItemTemplate" TargetType="{x:Type ListBoxItem}">
@@ -50,10 +50,7 @@
             </Setter>
         </Style>
     </Page.Resources>
-
-    
-    
-        <Grid Margin="25">
+    <Grid Margin="25">
         <Border Style="{DynamicResource GridBorder}"
             Padding="30">
             <Grid>
@@ -92,10 +89,9 @@
                         </ListBox.ItemsPanel>
                     </ListBox>
                 </Grid>
-                <Grid Grid.Row="2" HorizontalAlignment="Center">
-                    <Components:Navbar CurrentPage="MatchOverviewPage"/>
-                </Grid>
             </Grid>
         </Border>
+        <Components:NavigationButton ToPage="MatchCreatePage" Content="Klik hier om een match te maken" Style="{DynamicResource Button1}" HorizontalAlignment="Center" Margin="0,0,0,112" VerticalAlignment="Bottom" Height="40" Width="250" Background="#FF363636" BorderBrush="White" Foreground="White" FontSize="14"/>
+        <Components:Navbar CurrentPage="MatchOverviewPage"/>
     </Grid>
 </local:JumpPage>

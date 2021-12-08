@@ -41,6 +41,7 @@
                     </DockPanel>
                 </StackPanel>
             </Grid>
+
             <Grid Grid.Row="2" VerticalAlignment="Bottom">
                 <Components:NavigationButton Style="{DynamicResource Button1}" Content="Registreer" 
                         ToPage="RegisterPage"
