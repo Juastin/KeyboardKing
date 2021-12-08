@@ -49,6 +49,8 @@ namespace KeyboardKing.components
     public class NavigationButton : Button
     {
         public Pages ToPage { get; set; } = Pages.Empty;
+        public bool BoolParam { get; set; } = false;
+
         static NavigationButton()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(NavigationButton), new FrameworkPropertyMetadata(typeof(NavigationButton)));

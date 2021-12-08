@@ -24,7 +24,9 @@ namespace KeyboardKing.components
     /// </summary>
     public partial class Navbar : UserControl
     {
-        public Pages CurrentPage { get; set; } = Pages.ChaptersPage;
+        public Pages CurrentPage { get; set; } = Pages.Empty;
+        public static Pages StaticCurrentPage { get; set; } = Pages.Empty;
+        public static bool TestBoolShould { get; set; } = true;
 
         private SolidColorBrush _backgroundColor { get; set; }
         private SolidColorBrush _foregroundColor { get; set; }
@@ -39,6 +41,7 @@ namespace KeyboardKing.components
 
         public void OnLoaded(object sender, RoutedEventArgs e)
         {
+            StaticCurrentPage = CurrentPage;
             //switch (CurrentPage)
             //{
             //    case Pages.ChaptersPage:
@@ -58,6 +61,19 @@ namespace KeyboardKing.components
             //        Button_SettingsPage.Foreground = _foregroundColor;
             //        break;
             //}
+        }
+    }
+
+    public class TestConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return true;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
         }
     }
 }

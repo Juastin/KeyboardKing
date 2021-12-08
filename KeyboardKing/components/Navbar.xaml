@@ -9,6 +9,7 @@
              x:Name="root"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
+        <Components:TestConverter x:Key="TestConverter"/>
         <Style x:Key="NavButton" TargetType="Button">
             <Setter Property="OverridesDefaultStyle" Value="True"/>
             <Setter Property="Margin" Value="5"/>
@@ -31,10 +32,8 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-        </Style>
-        <Style TargetType="Button" x:Key="Button_ChaptersPage">
             <Style.Triggers>
-                <DataTrigger Binding="{Binding ElementName=root, Path=CurrentPage}" Value="{x:Static model:Pages.ChaptersPage}">
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=BoolParam}" Value="{x:Static Components:Navbar.TestBoolShould}">
                     <Setter Property="Foreground" Value="{DynamicResource Color6}"/>
                     <Setter Property="Background" Value="{DynamicResource Color5}"/>
                 </DataTrigger>
@@ -45,11 +44,11 @@
     <Grid>
         <DockPanel>
             <Menu DockPanel.Dock="Bottom" Width="520" Height="92" Background="{x:Null}" Margin="0,0,0,10">
-                <Components:NavigationButton ToPage="ChaptersPage" Style="{DynamicResource NavButton}" x:Name="Button_ChaptersPage" Content="▶" FontSize="36"/>
-                <Components:NavigationButton ToPage="FavoritesPage" Style="{DynamicResource NavButton}" x:Name="Button_FavoritesPage" Content="🔄" FontSize="30"/>
-                <Components:NavigationButton ToPage="MatchOverviewPage" Style="{DynamicResource NavButton}" x:Name="Button_MatchOverviewPage" Content="⚔" FontSize="30"/>
-                <Components:NavigationButton ToPage="SettingsPage" Style="{DynamicResource NavButton}" x:Name="Button_SettingsPage" Content="⚙" FontSize="30"/>
-                <Components:NavigationButton ToPage="LoginPage" Style="{DynamicResource NavButton}" Content="🚪" FontSize="30"/>
+                <Components:NavigationButton BoolParam="False" ToPage="ChaptersPage" Style="{DynamicResource NavButton}" x:Name="Button_ChaptersPage" Content="▶" FontSize="36"/>
+                <Components:NavigationButton BoolParam="True" ToPage="FavoritesPage" Style="{DynamicResource NavButton}" x:Name="Button_FavoritesPage" Content="🔄" FontSize="30"/>
+                <Components:NavigationButton BoolParam="False" ToPage="MatchOverviewPage" Style="{DynamicResource NavButton}" x:Name="Button_MatchOverviewPage" Content="⚔" FontSize="30"/>
+                <Components:NavigationButton BoolParam="True" ToPage="SettingsPage" Style="{DynamicResource NavButton}" x:Name="Button_SettingsPage" Content="⚙" FontSize="30"/>
+                <Components:NavigationButton BoolParam="False" ToPage="LoginPage" Style="{DynamicResource NavButton}" Content="🚪" FontSize="30"/>
             </Menu>
             <StackPanel></StackPanel>
         </DockPanel>
