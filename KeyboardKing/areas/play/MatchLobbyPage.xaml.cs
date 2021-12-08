@@ -24,7 +24,6 @@ namespace KeyboardKing.areas.play
     public partial class MatchLobbyPage : JumpPage
     {
         private DateTime _tickCheck { get; set; } = DateTime.Now;
-        private string CreatorId;
 
         /// <summary>
         /// Controller for <see cref="MatchLobbyPage"/>
@@ -59,10 +58,9 @@ namespace KeyboardKing.areas.play
 
         private void UpdateListView()
         {
-            List<List<string>> matchInfo = DBQueries.GetMatchProgress(MatchController.GetMatchId());
+            List<List<string>> matchInfo = MatchController.GetMatchProgressInfo();
             List<MatchLobbyData> items = new List<MatchLobbyData>();
             int counter = 0;
-            CreatorId = matchInfo[0][8];
             while (counter < matchInfo.Count)
             {
                 items.Add(new MatchLobbyData() { Username = matchInfo[counter][1] });
@@ -81,7 +79,7 @@ namespace KeyboardKing.areas.play
 
         private void BExitMatch(object sender, EventArgs e)
         {
-            if (MatchController.CheckUserIsCreator(CreatorId))
+            if (MatchController.CheckIfUserIsCreator())
             {
                 MessageBox.Show("Je kan momenteel niet de match verlaten. Je bent de creator");
             }

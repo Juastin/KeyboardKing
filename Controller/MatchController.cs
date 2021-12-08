@@ -10,6 +10,7 @@ namespace Controller
     public static class MatchController
     {
         private static int _currentMatchId;
+        private static string _creatorId;
 
         /// <summary>
         /// <para>This method checks if there is already a user in a match.</para>
@@ -33,8 +34,6 @@ namespace Controller
             DBQueries.AddMatchProgress(_currentMatchId, student);
         }
 
-        public static int GetMatchId() { return _currentMatchId; }
-
         /// <summary>
         /// <para>This method will add a user in MatchProgress to the database</para>
         /// It does this by getting the id of the chosen Match and inserting it in MatchProgressr.
@@ -54,10 +53,18 @@ namespace Controller
             DBQueries.RemoveUserInMatch(_currentMatchId, (UList)Session.Get("student"));
         }
 
-        public static bool CheckUserIsCreator(string creatorId)
+        public static List<List<string>> GetMatchProgressInfo()
+        {
+            List<List<string>> matchInfo = DBQueries.GetMatchProgress(_currentMatchId);
+            _creatorId = matchInfo[0][8];
+            return matchInfo;
+        }
+        public static bool CheckIfUserIsCreator()
         {
             UList student = (UList)Session.Get("student");
-            return student.Get<string>(0).Equals(creatorId, StringComparison.Ordinal);
+            return student.Get<string>(0).Equals(_creatorId, StringComparison.Ordinal);
         }
+
+        public static int GetMatchId() { return _currentMatchId; }
     }
 }
