@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="TemplateOverview" Height="450" Width="800" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
-    <Grid HorizontalAlignment="Left" Width="800">
+    <Grid Background="{DynamicResource BackgroundColor}" HorizontalAlignment="Left" Width="800">
         <Button Style="{DynamicResource Button1}" Width="100" Height="40" Content="Button1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,12,0,0"></Button>
         <Button Style="{DynamicResource Button2}" Width="100" Height="40" Content="Button2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="120,12,0,0"></Button>
         <Border Height="100" Width="200" Style="{DynamicResource Card}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,77,0,0" >
@@ -19,7 +19,7 @@
                 <Border CornerRadius="3, 3, 0, 0" Background="{DynamicResource Color4}"></Border>
                 <Grid Grid.Row="1">
                     <!-- CONTENT -->
-                    <Label Content="Place content here"/>
+                    <Label Style="{DynamicResource H3}" Content="Place content here"/>
                 </Grid>
             </Grid>
         </Border>

@@ -9,8 +9,8 @@
       Title="ChaptersPage"
       MinHeight="450"
       MinWidth="400"
-      MaxHeight="750"
-      MaxWidth="1420">
+      MaxWidth="1420"
+      MaxHeight="750">
 
     <!-- STYLING TEMPLATES -->
     <Page.Resources>
@@ -19,7 +19,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListBoxItem">
-                        <Border Margin="10" Height="75" Width="300" BorderThickness="0" CornerRadius="5" Background="White">
+                        <Border Margin="10" Height="75" Width="300" BorderThickness="0" CornerRadius="5" Background="{DynamicResource BackgroundColor}">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="75*"/>
@@ -33,8 +33,8 @@
                                 <Border x:Name="EpisodeNumberBox" CornerRadius="5, 0, 0, 5" Width="75" Grid.RowSpan="3" HorizontalAlignment="Left" Background="{DynamicResource Failed}">
                                     <TextBlock Text="{Binding [1]}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="48" Foreground="White"/>
                                 </Border>
-                                <TextBlock Text="{Binding [2]}" Grid.Column="1" Grid.RowSpan="3" Margin="10, 0, 0, 0" FontSize="16" VerticalAlignment="Center" Foreground="Black"/>
-                                <TextBlock x:Name="HighscoreBlock" Visibility="Hidden" Grid.Column="1" Grid.Row="2" Margin="10, 0, 0, 0" FontSize="12" VerticalAlignment="Top" Foreground="Black">
+                                <TextBlock Text="{Binding [2]}" Grid.Column="1" Grid.RowSpan="3" Margin="10, 0, 0, 0" FontSize="16" VerticalAlignment="Center" Foreground="{DynamicResource TextColor}"/>
+                                <TextBlock x:Name="HighscoreBlock" Visibility="Hidden" Grid.Column="1" Grid.Row="2" Margin="10, 0, 0, 0" FontSize="12" VerticalAlignment="Top" Foreground="{DynamicResource TextColor}">
                                         <Run Text="Highscore: "/>
                                         <Run x:Name="Highscore"/>
                                 </TextBlock>
@@ -79,7 +79,7 @@
                 </Grid>
                 <Grid Grid.Row="1" VerticalAlignment="Top">
                     <!-- Chapter overview ListBox -->
-                    <ListBox Name="EpOverview" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderBrush="{x:Null}" Foreground="White" 
+                    <ListBox Background="{DynamicResource BackgroundColor}" Name="EpOverview" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderBrush="{x:Null}" Foreground="{DynamicResource BackgroundColor}" 
                              HorizontalContentAlignment="Stretch" ItemContainerStyle="{DynamicResource ListBoxItemTemplate}" Margin="-2, 0">
                         <ListBox.OpacityMask>
                             <LinearGradientBrush EndPoint="0,1"
@@ -87,9 +87,9 @@
                                 <GradientStop Color="Transparent"
                                               Offset="0" />
                                 <GradientStop Color="White"
-                                              Offset="0.07" />
+                                              Offset="0.02" />
                                 <GradientStop Color="White"
-                                              Offset="0.93" />
+                                              Offset="0.98" />
                                 <GradientStop Color="Transparent" 
                                               Offset="1"/>
                             </LinearGradientBrush>
@@ -107,13 +107,13 @@
                                         <Setter Property="Template">
                                             <Setter.Value>
                                                 <ControlTemplate>
-                                                    <Expander Background="#f3f3f3" Margin="0, 10" BorderThickness="2" BorderBrush="{DynamicResource Color4}" IsExpanded="False" Padding="10">
+                                                    <Expander Background="{DynamicResource BackgroundColor}" Margin="0, 10" BorderThickness="2" BorderBrush="{DynamicResource Color4}" IsExpanded="False" Padding="10">
                                                         <Expander.Header>
                                                             <StackPanel Orientation="Horizontal" >
-                                                                <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="22"/>
-                                                                <TextBlock Text=" - " FontSize="22"/>
-                                                                <TextBlock Text="{Binding ItemCount}" FontSize="22" FontStyle="Italic"/>
-                                                                <TextBlock Text=" episode(s) " FontSize="22" FontStyle="Italic"/>
+                                                                <Label Style="{DynamicResource H3}" Content="{Binding Name}" FontWeight="Bold"/>
+                                                                <Label Style="{DynamicResource H3}" Content="-"/>
+                                                                <Label Style="{DynamicResource H3}" Content="{Binding ItemCount}" FontStyle="Italic"/>
+                                                                <Label Style="{DynamicResource H3}" Content="episode(s)" FontStyle="Italic"/>
                                                             </StackPanel>
                                                         </Expander.Header>
                                                         <ItemsPresenter />
@@ -130,5 +130,10 @@
             </Grid>
         </Border>
         <Components:Navbar CurrentPage="ChaptersPage"/>
+                <Grid Grid.Row="2" HorizontalAlignment="Center">
+                    <Components:Navbar CurrentPage="ChaptersPage"/>
+                </Grid>
+            </Grid>
+        </Border>
     </Grid>
 </local:JumpPage>

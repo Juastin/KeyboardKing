@@ -21,7 +21,7 @@
             </Grid.RowDefinitions>
             <Grid Grid.Row="0" VerticalAlignment="Center">
                 <Label Style="{DynamicResource H1}" Content="Registreren" HorizontalAlignment="Left"/>
-                <TextBox x:Name="error" VerticalContentAlignment="Center" HorizontalAlignment="Right" Width="450" Height="55"  FontSize="20" IsHitTestVisible="False" BorderBrush="{x:Null}" HorizontalContentAlignment="Right"/>
+                <TextBox Style="{DynamicResource ErrorTextBox}" x:Name="error" HorizontalAlignment="Right" Width="450"/>
             </Grid>
             <Grid Grid.Row="1">
                 <StackPanel Orientation="Vertical">
@@ -50,8 +50,8 @@
                 </StackPanel>
             </Grid>
             <Grid Grid.Row="2" VerticalAlignment="Bottom">
-                <Components:NavigationButton Style="{DynamicResource Button1}" Content="Ga naar login" ToPage="LoginPage" HorizontalAlignment="Left" Width="150"/>
-                <Button Style="{DynamicResource Button1}" Content="Registreer" Tag="" Click="BRegister" HorizontalAlignment="Right" Width="150"/>
+                <Components:NavigationButton Style="{DynamicResource Button1}" ToPage="LoginPage" Content="Ga naar login" HorizontalAlignment="Left" Width="150"/>
+                <Button Style="{DynamicResource Button1}" Content="Registreer" Tag="RegisterPage" Click="BRegister" HorizontalAlignment="Right" Width="150"/>
             </Grid>
         </Grid>
     </Border>

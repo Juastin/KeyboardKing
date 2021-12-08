@@ -96,7 +96,7 @@
                     </Border>
                 </Grid>
                 <Grid Grid.Row="2" VerticalAlignment="Bottom">
-                    <Components:NavigationButton ToPage="ChaptersPage" Style="{DynamicResource Button1}" Content="Voltooi episode" HorizontalAlignment="Right"/>
+                    <Components:NavigationButton ToPage="ChaptersPage" Style="{DynamicResource Button1}" HorizontalAlignment="Right" Content="Voltooi episode"/>
                 </Grid>
             </Grid>
         </Border>

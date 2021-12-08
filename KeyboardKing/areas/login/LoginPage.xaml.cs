@@ -59,8 +59,8 @@ namespace KeyboardKing.areas.login
                     bool passwordResult = Encryption.VerifyHash(boxPassword.Password, results[0][4], results[0][3]);
                     if (passwordResult)
                     {
-                        string[] Items = {results[0][0], results[0][1], results[0][2], results[0][5]};
-                        Session.Add("student", Items);
+                        UList student = new UList(new object[]{results[0][0], results[0][1], results[0][2], results[0][5]});
+                        Session.Add("student", student);
 
                         if (results[0][5] == string.Empty)
                         {

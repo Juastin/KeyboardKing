@@ -5,6 +5,7 @@ using KeyboardKing.areas.play;
 using KeyboardKing.core;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,9 +19,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Controller;
 using Model;
 using Model.event_args;
+using KeyboardKing.areas.info;
 
 namespace KeyboardKing
 {
@@ -46,6 +47,10 @@ namespace KeyboardKing
         /// </summary>
         private Dictionary<Pages, JumpPage> _pages {get;set;}
 
+        private Dictionary<string, Theme> _themes;
+
+        private ResourceDictionary themeDictionary = Application.Current.Resources.MergedDictionaries[0];
+
         public MainWindow()
         {
             InitializeComponent();
@@ -58,6 +63,9 @@ namespace KeyboardKing
             _mainFrame = MainFrame;
             _pages = new()
             {
+                // info area
+                {Pages.MessagePage, new MessagePage(this)},
+
                 // login area
                 {Pages.LoginPage, new LoginPage(this)},
                 {Pages.RegisterPage, new RegisterPage(this)},
@@ -73,10 +81,24 @@ namespace KeyboardKing
                 {Pages.EpisodePage, new EpisodePage(this)},
                 {Pages.EpisodeResultPage, new EpisodeResultPage(this)},
                 {Pages.MatchOverviewPage, new MatchOverviewPage(this)},
+                {Pages.MatchCreatePage, new MatchCreatePage(this)},
                 {Pages.MatchLobbyPage, new MatchLobbyPage(this)},
                 {Pages.MatchPlayingPage, new MatchPlayingPage(this)},
                 {Pages.MatchResultPage, new MatchResultPage(this)},
             };
+
+            _themes = new()
+            {
+                {"Light", new Theme("Light Theme", "resources/themes/LightTheme.xaml", "resources/images/kk_background_4K.png")},
+                {"Dark", new Theme("Dark Theme", "resources/themes/DarkTheme.xaml", "resources/images/kk_background_dark.png")},
+                {"Paint", new Theme("Paint Theme", "resources/themes/PaintTheme.xaml", "resources/images/paint_theme_background.png")},
+                {"Space", new Theme("Space Theme", "resources/themes/SpaceTheme.xaml", "resources/images/space_theme_background.png")},
+            };
+
+            CBTheme.ItemsSource = _themes;
+            CBTheme.SelectedValue = "Light";
+            CBTheme.DisplayMemberPath = "Value.ThemeTitle";
+            CBTheme.SelectedValuePath = "Key";
 
             // Navigate to the first view.
             NavigationController.Navigate += OnNavigate;
@@ -165,6 +187,24 @@ namespace KeyboardKing
         private void CloseWindow_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        //Switch from theme according to the given paths.
+        private void ChangeTheme(Theme theme)
+        {
+            themeDictionary.Clear();
+            themeDictionary.MergedDictionaries.Add(new ResourceDictionary() { Source = theme.ThemeUri });
+            MainBackground.ImageSource = new BitmapImage(theme.BackgroundUri);
+        }
+
+        private void CBTheme_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            object value = CBTheme.SelectedValue;
+            Theme theme;
+            if (_themes.TryGetValue((string)value, out theme))
+            {
+                ChangeTheme(theme);
+            }
         }
     }
 }

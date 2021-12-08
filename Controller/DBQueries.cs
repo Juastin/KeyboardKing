@@ -21,7 +21,6 @@ namespace Controller
         {
             return DBHandler.SelectQuery(new SqlCommand("SELECT id, username FROM [dbo].[User]", null));
         }
-       
 
         public static bool AddUser(string username, string email, string password, string salt)
         {
@@ -46,9 +45,7 @@ namespace Controller
             return DBHandler.Query(cmd);
         }
 
-   
-
-        public static bool AddSkill(string skilllevel, string[] Data)
+        public static bool AddSkill(string skilllevel, UList data)
         {
             SqlCommand cmd = new SqlCommand("UPDATE [dbo].[UserSettings] set skilllevel = @skill WHERE userid = @id");
 
@@ -57,7 +54,7 @@ namespace Controller
 
 
             skilllevelParam.Value = skilllevel;
-            idParam.Value = Data[0];
+            idParam.Value = data.Get<int>(0);
 
             cmd.Parameters.Add(skilllevelParam);
             cmd.Parameters.Add(idParam);
@@ -109,7 +106,7 @@ namespace Controller
             return result.Count == 1 && result[0].Count == 6 ? result : new List<List<string>>();
         }
 
-        public static List<List<string>> GetAllEpisodes(string[] User)
+        public static List<List<string>> GetAllEpisodes(UList user)
         {
             SqlCommand cmd = new SqlCommand("SELECT [dbo].[Chapter].name, episode, [dbo].[Episode].name, [dbo].[Episode].id, " +
                 "CASE WHEN [dbo].[EpisodeResult].userid IS NULL THEN 'False' ELSE 'True' END AS completed, " +
@@ -123,14 +120,14 @@ namespace Controller
                 "GROUP BY [dbo].[Chapter].name, episode, [dbo].[Episode].name, [dbo].[Episode].id, [dbo].[EpisodeResult].userid");
 
             SqlParameter UserIdParam = new SqlParameter("@userid", SqlDbType.Int, 0);
-            UserIdParam.Value = User[0];
+            UserIdParam.Value = user.Get<int>(0);
 
             cmd.Parameters.Add(UserIdParam);
 
             return DBHandler.SelectQuery(cmd);
         }
 
-        public static List<List<string>> GetAllEpisodeStepsFromEpisode(string id)
+        public static List<List<string>> GetAllEpisodeStepsFromEpisode(int id)
         {
             SqlCommand cmd = new SqlCommand("SELECT word " +
                 "FROM [dbo].[EpisodeStep] " +
@@ -153,6 +150,48 @@ namespace Controller
                 "LEFT JOIN [dbo].[Episode] e ON m.episodeid = e.id " +
                 "GROUP BY m.id, u.username, m.id, e.name", null);
             return DBHandler.SelectQuery(cmd);
+        }
+
+        public static List<List<string>> GetAllUsersInMatch()
+        {
+            SqlCommand cmd = new SqlCommand("SELECT userid " +
+                                            "FROM [dbo].[Match] m " +
+                                            "RIGHT JOIN [dbo].[MatchProgress] mp ON m.id = mp.matchid " +
+                                            "WHERE m.state != 2 ", null);
+            return DBHandler.SelectQuery(cmd);
+        }
+
+        public static int AddMatch(int episodeid, UList user)
+        {
+            SqlCommand cmd = new SqlCommand("INSERT INTO [dbo].[Match] (episodeid, creatorid) output INSERTED.id VALUES(@episodeid, @creatorid)");
+
+            SqlParameter episodeId = new SqlParameter("@episodeid", SqlDbType.Int, 255);
+            SqlParameter creatorId = new SqlParameter("@creatorid", SqlDbType.Int, 0);
+
+            episodeId.Value = episodeid;
+            creatorId.Value = user.Get<int>(0);
+
+            cmd.Parameters.Add(episodeId);
+            cmd.Parameters.Add(creatorId);
+
+            return DBHandler.QueryScalar<int>(cmd);
+        }
+
+        public static bool AddMatchProgress(int matchid, UList user)
+        {
+            SqlCommand cmd = new SqlCommand("INSERT INTO [dbo].[MatchProgress] (matchid, userid, progress,score,mistakes,lettersperminute,time) " +
+                                            "VALUES (@matchid, @userid, 0, 0, 0, 0, 0)", null);
+
+            SqlParameter matchId = new SqlParameter("@matchid", SqlDbType.Int, 255);
+            SqlParameter userId = new SqlParameter("@userid", SqlDbType.Int, 0);
+
+            matchId.Value = matchid;
+            userId.Value = user.Get<int>(0);
+
+            cmd.Parameters.Add(matchId);
+            cmd.Parameters.Add(userId);
+
+            return DBHandler.Query(cmd);
         }
     }
 }

@@ -49,8 +49,8 @@ namespace Controller
             }
             finally
             {
-                if (rdr != null) { rdr.Close(); }
-                if (_connection != null) { _connection.Close(); }
+                rdr?.Close();
+                _connection?.Close();
             }
             return result;
         }
@@ -71,7 +71,26 @@ namespace Controller
             }
             finally
             {
-                if (_connection != null) { _connection.Close(); }
+                _connection?.Close();
+            }
+        }
+        // Query for scalar queries
+        public static T QueryScalar<T>(SqlCommand cmd)
+        {
+            try
+            {
+                _connection.Open();
+                cmd.Connection = _connection;
+                cmd.Prepare();
+                return (T)cmd.ExecuteScalar();
+            }
+            catch
+            {
+                return default;
+            }
+            finally
+            {
+                _connection?.Close();
             }
         }
 
