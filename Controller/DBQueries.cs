@@ -227,7 +227,7 @@ namespace Controller
 
         public static bool DeleteMatch(int matchid)
         {
-            SqlCommand cmd = new SqlCommand("DELETE FROM [dbo].[Match] WHERE matchid = @matchid;");
+            SqlCommand cmd = new SqlCommand("DELETE FROM [dbo].[Match] WHERE id = @matchid;");
 
             SqlParameter matchId = new SqlParameter("@matchid", SqlDbType.Int, 255);
             matchId.Value = matchid;
