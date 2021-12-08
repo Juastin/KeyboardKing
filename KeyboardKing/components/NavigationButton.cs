@@ -49,7 +49,6 @@ namespace KeyboardKing.components
     public class NavigationButton : Button
     {
         public Pages ToPage { get; set; } = Pages.Empty;
-        public bool BoolParam { get; set; } = false;
 
         static NavigationButton()
         {

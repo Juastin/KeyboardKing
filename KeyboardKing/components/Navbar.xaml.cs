@@ -5,6 +5,9 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
 using Model;
+using Controller;
+using System.Diagnostics;
+using System.Windows.Threading;
 
 namespace KeyboardKing.components
 {
@@ -14,9 +17,6 @@ namespace KeyboardKing.components
     public partial class Navbar : UserControl
     {
         public Pages CurrentPage { get; set; } = Pages.Empty;
-        public static Pages StaticCurrentPage { get; set; } = Pages.Empty;
-        public static bool TestBoolShould { get; set; } = true;
-
         private SolidColorBrush _backgroundColor { get; set; }
         private SolidColorBrush _foregroundColor { get; set; }
 
@@ -30,26 +30,7 @@ namespace KeyboardKing.components
 
         public void OnLoaded(object sender, RoutedEventArgs e)
         {
-            StaticCurrentPage = CurrentPage;
-            //switch (CurrentPage)
-            //{
-            //    case Pages.ChaptersPage:
-            //        Button_ChaptersPage.Background = _backgroundColor;
-            //        Button_ChaptersPage.Foreground = _foregroundColor;
-            //        break;
-            //    case Pages.FavoritesPage:
-            //        Button_FavoritesPage.Background = _backgroundColor;
-            //        Button_FavoritesPage.Foreground = _foregroundColor;
-            //        break;
-            //    case Pages.MatchOverviewPage:
-            //        Button_MatchOverviewPage.Background = _backgroundColor;
-            //        Button_MatchOverviewPage.Foreground = _foregroundColor;
-            //        break;
-            //    case Pages.SettingsPage:
-            //        Button_SettingsPage.Background = _backgroundColor;
-            //        Button_SettingsPage.Foreground = _foregroundColor;
-            //        break;
-            //}
+            
         }
     }
 
@@ -57,7 +38,11 @@ namespace KeyboardKing.components
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return true;
+            Trace.WriteLine(value.ToString());
+            Trace.WriteLine(NavigationController.CurrentPage.ToString());
+            if (Enum.TryParse(value.ToString(), out Pages page))
+                return page == NavigationController.CurrentPage;
+            return false;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
