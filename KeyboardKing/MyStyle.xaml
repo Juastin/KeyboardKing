@@ -335,6 +335,8 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+   
     <Style x:Key="TextBox2" TargetType="{x:Type TextBox}">
         <Setter Property="Background" Value="{DynamicResource BackgroundColor}" />
         <Setter Property="Foreground" Value="{DynamicResource TextColor}" />
