@@ -96,7 +96,7 @@ namespace KeyboardKing
             };
 
             CBTheme.ItemsSource = _themes;
-            CBTheme.SelectedValue = "Space";
+            CBTheme.SelectedValue = "Chinese";
             CBTheme.DisplayMemberPath = "Value.ThemeTitle";
             CBTheme.SelectedValuePath = "Key";
 
