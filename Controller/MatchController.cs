@@ -44,5 +44,10 @@ namespace Controller
             _currentMatchId = int.Parse(selectedValue);
             DBQueries.AddMatchProgress(_currentMatchId, (UList)Session.Get("student"));
         }
+
+        public static void RemoveUserInMatchProgress()
+        {
+            DBQueries.RemoveUserInMatch(_currentMatchId, (UList)Session.Get("student"));
+        }
     }
 }
