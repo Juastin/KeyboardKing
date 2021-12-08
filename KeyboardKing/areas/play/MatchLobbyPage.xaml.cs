@@ -63,7 +63,8 @@ namespace KeyboardKing.areas.play
 
         private void BExitMatch(object sender, EventArgs e)
         {
-            MessageBox.Show("Verlaat de Match");
+            MatchController.RemoveUserInMatchProgress();
+            NavigationController.NavigateToPage(Pages.MatchOverviewPage);
         }
 
         private void UpdateListView()

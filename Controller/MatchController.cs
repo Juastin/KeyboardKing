@@ -37,7 +37,7 @@ namespace Controller
 
         /// <summary>
         /// <para>This method will add a user in MatchProgress to the database</para>
-        /// It does this by getting the id of the chosen Match and inserting it into MatchProgress with the logged user.
+        /// It does this by getting the id of the chosen Match and inserting it in MatchProgressr.
         /// </summary>
         public static void AddUserInMatchProgress(string selectedValue)
         {
@@ -45,6 +45,10 @@ namespace Controller
             DBQueries.AddMatchProgress(_currentMatchId, (UList)Session.Get("student"));
         }
 
+        /// <summary>
+        /// <para>This method will remove a user in MatchProgress to the database</para>
+        /// It does this by getting the id of the Match the user joined and delete it in MatchProgress.
+        /// </summary>
         public static void RemoveUserInMatchProgress()
         {
             DBQueries.RemoveUserInMatch(_currentMatchId, (UList)Session.Get("student"));
