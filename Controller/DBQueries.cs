@@ -19,7 +19,7 @@ namespace Controller
 
         public static List<List<string>> GetAllUsers()
         {
-            return DBHandler.SelectQuery(new SqlCommand("SELECT id, username FROM [dbo].[User]", null));
+            return DBHandler.SelectQuery(new SqlCommand("SELECT id, username FROM [dbo].[User]"));
         }
 
         public static bool AddUser(string username, string email, string password, string salt)
@@ -65,7 +65,7 @@ namespace Controller
         public static bool SaveResult(EpisodeResult es, int episodeId, int userId)
         {
             SqlCommand cmd = new SqlCommand("INSERT INTO [dbo].[EpisodeResult] (episodeid, userid, score, mistakes, lettersperminute, time) " +
-                                            "VALUES (@episodeid, @userid, @score, @mistakes, @lpm, @time)", null);
+                                            "VALUES (@episodeid, @userid, @score, @mistakes, @lpm, @time)");
             SqlParameter episodeidParam = new SqlParameter("@episodeid", SqlDbType.Int, 0);
             SqlParameter useridParam = new SqlParameter("@userid", SqlDbType.Int, 0);
             SqlParameter scoreParam = new SqlParameter("@score", SqlDbType.Int, 0);
@@ -94,7 +94,7 @@ namespace Controller
         {
  
             SqlCommand cmd = new SqlCommand("UPDATE [dbo].[MatchProgress] set score = @score, mistakes = @mistakes, lettersperminute = @lpm, time = @time " +
-                                "WHERE userId = @userid AND matchId = @matchid", null);
+                                "WHERE userId = @userid AND matchId = @matchid");
 
             SqlParameter matchidParam = new SqlParameter("@matchid", SqlDbType.Int, 0);
             SqlParameter useridParam = new SqlParameter("@userid", SqlDbType.Int, 0);
@@ -126,7 +126,7 @@ namespace Controller
                                             "FROM[dbo].[User] " +
                                             "LEFT JOIN [dbo].[UserSettings] " +
                                             "ON [dbo].[User].id = [dbo].[UserSettings].userid " +
-                                            "WHERE email = @email", null);
+                                            "WHERE email = @email");
 
             SqlParameter emailParam = new SqlParameter("@email", SqlDbType.VarChar, 255);
             emailParam.Value = email;
@@ -162,7 +162,7 @@ namespace Controller
             SqlCommand cmd = new SqlCommand("SELECT word " +
                 "FROM [dbo].[EpisodeStep] " +
                 "WHERE episodeid = @id " +
-                "ORDER BY NEWID()", null);
+                "ORDER BY NEWID()");
 
             SqlParameter episodeIdParam = new SqlParameter("@id", SqlDbType.Int, 255);
             episodeIdParam.Value = id;
@@ -179,7 +179,7 @@ namespace Controller
                 "LEFT JOIN [dbo].[User] u ON m.creatorid = u.id " +
                 "LEFT JOIN [dbo].[Episode] e ON m.episodeid = e.id " +
                 "WHERE m.state = 0 " + 
-                "GROUP BY m.id, u.username, m.id, e.name", null);
+                "GROUP BY m.id, u.username, m.id, e.name");
             return DBHandler.SelectQuery(cmd);
         }
 
@@ -188,14 +188,14 @@ namespace Controller
             SqlCommand cmd = new SqlCommand("SELECT userid " +
                                             "FROM [dbo].[Match] m " +
                                             "RIGHT JOIN [dbo].[MatchProgress] mp ON m.id = mp.matchid " +
-                                            "WHERE m.state != 2 ", null);
+                                            "WHERE m.state != 2 ");
             return DBHandler.SelectQuery(cmd);
         }
 
 
         public static bool SetPlayState(int matchid, int state)
         {
-            SqlCommand cmd = new SqlCommand("UPDATE [dbo].[Match] set state = @state WHERE id = @matchid ", null);
+            SqlCommand cmd = new SqlCommand("UPDATE [dbo].[Match] set state = @state WHERE id = @matchid ");
 
             SqlParameter matchId = new SqlParameter("@matchid", SqlDbType.Int, 0);
             SqlParameter State = new SqlParameter("@state", SqlDbType.Int, 0);
@@ -229,7 +229,7 @@ namespace Controller
         public static bool AddMatchProgress(int matchid, UList user)
         {
             SqlCommand cmd = new SqlCommand("INSERT INTO [dbo].[MatchProgress] (matchid, userid, progress,score,mistakes,lettersperminute,time) " +
-                                            "VALUES (@matchid, @userid, 0, 0, 0, 0, 0)", null);
+                                            "VALUES (@matchid, @userid, 0, 0, 0, 0, 0)");
 
             SqlParameter matchId = new SqlParameter("@matchid", SqlDbType.Int, 255);
             SqlParameter userId = new SqlParameter("@userid", SqlDbType.Int, 0);
@@ -250,7 +250,7 @@ namespace Controller
              "LEFT JOIN [dbo].[Match] m ON mp.matchid = m.id " +
              "LEFT JOIN [dbo].[Episode] e ON m.episodeid = e.id " +
              "LEFT JOIN [dbo].[User] u ON mp.userid = u.id " +
-             "WHERE mp.matchid = @matchid", null);
+             "WHERE mp.matchid = @matchid");
 
             SqlParameter matchId = new SqlParameter("@matchid", SqlDbType.Int, 255);
             matchId.Value = matchid;
