@@ -161,8 +161,22 @@ namespace Controller
             return DBHandler.SelectQuery(cmd);
         }
 
-    
 
+        public static bool SetPlayState(int matchid, int state)
+        {
+            SqlCommand cmd = new SqlCommand("UPDATE [dbo].[Match] set state = @state WHERE id = @matchid");
+
+            SqlParameter matchId = new SqlParameter("@matchid", SqlDbType.Int, 0);
+            SqlParameter State = new SqlParameter("@state", SqlDbType.Int, 0);
+
+            matchId.Value = matchid;
+            State.Value = state;
+
+            cmd.Parameters.Add(matchId);
+            cmd.Parameters.Add(State);
+
+            return DBHandler.Query(cmd);
+        }
 
 
         public static int AddMatch(int episodeid, UList user)
@@ -212,5 +226,7 @@ namespace Controller
             cmd.Parameters.Add(matchId);
             return DBHandler.SelectQuery(cmd);
         }
+
+      
     }
 }

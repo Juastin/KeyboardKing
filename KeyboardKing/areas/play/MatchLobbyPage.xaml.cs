@@ -46,7 +46,7 @@ namespace KeyboardKing.areas.play
 
             int state = 5;
 
-            if(_matchInfoLoad[0][10] == state.ToString())
+            if(_matchInfoLoad[0][10].Equals(state.ToString()))
             {
                 EpOverview_PlayClick(null, (RoutedEventArgs)EventArgs.Empty);
             }
@@ -73,10 +73,15 @@ namespace KeyboardKing.areas.play
 
             // set state to 5 om potje te starten
 
-            MatchController.EpisodeFinished += OnEpisodeFinished;
-            Episode episode = MatchController.ParseEpisode(int.Parse(_matchInfoLoad[0][9]));
-            MatchController.Initialise(episode);
-            NavigationController.NavigateToPage(Pages.MatchPlayingPage);
+            bool startGame = DBQueries.SetPlayState(int.Parse(_matchInfoLoad[0][9]), 5);
+
+            if(startGame == true)
+            {
+                MatchController.EpisodeFinished += OnEpisodeFinished;
+                Episode episode = MatchController.ParseEpisode(int.Parse(_matchInfoLoad[0][9]));
+                MatchController.Initialise(episode);
+                NavigationController.NavigateToPage(Pages.MatchPlayingPage);
+            }
         }
 
         private void OnEpisodeFinished(object sender, EventArgs e)
