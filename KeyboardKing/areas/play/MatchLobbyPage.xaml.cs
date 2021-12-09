@@ -23,7 +23,7 @@ namespace KeyboardKing.areas.play
     /// </summary>
     public partial class MatchLobbyPage : JumpPage
     {
-        private DateTime _tickCheck { get; set; } = DateTime.Now;
+        //private DateTime _tickCheck { get; set; } = DateTime.Now;
 
         private List<List<string>> _matchInfoLoad;
 
@@ -53,19 +53,14 @@ namespace KeyboardKing.areas.play
 
         public override void OnTick()
         {
-            DateTime now = DateTime.Now;
+/*            DateTime now = DateTime.Now;
             if (_tickCheck.AddSeconds(5) < now) // if 5 seconds have passed
             {
                 _tickCheck = now;
-                UpdateListView();
-            }
 
-            _matchInfoLoad = DBQueries.GetMatchProgress(MatchController.GetMatchId());
-            int state = int.Parse(_matchInfoLoad[0][10]);
-            if (state == 1)
-            {
-                StartGame();
-            }
+            }*/
+
+            UpdateListView();
 
         }
 
@@ -109,7 +104,7 @@ namespace KeyboardKing.areas.play
 
         private void UpdateListView()
         {
-            List<List<string>> matchInfo = MatchController.GetMatchProgressInfo();
+            _matchInfoLoad = MatchController.GetMatchProgressInfo();
             List<MatchLobbyData> items = new List<MatchLobbyData>();
             int counter = 0;
             while (counter < _matchInfoLoad.Count)
@@ -117,6 +112,13 @@ namespace KeyboardKing.areas.play
                 items.Add(new MatchLobbyData() { Username = _matchInfoLoad[counter][1] });
                 counter++;
             }
+
+            int state = int.Parse(_matchInfoLoad[0][10]);
+            if (state == 1)
+            {
+                StartGame();
+            }
+
             this.Dispatcher.Invoke(() =>
             {
                 LvMatch.ItemsSource = items;
