@@ -120,7 +120,7 @@ namespace KeyboardKing.areas.play
             TimerTextBox.Text = result.ToString("mm':'ss");
         }
 
-        private void ButtonExit(object sender, EventArgs e)
+        private void ButtonPause(object sender, EventArgs e)
         {
             MusicPlayer.PlayNextFrom("menu_music");
             NavigationController.NavigateToPage(Pages.ChaptersPage);
