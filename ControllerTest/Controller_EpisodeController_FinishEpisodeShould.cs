@@ -48,14 +48,6 @@ namespace ControllerTest
         //}
 
         [Test]
-        public void CalculateTime_ReturnsCorrect()
-        {
-           TimeSpan diffTime = EpisodeController.CalculateTime(StartTime);
-           TimeSpan tsStartTime = TimeSpan.FromTicks(StartTime.Ticks);
-           Assert.AreNotEqual(tsStartTime, diffTime);
-        }
-
-        [Test]
         public void CalculateScore_ReturnCorrect()
         {
             int score = EpisodeController.CalculateScore(EpisodeController.CurrentEpisodeResult.MaxScore, 5);
