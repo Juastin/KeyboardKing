@@ -27,6 +27,7 @@ namespace KeyboardKing.areas.play
 
         private List<List<string>> _matchInfoLoad;
 
+
         /// <summary>
         /// Controller for <see cref="MatchLobbyPage"/>
         /// </summary>
@@ -42,6 +43,13 @@ namespace KeyboardKing.areas.play
             lEpisodeMatch.Content = _matchInfoLoad[0][2];
             UpdateListView();
             //TODO: check if creatorid == userid -> startmatchbutton is visible for creator
+
+            int state = 5;
+
+            if(_matchInfoLoad[0][10] == state.ToString())
+            {
+                EpOverview_PlayClick(null, (RoutedEventArgs)EventArgs.Empty);
+            }
         }
 
         public override void OnShadow()
@@ -61,6 +69,10 @@ namespace KeyboardKing.areas.play
 
         private void EpOverview_PlayClick(object sender, RoutedEventArgs e)
         {
+            // query die checkt als iedereen ready is
+
+            // set state to 5 om potje te starten
+
             MatchController.EpisodeFinished += OnEpisodeFinished;
             Episode episode = MatchController.ParseEpisode(int.Parse(_matchInfoLoad[0][9]));
             MatchController.Initialise(episode);
@@ -72,6 +84,18 @@ namespace KeyboardKing.areas.play
             MatchController.EpisodeFinished -= OnEpisodeFinished;
             NavigationController.NavigateToPage(Pages.MatchResultPage);
         }
+
+        private void SetPlayerReady(object sender, RoutedEventArgs e)
+        {
+            if(ready.Content.ToString() == "Ready?" || ready.Content.ToString() == "No")
+            {
+                ready.Content = "Yes";
+            } else
+            {
+                ready.Content = "No";
+            }
+        }
+
 
         private void BExitMatch(object sender, EventArgs e)
         {

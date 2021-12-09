@@ -161,6 +161,10 @@ namespace Controller
             return DBHandler.SelectQuery(cmd);
         }
 
+    
+
+
+
         public static int AddMatch(int episodeid, UList user)
         {
             SqlCommand cmd = new SqlCommand("INSERT INTO [dbo].[Match] (episodeid, creatorid) output INSERTED.id VALUES(@episodeid, @creatorid)");
@@ -196,7 +200,7 @@ namespace Controller
 
         public static List<List<string>> GetMatchProgress(int matchid)
         {
-            SqlCommand cmd = new SqlCommand("SELECT mp.matchid, u.username, e.name, mp.progress, mp.score, mp.mistakes, mp.lettersperminute, mp.time, m.creatorid, m.episodeid " +
+            SqlCommand cmd = new SqlCommand("SELECT mp.matchid, u.username, e.name, mp.progress, mp.score, mp.mistakes, mp.lettersperminute, mp.time, m.creatorid, m.episodeid, m.state " +
              "FROM [dbo].[MatchProgress] mp " +
              "LEFT JOIN [dbo].[Match] m ON mp.matchid = m.id " +
              "LEFT JOIN [dbo].[Episode] e ON m.episodeid = e.id " +
