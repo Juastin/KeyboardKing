@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Model;
 
 namespace KeyboardKing.areas.play
 {
@@ -22,6 +23,8 @@ namespace KeyboardKing.areas.play
     /// </summary>
     public partial class MatchLobbyPage : JumpPage
     {
+        private DateTime _tickCheck { get; set; } = DateTime.Now;
+
         /// <summary>
         /// Controller for <see cref="MatchLobbyPage"/>
         /// </summary>
@@ -33,8 +36,10 @@ namespace KeyboardKing.areas.play
 
         public override void OnLoad()
         {
-            /* Useful for later: query for getting matchProgressData with MatchId*/
-            lMatchId.Content = "MatchId: " + MatchController.GetMatchId();
+            List<List<string>> matchInfo = DBQueries.GetMatchProgress(MatchController.GetMatchId());
+            lEpisodeMatch.Content = matchInfo[0][2];
+            UpdateListView();
+            if (!MatchController.CheckUserIsCreator()) { StartMatchB.Visibility = Visibility.Hidden; }
         }
 
         public override void OnShadow()
@@ -43,6 +48,52 @@ namespace KeyboardKing.areas.play
 
         public override void OnTick()
         {
+            DateTime now = DateTime.Now;
+            if (_tickCheck.AddSeconds(5) < now) // if 5 seconds have passed
+            {
+                _tickCheck = now;
+                UpdateListView();
+            }
+        }
+
+        private void UpdateListView()
+        {
+            List<List<string>> matchInfo = MatchController.GetMatchProgressInfo();
+            List<MatchLobbyData> items = new List<MatchLobbyData>();
+            int counter = 0;
+            while (counter < matchInfo.Count)
+            {
+                items.Add(new MatchLobbyData() { Username = matchInfo[counter][1] });
+                counter++;
+            }
+            this.Dispatcher.Invoke(() =>
+            {
+                LvMatch.ItemsSource = items;
+            });
+        }
+
+        private void BStartMatch(object sender, EventArgs e)
+        {
+            MessageBox.Show("Start de match");
+        }
+
+        private void BExitMatch(object sender, EventArgs e)
+        {
+            if (MatchController.CheckUserIsCreator())
+            {
+                if (MatchController.CheckCreatorIsAloneInMatch())
+                {
+                    MatchController.DeleteMatch();
+                    MessageBox.Show("Match is deleted");
+                    NavigationController.NavigateToPage(Pages.MatchOverviewPage);
+                }
+                else { MessageBox.Show("Je kan momenteel niet de match verlaten. Je bent de creator"); }
+            }
+            else
+            {
+                MatchController.RemoveUserInMatchProgress();
+                NavigationController.NavigateToPage(Pages.MatchOverviewPage);
+            }
         }
     }
 }
