@@ -91,7 +91,6 @@ namespace KeyboardKing.areas.play
         private void OnEpisodeFinished(object sender, EventArgs e)
         {
             MatchController.EpisodeFinished -= OnEpisodeFinished;
-            DBQueries.SetPlayState(int.Parse(_matchInfoLoad[0][0]), 2);
             NavigationController.NavigateToPage(Pages.MatchResultPage);
         }
 
