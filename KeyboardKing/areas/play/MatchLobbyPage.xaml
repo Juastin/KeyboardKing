@@ -16,7 +16,7 @@
 
         <Button Style="{DynamicResource Button1}" Content="Leave Match" Click="BExitMatch" Height="50" Margin="519,59,48,291" />
 
-        <Button Style="{DynamicResource Button1}" Content="Start Match" Click="EpOverview_PlayClick"  Height="50" Margin="287,324,279,26"/>
+        <Button Style="{DynamicResource Button1}" x:Name="startbtn" Content="Start Match" Click="EpOverview_PlayClick"  Height="50" Margin="287,324,279,26"/>
         <Button Style="{DynamicResource Button1}" Content="Ready?" x:Name="ready" Click="SetPlayerReady"  Height="50" Margin="519,324,47,26"/>
 
         <ListView Name="LvMatch" Width="471" Margin="0,145,0,103" HorizontalAlignment="Center">

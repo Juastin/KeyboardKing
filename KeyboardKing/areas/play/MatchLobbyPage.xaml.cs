@@ -43,13 +43,10 @@ namespace KeyboardKing.areas.play
             lEpisodeMatch.Content = _matchInfoLoad[0][2];
             UpdateListView();
             //TODO: check if creatorid == userid -> startmatchbutton is visible for creator
-
             int state = 5;
-
-            if(_matchInfoLoad[0][10].Equals(state.ToString()))
-            {
-                EpOverview_PlayClick(null, (RoutedEventArgs)EventArgs.Empty);
-            }
+            if (_matchInfoLoad[0][10].Equals(state.ToString()){
+                EpOverview_PlayClick(new object(), new RoutedEventArgs());
+            }    
         }
 
         public override void OnShadow()
