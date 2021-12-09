@@ -22,7 +22,6 @@ namespace Controller
         public static int LettersTyped { get; private set; }
         private static int _wordIndex;
         private static int _wrongIndex;
-        public static bool IsStarted { get; private set; }
         
         private static Stopwatch _stopwatch;
 
@@ -38,7 +37,6 @@ namespace Controller
         public static void Start()
         {
             _stopwatch.Start();
-            IsStarted = true;
         }
 
         public static void Pause()
@@ -151,7 +149,6 @@ namespace Controller
         public static void FinishEpisode()
         {
             _stopwatch.Stop();
-            IsStarted = false;
             CurrentEpisodeResult.Time = _stopwatch.Elapsed;
             CurrentEpisodeResult.Score = CalculateScore(CurrentEpisodeResult.MaxScore, CurrentEpisodeResult.Mistakes);
             CurrentEpisodeResult.LettersPerMinute = CalculateLetterPerMinute(CurrentEpisodeResult.Time, CurrentEpisodeResult.MaxScore);
