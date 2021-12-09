@@ -1,10 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <!-- IMAGES -->
-    <BitmapImage x:Key="Wallpaper" UriSource="/resources/images/kk_background_4K.png"/>
-    <BitmapImage x:Key="MessageWallpaper" UriSource="/resources/images/blur_background_4K.png"/>
-
     <!-- COLOR SCHEMES -->
     <Color x:Key="SColor1">#000814</Color>
     <Color x:Key="SColor2">#001D3D</Color>
