@@ -22,6 +22,7 @@ namespace Controller
         public static int LettersTyped { get; private set; }
         private static int _wordIndex;
         private static int _wrongIndex;
+        private static bool _isStarted;
         
         private static Stopwatch _stopwatch;
 
@@ -37,11 +38,14 @@ namespace Controller
         public static void Start()
         {
             _stopwatch.Start();
+            _isStarted = true;
         }
 
         public static void Pause()
         {
             _stopwatch.Stop();
+
+            MessageController.Show(Pages.MessagePage, "De episode is gepauzeerd.", Pages.EpisodePage, 10);
         }
 
         /// <summary>
@@ -143,6 +147,7 @@ namespace Controller
         public static void FinishEpisode()
         {
             _stopwatch.Stop();
+            _isStarted = false;
             CurrentEpisodeResult.Time = _stopwatch.Elapsed;
             CurrentEpisodeResult.Score = CalculateScore(CurrentEpisodeResult.MaxScore, CurrentEpisodeResult.Mistakes);
             CurrentEpisodeResult.LettersPerMinute = CalculateLetterPerMinute(CurrentEpisodeResult.Time, CurrentEpisodeResult.MaxScore);

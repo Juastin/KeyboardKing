@@ -122,8 +122,10 @@ namespace KeyboardKing.areas.play
 
         private void ButtonPause(object sender, EventArgs e)
         {
-            MusicPlayer.PlayNextFrom("menu_music");
-            NavigationController.NavigateToPage(Pages.ChaptersPage);
+            EpisodeController.Pause();
+
+            //MusicPlayer.PlayNextFrom("menu_music");
+            //NavigationController.NavigateToPage(Pages.ChaptersPage);
         }
     }
 }
