@@ -43,6 +43,7 @@ namespace KeyboardKing.areas.play
             lEpisodeMatch.Content = _matchInfoLoad[0][2];
             UpdateListView();
             if (!MatchController.CheckUserIsCreator()) { startbtn.Visibility = Visibility.Hidden; }
+            else { startbtn.Visibility = Visibility.Visible; }
         }
 
         public override void OnShadow()
@@ -91,6 +92,7 @@ namespace KeyboardKing.areas.play
         private void OnEpisodeFinished(object sender, EventArgs e)
         {
             MatchController.EpisodeFinished -= OnEpisodeFinished;
+            DBQueries.SetPlayState(int.Parse(_matchInfoLoad[0][0]), 2);
             NavigationController.NavigateToPage(Pages.MatchResultPage);
         }
 
