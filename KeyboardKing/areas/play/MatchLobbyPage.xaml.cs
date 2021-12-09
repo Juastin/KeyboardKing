@@ -42,7 +42,7 @@ namespace KeyboardKing.areas.play
             _matchInfoLoad = DBQueries.GetMatchProgress(MatchController.GetMatchId());
             lEpisodeMatch.Content = _matchInfoLoad[0][2];
             UpdateListView();
-            if (!MatchController.CheckUserIsCreator()) { StartMatchB.Visibility = Visibility.Hidden; }
+            if (!MatchController.CheckUserIsCreator()) { startbtn.Visibility = Visibility.Hidden; }
         }
 
         public override void OnShadow()
