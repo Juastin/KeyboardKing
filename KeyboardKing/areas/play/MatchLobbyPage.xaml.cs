@@ -117,7 +117,7 @@ namespace KeyboardKing.areas.play
             int counter = 0;
             while (counter < _matchInfoLoad.Count)
             {
-                items.Add(new MatchLobbyData() { Username = _matchInfoLoad[counter][10] });
+                items.Add(new MatchLobbyData() { Username = _matchInfoLoad[counter][1] });
                 counter++;
             }
             this.Dispatcher.Invoke(() =>
