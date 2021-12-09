@@ -1,25 +1,26 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-
+    
     <!-- IMAGES -->
-    <BitmapImage x:Key="Wallpaper" UriSource="/resources/images/kk_background_4K.png"/>
-    <BitmapImage x:Key="MessageWallpaper" UriSource="/resources/images/blur_background_4K.png"/>
+    <BitmapImage x:Key="Wallpaper" UriSource="/resources/images/red_chinese_background.png"/>
+    <BitmapImage x:Key="MessageWallpaper" UriSource="/resources/images/red_chinese_background.png"/>
 
     <!-- COLOR SCHEMES -->
+    <!-- Source color: https://www.schemecolor.com/chinese-red.php -->
     <Color x:Key="SColor1">#000814</Color>
     <Color x:Key="SColor2">#001D3D</Color>
     <Color x:Key="SColor3">#003566</Color>
-    <Color x:Key="SColor4">#FFC300</Color>
-    <Color x:Key="SColor5">#FFCF33</Color>
+    <Color x:Key="SColor4">#A50009</Color>
+    <Color x:Key="SColor5">#DD1C1C</Color>
 
     <!-- Tints -->
     <Color x:Key="SColor6">#FFFFFF</Color>
     <Color x:Key="SColor7">#bdbdbd</Color>
 
     <!-- MAIN COLORS -->
-    <Color x:Key="SText">Black</Color>
-    <Color x:Key="SBackground">White</Color>
-    <Color x:Key="SBorder">Black</Color>
+    <Color x:Key="SText">#FFCA62</Color>
+    <Color x:Key="SBackground">#360003</Color>
+    <Color x:Key="SBorder">White</Color>
 
     <SolidColorBrush x:Key="Succes" Color="#70AD47"/>
     <SolidColorBrush x:Key="Failed" Color="#FFD9534F"/>

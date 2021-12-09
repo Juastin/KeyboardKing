@@ -10,13 +10,11 @@ namespace Model
     {
         public string ThemeTitle { get; private set; }
         public Uri ThemeUri { get; private set; }
-        public Uri BackgroundUri { get; private set; }
 
-        public Theme(string themeTitle, string themePath, string backgroundPath)
+        public Theme(string themeTitle, string themePath)
         {
             ThemeTitle = themeTitle;
             ThemeUri = CreateUri(themePath);
-            BackgroundUri = CreateUri(backgroundPath);
         }
 
         private Uri CreateUri(string path)

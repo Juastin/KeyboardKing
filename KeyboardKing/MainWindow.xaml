@@ -18,8 +18,9 @@
     <!-- CONTENT -->
     <Border x:Name="MainBorder" CornerRadius="8" >
         <Border.Background>
-            <ImageBrush x:Name="MainBackground" Stretch="UniformToFill" ImageSource="resources/images/kk_background_4K.png"/>
+            <ImageBrush x:Name="MainBackground" Stretch="UniformToFill" ImageSource="{DynamicResource Wallpaper}"/>
         </Border.Background>
+        
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="25"/>
