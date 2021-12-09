@@ -43,10 +43,6 @@ namespace KeyboardKing.areas.play
             lEpisodeMatch.Content = _matchInfoLoad[0][2];
             UpdateListView();
             //TODO: check if creatorid == userid -> startmatchbutton is visible for creator
-            int state = 5;
-            if (_matchInfoLoad[0][10].Equals(state.ToString()){
-                EpOverview_PlayClick(new object(), new RoutedEventArgs());
-            }    
         }
 
         public override void OnShadow()
@@ -62,6 +58,14 @@ namespace KeyboardKing.areas.play
                 _tickCheck = now;
                 UpdateListView();
             }
+
+            _matchInfoLoad = DBQueries.GetMatchProgress(MatchController.GetMatchId());
+            int state = int.Parse(_matchInfoLoad[0][10]);
+            if (state == 5)
+            {
+                StartGame();
+            }
+
         }
 
         private void EpOverview_PlayClick(object sender, RoutedEventArgs e)
@@ -70,15 +74,18 @@ namespace KeyboardKing.areas.play
 
             // set state to 5 om potje te starten
 
-            bool startGame = DBQueries.SetPlayState(int.Parse(_matchInfoLoad[0][0]), 5);
+            DBQueries.SetPlayState(int.Parse(_matchInfoLoad[0][0]), 5);
+        }
 
-            if(startGame == true)
+        private void StartGame()
+        {
+            this.Dispatcher.Invoke(() =>
             {
                 MatchController.EpisodeFinished += OnEpisodeFinished;
                 Episode episode = MatchController.ParseEpisode(int.Parse(_matchInfoLoad[0][9]));
                 MatchController.Initialise(episode);
                 NavigationController.NavigateToPage(Pages.MatchPlayingPage);
-            }
+            });  
         }
 
         private void OnEpisodeFinished(object sender, EventArgs e)
@@ -106,12 +113,11 @@ namespace KeyboardKing.areas.play
 
         private void UpdateListView()
         {
-            List<List<string>> matchInfo = DBQueries.GetMatchProgress(MatchController.GetMatchId());
             List<MatchLobbyData> items = new List<MatchLobbyData>();
             int counter = 0;
-            while (counter < matchInfo.Count)
+            while (counter < _matchInfoLoad.Count)
             {
-                items.Add(new MatchLobbyData() { Username = matchInfo[counter][1] });
+                items.Add(new MatchLobbyData() { Username = _matchInfoLoad[counter][10] });
                 counter++;
             }
             this.Dispatcher.Invoke(() =>
