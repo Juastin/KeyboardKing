@@ -61,7 +61,7 @@ namespace KeyboardKing.areas.play
 
             _matchInfoLoad = DBQueries.GetMatchProgress(MatchController.GetMatchId());
             int state = int.Parse(_matchInfoLoad[0][10]);
-            if (state == 5)
+            if (state == 1)
             {
                 StartGame();
             }
@@ -74,7 +74,7 @@ namespace KeyboardKing.areas.play
 
             // set state to 5 om potje te starten
 
-            DBQueries.SetPlayState(int.Parse(_matchInfoLoad[0][0]), 5);
+            DBQueries.SetPlayState(int.Parse(_matchInfoLoad[0][0]), 1);
         }
 
         private void StartGame()
@@ -91,6 +91,7 @@ namespace KeyboardKing.areas.play
         private void OnEpisodeFinished(object sender, EventArgs e)
         {
             MatchController.EpisodeFinished -= OnEpisodeFinished;
+            DBQueries.SetPlayState(int.Parse(_matchInfoLoad[0][0]), 2);
             NavigationController.NavigateToPage(Pages.MatchResultPage);
         }
 

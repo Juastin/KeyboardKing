@@ -178,7 +178,7 @@ namespace Controller
                 "LEFT JOIN [dbo].[MatchProgress] mp ON m.id = mp.matchid " +
                 "LEFT JOIN [dbo].[User] u ON m.creatorid = u.id " +
                 "LEFT JOIN [dbo].[Episode] e ON m.episodeid = e.id " +
-                "WHERE m.state != 5 " + 
+                "WHERE m.state = 0 " + 
                 "GROUP BY m.id, u.username, m.id, e.name", null);
             return DBHandler.SelectQuery(cmd);
         }
