@@ -92,9 +92,9 @@ namespace Controller
 
         public static bool SaveMatchResult(EpisodeResult es, int matchId, int userId)
         {
-            SqlCommand cmd = new SqlCommand("UPDATE [dbo].[MatchProgress] set (score, mistakes, lettersperminute, time) " +
-                                            "VALUES (@score, @mistakes, @lpm, @time) " +
-                                            "WHERE userId = @userid AND matchId = @matchid", null);
+ 
+            SqlCommand cmd = new SqlCommand("UPDATE [dbo].[MatchProgress] set score = @score, mistakes = @mistakes, lettersperminute = @lpm, time = @time " +
+                                "WHERE userId = @userid AND matchId = @matchid", null);
 
             SqlParameter matchidParam = new SqlParameter("@matchid", SqlDbType.Int, 0);
             SqlParameter useridParam = new SqlParameter("@userid", SqlDbType.Int, 0);
@@ -178,6 +178,7 @@ namespace Controller
                 "LEFT JOIN [dbo].[MatchProgress] mp ON m.id = mp.matchid " +
                 "LEFT JOIN [dbo].[User] u ON m.creatorid = u.id " +
                 "LEFT JOIN [dbo].[Episode] e ON m.episodeid = e.id " +
+                "WHERE m.state != 5 " + 
                 "GROUP BY m.id, u.username, m.id, e.name", null);
             return DBHandler.SelectQuery(cmd);
         }
