@@ -47,6 +47,12 @@
         <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
     </Style>
 
+    <!-- TextBlock template -->
+    <Style x:Key="TextBlock" TargetType="{x:Type TextBlock}">
+        <Setter Property="Foreground" Value="{DynamicResource TextColor}" />
+        <Setter Property="FontSize" Value="32"/>
+    </Style>
+
     <!-- Titlebar ButtonTemplate -->
     <Style x:Key="TitleBarButtonTemplate" TargetType="{x:Type Button}">
         <Setter Property="Template">
@@ -332,8 +338,8 @@
 
    
     <Style x:Key="TextBox2" TargetType="{x:Type TextBox}">
-        <Setter Property="Background" Value="{DynamicResource Color6}" />
-        <Setter Property="Foreground" Value="{DynamicResource Color1}" />
+        <Setter Property="Background" Value="{DynamicResource BackgroundColor}" />
+        <Setter Property="Foreground" Value="{DynamicResource TextColor}" />
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Padding" Value="10, 0"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
