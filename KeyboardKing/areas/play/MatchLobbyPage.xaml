@@ -5,7 +5,10 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:KeyboardKing.core"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      MinHeight="450"
+      MinWidth="400"
+      MaxWidth="1420"
+      MaxHeight="750"
       Title="MatchLobbyPage">
 
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -15,7 +18,7 @@
         <Label Style="{DynamicResource H2}" Name="lEpisodeMatch" HorizontalAlignment="Left" VerticalAlignment="Top" Width="255" Height="50" Margin="224,95,0,0"/>
 
         <Button Style="{DynamicResource Button1}" Content="Leave Match" Click="BExitMatch" Height="50" Margin="519,59,48,291" />
-        <Button Style="{DynamicResource Button1}" Content="Start Match" Click="BStartMatch" Height="50" Margin="287,324,279,26"/>
+        <Button Style="{DynamicResource Button1}" Name="StartMatchB" Content="Start Match" Click="BStartMatch" Height="50" Margin="287,324,279,26"/>
 
         <ListView Name="LvMatch" Width="471" Margin="0,145,0,103" HorizontalAlignment="Center">
             <ListView.View>
