@@ -42,7 +42,7 @@ namespace KeyboardKing.areas.play
             _matchInfoLoad = DBQueries.GetMatchProgress(MatchController.GetMatchId());
             lEpisodeMatch.Content = _matchInfoLoad[0][2];
             UpdateListView();
-            //TODO: check if creatorid == userid -> startmatchbutton is visible for creator
+            if (!MatchController.CheckUserIsCreator()) { StartMatchB.Visibility = Visibility.Hidden; }
         }
 
         public override void OnShadow()
@@ -105,14 +105,9 @@ namespace KeyboardKing.areas.play
             }
         }
 
-
-        private void BExitMatch(object sender, EventArgs e)
-        {
-            MessageBox.Show("Verlaat de Match");
-        }
-
         private void UpdateListView()
         {
+            List<List<string>> matchInfo = MatchController.GetMatchProgressInfo();
             List<MatchLobbyData> items = new List<MatchLobbyData>();
             int counter = 0;
             while (counter < _matchInfoLoad.Count)
@@ -124,8 +119,25 @@ namespace KeyboardKing.areas.play
             {
                 LvMatch.ItemsSource = items;
             });
-            //LvMatch.ItemsSource = null;
-            
+        }
+
+        private void BExitMatch(object sender, EventArgs e)
+        {
+            if (MatchController.CheckUserIsCreator())
+            {
+                if (MatchController.CheckCreatorIsAloneInMatch())
+                {
+                    MatchController.DeleteMatch();
+                    MessageBox.Show("Match is deleted");
+                    NavigationController.NavigateToPage(Pages.MatchOverviewPage);
+                }
+                else { MessageBox.Show("Je kan momenteel niet de match verlaten. Je bent de creator"); }
+            }
+            else
+            {
+                MatchController.RemoveUserInMatchProgress();
+                NavigationController.NavigateToPage(Pages.MatchOverviewPage);
+            }
         }
     }
 }
