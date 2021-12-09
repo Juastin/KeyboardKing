@@ -4,12 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:Components="clr-namespace:KeyboardKing.components"
-             xmlns:controller="clr-namespace:Controller;assembly=Controller"
              mc:Ignorable="d" 
              x:Name="root"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <Components:TestConverter x:Key="TestConverter"/>
         <Style x:Key="NavButton" TargetType="Button">
             <Setter Property="OverridesDefaultStyle" Value="True"/>
             <Setter Property="Margin" Value="5"/>
@@ -32,18 +30,12 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=ToPage}" Value="{x:Static controller:NavigationController.CurrentPage}">
-                    <Setter Property="Foreground" Value="{DynamicResource Color6}"/>
-                    <Setter Property="Background" Value="{DynamicResource Color5}"/>
-                </DataTrigger>
-            </Style.Triggers>
         </Style>
     </UserControl.Resources>
 
     <Grid>
         <DockPanel>
-            <Menu DockPanel.Dock="Bottom" Width="520" Height="92" Background="{x:Null}" Margin="0,0,0,10">
+            <Menu x:Name="NavigationMenu" DockPanel.Dock="Bottom" Width="520" Height="92" Background="{x:Null}" Margin="0,0,0,10">
                 <Components:NavigationButton ToPage="ChaptersPage" Style="{DynamicResource NavButton}" x:Name="Button_ChaptersPage" Content="▶" FontSize="36"/>
                 <Components:NavigationButton ToPage="FavoritesPage" Style="{DynamicResource NavButton}" x:Name="Button_FavoritesPage" Content="🔄" FontSize="30"/>
                 <Components:NavigationButton ToPage="MatchOverviewPage" Style="{DynamicResource NavButton}" x:Name="Button_MatchOverviewPage" Content="⚔" FontSize="30"/>

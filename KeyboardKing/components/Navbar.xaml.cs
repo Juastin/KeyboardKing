@@ -1,13 +1,8 @@
-﻿using System;
-using System.Globalization;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Media;
+﻿using Controller;
 using Model;
-using Controller;
-using System.Diagnostics;
-using System.Windows.Threading;
+using System;
+using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace KeyboardKing.components
 {
@@ -23,31 +18,36 @@ namespace KeyboardKing.components
         public Navbar()
         {
             InitializeComponent();
+            NavigationController.ThemeChange += OnThemeChange;
+            SetBackgroundColors();
+        }
+
+        public void OnThemeChange(object sender, EventArgs e) => SetBackgroundColors();
+
+        public void SetBackgroundColors()
+        {
             _backgroundColor = FindResource("Color5") as SolidColorBrush;
             _foregroundColor = FindResource("Color6") as SolidColorBrush;
-            Loaded += OnLoaded;
-        }
 
-        public void OnLoaded(object sender, RoutedEventArgs e)
-        {
-            
-        }
-    }
-
-    public class TestConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            Trace.WriteLine(value.ToString());
-            Trace.WriteLine(NavigationController.CurrentPage.ToString());
-            if (Enum.TryParse(value.ToString(), out Pages page))
-                return page == NavigationController.CurrentPage;
-            return false;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
+            switch (CurrentPage)
+            {
+                case Pages.ChaptersPage:
+                    Button_ChaptersPage.Background = _backgroundColor;
+                    Button_ChaptersPage.Foreground = _foregroundColor;
+                    break;
+                case Pages.FavoritesPage:
+                    Button_FavoritesPage.Background = _backgroundColor;
+                    Button_FavoritesPage.Foreground = _foregroundColor;
+                    break;
+                case Pages.MatchOverviewPage:
+                    Button_MatchOverviewPage.Background = _backgroundColor;
+                    Button_MatchOverviewPage.Foreground = _foregroundColor;
+                    break;
+                case Pages.SettingsPage:
+                    Button_SettingsPage.Background = _backgroundColor;
+                    Button_SettingsPage.Foreground = _foregroundColor;
+                    break;
+            }
         }
     }
 }
