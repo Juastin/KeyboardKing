@@ -61,7 +61,7 @@ namespace KeyboardKing.areas.play
         {
             TimerTextBox.Text = "00:00";
             points.Text = "0p";
-            EpisodeController.Points = 0;
+            MatchController.Points = 0;
         }
 
         /// <summary>
@@ -120,8 +120,15 @@ namespace KeyboardKing.areas.play
             TimerTextBox.Text = result.ToString("mm':'ss");
         }
 
-        private void ButtonExit(object sender, EventArgs e)
+        private void ButtonExit(object sender, EventArgs e) // leave match set state 2 or remove match
         {
+            MatchController.RemoveUserInMatchProgress();
+            
+            if (!DBQueries.GetMatchProgress((int)Session.Get("matchId")).Any())
+            {
+                DBQueries.DeleteMatch((int)Session.Get("matchId"));
+            }
+
             MusicPlayer.PlayNextFrom("menu_music");
             NavigationController.NavigateToPage(Pages.ChaptersPage);
         }
