@@ -73,7 +73,7 @@ namespace KeyboardKing.areas.play
 
             // set state to 5 om potje te starten
 
-            bool startGame = DBQueries.SetPlayState(int.Parse(_matchInfoLoad[0][9]), 5);
+            bool startGame = DBQueries.SetPlayState(int.Parse(_matchInfoLoad[0][0]), 5);
 
             if(startGame == true)
             {

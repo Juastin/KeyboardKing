@@ -164,7 +164,7 @@ namespace Controller
 
         public static bool SetPlayState(int matchid, int state)
         {
-            SqlCommand cmd = new SqlCommand("UPDATE [dbo].[Match] set state = @state WHERE id = @matchid");
+            SqlCommand cmd = new SqlCommand("UPDATE [dbo].[Match] set state = @state WHERE id = @matchid ", null);
 
             SqlParameter matchId = new SqlParameter("@matchid", SqlDbType.Int, 0);
             SqlParameter State = new SqlParameter("@state", SqlDbType.Int, 0);
