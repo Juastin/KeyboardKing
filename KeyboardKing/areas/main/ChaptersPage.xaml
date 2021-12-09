@@ -31,9 +31,9 @@
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
                                 <Border x:Name="EpisodeNumberBox" CornerRadius="5, 0, 0, 5" Width="75" Grid.RowSpan="3" HorizontalAlignment="Left" Background="{DynamicResource Failed}">
-                                    <TextBlock Text="{Binding [1]}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="48" Foreground="White"/>
+                                    <TextBlock Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="48" Foreground="White"/>
                                 </Border>
-                                <TextBlock Text="{Binding [2]}" Grid.Column="1" Grid.RowSpan="3" Margin="10, 0, 0, 0" FontSize="16" VerticalAlignment="Center" Foreground="{DynamicResource TextColor}"/>
+                                <TextBlock Text="{Binding Id}" Grid.Column="1" Grid.RowSpan="3" Margin="10, 0, 0, 0" FontSize="16" VerticalAlignment="Center" Foreground="{DynamicResource TextColor}"/>
                                 <TextBlock x:Name="HighscoreBlock" Visibility="Hidden" Grid.Column="1" Grid.Row="2" Margin="10, 0, 0, 0" FontSize="12" VerticalAlignment="Top" Foreground="{DynamicResource TextColor}">
                                         <Run Text="Highscore: "/>
                                         <Run x:Name="Highscore"/>
@@ -42,14 +42,14 @@
                             </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
-                            <DataTrigger Binding="{Binding [4]}"
+                            <DataTrigger Binding="{Binding Completed}"
                                  Value="True">
                                 <Setter TargetName="EpisodeNumberBox" Property="Background"
                                 Value="{DynamicResource Succes}" />
                                 <Setter TargetName="HighscoreBlock" Property="Visibility"
                                 Value="Visible" />
                                 <Setter TargetName="Highscore" Property="Text"
-                                Value="{Binding [5]}" />
+                                Value="{Binding HighScore}" />
                             </DataTrigger>
                         </ControlTemplate.Triggers>
 

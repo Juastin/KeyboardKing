@@ -106,7 +106,7 @@ namespace Controller
             return result.Count == 1 && result[0].Count == 6 ? result : new List<List<string>>();
         }
 
-        public static List<List<string>> GetAllEpisodes(UList user)
+        public static List<Episode> GetAllEpisodes(UList user)
         {
             SqlCommand cmd = new SqlCommand("SELECT [dbo].[Chapter].name, episode, [dbo].[Episode].name, [dbo].[Episode].id, " +
                 "CASE WHEN [dbo].[EpisodeResult].userid IS NULL THEN 'False' ELSE 'True' END AS completed, " +
@@ -124,7 +124,8 @@ namespace Controller
 
             cmd.Parameters.Add(UserIdParam);
 
-            return DBHandler.SelectQuery(cmd);
+            List<List<string>> result = DBHandler.SelectQuery(cmd);
+            return Episode.ParseEpisodes(result);
         }
 
         public static List<List<string>> GetAllEpisodeStepsFromEpisode(int id)

@@ -51,7 +51,7 @@ namespace KeyboardKing.areas.main
             {
                 // Get logged in user data for the GetAllEpisodes query and set it to the itemsource of the overview ListBox.
                 UList User = (UList)Session.Get("student");
-                List<List<string>> Episodes = DBQueries.GetAllEpisodes(User);
+                List<Episode> Episodes = DBQueries.GetAllEpisodes(User);
                 EpOverview.ItemsSource = Episodes;
 
                 // Add a GroupDescription so that the chapters with it's episodes will be split.

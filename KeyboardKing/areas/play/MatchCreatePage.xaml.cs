@@ -38,18 +38,10 @@ namespace KeyboardKing.areas.play
             }
 
             UList user = (UList)Session.Get("student");
-            List<List<string>> episodes = DBQueries.GetAllEpisodes(user);
-            int counter = 0;
-            List<EpisodeData> listData = new List<EpisodeData>();
 
-            while (counter < episodes.Count)
-            {
-                listData.Add(new EpisodeData { EpisodeId = int.Parse(episodes[counter][3]), EpisodeName = episodes[counter][2] });
-                counter++;
-            }
-            CBEpisode.ItemsSource = listData;
-            CBEpisode.DisplayMemberPath = "EpisodeName";
-            CBEpisode.SelectedValuePath = "EpisodeId";
+            CBEpisode.ItemsSource = DBQueries.GetAllEpisodes(user);
+            CBEpisode.DisplayMemberPath = "Name";
+            CBEpisode.SelectedValuePath = "Id";
         }
 
         public override void OnShadow()
