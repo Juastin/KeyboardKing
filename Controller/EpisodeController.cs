@@ -23,7 +23,7 @@ namespace Controller
         private static int _wordIndex;
         private static int _wrongIndex;
         
-        private static Stopwatch _startTime;
+        private static Stopwatch _stopwatch;
 
         public static event EventHandler WordChanged;
         public static event EventHandler EpisodeFinished;
@@ -36,7 +36,12 @@ namespace Controller
 
         public static void Start()
         {
-            _startTime.Start();
+            _stopwatch.Start();
+        }
+
+        public static void Pause()
+        {
+            _stopwatch.Stop();
         }
 
         /// <summary>
@@ -50,7 +55,7 @@ namespace Controller
         {
             _currentEpisode = episode;
             CurrentEpisodeResult = new EpisodeResult();
-            _startTime = new Stopwatch();
+            _stopwatch = new Stopwatch();
             _wordIndex = 0;
             _wrongIndex = 0;
             LettersTyped = 0;
@@ -137,7 +142,8 @@ namespace Controller
 
         public static void FinishEpisode()
         {
-            CurrentEpisodeResult.Time = _startTime.Elapsed;
+            _stopwatch.Stop();
+            CurrentEpisodeResult.Time = _stopwatch.Elapsed;
             CurrentEpisodeResult.Score = CalculateScore(CurrentEpisodeResult.MaxScore, CurrentEpisodeResult.Mistakes);
             CurrentEpisodeResult.LettersPerMinute = CalculateLetterPerMinute(CurrentEpisodeResult.Time, CurrentEpisodeResult.MaxScore);
 
