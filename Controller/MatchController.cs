@@ -136,8 +136,7 @@ namespace Controller
         {
             List<List<string>> results = DBQueries.GetAllEpisodeStepsFromEpisode(episodeId);
 
-            Session.Remove("episodeId");
-            Session.Add("episodeId", episodeId);
+            Session.Add("matchId", _currentMatchId);
 
             Episode episode = new Episode();
 
@@ -167,9 +166,9 @@ namespace Controller
             UList student = (UList)Session.Get("student");
 
             int userId = student.Get<int>(0);
-            int episodeId = (int)Session.Get("episodeId");
+            int matchId = (int)Session.Get("matchId");
 
-            DBQueries.SaveResult(CurrentEpisodeResult, episodeId, userId);
+            DBQueries.SaveMatchResult(CurrentEpisodeResult, matchId, userId);
 
             EpisodeFinished?.Invoke(null, EventArgs.Empty);
         }

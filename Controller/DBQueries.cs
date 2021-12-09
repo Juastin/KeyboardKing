@@ -90,6 +90,36 @@ namespace Controller
             return DBHandler.Query(cmd);
         }
 
+        public static bool SaveMatchResult(EpisodeResult es, int matchId, int userId)
+        {
+            SqlCommand cmd = new SqlCommand("UPDATE [dbo].[MatchProgress] set (score, mistakes, lettersperminute, time) " +
+                                            "VALUES (@score, @mistakes, @lpm, @time) " +
+                                            "WHERE userId = @userid AND matchId = @matchid", null);
+
+            SqlParameter matchidParam = new SqlParameter("@matchid", SqlDbType.Int, 0);
+            SqlParameter useridParam = new SqlParameter("@userid", SqlDbType.Int, 0);
+            SqlParameter scoreParam = new SqlParameter("@score", SqlDbType.Int, 0);
+            SqlParameter mistakesParam = new SqlParameter("@mistakes", SqlDbType.Int, 0);
+            SqlParameter lpmParam = new SqlParameter("@lpm", SqlDbType.Int, 0);
+            SqlParameter timeParam = new SqlParameter("@time", SqlDbType.BigInt, 0);
+
+            matchidParam.Value = matchId;
+            useridParam.Value = userId;
+            mistakesParam.Value = es.Mistakes;
+            scoreParam.Value = es.Score;
+            lpmParam.Value = es.LettersPerMinute;
+            timeParam.Value = es.Time.Ticks;
+
+            cmd.Parameters.Add(matchidParam);
+            cmd.Parameters.Add(useridParam);
+            cmd.Parameters.Add(mistakesParam);
+            cmd.Parameters.Add(scoreParam);
+            cmd.Parameters.Add(lpmParam);
+            cmd.Parameters.Add(timeParam);
+
+            return DBHandler.Query(cmd);
+        }
+
         public static List<List<string>> GetUserInfo(string email)
         {
             SqlCommand cmd = new SqlCommand("SELECT id, username, email, password, salt, skilllevel " +
@@ -227,6 +257,7 @@ namespace Controller
             return DBHandler.SelectQuery(cmd);
         }
 
-      
+       
+
     }
 }

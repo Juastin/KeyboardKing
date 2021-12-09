@@ -43,7 +43,7 @@ namespace KeyboardKing.areas.play
         {
             Initialize();
             MusicPlayer.PlayNextFrom("intense_music");
-            EpisodeController.Start();
+            MatchController.Start();
             this.UserInput.Focus();
         }
 
