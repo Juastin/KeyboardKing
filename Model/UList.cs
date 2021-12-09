@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,7 +33,7 @@ namespace Model
                 return (T)Convert.ChangeType(_data[index], typeof(T));
             } catch
             {
-                throw new Exception("Given generic type does not match the object origin type.");
+                return default;
             }
         }
     }
