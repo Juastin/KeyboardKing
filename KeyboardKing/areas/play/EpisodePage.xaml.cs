@@ -43,7 +43,6 @@ namespace KeyboardKing.areas.play
             EpisodeController.Start();
             UpdateTimerView();
             this.UserInput.Focus();
-            
         }
         public override void OnShadow()
         {
