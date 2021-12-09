@@ -39,30 +39,22 @@ namespace KeyboardKing.areas.play
 
         public override void OnLoad()
         {
-            if (!EpisodeController.IsStarted)
-                Initialize();
-
             MusicPlayer.PlayNextFrom("intense_music");
             EpisodeController.Start();
+            UpdateTimerView();
             this.UserInput.Focus();
             
         }
-
         public override void OnShadow()
         {
 
         }
-
         public override void OnTick()
         {
-            Dispatcher.Invoke(() => TimerTextBox.Text = EpisodeController.GetTimeFormat());
+            UpdateTimerView();
         }
 
-        private void Initialize()
-        {
-            //TimerTextBox.Text = "00:00";
-            //points.Text = "0p";
-        }
+        private void UpdateTimerView() => Dispatcher.Invoke(() => TimerTextBox.Text = EpisodeController.GetTimeFormat());
 
         /// <summary>
         /// <para>Event that fires each time when focus of window has been lost.</para>
