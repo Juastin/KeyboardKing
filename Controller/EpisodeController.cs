@@ -23,7 +23,7 @@ namespace Controller
         private static int _wordIndex;
         private static int _wrongIndex;
         
-        private static DateTime _startTime;
+        private static Stopwatch _startTime;
 
         public static event EventHandler WordChanged;
         public static event EventHandler EpisodeFinished;
@@ -36,7 +36,7 @@ namespace Controller
 
         public static void Start()
         {
-            _startTime = DateTime.Now;
+            _startTime.Start();
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace Controller
         {
             _currentEpisode = episode;
             CurrentEpisodeResult = new EpisodeResult();
-            _startTime = new DateTime();
+            _startTime = new Stopwatch();
             _wordIndex = 0;
             _wrongIndex = 0;
             LettersTyped = 0;
@@ -137,7 +137,7 @@ namespace Controller
 
         public static void FinishEpisode()
         {
-            CurrentEpisodeResult.Time = CalculateTime(_startTime);
+            CurrentEpisodeResult.Time = _startTime.Elapsed;
             CurrentEpisodeResult.Score = CalculateScore(CurrentEpisodeResult.MaxScore, CurrentEpisodeResult.Mistakes);
             CurrentEpisodeResult.LettersPerMinute = CalculateLetterPerMinute(CurrentEpisodeResult.Time, CurrentEpisodeResult.MaxScore);
 
@@ -149,16 +149,6 @@ namespace Controller
             DBQueries.SaveResult(CurrentEpisodeResult, episodeId, userId);
 
             EpisodeFinished?.Invoke(null, EventArgs.Empty);
-        }
-
-        /// <summary>
-        /// Returns the time difference between the given parameter and the time of now.
-        /// </summary>
-        /// <param name="startTime"></param>
-        /// <returns></returns>
-        public static TimeSpan CalculateTime(DateTime startTime)
-        {
-            return DateTime.Now - startTime;
         }
         /// <summary>
         /// Returns a percentage of the correct typed letters based on the mistakes and the max amount of letters.
