@@ -22,7 +22,7 @@ namespace Controller
         public static int LettersTyped { get; private set; }
         private static int _wordIndex;
         private static int _wrongIndex;
-        private static bool _isStarted;
+        public static bool IsStarted { get; private set; }
         
         private static Stopwatch _stopwatch;
 
@@ -38,14 +38,14 @@ namespace Controller
         public static void Start()
         {
             _stopwatch.Start();
-            _isStarted = true;
+            IsStarted = true;
         }
 
         public static void Pause()
         {
             _stopwatch.Stop();
 
-            MessageController.Show(Pages.MessagePage, "De episode is gepauzeerd.", Pages.EpisodePage, 10);
+            MessageController.Show(Pages.MessagePage, "De episode is gepauzeerd.", Pages.EpisodePage, null);
         }
 
         /// <summary>
@@ -63,6 +63,7 @@ namespace Controller
             _wordIndex = 0;
             _wrongIndex = 0;
             LettersTyped = 0;
+            Points = 0;
             CurrentEpisodeResult.MaxScore = CalculateMaxScore(episode);
             NextEpisodeStep();
         }
@@ -143,11 +144,14 @@ namespace Controller
         {
             NextLetter(CurrentEpisodeStep.Word[_wordIndex].Equals(input));
         }
-
+        public static string GetTimeFormat()
+        {
+            return _stopwatch?.Elapsed.ToString("mm\\:ss");
+        }
         public static void FinishEpisode()
         {
             _stopwatch.Stop();
-            _isStarted = false;
+            IsStarted = false;
             CurrentEpisodeResult.Time = _stopwatch.Elapsed;
             CurrentEpisodeResult.Score = CalculateScore(CurrentEpisodeResult.MaxScore, CurrentEpisodeResult.Mistakes);
             CurrentEpisodeResult.LettersPerMinute = CalculateLetterPerMinute(CurrentEpisodeResult.Time, CurrentEpisodeResult.MaxScore);

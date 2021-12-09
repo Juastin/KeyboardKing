@@ -27,4 +27,5 @@ namespace Model
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(""));
         }
     }
+
 }

@@ -32,8 +32,6 @@ namespace KeyboardKing.areas.play
         /// <param name="w"></param>
         /// 
 
-        public int increment { get; set; }
-        private DispatcherTimer dt = new DispatcherTimer();
         public EpisodePage(MainWindow w) : base(w)
         {
             InitializeComponent();
@@ -41,27 +39,29 @@ namespace KeyboardKing.areas.play
 
         public override void OnLoad()
         {
-            Initialize();
+            if (!EpisodeController.IsStarted)
+                Initialize();
+
             MusicPlayer.PlayNextFrom("intense_music");
             EpisodeController.Start();
             this.UserInput.Focus();
+            
         }
 
         public override void OnShadow()
         {
-            
+
         }
 
         public override void OnTick()
         {
-           
+            Dispatcher.Invoke(() => TimerTextBox.Text = EpisodeController.GetTimeFormat());
         }
 
         private void Initialize()
         {
-            TimerTextBox.Text = "00:00";
-            points.Text = "0p";
-            EpisodeController.Points = 0;
+            //TimerTextBox.Text = "00:00";
+            //points.Text = "0p";
         }
 
         /// <summary>
@@ -102,22 +102,6 @@ namespace KeyboardKing.areas.play
         {
             if (e.Key == Key.Tab)
                 e.Handled = true;
-        }
-
-        private void TimerTextBox_Loaded(object sender, RoutedEventArgs e)
-        {
-            increment = 0;
-            dt.Tick -= dtTicker;
-            dt.Interval = TimeSpan.FromSeconds(1);
-            dt.Tick += dtTicker;
-            dt.Start();
-        }
-       
-        private void dtTicker(object sender, EventArgs e)
-        {
-            increment++;
-            TimeSpan result = TimeSpan.FromSeconds(increment);
-            TimerTextBox.Text = result.ToString("mm':'ss");
         }
 
         private void ButtonPause(object sender, EventArgs e)
