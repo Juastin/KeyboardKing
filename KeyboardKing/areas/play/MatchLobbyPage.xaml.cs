@@ -39,7 +39,7 @@ namespace KeyboardKing.areas.play
             List<List<string>> matchInfo = DBQueries.GetMatchProgress(MatchController.GetMatchId());
             lEpisodeMatch.Content = matchInfo[0][2];
             UpdateListView();
-            //TODO: check if creatorid == userid -> startmatchbutton is visible for creator
+            if (!MatchController.CheckUserIsCreator()) { StartMatchB.Visibility = Visibility.Hidden; }
         }
 
         public override void OnShadow()
