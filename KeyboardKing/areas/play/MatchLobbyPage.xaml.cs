@@ -27,6 +27,7 @@ namespace KeyboardKing.areas.play
 
         private List<List<string>> _matchInfoLoad;
 
+        private bool _checkIfLeft = false;
 
         /// <summary>
         /// Controller for <see cref="MatchLobbyPage"/>
@@ -53,22 +54,15 @@ namespace KeyboardKing.areas.play
 
         public override void OnTick()
         {
-/*            DateTime now = DateTime.Now;
-            if (_tickCheck.AddSeconds(5) < now) // if 5 seconds have passed
+            if(!_checkIfLeft)
             {
-                _tickCheck = now;
-
-            }*/
-
-            UpdateListView();
-
+                UpdateListView();
+            }
         }
 
         private void EpOverview_PlayClick(object sender, RoutedEventArgs e)
         {
             // query die checkt als iedereen ready is
-
-            // set state to 5 om potje te starten
 
             DBQueries.SetPlayState(int.Parse(_matchInfoLoad[0][0]), 1);
         }
@@ -113,8 +107,7 @@ namespace KeyboardKing.areas.play
                 counter++;
             }
 
-            int state = int.Parse(_matchInfoLoad[0][10]);
-            if (state == 1)
+            if (int.Parse(_matchInfoLoad[0][10]) == 1)
             {
                 StartGame();
             }
@@ -131,6 +124,7 @@ namespace KeyboardKing.areas.play
             {
                 if (MatchController.CheckCreatorIsAloneInMatch())
                 {
+                    _checkIfLeft = true;
                     MatchController.DeleteMatch();
                     MessageBox.Show("Match is deleted");
                     NavigationController.NavigateToPage(Pages.MatchOverviewPage);
