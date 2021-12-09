@@ -42,7 +42,6 @@ namespace Controller
         public static void Pause()
         {
             _stopwatch.Stop();
-
             MessageController.Show(Pages.MessagePage, "De episode is gepauzeerd.", Pages.EpisodePage, null);
         }
 
