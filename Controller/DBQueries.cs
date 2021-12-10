@@ -26,7 +26,6 @@ namespace Controller
         {
             SqlCommand cmd = new SqlCommand("INSERT INTO [dbo].[User] (username, email, password, salt) VALUES (@username, @email, @password, @salt)");
 
-
             SqlParameter usernameParam = new SqlParameter("@username", SqlDbType.VarChar, 255);
             SqlParameter emailParam = new SqlParameter("@email", SqlDbType.VarChar, 255);
             SqlParameter passwordParam = new SqlParameter("@password", SqlDbType.VarChar, 255);
@@ -51,7 +50,6 @@ namespace Controller
 
             SqlParameter skilllevelParam = new SqlParameter("@skill", SqlDbType.VarChar, 255);
             SqlParameter idParam = new SqlParameter("@id", SqlDbType.Int, 0);
-
 
             skilllevelParam.Value = skilllevel;
             idParam.Value = data.Get<int>(0);
@@ -247,8 +245,6 @@ namespace Controller
 
             return DBHandler.SelectQuery(cmd);
         }
-
-
 
         public static int AddMatch(int episodeid, UList user)
         {
