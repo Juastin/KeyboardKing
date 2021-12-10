@@ -39,9 +39,9 @@ namespace Controller
         /// <para>This method will add a user in MatchProgress to the database</para>
         /// It does this by getting the id of the chosen Match and inserting it in MatchProgressr.
         /// </summary>
-        public static void AddUserInMatchProgress(string selectedValue)
+        public static void AddUserInMatchProgress(int matchId)
         {
-            _currentMatchId = int.Parse(selectedValue);
+            _currentMatchId = matchId;
             DBQueries.AddMatchProgress(_currentMatchId, (User)Session.Get("student"));
         }
 

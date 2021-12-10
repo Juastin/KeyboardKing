@@ -55,8 +55,8 @@ namespace KeyboardKing.areas.play
         {
             Dispatcher.Invoke(() =>
             {
-                List<List<string>> Matches = DBQueries.GetAllActiveMatches();
-                MatchOverview.ItemsSource = Matches;
+                List<Match> matches = DBQueries.GetAllActiveMatches();
+                MatchOverview.ItemsSource = matches;
                 MatchOverview.Items.Refresh();
             });
         }
@@ -66,10 +66,9 @@ namespace KeyboardKing.areas.play
             if (!_isInMatch)
             {
                 Button button = (Button)sender;
-                if (button.DataContext is List<string>)
+                if (button.DataContext is Match match)
                 {
-                    List<string> row = (List<string>)button.DataContext;
-                    MatchController.AddUserInMatchProgress(row[2]);
+                    MatchController.AddUserInMatchProgress(match.Id);
                     NavigationController.NavigateToPage(Pages.MatchLobbyPage);
                 }
             }

@@ -154,7 +154,7 @@ namespace Controller
             return EpisodeStep.ParseEpisodeSteps(result);
         }
 
-        public static List<List<string>> GetAllActiveMatches()
+        public static List<Match> GetAllActiveMatches()
         {
             SqlCommand cmd = new SqlCommand("SELECT COUNT(mp.id) playercount, u.username as host, m.id, e.name " +
                 "FROM [dbo].[Match] m " +
@@ -162,7 +162,9 @@ namespace Controller
                 "LEFT JOIN [dbo].[User] u ON m.creatorid = u.id " +
                 "LEFT JOIN [dbo].[Episode] e ON m.episodeid = e.id " +
                 "GROUP BY m.id, u.username, m.id, e.name", null);
-            return DBHandler.SelectQuery(cmd);
+
+            List<List<string>> result = DBHandler.SelectQuery(cmd);
+            return Match.ParseMatches(result);
         }
 
         public static List<List<string>> GetAllUsersInMatch()
