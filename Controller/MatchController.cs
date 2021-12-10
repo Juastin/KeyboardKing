@@ -56,7 +56,6 @@ namespace Controller
         {
             UList student = (UList)Session.Get("student");
             _currentMatchId = DBQueries.AddMatch(selectedValue, student);
-            Session.Add("matchId", _currentMatchId);
             DBQueries.AddMatchProgress(_currentMatchId, student);
         }
 
@@ -141,7 +140,7 @@ namespace Controller
             List<List<string>> results = DBQueries.GetAllEpisodeStepsFromEpisode(episodeId);
 
             Episode episode = new Episode();
-
+            Session.Add("matchId", _currentMatchId);
             foreach (List<string> word in results)
             {
                 EpisodeStep es = new EpisodeStep() { Word = word[0] };
