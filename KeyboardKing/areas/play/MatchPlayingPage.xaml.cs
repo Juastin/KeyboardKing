@@ -43,12 +43,16 @@ namespace KeyboardKing.areas.play
             MusicPlayer.PlayNextFrom("intense_music");
             MatchController.Start();
             this.UserInput.Focus();
+
+            this.Dispatcher.Invoke(() =>
+            {
+                OpponentListBox.Items.Clear();
+                OpponentListBox.Items.Refresh();
+            });
         }
 
         public override void OnShadow()
         {
-            OpponentListBox.Items.Clear();
-            OpponentListBox.Items.Refresh();
         }
 
         public override void OnTick()
