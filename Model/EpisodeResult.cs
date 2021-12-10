@@ -9,20 +9,21 @@ namespace Model
     public class EpisodeResult
     {
         public int Mistakes { get; set; }
-        private int _score;
-        public int Score { 
+        public int Score { get; set; }
+        private int _scorePercentage;
+        public int ScorePercentage { 
             get 
             { 
-                return _score; 
+                return _scorePercentage; 
             } 
             set 
             { 
-                if (value >= 0 || value <= 100) 
-                    _score = value;
+                if (value >= 0 || value <= 100)
+                    _scorePercentage  = value;
                 if (value < 0)
-                    _score = 0;
+                    _scorePercentage  = 0;
                 if (value > 100)
-                    _score = 100;
+                    _scorePercentage = 100;
             } 
         }
         public int MaxScore { get; set; }

@@ -31,6 +31,8 @@ namespace Controller
         public static string Word { get => CurrentEpisodeStep?.Word; }
 
         public static int Points { get; set; }
+        public static int Difficulty { get; set; }
+        private static bool _repeatMistake;
         public static string WordOverlayCorrect { get =>CurrentEpisodeStep?.Word.Substring(0, _wordIndex); }
         public static string WordOverlayWrong { get =>CurrentEpisodeStep?.Word.Substring(0, _wrongIndex); }
 
@@ -51,6 +53,8 @@ namespace Controller
             _currentEpisode = episode;
             CurrentEpisodeResult = new EpisodeResult();
             _startTime = new DateTime();
+            Difficulty = 30;
+            _repeatMistake = false;
             _wordIndex = 0;
             _wrongIndex = 0;
             LettersTyped = 0;
@@ -84,18 +88,24 @@ namespace Controller
             {
                 _wordIndex++;
                 LettersTyped++;
+                Points = Points + 10;
+                _repeatMistake = false;
             }
-                 
+
             else
             {
                 _wrongIndex = _wordIndex + 1;
                 CurrentEpisodeResult.Mistakes++;
+                if (_repeatMistake == false && Points >= Difficulty)
+                {
+                    Points = Points - Difficulty;
+                    _repeatMistake = true;
+                }
             }
-                
+
             if (_wordIndex >= CurrentEpisodeStep.Word.Length)
             {
                 NextEpisodeStep();
-                Points = Points + 10;
             }
             else
             {
@@ -138,19 +148,19 @@ namespace Controller
         public static void FinishEpisode()
         {
             CurrentEpisodeResult.Time = CalculateTime(_startTime);
-            CurrentEpisodeResult.Score = CalculateScore(CurrentEpisodeResult.MaxScore, CurrentEpisodeResult.Mistakes);
+            CurrentEpisodeResult.Score = CalculateScore(CalculateLetterPerMinute(CurrentEpisodeResult.Time, CurrentEpisodeResult.MaxScore));
+            CurrentEpisodeResult.ScorePercentage = CalculatePercentage(CurrentEpisodeResult.MaxScore, CurrentEpisodeResult.Mistakes);
             CurrentEpisodeResult.LettersPerMinute = CalculateLetterPerMinute(CurrentEpisodeResult.Time, CurrentEpisodeResult.MaxScore);
 
             UList student = (UList)Session.Get("student");
 
             int userId = student.Get<int>(0);
             int episodeId = (int)Session.Get("episodeId");
-            
+
             DBQueries.SaveResult(CurrentEpisodeResult, episodeId, userId);
 
             EpisodeFinished?.Invoke(null, EventArgs.Empty);
         }
-
         /// <summary>
         /// Returns the time difference between the given parameter and the time of now.
         /// </summary>
@@ -166,10 +176,21 @@ namespace Controller
         /// <param name="maxScore"></param>
         /// <param name="mistakes"></param>
         /// <returns></returns>
-        public static int CalculateScore(int maxScore, int mistakes)
+        public static int CalculatePercentage(int maxScore, int mistakes)
         {
             return (int)((double)(maxScore-mistakes) / maxScore * 100);
         }
+
+        /// <summary>
+        /// Returns the score based on the point in earned in the episode * how fast you type.
+        /// </summary>
+        /// <param name="LettersPerMinute"></param>
+        /// <returns></returns>
+        public static int CalculateScore(double LettersPerMinute)
+        {
+            return (int)(Points * LettersPerMinute);
+        }
+
         /// <summary>
         /// Calculates the max amount of store possible by getting the total amount of letters that can be written.
         /// </summary>

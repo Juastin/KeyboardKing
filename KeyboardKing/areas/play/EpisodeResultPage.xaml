@@ -41,6 +41,8 @@
                                VerticalAlignment="Center"/>
                     <Label  Style="{DynamicResource H3}" Content="Tijd:" 
                                VerticalAlignment="Center"/>
+                    <Label  Style="{DynamicResource H3}" Content="Goed:" 
+                               VerticalAlignment="Center"/>
                     <Label  Style="{DynamicResource H3}" Content="Fouten:" 
                                VerticalAlignment="Center"/>
                     <Label  Style="{DynamicResource H3}" Content="LPM:" 
@@ -49,6 +51,7 @@
                 <StackPanel VerticalAlignment="Center" Grid.Column="1" Orientation="Vertical" Margin="0, 0, 30, 0">
                     <Label Style="{DynamicResource H3}" Content="{Binding Score}" HorizontalAlignment="Left"/>
                     <Label Style="{DynamicResource H3}" Content="{Binding Time}" HorizontalAlignment="Left"/>
+                    <Label Style="{DynamicResource H3}" Content="{Binding ScorePercentage}" HorizontalAlignment="Left"/>
                     <Label Style="{DynamicResource H3}" Content="{Binding Mistakes}" HorizontalAlignment="Left"/>
                     <Label Style="{DynamicResource H3}" Content="{Binding LettersPerMinute}" HorizontalAlignment="Left"/>
                 </StackPanel>

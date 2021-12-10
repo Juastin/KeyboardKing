@@ -12,8 +12,9 @@ namespace Model
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public string Score { get => $"{MatchController.CurrentEpisodeResult?.Score ?? 0}%"; }
+        public string Score { get => $"{MatchController.CurrentEpisodeResult?.Score ?? 0}p"; }
         public int Mistakes { get => MatchController.CurrentEpisodeResult?.Mistakes ?? 0; }
+        public string ScorePercentage { get => $"{MatchController.CurrentEpisodeResult?.ScorePercentage ?? 0}%"; }
         public string Time { get => FormatTimespan(); }
         public double LettersPerMinute { get => MatchController.CurrentEpisodeResult?.LettersPerMinute ?? 0; }
         public MatchResultPageDataContext()
