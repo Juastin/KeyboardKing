@@ -56,7 +56,7 @@ namespace KeyboardKing.areas.main
 
                 // Add a GroupDescription so that the chapters with it's episodes will be split.
                 CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(EpOverview.ItemsSource);
-                PropertyGroupDescription groupDescription = new PropertyGroupDescription("[0]");
+                PropertyGroupDescription groupDescription = new PropertyGroupDescription("ChapterName");
                 view.GroupDescriptions.Add(groupDescription);
                 EpOverview.Items.Refresh();
             });
@@ -68,15 +68,15 @@ namespace KeyboardKing.areas.main
         private void EpOverview_PlayClick(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;
-            if (button.DataContext is List<string>)
+            if (button.DataContext is Episode)
             {
                 //Gets the selected row data
-                List<string> row = (List<string>)button.DataContext;
+                Episode row = (Episode)button.DataContext;
 
                 //When the episode is finished this event will trigger.
                 //Since we can only call Navigate() inside the View this is needed.
                 EpisodeController.EpisodeFinished += OnEpisodeFinished;
-                Episode episode = EpisodeController.ParseEpisode(int.Parse(row[3]));
+                Episode episode = EpisodeController.ParseEpisode(row.Id);
                 EpisodeController.Initialise(episode);
 
                 NavigationController.NavigateToPage(Pages.EpisodeReadyUpPage);

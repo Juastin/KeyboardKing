@@ -31,9 +31,9 @@
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
                                 <Border x:Name="EpisodeNumberBox" CornerRadius="5, 0, 0, 5" Width="75" Grid.RowSpan="3" HorizontalAlignment="Left" Background="{DynamicResource Failed}">
-                                    <TextBlock Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="48" Foreground="White"/>
+                                    <TextBlock Text="{Binding Id}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="48" Foreground="White"/>
                                 </Border>
-                                <TextBlock Text="{Binding Id}" Grid.Column="1" Grid.RowSpan="3" Margin="10, 0, 0, 0" FontSize="16" VerticalAlignment="Center" Foreground="{DynamicResource TextColor}"/>
+                                <TextBlock Text="{Binding Name}" Grid.Column="1" Grid.RowSpan="3" Margin="10, 0, 0, 0" FontSize="16" VerticalAlignment="Center" Foreground="{DynamicResource TextColor}"/>
                                 <TextBlock x:Name="HighscoreBlock" Visibility="Hidden" Grid.Column="1" Grid.Row="2" Margin="10, 0, 0, 0" FontSize="12" VerticalAlignment="Top" Foreground="{DynamicResource TextColor}">
                                         <Run Text="Highscore: "/>
                                         <Run x:Name="Highscore"/>
