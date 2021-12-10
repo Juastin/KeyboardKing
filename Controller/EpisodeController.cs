@@ -31,7 +31,8 @@ namespace Controller
         public static string Word { get => CurrentEpisodeStep?.Word; }
 
         public static int Points { get; set; }
-        public static string WordOverlayCorrect { get =>CurrentEpisodeStep?.Word.Substring(_wordIndex); }
+        public static string WordOverlayCorrect { get =>CurrentEpisodeStep?.Word.Substring(0, _wordIndex); }
+        public static string WordOverlay { get => CurrentEpisodeStep?.Word.Substring(_wordIndex); }
         public static string WordOverlayWrong { get =>CurrentEpisodeStep?.Word.Substring(_wordIndex, _wrongIndex); }
 
         public static void Start()
