@@ -63,33 +63,33 @@
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0">
                                 <StackPanel VerticalAlignment="Bottom" Orientation="Vertical">
-                                    <TextBlock Style="{DynamicResource PodiumUsername}" Text="Username1"/>
+                                    <TextBlock Style="{DynamicResource PodiumUsername}"  Text="{Binding Winnaar2}"/>
                                     <Border Style="{DynamicResource PodiumBorder}" CornerRadius="5,5,0,5" Background="{DynamicResource Color4}" Height="125" VerticalAlignment="Bottom">
                                         <Grid>
                                             <Label Style="{DynamicResource PodiumNumberLabel}" Content="2"/>
-                                            <Label Style="{DynamicResource PodiumScoreLabel}" Content="5.000.000 p"/>
+                                            <Label Style="{DynamicResource PodiumScoreLabel}" Content="{Binding Score2}"/>
                                         </Grid>
                                     </Border>
                                 </StackPanel>
                             </Grid>
                             <Grid Grid.Column="1">
                                 <StackPanel VerticalAlignment="Bottom" Orientation="Vertical">
-                                    <TextBlock Style="{DynamicResource PodiumUsername}" Text="StormJulian-De-Tweede"/>
+                                    <TextBlock Style="{DynamicResource PodiumUsername}" Text="{Binding Winnaar1}"/>
                                     <Border Style="{DynamicResource PodiumBorder}" Background="{DynamicResource Color5}" Height="175" VerticalAlignment="Bottom" Grid.Column="1">
                                         <Grid>
                                             <Label Style="{DynamicResource PodiumNumberLabel}" Content="1"/>
-                                            <Label Style="{DynamicResource PodiumScoreLabel}" Content="12.345.678 p"/>
+                                            <Label Style="{DynamicResource PodiumScoreLabel}" Content="{Binding Score1}"/>
                                         </Grid>
                                     </Border>
                                 </StackPanel>
                             </Grid>
                             <Grid Grid.Column="2">
                                 <StackPanel VerticalAlignment="Bottom" Orientation="Vertical">
-                                    <TextBlock Style="{DynamicResource PodiumUsername}" Text="Username3"/>
+                                    <TextBlock Style="{DynamicResource PodiumUsername}"  Text="{Binding Winnaar3}"/>
                                     <Border Style="{DynamicResource PodiumBorder}" CornerRadius="5,5,5,0" Background="{DynamicResource Color4}" Height="75" VerticalAlignment="Bottom" Grid.Column="2">
                                         <Grid>
                                             <Label Style="{DynamicResource PodiumNumberLabel}" Content="3"/>
-                                            <Label Style="{DynamicResource PodiumScoreLabel}" Content="1.345.678 p"/>
+                                            <Label Style="{DynamicResource PodiumScoreLabel}" Content="{Binding Score3}"/>
                                         </Grid>
                                     </Border>
                                 </StackPanel>
@@ -99,7 +99,7 @@
                 </StackPanel>
             </Grid>
             <Grid Grid.Row="2" VerticalAlignment="Bottom">
-                <Components:NavigationButton ToPage="ChaptersPage" Style="{DynamicResource Button1}" HorizontalAlignment="Left" Content="Voltooi episode"/>
+                <Components:NavigationButton ToPage="ChaptersPage" Style="{DynamicResource Button1}" HorizontalAlignment="Left" Content="Leave Match"/>
             </Grid>
         </Grid>
     </Border>

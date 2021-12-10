@@ -24,14 +24,27 @@ namespace Controller
 
         public static event EventHandler WordChanged;
         public static event EventHandler EpisodeFinished;
-
         public static string Word { get => CurrentEpisodeStep?.Word; }
+
+        private static List<string> _winnaars;
+        private static List<string> _scores;
 
         public static int Points { get; set; }
         public static int Difficulty { get; set; }
         private static bool _repeatMistake;
         public static string WordOverlayCorrect { get => CurrentEpisodeStep?.Word.Substring(0, _wordIndex); }
         public static string WordOverlayWrong { get => CurrentEpisodeStep?.Word.Substring(0, _wrongIndex); }
+
+
+        public static string Winnaar1 { get; private set; }
+        public static string Winnaar2 { get; private set; }
+        public static string Winnaar3 { get; private set; }
+
+        public static string Score1 { get; private set; }
+        public static string Score2 { get; private set; }
+        public static string Score3 { get; private set; }
+
+
 
         public static void Start()
         {
@@ -75,6 +88,42 @@ namespace Controller
             DBQueries.AddMatchProgress(_currentMatchId, student);
         }
 
+        public static List<List<string>> GetWinnaars()
+        {
+            return DBQueries.GetScoresOrderByHighest(_currentMatchId);
+        }
+        
+        public static void SetWinnars()
+        {
+            List<List<string>> players = GetWinnaars();
+            _winnaars = new List<string>();
+            _scores = new List<string>();
+
+            for (int i = 0; i < 3; i++)
+            {
+                if(i < players.Count) 
+                {
+                    _winnaars.Add(players[i][0]);
+                    _scores.Add(players[i][1]);
+                }
+                else
+                {
+                    _winnaars.Add("");
+                    _scores.Add("");
+                }
+            }
+
+            Winnaar1 = _winnaars[0];
+            Winnaar2 = _winnaars[1];
+            Winnaar3 = _winnaars[2];
+
+            Score1 = _scores[0];
+            Score2 = _scores[1];
+            Score3 = _scores[2];
+
+
+        }
+
         /// <summary>
         /// <para>This method will add a user in MatchProgress to the database</para>
         /// It does this by getting the id of the chosen Match and inserting it in MatchProgressr.
@@ -85,7 +134,7 @@ namespace Controller
             DBQueries.AddMatchProgress(_currentMatchId, (UList)Session.Get("student"));
         }
 
-
+        
 
         /// <summary>
         /// Tries to dequeue next episode step from the current episode.
@@ -173,14 +222,15 @@ namespace Controller
             CurrentEpisodeResult.Score = CalculateScore(CalculateLetterPerMinute(CurrentEpisodeResult.Time, CurrentEpisodeResult.MaxScore));
             CurrentEpisodeResult.ScorePercentage = CalculatePercentage(CurrentEpisodeResult.MaxScore, CurrentEpisodeResult.Mistakes);
             CurrentEpisodeResult.LettersPerMinute = CalculateLetterPerMinute(CurrentEpisodeResult.Time, CurrentEpisodeResult.MaxScore);
-
-
+         
             UList student = (UList)Session.Get("student");
 
             int userId = student.Get<int>(0);
             int matchId = (int)Session.Get("matchId");
 
             DBQueries.SaveMatchResult(CurrentEpisodeResult, matchId, userId);
+
+            SetWinnars();
 
             EpisodeFinished?.Invoke(null, EventArgs.Empty);
         }

@@ -17,6 +17,14 @@ namespace Model
         public string ScorePercentage { get => $"{MatchController.CurrentEpisodeResult?.ScorePercentage ?? 0}%"; }
         public string Time { get => FormatTimespan(); }
         public double LettersPerMinute { get => MatchController.CurrentEpisodeResult?.LettersPerMinute ?? 0; }
+
+        public string Winnaar1 { get => MatchController.Winnaar1; }
+        public string Winnaar2 { get => MatchController.Winnaar2; }
+        public string Winnaar3 { get => MatchController.Winnaar3; }
+
+        public string Score1 { get => MatchController.Score1; }
+        public string Score2 { get => MatchController.Score2; }
+        public string Score3 { get => MatchController.Score3; }
         public MatchResultPageDataContext()
         {
             MatchController.EpisodeFinished += OnEpisodeFinished;

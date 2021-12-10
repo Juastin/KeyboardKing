@@ -1,4 +1,5 @@
-﻿using KeyboardKing.core;
+﻿using Controller;
+using KeyboardKing.core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,6 +44,7 @@ namespace KeyboardKing.areas.play
 
         public override void OnTick()
         {
+           
         }
     }
 }

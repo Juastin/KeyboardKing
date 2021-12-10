@@ -284,5 +284,23 @@ namespace Controller
             cmd.Parameters.Add(matchId);
             return DBHandler.Query(cmd);
         }
+
+        public static List<List<string>> GetScoresOrderByHighest(int matchid)
+        {
+            SqlCommand cmd = new SqlCommand("SELECT u.username, mp.score " +
+            "FROM [dbo].[MatchProgress] mp " +
+            "LEFT JOIN [dbo].[User] u ON mp.userid = u.id " +
+            "WHERE mp.matchid = @matchid " +
+            "ORDER BY mp.score");
+
+            SqlParameter matchId = new SqlParameter("@matchid", SqlDbType.Int, 255);
+
+            matchId.Value = matchid;
+
+            cmd.Parameters.Add(matchId);
+
+            return DBHandler.SelectQuery(cmd);
+        }
+
     }
 }
