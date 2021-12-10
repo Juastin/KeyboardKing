@@ -33,10 +33,11 @@ namespace Controller
         public static int Points { get; set; }
         public static string WordOverlayCorrect { get =>CurrentEpisodeStep?.Word.Substring(0, _wordIndex); }
         public static string WordOverlayWrong { get =>CurrentEpisodeStep?.Word.Substring(0, _wrongIndex); }
-
+        public static bool IsStarted { get; private set; }
         public static void Start()
         {
             _stopwatch.Start();
+            IsStarted = true;
         }
 
         public static void Pause()
@@ -148,6 +149,7 @@ namespace Controller
         public static void FinishEpisode()
         {
             _stopwatch.Stop();
+            IsStarted = false;
             CurrentEpisodeResult.Time = _stopwatch.Elapsed;
             CurrentEpisodeResult.Score = CalculateScore(CurrentEpisodeResult.MaxScore, CurrentEpisodeResult.Mistakes);
             CurrentEpisodeResult.LettersPerMinute = CalculateLetterPerMinute(CurrentEpisodeResult.Time, CurrentEpisodeResult.MaxScore);
