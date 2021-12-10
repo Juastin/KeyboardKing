@@ -18,5 +18,10 @@ namespace Model
         public string Password { get; set; }
         public string Salt { get; set; }
         public SkillLevel SkillLevel { get; set; }
+
+        public static List<User> ParseUserIds(List<List<string>> input)
+        {
+            return input.Select(u => new User() { Id = int.Parse(u[0]) }).ToList();
+        }
     }
 }

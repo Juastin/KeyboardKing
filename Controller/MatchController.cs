@@ -21,7 +21,7 @@ namespace Controller
         public static bool CheckIfUserExists()
         {
             User student = (User)Session.Get("student");
-            return DBQueries.GetAllUsersInMatch().SelectMany(result => result.Where(data => data.Equals(student.Id.ToString(), StringComparison.Ordinal)).Select(data => new { })).Any();
+            return DBQueries.GetAllUsersInMatch().Where(user => user.Id == student.Id).Count() > 0;
         }
         /// <summary>
         /// <para>This method will make a match by adding a Match, and a MatchProgress to the database</para>

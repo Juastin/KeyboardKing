@@ -167,13 +167,15 @@ namespace Controller
             return Match.ParseMatches(result);
         }
 
-        public static List<List<string>> GetAllUsersInMatch()
+        public static List<User> GetAllUsersInMatch()
         {
             SqlCommand cmd = new SqlCommand("SELECT userid " +
                                             "FROM [dbo].[Match] m " +
                                             "RIGHT JOIN [dbo].[MatchProgress] mp ON m.id = mp.matchid " +
                                             "WHERE m.state != 2 ", null);
-            return DBHandler.SelectQuery(cmd);
+
+            List<List<string>> result = DBHandler.SelectQuery(cmd);
+            return User.ParseUserIds(result);
         }
 
         public static int AddMatch(int episodeid, User user)
