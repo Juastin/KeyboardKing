@@ -33,7 +33,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="130"/>
                     <ColumnDefinition Width="auto" MaxWidth="200"/>
-                    <ColumnDefinition />
+
                 </Grid.ColumnDefinitions>
 
                 <StackPanel VerticalAlignment="Center" Grid.Column="0" Orientation="Vertical">
@@ -54,51 +54,6 @@
                     <Label Style="{DynamicResource H3}" Content="{Binding ScorePercentage}" HorizontalAlignment="Left"/>
                     <Label Style="{DynamicResource H3}" Content="{Binding Mistakes}" HorizontalAlignment="Left"/>
                     <Label Style="{DynamicResource H3}" Content="{Binding LettersPerMinute}" HorizontalAlignment="Left"/>
-                </StackPanel>
-                <StackPanel VerticalAlignment="Center" Grid.Column="2" Orientation="Vertical">
-                    <Border>
-                        <!-- CONTENT SPACE FOR THE PODIUM -->
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <Grid Grid.Column="0">
-                                <StackPanel VerticalAlignment="Bottom" Orientation="Vertical">
-                                    <TextBlock Style="{DynamicResource PodiumUsername}" Text="Username1"/>
-                                    <Border Style="{DynamicResource PodiumBorder}" CornerRadius="5,5,0,5" Background="{DynamicResource Color4}" Height="125" VerticalAlignment="Bottom">
-                                        <Grid>
-                                            <Label Style="{DynamicResource PodiumNumberLabel}" Content="2"/>
-                                            <Label Style="{DynamicResource PodiumScoreLabel}" Content="5.000.000 p"/>
-                                        </Grid>
-                                    </Border>
-                                </StackPanel>
-                            </Grid>
-                            <Grid Grid.Column="1">
-                                <StackPanel VerticalAlignment="Bottom" Orientation="Vertical">
-                                    <TextBlock Style="{DynamicResource PodiumUsername}" Text="StormJulian-De-Tweede"/>
-                                    <Border Style="{DynamicResource PodiumBorder}" Background="{DynamicResource Color5}" Height="175" VerticalAlignment="Bottom" Grid.Column="1">
-                                        <Grid>
-                                            <Label Style="{DynamicResource PodiumNumberLabel}" Content="1"/>
-                                            <Label Style="{DynamicResource PodiumScoreLabel}" Content="12.345.678 p"/>
-                                        </Grid>
-                                    </Border>
-                                </StackPanel>
-                            </Grid>
-                            <Grid Grid.Column="2">
-                                <StackPanel VerticalAlignment="Bottom" Orientation="Vertical">
-                                    <TextBlock Style="{DynamicResource PodiumUsername}" Text="Username3"/>
-                                    <Border Style="{DynamicResource PodiumBorder}" CornerRadius="5,5,5,0" Background="{DynamicResource Color4}" Height="75" VerticalAlignment="Bottom" Grid.Column="2">
-                                        <Grid>
-                                            <Label Style="{DynamicResource PodiumNumberLabel}" Content="3"/>
-                                            <Label Style="{DynamicResource PodiumScoreLabel}" Content="1.345.678 p"/>
-                                        </Grid>
-                                    </Border>
-                                </StackPanel>
-                            </Grid>
-                        </Grid>
-                    </Border>
                 </StackPanel>
             </Grid>
             <Grid Grid.Row="2" VerticalAlignment="Bottom">
