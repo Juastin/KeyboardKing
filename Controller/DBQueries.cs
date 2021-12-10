@@ -331,7 +331,7 @@ namespace Controller
             "FROM [dbo].[MatchProgress] mp " +
             "LEFT JOIN [dbo].[User] u ON mp.userid = u.id " +
             "WHERE mp.matchid = @matchid " +
-            "ORDER BY mp.score");
+            "ORDER BY mp.score DESC");
 
             SqlParameter matchId = new SqlParameter("@matchid", SqlDbType.Int, 255);
 
