@@ -94,6 +94,7 @@ namespace KeyboardKing
                 {"Paint", new Theme("Paint Theme", "resources/themes/PaintTheme.xaml", "resources/images/paint_theme_background.png")},
                 {"Obsidian", new Theme("Obsidian Theme", "resources/themes/ObsidianTheme.xaml", "resources/images/obsidian_theme_background.png")},
                 {"Space", new Theme("Space Theme", "resources/themes/SpaceTheme.xaml", "resources/images/space_theme_background.png")},
+                {"Christmas", new Theme("Christmas Theme", "resources/themes/ChristmasTheme.xaml", "resources/images/kk_background_christmas.png")},
             };
 
             CBTheme.ItemsSource = _themes;
