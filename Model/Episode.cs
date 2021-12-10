@@ -37,15 +37,6 @@ namespace Model
             }));
 
             return episodes;
-            //return input.Select(e => new Episode()
-            //{
-            //    ChapterName = e[0],
-            //    ChapterId = int.Parse(e[1]),
-            //    Name = e[2],
-            //    Id = int.Parse(e[3]),
-            //    Completed = bool.Parse(e[4]),
-            //    HighScore = int.Parse(e[5]),
-            //}).ToList();
         }
     }
 }

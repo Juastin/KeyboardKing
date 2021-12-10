@@ -117,18 +117,13 @@ namespace Controller
         /// <returns></returns>
         public static Episode ParseEpisode(int episodeId)
         {
-            List<List<string>> results = DBQueries.GetAllEpisodeStepsFromEpisode(episodeId);
+            List<EpisodeStep> steps = DBQueries.GetAllEpisodeStepsFromEpisode(episodeId);
 
             Session.Remove("episodeId");
             Session.Add("episodeId", episodeId);
 
             Episode episode = new Episode();
-
-            foreach (List<string> word in results)
-            {
-                EpisodeStep es = new EpisodeStep() { Word = word[0] };
-                episode.EpisodeSteps.Enqueue(es);
-            }
+            steps.ForEach(s => episode.EpisodeSteps.Enqueue(s));
 
             return episode;
         }

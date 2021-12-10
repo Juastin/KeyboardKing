@@ -139,7 +139,7 @@ namespace Controller
             return Episode.ParseEpisodes(result);
         }
 
-        public static List<List<string>> GetAllEpisodeStepsFromEpisode(int id)
+        public static List<EpisodeStep> GetAllEpisodeStepsFromEpisode(int id)
         {
             SqlCommand cmd = new SqlCommand("SELECT word " +
                 "FROM [dbo].[EpisodeStep] " +
@@ -149,8 +149,9 @@ namespace Controller
             SqlParameter episodeIdParam = new SqlParameter("@id", SqlDbType.Int, 255);
             episodeIdParam.Value = id;
             cmd.Parameters.Add(episodeIdParam);
-
-            return DBHandler.SelectQuery(cmd);
+            
+            List<List<string>> result = DBHandler.SelectQuery(cmd);
+            return EpisodeStep.ParseEpisodeSteps(result);
         }
 
         public static List<List<string>> GetAllActiveMatches()
