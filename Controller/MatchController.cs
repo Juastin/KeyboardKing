@@ -20,8 +20,8 @@ namespace Controller
         /// <returns></returns>
         public static bool CheckIfUserExists()
         {
-            UList student = (UList)Session.Get("student");
-            return DBQueries.GetAllUsersInMatch().SelectMany(result => result.Where(data => data.Equals(student.Get<string>(0), StringComparison.Ordinal)).Select(data => new { })).Any();
+            User student = (User)Session.Get("student");
+            return DBQueries.GetAllUsersInMatch().SelectMany(result => result.Where(data => data.Equals(student.Id.ToString(), StringComparison.Ordinal)).Select(data => new { })).Any();
         }
         /// <summary>
         /// <para>This method will make a match by adding a Match, and a MatchProgress to the database</para>
@@ -30,7 +30,7 @@ namespace Controller
         /// <param name="selectedValue"></param>
         public static void MakeMatch(int selectedValue)
         {
-            UList student = (UList)Session.Get("student");
+            User student = (User)Session.Get("student");
             _currentMatchId = DBQueries.AddMatch(selectedValue, student);
             DBQueries.AddMatchProgress(_currentMatchId, student);
         }
@@ -42,7 +42,7 @@ namespace Controller
         public static void AddUserInMatchProgress(string selectedValue)
         {
             _currentMatchId = int.Parse(selectedValue);
-            DBQueries.AddMatchProgress(_currentMatchId, (UList)Session.Get("student"));
+            DBQueries.AddMatchProgress(_currentMatchId, (User)Session.Get("student"));
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace Controller
         /// </summary>
         public static void RemoveUserInMatchProgress()
         {
-            DBQueries.RemoveUserInMatch(_currentMatchId, (UList)Session.Get("student"));
+            DBQueries.RemoveUserInMatch(_currentMatchId, (User)Session.Get("student"));
         }
 
         /// <summary>
@@ -68,13 +68,13 @@ namespace Controller
 
         public static bool CheckUserIsCreator()
         {
-            UList student = (UList)Session.Get("student");
-            return student.Get<string>(0).Equals(_creatorId, StringComparison.Ordinal);
+            User student = (User)Session.Get("student");
+            return student.Id.ToString().Equals(_creatorId, StringComparison.Ordinal);
         }
 
         public static void DeleteMatch()
         {
-            DBQueries.RemoveUserInMatch(_currentMatchId, (UList)Session.Get("student"));
+            DBQueries.RemoveUserInMatch(_currentMatchId, (User)Session.Get("student"));
             DBQueries.DeleteMatch(_currentMatchId);
         }
 

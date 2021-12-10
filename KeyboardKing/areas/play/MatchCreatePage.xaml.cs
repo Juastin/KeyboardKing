@@ -37,7 +37,7 @@ namespace KeyboardKing.areas.play
                 NavigationController.NavigateToPage(Pages.MatchOverviewPage);
             }
 
-            UList user = (UList)Session.Get("student");
+            User user = (User)Session.Get("student");
 
             CBEpisode.ItemsSource = DBQueries.GetAllEpisodes(user);
             CBEpisode.DisplayMemberPath = "Name";

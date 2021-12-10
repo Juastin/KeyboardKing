@@ -53,16 +53,16 @@ namespace KeyboardKing.areas.login
             if (!email.Equals("", StringComparison.Ordinal) && email != null
                 && !boxPassword.Password.Equals("", StringComparison.Ordinal) && boxPassword.Password != null)
             {
-                List<List<string>> results = DBQueries.GetUserInfo(email);
-                if (results.Any())
+                User user = DBQueries.GetUserInfo(email);
+                if (user != null)
                 {
-                    bool passwordResult = Encryption.VerifyHash(boxPassword.Password, results[0][4], results[0][3]);
+                    bool passwordResult = Encryption.VerifyHash(boxPassword.Password, user.Salt, user.Password);
                     if (passwordResult)
                     {
-                        UList student = new UList(new object[]{results[0][0], results[0][1], results[0][2], results[0][5]});
-                        Session.Add("student", student);
+                        user.Password = user.Salt = null;
+                        Session.Add("student", user);
 
-                        if (results[0][5] == string.Empty)
+                        if (user.SkillLevel == null)
                         {
                             NavigationController.NavigateToPage(Pages.RegisterSkillPage);
                             return;

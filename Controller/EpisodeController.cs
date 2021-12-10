@@ -152,12 +152,10 @@ namespace Controller
             CurrentEpisodeResult.Score = CalculateScore(CurrentEpisodeResult.MaxScore, CurrentEpisodeResult.Mistakes);
             CurrentEpisodeResult.LettersPerMinute = CalculateLetterPerMinute(CurrentEpisodeResult.Time, CurrentEpisodeResult.MaxScore);
 
-            UList student = (UList)Session.Get("student");
-
-            int userId = student.Get<int>(0);
+            User student = (User)Session.Get("student");
             int episodeId = (int)Session.Get("episodeId");
             
-            DBQueries.SaveResult(CurrentEpisodeResult, episodeId, userId);
+            DBQueries.SaveResult(CurrentEpisodeResult, episodeId, student.Id);
 
             EpisodeFinished?.Invoke(null, EventArgs.Empty);
         }
