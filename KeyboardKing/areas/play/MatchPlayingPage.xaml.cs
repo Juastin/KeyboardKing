@@ -52,6 +52,11 @@ namespace KeyboardKing.areas.play
         public override void OnTick()
         {
             MatchController.MultiplayerFetch();
+            this.Dispatcher.Invoke(() =>
+            {
+                OpponentListBox.ItemsSource = MatchController.OpponentData;
+                OpponentListBox.Items.Refresh();
+            });
         }
 
         private void Initialize()

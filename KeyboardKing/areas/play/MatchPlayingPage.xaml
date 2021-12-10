@@ -4,8 +4,10 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:KeyboardKing.core" xmlns:model="clr-namespace:Model" d:DataContext="{d:DesignInstance Type=model:MatchPageDataContext}"
-                mc:Ignorable="d" 
+      mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
+      MaxHeight="600"
+      MaxWidth="1450"
       Title="MatchPlayingPage" PreviewKeyDown="PreventTab_PreviewKeyDown" ForceCursor="True" Cursor="Arrow">
     <local:JumpPage.DataContext>
         <model:MatchPageDataContext/>
@@ -34,17 +36,16 @@
             </Setter>
         </Style>
     </Page.Resources>
-    
+
     <Grid x:Name="Container">
-        <ListBox Background="Transparent" ItemsSource="{Binding OpponentData}" x:Name="OpponentListBox" ItemContainerStyle="{DynamicResource ListBoxItemTemplate}" BorderThickness="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,200">
+        <Border Style="{DynamicResource GridBorder}"/>
+        <ListBox x:Name="OpponentListBox" ItemContainerStyle="{DynamicResource ListBoxItemTemplate}" BorderThickness="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,200">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <UniformGrid Columns="2"/>
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
         </ListBox>
-        
-        <Border Style="{DynamicResource GridBorder}"/>
         <Label Style="{DynamicResource H1}" Content="" Margin="49,51,301,336"/>
         <TextBox x:Name="UserInput" Background="Transparent" Foreground="Transparent" CaretBrush="Transparent" Grid.Column="0" LostKeyboardFocus="UserInput_LostFocus" Text="" TextChanged="UserInput_TextChanged" SelectionBrush="{x:Null}" BorderThickness="0,0,0,0">
         </TextBox>
@@ -54,7 +55,7 @@
             <Label x:Name="WordOverlayCorrect" Content="{Binding WordOverlayCorrect}" Foreground="Green" FontSize="50"/>
         </Grid>
         <Grid>
-            <ProgressBar Template="{DynamicResource ProgressBar}" VerticalAlignment="Bottom" Height="20" Minimum="0" Maximum="{Binding MaxLetters}" Value="{Binding LettersTyped, Mode=OneWay}"/>
+            <ProgressBar Background="{DynamicResource Color4}" Template="{DynamicResource ProgressBar}" VerticalAlignment="Bottom" Height="20" Minimum="0" Maximum="{Binding MaxLetters}" Value="{Binding LettersTyped, Mode=OneWay}"/>
             <TextBox x:Name="TimerTextBox" Style="{DynamicResource TextBox2}" VerticalAlignment="Top" Background="Transparent"  Text="00:00" Loaded="TimerTextBox_Loaded" Height="53"  Margin="10,11,133,0"/>
             <Button Style="{DynamicResource Button1}" Content="Exit" VerticalAlignment="Top" HorizontalAlignment="Right" Click="ButtonExit" FontSize="26" Margin="0,11,10,0"  Height="54" Width="110"/>
         </Grid>
