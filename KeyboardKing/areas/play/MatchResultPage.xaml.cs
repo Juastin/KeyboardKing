@@ -54,7 +54,7 @@ namespace KeyboardKing.areas.play
             DateTime now = DateTime.Now;
             if (_tickCheck.AddSeconds(2) < now)
             {
-                MatchController.SetWinnars();
+                MatchController.SetWinners();
             }
         }
     }

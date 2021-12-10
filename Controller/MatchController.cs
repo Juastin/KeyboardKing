@@ -81,29 +81,7 @@ namespace Controller
             NextEpisodeStep();
         }
 
-        /// <summary>
-        /// <para>This method checks if there is already a user in a match.</para>
-        /// It does this by running an sql query to get all user that are in a match and compare that to the user that is in the session (the logged in user)
-        /// </summary>
-        /// <returns></returns>
-        public static bool CheckIfUserExists()
-        {
-            UList student = (UList)Session.Get("student");
-            return DBQueries.GetAllUsersInMatch().SelectMany(result => result.Where(data => data.Equals(student.Get<string>(0), StringComparison.Ordinal)).Select(data => new { })).Any();
-        }
-        /// <summary>
-        /// <para>This method will make a match by adding a Match, and a MatchProgress to the database</para>
-        /// It does this by getting the id of the just inserted Match and inserting it into MatchProgress with the current user.
-        /// </summary>
-        /// <param name="selectedValue"></param>
-        public static void MakeMatch(int selectedValue)
-        {
-            UList student = (UList)Session.Get("student");
-            _currentMatchId = DBQueries.AddMatch(selectedValue, student);
-            DBQueries.AddMatchProgress(_currentMatchId, student);
-        }
-        
-        public static void SetWinnars()
+        public static void SetWinners()
         {
             List<List<string>> players = DBQueries.GetScoresOrderByHighest(_currentMatchId);
             _winnaars = new List<string>();
@@ -132,16 +110,6 @@ namespace Controller
             Score3 = _scores[2];
 
             Refresh?.Invoke(null, new EventArgs());
-        }
-
-        /// <summary>
-        /// <para>This method will add a user in MatchProgress to the database</para>
-        /// It does this by getting the id of the chosen Match and inserting it in MatchProgressr.
-        /// </summary>
-        public static void AddUserInMatchProgress(string selectedValue)
-        {
-            _currentMatchId = int.Parse(selectedValue);
-            DBQueries.AddMatchProgress(_currentMatchId, (UList)Session.Get("student"));
         }
 
         /// <summary>
@@ -239,7 +207,7 @@ namespace Controller
 
             DBQueries.SaveMatchResult(CurrentEpisodeResult, matchId, userId);
 
-            SetWinnars();
+            SetWinners();
 
             EpisodeFinished?.Invoke(null, EventArgs.Empty);
         }
@@ -284,7 +252,7 @@ namespace Controller
         {
             return episode.EpisodeSteps.Sum(episodeStep => episodeStep.Word.Length);
         }
-        
+
         /// <summary>
         /// Calculates the letters that are written per minute by dividing the amount of letters possible by the time spend on the episode.
         /// </summary>
@@ -295,6 +263,52 @@ namespace Controller
         {
             return Math.Round(letters / time.TotalMinutes);
         }
+
+        public static void MultiplayerFetch()
+        {
+            // PUSH THIS CLIENT'S PROGRESS
+            int progress_percent = (LettersTyped * 100) / CurrentEpisodeResult.MaxScore;
+            int user_id = ((UList)Session.Get("student")).Get<int>(0);
+            int match_id = _currentMatchId;
+            DBQueries.UpdateMatchProgress(progress_percent, user_id, match_id);
+
+            // FETCH OTHERS PROGRESS
+            OpponentData.Clear();
+            OpponentData = DBQueries.GetOpponentProgress(user_id, match_id);
+        }
+
+        /// <summary>
+        /// <para>This method checks if there is already a user in a match.</para>
+        /// It does this by running an sql query to get all user that are in a match and compare that to the user that is in the session (the logged in user)
+        /// </summary>
+        /// <returns></returns>
+        public static bool CheckIfUserExists()
+        {
+            UList student = (UList)Session.Get("student");
+            return DBQueries.GetAllUsersInMatch().SelectMany(result => result.Where(data => data.Equals(student.Get<string>(0), StringComparison.Ordinal)).Select(data => new { })).Any();
+        }
+        /// <summary>
+        /// <para>This method will make a match by adding a Match, and a MatchProgress to the database</para>
+        /// It does this by getting the id of the just inserted Match and inserting it into MatchProgress with the current user.
+        /// </summary>
+        /// <param name="selectedValue"></param>
+        public static void MakeMatch(int selectedValue)
+        {
+            UList student = (UList)Session.Get("student");
+            _currentMatchId = DBQueries.AddMatch(selectedValue, student);
+            DBQueries.AddMatchProgress(_currentMatchId, student);
+        }
+
+        /// <summary>
+        /// <para>This method will add a user in MatchProgress to the database</para>
+        /// It does this by getting the id of the chosen Match and inserting it in MatchProgressr.
+        /// </summary>
+        public static void AddUserInMatchProgress(string selectedValue)
+        {
+            _currentMatchId = int.Parse(selectedValue);
+            DBQueries.AddMatchProgress(_currentMatchId, (UList)Session.Get("student"));
+        }
+
         /// <summary>
         /// <para>This method will remove a user in MatchProgress to the database</para>
         /// It does this by giving the Match and User id to the method to delete the MatchProgress.
@@ -331,18 +345,5 @@ namespace Controller
         public static bool CheckCreatorIsAloneInMatch() { return _amountOfPlayers == 1; }
 
         public static int GetMatchId() { return _currentMatchId; }
-
-        public static void MultiplayerFetch()
-        {
-            // PUSH THIS CLIENT'S PROGRESS
-            int progress_percent = (LettersTyped * 100) / CurrentEpisodeResult.MaxScore;
-            int user_id = ((UList)Session.Get("student")).Get<int>(0);
-            int match_id = _currentMatchId;
-            DBQueries.UpdateMatchProgress(progress_percent, user_id, match_id);
-
-            // FETCH OTHERS PROGRESS
-            OpponentData.Clear();
-            OpponentData = DBQueries.GetOpponentProgress(user_id, match_id);
-        }
     }
 }
