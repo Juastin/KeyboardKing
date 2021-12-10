@@ -63,16 +63,12 @@ namespace KeyboardKing.areas.play
         {
             this.Dispatcher.Invoke(() =>
             {
-                MatchController.EpisodeFinished += OnEpisodeFinished;
-                MatchController.Initialise(MatchController.ParseEpisode(int.Parse(_matchInfoLoad[0][9])));
-                NavigationController.NavigateToPage(Pages.MatchPlayingPage);
+                MatchController.StartGame();
             });
         }
 
         private void OnEpisodeFinished(object sender, EventArgs e)
         {
-            MatchController.EpisodeFinished -= OnEpisodeFinished;
-            DBQueries.SetPlayState(int.Parse(_matchInfoLoad[0][0]), 2);
             NavigationController.NavigateToPage(Pages.MatchResultPage);
         }
 

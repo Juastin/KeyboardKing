@@ -47,13 +47,24 @@ namespace Controller
         public static string Score2 { get; private set; }
         public static string Score3 { get; private set; }
 
-
-
         public static void Start()
         {
             _startTime = DateTime.Now;
         }
 
+        public static void StartGame()
+        {
+            EpisodeFinished += OnEpisodeFinished;
+            Initialise(ParseEpisode(int.Parse(_matchInfo[0][9])));
+            NavigationController.NavigateToPage(Pages.MatchPlayingPage);
+        }
+
+        private static void OnEpisodeFinished(object sender, EventArgs e)
+        {
+            EpisodeFinished -= OnEpisodeFinished;
+            DBQueries.SetPlayState(int.Parse(_matchInfo[0][0]), 2);
+            NavigationController.NavigateToPage(Pages.MatchResultPage);
+        }
 
         public static void Initialise(Episode episode)
         {
@@ -68,6 +79,11 @@ namespace Controller
             CurrentEpisodeResult.MaxScore = CalculateMaxScore(episode);
             OpponentData = new List<List<string>>();
             NextEpisodeStep();
+        }
+
+        public static void OnEpisodeFinished(object v, object sender, EventArgs eventArgs, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
