@@ -180,26 +180,41 @@
 
     
     <!-- NavButton template -->
-    <Style x:Key="NavButton" TargetType="Button">
+    <Style x:Key="NavButton" TargetType="{x:Type Button}">
         <Setter Property="OverridesDefaultStyle" Value="True"/>
-        <Setter Property="Margin" Value="5, 0"/>
+        <Setter Property="Margin" Value="10,5"/>
+        <Setter Property="Width" Value="80"/>
+        <Setter Property="Height" Value="80"/>
+        <Setter Property="Foreground" Value="{DynamicResource Color4}"/>
+        <Setter Property="FontFamily" Value="Arial"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <Border Name="border" 
-                            BorderThickness="1"
-                            Padding="4, 2" 
-                            BorderBrush="DarkGray" 
-                            CornerRadius="3" 
-                            Background="{TemplateBinding Background}">
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid x:Name="grid" Background="Transparent">
+                        <Border Name="border" 
+                        BorderThickness="1"
+                        Padding="4,2" 
+                        BorderBrush="{DynamicResource Color4}" 
+                        CornerRadius="3" 
+                        Background="{TemplateBinding Background}">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    </Border>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="{DynamicResource Color6}"/>
+                            <Setter TargetName="border" Property="Background" Value="{DynamicResource Color5}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Foreground" Value="{DynamicResource Color6}"/>
+                            <Setter TargetName="border" Property="Background" Value="{DynamicResource Color4}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 
-    
     <!-- Button1 template -->
     <Style x:Key="Button1" TargetType="Button">
         <Setter Property="Height" Value="50"/>
