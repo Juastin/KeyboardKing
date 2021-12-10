@@ -51,6 +51,7 @@ namespace Controller
             _wrongIndex = 0;
             LettersTyped = 0;
             CurrentEpisodeResult.MaxScore = CalculateMaxScore(episode);
+            OpponentData = new List<int>();
             NextEpisodeStep();
         }
 
@@ -273,6 +274,17 @@ namespace Controller
 
         public static int GetMatchId() { return _currentMatchId; }
 
+        public static int GetOpponentData(int index)
+        {
+            if (OpponentData.Count<index)
+            {
+                return OpponentData[index];
+            } else
+            {
+                return 0;
+            }
+        }
+
         public static void MultiplayerFetch()
         {
             // PUSH THIS CLIENT'S PROGRESS
@@ -282,9 +294,8 @@ namespace Controller
             DBQueries.UpdateMatchProgress(progress_percent, user_id, match_id);
 
             // FETCH OTHERS PROGRESS
-            List<List<string>> multiplayer_progress = DBQueries.GetOpponentProgress(user_id, match_id);
-
             OpponentData.Clear();
+            List<List<string>> multiplayer_progress = DBQueries.GetOpponentProgress(user_id, match_id);
 
             foreach (List<string> row in multiplayer_progress)
             {
