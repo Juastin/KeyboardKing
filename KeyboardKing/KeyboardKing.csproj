@@ -100,6 +100,8 @@
 
   <ItemGroup>
     <Page Update="resources\themes\ChineseTheme.xaml">
+		<XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+	</Page>
     <Page Update="resources\themes\ObsidianTheme.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>
