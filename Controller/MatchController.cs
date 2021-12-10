@@ -17,7 +17,7 @@ namespace Controller
         public static EpisodeStep CurrentEpisodeStep { get; private set; }
         public static EpisodeResult CurrentEpisodeResult { get; private set; }
         public static int LettersTyped { get; private set; }
-        public static List<int> OpponentData { get; private set; }
+        public static List<int> OpponentData { get; private set; } = new List<int>();
         private static int _wordIndex;
         private static int _wrongIndex;
 
