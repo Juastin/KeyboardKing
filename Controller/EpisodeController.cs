@@ -96,7 +96,7 @@ namespace Controller
             {
                 _wordIndex++;
                 LettersTyped++;
-                Points = Points + 10;
+                Points += 10;
                 _repeatMistake = false;
             }
 
