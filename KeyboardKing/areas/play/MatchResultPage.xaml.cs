@@ -32,10 +32,13 @@ namespace KeyboardKing.areas.play
 
         public override void OnLoad()
         {
+            MusicPlayer.Stop();
+            AudioPlayer.Play(AudioPlayer.Sound.congratulations);
         }
 
         public override void OnShadow()
         {
+            MusicPlayer.PlayNextFrom("menu_music");
         }
 
         public override void OnTick()
