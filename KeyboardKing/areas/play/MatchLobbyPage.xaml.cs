@@ -23,7 +23,11 @@ namespace KeyboardKing.areas.play
     /// </summary>
     public partial class MatchLobbyPage : JumpPage
     {
-        private DateTime _tickCheck { get; set; } = DateTime.Now;
+        //private DateTime _tickCheck { get; set; } = DateTime.Now;
+
+        private List<List<string>> _matchInfoLoad;
+
+        private bool _checkIfLeft = false;
 
         /// <summary>
         /// Controller for <see cref="MatchLobbyPage"/>
@@ -36,45 +40,86 @@ namespace KeyboardKing.areas.play
 
         public override void OnLoad()
         {
-            List<List<string>> matchInfo = DBQueries.GetMatchProgress(MatchController.GetMatchId());
-            lEpisodeMatch.Content = matchInfo[0][2];
+            _matchInfoLoad = DBQueries.GetMatchProgress(MatchController.GetMatchId());
+            lEpisodeMatch.Content = _matchInfoLoad[0][2];
             UpdateListView();
-            if (!MatchController.CheckUserIsCreator()) { StartMatchB.Visibility = Visibility.Hidden; }
+            if (!MatchController.CheckUserIsCreator()) { startbtn.Visibility = Visibility.Hidden; }
+            else { startbtn.Visibility = Visibility.Visible; }
+
+            Session.Add("matchId", int.Parse(_matchInfoLoad[0][0]));
         }
 
         public override void OnShadow()
         {
+
         }
 
         public override void OnTick()
         {
-            DateTime now = DateTime.Now;
-            if (_tickCheck.AddSeconds(5) < now) // if 5 seconds have passed
+            if(!_checkIfLeft)
             {
-                _tickCheck = now;
                 UpdateListView();
+            }
+        }
+
+        private void EpOverview_PlayClick(object sender, RoutedEventArgs e)
+        {
+            // query die checkt als iedereen ready is
+
+            DBQueries.SetPlayState(int.Parse(_matchInfoLoad[0][0]), 1);
+        }
+
+        private void StartGame()
+        {
+            this.Dispatcher.Invoke(() =>
+            {
+                MatchController.EpisodeFinished += OnEpisodeFinished;
+                Episode episode = MatchController.ParseEpisode(int.Parse(_matchInfoLoad[0][9]));
+                MatchController.Initialise(episode);
+                NavigationController.NavigateToPage(Pages.MatchPlayingPage);
+            });  
+        }
+
+        private void OnEpisodeFinished(object sender, EventArgs e)
+        {
+            MatchController.EpisodeFinished -= OnEpisodeFinished;
+            DBQueries.SetPlayState(int.Parse(_matchInfoLoad[0][0]), 2);
+            NavigationController.NavigateToPage(Pages.MatchResultPage);
+        }
+
+        private void SetPlayerReady(object sender, RoutedEventArgs e)
+        {
+            if(ready.Content.ToString() == "Ready?" || ready.Content.ToString() == "No")
+            {
+                ready.Content = "Yes";
+            } else
+            {
+                ready.Content = "No";
             }
         }
 
         private void UpdateListView()
         {
-            List<List<string>> matchInfo = MatchController.GetMatchProgressInfo();
+            _matchInfoLoad = MatchController.GetMatchProgressInfo();
             List<MatchLobbyData> items = new List<MatchLobbyData>();
             int counter = 0;
-            while (counter < matchInfo.Count)
+            while (counter < _matchInfoLoad.Count)
             {
-                items.Add(new MatchLobbyData() { Username = matchInfo[counter][1] });
+                items.Add(new MatchLobbyData() { Username = _matchInfoLoad[counter][1] });
                 counter++;
             }
+
+            if (int.Parse(_matchInfoLoad[0][10]) == 1)
+            {
+                StartGame();
+            }
+
             this.Dispatcher.Invoke(() =>
             {
+                int SelectedItem = LvMatch.SelectedIndex;
                 LvMatch.ItemsSource = items;
+                LvMatch.SelectedIndex = SelectedItem;          
             });
-        }
-
-        private void BStartMatch(object sender, EventArgs e)
-        {
-            MessageBox.Show("Start de match");
         }
 
         private void BExitMatch(object sender, EventArgs e)
@@ -83,6 +128,7 @@ namespace KeyboardKing.areas.play
             {
                 if (MatchController.CheckCreatorIsAloneInMatch())
                 {
+                    _checkIfLeft = true;
                     MatchController.DeleteMatch();
                     MessageBox.Show("Match is deleted");
                     NavigationController.NavigateToPage(Pages.MatchOverviewPage);
