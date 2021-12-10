@@ -81,11 +81,6 @@ namespace Controller
             NextEpisodeStep();
         }
 
-        public static void OnEpisodeFinished(object v, object sender, EventArgs eventArgs, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
         /// <summary>
         /// <para>This method checks if there is already a user in a match.</para>
         /// It does this by running an sql query to get all user that are in a match and compare that to the user that is in the session (the logged in user)
