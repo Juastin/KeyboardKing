@@ -27,10 +27,11 @@ namespace Model
         public string Score3 { get => MatchController.Score3; }
         public MatchResultPageDataContext()
         {
-            MatchController.EpisodeFinished += OnEpisodeFinished;
+            MatchController.EpisodeFinished += OnRefresh;
+            MatchController.Refresh += OnRefresh;
         }
 
-        private void OnEpisodeFinished(object sender, EventArgs e)
+        private void OnRefresh(object sender, EventArgs e)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(""));
         }

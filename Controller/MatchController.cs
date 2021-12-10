@@ -25,6 +25,7 @@ namespace Controller
 
         public static event EventHandler WordChanged;
         public static event EventHandler EpisodeFinished;
+        public static event EventHandler Refresh;
         public static string Word { get => CurrentEpisodeStep?.Word; }
 
         private static List<string> _winnaars;
@@ -123,7 +124,7 @@ namespace Controller
             Score2 = _scores[1];
             Score3 = _scores[2];
 
-
+            Refresh?.Invoke(null, new EventArgs());
         }
 
         /// <summary>
