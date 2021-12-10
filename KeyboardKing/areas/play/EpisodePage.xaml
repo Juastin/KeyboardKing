@@ -49,8 +49,12 @@
                 <Grid.OpacityMask>
                     <LinearGradientBrush EndPoint="1,0"
                              StartPoint="0,0">
+                        <GradientStop Color="Transparent"
+                                              Offset="0" />
+                        <GradientStop Color="White" 
+                                              Offset="0.02"/>
                         <GradientStop Color="White"
-                                              Offset="0.9" />
+                                              Offset="0.98" />
                         <GradientStop Color="Transparent" 
                                               Offset="1"/>
                     </LinearGradientBrush>
