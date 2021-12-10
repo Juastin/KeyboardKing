@@ -82,10 +82,10 @@ namespace Controller
         {
             _wordIndex = 0;
             _wrongIndex = 0;
-            if(_currentEpisode.EpisodeSteps.TryDequeue(out EpisodeStep step))
+            if (_currentEpisode.EpisodeSteps.TryDequeue(out EpisodeStep step))
                 CurrentEpisodeStep = step;
             else
-                FinishEpisode();
+                EpisodeFinished?.Invoke(null, EventArgs.Empty);
 
             WordChanged?.Invoke(null, new EventArgs());
         }

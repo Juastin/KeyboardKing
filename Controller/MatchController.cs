@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EC = Controller.EpisodeController;
 
 namespace Controller
 {
@@ -16,7 +17,7 @@ namespace Controller
 
         public static EpisodeStep CurrentEpisodeStep { get; private set; }
         public static EpisodeResult CurrentEpisodeResult { get; private set; }
-        public static int LettersTyped { get => EpisodeController.LettersTyped; }
+        public static int LettersTyped { get => EC.LettersTyped; }
         public static List<List<string>> OpponentData { get; private set; } = new List<List<string>>();
 
         private static DateTime _startTime;
@@ -24,11 +25,11 @@ namespace Controller
         public static event EventHandler Refresh;
         public static string Word { get => CurrentEpisodeStep?.Word; }
 
-        private static List<string> _winnaars;
+        private static List<string> _winners;
         private static List<string> _scores;
 
-        public static string WordOverlayCorrect { get => EpisodeController.WordOverlayCorrect; }
-        public static string WordOverlayWrong { get => EpisodeController.WordOverlayWrong; }
+        public static string WordOverlayCorrect { get => EC.WordOverlayCorrect; }
+        public static string WordOverlayWrong { get => EC.WordOverlayWrong; }
 
         public static string Winnaar1 { get; private set; }
         public static string Winnaar2 { get; private set; }
@@ -45,15 +46,15 @@ namespace Controller
 
         public static void StartGame()
         {
-            Episode episode = EpisodeController.ParseEpisode(int.Parse(_matchInfo[0][9]));
-            EpisodeController.Initialise(episode, true);
+            Episode episode = EC.ParseEpisode(int.Parse(_matchInfo[0][9]));
+            EC.Initialise(episode, true);
             NavigationController.NavigateToPage(Pages.MatchPlayingPage);
         }
 
         public static void OnEpisodeFinished(object sender, EventArgs e)
         {
             FinishMatch();
-            EpisodeController.EpisodeFinished -= OnEpisodeFinished;
+            EC.EpisodeFinished -= OnEpisodeFinished;
             DBQueries.SetPlayState(int.Parse(_matchInfo[0][0]), 2);
             NavigationController.NavigateToPage(Pages.MatchResultPage);
         }
@@ -61,33 +62,44 @@ namespace Controller
         public static void SetWinners()
         {
             List<List<string>> players = DBQueries.GetScoresOrderByHighest(_currentMatchId);
-            _winnaars = players.Select(p => p[0]).ToList();
+            _winners = players.Select(p => p[0]).ToList();
             _scores = players.Select(p => p[1]).ToList();
 
-            Winnaar1 = _winnaars[0];
-            Winnaar2 = _winnaars[1];
-            Winnaar3 = _winnaars[2];
+            //simple null check for now, suggestions for improvement welcome.
+            Winnaar1 = _winners.Count > 0 ? _winners[0] : null;
+            Winnaar2 = _winners.Count > 1 ? _winners[1] : null;
+            Winnaar3 = _winners.Count > 2 ? _winners[2] : null;
 
-            Score1 = _scores[0];
-            Score2 = _scores[1];
-            Score3 = _scores[2];
+            Score1 = _scores.Count > 0 ? _scores[0] : null;
+            Score2 = _scores.Count > 1 ? _scores[1] : null;
+            Score3 = _scores.Count > 2 ? _scores[2] : null;
 
             Refresh?.Invoke(null, new EventArgs());
         }
 
         public static void FinishMatch()
         {
-            EpisodeController.CurrentEpisodeResult.Time = EpisodeController.CalculateTime(_startTime);
-            EpisodeController.CurrentEpisodeResult.Score = EpisodeController.CalculateScore(EpisodeController.CalculateLetterPerMinute(CurrentEpisodeResult.Time, CurrentEpisodeResult.MaxScore));
-            EpisodeController.CurrentEpisodeResult.ScorePercentage = EpisodeController.CalculatePercentage(CurrentEpisodeResult.MaxScore, CurrentEpisodeResult.Mistakes);
-            EpisodeController.CurrentEpisodeResult.LettersPerMinute = EpisodeController.CalculateLetterPerMinute(CurrentEpisodeResult.Time, CurrentEpisodeResult.MaxScore);
+            EC.CurrentEpisodeResult.Time = EC.CalculateTime(_startTime);
+
+            EC.CurrentEpisodeResult.Score = EC.CalculateScore(
+                EC.CalculateLetterPerMinute(
+                    EC.CurrentEpisodeResult.Time,
+                    EC.CurrentEpisodeResult.MaxScore));
+
+            EC.CurrentEpisodeResult.ScorePercentage = EC.CalculatePercentage(
+                EC.CurrentEpisodeResult.MaxScore,
+                EC.CurrentEpisodeResult.Mistakes);
+
+            EC.CurrentEpisodeResult.LettersPerMinute = EC.CalculateLetterPerMinute(
+                EC.CurrentEpisodeResult.Time,
+                EC.CurrentEpisodeResult.MaxScore);
          
             UList student = (UList)Session.Get("student");
 
             int userId = student.Get<int>(0);
             int matchId = (int)Session.Get("matchId");
 
-            DBQueries.SaveMatchResult(EpisodeController.CurrentEpisodeResult, matchId, userId);
+            DBQueries.SaveMatchResult(EC.CurrentEpisodeResult, matchId, userId);
 
             SetWinners();
         }
@@ -95,7 +107,7 @@ namespace Controller
         public static void MultiplayerFetch()
         {
             // PUSH THIS CLIENT'S PROGRESS
-            int progress_percent = (LettersTyped * 100) / EpisodeController.CurrentEpisodeResult.MaxScore;
+            int progress_percent = (LettersTyped * 100) / EC.CurrentEpisodeResult.MaxScore;
             int user_id = ((UList)Session.Get("student")).Get<int>(0);
             int match_id = _currentMatchId;
             DBQueries.UpdateMatchProgress(progress_percent, user_id, match_id);
