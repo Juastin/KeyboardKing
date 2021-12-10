@@ -283,8 +283,8 @@ namespace Controller
             DBQueries.UpdateMatchProgress(progress_percent, user_id, match_id);
 
             // FETCH OTHERS PROGRESS
+            OpponentData.Clear();
             List<List<string>> multiplayer_progress = DBQueries.GetOpponentProgress(user_id, match_id);
-
             foreach (List<string> row in multiplayer_progress)
             {
                 OpponentData.Add((row[0], int.Parse(row[0])));
