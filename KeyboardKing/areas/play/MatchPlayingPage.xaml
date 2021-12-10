@@ -23,7 +23,7 @@
         </Grid>
         <Grid>
             <ProgressBar Template="{DynamicResource ProgressBar}" VerticalAlignment="Bottom" Height="20" Minimum="0" Maximum="{Binding MaxLetters}" Value="{Binding LettersTyped, Mode=OneWay}"/>
-            <ProgressBar Template="{DynamicResource ProgressBar}" VerticalAlignment="Top" Height="20" Minimum="0" Maximum="{Binding MaxLetters}" Value="{Binding LettersTypedO1, Mode=OneWay}" Margin="0,410,0,0" Foreground="#FF0653B0"/>
+            <ProgressBar Template="{DynamicResource ProgressBar}" VerticalAlignment="Top" Height="20" Minimum="0" Maximum="100" Value="{Binding LettersTypedO1, Mode=OneWay}" Margin="0,410,0,0" Foreground="#FF0653B0"/>
             <TextBox x:Name="TimerTextBox" Style="{DynamicResource TextBox2}" VerticalAlignment="Top" Background="Transparent"  Text="00:00" Loaded="TimerTextBox_Loaded" Height="53"  Margin="10,11,133,0"/>
             <Button Style="{DynamicResource Button1}" Content="Exit" VerticalAlignment="Top" HorizontalAlignment="Right" Click="ButtonExit" FontSize="26" Margin="0,11,10,0"  Height="54" Width="110"/>
         </Grid>

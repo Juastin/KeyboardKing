@@ -1,4 +1,6 @@
-﻿using KeyboardKing.core;
+﻿using Controller;
+using KeyboardKing.core;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +34,10 @@ namespace KeyboardKing.areas.play
 
         public override void OnLoad()
         {
+            int user_id = ((UList)Session.Get("student")).Get<int>(0);
+            int match_id = MatchController.GetMatchId();
+            DBQueries.UpdateMatchProgress(100, user_id, match_id);
+
             MusicPlayer.Stop();
             AudioPlayer.Play(AudioPlayer.Sound.congratulations);
         }
