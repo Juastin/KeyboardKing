@@ -90,15 +90,10 @@ namespace Controller
             _currentMatchId = DBQueries.AddMatch(selectedValue, student);
             DBQueries.AddMatchProgress(_currentMatchId, student);
         }
-
-        public static List<List<string>> GetWinnaars()
-        {
-            return DBQueries.GetScoresOrderByHighest(_currentMatchId);
-        }
         
         public static void SetWinnars()
         {
-            List<List<string>> players = GetWinnaars();
+            List<List<string>> players = DBQueries.GetScoresOrderByHighest(_currentMatchId);
             _winnaars = new List<string>();
             _scores = new List<string>();
 
@@ -136,8 +131,6 @@ namespace Controller
             _currentMatchId = int.Parse(selectedValue);
             DBQueries.AddMatchProgress(_currentMatchId, (UList)Session.Get("student"));
         }
-
-        
 
         /// <summary>
         /// Tries to dequeue next episode step from the current episode.
@@ -192,6 +185,7 @@ namespace Controller
                 WordChanged?.Invoke(null, new EventArgs());
             }
         }
+        
         /// <summary>
         /// Creates a new Episode object with all corresponding EpisodeSteps
         /// </summary>
@@ -278,6 +272,7 @@ namespace Controller
         {
             return episode.EpisodeSteps.Sum(episodeStep => episodeStep.Word.Length);
         }
+        
         /// <summary>
         /// Calculates the letters that are written per minute by dividing the amount of letters possible by the time spend on the episode.
         /// </summary>
