@@ -23,6 +23,8 @@ namespace KeyboardKing.areas.play
     /// </summary>
     public partial class MatchResultPage : JumpPage
     {
+        private DateTime _tickCheck {get;set;} = DateTime.Now;
+
         /// <summary>
         /// Controller for <see cref="MatchResultPage"/>
         /// </summary>
@@ -49,7 +51,11 @@ namespace KeyboardKing.areas.play
 
         public override void OnTick()
         {
-           
+            DateTime now = DateTime.Now;
+            if (_tickCheck.AddSeconds(2) < now)
+            {
+                MatchController.SetWinnars();
+            }
         }
     }
 }
