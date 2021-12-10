@@ -55,7 +55,7 @@ namespace Controller
         /// Initializes all variables needed to play and keep track of the episode.
         /// </summary>
         /// <param name="episode">The episode that is going to be played</param>
-        public static void Initialise(Episode episode)
+        public static void Initialise(Episode episode, bool isMatch)
         {
             _currentEpisode = episode;
             CurrentEpisodeResult = new EpisodeResult();
@@ -68,6 +68,11 @@ namespace Controller
             Points = 0;
             CurrentEpisodeResult.MaxScore = CalculateMaxScore(episode);
             NextEpisodeStep();
+
+            if (isMatch)
+                EpisodeFinished += MatchController.OnEpisodeFinished;
+            else
+                EpisodeFinished += OnEpisodeFinished;
         }
 
         /// <summary>
@@ -156,6 +161,12 @@ namespace Controller
         {
             return _stopwatch?.Elapsed.ToString("mm\\:ss");
         }
+
+        public static void OnEpisodeFinished(object sender, EventArgs e)
+        {
+            FinishEpisode();
+        }
+
         public static void FinishEpisode()
         {
             _stopwatch.Stop();
@@ -172,7 +183,7 @@ namespace Controller
 
             DBQueries.SaveResult(CurrentEpisodeResult, episodeId, userId);
 
-            EpisodeFinished?.Invoke(null, EventArgs.Empty);
+            NavigationController.NavigateToPage(Pages.EpisodeResultPage);
         }
 
         /// <summary>

@@ -20,7 +20,7 @@ namespace Model
 
         public MatchPageDataContext()
         {
-            MatchController.WordChanged += OnWordChanged;
+            EpisodeController.WordChanged += OnWordChanged;
         }
 
         private void OnWordChanged(object sender, EventArgs e)

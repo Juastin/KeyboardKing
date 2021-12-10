@@ -27,7 +27,7 @@ namespace Model
         public string Score3 { get => MatchController.Score3; }
         public MatchResultPageDataContext()
         {
-            MatchController.EpisodeFinished += OnRefresh;
+            EpisodeController.EpisodeFinished += OnRefresh;
             MatchController.Refresh += OnRefresh;
         }
 
