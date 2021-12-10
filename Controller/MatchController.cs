@@ -17,7 +17,7 @@ namespace Controller
         public static EpisodeStep CurrentEpisodeStep { get; private set; }
         public static EpisodeResult CurrentEpisodeResult { get; private set; }
         public static int LettersTyped { get; private set; }
-        public static int OpponentData { get; private set; } = 0;
+        public static List<int> OpponentData { get; private set; } = new List<int>();
         private static int _wordIndex;
         private static int _wrongIndex;
 
@@ -51,7 +51,7 @@ namespace Controller
             _wrongIndex = 0;
             LettersTyped = 0;
             CurrentEpisodeResult.MaxScore = CalculateMaxScore(episode);
-            OpponentData = 0;
+            OpponentData = new List<int>();
             NextEpisodeStep();
         }
 
@@ -287,7 +287,7 @@ namespace Controller
 
             foreach (List<string> row in multiplayer_progress)
             {
-                OpponentData = int.Parse(row[0]);
+                OpponentData.Add(int.Parse(row[0]));
             }
         }
     }

@@ -29,7 +29,6 @@ namespace KeyboardKing.areas.play
         /// </summary>
         /// <param name="w"></param>
 
-        private DateTime _tickCheck {get;set;} = DateTime.Now;
         public int increment { get; set; }
         private DispatcherTimer dt = new DispatcherTimer();
 
@@ -52,12 +51,7 @@ namespace KeyboardKing.areas.play
 
         public override void OnTick()
         {
-            DateTime now = DateTime.Now;
-            if (_tickCheck.AddSeconds(2) < now)
-            {
-                _tickCheck = now;
-                MatchController.MultiplayerFetch();
-            }
+            MatchController.MultiplayerFetch();
         }
 
         private void Initialize()

@@ -16,7 +16,6 @@ namespace Model
         public string WordOverlayWrong { get => MatchController.WordOverlayWrong; }
         public string WordOverlayCorrect { get => MatchController.WordOverlayCorrect; }
         public int LettersTyped { get => MatchController.LettersTyped; }
-        public int LettersTypedO1 { get => MatchController.OpponentData; }
         public int MaxLetters { get => MatchController.CurrentEpisodeResult?.MaxScore ?? 0; }
 
         public MatchPageDataContext()
