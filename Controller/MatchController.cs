@@ -14,22 +14,12 @@ namespace Controller
         private static string _creatorId;
         private static int _amountOfPlayers;
         private static List<List<string>> _matchInfo;
-
-        public static EpisodeStep CurrentEpisodeStep { get; private set; }
-        public static EpisodeResult CurrentEpisodeResult { get; private set; }
-        public static int LettersTyped { get => EC.LettersTyped; }
-        public static List<List<string>> OpponentData { get; private set; } = new List<List<string>>();
-
-        private static DateTime _startTime;
-
-        public static event EventHandler Refresh;
-        public static string Word { get => CurrentEpisodeStep?.Word; }
-
         private static List<string> _winners;
         private static List<string> _scores;
 
-        public static string WordOverlayCorrect { get => EC.WordOverlayCorrect; }
-        public static string WordOverlayWrong { get => EC.WordOverlayWrong; }
+        public static List<List<string>> OpponentData { get; private set; } = new List<List<string>>();
+
+        public static event EventHandler Refresh;
 
         public static string Winnaar1 { get; private set; }
         public static string Winnaar2 { get; private set; }
@@ -39,10 +29,7 @@ namespace Controller
         public static string Score2 { get; private set; }
         public static string Score3 { get; private set; }
 
-        public static void Start()
-        {
-            _startTime = DateTime.Now;
-        }
+        public static void Start() => EC.Start();
 
         public static void StartGame()
         {
@@ -93,7 +80,7 @@ namespace Controller
         public static void MultiplayerFetch()
         {
             // PUSH THIS CLIENT'S PROGRESS
-            int progress_percent = (LettersTyped * 100) / EC.CurrentEpisodeResult.MaxScore;
+            int progress_percent = (EC.LettersTyped * 100) / EC.CurrentEpisodeResult.MaxScore;
             int user_id = ((UList)Session.Get("student")).Get<int>(0);
             int match_id = _currentMatchId;
             DBQueries.UpdateMatchProgress(progress_percent, user_id, match_id);
