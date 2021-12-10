@@ -23,8 +23,6 @@ namespace KeyboardKing.areas.play
     /// </summary>
     public partial class MatchLobbyPage : JumpPage
     {
-        //private DateTime _tickCheck { get; set; } = DateTime.Now;
-
         private List<List<string>> _matchInfoLoad;
 
         private bool _checkIfLeft = false;
