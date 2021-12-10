@@ -16,6 +16,7 @@
     <Page.Resources>
         <!-- ListBoxItem template -->
         <Style x:Key="ListBoxItemTemplate" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListBoxItem">
