@@ -210,6 +210,27 @@ namespace Controller
         }
 
 
+
+        public static bool UpdateMatchProgress(int progress, int user_id, int match_id)
+        {
+            SqlCommand cmd = new SqlCommand("UPDATE [dbo].[MatchProgress] set progress = @progress WHERE userid = @userid AND matchid = @matchid ");
+
+            SqlParameter q_progress = new SqlParameter("@progress", SqlDbType.Int, 100);
+            SqlParameter q_user_id = new SqlParameter("@userid", SqlDbType.Int, 255);
+            SqlParameter q_match_id = new SqlParameter("@matchid", SqlDbType.Int, 255);
+
+            q_progress.Value = progress;
+            q_user_id.Value = user_id;
+            q_match_id.Value = match_id;
+
+            cmd.Parameters.Add(q_progress);
+            cmd.Parameters.Add(q_user_id);
+            cmd.Parameters.Add(q_match_id);
+
+            return DBHandler.Query(cmd);
+        }
+
+
         public static int AddMatch(int episodeid, UList user)
         {
             SqlCommand cmd = new SqlCommand("INSERT INTO [dbo].[Match] (episodeid, creatorid) output INSERTED.id VALUES(@episodeid, @creatorid)");
