@@ -114,7 +114,9 @@ namespace KeyboardKing.areas.play
 
             this.Dispatcher.Invoke(() =>
             {
+                int SelectedItem = LvMatch.SelectedIndex;
                 LvMatch.ItemsSource = items;
+                LvMatch.SelectedIndex = SelectedItem;          
             });
         }
 

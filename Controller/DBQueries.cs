@@ -228,8 +228,8 @@ namespace Controller
 
         public static bool AddMatchProgress(int matchid, UList user)
         {
-            SqlCommand cmd = new SqlCommand("INSERT INTO [dbo].[MatchProgress] (matchid, userid, progress,score,mistakes,lettersperminute,time) " +
-                                            "VALUES (@matchid, @userid, 0, 0, 0, 0, 0)");
+            SqlCommand cmd = new SqlCommand("INSERT INTO [dbo].[MatchProgress] (matchid, userid) " +
+                                            "VALUES (@matchid, @userid)");
 
             SqlParameter matchId = new SqlParameter("@matchid", SqlDbType.Int, 255);
             SqlParameter userId = new SqlParameter("@userid", SqlDbType.Int, 0);
