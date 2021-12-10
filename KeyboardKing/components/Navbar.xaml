@@ -32,10 +32,10 @@
             </Setter>
         </Style>
     </UserControl.Resources>
-    
+
     <Grid>
         <DockPanel>
-            <Menu DockPanel.Dock="Bottom" Width="520" Height="92" Background="{x:Null}" Margin="0,0,0,10">
+            <Menu x:Name="NavigationMenu" DockPanel.Dock="Bottom" Width="520" Height="92" Background="{x:Null}" Margin="0,0,0,10">
                 <Components:NavigationButton ToPage="ChaptersPage" Style="{DynamicResource NavButton}" x:Name="Button_ChaptersPage" Content="▶" FontSize="36"/>
                 <Components:NavigationButton ToPage="FavoritesPage" Style="{DynamicResource NavButton}" x:Name="Button_FavoritesPage" Content="🔄" FontSize="30"/>
                 <Components:NavigationButton ToPage="MatchOverviewPage" Style="{DynamicResource NavButton}" x:Name="Button_MatchOverviewPage" Content="⚔" FontSize="30"/>
