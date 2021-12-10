@@ -234,7 +234,7 @@ namespace Controller
 
         public static List<List<string>> GetOpponentProgress(int user_id, int match_id)
         {
-            SqlCommand cmd = new SqlCommand("SELECT progress FROM [dbo].[MatchProgress] WHERE userid != @userid AND matchid = @matchid ORDER BY progress DESC LIMIT 3");
+            SqlCommand cmd = new SqlCommand("SELECT TOP 3 progress FROM [dbo].[MatchProgress] WHERE userid != @userid AND matchid = @matchid ORDER BY progress DESC");
 
             SqlParameter q_user_id = new SqlParameter("@userid", SqlDbType.Int, 255);
             SqlParameter q_match_id = new SqlParameter("@matchid", SqlDbType.Int, 255);
