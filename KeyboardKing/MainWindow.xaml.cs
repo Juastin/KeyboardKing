@@ -92,7 +92,9 @@ namespace KeyboardKing
                 {"Light", new Theme("Light Theme", "resources/themes/LightTheme.xaml")},
                 {"Dark", new Theme("Dark Theme", "resources/themes/DarkTheme.xaml")},
                 {"Space", new Theme("Space Theme", "resources/themes/SpaceTheme.xaml")},
-                {"Chinese", new Theme("Chinese Theme", "resources/themes/ChineseTheme.xaml")}
+                {"Chinese", new Theme("Chinese Theme", "resources/themes/ChineseTheme.xaml")}     
+                {"Paint", new Theme("Paint Theme", "resources/themes/PaintTheme.xaml")},
+                {"Obsidian", new Theme("Obsidian Theme", "resources/themes/ObsidianTheme.xaml")},
             };
 
             CBTheme.ItemsSource = _themes;

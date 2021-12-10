@@ -23,7 +23,7 @@ namespace Controller
         private static int _wordIndex;
         private static int _wrongIndex;
         
-        private static DateTime _startTime;
+        private static Stopwatch _stopwatch;
 
         public static event EventHandler WordChanged;
         public static event EventHandler EpisodeFinished;
@@ -33,10 +33,17 @@ namespace Controller
         public static int Points { get; set; }
         public static string WordOverlayCorrect { get =>CurrentEpisodeStep?.Word.Substring(0, _wordIndex); }
         public static string WordOverlayWrong { get =>CurrentEpisodeStep?.Word.Substring(0, _wrongIndex); }
-
+        public static bool IsStarted { get; private set; }
         public static void Start()
         {
-            _startTime = DateTime.Now;
+            _stopwatch.Start();
+            IsStarted = true;
+        }
+
+        public static void Pause()
+        {
+            _stopwatch.Stop();
+            MessageController.Show(Pages.MessagePage, "De episode is gepauzeerd.", Pages.EpisodePage, null);
         }
 
         /// <summary>
@@ -50,10 +57,11 @@ namespace Controller
         {
             _currentEpisode = episode;
             CurrentEpisodeResult = new EpisodeResult();
-            _startTime = new DateTime();
+            _stopwatch = new Stopwatch();
             _wordIndex = 0;
             _wrongIndex = 0;
             LettersTyped = 0;
+            Points = 0;
             CurrentEpisodeResult.MaxScore = CalculateMaxScore(episode);
             NextEpisodeStep();
         }
@@ -134,10 +142,15 @@ namespace Controller
         {
             NextLetter(CurrentEpisodeStep.Word[_wordIndex].Equals(input));
         }
-
+        public static string GetTimeFormat()
+        {
+            return _stopwatch?.Elapsed.ToString("mm\\:ss");
+        }
         public static void FinishEpisode()
         {
-            CurrentEpisodeResult.Time = CalculateTime(_startTime);
+            _stopwatch.Stop();
+            IsStarted = false;
+            CurrentEpisodeResult.Time = _stopwatch.Elapsed;
             CurrentEpisodeResult.Score = CalculateScore(CurrentEpisodeResult.MaxScore, CurrentEpisodeResult.Mistakes);
             CurrentEpisodeResult.LettersPerMinute = CalculateLetterPerMinute(CurrentEpisodeResult.Time, CurrentEpisodeResult.MaxScore);
 
@@ -149,16 +162,6 @@ namespace Controller
             DBQueries.SaveResult(CurrentEpisodeResult, episodeId, userId);
 
             EpisodeFinished?.Invoke(null, EventArgs.Empty);
-        }
-
-        /// <summary>
-        /// Returns the time difference between the given parameter and the time of now.
-        /// </summary>
-        /// <param name="startTime"></param>
-        /// <returns></returns>
-        public static TimeSpan CalculateTime(DateTime startTime)
-        {
-            return DateTime.Now - startTime;
         }
         /// <summary>
         /// Returns a percentage of the correct typed letters based on the mistakes and the max amount of letters.
