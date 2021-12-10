@@ -28,11 +28,9 @@ namespace KeyboardKing.areas.play
         /// Controller for <see cref="MatchPlayingPage"/>
         /// </summary>
         /// <param name="w"></param>
-  
 
         public int increment { get; set; }
         private DispatcherTimer dt = new DispatcherTimer();
-        
 
         public MatchPlayingPage(MainWindow w) : base(w)
         {
@@ -49,12 +47,11 @@ namespace KeyboardKing.areas.play
 
         public override void OnShadow()
         {
-
         }
 
         public override void OnTick()
         {
-
+            MatchController.MultiplayerFetch();
         }
 
         private void Initialize()
