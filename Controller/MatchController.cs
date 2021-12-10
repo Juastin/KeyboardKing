@@ -56,6 +56,7 @@ namespace Controller
         {
             UList student = (UList)Session.Get("student");
             _currentMatchId = DBQueries.AddMatch(selectedValue, student);
+            Session.Add("matchId", _currentMatchId);
             DBQueries.AddMatchProgress(_currentMatchId, student);
         }
 
@@ -95,7 +96,7 @@ namespace Controller
             }
             else
             {
-                FinishEpisode();
+                FinishMatch();
             }
             WordChanged?.Invoke(null, new EventArgs());
         }
@@ -139,8 +140,6 @@ namespace Controller
         {
             List<List<string>> results = DBQueries.GetAllEpisodeStepsFromEpisode(episodeId);
 
-            Session.Add("matchId", _currentMatchId);
-
             Episode episode = new Episode();
 
             foreach (List<string> word in results)
@@ -160,7 +159,7 @@ namespace Controller
             NextLetter(CurrentEpisodeStep.Word[_wordIndex].Equals(input));
         }
 
-        public static void FinishEpisode()
+        public static void FinishMatch()
         {
             CurrentEpisodeResult.Time = CalculateTime(_startTime);
             CurrentEpisodeResult.Score = CalculateScore(CurrentEpisodeResult.MaxScore, CurrentEpisodeResult.Mistakes);
