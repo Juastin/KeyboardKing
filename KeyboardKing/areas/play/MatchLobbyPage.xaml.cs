@@ -38,12 +38,7 @@ namespace KeyboardKing.areas.play
 
         public override void OnLoad()
         {
-            _matchInfoLoad = DBQueries.GetMatchProgress(MatchController.GetMatchId());
-            lEpisodeMatch.Content = _matchInfoLoad[0][2];
             UpdateListView();
-            if (!MatchController.CheckUserIsCreator()) { startbtn.Visibility = Visibility.Hidden; }
-            else { startbtn.Visibility = Visibility.Visible; }
-
             Session.Add("matchId", int.Parse(_matchInfoLoad[0][0]));
         }
 
@@ -60,10 +55,9 @@ namespace KeyboardKing.areas.play
             }
         }
 
+        // Query checks id everyone is ready
         private void EpOverview_PlayClick(object sender, RoutedEventArgs e)
         {
-            // query die checkt als iedereen ready is
-
             DBQueries.SetPlayState(int.Parse(_matchInfoLoad[0][0]), 1);
         }
 
@@ -75,7 +69,7 @@ namespace KeyboardKing.areas.play
                 Episode episode = MatchController.ParseEpisode(int.Parse(_matchInfoLoad[0][9]));
                 MatchController.Initialise(episode);
                 NavigationController.NavigateToPage(Pages.MatchPlayingPage);
-            });  
+            });
         }
 
         private void OnEpisodeFinished(object sender, EventArgs e)
@@ -107,16 +101,15 @@ namespace KeyboardKing.areas.play
                 counter++;
             }
 
-            if (int.Parse(_matchInfoLoad[0][10]) == 1)
-            {
-                StartGame();
-            }
+            if (int.Parse(_matchInfoLoad[0][10]) == 1) StartGame();
 
             this.Dispatcher.Invoke(() =>
             {
                 int SelectedItem = LvMatch.SelectedIndex;
                 LvMatch.ItemsSource = items;
-                LvMatch.SelectedIndex = SelectedItem;          
+                LvMatch.SelectedIndex = SelectedItem;
+                lEpisodeMatch.Content = _matchInfoLoad[0][2];
+                startbtn.Visibility = MatchController.CheckUserIsCreator() ? Visibility.Visible : Visibility.Hidden;
             });
         }
 

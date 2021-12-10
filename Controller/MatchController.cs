@@ -12,6 +12,7 @@ namespace Controller
         private static int _currentMatchId;
         private static string _creatorId;
         private static int _amountOfPlayers;
+        private static List<List<string>> _matchInfo;
 
         private static Episode _currentEpisode;
         public static EpisodeStep CurrentEpisodeStep { get; private set; }
@@ -298,10 +299,10 @@ namespace Controller
         /// </summary>
         public static List<List<string>> GetMatchProgressInfo()
         {
-            List<List<string>> matchInfo = DBQueries.GetMatchProgress(_currentMatchId);
-            _amountOfPlayers = matchInfo.Count();
-            if (_amountOfPlayers != 0) _creatorId = matchInfo[0][8];
-            return matchInfo;
+            _matchInfo = DBQueries.GetMatchProgress(_currentMatchId);
+            _amountOfPlayers = _matchInfo.Count();
+            if (_amountOfPlayers != 0) _creatorId = _matchInfo[0][8];
+            return _matchInfo;
         }
 
         public static bool CheckUserIsCreator()
