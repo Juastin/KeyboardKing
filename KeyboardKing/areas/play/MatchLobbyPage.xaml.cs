@@ -24,7 +24,6 @@ namespace KeyboardKing.areas.play
     public partial class MatchLobbyPage : JumpPage
     {
         private List<List<string>> _matchInfoLoad;
-
         private bool _checkIfLeft = false;
 
         /// <summary>
@@ -44,7 +43,6 @@ namespace KeyboardKing.areas.play
 
         public override void OnShadow()
         {
-
         }
 
         public override void OnTick()
@@ -55,7 +53,7 @@ namespace KeyboardKing.areas.play
             }
         }
 
-        // Query checks id everyone is ready
+        // Query checks if everyone in lobby is ready
         private void EpOverview_PlayClick(object sender, RoutedEventArgs e)
         {
             DBQueries.SetPlayState(int.Parse(_matchInfoLoad[0][0]), 1);
@@ -66,8 +64,7 @@ namespace KeyboardKing.areas.play
             this.Dispatcher.Invoke(() =>
             {
                 MatchController.EpisodeFinished += OnEpisodeFinished;
-                Episode episode = MatchController.ParseEpisode(int.Parse(_matchInfoLoad[0][9]));
-                MatchController.Initialise(episode);
+                MatchController.Initialise(MatchController.ParseEpisode(int.Parse(_matchInfoLoad[0][9])));
                 NavigationController.NavigateToPage(Pages.MatchPlayingPage);
             });
         }
