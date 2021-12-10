@@ -152,7 +152,7 @@
             <Rectangle x:Name="PART_Track"/>
             <Grid x:Name="PART_Indicator" ClipToBounds="true" HorizontalAlignment="Left">
                 <Rectangle x:Name="Indicator" Fill="{DynamicResource Color4}"/>
-                <Rectangle x:Name="Animation" Fill="{DynamicResource Color4}" RenderTransformOrigin="0.5,0.5">
+                <Rectangle x:Name="Animation" Fill="{TemplateBinding Background}" RenderTransformOrigin="0.5,0.5">
                     <Rectangle.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>

@@ -29,6 +29,13 @@ namespace KeyboardKing.template
             items.Add(new User() { Name = "Sammy Doe", Age = 7, Mail = "sammy.doe@gmail.com" });
             items.Add(new User() { Name = "Sammy Doe", Age = 7, Mail = "sammy.doe@gmail.com" });
             lvUsers.ItemsSource = items;
+
+            List<OpponentProgress> users = new List<OpponentProgress>();
+            users.Add(new OpponentProgress() { Name = "strom", Progress = 42});
+            users.Add(new OpponentProgress() { Name = "brenk", Progress = 90 });
+            users.Add(new OpponentProgress() { Name = "strom", Progress = 20 });
+            users.Add(new OpponentProgress() { Name = "brenk", Progress = 10 });
+            OpponentListBox.ItemsSource = users;
         }
     }
 
@@ -39,5 +46,12 @@ namespace KeyboardKing.template
         public int Age { get; set; }
 
         public string Mail { get; set; }
+    }
+
+    public class OpponentProgress
+    {
+        public string Name { get; set; }
+
+        public int Progress { get; set; }
     }
 }

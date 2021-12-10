@@ -25,6 +25,18 @@
             <Label x:Name="Word" Content="{Binding Word}" Foreground="{DynamicResource TextColor}" FontSize="50"/>
             <Label x:Name="WordOverlayWrong" Content="{Binding WordOverlayWrong}" Foreground="Red" FontSize="50"/>
             <Label x:Name="WordOverlayCorrect" Content="{Binding WordOverlayCorrect}" Foreground="Green" FontSize="50"/>
+            <Border Margin="5">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="350"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25"/>
+                    </Grid.RowDefinitions>
+                    <ProgressBar Grid.Row="0" Template="{DynamicResource ProgressBar}" Value="5"/>
+                    <Label Content="Storm-de-tweede" HorizontalAlignment="Center" FontWeight="Bold" Foreground="{DynamicResource TextColor}"></Label>
+                </Grid>
+            </Border>
         </Grid>
         <Grid>
             <ProgressBar Template="{DynamicResource ProgressBar}" 
