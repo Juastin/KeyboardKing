@@ -56,12 +56,7 @@ namespace KeyboardKing.areas.play
             if (_tickCheck.AddSeconds(2) < now)
             {
                 _tickCheck = now;
-
-                int progress_percent = (MatchController.LettersTyped * 100) / MatchController.CurrentEpisodeResult.MaxScore;
-                int user_id = ((UList)Session.Get("student")).Get<int>(0);
-                int match_id = MatchController.GetMatchId();
-
-                DBQueries.UpdateMatchProgress(progress_percent, user_id, match_id);
+                MatchController.MultiplayerFetch();
             }
         }
 

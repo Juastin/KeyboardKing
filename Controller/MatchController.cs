@@ -17,6 +17,7 @@ namespace Controller
         public static EpisodeStep CurrentEpisodeStep { get; private set; }
         public static EpisodeResult CurrentEpisodeResult { get; private set; }
         public static int LettersTyped { get; private set; }
+        public static List<int> OpponentData { get; private set; }
         private static int _wordIndex;
         private static int _wrongIndex;
 
@@ -271,5 +272,24 @@ namespace Controller
         public static bool CheckCreatorIsAloneInMatch() { return _amountOfPlayers == 1; }
 
         public static int GetMatchId() { return _currentMatchId; }
+
+        public static void MultiplayerFetch()
+        {
+            // PUSH THIS CLIENT'S PROGRESS
+            int progress_percent = (LettersTyped * 100) / CurrentEpisodeResult.MaxScore;
+            int user_id = ((UList)Session.Get("student")).Get<int>(0);
+            int match_id = _currentMatchId;
+            DBQueries.UpdateMatchProgress(progress_percent, user_id, match_id);
+
+            // FETCH OTHERS PROGRESS
+            List<List<string>> multiplayer_progress = DBQueries.GetOpponentProgress(user_id, match_id);
+
+            OpponentData.Clear();
+
+            foreach (List<string> row in multiplayer_progress)
+            {
+                OpponentData.Add(int.Parse(row[0]));
+            }
+        }
     }
 }

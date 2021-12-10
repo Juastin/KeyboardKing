@@ -22,21 +22,14 @@
             <Label x:Name="WordOverlayCorrect" Content="{Binding WordOverlayCorrect}" Foreground="Green" FontSize="50"/>
         </Grid>
         <Grid>
-            <ProgressBar Template="{DynamicResource ProgressBar}" 
-                         VerticalAlignment="Bottom" Height="20" Minimum="0" 
-                         Maximum="{Binding MaxLetters}" 
-                         Value="{Binding LettersTyped, Mode=OneWay}"/>
+            <ProgressBar Template="{DynamicResource ProgressBar}" VerticalAlignment="Bottom" Height="20" Minimum="0" Maximum="{Binding MaxLetters}" Value="{Binding LettersTyped, Mode=OneWay}"/>
+            <ProgressBar Template="{DynamicResource ProgressBar}" VerticalAlignment="Top" Height="20" Minimum="0" Maximum="{Binding MaxLetters}" Value="{Binding LettersTypedO1, Mode=OneWay}" Margin="0,410,0,0" Foreground="#FF0653B0"/>
             <TextBox x:Name="TimerTextBox" Style="{DynamicResource TextBox2}" VerticalAlignment="Top" Background="Transparent"  Text="00:00" Loaded="TimerTextBox_Loaded" Height="53"  Margin="10,11,133,0"/>
             <Button Style="{DynamicResource Button1}" Content="Exit" VerticalAlignment="Top" HorizontalAlignment="Right" Click="ButtonExit" FontSize="26" Margin="0,11,10,0"  Height="54" Width="110"/>
         </Grid>
-        <Border CornerRadius="80" Background="Transparent" BorderBrush="#2a3b57" 
-                BorderThickness="5" Height="91" Margin="0,82,0,0" 
-                Name="Border1" VerticalAlignment="Top" HorizontalAlignment="Center" Width="136">
-            <TextBlock Style="{DynamicResource TextBlock}" Background="Transparent" x:Name="points" HorizontalAlignment="Center"
-                       VerticalAlignment="Center" Height="40" Width="116"
-                       TextWrapping="Wrap" Text="0p" TextAlignment="Center">
-
-            </TextBlock>
-        </Border>
+        <TextBlock Style="{DynamicResource TextBlock}" Background="Transparent" x:Name="points" HorizontalAlignment="Center"
+                    VerticalAlignment="Top" Height="40" Width="116"
+                    TextWrapping="Wrap" Text="0p" TextAlignment="Center" Margin="0,16,0,0">
+        </TextBlock>
     </Grid>
 </local:JumpPage>
