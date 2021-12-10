@@ -190,7 +190,6 @@ namespace Controller
             return DBHandler.SelectQuery(cmd);
         }
 
-
         public static bool SetPlayState(int matchid, int state)
         {
             SqlCommand cmd = new SqlCommand("UPDATE [dbo].[Match] set state = @state WHERE id = @matchid ");
@@ -206,8 +205,6 @@ namespace Controller
 
             return DBHandler.Query(cmd);
         }
-
-
 
         public static bool UpdateMatchProgress(int progress, int user_id, int match_id)
         {
@@ -227,8 +224,6 @@ namespace Controller
 
             return DBHandler.Query(cmd);
         }
-
-
 
         public static List<List<string>> GetOpponentProgress(int user_id, int match_id)
         {
@@ -294,7 +289,6 @@ namespace Controller
             return DBHandler.SelectQuery(cmd);
         }
 
-
         public static bool RemoveUserInMatch(int matchid, UList user)
         {
             SqlCommand cmd = new SqlCommand("DELETE FROM [dbo].[MatchProgress] WHERE matchid = @matchid AND userid = @userid;");
@@ -337,6 +331,5 @@ namespace Controller
 
             return DBHandler.SelectQuery(cmd);
         }
-
     }
 }
