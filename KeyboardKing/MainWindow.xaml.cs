@@ -22,6 +22,7 @@ using System.Windows.Shapes;
 using Model;
 using Model.event_args;
 using KeyboardKing.areas.info;
+using System.ComponentModel;
 
 namespace KeyboardKing
 {
@@ -103,6 +104,19 @@ namespace KeyboardKing
             // Navigate to the first view.
             NavigationController.Navigate += OnNavigate;
             NavigationController.NavigateToPage(Pages.LoginPage);
+        }
+        private void CheckBefore_Closing(object sender, CancelEventArgs e)
+        {
+            if(NavigationController.CurrentPage == Pages.MatchOverviewPage || NavigationController.CurrentPage == Pages.MatchPlayingPage)
+            {
+                MatchController.RemoveUserInMatchProgress();
+
+                if (!DBQueries.GetMatchProgress((int)Session.Get("matchId")).Any())
+                {
+                    DBQueries.DeleteMatch((int)Session.Get("matchId"));
+                }
+
+            }
         }
 
         public void OnNavigate(NavigateEventArgs e)
