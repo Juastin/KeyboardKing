@@ -161,9 +161,9 @@ namespace Controller
             _stopwatch.Stop();
             IsStarted = false;
             CurrentEpisodeResult.Time = _stopwatch.Elapsed;
-            CurrentEpisodeResult.Score = CalculateScore(CurrentEpisodeResult.MaxScore, CurrentEpisodeResult.Mistakes);
             CurrentEpisodeResult.ScorePercentage = CalculatePercentage(CurrentEpisodeResult.MaxScore, CurrentEpisodeResult.Mistakes);
             CurrentEpisodeResult.LettersPerMinute = CalculateLetterPerMinute(CurrentEpisodeResult.Time, CurrentEpisodeResult.MaxScore);
+            CurrentEpisodeResult.Score = CalculateScore(CurrentEpisodeResult.LettersPerMinute);
 
             UList student = (UList)Session.Get("student");
 

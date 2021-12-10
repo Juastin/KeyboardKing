@@ -197,7 +197,6 @@ namespace KeyboardKing
         {
             themeDictionary.Clear();
             themeDictionary.MergedDictionaries.Add(new ResourceDictionary() { Source = theme.ThemeUri });
-            MainBackground.ImageSource = new BitmapImage(theme.BackgroundUri);
         }
 
         private void CBTheme_SelectionChanged(object sender, SelectionChangedEventArgs e)
