@@ -14,78 +14,92 @@
         <Model:EpisodeResultPageDataContext/>
     </local:JumpPage.DataContext>
 
-    <Grid>
-        <Border Style="{DynamicResource GridBorder}"
-            Padding="30" 
+    <Border Style="{DynamicResource GridBorder}"
+            Padding="30, 17, 30, 30" 
             HorizontalAlignment="Center" 
             VerticalAlignment="Center" 
-            Height="400" Width="750" >
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid Grid.Row="0" VerticalAlignment="Center">
-                    <Label Style="{DynamicResource H1}" HorizontalAlignment="Left" Content="Results"/>
-                </Grid>
-                <Grid Grid.Row="1" VerticalAlignment="Center">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <StackPanel Grid.Column="0" Orientation="Vertical">
-                        <Label  Style="{DynamicResource H3}" Content="Score:" 
+            Height="400" Width="750">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" VerticalAlignment="Center">
+                <Label Style="{DynamicResource H1}" HorizontalAlignment="Left" Content="Results"/>
+            </Grid>
+            <Grid VerticalAlignment="Center" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="130"/>
+                    <ColumnDefinition Width="auto" MaxWidth="200"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel VerticalAlignment="Center" Grid.Column="0" Orientation="Vertical">
+                    <Label  Style="{DynamicResource H3}" Content="Score:" 
                                VerticalAlignment="Center"/>
-                        <Label  Style="{DynamicResource H3}" Content="Tijd:" 
+                    <Label  Style="{DynamicResource H3}" Content="Tijd:" 
                                VerticalAlignment="Center"/>
-                        <Label  Style="{DynamicResource H3}" Content="Fouten" 
+                    <Label  Style="{DynamicResource H3}" Content="Fouten:" 
                                VerticalAlignment="Center"/>
-                        <Label  Style="{DynamicResource H3}" Content="Letters per minuut:" 
+                    <Label  Style="{DynamicResource H3}" Content="LPM:" 
                                VerticalAlignment="Center"/>
-                        
-                    </StackPanel>
-                    <StackPanel Margin="10, 0"  Grid.Column="1" Orientation="Vertical">
-                        <Label Style="{DynamicResource H3}" Content="{Binding Score}" HorizontalAlignment="Left"/>
-                        <Label Style="{DynamicResource H3}" Content="{Binding Time}" HorizontalAlignment="Left"/>
-                        <Label Style="{DynamicResource H3}" Content="{Binding Mistakes}" HorizontalAlignment="Left"/>
-                        <Label Style="{DynamicResource H3}" Content="{Binding LettersPerMinute}" HorizontalAlignment="Left"/>
-                    </StackPanel>
-                    <Border Style="{DynamicResource GridBorder}" CornerRadius="5" Grid.Column="2" >
+                </StackPanel>
+                <StackPanel VerticalAlignment="Center" Grid.Column="1" Orientation="Vertical" Margin="0, 0, 30, 0">
+                    <Label Style="{DynamicResource H3}" Content="{Binding Score}" HorizontalAlignment="Left"/>
+                    <Label Style="{DynamicResource H3}" Content="{Binding Time}" HorizontalAlignment="Left"/>
+                    <Label Style="{DynamicResource H3}" Content="{Binding Mistakes}" HorizontalAlignment="Left"/>
+                    <Label Style="{DynamicResource H3}" Content="{Binding LettersPerMinute}" HorizontalAlignment="Left"/>
+                </StackPanel>
+                <StackPanel VerticalAlignment="Center" Grid.Column="2" Orientation="Vertical">
+                    <Border>
                         <!-- CONTENT SPACE FOR THE PODIUM -->
-                        <Grid Width="275">
+                        <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="100"/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-                            <Grid VerticalAlignment="Bottom" Margin="0, 0" HorizontalAlignment="Center" Grid.Column="0">
-                                <TextBlock TextWrapping="Wrap">
-                                    <Run Text="test"/>
-                                </TextBlock>
+                            <Grid Grid.Column="0">
+                                <StackPanel VerticalAlignment="Bottom" Orientation="Vertical">
+                                    <TextBlock Style="{DynamicResource PodiumUsername}" Text="Username1"/>
+                                    <Border Style="{DynamicResource PodiumBorder}" CornerRadius="5,5,0,5" Background="{DynamicResource Color4}" Height="125" VerticalAlignment="Bottom">
+                                        <Grid>
+                                            <Label Style="{DynamicResource PodiumNumberLabel}" Content="2"/>
+                                            <Label Style="{DynamicResource PodiumScoreLabel}" Content="5.000.000 p"/>
+                                        </Grid>
+                                    </Border>
+                                </StackPanel>
                             </Grid>
-                            <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1">
-                                <TextBlock TextWrapping="Wrap">
-                                    <Run Text="test"/>
-                                </TextBlock>
+                            <Grid Grid.Column="1">
+                                <StackPanel VerticalAlignment="Bottom" Orientation="Vertical">
+                                    <TextBlock Style="{DynamicResource PodiumUsername}" Text="StormJulian-De-Tweede"/>
+                                    <Border Style="{DynamicResource PodiumBorder}" Background="{DynamicResource Color5}" Height="175" VerticalAlignment="Bottom" Grid.Column="1">
+                                        <Grid>
+                                            <Label Style="{DynamicResource PodiumNumberLabel}" Content="1"/>
+                                            <Label Style="{DynamicResource PodiumScoreLabel}" Content="12.345.678 p"/>
+                                        </Grid>
+                                    </Border>
+                                </StackPanel>
                             </Grid>
-                            <Grid VerticalAlignment="Bottom" HorizontalAlignment="Center" Grid.Column="2">
-                                <TextBlock TextWrapping="Wrap">
-                                    <Run Text="test"/>
-                                </TextBlock>
+                            <Grid Grid.Column="2">
+                                <StackPanel VerticalAlignment="Bottom" Orientation="Vertical">
+                                    <TextBlock Style="{DynamicResource PodiumUsername}" Text="Username3"/>
+                                    <Border Style="{DynamicResource PodiumBorder}" CornerRadius="5,5,5,0" Background="{DynamicResource Color4}" Height="75" VerticalAlignment="Bottom" Grid.Column="2">
+                                        <Grid>
+                                            <Label Style="{DynamicResource PodiumNumberLabel}" Content="3"/>
+                                            <Label Style="{DynamicResource PodiumScoreLabel}" Content="1.345.678 p"/>
+                                        </Grid>
+                                    </Border>
+                                </StackPanel>
                             </Grid>
                         </Grid>
                     </Border>
-                </Grid>
-                <Grid Grid.Row="2" VerticalAlignment="Bottom">
-                    <Components:NavigationButton ToPage="ChaptersPage" Style="{DynamicResource Button1}" HorizontalAlignment="Right" Content="Voltooi episode"/>
-                </Grid>
+                </StackPanel>
             </Grid>
-        </Border>
-    </Grid>
+            <Grid Grid.Row="2" VerticalAlignment="Bottom">
+                <Components:NavigationButton ToPage="ChaptersPage" Style="{DynamicResource Button1}" HorizontalAlignment="Left" Content="Voltooi episode"/>
+            </Grid>
+        </Grid>
+    </Border>
 </local:JumpPage>

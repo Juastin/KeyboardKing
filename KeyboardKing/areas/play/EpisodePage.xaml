@@ -25,6 +25,18 @@
             <Label x:Name="Word" Content="{Binding Word}" Foreground="{DynamicResource TextColor}" FontSize="50"/>
             <Label x:Name="WordOverlayWrong" Content="{Binding WordOverlayWrong}" Foreground="Red" FontSize="50"/>
             <Label x:Name="WordOverlayCorrect" Content="{Binding WordOverlayCorrect}" Foreground="Green" FontSize="50"/>
+            <Border Margin="5">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="350"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25"/>
+                    </Grid.RowDefinitions>
+                    <ProgressBar Grid.Row="0" Template="{DynamicResource ProgressBar}" Value="5"/>
+                    <Label Content="Storm-de-tweede" HorizontalAlignment="Center" FontWeight="Bold" Foreground="{DynamicResource TextColor}"></Label>
+                </Grid>
+            </Border>
         </Grid>
         <Grid>
             <ProgressBar Template="{DynamicResource ProgressBar}" 
@@ -34,7 +46,7 @@
             <TextBox x:Name="TimerTextBox" Style="{DynamicResource TextBox2}" VerticalAlignment="Top" Background="Transparent"  Text="00:00" Height="53"  Margin="10,11,133,0"/>
             <Button Style="{DynamicResource Button1}" Content="Pauze" VerticalAlignment="Top" HorizontalAlignment="Right" Click="ButtonPause" FontSize="26" Margin="0,11,10,0"  Height="54" Width="110"/>
         </Grid>
-        <Border CornerRadius="80" Background="Transparent" BorderBrush="#2a3b57" 
+        <Border CornerRadius="80" Background="Transparent" BorderBrush="{DynamicResource BorderColor}" 
                 BorderThickness="5" Height="91" Margin="0,82,0,0" 
                 Name="Border1" VerticalAlignment="Top" HorizontalAlignment="Center" Width="136">
             <TextBlock Style="{DynamicResource TextBlock}" Background="Transparent" x:Name="points" HorizontalAlignment="Center"

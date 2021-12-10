@@ -25,7 +25,7 @@ namespace KeyboardKing.areas.info
 
             TitleLabel.Text = vars.Get<string>(0);
             TargetLocation = vars.Get<Pages>(1);
-            AutoRedirectTime = vars.Get<int?>(2);
+            AutoRedirectTime = vars.Get<int>(2);
 
             UpdateButtonText();
         }

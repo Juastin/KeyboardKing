@@ -89,15 +89,16 @@ namespace KeyboardKing
 
             _themes = new()
             {
-                {"Light", new Theme("Light Theme", "resources/themes/LightTheme.xaml", "resources/images/kk_background_4K.png")},
-                {"Dark", new Theme("Dark Theme", "resources/themes/DarkTheme.xaml", "resources/images/kk_background_dark.png")},
-                {"Paint", new Theme("Paint Theme", "resources/themes/PaintTheme.xaml", "resources/images/paint_theme_background.png")},
-                {"Obsidian", new Theme("Obsidian Theme", "resources/themes/ObsidianTheme.xaml", "resources/images/obsidian_theme_background.png")},
-                {"Space", new Theme("Space Theme", "resources/themes/SpaceTheme.xaml", "resources/images/space_theme_background.png")},
+                {"Light", new Theme("Light Theme", "resources/themes/LightTheme.xaml")},
+                {"Dark", new Theme("Dark Theme", "resources/themes/DarkTheme.xaml")},
+                {"Space", new Theme("Space Theme", "resources/themes/SpaceTheme.xaml")},
+                {"Chinese", new Theme("Chinese Theme", "resources/themes/ChineseTheme.xaml")}     
+                {"Paint", new Theme("Paint Theme", "resources/themes/PaintTheme.xaml")},
+                {"Obsidian", new Theme("Obsidian Theme", "resources/themes/ObsidianTheme.xaml")},
             };
 
             CBTheme.ItemsSource = _themes;
-            CBTheme.SelectedValue = "Light";
+            CBTheme.SelectedValue = "Chinese";
             CBTheme.DisplayMemberPath = "Value.ThemeTitle";
             CBTheme.SelectedValuePath = "Key";
 
@@ -195,8 +196,6 @@ namespace KeyboardKing
         {
             themeDictionary.Clear();
             themeDictionary.MergedDictionaries.Add(new ResourceDictionary() { Source = theme.ThemeUri });
-            MainBackground.ImageSource = new BitmapImage(theme.BackgroundUri);
-            NavigationController.ChangeTheme();
         }
 
         private void CBTheme_SelectionChanged(object sender, SelectionChangedEventArgs e)

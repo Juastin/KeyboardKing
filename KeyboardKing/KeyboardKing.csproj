@@ -26,6 +26,7 @@
     <None Remove="resources\images\obsidian_theme_background.png" />
     <None Remove="resources\images\paint_theme_background.png" />
     <None Remove="resources\images\play-button.png" />
+    <None Remove="resources\images\red_chinese_background.png" />
     <None Remove="resources\images\space_theme_background.png" />
   </ItemGroup>
 
@@ -87,6 +88,9 @@
     <Content Include="resources\images\play-button.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="resources\images\red_chinese_background.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="resources\images\space_theme_background.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -95,6 +99,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="resources\themes\ChineseTheme.xaml">
     <Page Update="resources\themes\ObsidianTheme.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>
