@@ -45,6 +45,8 @@ namespace KeyboardKing.areas.play
             UpdateListView();
             if (!MatchController.CheckUserIsCreator()) { startbtn.Visibility = Visibility.Hidden; }
             else { startbtn.Visibility = Visibility.Visible; }
+
+            Session.Add("matchId", int.Parse(_matchInfoLoad[0][0]));
         }
 
         public override void OnShadow()

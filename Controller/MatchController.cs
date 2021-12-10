@@ -150,7 +150,6 @@ namespace Controller
             List<List<string>> results = DBQueries.GetAllEpisodeStepsFromEpisode(episodeId);
 
             Episode episode = new Episode();
-            Session.Add("matchId", _currentMatchId);
             foreach (List<string> word in results)
             {
                 EpisodeStep es = new EpisodeStep() { Word = word[0] };
