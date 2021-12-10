@@ -327,7 +327,7 @@ namespace Controller
 
         public static List<List<string>> GetScoresOrderByHighest(int matchid)
         {
-            SqlCommand cmd = new SqlCommand("SELECT u.username, mp.score " +
+            SqlCommand cmd = new SqlCommand("SELECT TOP 3 u.username, mp.score " +
             "FROM [dbo].[MatchProgress] mp " +
             "LEFT JOIN [dbo].[User] u ON mp.userid = u.id " +
             "WHERE mp.matchid = @matchid " +
