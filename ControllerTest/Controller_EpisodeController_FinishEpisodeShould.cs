@@ -48,13 +48,6 @@ namespace ControllerTest
         //}
 
         [Test]
-        public void CalculateScore_ReturnCorrect()
-        {
-            int score = EpisodeController.CalculateScore(EpisodeController.CurrentEpisodeResult.MaxScore, 5);
-            Assert.AreEqual(50, score);
-        }
-
-        [Test]
         public void CalculateMaxScore_ReturnCorrect()
         {
             Assert.AreEqual(10, EpisodeController.CurrentEpisodeResult.MaxScore);
