@@ -43,12 +43,7 @@ namespace KeyboardKing.areas.play
             MusicPlayer.PlayNextFrom("intense_music");
             MatchController.Start();
             this.UserInput.Focus();
-
-            this.Dispatcher.Invoke(() =>
-            {
-                OpponentListBox.Items.Clear();
-                OpponentListBox.Items.Refresh();
-            });
+            UpdateOpponentProgress();
         }
 
         public override void OnShadow()
@@ -58,6 +53,11 @@ namespace KeyboardKing.areas.play
         public override void OnTick()
         {
             MatchController.MultiplayerFetch();
+            UpdateOpponentProgress();
+        }
+
+        public void UpdateOpponentProgress()
+        {
             this.Dispatcher.Invoke(() =>
             {
                 OpponentListBox.ItemsSource = MatchController.OpponentData;
