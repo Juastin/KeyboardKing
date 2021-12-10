@@ -47,6 +47,8 @@ namespace KeyboardKing.areas.play
 
         public override void OnShadow()
         {
+            OpponentListBox.Items.Clear();
+            OpponentListBox.Items.Refresh();
         }
 
         public override void OnTick()

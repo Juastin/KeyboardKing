@@ -27,7 +27,7 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="25"/>
                                 </Grid.RowDefinitions>
-                                <ProgressBar Background="{DynamicResource Succes}" Grid.Row="0" Template="{DynamicResource ProgressBar}" Value="{Binding [1]}"/>
+                                <ProgressBar Background="{DynamicResource Color5}" Grid.Row="0" Template="{DynamicResource ProgressBar}" Value="{Binding [1]}"/>
                                 <Label Content="{Binding [0]}" HorizontalAlignment="Center" FontWeight="Bold" Foreground="{DynamicResource TextColor}"></Label>
                             </Grid>
                         </Border>
@@ -39,7 +39,7 @@
 
     <Grid x:Name="Container">
         <Border Style="{DynamicResource GridBorder}"/>
-        <ListBox x:Name="OpponentListBox" ItemContainerStyle="{DynamicResource ListBoxItemTemplate}" BorderThickness="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,200">
+        <ListBox Background="Transparent" x:Name="OpponentListBox" ItemContainerStyle="{DynamicResource ListBoxItemTemplate}" BorderThickness="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,200">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <UniformGrid Columns="2"/>
