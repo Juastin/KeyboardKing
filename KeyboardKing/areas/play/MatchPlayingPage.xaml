@@ -11,7 +11,39 @@
         <model:MatchPageDataContext/>
     </local:JumpPage.DataContext>
 
+    <Page.Resources>
+        <!-- ListBoxItem template -->
+        <Style x:Key="ListBoxItemTemplate" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border Margin="5">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="350"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="25"/>
+                                </Grid.RowDefinitions>
+                                <ProgressBar Background="{DynamicResource Succes}" Grid.Row="0" Template="{DynamicResource ProgressBar}" Value="{Binding [1]}"/>
+                                <Label Content="{Binding [0]}" HorizontalAlignment="Center" FontWeight="Bold" Foreground="{DynamicResource TextColor}"></Label>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+    
     <Grid x:Name="Container">
+        <ListBox Background="Transparent" ItemsSource="{Binding OpponentData}" x:Name="OpponentListBox" ItemContainerStyle="{DynamicResource ListBoxItemTemplate}" BorderThickness="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,200">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="2"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
+        
         <Border Style="{DynamicResource GridBorder}"/>
         <Label Style="{DynamicResource H1}" Content="" Margin="49,51,301,336"/>
         <TextBox x:Name="UserInput" Background="Transparent" Foreground="Transparent" CaretBrush="Transparent" Grid.Column="0" LostKeyboardFocus="UserInput_LostFocus" Text="" TextChanged="UserInput_TextChanged" SelectionBrush="{x:Null}" BorderThickness="0,0,0,0">
