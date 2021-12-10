@@ -123,10 +123,12 @@ namespace KeyboardKing.areas.play
         private void ButtonExit(object sender, EventArgs e) // leave match set state 2 or remove match
         {
             MatchController.RemoveUserInMatchProgress();
+
+            int matchId = MatchController.GetMatchId();
             
-            if (!DBQueries.GetMatchProgress((int)Session.Get("matchId")).Any())
+            if (!DBQueries.GetMatchProgress(matchId).Any())
             {
-                DBQueries.DeleteMatch((int)Session.Get("matchId"));
+                DBQueries.DeleteMatch(matchId);
             }
 
             MusicPlayer.PlayNextFrom("menu_music");
