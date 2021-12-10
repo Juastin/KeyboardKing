@@ -27,6 +27,7 @@ namespace Controller
 
         public static event EventHandler WordChanged;
         public static event EventHandler EpisodeFinished;
+        public static event EventHandler EpisodeResultUpdated;
 
         public static string Word { get => CurrentEpisodeStep?.Word; }
 
@@ -162,12 +163,7 @@ namespace Controller
             return _stopwatch?.Elapsed.ToString("mm\\:ss");
         }
 
-        public static void OnEpisodeFinished(object sender, EventArgs e)
-        {
-            FinishEpisode();
-        }
-
-        public static void FinishEpisode()
+        public static void StopAndSetEpisodeResult()
         {
             _stopwatch.Stop();
             IsStarted = false;
@@ -175,7 +171,16 @@ namespace Controller
             CurrentEpisodeResult.ScorePercentage = CalculatePercentage(CurrentEpisodeResult.MaxScore, CurrentEpisodeResult.Mistakes);
             CurrentEpisodeResult.LettersPerMinute = CalculateLetterPerMinute(CurrentEpisodeResult.Time, CurrentEpisodeResult.MaxScore);
             CurrentEpisodeResult.Score = CalculateScore(CurrentEpisodeResult.LettersPerMinute);
+        }
 
+        public static void OnEpisodeFinished(object sender, EventArgs e)
+        {
+            FinishEpisode();
+        }
+
+        public static void FinishEpisode()
+        {
+            StopAndSetEpisodeResult();
             UList student = (UList)Session.Get("student");
 
             int userId = student.Get<int>(0);
@@ -183,6 +188,7 @@ namespace Controller
 
             DBQueries.SaveResult(CurrentEpisodeResult, episodeId, userId);
 
+            EpisodeResultUpdated?.Invoke(null, EventArgs.Empty);
             NavigationController.NavigateToPage(Pages.EpisodeResultPage);
         }
 

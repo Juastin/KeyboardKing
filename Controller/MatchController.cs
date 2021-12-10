@@ -79,21 +79,7 @@ namespace Controller
 
         public static void FinishMatch()
         {
-            EC.CurrentEpisodeResult.Time = EC.CalculateTime(_startTime);
-
-            EC.CurrentEpisodeResult.Score = EC.CalculateScore(
-                EC.CalculateLetterPerMinute(
-                    EC.CurrentEpisodeResult.Time,
-                    EC.CurrentEpisodeResult.MaxScore));
-
-            EC.CurrentEpisodeResult.ScorePercentage = EC.CalculatePercentage(
-                EC.CurrentEpisodeResult.MaxScore,
-                EC.CurrentEpisodeResult.Mistakes);
-
-            EC.CurrentEpisodeResult.LettersPerMinute = EC.CalculateLetterPerMinute(
-                EC.CurrentEpisodeResult.Time,
-                EC.CurrentEpisodeResult.MaxScore);
-         
+            EC.StopAndSetEpisodeResult();
             UList student = (UList)Session.Get("student");
 
             int userId = student.Get<int>(0);
