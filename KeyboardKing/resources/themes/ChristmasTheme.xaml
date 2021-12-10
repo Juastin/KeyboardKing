@@ -1,6 +1,10 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+    <!-- IMAGES -->
+    <BitmapImage x:Key="Wallpaper" UriSource="/resources/images/kk_background_christmas.png"/>
+    <BitmapImage x:Key="MessageWallpaper" UriSource="/resources/images/kk_background_christmas_blur.png"/>
+    
     <!-- COLOR SCHEMES -->
     <Color x:Key="SColor1">#165B33</Color>
     <Color x:Key="SColor2">#146B3A</Color>
@@ -10,7 +14,7 @@
 
     <!-- Tints -->
     <Color x:Key="SColor6">#FFFFFF</Color>
-    <Color x:Key="SColor7">#bdbdbd</Color>
+    <Color x:Key="SColor7">#F9C154</Color>
 
     <!-- MAIN COLORS -->
     <Color x:Key="SText">Black</Color>
