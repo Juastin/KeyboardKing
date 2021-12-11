@@ -22,6 +22,7 @@ using System.Windows.Shapes;
 using Model;
 using Model.event_args;
 using KeyboardKing.areas.info;
+using System.ComponentModel;
 
 namespace KeyboardKing
 {
@@ -107,7 +108,7 @@ namespace KeyboardKing
             NavigationController.Navigate += OnNavigate;
             NavigationController.NavigateToPage(Pages.LoginPage);
         }
-
+   
         public void OnNavigate(NavigateEventArgs e)
         {
 
@@ -209,5 +210,22 @@ namespace KeyboardKing
                 ChangeTheme(theme);
             }
         }
+
+        //Closes open matches when closing application
+        private void CheckBefore_Closing(object sender, CancelEventArgs e)
+        {
+            if (NavigationController.CurrentPage == Pages.MatchLobbyPage || NavigationController.CurrentPage == Pages.MatchPlayingPage)
+            {
+                MatchController.RemoveUserInMatchProgress();
+
+                if (!DBQueries.GetMatchProgress((int)Session.Get("matchId")).Any())
+                {
+                    DBQueries.DeleteMatch((int)Session.Get("matchId"));
+                }
+
+            }
+        }
+
+
     }
 }
