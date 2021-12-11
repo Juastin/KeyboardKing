@@ -28,7 +28,6 @@ namespace KeyboardKing.areas.play
         /// Controller for <see cref="MatchPlayingPage"/>
         /// </summary>
         /// <param name="w"></param>
-
         public MatchPlayingPage(MainWindow w) : base(w)
         {
             InitializeComponent();
