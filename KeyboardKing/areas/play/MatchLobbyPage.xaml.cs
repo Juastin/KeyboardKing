@@ -53,7 +53,6 @@ namespace KeyboardKing.areas.play
             }
         }
 
-        // Query checks if everyone in lobby is ready
         private void EpOverview_PlayClick(object sender, RoutedEventArgs e)
         {
             DBQueries.SetPlayState(int.Parse(_matchInfoLoad[0][0]), 1);
@@ -65,11 +64,6 @@ namespace KeyboardKing.areas.play
             {
                 MatchController.StartGame();
             });
-        }
-
-        private void OnEpisodeFinished(object sender, EventArgs e)
-        {
-            NavigationController.NavigateToPage(Pages.MatchResultPage);
         }
 
         private void SetPlayerReady(object sender, RoutedEventArgs e)
