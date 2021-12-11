@@ -18,9 +18,9 @@ namespace Model
         public string Time { get => FormatTimespan(); }
         public double LettersPerMinute { get => EpisodeController.CurrentEpisodeResult?.LettersPerMinute ?? 0; }
 
-        public string Winnaar1 { get => MatchController.Winnaar1; }
-        public string Winnaar2 { get => MatchController.Winnaar2; }
-        public string Winnaar3 { get => MatchController.Winnaar3; }
+        public string Winner1 { get => MatchController.Winner1; }
+        public string Winner2 { get => MatchController.Winner2; }
+        public string Winner3 { get => MatchController.Winner3; }
 
         public string Score1 { get => MatchController.Score1; }
         public string Score2 { get => MatchController.Score2; }

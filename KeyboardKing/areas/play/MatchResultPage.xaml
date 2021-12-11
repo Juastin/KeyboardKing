@@ -63,7 +63,7 @@
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0">
                                 <StackPanel VerticalAlignment="Bottom" Orientation="Vertical">
-                                    <TextBlock Style="{DynamicResource PodiumUsername}"  Text="{Binding Winnaar2}"/>
+                                    <TextBlock Style="{DynamicResource PodiumUsername}"  Text="{Binding Winner2}"/>
                                     <Border Style="{DynamicResource PodiumBorder}" CornerRadius="5,5,0,5" Background="{DynamicResource Color4}" Height="125" VerticalAlignment="Bottom">
                                         <Grid>
                                             <Label Style="{DynamicResource PodiumNumberLabel}" Content="2"/>
@@ -74,7 +74,7 @@
                             </Grid>
                             <Grid Grid.Column="1">
                                 <StackPanel VerticalAlignment="Bottom" Orientation="Vertical">
-                                    <TextBlock Style="{DynamicResource PodiumUsername}" Text="{Binding Winnaar1}"/>
+                                    <TextBlock Style="{DynamicResource PodiumUsername}" Text="{Binding Winner1}"/>
                                     <Border Style="{DynamicResource PodiumBorder}" Background="{DynamicResource Color5}" Height="175" VerticalAlignment="Bottom" Grid.Column="1">
                                         <Grid>
                                             <Label Style="{DynamicResource PodiumNumberLabel}" Content="1"/>
@@ -85,7 +85,7 @@
                             </Grid>
                             <Grid Grid.Column="2">
                                 <StackPanel VerticalAlignment="Bottom" Orientation="Vertical">
-                                    <TextBlock Style="{DynamicResource PodiumUsername}"  Text="{Binding Winnaar3}"/>
+                                    <TextBlock Style="{DynamicResource PodiumUsername}"  Text="{Binding Winner3}"/>
                                     <Border Style="{DynamicResource PodiumBorder}" CornerRadius="5,5,5,0" Background="{DynamicResource Color4}" Height="75" VerticalAlignment="Bottom" Grid.Column="2">
                                         <Grid>
                                             <Label Style="{DynamicResource PodiumNumberLabel}" Content="3"/>

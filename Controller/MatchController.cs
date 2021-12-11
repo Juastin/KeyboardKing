@@ -21,9 +21,9 @@ namespace Controller
 
         public static event EventHandler Refresh;
 
-        public static string Winnaar1 { get; private set; }
-        public static string Winnaar2 { get; private set; }
-        public static string Winnaar3 { get; private set; }
+        public static string Winner1 { get; private set; }
+        public static string Winner2 { get; private set; }
+        public static string Winner3 { get; private set; }
 
         public static string Score1 { get; private set; }
         public static string Score2 { get; private set; }
@@ -53,9 +53,9 @@ namespace Controller
             _scores = players.Select(p => p[1]).ToList();
 
             //simple null check for now, suggestions for improvement welcome.
-            Winnaar1 = _winners.Count > 0 ? _winners[0] : null;
-            Winnaar2 = _winners.Count > 1 ? _winners[1] : null;
-            Winnaar3 = _winners.Count > 2 ? _winners[2] : null;
+            Winner1 = _winners.Count > 0 ? _winners[0] : null;
+            Winner2 = _winners.Count > 1 ? _winners[1] : null;
+            Winner3 = _winners.Count > 2 ? _winners[2] : null;
 
             Score1 = _scores.Count > 0 ? _scores[0] : null;
             Score2 = _scores.Count > 1 ? _scores[1] : null;
