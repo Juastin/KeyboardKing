@@ -54,6 +54,7 @@ namespace KeyboardKing.areas.play
         {
             MatchController.MultiplayerFetch();
             UpdateOpponentProgress();
+            UpdateTimerView();
         }
 
         public void UpdateOpponentProgress()
@@ -69,7 +70,6 @@ namespace KeyboardKing.areas.play
         {
             TimerTextBox.Text = "00:00";
             points.Text = "0p";
-            MatchController.Points = 0;
         }
 
         /// <summary>
@@ -95,9 +95,9 @@ namespace KeyboardKing.areas.play
             string txt = this.UserInput.Text;
             if (txt.Length > 0)
             {
-                MatchController.CheckInput(txt[0]);
+                EpisodeController.CheckInput(txt[0]);
             }
-            points.Text = MatchController.Points.ToString() + "p";
+            points.Text = EpisodeController.Points.ToString() + "p";
             this.UserInput.Clear();
         }
 
@@ -112,21 +112,7 @@ namespace KeyboardKing.areas.play
                 e.Handled = true;
         }
 
-        private void TimerTextBox_Loaded(object sender, RoutedEventArgs e)
-        {
-            increment = 0;
-            dt.Tick -= dtTicker;
-            dt.Interval = TimeSpan.FromSeconds(1);
-            dt.Tick += dtTicker;
-            dt.Start();
-        }
-
-        private void dtTicker(object sender, EventArgs e)
-        {
-            increment++;
-            TimeSpan result = TimeSpan.FromSeconds(increment);
-            TimerTextBox.Text = result.ToString("mm':'ss");
-        }
+        private void UpdateTimerView() => Dispatcher.Invoke(() => TimerTextBox.Text = EpisodeController.GetTimeFormat());
 
         private void ButtonExit(object sender, EventArgs e) // leave match set state 2 or remove match
         {

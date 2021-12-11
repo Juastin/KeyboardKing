@@ -27,6 +27,7 @@ namespace Controller
 
         public static event EventHandler WordChanged;
         public static event EventHandler EpisodeFinished;
+        public static event EventHandler EpisodeResultUpdated;
 
         public static string Word { get => CurrentEpisodeStep?.Word; }
 
@@ -55,7 +56,7 @@ namespace Controller
         /// Initializes all variables needed to play and keep track of the episode.
         /// </summary>
         /// <param name="episode">The episode that is going to be played</param>
-        public static void Initialise(Episode episode)
+        public static void Initialise(Episode episode, bool isMatch)
         {
             _currentEpisode = episode;
             CurrentEpisodeResult = new EpisodeResult();
@@ -68,6 +69,11 @@ namespace Controller
             Points = 0;
             CurrentEpisodeResult.MaxScore = CalculateMaxScore(episode);
             NextEpisodeStep();
+
+            if (isMatch)
+                EpisodeFinished += MatchController.OnEpisodeFinished;
+            else
+                EpisodeFinished += OnEpisodeFinished;
         }
 
         /// <summary>
@@ -77,10 +83,10 @@ namespace Controller
         {
             _wordIndex = 0;
             _wrongIndex = 0;
-            if(_currentEpisode.EpisodeSteps.TryDequeue(out EpisodeStep step))
+            if (_currentEpisode.EpisodeSteps.TryDequeue(out EpisodeStep step))
                 CurrentEpisodeStep = step;
             else
-                FinishEpisode();
+                EpisodeFinished?.Invoke(null, EventArgs.Empty);
 
             WordChanged?.Invoke(null, new EventArgs());
         }
@@ -156,7 +162,8 @@ namespace Controller
         {
             return _stopwatch?.Elapsed.ToString("mm\\:ss");
         }
-        public static void FinishEpisode()
+
+        public static void StopAndSetEpisodeResult()
         {
             _stopwatch.Stop();
             IsStarted = false;
@@ -164,7 +171,11 @@ namespace Controller
             CurrentEpisodeResult.ScorePercentage = CalculatePercentage(CurrentEpisodeResult.MaxScore, CurrentEpisodeResult.Mistakes);
             CurrentEpisodeResult.LettersPerMinute = CalculateLetterPerMinute(CurrentEpisodeResult.Time, CurrentEpisodeResult.MaxScore);
             CurrentEpisodeResult.Score = CalculateScore(CurrentEpisodeResult.LettersPerMinute);
+        }
 
+        public static void OnEpisodeFinished(object sender, EventArgs e)
+        {
+            StopAndSetEpisodeResult();
             UList student = (UList)Session.Get("student");
 
             int userId = student.Get<int>(0);
@@ -172,17 +183,8 @@ namespace Controller
 
             DBQueries.SaveResult(CurrentEpisodeResult, episodeId, userId);
 
-            EpisodeFinished?.Invoke(null, EventArgs.Empty);
-        }
-
-        /// <summary>
-        /// Returns the time difference between the given parameter and the time of now.
-        /// </summary>
-        /// <param name="startTime"></param>
-        /// <returns></returns>
-        public static TimeSpan CalculateTime(DateTime startTime)
-        {
-            return DateTime.Now - startTime;
+            EpisodeResultUpdated?.Invoke(null, EventArgs.Empty);
+            NavigationController.NavigateToPage(Pages.EpisodeResultPage);
         }
 
         /// <summary>

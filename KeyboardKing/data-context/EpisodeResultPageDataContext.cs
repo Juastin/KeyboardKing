@@ -19,7 +19,7 @@ namespace Model
         public double LettersPerMinute { get => EpisodeController.CurrentEpisodeResult?.LettersPerMinute ?? 0; }
         public EpisodeResultPageDataContext()
         {
-            EpisodeController.EpisodeFinished += OnEpisodeFinished;
+            EpisodeController.EpisodeResultUpdated += OnEpisodeFinished;
         }
 
         private void OnEpisodeFinished(object sender, EventArgs e)

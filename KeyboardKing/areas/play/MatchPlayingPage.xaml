@@ -57,7 +57,7 @@
         </Grid>
         <Grid>
             <ProgressBar Background="{DynamicResource Color4}" Template="{DynamicResource ProgressBar}" VerticalAlignment="Bottom" Height="20" Minimum="0" Maximum="{Binding MaxLetters}" Value="{Binding LettersTyped, Mode=OneWay}"/>
-            <TextBox x:Name="TimerTextBox" Style="{DynamicResource TextBox2}" VerticalAlignment="Top" Background="Transparent"  Text="00:00" Loaded="TimerTextBox_Loaded" Height="53"  Margin="10,11,133,0"/>
+            <TextBox x:Name="TimerTextBox" Style="{DynamicResource TextBox2}" VerticalAlignment="Top" Background="Transparent"  Text="00:00" Height="53"  Margin="10,11,133,0"/>
             <Button Style="{DynamicResource Button1}" Content="Exit" VerticalAlignment="Top" HorizontalAlignment="Right" Click="ButtonExit" FontSize="26" Margin="0,11,10,0"  Height="54" Width="110"/>
         </Grid>
         <TextBlock Style="{DynamicResource TextBlock}" Background="Transparent" x:Name="points" HorizontalAlignment="Center"

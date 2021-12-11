@@ -12,22 +12,22 @@ namespace Model
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public string Score { get => $"{MatchController.CurrentEpisodeResult?.Score ?? 0}p"; }
-        public int Mistakes { get => MatchController.CurrentEpisodeResult?.Mistakes ?? 0; }
-        public string ScorePercentage { get => $"{MatchController.CurrentEpisodeResult?.ScorePercentage ?? 0}%"; }
+        public string Score { get => $"{EpisodeController.CurrentEpisodeResult?.Score ?? 0}p"; }
+        public int Mistakes { get => EpisodeController.CurrentEpisodeResult?.Mistakes ?? 0; }
+        public string ScorePercentage { get => $"{EpisodeController.CurrentEpisodeResult?.ScorePercentage ?? 0}%"; }
         public string Time { get => FormatTimespan(); }
-        public double LettersPerMinute { get => MatchController.CurrentEpisodeResult?.LettersPerMinute ?? 0; }
+        public double LettersPerMinute { get => EpisodeController.CurrentEpisodeResult?.LettersPerMinute ?? 0; }
 
-        public string Winnaar1 { get => MatchController.Winnaar1; }
-        public string Winnaar2 { get => MatchController.Winnaar2; }
-        public string Winnaar3 { get => MatchController.Winnaar3; }
+        public string Winner1 { get => MatchController.Winner1; }
+        public string Winner2 { get => MatchController.Winner2; }
+        public string Winner3 { get => MatchController.Winner3; }
 
         public string Score1 { get => MatchController.Score1; }
         public string Score2 { get => MatchController.Score2; }
         public string Score3 { get => MatchController.Score3; }
         public MatchResultPageDataContext()
         {
-            MatchController.EpisodeFinished += OnRefresh;
+            EpisodeController.EpisodeFinished += OnRefresh;
             MatchController.Refresh += OnRefresh;
         }
 
@@ -38,7 +38,7 @@ namespace Model
 
         private string FormatTimespan()
         {
-            TimeSpan span = MatchController.CurrentEpisodeResult?.Time ?? TimeSpan.Zero;
+            TimeSpan span = EpisodeController.CurrentEpisodeResult?.Time ?? TimeSpan.Zero;
             return string.Format("{0}min {1}sec",
                 (int)span.TotalMinutes,
                 span.Seconds);

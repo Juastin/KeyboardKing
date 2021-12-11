@@ -12,15 +12,15 @@ namespace Model
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public string Word { get => MatchController.Word; }
-        public string WordOverlayWrong { get => MatchController.WordOverlayWrong; }
-        public string WordOverlayCorrect { get => MatchController.WordOverlayCorrect; }
-        public int LettersTyped { get => MatchController.LettersTyped; }
-        public int MaxLetters { get => MatchController.CurrentEpisodeResult?.MaxScore ?? 0; }
+        public string Word { get => EpisodeController.Word; }
+        public string WordOverlayWrong { get => EpisodeController.WordOverlayWrong; }
+        public string WordOverlayCorrect { get => EpisodeController.WordOverlayCorrect; }
+        public int LettersTyped { get => EpisodeController.LettersTyped; }
+        public int MaxLetters { get => EpisodeController.CurrentEpisodeResult?.MaxScore ?? 0; }
 
         public MatchPageDataContext()
         {
-            MatchController.WordChanged += OnWordChanged;
+            EpisodeController.WordChanged += OnWordChanged;
         }
 
         private void OnWordChanged(object sender, EventArgs e)

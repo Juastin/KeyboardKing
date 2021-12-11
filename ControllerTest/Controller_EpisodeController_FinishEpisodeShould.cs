@@ -34,7 +34,7 @@ namespace ControllerTest
             //Session.Add("student",User);
             //Session.Add("episodeId", "3");
 
-            EpisodeController.Initialise(Episode);
+            EpisodeController.Initialise(Episode, false);
         }
 
         //[Test]
@@ -56,7 +56,7 @@ namespace ControllerTest
         [Test]
         public void CalculateLPM_ReturnCorrect()
         { 
-            double lpm = EpisodeController.CalculateLetterPerMinute(TwoMinute,EpisodeController.CurrentEpisodeResult.MaxScore);
+            double lpm = EpisodeController.CalculateLetterPerMinute(TwoMinute, EpisodeController.CurrentEpisodeResult.MaxScore);
             Assert.AreEqual(5.0, lpm);
         }
     }
