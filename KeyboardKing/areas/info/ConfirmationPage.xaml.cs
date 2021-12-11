@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Controller;
 using KeyboardKing.core;
 
 namespace KeyboardKing.areas.info
@@ -36,6 +37,16 @@ namespace KeyboardKing.areas.info
 
         public override void OnTick()
         {
+        }
+
+        private void RedirectApproved(object sender, RoutedEventArgs e)
+        {
+            NavigationController.NavigateToPage(TargetLocation);
+        }
+
+        private void RedirectDeclined(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }
