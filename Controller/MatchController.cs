@@ -150,10 +150,14 @@ namespace Controller
         /// </summary>
         public static void UpdateCreatorInMatch()
         {
-            DBQueries.UpdateNewCreatorInMatch(_currentMatchId, 7); // not done yet
+            DBQueries.UpdateNewCreatorInMatch(_currentMatchId, int.Parse(_matchInfo[1][11])); // not done yet
             RemoveUserInMatchProgress();
         }
 
+        /// <summary>
+        /// <para>This method will check if the user is the creator</para>
+        /// It does this by checking if the userid is the same as the creatorid
+        /// </summary>
         public static bool CheckUserIsCreator()
         {
             UList student = (UList)Session.Get("student");
