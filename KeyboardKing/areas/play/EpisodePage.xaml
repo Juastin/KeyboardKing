@@ -27,7 +27,7 @@
             <Label x:Name="WordOverlayCorrect" Content="{Binding WordOverlayCorrect}" Foreground="Green" FontSize="50"/>
         </Grid>
         <Grid>
-            <ProgressBar Template="{DynamicResource ProgressBar}" 
+            <ProgressBar Template="{DynamicResource ProgressBar}" Background="{DynamicResource Color4}"
                          VerticalAlignment="Bottom" Height="20" Minimum="0" 
                          Maximum="{Binding MaxLetters}" 
                          Value="{Binding LettersTyped, Mode=OneWay}"/>
