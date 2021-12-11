@@ -23,7 +23,6 @@ namespace Model
         MatchCreatePage,
         MatchOverviewPage,
         MatchPlayingPage,
-        MatchResultPage,
-        MatchWaitingResultPage
+        MatchResultPage
     }
 }

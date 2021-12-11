@@ -86,7 +86,6 @@ namespace KeyboardKing
                 {Pages.MatchLobbyPage, new MatchLobbyPage(this)},
                 {Pages.MatchPlayingPage, new MatchPlayingPage(this)},
                 {Pages.MatchResultPage, new MatchResultPage(this)},
-                { Pages.MatchWaitingResultPage, new MatchWaitingResultPage(this) },
             };
 
             _themes = new()
@@ -219,9 +218,9 @@ namespace KeyboardKing
             {
                 MatchController.RemoveUserInMatchProgress();
 
-                if (!MatchController.GetMatchProgressInfo().Any())
+                if (!DBQueries.GetMatchProgress((int)Session.Get("matchId")).Any())
                 {
-                    MatchController.DeleteMatch();
+                    DBQueries.DeleteMatch((int)Session.Get("matchId"));
                 }
 
             }

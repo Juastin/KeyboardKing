@@ -44,7 +44,7 @@ namespace Controller
             FinishMatch();
             EC.EpisodeFinished -= OnEpisodeFinished;
             DBQueries.SetPlayState(int.Parse(_matchInfo[0][0]), 2);
-            NavigationController.NavigateToPage(Pages.MatchWaitingResultPage);
+            NavigationController.NavigateToPage(Pages.MatchResultPage);
         }
 
         public static void SetWinners()
@@ -71,8 +71,9 @@ namespace Controller
             UList student = (UList)Session.Get("student");
 
             int userId = student.Get<int>(0);
+            int matchId = (int)Session.Get("matchId");
 
-            DBQueries.SaveMatchResult(EC.CurrentEpisodeResult, _currentMatchId, userId);
+            DBQueries.SaveMatchResult(EC.CurrentEpisodeResult, matchId, userId);
 
             SetWinners();
         }
@@ -143,9 +144,6 @@ namespace Controller
             return _matchInfo;
         }
 
-       
-       
-
         public static bool CheckUserIsCreator()
         {
             UList student = (UList)Session.Get("student");
@@ -159,20 +157,6 @@ namespace Controller
         }
 
         public static bool CheckCreatorIsAloneInMatch() { return _amountOfPlayers == 1; }
-
-        public static bool CheckIfEverybodyDone()
-        {
-            List<List<string>> progress = DBQueries.GetAllProgress(_currentMatchId);
-
-            for (int i = 0; i < progress.Count; i++)
-            {
-                if (int.Parse(progress[i][0]) < 100)
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
 
         public static int GetMatchId() { return _currentMatchId; }
     }

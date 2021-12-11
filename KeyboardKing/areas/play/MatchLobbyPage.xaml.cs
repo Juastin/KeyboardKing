@@ -38,6 +38,7 @@ namespace KeyboardKing.areas.play
         public override void OnLoad()
         {
             UpdateListView();
+            Session.Add("matchId", int.Parse(_matchInfoLoad[0][0]));
         }
 
         public override void OnShadow()
