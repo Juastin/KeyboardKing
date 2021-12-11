@@ -168,7 +168,7 @@ namespace Controller
             _stopwatch.Stop();
             IsStarted = false;
             CurrentEpisodeResult.Time = _stopwatch.Elapsed;
-            CurrentEpisodeResult.Accuracy = CalculatePercentage(CurrentEpisodeResult.MaxScore, CurrentEpisodeResult.Mistakes);
+            CurrentEpisodeResult.Accuracy = CalculateAccuracy(CurrentEpisodeResult.MaxScore, CurrentEpisodeResult.Mistakes);
             CurrentEpisodeResult.LettersPerMinute = CalculateLetterPerMinute(CurrentEpisodeResult.Time, CurrentEpisodeResult.MaxScore);
             CurrentEpisodeResult.Score = CalculateScore(CurrentEpisodeResult.LettersPerMinute);
         }
@@ -188,12 +188,12 @@ namespace Controller
         }
 
         /// <summary>
-        /// Returns a percentage of the correct typed letters based on the mistakes and the max amount of letters.
+        /// Returns a percentage of the correct typed letters, accuracy, based on the mistakes and the max amount of letters.
         /// </summary>
         /// <param name="maxScore"></param>
         /// <param name="mistakes"></param>
         /// <returns></returns>
-        public static int CalculatePercentage(int maxScore, int mistakes)
+        public static int CalculateAccuracy(int maxScore, int mistakes)
         {
             return (int)((double)(maxScore-mistakes) / maxScore * 100);
         }
