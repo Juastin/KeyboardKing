@@ -22,7 +22,7 @@ namespace Controller
         public static int LettersTyped { get; private set; }
         private static int _wordIndex;
         private static int _wrongIndex;
-        
+
         private static Stopwatch _stopwatch;
 
         public static event EventHandler WordChanged;
@@ -112,7 +112,7 @@ namespace Controller
                 CurrentEpisodeResult.Mistakes++;
                 if (_repeatMistake == false && Points >= Difficulty)
                 {
-                    Points = Points - Difficulty;
+                    Points -= Difficulty;
                     _repeatMistake = true;
                 }
             }
@@ -195,7 +195,7 @@ namespace Controller
         /// <returns></returns>
         public static int CalculateAccuracy(int maxScore, int mistakes)
         {
-            return (int)((double)(maxScore-mistakes) / maxScore * 100);
+            return (int)((double)(maxScore - mistakes) / maxScore * 100);
         }
 
         /// <summary>

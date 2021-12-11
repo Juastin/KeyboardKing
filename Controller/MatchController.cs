@@ -35,7 +35,7 @@ namespace Controller
         {
             Episode episode = EC.ParseEpisode(int.Parse(_matchInfo[0][9]));
             EC.Initialise(episode, true);
-            MatchController.MultiplayerFetch();
+            MultiplayerFetch();
             NavigationController.NavigateToPage(Pages.MatchPlayingPage);
         }
 
