@@ -175,11 +175,6 @@ namespace Controller
 
         public static void OnEpisodeFinished(object sender, EventArgs e)
         {
-            FinishEpisode();
-        }
-
-        public static void FinishEpisode()
-        {
             StopAndSetEpisodeResult();
             UList student = (UList)Session.Get("student");
 
@@ -190,16 +185,6 @@ namespace Controller
 
             EpisodeResultUpdated?.Invoke(null, EventArgs.Empty);
             NavigationController.NavigateToPage(Pages.EpisodeResultPage);
-        }
-
-        /// <summary>
-        /// Returns the time difference between the given parameter and the time of now.
-        /// </summary>
-        /// <param name="startTime"></param>
-        /// <returns></returns>
-        public static TimeSpan CalculateTime(DateTime startTime)
-        {
-            return DateTime.Now - startTime;
         }
 
         /// <summary>
