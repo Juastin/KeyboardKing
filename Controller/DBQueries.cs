@@ -317,7 +317,7 @@ namespace Controller
 
         public static bool UpdateNewCreatorInMatch(int matchid, int newcreatorid)
         {
-            SqlCommand cmd = new SqlCommand("UPDATE FROM [dbo].[Match] SET creatorid = @newcreatorid WHERE matchid = @matchid");
+            SqlCommand cmd = new SqlCommand("UPDATE [dbo].[Match] SET creatorid = @newcreatorid WHERE id = @matchid");
 
             SqlParameter matchId = new SqlParameter("@matchid", SqlDbType.Int, 255);
             SqlParameter newcreatorId = new SqlParameter("@newcreatorid", SqlDbType.Int, 0);

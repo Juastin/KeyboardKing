@@ -109,8 +109,8 @@ namespace KeyboardKing.areas.play
                 }
                 else
                 {
-                    //must change
                     MatchController.UpdateCreatorInMatch();
+                    MatchController.RemoveUserInMatchProgress();
                 }
                 NavigationController.NavigateToPage(Pages.MatchOverviewPage);
             }
