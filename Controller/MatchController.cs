@@ -144,6 +144,16 @@ namespace Controller
             return _matchInfo;
         }
 
+        /// <summary>
+        /// <para>This method will update in Match a new Userid, who joined the match, as creator</para>
+        /// It does this by giving the Matchid and the id of the user who first joined after the current creator.
+        /// </summary>
+        public static void UpdateCreatorInMatch()
+        {
+            DBQueries.UpdateNewCreatorInMatch(_currentMatchId, 7); // not done yet
+            RemoveUserInMatchProgress();
+        }
+
         public static bool CheckUserIsCreator()
         {
             UList student = (UList)Session.Get("student");

@@ -99,16 +99,20 @@ namespace KeyboardKing.areas.play
 
         private void BExitMatch(object sender, EventArgs e)
         {
+            _checkIfLeft = true;
             if (MatchController.CheckUserIsCreator())
             {
                 if (MatchController.CheckCreatorIsAloneInMatch())
                 {
-                    _checkIfLeft = true;
                     MatchController.DeleteMatch();
-                    MessageBox.Show("Match is deleted");
-                    NavigationController.NavigateToPage(Pages.MatchOverviewPage);
+                    MessageBox.Show("Match is verwijderd");
                 }
-                else { MessageBox.Show("Je kan momenteel niet de match verlaten. Je bent de creator"); }
+                else
+                {
+                    //must change
+                    MatchController.UpdateCreatorInMatch();
+                }
+                NavigationController.NavigateToPage(Pages.MatchOverviewPage);
             }
             else
             {
