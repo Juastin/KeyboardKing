@@ -60,10 +60,7 @@ namespace KeyboardKing.areas.play
 
         private void StartGame()
         {
-            this.Dispatcher.Invoke(() =>
-            {
-                MatchController.StartGame();
-            });
+            this.Dispatcher.Invoke(MatchController.StartGame);
         }
 
         private void SetPlayerReady(object sender, RoutedEventArgs e)
@@ -92,9 +89,9 @@ namespace KeyboardKing.areas.play
 
             this.Dispatcher.Invoke(() =>
             {
-                int SelectedItem = LvMatch.SelectedIndex;
+                int selectedItem = LvMatch.SelectedIndex;
                 LvMatch.ItemsSource = items;
-                LvMatch.SelectedIndex = SelectedItem;
+                LvMatch.SelectedIndex = selectedItem;
                 lEpisodeMatch.Content = _matchInfoLoad[0][2];
                 startbtn.Visibility = MatchController.CheckUserIsCreator() ? Visibility.Visible : Visibility.Hidden;
             });
