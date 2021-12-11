@@ -10,20 +10,21 @@ namespace Model
     {
         public int Mistakes { get; set; }
         public int Score { get; set; }
-        private int _scorePercentage;
-        public int ScorePercentage { 
+        private int _accuracy;
+        public int Accuracy
+        { 
             get 
             { 
-                return _scorePercentage; 
+                return _accuracy; 
             } 
             set 
             { 
                 if (value >= 0 || value <= 100)
-                    _scorePercentage  = value;
+                    _accuracy = value;
                 if (value < 0)
-                    _scorePercentage  = 0;
+                    _accuracy = 0;
                 if (value > 100)
-                    _scorePercentage = 100;
+                    _accuracy = 100;
             } 
         }
         public int MaxScore { get; set; }
