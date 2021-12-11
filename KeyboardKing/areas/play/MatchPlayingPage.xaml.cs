@@ -29,9 +29,6 @@ namespace KeyboardKing.areas.play
         /// </summary>
         /// <param name="w"></param>
 
-        public int increment { get; set; }
-        private DispatcherTimer dt = new DispatcherTimer();
-
         public MatchPlayingPage(MainWindow w) : base(w)
         {
             InitializeComponent();
