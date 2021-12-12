@@ -86,12 +86,11 @@
                 </Border>
             </Grid>
             <Grid Grid.Row="3">
-                <ProgressBar Template="{DynamicResource ProgressBar}" 
+                <ProgressBar Background="{DynamicResource Color4}" Template="{DynamicResource ProgressBar}" 
                          VerticalAlignment="Bottom" Height="20" Minimum="0" 
                          Maximum="{Binding MaxLetters}" 
                          Value="{Binding LettersTyped, Mode=OneWay}"/>
-            </Grid>
-            
+            </Grid>         
         </Grid>
     </Grid>
 </local:JumpPage>

@@ -13,7 +13,7 @@ namespace Controller
         /// <summary>
         /// Database connection.
         /// </summary>
-        private static SqlConnection _connection {get;set;} = new SqlConnection(Encryption.Decrypt(ConfigurationManager.AppSettings["connectionString"], "332cc6da-d757-4e80-a726-0bf6b615df09"));
+        private static SqlConnection _connection { get; set; } = new SqlConnection(Encryption.Decrypt(ConfigurationManager.AppSettings["connectionString"], "332cc6da-d757-4e80-a726-0bf6b615df09"));
 
         /// <summary>
         /// Used to query the DB.
@@ -26,7 +26,7 @@ namespace Controller
         ///     {"3", "Username3"}
         /// }
         /// </summary>
-        
+
         public static List<List<string>> SelectQuery(SqlCommand cmd)
         {
             SqlDataReader rdr = null;
@@ -34,7 +34,7 @@ namespace Controller
 
             try
             {
-                _connection.Open();
+                OpenConnection();
                 cmd.Connection = _connection;
                 rdr = cmd.ExecuteReader();
                 while (rdr.Read())
@@ -60,12 +60,13 @@ namespace Controller
         {
             try
             {
-                _connection.Open();
+                OpenConnection();
                 cmd.Connection = _connection;
                 cmd.Prepare();
                 cmd.ExecuteNonQuery();
                 return true;
-            } catch
+            }
+            catch
             {
                 return false;
             }
@@ -79,7 +80,7 @@ namespace Controller
         {
             try
             {
-                _connection.Open();
+                OpenConnection();
                 cmd.Connection = _connection;
                 cmd.Prepare();
                 return (T)cmd.ExecuteScalar();
@@ -94,5 +95,12 @@ namespace Controller
             }
         }
 
+        public static void OpenConnection()
+        {
+            if (_connection != null && _connection.State == ConnectionState.Closed)
+            {
+                _connection.Open();
+            }
+        }
     }
 }

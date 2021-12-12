@@ -22,22 +22,33 @@ namespace Controller
         public static int LettersTyped { get; private set; }
         private static int _wordIndex;
         private static int _wrongIndex;
-        
-        private static DateTime _startTime;
+
+        private static Stopwatch _stopwatch;
 
         public static event EventHandler WordChanged;
         public static event EventHandler EpisodeFinished;
+        public static event EventHandler EpisodeResultUpdated;
 
         public static string Word { get => CurrentEpisodeStep?.Word; }
 
         public static int Points { get; set; }
+        public static int Difficulty { get; set; }
+        private static bool _repeatMistake;
         public static string WordOverlayCorrect { get =>CurrentEpisodeStep?.Word.Substring(0, _wordIndex); }
         public static string WordOverlay { get => CurrentEpisodeStep?.Word.Substring(_wordIndex); }
         public static string WordOverlayWrong { get =>CurrentEpisodeStep?.Word.Substring(_wordIndex, _wrongIndex); }
-
+        public static bool IsStarted { get; private set; }
+      
         public static void Start()
         {
-            _startTime = DateTime.Now;
+            _stopwatch.Start();
+            IsStarted = true;
+        }
+
+        public static void Pause()
+        {
+            _stopwatch.Stop();
+            MessageController.Show(Pages.MessagePage, "De episode is gepauzeerd.", Pages.EpisodePage, null);
         }
 
         /// <summary>
@@ -47,16 +58,24 @@ namespace Controller
         /// Initializes all variables needed to play and keep track of the episode.
         /// </summary>
         /// <param name="episode">The episode that is going to be played</param>
-        public static void Initialise(Episode episode)
+        public static void Initialise(Episode episode, bool isMatch)
         {
             _currentEpisode = episode;
             CurrentEpisodeResult = new EpisodeResult();
-            _startTime = new DateTime();
+            _stopwatch = new Stopwatch();
+            Difficulty = 30;
+            _repeatMistake = false;
             _wordIndex = 0;
             _wrongIndex = 0;
             LettersTyped = 0;
+            Points = 0;
             CurrentEpisodeResult.MaxScore = CalculateMaxScore(episode);
             NextEpisodeStep();
+
+            if (isMatch)
+                EpisodeFinished += MatchController.OnEpisodeFinished;
+            else
+                EpisodeFinished += OnEpisodeFinished;
         }
 
         /// <summary>
@@ -66,10 +85,10 @@ namespace Controller
         {
             _wordIndex = 0;
             _wrongIndex = 0;
-            if(_currentEpisode.EpisodeSteps.TryDequeue(out EpisodeStep step))
+            if (_currentEpisode.EpisodeSteps.TryDequeue(out EpisodeStep step))
                 CurrentEpisodeStep = step;
             else
-                FinishEpisode();
+                EpisodeFinished?.Invoke(null, EventArgs.Empty);
 
             WordChanged?.Invoke(null, new EventArgs());
         }
@@ -86,18 +105,24 @@ namespace Controller
                 _wordIndex++;
                 LettersTyped++;
                 _wrongIndex = 0;
+                Points += 10;
+                _repeatMistake = false;
             }
-                 
+
             else
             {
                 _wrongIndex = 1;
                 CurrentEpisodeResult.Mistakes++;
+                if (_repeatMistake == false && Points >= Difficulty)
+                {
+                    Points -= Difficulty;
+                    _repeatMistake = true;
+                }
             }
-                
+
             if (_wordIndex >= CurrentEpisodeStep.Word.Length)
             {
                 NextEpisodeStep();
-                Points = Points + 10;
             }
             else
             {
@@ -110,9 +135,10 @@ namespace Controller
         /// </summary>
         /// <param name="episodeId">episode id from the requested episode</param>
         /// <returns></returns>
-        public static Episode ParseEpisode(string episodeId)
+        public static Episode ParseEpisode(int episodeId)
         {
             List<List<string>> results = DBQueries.GetAllEpisodeStepsFromEpisode(episodeId);
+
             Session.Remove("episodeId");
             Session.Add("episodeId", episodeId);
 
@@ -135,40 +161,56 @@ namespace Controller
         {
             NextLetter(CurrentEpisodeStep.Word[_wordIndex].Equals(input));
         }
-
-        public static void FinishEpisode()
+        public static string GetTimeFormat()
         {
-            CurrentEpisodeResult.Time = CalculateTime(_startTime);
-            CurrentEpisodeResult.Score = CalculateScore(CurrentEpisodeResult.MaxScore, CurrentEpisodeResult.Mistakes);
-            CurrentEpisodeResult.LettersPerMinute = CalculateLetterPerMinute(CurrentEpisodeResult.Time, CurrentEpisodeResult.MaxScore);
+            return _stopwatch?.Elapsed.ToString("mm\\:ss");
+        }
 
-            int userId = IntegerType.FromString(((string[])Session.Get("student"))[0]);
-            int episodeId = IntegerType.FromString((string)Session.Get("episodeId"));
-            
+        public static void StopAndSetEpisodeResult()
+        {
+            _stopwatch.Stop();
+            IsStarted = false;
+            CurrentEpisodeResult.Time = _stopwatch.Elapsed;
+            CurrentEpisodeResult.Accuracy = CalculateAccuracy(CurrentEpisodeResult.MaxScore, CurrentEpisodeResult.Mistakes);
+            CurrentEpisodeResult.LettersPerMinute = CalculateLetterPerMinute(CurrentEpisodeResult.Time, CurrentEpisodeResult.MaxScore);
+            CurrentEpisodeResult.Score = CalculateScore(CurrentEpisodeResult.LettersPerMinute);
+        }
+
+        public static void OnEpisodeFinished(object sender, EventArgs e)
+        {
+            StopAndSetEpisodeResult();
+            UList student = (UList)Session.Get("student");
+
+            int userId = student.Get<int>(0);
+            int episodeId = (int)Session.Get("episodeId");
+
             DBQueries.SaveResult(CurrentEpisodeResult, episodeId, userId);
 
-            EpisodeFinished?.Invoke(null, EventArgs.Empty);
+            EpisodeResultUpdated?.Invoke(null, EventArgs.Empty);
+            NavigationController.NavigateToPage(Pages.EpisodeResultPage);
         }
 
         /// <summary>
-        /// Returns the time difference between the given parameter and the time of now.
-        /// </summary>
-        /// <param name="startTime"></param>
-        /// <returns></returns>
-        public static TimeSpan CalculateTime(DateTime startTime)
-        {
-            return DateTime.Now - startTime;
-        }
-        /// <summary>
-        /// Returns a percentage of the correct typed letters based on the mistakes and the max amount of letters.
+        /// Returns a percentage of the correct typed letters, accuracy, based on the mistakes and the max amount of letters.
         /// </summary>
         /// <param name="maxScore"></param>
         /// <param name="mistakes"></param>
         /// <returns></returns>
-        public static int CalculateScore(int maxScore, int mistakes)
+        public static int CalculateAccuracy(int maxScore, int mistakes)
         {
-            return (int)((double)(maxScore-mistakes) / maxScore * 100);
+            return (int)((double)(maxScore - mistakes) / maxScore * 100);
         }
+
+        /// <summary>
+        /// Returns the score based on the point in earned in the episode * how fast you type.
+        /// </summary>
+        /// <param name="LettersPerMinute"></param>
+        /// <returns></returns>
+        public static int CalculateScore(double LettersPerMinute)
+        {
+            return (int)(Points * LettersPerMinute);
+        }
+
         /// <summary>
         /// Calculates the max amount of store possible by getting the total amount of letters that can be written.
         /// </summary>

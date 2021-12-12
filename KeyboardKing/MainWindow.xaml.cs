@@ -22,6 +22,7 @@ using System.Windows.Shapes;
 using Model;
 using Model.event_args;
 using KeyboardKing.areas.info;
+using System.ComponentModel;
 
 namespace KeyboardKing
 {
@@ -89,8 +90,13 @@ namespace KeyboardKing
 
             _themes = new()
             {
-                {"Light", new Theme("Light Theme", "resources/themes/LightTheme.xaml", "resources/images/kk_background_4K.png")},
-                {"Dark", new Theme("Dark Theme", "resources/themes/DarkTheme.xaml", "resources/images/kk_background_dark.png")},
+                {"Light", new Theme("Light Theme", "resources/themes/LightTheme.xaml")},
+                {"Dark", new Theme("Dark Theme", "resources/themes/DarkTheme.xaml")},
+                {"Space", new Theme("Space Theme", "resources/themes/SpaceTheme.xaml")},
+                {"Chinese", new Theme("Chinese Theme", "resources/themes/ChineseTheme.xaml")},     
+                {"Paint", new Theme("Paint Theme", "resources/themes/PaintTheme.xaml")},
+                {"Obsidian", new Theme("Obsidian Theme", "resources/themes/ObsidianTheme.xaml")},
+                {"Christmas", new Theme("Christmas Theme", "resources/themes/ChristmasTheme.xaml")},
             };
 
             CBTheme.ItemsSource = _themes;
@@ -102,7 +108,7 @@ namespace KeyboardKing
             NavigationController.Navigate += OnNavigate;
             NavigationController.NavigateToPage(Pages.LoginPage);
         }
-
+   
         public void OnNavigate(NavigateEventArgs e)
         {
 
@@ -192,7 +198,7 @@ namespace KeyboardKing
         {
             themeDictionary.Clear();
             themeDictionary.MergedDictionaries.Add(new ResourceDictionary() { Source = theme.ThemeUri });
-            MainBackground.ImageSource = new BitmapImage(theme.BackgroundUri);
+            NavigationController.ChangeTheme();
         }
 
         private void CBTheme_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -204,5 +210,22 @@ namespace KeyboardKing
                 ChangeTheme(theme);
             }
         }
+
+        //Closes open matches when closing application
+        private void CheckBefore_Closing(object sender, CancelEventArgs e)
+        {
+            if (NavigationController.CurrentPage == Pages.MatchLobbyPage || NavigationController.CurrentPage == Pages.MatchPlayingPage)
+            {
+                MatchController.RemoveUserInMatchProgress();
+
+                if (!DBQueries.GetMatchProgress((int)Session.Get("matchId")).Any())
+                {
+                    DBQueries.DeleteMatch((int)Session.Get("matchId"));
+                }
+
+            }
+        }
+
+
     }
 }

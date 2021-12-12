@@ -43,7 +43,7 @@ namespace KeyboardKing.areas.login
 
         private void Button_Click_Skill(object sender, RoutedEventArgs e) 
         {
-            string[] result = (string[])Session.Get("student");
+            UList result = (UList)Session.Get("student");
             DBQueries.AddSkill(((Button)sender).Tag.ToString(), result);
             NavigationController.NavigateToPage(Pages.ChaptersPage);
         }

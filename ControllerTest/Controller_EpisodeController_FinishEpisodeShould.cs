@@ -34,7 +34,7 @@ namespace ControllerTest
             //Session.Add("student",User);
             //Session.Add("episodeId", "3");
 
-            EpisodeController.Initialise(Episode);
+            EpisodeController.Initialise(Episode, false);
         }
 
         //[Test]
@@ -48,21 +48,6 @@ namespace ControllerTest
         //}
 
         [Test]
-        public void CalculateTime_ReturnsCorrect()
-        {
-           TimeSpan diffTime = EpisodeController.CalculateTime(StartTime);
-           TimeSpan tsStartTime = TimeSpan.FromTicks(StartTime.Ticks);
-           Assert.AreNotEqual(tsStartTime, diffTime);
-        }
-
-        [Test]
-        public void CalculateScore_ReturnCorrect()
-        {
-            int score = EpisodeController.CalculateScore(EpisodeController.CurrentEpisodeResult.MaxScore, 5);
-            Assert.AreEqual(50, score);
-        }
-
-        [Test]
         public void CalculateMaxScore_ReturnCorrect()
         {
             Assert.AreEqual(10, EpisodeController.CurrentEpisodeResult.MaxScore);
@@ -71,7 +56,7 @@ namespace ControllerTest
         [Test]
         public void CalculateLPM_ReturnCorrect()
         { 
-            double lpm = EpisodeController.CalculateLetterPerMinute(TwoMinute,EpisodeController.CurrentEpisodeResult.MaxScore);
+            double lpm = EpisodeController.CalculateLetterPerMinute(TwoMinute, EpisodeController.CurrentEpisodeResult.MaxScore);
             Assert.AreEqual(5.0, lpm);
         }
     }

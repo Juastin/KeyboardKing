@@ -2,27 +2,27 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!-- IMAGES -->
-    <BitmapImage x:Key="Wallpaper" UriSource="/resources/images/kk_background_4K.png"/>
-    <BitmapImage x:Key="MessageWallpaper" UriSource="/resources/images/blur_background_4K.png"/>
+    <BitmapImage x:Key="Wallpaper" UriSource="/resources/images/obsidian_theme_background.png"/>
+    <BitmapImage x:Key="MessageWallpaper" UriSource="/resources/images/obsidian_theme_background.png"/>
 
     <!-- COLOR SCHEMES -->
     <Color x:Key="SColor1">#000814</Color>
     <Color x:Key="SColor2">#001D3D</Color>
     <Color x:Key="SColor3">#003566</Color>
-    <Color x:Key="SColor4">#FFC300</Color>
-    <Color x:Key="SColor5">#FFCF33</Color>
+    <Color x:Key="SColor4">#4f00ad</Color>
+    <Color x:Key="SColor5">#6500de</Color>
 
     <!-- Tints -->
-    <Color x:Key="SColor6">#FFFFFF</Color>
-    <Color x:Key="SColor7">#bdbdbd</Color>
+    <Color x:Key="SColor6">#000</Color>
+    <Color x:Key="SColor7">#999</Color>
 
     <!-- MAIN COLORS -->
-    <Color x:Key="SText">Black</Color>
-    <Color x:Key="SBackground">White</Color>
-    <Color x:Key="SBorder">Black</Color>
+    <Color x:Key="SText">White</Color>
+    <Color x:Key="SBackground">#000</Color>
+    <Color x:Key="SBorder">White</Color>
 
-    <SolidColorBrush x:Key="Succes" Color="#70AD47"/>
-    <SolidColorBrush x:Key="Failed" Color="#FFD9534F"/>
+    <SolidColorBrush x:Key="Succes" Color="#00ad28"/>
+    <SolidColorBrush x:Key="Failed" Color="#ad0000"/>
 
 
     <!-- BRUSHES (DO NOT CHANGE THESE VALUES!) -->
@@ -40,5 +40,5 @@
     <SolidColorBrush x:Key="TextColor" Color="{DynamicResource SText}"/>
     <SolidColorBrush x:Key="BackgroundColor" Color="{DynamicResource SBackground}"/>
     <SolidColorBrush x:Key="BorderColor" Color="{DynamicResource SBorder}"/>
-    
+
 </ResourceDictionary>

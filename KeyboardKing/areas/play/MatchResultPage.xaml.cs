@@ -1,4 +1,6 @@
-﻿using KeyboardKing.core;
+﻿using Controller;
+using KeyboardKing.core;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +23,8 @@ namespace KeyboardKing.areas.play
     /// </summary>
     public partial class MatchResultPage : JumpPage
     {
+        private DateTime _tickCheck {get;set;} = DateTime.Now;
+
         /// <summary>
         /// Controller for <see cref="MatchResultPage"/>
         /// </summary>
@@ -32,14 +36,26 @@ namespace KeyboardKing.areas.play
 
         public override void OnLoad()
         {
+            int user_id = ((UList)Session.Get("student")).Get<int>(0);
+            int match_id = MatchController.GetMatchId();
+            DBQueries.UpdateMatchProgress(100, user_id, match_id);
+
+            MusicPlayer.Stop();
+            AudioPlayer.Play(AudioPlayer.Sound.congratulations);
         }
 
         public override void OnShadow()
         {
+            MusicPlayer.PlayNextFrom("menu_music");
         }
 
         public override void OnTick()
         {
+            DateTime now = DateTime.Now;
+            if (_tickCheck.AddSeconds(2) < now)
+            {
+                MatchController.SetWinners();
+            }
         }
     }
 }

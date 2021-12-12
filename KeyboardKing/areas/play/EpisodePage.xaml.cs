@@ -32,8 +32,6 @@ namespace KeyboardKing.areas.play
         /// <param name="w"></param>
         /// 
 
-        public int increment { get; set; }
-        private DispatcherTimer dt = new DispatcherTimer();
         public EpisodePage(MainWindow w) : base(w)
         {
             InitializeComponent();
@@ -41,28 +39,23 @@ namespace KeyboardKing.areas.play
 
         public override void OnLoad()
         {
-            Initialize();
-            MusicPlayer.PlayNextFrom("intense_music");
+            if (!EpisodeController.IsStarted)
+                MusicPlayer.PlayNextFrom("intense_music");
+
             EpisodeController.Start();
+            UpdateTimerView();
             this.UserInput.Focus();
         }
-
         public override void OnShadow()
         {
-            
-        }
 
+        }
         public override void OnTick()
         {
-           
+            UpdateTimerView();
         }
 
-        private void Initialize()
-        {
-            TimerTextBox.Text = "00:00";
-            points.Text = "0p";
-            EpisodeController.Points = 0;
-        }
+        private void UpdateTimerView() => Dispatcher.Invoke(() => TimerTextBox.Text = EpisodeController.GetTimeFormat());
 
         /// <summary>
         /// <para>Event that fires each time when focus of window has been lost.</para>
@@ -104,26 +97,12 @@ namespace KeyboardKing.areas.play
                 e.Handled = true;
         }
 
-        private void TimerTextBox_Loaded(object sender, RoutedEventArgs e)
+        private void ButtonPause(object sender, EventArgs e)
         {
-            increment = 0;
-            dt.Tick -= dtTicker;
-            dt.Interval = TimeSpan.FromSeconds(1);
-            dt.Tick += dtTicker;
-            dt.Start();
-        }
-       
-        private void dtTicker(object sender, EventArgs e)
-        {
-            increment++;
-            TimeSpan result = TimeSpan.FromSeconds(increment);
-            TimerTextBox.Text = result.ToString("mm':'ss");
-        }
+            EpisodeController.Pause();
 
-        private void ButtonExit(object sender, EventArgs e)
-        {
-            MusicPlayer.PlayNextFrom("menu_music");
-            NavigationController.NavigateToPage(Pages.ChaptersPage);
+            //MusicPlayer.PlayNextFrom("menu_music");
+            //NavigationController.NavigateToPage(Pages.ChaptersPage);
         }
     }
 }
