@@ -95,7 +95,6 @@ namespace KeyboardKing.areas.play
                 if (MatchController.CheckCreatorIsAloneInMatch())
                 {
                     _checkIfLeft = true;
-                    MatchController.RemoveUserInMatchProgress();
                     MatchController.DeleteMatch();
                     NavigationController.NavigateToPage(Pages.MatchOverviewPage);
                 }
