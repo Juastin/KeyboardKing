@@ -50,10 +50,49 @@
         <Label Style="{DynamicResource H1}" Content="" Margin="49,51,301,336"/>
         <TextBox x:Name="UserInput" Background="Transparent" Foreground="Transparent" CaretBrush="Transparent" Grid.Column="0" LostKeyboardFocus="UserInput_LostFocus" Text="" TextChanged="UserInput_TextChanged" SelectionBrush="{x:Null}" BorderThickness="0,0,0,0">
         </TextBox>
-        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" TextOptions.TextFormattingMode="Display">
-            <Label x:Name="Word" Content="{Binding Word}" Foreground="{DynamicResource TextColor}" FontSize="50"/>
-            <Label x:Name="WordOverlayWrong" Content="{Binding WordOverlayWrong}" Foreground="Red" FontSize="50"/>
-            <Label x:Name="WordOverlayCorrect" Content="{Binding WordOverlayCorrect}" Foreground="Green" FontSize="50"/>
+        <Grid Margin="100,0" Grid.Row="1" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" TextOptions.TextFormattingMode="Display">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.OpacityMask>
+                <LinearGradientBrush EndPoint="1,0"
+                             StartPoint="0,0">
+                    <GradientStop Color="Transparent"
+                                              Offset="0" />
+                    <GradientStop Color="White" 
+                                              Offset="0.02"/>
+                    <GradientStop Color="White"
+                                              Offset="0.98" />
+                    <GradientStop Color="Transparent" 
+                                              Offset="1"/>
+                </LinearGradientBrush>
+            </Grid.OpacityMask>
+            <Grid>
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="50" x:Name="WordOverlayCorrect" Text="{Binding WordOverlayCorrect}" Foreground="Green"/>
+            </Grid>
+            <Border Grid.Column="1" BorderThickness="3, 0, 0, 0">
+                <Border.BorderBrush>
+                    <DrawingBrush Viewport="0,0,8,22" ViewportUnits="Absolute" TileMode="Tile">
+                        <DrawingBrush.Drawing>
+                            <DrawingGroup>
+                                <GeometryDrawing Brush="{DynamicResource TextColor}">
+                                    <GeometryDrawing.Geometry>
+                                        <GeometryGroup>
+                                            <RectangleGeometry Rect="0,0,50,50" />
+                                            <RectangleGeometry Rect="50,50,0,50" />
+                                        </GeometryGroup>
+                                    </GeometryDrawing.Geometry>
+                                </GeometryDrawing>
+                            </DrawingGroup>
+                        </DrawingBrush.Drawing>
+                    </DrawingBrush>
+                </Border.BorderBrush>
+                <Grid>
+                    <Label FontSize="50" x:Name="WordOverlay" Content="{Binding WordOverlay }" Foreground="{DynamicResource TextColor}"/>
+                    <Label FontSize="50" x:Name="WordOverlayWrong" Content="{Binding WordOverlayWrong}" Foreground="Red"/>
+                </Grid>
+            </Border>
         </Grid>
         <Grid>
             <ProgressBar Background="{DynamicResource Color4}" Template="{DynamicResource ProgressBar}" VerticalAlignment="Bottom" Height="20" Minimum="0" Maximum="{Binding MaxLetters}" Value="{Binding LettersTyped, Mode=OneWay}"/>
