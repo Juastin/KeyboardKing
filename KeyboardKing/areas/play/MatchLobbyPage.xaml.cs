@@ -43,11 +43,12 @@ namespace KeyboardKing.areas.play
 
         public override void OnShadow()
         {
+            
         }
 
         public override void OnTick()
         {
-            if(!_checkIfLeft)
+            if (!_checkIfLeft)
             {
                 UpdateListView();
             }
@@ -63,16 +64,6 @@ namespace KeyboardKing.areas.play
             this.Dispatcher.Invoke(MatchController.StartGame);
         }
 
-        private void SetPlayerReady(object sender, RoutedEventArgs e)
-        {
-            if(ready.Content.ToString() == "Ready?" || ready.Content.ToString() == "No")
-            {
-                ready.Content = "Yes";
-            } else
-            {
-                ready.Content = "No";
-            }
-        }
 
         private void UpdateListView()
         {
