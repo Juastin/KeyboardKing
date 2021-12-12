@@ -143,9 +143,6 @@ namespace Controller
             return _matchInfo;
         }
 
-       
-       
-
         public static bool CheckUserIsCreator()
         {
             UList student = (UList)Session.Get("student");
