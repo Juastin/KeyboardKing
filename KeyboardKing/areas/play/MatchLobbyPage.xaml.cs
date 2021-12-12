@@ -37,8 +37,8 @@ namespace KeyboardKing.areas.play
 
         public override void OnLoad()
         {
-            UpdateListView();
             _checkIfLeft = false;
+            UpdateListView();
             Session.Add("matchId", int.Parse(_matchInfoLoad[0][0]));
         }
 
