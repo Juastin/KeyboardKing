@@ -13,7 +13,7 @@ namespace Controller
         /// <summary>
         /// Database connection.
         /// </summary>
-        private static string _connection { get; set; } = Encryption.Decrypt(ConfigurationManager.AppSettings["connectionString"], "332cc6da-d757-4e80-a726-0bf6b615df09");
+        private static string _connection { get; set; } = ConfigurationManager.AppSettings["connectionString"];
 
         /// <summary>
         /// Used to query the DB.
@@ -99,7 +99,7 @@ namespace Controller
 
         public static SqlConnection OpenConnection(string connectionString)
         {
-            SqlConnection connection = new SqlConnection(connectionString);
+            SqlConnection connection = new SqlConnection(Encryption.Decrypt(connectionString, "332cc6da-d757-4e80-a726-0bf6b615df09"));
             connection.Open();
             return connection;
         }
