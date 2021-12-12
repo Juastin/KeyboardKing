@@ -35,8 +35,10 @@ namespace Controller
         public static int Difficulty { get; set; }
         private static bool _repeatMistake;
         public static string WordOverlayCorrect { get =>CurrentEpisodeStep?.Word.Substring(0, _wordIndex); }
-        public static string WordOverlayWrong { get =>CurrentEpisodeStep?.Word.Substring(0, _wrongIndex); }
+        public static string WordOverlay { get => CurrentEpisodeStep?.Word.Substring(_wordIndex); }
+        public static string WordOverlayWrong { get =>CurrentEpisodeStep?.Word.Substring(_wordIndex, _wrongIndex); }
         public static bool IsStarted { get; private set; }
+      
         public static void Start()
         {
             _stopwatch.Start();
@@ -102,13 +104,14 @@ namespace Controller
             {
                 _wordIndex++;
                 LettersTyped++;
+                _wrongIndex = 0;
                 Points += 10;
                 _repeatMistake = false;
             }
 
             else
             {
-                _wrongIndex = _wordIndex + 1;
+                _wrongIndex = 1;
                 CurrentEpisodeResult.Mistakes++;
                 if (_repeatMistake == false && Points >= Difficulty)
                 {

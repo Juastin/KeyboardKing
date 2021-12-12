@@ -276,7 +276,7 @@ namespace Controller
 
         public static List<List<string>> GetMatchProgress(int matchid)
         {
-            SqlCommand cmd = new SqlCommand("SELECT mp.matchid, u.username, e.name, mp.progress, mp.score, mp.mistakes, mp.lettersperminute, mp.time, m.creatorid, m.episodeid, m.state " +
+            SqlCommand cmd = new SqlCommand("SELECT mp.matchid, u.username, e.name, mp.progress, mp.score, mp.mistakes, mp.lettersperminute, mp.time, m.creatorid, m.episodeid, m.state, mp.userid " +
              "FROM [dbo].[MatchProgress] mp " +
              "LEFT JOIN [dbo].[Match] m ON mp.matchid = m.id " +
              "LEFT JOIN [dbo].[Episode] e ON m.episodeid = e.id " +
@@ -312,6 +312,22 @@ namespace Controller
             SqlParameter matchId = new SqlParameter("@matchid", SqlDbType.Int, 255);
             matchId.Value = matchid;
             cmd.Parameters.Add(matchId);
+            return DBHandler.Query(cmd);
+        }
+
+        public static bool UpdateNewCreatorInMatch(int matchid, int newcreatorid)
+        {
+            SqlCommand cmd = new SqlCommand("UPDATE [dbo].[Match] SET creatorid = @newcreatorid WHERE id = @matchid");
+
+            SqlParameter matchId = new SqlParameter("@matchid", SqlDbType.Int, 255);
+            SqlParameter newcreatorId = new SqlParameter("@newcreatorid", SqlDbType.Int, 0);
+
+            matchId.Value = matchid;
+            newcreatorId.Value = newcreatorid;
+
+            cmd.Parameters.Add(matchId);
+            cmd.Parameters.Add(newcreatorId);
+
             return DBHandler.Query(cmd);
         }
 
