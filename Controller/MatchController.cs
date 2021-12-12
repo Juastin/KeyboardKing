@@ -71,9 +71,8 @@ namespace Controller
             UList student = (UList)Session.Get("student");
 
             int userId = student.Get<int>(0);
-            int matchId = (int)Session.Get("matchId");
-
-            DBQueries.SaveMatchResult(EC.CurrentEpisodeResult, matchId, userId);
+           
+            DBQueries.SaveMatchResult(EC.CurrentEpisodeResult, _currentMatchId, userId);
 
             SetWinners();
         }
