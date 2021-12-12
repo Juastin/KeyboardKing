@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Controller;
 using KeyboardKing.core;
+using Model;
 
 namespace KeyboardKing.areas.info
 {
@@ -22,6 +23,9 @@ namespace KeyboardKing.areas.info
     /// </summary>
     public partial class ConfirmationPage : JumpPage
     {
+        private Pages _targetLocation;
+        private Pages _previousLocation;
+
         public ConfirmationPage(MainWindow w) : base(w)
         {
             InitializeComponent();
@@ -29,10 +33,21 @@ namespace KeyboardKing.areas.info
 
         public override void OnLoad()
         {
+            UList vars = (UList)Session.Get("ConfirmationPageInfo");
+
+            TitleLabel.Text = vars.Get<string>(0);
+            _targetLocation = vars.Get<Pages>(1);
+            _previousLocation = vars.Get<Pages>(2);
         }
 
         public override void OnShadow()
         {
+            Dispatcher.Invoke(() =>
+            {
+                TitleLabel.Text = "";
+                _targetLocation = Pages.Empty;
+                Session.Remove("ConfirmationPageInfo");
+            });
         }
 
         public override void OnTick()
@@ -41,12 +56,12 @@ namespace KeyboardKing.areas.info
 
         private void RedirectApproved(object sender, RoutedEventArgs e)
         {
-            NavigationController.NavigateToPage(TargetLocation);
+            NavigationController.NavigateToPage(_targetLocation);
         }
 
         private void RedirectDeclined(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            NavigationController.NavigateToPage(_previousLocation);
         }
     }
 }
