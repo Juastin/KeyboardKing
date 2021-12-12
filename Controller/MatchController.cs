@@ -166,5 +166,11 @@ namespace Controller
         public static bool CheckCreatorIsAloneInMatch() { return _amountOfPlayers == 1; }
 
         public static int GetMatchId() { return _currentMatchId; }
+
+        public static void SetPlayingState()
+        {
+            DBQueries.SetPlayState(_currentMatchId, 1);
+        }
+
     }
 }

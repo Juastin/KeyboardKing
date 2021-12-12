@@ -39,7 +39,6 @@ namespace KeyboardKing.areas.play
         {
             _checkIfLeft = false;
             UpdateListView();
-            Session.Add("matchId", int.Parse(_matchInfoLoad[0][0]));
         }
 
         public override void OnShadow()
@@ -56,7 +55,7 @@ namespace KeyboardKing.areas.play
 
         private void EpOverview_PlayClick(object sender, RoutedEventArgs e)
         {
-            DBQueries.SetPlayState(int.Parse(_matchInfoLoad[0][0]), 1);
+            MatchController.SetPlayingState();
         }
 
         private void StartGame()
