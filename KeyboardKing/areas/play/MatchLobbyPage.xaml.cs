@@ -24,7 +24,7 @@ namespace KeyboardKing.areas.play
     public partial class MatchLobbyPage : JumpPage
     {
         private List<List<string>> _matchInfoLoad;
-        private bool _checkIfLeft = false;
+        private bool _checkIfLeft;
 
         /// <summary>
         /// Controller for <see cref="MatchLobbyPage"/>
@@ -38,6 +38,7 @@ namespace KeyboardKing.areas.play
         public override void OnLoad()
         {
             UpdateListView();
+            _checkIfLeft = false;
             Session.Add("matchId", int.Parse(_matchInfoLoad[0][0]));
         }
 
@@ -112,13 +113,12 @@ namespace KeyboardKing.areas.play
                     MatchController.UpdateCreatorInMatch();
                     MatchController.RemoveUserInMatchProgress();
                 }
-                NavigationController.NavigateToPage(Pages.MatchOverviewPage);
             }
             else
             {
                 MatchController.RemoveUserInMatchProgress();
-                NavigationController.NavigateToPage(Pages.MatchOverviewPage);
             }
+            NavigationController.NavigateToPage(Pages.MatchOverviewPage);
         }
     }
 }
