@@ -331,5 +331,19 @@ namespace Controller
 
             return DBHandler.SelectQuery(cmd);
         }
+
+        public static List<List<string>> GetAllProgress(int match_id)
+        {
+            SqlCommand cmd = new SqlCommand("SELECT progress FROM [dbo].[MatchProgress] WHERE matchid = @matchid");
+
+            SqlParameter q_match_id = new SqlParameter("@matchid", SqlDbType.Int, 255);
+
+            q_match_id.Value = match_id;
+
+            cmd.Parameters.Add(q_match_id);
+
+            return DBHandler.SelectQuery(cmd);
+        }
+
     }
 }
