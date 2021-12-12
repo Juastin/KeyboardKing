@@ -71,7 +71,7 @@
         </ListView>
         <ScrollBar HorizontalAlignment="Left" Margin="228,229,0,0" VerticalAlignment="Top" Height="80"/>
 
-        <ListBox Background="Transparent" x:Name="OpponentListBox" ItemContainerStyle="{DynamicResource ListBoxItemTemplate}" BorderThickness="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="245,105,0,0">
+        <ListBox x:Name="OpponentListBox" ItemContainerStyle="{DynamicResource ListBoxItemTemplate}" BorderThickness="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="245,105,0,0">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <UniformGrid Columns="2"/>
