@@ -66,6 +66,7 @@ namespace KeyboardKing
                 // info area
                 {Pages.MessagePage, new MessagePage(this)},
                 {Pages.ConfirmationPage, new ConfirmationPage(this)},
+                {Pages.PausePage, new PausePage(this)},
 
                 // login area
                 {Pages.LoginPage, new LoginPage(this)},
