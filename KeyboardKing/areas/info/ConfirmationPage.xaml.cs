@@ -36,8 +36,8 @@ namespace KeyboardKing.areas.info
             UList vars = (UList)Session.Get("ConfirmationPageInfo");
 
             TitleLabel.Text = vars.Get<string>(0);
-            _targetLocation = vars.Get<Pages>(1);
-            _previousLocation = vars.Get<Pages>(2);
+            _previousLocation = vars.Get<Pages>(1);
+            _targetLocation = vars.Get<Pages>(2);
         }
 
         public override void OnShadow()

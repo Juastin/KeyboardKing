@@ -37,5 +37,10 @@ namespace KeyboardKing.areas.info
         {
             NavigationController.NavigateToPage(_targetLocation);
         }
+
+        public void ExitEpisode(object sender, EventArgs e)
+        {
+            EpisodeController.Exit();
+        }
     }
 }

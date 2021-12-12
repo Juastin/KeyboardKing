@@ -43,7 +43,12 @@ namespace Controller
         public static void Pause()
         {
             _stopwatch.Stop();
-            MessageController.Show(Pages.MessagePage, "De episode is gepauzeerd.", Pages.EpisodePage, null);
+            MessageController.ShowPause(Pages.PausePage, "De episode is gepauzeerd.", Pages.EpisodePage);
+        }
+
+        public static void Exit()
+        {
+            MessageController.ShowConfirmation(Pages.ConfirmationPage, "Weet je zeker dat je de episode wilt afsluiten?", Pages.PausePage, Pages.ChaptersPage);
         }
 
         /// <summary>
