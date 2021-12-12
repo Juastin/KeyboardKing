@@ -37,16 +37,18 @@ namespace KeyboardKing.areas.play
 
         public override void OnLoad()
         {
+            _checkIfLeft = false;
             UpdateListView();
         }
 
         public override void OnShadow()
         {
+            
         }
 
         public override void OnTick()
         {
-            if(!_checkIfLeft)
+            if (!_checkIfLeft)
             {
                 UpdateListView();
             }
@@ -54,7 +56,7 @@ namespace KeyboardKing.areas.play
 
         private void EpOverview_PlayClick(object sender, RoutedEventArgs e)
         {
-            DBQueries.SetPlayState(int.Parse(_matchInfoLoad[0][0]), 1);
+            MatchController.SetPlayingState();
         }
 
         private void StartGame()
@@ -62,16 +64,6 @@ namespace KeyboardKing.areas.play
             this.Dispatcher.Invoke(MatchController.StartGame);
         }
 
-        private void SetPlayerReady(object sender, RoutedEventArgs e)
-        {
-            if(ready.Content.ToString() == "Ready?" || ready.Content.ToString() == "No")
-            {
-                ready.Content = "Yes";
-            } else
-            {
-                ready.Content = "No";
-            }
-        }
 
         private void UpdateListView()
         {
@@ -103,8 +95,8 @@ namespace KeyboardKing.areas.play
                 if (MatchController.CheckCreatorIsAloneInMatch())
                 {
                     _checkIfLeft = true;
+                    MatchController.RemoveUserInMatchProgress();
                     MatchController.DeleteMatch();
-                    MessageBox.Show("Match is deleted");
                     NavigationController.NavigateToPage(Pages.MatchOverviewPage);
                 }
                 else { MessageBox.Show("Je kan momenteel niet de match verlaten. Je bent de creator"); }

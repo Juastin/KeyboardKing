@@ -175,5 +175,10 @@ namespace Controller
         }
 
         public static int GetMatchId() { return _currentMatchId; }
+
+        public static void SetPlayingState()
+        {
+            DBQueries.SetPlayState(_currentMatchId, 1);
+        }
     }
 }
