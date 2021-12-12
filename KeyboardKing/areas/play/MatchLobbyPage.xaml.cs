@@ -24,7 +24,7 @@ namespace KeyboardKing.areas.play
     public partial class MatchLobbyPage : JumpPage
     {
         private List<List<string>> _matchInfoLoad;
-        private bool _checkIfLeft = false;
+        private bool _checkIfLeft;
 
         /// <summary>
         /// Controller for <see cref="MatchLobbyPage"/>
@@ -37,8 +37,8 @@ namespace KeyboardKing.areas.play
 
         public override void OnLoad()
         {
+            _checkIfLeft = false;
             UpdateListView();
-            Session.Add("matchId", int.Parse(_matchInfoLoad[0][0]));
         }
 
         public override void OnShadow()
@@ -55,7 +55,7 @@ namespace KeyboardKing.areas.play
 
         private void EpOverview_PlayClick(object sender, RoutedEventArgs e)
         {
-            DBQueries.SetPlayState(int.Parse(_matchInfoLoad[0][0]), 1);
+            MatchController.SetPlayingState();
         }
 
         private void StartGame()
@@ -99,22 +99,25 @@ namespace KeyboardKing.areas.play
 
         private void BExitMatch(object sender, EventArgs e)
         {
+            _checkIfLeft = true;
             if (MatchController.CheckUserIsCreator())
             {
                 if (MatchController.CheckCreatorIsAloneInMatch())
                 {
-                    _checkIfLeft = true;
                     MatchController.DeleteMatch();
-                    MessageBox.Show("Match is deleted");
-                    NavigationController.NavigateToPage(Pages.MatchOverviewPage);
+                    MessageBox.Show("Match is verwijderd");
                 }
-                else { MessageBox.Show("Je kan momenteel niet de match verlaten. Je bent de creator"); }
+                else
+                {
+                    MatchController.UpdateCreatorInMatch();
+                    MatchController.RemoveUserInMatchProgress();
+                }
             }
             else
             {
                 MatchController.RemoveUserInMatchProgress();
-                NavigationController.NavigateToPage(Pages.MatchOverviewPage);
             }
+            NavigationController.NavigateToPage(Pages.MatchOverviewPage);
         }
     }
 }

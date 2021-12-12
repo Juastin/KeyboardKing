@@ -71,9 +71,8 @@ namespace Controller
             UList student = (UList)Session.Get("student");
 
             int userId = student.Get<int>(0);
-            int matchId = (int)Session.Get("matchId");
-
-            DBQueries.SaveMatchResult(EC.CurrentEpisodeResult, matchId, userId);
+           
+            DBQueries.SaveMatchResult(EC.CurrentEpisodeResult, _currentMatchId, userId);
 
             SetWinners();
         }
@@ -127,10 +126,7 @@ namespace Controller
         /// <para>This method will remove a user in MatchProgress to the database</para>
         /// It does this by giving the Match and User id to the method to delete the MatchProgress.
         /// </summary>
-        public static void RemoveUserInMatchProgress()
-        {
-            DBQueries.RemoveUserInMatch(_currentMatchId, (UList)Session.Get("student"));
-        }
+        public static void RemoveUserInMatchProgress() => DBQueries.RemoveUserInMatch(_currentMatchId, (UList)Session.Get("student"));
 
         /// <summary>
         /// <para>This method get current MatchProgressInfo</para>
@@ -144,6 +140,16 @@ namespace Controller
             return _matchInfo;
         }
 
+        /// <summary>
+        /// <para>This method will update in Match a new Userid, who joined the match, as creator</para>
+        /// It does this by giving the Matchid and the id of the user who first joined after the current creator.
+        /// </summary>
+        public static void UpdateCreatorInMatch() => DBQueries.UpdateNewCreatorInMatch(_currentMatchId, int.Parse(_matchInfo[1][11]));
+
+        /// <summary>
+        /// <para>This method will check if the user is the creator</para>
+        /// It does this by checking if the userid is the same as the creatorid
+        /// </summary>
         public static bool CheckUserIsCreator()
         {
             UList student = (UList)Session.Get("student");
@@ -159,5 +165,11 @@ namespace Controller
         public static bool CheckCreatorIsAloneInMatch() { return _amountOfPlayers == 1; }
 
         public static int GetMatchId() { return _currentMatchId; }
+
+        public static void SetPlayingState()
+        {
+            DBQueries.SetPlayState(_currentMatchId, 1);
+        }
+
     }
 }
