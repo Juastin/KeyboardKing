@@ -10,6 +10,7 @@ namespace KeyboardKing.areas.info
     /// </summary>
     public partial class PausePage : JumpPage
     {
+        private Pages _targetLocation;
         public PausePage(MainWindow w) : base(w)
         {
             InitializeComponent();
@@ -17,7 +18,10 @@ namespace KeyboardKing.areas.info
 
         public override void OnLoad()
         {
+            UList vars = (UList)Session.Get("PausePageInfo");
 
+            TitleLabel.Text = vars.Get<string>(0);
+            _targetLocation = vars.Get<Pages>(1);
         }
 
         public override void OnShadow()
@@ -31,7 +35,7 @@ namespace KeyboardKing.areas.info
         }
         public void Redirect(object sender, EventArgs e)
         {
-            NavigationController.NavigateToPage(TargetLocation);
+            NavigationController.NavigateToPage(_targetLocation);
         }
     }
 }
