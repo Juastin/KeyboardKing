@@ -98,6 +98,7 @@ namespace KeyboardKing.areas.play
                 {
                     MatchController.DeleteMatch();
                     MessageController.Show(Pages.MessagePage, "De match is verwijderd", Pages.MatchOverviewPage, -1);
+                    return;
                 }
                 else
                 {
