@@ -72,7 +72,8 @@ namespace KeyboardKing.areas.play
             int counter = 0;
             while (counter < _matchInfoLoad.Count)
             {
-                items.Add(new MatchLobbyData() { Username = _matchInfoLoad[counter][1] });
+                string symbol = MatchController.CheckUserIsCreator() ? "\u2654" : " ";
+                items.Add(new MatchLobbyData() { Username = $"{symbol} {_matchInfoLoad[counter][1]}" });
                 counter++;
             }
 
