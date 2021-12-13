@@ -72,8 +72,8 @@ namespace KeyboardKing.areas.play
             int counter = 0;
             while (counter < _matchInfoLoad.Count)
             {
-                string symbol = MatchController.CheckUserIsCreator(_matchInfoLoad[counter][11]) ? "\u2654" : " ";
-                items.Add(new MatchLobbyData() { Username = $"{symbol} {_matchInfoLoad[counter][1]}" });
+                string symbol = MatchController.CheckUserIsCreator(_matchInfoLoad[counter][11]) ? "\u2654" : string.Empty;
+                items.Add(new MatchLobbyData() { Logo = symbol, Username = $"{_matchInfoLoad[counter][1]}" });;
                 counter++;
             }
 
@@ -97,7 +97,7 @@ namespace KeyboardKing.areas.play
                 if (MatchController.CheckCreatorIsAloneInMatch())
                 {
                     MatchController.DeleteMatch();
-                    MessageBox.Show("Match is verwijderd");
+                    MessageController.Show(Pages.MessagePage, "De match is verwijderd", Pages.MatchOverviewPage, null);
                 }
                 else
                 {
