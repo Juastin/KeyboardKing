@@ -19,7 +19,7 @@
                 <TextBlock TextWrapping="WrapWithOverflow" x:Name="TitleLabel" Margin="50,29,50,71" Foreground="{DynamicResource TextColor}" FontSize="30"/>
             </Grid>
             <Grid Margin="60,10,60,0">
-                <Button x:Name="ExitButton" Style="{DynamicResource InfoButton1}" Width="152" Height="53" Click="ExitEpisode" Content="Exit" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,357,0,0" FontSize="20"/>
+                <Button x:Name="ExitButton" Style="{DynamicResource InfoButton1}" Width="152" Height="53" Click="ExitEpisode" Content="Afsluiten" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,357,0,0" FontSize="20"/>
                 <Button x:Name="RedirectButton" Style="{DynamicResource InfoButton1}" Width="152" Height="53" Click="Redirect" Content="Verder" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,357,0,0" FontSize="20"/>
             </Grid>
         </Grid>
