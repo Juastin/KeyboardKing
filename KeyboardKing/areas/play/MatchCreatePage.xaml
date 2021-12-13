@@ -8,30 +8,28 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="MatchCreatePage">
-    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Border Style="{DynamicResource GridBorder}"
+    <Border Style="{DynamicResource GridBorder}"
             Padding="30" 
             HorizontalAlignment="Center" 
             VerticalAlignment="Center" 
             Height="400" Width="750" >
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid Grid.Row="0" VerticalAlignment="Center">
-                    <Label Style="{DynamicResource H1}" Content="Aanmaken match" HorizontalAlignment="Left"/>
-                    <Components:NavigationButton Style="{DynamicResource Button1}" Content="Ga terug" ToPage="MatchOverviewPage" Height="45" Width="111" FontSize="18" HorizontalAlignment="Right"/>
-                </Grid>
-                <Grid Grid.Row="1" VerticalAlignment="Center">
-                    <Label Style="{DynamicResource H2}" Content="Selecteer een episode" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top" Width="254" Height="52"/>
-                    <ComboBox ScrollViewer.VerticalScrollBarVisibility="Hidden" Name="CBEpisode" HorizontalAlignment="Center" ItemContainerStyle="{DynamicResource ComboBoxItem}" Template="{DynamicResource ComboBox}" VerticalAlignment="Top" Width="336" Height="42" FontSize="18" Margin="0,90,0,0"/>
-                </Grid>
-                <Grid Grid.Row="2" VerticalAlignment="Bottom">
-                    <Button Style="{DynamicResource Button1}" Content="Maak een match" HorizontalAlignment="Center" Click="BCreateMatch" Margin="0,0,0,0" Height="53" Width="200" FontSize="20" VerticalAlignment="Top"/>
-                </Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" VerticalAlignment="Center">
+                <Label Style="{DynamicResource H1}" Content="Aanmaken match" HorizontalAlignment="Left"/>
+                <Components:NavigationButton Style="{DynamicResource Button1}" Content="Ga terug" ToPage="MatchOverviewPage" Height="45" Width="111" FontSize="18" HorizontalAlignment="Right"/>
             </Grid>
-        </Border>
-    </Grid>
+            <Grid Grid.Row="1" VerticalAlignment="Center">
+                <Label Style="{DynamicResource H2}" Content="Selecteer een episode" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top" Width="254" Height="52"/>
+                <ComboBox ScrollViewer.VerticalScrollBarVisibility="Hidden" Name="CBEpisode" HorizontalAlignment="Center" ItemContainerStyle="{DynamicResource ComboBoxItem}" Template="{DynamicResource ComboBox}" VerticalAlignment="Top" Width="336" Height="42" FontSize="18" Margin="0,90,0,0"/>
+            </Grid>
+            <Grid Grid.Row="2" VerticalAlignment="Bottom">
+                <Button Style="{DynamicResource Button1}" Content="Maak een match" HorizontalAlignment="Center" Click="BCreateMatch" Margin="0,0,0,0" Height="53" Width="200" FontSize="20" VerticalAlignment="Top"/>
+            </Grid>
+        </Grid>
+    </Border>
 </local:JumpPage>
