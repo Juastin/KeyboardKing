@@ -13,13 +13,11 @@
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
         <Border Style="{DynamicResource GridBorder}" Margin="14,0,0,0" HorizontalAlignment="Left" Width="675">
         </Border>
-        <Label Style="{DynamicResource H1}" Content="MatchLobbyPage" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top"/>
+        <Label Style="{DynamicResource H1}" Content="Lobby" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top"/>
         <Label Style="{DynamicResource H2}" Name="lEpisodeMatch" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Top" Width="306" Height="50" Margin="0,95,0,0"/>
 
-        <Button Style="{DynamicResource Button1}" Content="Leave Match" Click="BExitMatch" Height="50" Margin="519,59,48,291" />
-
-        <Button Style="{DynamicResource Button1}" x:Name="startbtn" Content="Start Match" Click="EpOverview_PlayClick"  Height="50" Margin="287,324,279,26"/>
-
+        <Button Style="{DynamicResource Button1}" Content="Verlaat match" Click="BExitMatch" Height="50" Margin="519,59,48,291" />
+        <Button Style="{DynamicResource Button1}" x:Name="startbtn" Content="Start match" Click="EpOverview_PlayClick"  Height="50" Margin="287,324,279,26"/>
 
         <ListView Name="LvMatch" Width="471" Margin="0,145,0,103" HorizontalAlignment="Center" Style="{DynamicResource ListViewTemplate}" ItemContainerStyle="{DynamicResource ListViewItemTemplate}">
             <ListView.View>
