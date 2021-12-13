@@ -66,8 +66,7 @@
 
     <!-- CONTENT -->
     <Grid Margin="25">
-        <Border Style="{DynamicResource GridBorder}"
-            Padding="30">
+        <Border Style="{DynamicResource GridBorder}" Padding="30">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
