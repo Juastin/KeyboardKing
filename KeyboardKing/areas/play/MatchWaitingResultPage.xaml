@@ -15,7 +15,7 @@
             VerticalAlignment="Center" 
             Height="400" Width="750" >
         <Grid>
-            <Label Style="{DynamicResource H1}" Content="Waiting on other players..." HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Style="{DynamicResource H1}" Content="Wachten op andere spelers..." HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
     </Border>
 </local:JumpPage>
