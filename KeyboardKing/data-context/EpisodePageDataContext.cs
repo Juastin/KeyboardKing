@@ -18,6 +18,7 @@ namespace Model
         public string WordOverlayCorrect { get => EpisodeController.WordOverlayCorrect; }
         public int LettersTyped { get => EpisodeController.LettersTyped; }
         public int MaxLetters { get => EpisodeController.CurrentEpisodeResult?.MaxScore ?? 0; }
+
         public EpisodePageDataContext()
         {
             EpisodeController.WordChanged += OnWordChanged;
