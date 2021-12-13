@@ -32,7 +32,7 @@
                 <Button Style="{DynamicResource Button1}" Content="Pauze" VerticalAlignment="Top" HorizontalAlignment="Right" Click="ButtonPause" FontSize="26" Margin="0,11,10,0"  Height="54" Width="110"/>
             </Grid>
             <Grid Grid.Row="1">
-                <Border CornerRadius="80" Visibility="Hidden" Background="#ffffff" BorderBrush="#2a3b57" 
+                <Border Visibility="Hidden" CornerRadius="80" Background="#ffffff" BorderBrush="#2a3b57" 
                 BorderThickness="5" Height="91" Margin="10"
                 Name="Border1" VerticalAlignment="Top" HorizontalAlignment="Center" Width="136">
                     <TextBlock x:Name="points" Background="Transparent" HorizontalAlignment="Center"
@@ -84,7 +84,13 @@
                         <Label FontSize="50" x:Name="WordOverlayWrong" Content="{Binding WordOverlayWrong}" Foreground="Red"/>
                     </Grid>
                 </Border>
-            </Grid>  
+            </Grid>
+            <Grid Grid.Row="3">
+                <ProgressBar Background="{DynamicResource Color4}" Template="{DynamicResource ProgressBar}" 
+                         VerticalAlignment="Bottom" Height="20" Minimum="0" 
+                         Maximum="{Binding MaxLetters}" 
+                         Value="{Binding LettersTyped, Mode=OneWay}"/>
+            </Grid>         
         </Grid>
     </Grid>
 </local:JumpPage>
