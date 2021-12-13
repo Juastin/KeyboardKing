@@ -4,7 +4,7 @@ namespace Controller
 {
     public static class MessageController
     {
-        public static void Show(Pages infoPage, string message, Pages redirectPage, int? time)
+        public static void Show(Pages infoPage, string message, Pages redirectPage, int time)
         {
             Session.Add("MessagePageInfo", new UList(new object[]{message, redirectPage, time}));
             NavigationController.NavigateToPage(infoPage);
