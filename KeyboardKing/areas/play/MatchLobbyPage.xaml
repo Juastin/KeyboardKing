@@ -26,18 +26,12 @@
                 <Button Style="{DynamicResource Button1}" Content="Verlaat match" HorizontalAlignment="Right" Click="BExitMatch" Height="50" Width="150"/>
             </Grid>
             <Grid Grid.Row="1" VerticalAlignment="Center">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="140*"/>
-                    <ColumnDefinition Width="20*"/>
-                    <ColumnDefinition Width="257*"/>
-                    <ColumnDefinition Width="273*"/>
-                </Grid.ColumnDefinitions>
-                <Label Style="{DynamicResource H2}" Name="lEpisodeMatch" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalAlignment="Top" Width="306" Height="50" Margin="32,-95,0,0" Grid.ColumnSpan="2" Grid.Column="2"/>
-                <ListView Name="LvMatch" Width="470" HorizontalAlignment="Left" Style="{DynamicResource ListViewTemplate}" ItemContainerStyle="{DynamicResource ListViewItemTemplate}" Margin="110,-40,0,30" Grid.ColumnSpan="4">
+                <Label Style="{DynamicResource H2}" Name="lEpisodeMatch" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Top" Width="306" Height="50" Margin="0,-95,0,0"/>
+                <ListView Name="LvMatch" Width="470" HorizontalAlignment="Left" Style="{DynamicResource ListViewTemplate}" ItemContainerStyle="{DynamicResource ListViewItemTemplate}" Margin="110,-40,0,30">
                     <ListView.View>
                         <GridView ColumnHeaderContainerStyle="{DynamicResource ListViewHeader}">
                             <GridViewColumn Width="25" DisplayMemberBinding="{Binding Logo}"/>
-                            <GridViewColumn Header="Name" Width="450" DisplayMemberBinding="{Binding Username}"/>
+                            <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Username}"/>
                         </GridView>
                     </ListView.View>
                 </ListView>
