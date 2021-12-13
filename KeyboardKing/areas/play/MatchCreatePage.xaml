@@ -17,6 +17,6 @@
         <ComboBox ScrollViewer.VerticalScrollBarVisibility="Hidden" Name="CBEpisode" HorizontalAlignment="Center" ItemContainerStyle="{DynamicResource ComboBoxItem}" Template="{DynamicResource ComboBox}" VerticalAlignment="Top" Width="336" Height="42" FontSize="18" Margin="0,200,0,0"/>
 
         <Button Style="{DynamicResource Button1}" Content="Maak een match" HorizontalAlignment="Center" Click="BCreateMatch" Margin="0,258,0,0" Height="53" Width="200" FontSize="20" VerticalAlignment="Top"/>
-        <Components:NavigationButton Style="{DynamicResource Button1}" Content="Ga terug" ToPage="MatchOverviewPage" Margin="549,65,0,224" Height="40" Width="111" FontSize="18" HorizontalAlignment="Left" Click="NavigationButton_Click"/>
+        <Components:NavigationButton Style="{DynamicResource Button1}" Content="Ga terug" ToPage="MatchOverviewPage" Margin="549,65,0,224" Height="40" Width="111" FontSize="18" HorizontalAlignment="Left"/>
     </Grid>
 </local:JumpPage>
