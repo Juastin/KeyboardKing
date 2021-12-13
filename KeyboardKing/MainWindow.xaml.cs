@@ -22,6 +22,7 @@ using System.Windows.Shapes;
 using Model;
 using Model.event_args;
 using KeyboardKing.areas.info;
+using System.ComponentModel;
 
 namespace KeyboardKing
 {
@@ -87,6 +88,7 @@ namespace KeyboardKing
                 {Pages.MatchLobbyPage, new MatchLobbyPage(this)},
                 {Pages.MatchPlayingPage, new MatchPlayingPage(this)},
                 {Pages.MatchResultPage, new MatchResultPage(this)},
+                { Pages.MatchWaitingResultPage, new MatchWaitingResultPage(this) },
             };
 
             _themes = new()
@@ -97,6 +99,7 @@ namespace KeyboardKing
                 {"Chinese", new Theme("Chinese Theme", "resources/themes/ChineseTheme.xaml")},     
                 {"Paint", new Theme("Paint Theme", "resources/themes/PaintTheme.xaml")},
                 {"Obsidian", new Theme("Obsidian Theme", "resources/themes/ObsidianTheme.xaml")},
+                {"Christmas", new Theme("Christmas Theme", "resources/themes/ChristmasTheme.xaml")},
             };
 
             CBTheme.ItemsSource = _themes;
@@ -108,7 +111,7 @@ namespace KeyboardKing
             NavigationController.Navigate += OnNavigate;
             NavigationController.NavigateToPage(Pages.LoginPage);
         }
-
+   
         public void OnNavigate(NavigateEventArgs e)
         {
 
@@ -210,5 +213,22 @@ namespace KeyboardKing
                 ChangeTheme(theme);
             }
         }
+
+        //Closes open matches when closing application
+        private void CheckBefore_Closing(object sender, CancelEventArgs e)
+        {
+            if (NavigationController.CurrentPage == Pages.MatchLobbyPage || NavigationController.CurrentPage == Pages.MatchPlayingPage)
+            {
+                MatchController.RemoveUserInMatchProgress();
+
+                if (!MatchController.GetMatchProgressInfo().Any())
+                {
+                    MatchController.DeleteMatch();
+                }
+
+            }
+        }
+
+
     }
 }

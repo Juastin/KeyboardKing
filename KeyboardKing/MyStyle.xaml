@@ -28,14 +28,6 @@
     <SolidColorBrush x:Key="Info" Color="#FF0051FF"/>
     <SolidColorBrush x:Key="InfoLight" Color="#FF3374FF"/>
 
-    <!-- Text template -->
-    <Style x:Key="Text" TargetType="{x:Type TextBox}">
-        <Setter Property="TextWrapping" Value="Wrap"/>
-        <Setter Property="FontSize" Value="12"/>
-        <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
-    </Style>
-
     <!-- Error TextBox template -->
     <Style x:Key="ErrorTextBox" TargetType="{x:Type TextBox}">
         <Setter Property="FontSize" Value="20"/>

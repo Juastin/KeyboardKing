@@ -13,45 +13,41 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace KeyboardKing.areas.play
 {
     /// <summary>
-    /// Interaction logic for MatchResultPage.xaml
+    /// Interaction logic for MatchWaitingResultPage.xaml
     /// </summary>
-    public partial class MatchResultPage : JumpPage
+    public partial class MatchWaitingResultPage : JumpPage
     {
-        private DateTime _tickCheck {get;set;} = DateTime.Now;
-
-        /// <summary>
-        /// Controller for <see cref="MatchResultPage"/>
-        /// </summary>
-        /// <param name="w"></param>
-        public MatchResultPage(MainWindow w) : base(w)
+        public MatchWaitingResultPage(MainWindow w) : base(w)
         {
             InitializeComponent();
         }
 
         public override void OnLoad()
         {
-            MusicPlayer.Stop();
-            AudioPlayer.Play(AudioPlayer.Sound.congratulations);
+            int user_id = ((UList)Session.Get("student")).Get<int>(0);
+            int match_id = MatchController.GetMatchId();
+            DBQueries.UpdateMatchProgress(100, user_id, match_id);
         }
 
         public override void OnShadow()
         {
-            MusicPlayer.PlayNextFrom("menu_music");
+
         }
 
         public override void OnTick()
         {
-            DateTime now = DateTime.Now;
-            if (_tickCheck.AddSeconds(2) < now)
+            Dispatcher.Invoke(() =>
             {
-                MatchController.SetWinners();
+                if (MatchController.CheckIfEverybodyDone())
+            {
+                NavigationController.NavigateToPage(Pages.MatchResultPage);
             }
+            });
         }
     }
 }

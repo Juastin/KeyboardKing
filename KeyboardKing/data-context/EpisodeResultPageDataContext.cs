@@ -12,13 +12,14 @@ namespace Model
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public string Score { get => $"{EpisodeController.CurrentEpisodeResult?.Score ?? 0}%"; }
+        public string Score { get => $"{EpisodeController.CurrentEpisodeResult?.Score ?? 0}p"; }
         public int Mistakes { get => EpisodeController.CurrentEpisodeResult?.Mistakes ?? 0; }
+        public string Accuracy { get => $"{EpisodeController.CurrentEpisodeResult?.Accuracy ?? 0}%"; }
         public string Time { get => FormatTimespan(); }
         public double LettersPerMinute { get => EpisodeController.CurrentEpisodeResult?.LettersPerMinute ?? 0; }
         public EpisodeResultPageDataContext()
         {
-            EpisodeController.EpisodeFinished += OnEpisodeFinished;
+            EpisodeController.EpisodeResultUpdated += OnEpisodeFinished;
         }
 
         private void OnEpisodeFinished(object sender, EventArgs e)
