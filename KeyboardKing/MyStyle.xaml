@@ -270,6 +270,7 @@
         </Setter>
     </Style>
 
+
     <Style x:Key="InfoButton1" TargetType="Button">
         <Setter Property="Template">
             <Setter.Value>
@@ -296,9 +297,67 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style> 
+    </Style>
 
-     <!-- GridBorder template -->
+    <Style x:Key="ApproveButton" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid x:Name="grid" Background="{x:Null}">
+                        <Border x:Name="border" CornerRadius="5" Background="{DynamicResource Succes}">
+                            <Label FontWeight="Bold" Content="{TemplateBinding Content}" Foreground="#fff" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                            <Border.Effect>
+                                <DropShadowEffect ShadowDepth="0" BlurRadius="10" Color="#FFB0B0B0"/>
+                            </Border.Effect>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource Succes}"/>
+                            <Setter Property="Opacity" TargetName="border" Value="0.7"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource Succes}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" TargetName="grid" Value="0.50"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="DeclineButton" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid x:Name="grid" Background="{x:Null}">
+                        <Border x:Name="border" CornerRadius="5" Background="{DynamicResource Failed}">
+                            <Label FontWeight="Bold" Content="{TemplateBinding Content}" Foreground="#fff" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                            <Border.Effect>
+                                <DropShadowEffect ShadowDepth="0" BlurRadius="10" Color="#FFB0B0B0"/>
+                            </Border.Effect>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource Failed}"/>
+                            <Setter Property="Opacity" TargetName="border" Value="0.7"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource Failed}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" TargetName="grid" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- GridBorder template -->
     <Style x:Key="GridBorder" TargetType="{x:Type Border}">
         <Setter Property="Background" Value="{DynamicResource BackgroundColor}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Color4}" />

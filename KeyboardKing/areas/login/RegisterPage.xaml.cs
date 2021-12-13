@@ -17,6 +17,7 @@ using Controller;
 using Model;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
+using Cryptography;
 
 namespace KeyboardKing.areas.login
 {
@@ -63,8 +64,8 @@ namespace KeyboardKing.areas.login
                         {
                             if (username.Length <= 20)
                             {
-                                string salt = Encryption.CreateSalt();
-                                string passHashed = Encryption.HashPassword(password, salt); //Hashing the password
+                                string salt = Argon2.CreateSalt();
+                                string passHashed = Argon2.HashPassword(password, salt); //Hashing the password
                                 bool Adduser = DBQueries.AddUser(username, email, passHashed, salt); //Adding new user to database
                                 if (Adduser)
                                     NavigationController.NavigateToPage(Pages.LoginPage); //Returning to loginpage

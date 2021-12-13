@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Controller;
 using Model;
+using Cryptography;
 
 namespace KeyboardKing.areas.login
 {
@@ -56,7 +57,7 @@ namespace KeyboardKing.areas.login
                 List<List<string>> results = DBQueries.GetUserInfo(email);
                 if (results.Any())
                 {
-                    bool passwordResult = Encryption.VerifyHash(boxPassword.Password, results[0][4], results[0][3]);
+                    bool passwordResult = Argon2.VerifyHash(boxPassword.Password, results[0][4], results[0][3]);
                     if (passwordResult)
                     {
                         UList student = new UList(new object[]{results[0][0], results[0][1], results[0][2], results[0][5]});
