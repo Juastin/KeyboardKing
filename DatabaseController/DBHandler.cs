@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.Configuration;
+using Cryptography;
 
 namespace Controller
 {
@@ -99,7 +100,7 @@ namespace Controller
 
         public static SqlConnection OpenConnection(string connectionString)
         {
-            SqlConnection connection = new SqlConnection(Encryption.Decrypt(connectionString, "332cc6da-d757-4e80-a726-0bf6b615df09"));
+            SqlConnection connection = new SqlConnection(TripleDES.Decrypt(connectionString, "332cc6da-d757-4e80-a726-0bf6b615df09"));
             connection.Open();
             return connection;
         }
