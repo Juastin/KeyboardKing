@@ -26,7 +26,7 @@ namespace KeyboardKing.areas.info
 
             TitleLabel.Text = vars.Get<string>(0);
             TargetLocation = vars.Get<Pages>(1);
-            AutoRedirectTime = vars.Get<int>(2) + 1;
+            AutoRedirectTime = vars.Get<int>(2);
 
             UpdateButtonText();
         }
@@ -62,7 +62,7 @@ namespace KeyboardKing.areas.info
         {
             Dispatcher.Invoke(() =>
             {
-                RedirectButton.Content = AutoRedirectTime<30 ? $"Oke ({AutoRedirectTime-1})" : "Oke";
+                RedirectButton.Content = (AutoRedirectTime<30&&AutoRedirectTime>-1) ? $"Oke ({AutoRedirectTime-1})" : "Oke";
             });
         }
 
