@@ -10,6 +10,8 @@ namespace Model
     {
         Empty,
         MessagePage,
+        ConfirmationPage,
+        PausePage,
         LoginPage,
         RegisterPage,
         RegisterSkillPage,
