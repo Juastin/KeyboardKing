@@ -97,7 +97,7 @@ namespace KeyboardKing.areas.play
                 if (MatchController.CheckCreatorIsAloneInMatch())
                 {
                     MatchController.DeleteMatch();
-                    MessageController.Show(Pages.MessagePage, "De match is verwijderd", Pages.MatchOverviewPage, null);
+                    MessageController.Show(Pages.MessagePage, "De match is verwijderd", Pages.MatchOverviewPage, -1);
                 }
                 else
                 {
