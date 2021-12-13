@@ -155,6 +155,11 @@ namespace Controller
             return student.Get<string>(0).Equals(_creatorId, StringComparison.Ordinal);
         }
 
+        public static bool CheckUserIsCreator(string userId)
+        {
+            return _creatorId.Equals(userId, StringComparison.Ordinal);
+        }
+
         public static void DeleteMatch()
         {
             DBQueries.RemoveUserInMatch(_currentMatchId, (UList)Session.Get("student"));
