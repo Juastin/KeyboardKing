@@ -60,7 +60,7 @@
             <TextBox x:Name="TimerTextBox" Style="{DynamicResource TextBox2}" VerticalAlignment="Top" Background="Transparent"  Text="00:00" Height="53"  Margin="10,11,133,0"/>
             <Button Style="{DynamicResource Button1}" Content="Exit" VerticalAlignment="Top" HorizontalAlignment="Right" Click="ButtonExit" FontSize="26" Margin="0,11,10,0"  Height="54" Width="110"/>
         </Grid>
-        <TextBlock Style="{DynamicResource TextBlock}" Background="Transparent" x:Name="points" HorizontalAlignment="Center"
+        <TextBlock Visibility="Hidden" Style="{DynamicResource TextBlock}" Background="Transparent" x:Name="points" HorizontalAlignment="Center"
                     VerticalAlignment="Top" Height="40" Width="116"
                     TextWrapping="Wrap" Text="0p" TextAlignment="Center" Margin="0,16,0,0">
         </TextBlock>
