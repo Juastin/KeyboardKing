@@ -44,12 +44,15 @@ namespace KeyboardKing.areas.play
 
             while (counter < episodes.Count)
             {
-                listData.Add(new EpisodeData { EpisodeId = int.Parse(episodes[counter][3]), EpisodeName = episodes[counter][2] });
+                listData.Add(new EpisodeData { EpisodeId = int.Parse(episodes[counter][3]), EpisodeName = episodes[counter][2], ChapterName = episodes[counter][2] });
                 counter++;
             }
-            CBEpisode.ItemsSource = listData;
-            CBEpisode.DisplayMemberPath = "EpisodeName";
-            CBEpisode.SelectedValuePath = "EpisodeId";
+            ListCollectionView lcv = new ListCollectionView(listData);
+            lcv.GroupDescriptions.Add(new PropertyGroupDescription("ChapterName"));
+
+            this.CBEpisode.ItemsSource = lcv;
+            /*            CBEpisode.DisplayMemberPath = "EpisodeName";
+            CBEpisode.SelectedValuePath = "EpisodeId";*/
         }
 
         public override void OnShadow()

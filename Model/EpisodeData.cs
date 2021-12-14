@@ -10,5 +10,6 @@ namespace Model
     {
         public int EpisodeId { get; set; }
         public string EpisodeName { get; set; }
+        public string ChapterName { get; set; }
     }
 }
