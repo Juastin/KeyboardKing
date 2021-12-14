@@ -167,7 +167,7 @@ namespace Controller
         public static List<List<string>> GetAllActiveMatches()
         {
             MySqlCommand cmd = new MySqlCommand("SELECT COUNT(mp.id) playercount, u.username as host, m.id, e.name " +
-                "FROM Match m " +
+                "FROM MatchLobby m " +
                 "LEFT JOIN MatchProgress mp ON m.id = mp.matchid " +
                 "LEFT JOIN User u ON m.creatorid = u.id " +
                 "LEFT JOIN Episode e ON m.episodeid = e.id " +
@@ -179,7 +179,7 @@ namespace Controller
         public static List<List<string>> GetAllUsersInMatch()
         {
             MySqlCommand cmd = new MySqlCommand("SELECT userid " +
-                                            "FROM Match m " +
+                                            "FROM MatchLobby m " +
                                             "RIGHT JOIN MatchProgress mp ON m.id = mp.matchid " +
                                             "WHERE m.state != 2 ");
             return DBHandler.SelectQuery(cmd);
@@ -187,7 +187,7 @@ namespace Controller
 
         public static bool SetPlayState(int matchid, int state)
         {
-            MySqlCommand cmd = new MySqlCommand("UPDATE Match set state = @state WHERE id = @matchid ");
+            MySqlCommand cmd = new MySqlCommand("UPDATE MatchLobby set state = @state WHERE id = @matchid ");
 
             MySqlParameter matchId = new MySqlParameter("@matchid", MySqlDbType.Int32, 0);
             MySqlParameter State = new MySqlParameter("@state", MySqlDbType.Int32, 0);
@@ -238,7 +238,7 @@ namespace Controller
 
         public static int AddMatch(int episodeid, UList user)
         {
-            MySqlCommand cmd = new MySqlCommand("INSERT INTO Match (episodeid, creatorid) output INSERTED.id VALUES(@episodeid, @creatorid)");
+            MySqlCommand cmd = new MySqlCommand("INSERT INTO MatchLobby (episodeid, creatorid) output INSERTED.id VALUES(@episodeid, @creatorid)");
 
             MySqlParameter episodeId = new MySqlParameter("@episodeid", MySqlDbType.Int32, 255);
             MySqlParameter creatorId = new MySqlParameter("@creatorid", MySqlDbType.Int32, 0);
@@ -273,7 +273,7 @@ namespace Controller
         {
             MySqlCommand cmd = new MySqlCommand("SELECT mp.matchid, u.username, e.name, mp.progress, mp.score, mp.mistakes, mp.lettersperminute, mp.time, m.creatorid, m.episodeid, m.state, mp.userid " +
              "FROM MatchProgress mp " +
-             "LEFT JOIN Match m ON mp.matchid = m.id " +
+             "LEFT JOIN MatchLobby m ON mp.matchid = m.id " +
              "LEFT JOIN Episode e ON m.episodeid = e.id " +
              "LEFT JOIN User u ON mp.userid = u.id " +
              "WHERE mp.matchid = @matchid");
@@ -302,7 +302,7 @@ namespace Controller
 
         public static bool DeleteMatch(int matchid)
         {
-            MySqlCommand cmd = new MySqlCommand("DELETE FROM Match WHERE id = @matchid;");
+            MySqlCommand cmd = new MySqlCommand("DELETE FROM MatchLobby WHERE id = @matchid;");
 
             MySqlParameter matchId = new MySqlParameter("@matchid", MySqlDbType.Int32, 255);
             matchId.Value = matchid;
@@ -312,7 +312,7 @@ namespace Controller
 
         public static bool UpdateNewCreatorInMatch(int matchid, int newcreatorid)
         {
-            MySqlCommand cmd = new MySqlCommand("UPDATE Match SET creatorid = @newcreatorid WHERE id = @matchid");
+            MySqlCommand cmd = new MySqlCommand("UPDATE MatchLobby SET creatorid = @newcreatorid WHERE id = @matchid");
 
             MySqlParameter matchId = new MySqlParameter("@matchid", MySqlDbType.Int32, 255);
             MySqlParameter newcreatorId = new MySqlParameter("@newcreatorid", MySqlDbType.Int32, 0);
