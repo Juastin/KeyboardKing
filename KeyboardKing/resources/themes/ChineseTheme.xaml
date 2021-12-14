@@ -3,7 +3,7 @@
     
     <!-- IMAGES -->
     <BitmapImage x:Key="Wallpaper" UriSource="/resources/images/red_chinese_background.png"/>
-    <BitmapImage x:Key="MessageWallpaper" UriSource="/resources/images/red_chinese_background.png"/>
+    <BitmapImage x:Key="MessageWallpaper" UriSource="/resources/images/blur_red_chinese_background.png"/>
 
     <!-- COLOR SCHEMES -->
     <!-- Source color: https://www.schemecolor.com/chinese-red.php -->
