@@ -22,9 +22,9 @@ namespace Model
         public string Winner2 { get => MatchController.Winner2; }
         public string Winner3 { get => MatchController.Winner3; }
 
-        public string Score1 { get => MatchController.Score1; }
-        public string Score2 { get => MatchController.Score2; }
-        public string Score3 { get => MatchController.Score3; }
+        public string Score1 { get => MatchController.Score1 == 0 ? "" : MatchController.Score1.ToString(); }
+        public string Score2 { get => MatchController.Score2 == 0 ? "" : MatchController.Score2.ToString(); }
+        public string Score3 { get => MatchController.Score3 == 0 ? "" : MatchController.Score3.ToString(); }
         public MatchResultPageDataContext()
         {
             EpisodeController.EpisodeFinished += OnRefresh;

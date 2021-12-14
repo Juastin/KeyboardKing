@@ -34,12 +34,18 @@ namespace Model
                 LPM = int.Parse(p[6]),
                 Time = TimeSpan.FromTicks(long.Parse(p[7])),
                 HostId = int.Parse(p[8]),
-                MatchState = (MatchState)Enum.Parse(typeof(MatchState), p[9]),
-                UserId = int.Parse(p[10])
+                EpisodeId = int.Parse(p[9]),
+                MatchState = (MatchState)Enum.Parse(typeof(MatchState), p[10]),
+                UserId = int.Parse(p[11])
             }).ToList();
         }
 
-        public static List<MatchProgress> ParseOpponentProgress(List<List<string>> input)
+        /// <summary>
+        /// Only returns a list of <see cref="MatchProgress"/> with <see cref="MatchProgress.Username"/> and <see cref="MatchProgress.Progress"/>
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static List<MatchProgress> ParseSimpleProgress(List<List<string>> input)
         {
             return input.Select(p => new MatchProgress() { Username = p[0], Progress = int.Parse(p[1]) }).ToList();
         }

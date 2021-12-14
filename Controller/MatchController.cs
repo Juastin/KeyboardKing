@@ -11,11 +11,9 @@ namespace Controller
     public static class MatchController
     {
         private static int _currentMatchId;
-        private static string _creatorId;
+        private static int _creatorId;
         private static int _amountOfPlayers;
-        private static List<List<string>> _matchInfo;
-        private static List<string> _winners;
-        private static List<string> _scores;
+        private static List<MatchProgress> _matchInfo;
 
         public static List<MatchProgress> OpponentData { get; private set; } = new List<MatchProgress>();
 
@@ -25,15 +23,15 @@ namespace Controller
         public static string Winner2 { get; private set; }
         public static string Winner3 { get; private set; }
 
-        public static string Score1 { get; private set; }
-        public static string Score2 { get; private set; }
-        public static string Score3 { get; private set; }
+        public static int Score1 { get; private set; }
+        public static int Score2 { get; private set; }
+        public static int Score3 { get; private set; }
 
         public static void Start() => EC.Start();
 
         public static void StartGame()
         {
-            Episode episode = EC.ParseEpisode(int.Parse(_matchInfo[0][9]));
+            Episode episode = EC.ParseEpisode(_matchInfo[0].EpisodeId);
             EC.Initialise(episode, true);
             MultiplayerFetch();
             NavigationController.NavigateToPage(Pages.MatchPlayingPage);
@@ -43,24 +41,22 @@ namespace Controller
         {
             FinishMatch();
             EC.EpisodeFinished -= OnEpisodeFinished;
-            DBQueries.SetPlayState(int.Parse(_matchInfo[0][0]), 2);
+            DBQueries.SetPlayState(_matchInfo[0].MatchId, MatchState.Finished);
             NavigationController.NavigateToPage(Pages.MatchWaitingResultPage);
         }
 
         public static void SetWinners()
         {
-            List<List<string>> players = DBQueries.GetScoresOrderByHighest(_currentMatchId);
-            _winners = players.Select(p => p[0]).ToList();
-            _scores = players.Select(p => p[1]).ToList();
+            List<MatchProgress> players = DBQueries.GetScoresOrderByHighest(_currentMatchId);
 
             //simple null check for now, suggestions for improvement welcome.
-            Winner1 = _winners.Count > 0 ? _winners[0] : null;
-            Winner2 = _winners.Count > 1 ? _winners[1] : null;
-            Winner3 = _winners.Count > 2 ? _winners[2] : null;
+            Winner1 = players.Count > 0 ? players[0].Username : null;
+            Winner2 = players.Count > 1 ? players[1].Username : null;
+            Winner3 = players.Count > 2 ? players[2].Username : null;
 
-            Score1 = _scores.Count > 0 ? _scores[0] : null;
-            Score2 = _scores.Count > 1 ? _scores[1] : null;
-            Score3 = _scores.Count > 2 ? _scores[2] : null;
+            Score1 = players.Count > 0 ? players[0].Progress : default;
+            Score2 = players.Count > 1 ? players[1].Progress : default;
+            Score3 = players.Count > 2 ? players[2].Progress : default;
 
             Refresh?.Invoke(null, new EventArgs());
         }
@@ -129,11 +125,12 @@ namespace Controller
         /// <para>This method get current MatchProgressInfo</para>
         /// It does this by giving the Match id to get info from MatchProgress.
         /// </summary>
-        public static List<List<string>> GetMatchProgressInfo()
+        public static List<MatchProgress> GetMatchProgressInfo()
         {
             _matchInfo = DBQueries.GetMatchProgress(_currentMatchId);
             _amountOfPlayers = _matchInfo.Count();
-            if (_amountOfPlayers != 0) _creatorId = _matchInfo[0][8];
+            if (_amountOfPlayers != 0)
+                _creatorId = _matchInfo[0].HostId;
             return _matchInfo;
         }
 
@@ -141,7 +138,7 @@ namespace Controller
         /// <para>This method will update in Match a new Userid, who joined the match, as creator</para>
         /// It does this by giving the Matchid and the id of the user who first joined after the current creator.
         /// </summary>
-        public static void UpdateCreatorInMatch() => DBQueries.UpdateNewCreatorInMatch(_currentMatchId, int.Parse(_matchInfo[1][11]));
+        public static void UpdateCreatorInMatch() => DBQueries.UpdateNewCreatorInMatch(_currentMatchId, _matchInfo[1].UserId);
 
         /// <summary>
         /// <para>This method will check if the user is the creator</para>
@@ -150,12 +147,12 @@ namespace Controller
         public static bool CheckUserIsCreator()
         {
             User student = (User)Session.Get("student");
-            return student.Id.ToString().Equals(_creatorId, StringComparison.Ordinal);
+            return student.Id == _creatorId;
         }
 
-        public static bool CheckUserIsCreator(string userId)
+        public static bool CheckUserIsCreator(int userId)
         {
-            return _creatorId.Equals(userId, StringComparison.Ordinal);
+            return _creatorId == userId;
         }
 
         public static void DeleteMatch()
@@ -168,23 +165,15 @@ namespace Controller
 
         public static bool CheckIfEverybodyDone()
         {
-            List<List<string>> progress = DBQueries.GetAllProgress(_currentMatchId);
-
-            for (int i = 0; i < progress.Count; i++)
-            {
-                if (int.Parse(progress[i][0]) < 100)
-                {
-                    return false;
-                }
-            }
-            return true;
+            List<MatchProgress> progress = DBQueries.GetAllProgress(_currentMatchId);
+            return progress.Select(p => p.Progress).All(p => p == 100);
         }
 
         public static int GetMatchId() { return _currentMatchId; }
 
         public static void SetPlayingState()
         {
-            DBQueries.SetPlayState(_currentMatchId, 1);
+            DBQueries.SetPlayState(_currentMatchId, MatchState.Started);
         }
     }
 }

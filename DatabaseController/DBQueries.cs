@@ -197,7 +197,7 @@ namespace Controller
             return User.ParseUserIds(result);
         }
 
-        public static bool SetPlayState(int matchid, int state)
+        public static bool SetPlayState(int matchid, MatchState state)
         {
             SqlCommand cmd = new SqlCommand("UPDATE [dbo].[Match] set state = @state WHERE id = @matchid ");
 
@@ -246,7 +246,7 @@ namespace Controller
             cmd.Parameters.Add(q_match_id);
 
             List<List<string>> result = DBHandler.SelectQuery(cmd);
-            return MatchProgress.ParseOpponentProgress(result);
+            return MatchProgress.ParseSimpleProgress(result);
         }
 
         public static int AddMatch(int episodeid, User user)
@@ -341,7 +341,7 @@ namespace Controller
             return DBHandler.Query(cmd);
         }
 
-        public static List<List<string>> GetScoresOrderByHighest(int matchid)
+        public static List<MatchProgress> GetScoresOrderByHighest(int matchid)
         {
             SqlCommand cmd = new SqlCommand("SELECT TOP 3 u.username, mp.score " +
             "FROM [dbo].[MatchProgress] mp " +
@@ -355,21 +355,21 @@ namespace Controller
 
             cmd.Parameters.Add(matchId);
 
-            return DBHandler.SelectQuery(cmd);
+            List<List<string>> result = DBHandler.SelectQuery(cmd);
+            return MatchProgress.ParseSimpleProgress(result);
         }
 
-        public static List<List<string>> GetAllProgress(int match_id)
+        public static List<MatchProgress> GetAllProgress(int match_id)
         {
             SqlCommand cmd = new SqlCommand("SELECT progress FROM [dbo].[MatchProgress] WHERE matchid = @matchid");
 
             SqlParameter q_match_id = new SqlParameter("@matchid", SqlDbType.Int, 255);
-
             q_match_id.Value = match_id;
 
             cmd.Parameters.Add(q_match_id);
 
-            return DBHandler.SelectQuery(cmd);
+            List<List<string>> result = DBHandler.SelectQuery(cmd);
+            return result.Select(p => new MatchProgress() { Progress = int.Parse(p[0]) }).ToList();
         }
-
     }
 }

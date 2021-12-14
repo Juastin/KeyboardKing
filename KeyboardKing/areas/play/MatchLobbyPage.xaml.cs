@@ -23,7 +23,7 @@ namespace KeyboardKing.areas.play
     /// </summary>
     public partial class MatchLobbyPage : JumpPage
     {
-        private List<List<string>> _matchInfoLoad;
+        private List<MatchProgress> _matchInfoLoad;
         private bool _checkIfLeft;
 
         /// <summary>
@@ -72,19 +72,19 @@ namespace KeyboardKing.areas.play
             int counter = 0;
             while (counter < _matchInfoLoad.Count)
             {
-                string symbol = MatchController.CheckUserIsCreator(_matchInfoLoad[counter][11]) ? "\u2654" : string.Empty;
-                items.Add(new MatchLobbyData() { Logo = symbol, Username = $"{_matchInfoLoad[counter][1]}" });;
+                string symbol = MatchController.CheckUserIsCreator(_matchInfoLoad[counter].UserId) ? "\u2654" : string.Empty;
+                items.Add(new MatchLobbyData() { Logo = symbol, Username = $"{_matchInfoLoad[counter].Username}" });;
                 counter++;
             }
 
-            if (int.Parse(_matchInfoLoad[0][10]) == 1) StartGame();
+            if (_matchInfoLoad[0].MatchState == MatchState.Started) StartGame();
 
             this.Dispatcher.Invoke(() =>
             {
                 int selectedItem = LvMatch.SelectedIndex;
                 LvMatch.ItemsSource = items;
                 LvMatch.SelectedIndex = selectedItem;
-                lEpisodeMatch.Content = _matchInfoLoad[0][2];
+                lEpisodeMatch.Content = _matchInfoLoad[0].EpisodeName;
                 startbtn.Visibility = MatchController.CheckUserIsCreator() ? Visibility.Visible : Visibility.Hidden;
             });
         }
