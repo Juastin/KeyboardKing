@@ -76,28 +76,7 @@ namespace Controller
             }
         }
 
-        // Query for scalar queries
-        public static T QueryScalar<T>(MySqlCommand cmd)
-        {
-            MySqlConnection connection = null;
-            try
-            {
-                connection = OpenConnection(_connection);
-                cmd.Connection = connection;
-                cmd.Prepare();
-                return (T)cmd.ExecuteScalar();
-            }
-            catch
-            {
-                return default;
-            }
-            finally
-            {
-                connection?.Close();
-            }
-        }
-
-        // Query for scalar queries
+        // Query for INSERTs that returns the inserted id
         public static int InsertAndGet(MySqlCommand cmd)
         {
             MySqlConnection connection = null;
