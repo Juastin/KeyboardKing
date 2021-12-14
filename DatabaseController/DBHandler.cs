@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Common;
-using System.Data.SqlClient;
+﻿using System.Collections.Generic;
+using MySql.Data.MySqlClient;
 using System.Configuration;
 using Cryptography;
 
@@ -27,10 +24,10 @@ namespace Controller
         ///     {"3", "Username3"}
         /// }
         /// </summary>    
-        public static List<List<string>> SelectQuery(SqlCommand cmd)
+        public static List<List<string>> SelectQuery(MySqlCommand cmd)
         {
-            SqlConnection connection = null;
-            SqlDataReader rdr = null;
+            MySqlConnection connection = null;
+            MySqlDataReader rdr = null;
             List<List<string>> result = new List<List<string>>();
 
             try
@@ -57,9 +54,9 @@ namespace Controller
         }
 
         // Query for Insert, Update and Delete
-        public static bool Query(SqlCommand cmd)
+        public static bool Query(MySqlCommand cmd)
         {
-            SqlConnection connection = null;
+            MySqlConnection connection = null;
             try
             {
                 connection = OpenConnection(_connection);
@@ -78,9 +75,9 @@ namespace Controller
             }
         }
         // Query for scalar queries
-        public static T QueryScalar<T>(SqlCommand cmd)
+        public static T QueryScalar<T>(MySqlCommand cmd)
         {
-            SqlConnection connection = null;
+            MySqlConnection connection = null;
             try
             {
                 connection = OpenConnection(_connection);
@@ -98,9 +95,9 @@ namespace Controller
             }
         }
 
-        public static SqlConnection OpenConnection(string connectionString)
+        public static MySqlConnection OpenConnection(string connectionString)
         {
-            SqlConnection connection = new SqlConnection(TripleDES.Decrypt(connectionString, "5a504a70-83bf-4d1f-a5f0-a87f7b8f0c23"));
+            MySqlConnection connection = new MySqlConnection(TripleDES.Decrypt(connectionString, "730cec9c-b95d-4647-b4a9-e7642b15c239"));
             connection.Open();
             return connection;
         }
