@@ -10,7 +10,10 @@ namespace Model
     {
         public int HostId { get; set; }
         public int MatchId { get; set; }
+        public MatchState MatchState { get; set; }
+        public int UserId { get; set; }
         public string Username { get; set; }
+        public int EpisodeId { get; set; }
         public string EpisodeName { get; set; }
         public int Progress { get; set; }
         public int Score { get; set; }
@@ -18,9 +21,27 @@ namespace Model
         public int LPM { get; set; }
         public TimeSpan Time { get; set; }
 
+        public static List<MatchProgress> ParseMatchProgress(List<List<string>> input)
+        {
+            return input.Select(p => new MatchProgress()
+            {
+                MatchId = int.Parse(p[0]),
+                Username = p[1],
+                EpisodeName = p[2],
+                Progress = int.Parse(p[3]),
+                Score = int.Parse(p[4]),
+                Mistakes = int.Parse(p[5]),
+                LPM = int.Parse(p[6]),
+                Time = TimeSpan.FromTicks(long.Parse(p[7])),
+                HostId = int.Parse(p[8]),
+                MatchState = (MatchState)Enum.Parse(typeof(MatchState), p[9]),
+                UserId = int.Parse(p[10])
+            }).ToList();
+        }
+
         public static List<MatchProgress> ParseOpponentProgress(List<List<string>> input)
         {
-            return input.Select(m => new MatchProgress() { Username = m[0], Progress = int.Parse(m[1]) }).ToList();
+            return input.Select(p => new MatchProgress() { Username = p[0], Progress = int.Parse(p[1]) }).ToList();
         }
     }
 }

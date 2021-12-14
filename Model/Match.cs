@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace Model
 {
+    public enum MatchState
+    {
+        Open, Started, Finished
+    }
+
     public class Match
     {
         public int PlayerCount { get; set; }

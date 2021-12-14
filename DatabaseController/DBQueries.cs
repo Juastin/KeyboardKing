@@ -282,7 +282,7 @@ namespace Controller
             return DBHandler.Query(cmd);
         }
 
-        public static List<List<string>> GetMatchProgress(int matchid)
+        public static List<MatchProgress> GetMatchProgress(int matchid)
         {
             SqlCommand cmd = new SqlCommand("SELECT mp.matchid, u.username, e.name, mp.progress, mp.score, mp.mistakes, mp.lettersperminute, mp.time, m.creatorid, m.episodeid, m.state, mp.userid " +
              "FROM [dbo].[MatchProgress] mp " +
@@ -294,7 +294,9 @@ namespace Controller
             SqlParameter matchId = new SqlParameter("@matchid", SqlDbType.Int, 255);
             matchId.Value = matchid;
             cmd.Parameters.Add(matchId);
-            return DBHandler.SelectQuery(cmd);
+
+            List<List<string>> result = DBHandler.SelectQuery(cmd);
+            return MatchProgress.ParseMatchProgress(result);
         }
 
         public static bool RemoveUserInMatch(int matchid, User user)
