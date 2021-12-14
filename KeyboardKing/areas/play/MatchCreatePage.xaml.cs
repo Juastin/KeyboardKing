@@ -29,6 +29,7 @@ namespace KeyboardKing.areas.play
             InitializeComponent();
         }
 
+        //https://stackoverflow.com/questions/3585017/grouping-items-in-a-combobox
         public override void OnLoad()
         {
             if (MatchController.CheckIfUserExists())
@@ -50,9 +51,10 @@ namespace KeyboardKing.areas.play
             ListCollectionView lcv = new ListCollectionView(listData);
             lcv.GroupDescriptions.Add(new PropertyGroupDescription("ChapterName"));
 
-            this.CBEpisode.ItemsSource = lcv;
-            /*            CBEpisode.DisplayMemberPath = "EpisodeName";
-            CBEpisode.SelectedValuePath = "EpisodeId";*/
+            CBEpisode.ItemsSource = lcv;
+            CBEpisode.SelectedValuePath = "EpisodeId";
+
+            // Saving for style in XAML: <ComboBox ScrollViewer.VerticalScrollBarVisibility="Hidden" Name="CBEpisode" HorizontalAlignment="Center" ItemContainerStyle="{DynamicResource ComboBoxItem}" Template="{DynamicResource ComboBox}" VerticalAlignment="Top" Width="336" Height="42" FontSize="18" Margin="0,90,0,0"/>
         }
 
         public override void OnShadow()
