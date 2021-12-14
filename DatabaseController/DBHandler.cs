@@ -100,7 +100,7 @@ namespace Controller
 
         public static SqlConnection OpenConnection(string connectionString)
         {
-            SqlConnection connection = new SqlConnection(TripleDES.Decrypt(connectionString, "332cc6da-d757-4e80-a726-0bf6b615df09"));
+            SqlConnection connection = new SqlConnection(TripleDES.Decrypt(connectionString, "5a504a70-83bf-4d1f-a5f0-a87f7b8f0c23"));
             connection.Open();
             return connection;
         }
