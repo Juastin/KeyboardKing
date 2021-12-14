@@ -25,7 +25,7 @@
             </Grid>
             <Grid Grid.Row="1" VerticalAlignment="Center">
                 <Label Style="{DynamicResource H2}" Content="Selecteer een episode" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top" Width="254" Height="52"/>
-                <ComboBox ScrollViewer.VerticalScrollBarVisibility="Hidden" x:Name="CBEpisode" HorizontalAlignment="Center" Width="336" Height="42" FontSize="18" Margin="0,90,0,0">
+                <ComboBox x:Name="CBEpisode" Width="336" Height="42" FontSize="18" Margin="0,90,0,0">
                     <ComboBox.GroupStyle>
                         <GroupStyle>
                             <GroupStyle.HeaderTemplate>

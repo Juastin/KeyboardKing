@@ -45,7 +45,7 @@ namespace KeyboardKing.areas.play
 
             while (counter < episodes.Count)
             {
-                listData.Add(new EpisodeData { EpisodeId = int.Parse(episodes[counter][3]), EpisodeName = episodes[counter][2], ChapterName = episodes[counter][2] });
+                listData.Add(new EpisodeData { EpisodeId = int.Parse(episodes[counter][3]), EpisodeName = episodes[counter][2], ChapterName = episodes[counter][0] });
                 counter++;
             }
             ListCollectionView lcv = new ListCollectionView(listData);
