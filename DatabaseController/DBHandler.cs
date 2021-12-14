@@ -2,6 +2,7 @@
 using MySql.Data.MySqlClient;
 using System.Configuration;
 using Cryptography;
+using System;
 
 namespace Controller
 {
@@ -74,6 +75,7 @@ namespace Controller
                 connection?.Close();
             }
         }
+
         // Query for scalar queries
         public static T QueryScalar<T>(MySqlCommand cmd)
         {
@@ -86,6 +88,28 @@ namespace Controller
                 return (T)cmd.ExecuteScalar();
             }
             catch
+            {
+                return default;
+            }
+            finally
+            {
+                connection?.Close();
+            }
+        }
+
+        // Query for scalar queries
+        public static int InsertAndGet(MySqlCommand cmd)
+        {
+            MySqlConnection connection = null;
+            try
+            {
+                connection = OpenConnection(_connection);
+                cmd.Connection = connection;
+                cmd.Prepare();
+                cmd.ExecuteNonQuery();
+                return (int)cmd.LastInsertedId;
+            }
+            catch (Exception e)
             {
                 return default;
             }

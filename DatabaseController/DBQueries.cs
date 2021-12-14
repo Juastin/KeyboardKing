@@ -238,7 +238,7 @@ namespace Controller
 
         public static int AddMatch(int episodeid, UList user)
         {
-            MySqlCommand cmd = new MySqlCommand("INSERT INTO MatchLobby (episodeid, creatorid) output INSERTED.id VALUES(@episodeid, @creatorid)");
+            MySqlCommand cmd = new MySqlCommand("INSERT INTO MatchLobby (episodeid, creatorid) VALUES (@episodeid, @creatorid)");
 
             MySqlParameter episodeId = new MySqlParameter("@episodeid", MySqlDbType.Int32, 255);
             MySqlParameter creatorId = new MySqlParameter("@creatorid", MySqlDbType.Int32, 0);
@@ -249,7 +249,7 @@ namespace Controller
             cmd.Parameters.Add(episodeId);
             cmd.Parameters.Add(creatorId);
 
-            return DBHandler.QueryScalar<int>(cmd);
+            return DBHandler.InsertAndGet(cmd);
         }
 
         public static bool AddMatchProgress(int matchid, UList user)
