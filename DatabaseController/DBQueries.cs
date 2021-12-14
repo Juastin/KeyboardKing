@@ -222,7 +222,7 @@ namespace Controller
 
         public static List<List<string>> GetOpponentProgress(int user_id, int match_id)
         {
-            MySqlCommand cmd = new MySqlCommand("SELECT TOP 4 username, progress FROM MatchProgress mp LEFT JOIN User u ON mp.userid=u.id WHERE userid != @userid AND matchid = @matchid ORDER BY progress DESC");
+            MySqlCommand cmd = new MySqlCommand("SELECT username, progress FROM MatchProgress mp LEFT JOIN User u ON mp.userid=u.id WHERE userid != @userid AND matchid = @matchid ORDER BY progress DESC LIMIT 4");
 
             MySqlParameter q_user_id = new MySqlParameter("@userid", MySqlDbType.Int32, 255);
             MySqlParameter q_match_id = new MySqlParameter("@matchid", MySqlDbType.Int32, 255);
@@ -286,7 +286,7 @@ namespace Controller
 
         public static bool RemoveUserInMatch(int matchid, UList user)
         {
-            MySqlCommand cmd = new MySqlCommand("DELETE FROM MatchProgress WHERE matchid = @matchid AND userid = @userid;");
+            MySqlCommand cmd = new MySqlCommand("DELETE FROM MatchProgress WHERE matchid = @matchid AND userid = @userid");
 
             MySqlParameter matchId = new MySqlParameter("@matchid", MySqlDbType.Int32, 255);
             MySqlParameter userId = new MySqlParameter("@userid", MySqlDbType.Int32, 0);
@@ -302,7 +302,7 @@ namespace Controller
 
         public static bool DeleteMatch(int matchid)
         {
-            MySqlCommand cmd = new MySqlCommand("DELETE FROM MatchLobby WHERE id = @matchid;");
+            MySqlCommand cmd = new MySqlCommand("DELETE FROM MatchLobby WHERE id = @matchid");
 
             MySqlParameter matchId = new MySqlParameter("@matchid", MySqlDbType.Int32, 255);
             matchId.Value = matchid;
@@ -328,11 +328,11 @@ namespace Controller
 
         public static List<List<string>> GetScoresOrderByHighest(int matchid)
         {
-            MySqlCommand cmd = new MySqlCommand("SELECT TOP 3 u.username, mp.score " +
+            MySqlCommand cmd = new MySqlCommand("SELECT u.username, mp.score " +
             "FROM MatchProgress mp " +
             "LEFT JOIN User u ON mp.userid = u.id " +
             "WHERE mp.matchid = @matchid " +
-            "ORDER BY mp.score DESC");
+            "ORDER BY mp.score DESC LIMIT 3");
 
             MySqlParameter matchId = new MySqlParameter("@matchid", MySqlDbType.Int32, 255);
 
