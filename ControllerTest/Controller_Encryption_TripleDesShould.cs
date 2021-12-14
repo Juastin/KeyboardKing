@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using Controller;
+using Cryptography;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace ControllerTest
         public static void TripleDesShouldEncryptPassword()
         {
             string password = "test1";
-            Assert.AreNotEqual(password, Encryption.TripleDes(password, true));
+            Assert.AreNotEqual(password, TripleDES.EncryptOrDecrypt(password, true));
             
         }
 
@@ -27,7 +28,7 @@ namespace ControllerTest
         public static void TripleDesShouldDecryptPassword()
         {
             string password = "test2";
-            Assert.AreEqual(password, Encryption.TripleDes(Encryption.TripleDes(password, true), false));
+            Assert.AreEqual(password, TripleDES.EncryptOrDecrypt(TripleDES.EncryptOrDecrypt(password, true), false));
         }
 
     }
