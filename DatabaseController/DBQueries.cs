@@ -155,7 +155,7 @@ namespace Controller
             MySqlCommand cmd = new MySqlCommand("SELECT word " +
                 "FROM EpisodeStep " +
                 "WHERE episodeid = @id " +
-                "ORDER BY NEWID()");
+                "ORDER BY RAND()");
 
             MySqlParameter episodeIdParam = new MySqlParameter("@id", MySqlDbType.Int32, 255);
             episodeIdParam.Value = id;
