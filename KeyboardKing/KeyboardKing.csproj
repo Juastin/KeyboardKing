@@ -18,6 +18,8 @@
     <None Remove="resources\audio\music\There Was A King.wav" />
     <None Remove="resources\audio\music\Underdog.wav" />
     <None Remove="resources\images\blur_background_4K.png" />
+    <None Remove="resources\images\blur_hellobeertje_background.png" />
+    <None Remove="resources\images\hellobeertje_background_4k.png" />
     <None Remove="resources\images\icon.png" />
     <None Remove="resources\images\kingbackground.png" />
     <None Remove="resources\images\kk_background_1080.png" />
@@ -65,6 +67,12 @@
     </Content>
     <Content Include="resources\images\blur_background_4K.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\blur_hellobeertje_background.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\hellobeertje_background_4k.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\images\icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -117,6 +125,9 @@
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>
     <Page Update="resources\themes\PaintTheme.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="resources\themes\HelloBeertjeTheme.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>
     <Page Update="resources\themes\ThemeTemplate.xaml">
