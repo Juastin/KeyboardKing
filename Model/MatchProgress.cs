@@ -17,5 +17,10 @@ namespace Model
         public int Mistakes { get; set; }
         public int LPM { get; set; }
         public TimeSpan Time { get; set; }
+
+        public static List<MatchProgress> ParseOpponentProgress(List<List<string>> input)
+        {
+            return input.Select(m => new MatchProgress() { Username = m[0], Progress = int.Parse(m[1]) }).ToList();
+        }
     }
 }

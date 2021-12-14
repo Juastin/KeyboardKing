@@ -39,7 +39,9 @@ namespace KeyboardKing.areas.play
 
         public override void OnLoad()
         {
-            MusicPlayer.PlayNextFrom("intense_music");
+            if (!EpisodeController.IsStarted)
+                MusicPlayer.PlayNextFrom("intense_music");
+
             EpisodeController.Start();
             UpdateTimerView();
             this.UserInput.Focus();

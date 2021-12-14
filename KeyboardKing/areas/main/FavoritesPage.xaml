@@ -6,12 +6,29 @@
       xmlns:local="clr-namespace:KeyboardKing.core"
       xmlns:Components="clr-namespace:KeyboardKing.components"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="FavoritesPage">
+      Title="FavoritesPage"
+      MinHeight="450"
+      MinWidth="400"
+      MaxWidth="1420"
+      MaxHeight="750">
 
-    <Grid>
-        <Label Content="Favorieten" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"/>
-
-        <Components:Navbar CurrentPage="FavoritesPage"/>
+    <Grid Margin="25">
+        <Border Style="{DynamicResource GridBorder}" Padding="30">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" VerticalAlignment="Center">
+                    <Label Style="{DynamicResource H1}" Content="Favorieten - Werk in uitvoering" HorizontalAlignment="Left"/>
+                </Grid>
+                <Grid Grid.Row="1" VerticalAlignment="Top">
+                </Grid>
+                <Grid Grid.Row="2" HorizontalAlignment="Center">
+                    <Components:Navbar CurrentPage="FavoritesPage"/>
+                </Grid>
+            </Grid>
+        </Border>
     </Grid>
 </local:JumpPage>

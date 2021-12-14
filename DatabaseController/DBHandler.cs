@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.Configuration;
+using Cryptography;
 
 namespace Controller
 {
@@ -13,7 +14,7 @@ namespace Controller
         /// <summary>
         /// Database connection.
         /// </summary>
-        private static SqlConnection _connection {get;set;} = new SqlConnection(Encryption.Decrypt(ConfigurationManager.AppSettings["connectionString"], "332cc6da-d757-4e80-a726-0bf6b615df09"));
+        private static string _connection { get; set; } = ConfigurationManager.AppSettings["connectionString"];
 
         /// <summary>
         /// Used to query the DB.
@@ -25,17 +26,17 @@ namespace Controller
         ///     {"2", "Username2"}
         ///     {"3", "Username3"}
         /// }
-        /// </summary>
-        
+        /// </summary>    
         public static List<List<string>> SelectQuery(SqlCommand cmd)
         {
+            SqlConnection connection = null;
             SqlDataReader rdr = null;
             List<List<string>> result = new List<List<string>>();
 
             try
             {
-                _connection.Open();
-                cmd.Connection = _connection;
+                connection = OpenConnection(_connection);
+                cmd.Connection = connection;
                 rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
@@ -50,7 +51,7 @@ namespace Controller
             finally
             {
                 rdr?.Close();
-                _connection?.Close();
+                connection?.Close();
             }
             return result;
         }
@@ -58,29 +59,32 @@ namespace Controller
         // Query for Insert, Update and Delete
         public static bool Query(SqlCommand cmd)
         {
+            SqlConnection connection = null;
             try
             {
-                _connection.Open();
-                cmd.Connection = _connection;
+                connection = OpenConnection(_connection);
+                cmd.Connection = connection;
                 cmd.Prepare();
                 cmd.ExecuteNonQuery();
                 return true;
-            } catch
+            }
+            catch
             {
                 return false;
             }
             finally
             {
-                _connection?.Close();
+                connection?.Close();
             }
         }
         // Query for scalar queries
         public static T QueryScalar<T>(SqlCommand cmd)
         {
+            SqlConnection connection = null;
             try
             {
-                _connection.Open();
-                cmd.Connection = _connection;
+                connection = OpenConnection(_connection);
+                cmd.Connection = connection;
                 cmd.Prepare();
                 return (T)cmd.ExecuteScalar();
             }
@@ -90,9 +94,15 @@ namespace Controller
             }
             finally
             {
-                _connection?.Close();
+                connection?.Close();
             }
         }
 
+        public static SqlConnection OpenConnection(string connectionString)
+        {
+            SqlConnection connection = new SqlConnection(TripleDES.Decrypt(connectionString, "332cc6da-d757-4e80-a726-0bf6b615df09"));
+            connection.Open();
+            return connection;
+        }
     }
 }

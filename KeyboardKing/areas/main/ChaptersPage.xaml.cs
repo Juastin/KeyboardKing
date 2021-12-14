@@ -75,18 +75,11 @@ namespace KeyboardKing.areas.main
 
                 //When the episode is finished this event will trigger.
                 //Since we can only call Navigate() inside the View this is needed.
-                EpisodeController.EpisodeFinished += OnEpisodeFinished;
                 Episode episode = EpisodeController.ParseEpisode(row.Id);
-                EpisodeController.Initialise(episode);
+                EpisodeController.Initialise(episode, false);
 
                 NavigationController.NavigateToPage(Pages.EpisodeReadyUpPage);
             }
-        }
-
-        private void OnEpisodeFinished(object sender, EventArgs e)
-        {
-            EpisodeController.EpisodeFinished -= OnEpisodeFinished;
-            NavigationController.NavigateToPage(Pages.EpisodeResultPage);
         }
     }
 }

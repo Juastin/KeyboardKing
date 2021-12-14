@@ -23,7 +23,8 @@ namespace KeyboardKing.areas.play
     /// </summary>
     public partial class MatchLobbyPage : JumpPage
     {
-        private DateTime _tickCheck { get; set; } = DateTime.Now;
+        private List<List<string>> _matchInfoLoad;
+        private bool _checkIfLeft;
 
         /// <summary>
         /// Controller for <see cref="MatchLobbyPage"/>
@@ -36,64 +37,80 @@ namespace KeyboardKing.areas.play
 
         public override void OnLoad()
         {
-            List<List<string>> matchInfo = DBQueries.GetMatchProgress(MatchController.GetMatchId());
-            lEpisodeMatch.Content = matchInfo[0][2];
+            _checkIfLeft = false;
             UpdateListView();
-            if (!MatchController.CheckUserIsCreator()) { StartMatchB.Visibility = Visibility.Hidden; }
         }
 
         public override void OnShadow()
         {
+            
         }
 
         public override void OnTick()
         {
-            DateTime now = DateTime.Now;
-            if (_tickCheck.AddSeconds(5) < now) // if 5 seconds have passed
+            if (!_checkIfLeft)
             {
-                _tickCheck = now;
                 UpdateListView();
             }
         }
 
-        private void UpdateListView()
+        private void EpOverview_PlayClick(object sender, RoutedEventArgs e)
         {
-            List<List<string>> matchInfo = MatchController.GetMatchProgressInfo();
-            List<MatchLobbyData> items = new List<MatchLobbyData>();
-            int counter = 0;
-            while (counter < matchInfo.Count)
-            {
-                items.Add(new MatchLobbyData() { Username = matchInfo[counter][1] });
-                counter++;
-            }
-            this.Dispatcher.Invoke(() =>
-            {
-                LvMatch.ItemsSource = items;
-            });
+            MatchController.SetPlayingState();
         }
 
-        private void BStartMatch(object sender, EventArgs e)
+        private void StartGame()
         {
-            MessageBox.Show("Start de match");
+            this.Dispatcher.Invoke(MatchController.StartGame);
+        }
+
+
+        private void UpdateListView()
+        {
+            _matchInfoLoad = MatchController.GetMatchProgressInfo();
+            List<MatchLobbyData> items = new List<MatchLobbyData>();
+            int counter = 0;
+            while (counter < _matchInfoLoad.Count)
+            {
+                string symbol = MatchController.CheckUserIsCreator(_matchInfoLoad[counter][11]) ? "\u2654" : string.Empty;
+                items.Add(new MatchLobbyData() { Logo = symbol, Username = $"{_matchInfoLoad[counter][1]}" });;
+                counter++;
+            }
+
+            if (int.Parse(_matchInfoLoad[0][10]) == 1) StartGame();
+
+            this.Dispatcher.Invoke(() =>
+            {
+                int selectedItem = LvMatch.SelectedIndex;
+                LvMatch.ItemsSource = items;
+                LvMatch.SelectedIndex = selectedItem;
+                lEpisodeMatch.Content = _matchInfoLoad[0][2];
+                startbtn.Visibility = MatchController.CheckUserIsCreator() ? Visibility.Visible : Visibility.Hidden;
+            });
         }
 
         private void BExitMatch(object sender, EventArgs e)
         {
+            _checkIfLeft = true;
             if (MatchController.CheckUserIsCreator())
             {
                 if (MatchController.CheckCreatorIsAloneInMatch())
                 {
                     MatchController.DeleteMatch();
-                    MessageBox.Show("Match is deleted");
-                    NavigationController.NavigateToPage(Pages.MatchOverviewPage);
+                    MessageController.Show(Pages.MessagePage, "De match is verwijderd", Pages.MatchOverviewPage, -1);
+                    return;
                 }
-                else { MessageBox.Show("Je kan momenteel niet de match verlaten. Je bent de creator"); }
+                else
+                {
+                    MatchController.UpdateCreatorInMatch();
+                    MatchController.RemoveUserInMatchProgress();
+                }
             }
             else
             {
                 MatchController.RemoveUserInMatchProgress();
-                NavigationController.NavigateToPage(Pages.MatchOverviewPage);
             }
+            NavigationController.NavigateToPage(Pages.MatchOverviewPage);
         }
     }
 }

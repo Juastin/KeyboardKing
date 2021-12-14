@@ -8,7 +8,7 @@ namespace Model
 {
     public enum SkillLevel
     {
-        beginner, gemiddeld, gevorderd
+        none, beginner, gemiddeld, gevorderd
     }
     public class User
     {

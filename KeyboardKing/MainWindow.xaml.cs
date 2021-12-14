@@ -22,6 +22,7 @@ using System.Windows.Shapes;
 using Model;
 using Model.event_args;
 using KeyboardKing.areas.info;
+using System.ComponentModel;
 
 namespace KeyboardKing
 {
@@ -65,6 +66,8 @@ namespace KeyboardKing
             {
                 // info area
                 {Pages.MessagePage, new MessagePage(this)},
+                {Pages.ConfirmationPage, new ConfirmationPage(this)},
+                {Pages.PausePage, new PausePage(this)},
 
                 // login area
                 {Pages.LoginPage, new LoginPage(this)},
@@ -85,14 +88,18 @@ namespace KeyboardKing
                 {Pages.MatchLobbyPage, new MatchLobbyPage(this)},
                 {Pages.MatchPlayingPage, new MatchPlayingPage(this)},
                 {Pages.MatchResultPage, new MatchResultPage(this)},
+                { Pages.MatchWaitingResultPage, new MatchWaitingResultPage(this) },
             };
 
             _themes = new()
             {
-                {"Light", new Theme("Light Theme", "resources/themes/LightTheme.xaml", "resources/images/kk_background_4K.png")},
-                {"Dark", new Theme("Dark Theme", "resources/themes/DarkTheme.xaml", "resources/images/kk_background_dark.png")},
-                {"Paint", new Theme("Paint Theme", "resources/themes/PaintTheme.xaml", "resources/images/paint_theme_background.png")},
-                {"Space", new Theme("Space Theme", "resources/themes/SpaceTheme.xaml", "resources/images/space_theme_background.png")},
+                {"Light", new Theme("Light Theme", "resources/themes/LightTheme.xaml")},
+                {"Dark", new Theme("Dark Theme", "resources/themes/DarkTheme.xaml")},
+                {"Space", new Theme("Space Theme", "resources/themes/SpaceTheme.xaml")},
+                {"Chinese", new Theme("Chinese Theme", "resources/themes/ChineseTheme.xaml")},     
+                {"Paint", new Theme("Paint Theme", "resources/themes/PaintTheme.xaml")},
+                {"Obsidian", new Theme("Obsidian Theme", "resources/themes/ObsidianTheme.xaml")},
+                {"Christmas", new Theme("Christmas Theme", "resources/themes/ChristmasTheme.xaml")},
             };
 
             CBTheme.ItemsSource = _themes;
@@ -104,7 +111,7 @@ namespace KeyboardKing
             NavigationController.Navigate += OnNavigate;
             NavigationController.NavigateToPage(Pages.LoginPage);
         }
-
+   
         public void OnNavigate(NavigateEventArgs e)
         {
 
@@ -194,7 +201,7 @@ namespace KeyboardKing
         {
             themeDictionary.Clear();
             themeDictionary.MergedDictionaries.Add(new ResourceDictionary() { Source = theme.ThemeUri });
-            MainBackground.ImageSource = new BitmapImage(theme.BackgroundUri);
+            NavigationController.ChangeTheme();
         }
 
         private void CBTheme_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -206,5 +213,22 @@ namespace KeyboardKing
                 ChangeTheme(theme);
             }
         }
+
+        //Closes open matches when closing application
+        private void CheckBefore_Closing(object sender, CancelEventArgs e)
+        {
+            if (NavigationController.CurrentPage == Pages.MatchLobbyPage || NavigationController.CurrentPage == Pages.MatchPlayingPage)
+            {
+                MatchController.RemoveUserInMatchProgress();
+
+                if (!MatchController.GetMatchProgressInfo().Any())
+                {
+                    MatchController.DeleteMatch();
+                }
+
+            }
+        }
+
+
     }
 }

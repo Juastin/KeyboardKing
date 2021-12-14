@@ -10,6 +10,8 @@ namespace Model
     {
         Empty,
         MessagePage,
+        ConfirmationPage,
+        PausePage,
         LoginPage,
         RegisterPage,
         RegisterSkillPage,
@@ -23,6 +25,7 @@ namespace Model
         MatchCreatePage,
         MatchOverviewPage,
         MatchPlayingPage,
-        MatchResultPage
+        MatchResultPage,
+        MatchWaitingResultPage
     }
 }

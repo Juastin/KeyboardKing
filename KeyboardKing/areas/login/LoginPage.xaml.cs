@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Controller;
 using Model;
+using Cryptography;
 
 namespace KeyboardKing.areas.login
 {
@@ -56,13 +57,13 @@ namespace KeyboardKing.areas.login
                 User user = DBQueries.GetUserInfo(email);
                 if (user != null)
                 {
-                    bool passwordResult = Encryption.VerifyHash(boxPassword.Password, user.Salt, user.Password);
+                    bool passwordResult = Argon2.VerifyHash(boxPassword.Password, user.Salt, user.Password);
                     if (passwordResult)
                     {
                         user.Password = user.Salt = null;
                         Session.Add("student", user);
 
-                        if (user.SkillLevel == null)
+                        if (user.SkillLevel == SkillLevel.none)
                         {
                             NavigationController.NavigateToPage(Pages.RegisterSkillPage);
                             return;

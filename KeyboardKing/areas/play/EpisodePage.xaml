@@ -9,7 +9,7 @@
       xmlns:Components="clr-namespace:KeyboardKing.components"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      MaxHeight="600"
+      MaxHeight="750"
       MaxWidth="1450"
       Title="EpisodePage" PreviewKeyDown="PreventTab_PreviewKeyDown" ForceCursor="True" Cursor="Arrow">
 
@@ -17,31 +17,73 @@
         <Model:EpisodePageDataContext/>
     </local:JumpPage.DataContext>
 
-    <Grid x:Name="Container">
-        <Border Style="{DynamicResource GridBorder}"/>
-        <Label Style="{DynamicResource H1}" Content="" Margin="49,51,301,336"/>
-        <TextBox x:Name="UserInput" Background="Transparent" Foreground="Transparent" CaretBrush="Transparent" Grid.Column="0" LostKeyboardFocus="UserInput_LostFocus" Text="" TextChanged="UserInput_TextChanged" SelectionBrush="{x:Null}" BorderThickness="0,0,0,0"/>
-        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" TextOptions.TextFormattingMode="Display">
-            <Label x:Name="Word" Content="{Binding Word}" Foreground="{DynamicResource TextColor}" FontSize="50"/>
-            <Label x:Name="WordOverlayWrong" Content="{Binding WordOverlayWrong}" Foreground="Red" FontSize="50"/>
-            <Label x:Name="WordOverlayCorrect" Content="{Binding WordOverlayCorrect}" Foreground="Green" FontSize="50"/>
-        </Grid>
-        <Grid>
-            <ProgressBar Template="{DynamicResource ProgressBar}" 
+    <Grid x:Name="Container" Margin="25">
+        <Border Style="{DynamicResource GridBorder}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBox x:Name="UserInput" Background="Transparent" Foreground="Transparent" CaretBrush="Transparent" Grid.RowSpan="4" LostKeyboardFocus="UserInput_LostFocus" Text="" TextChanged="UserInput_TextChanged" SelectionBrush="{x:Null}" BorderThickness="0,0,0,0"/>
+                <Grid Grid.Row="0" Margin="30,30,30,0">
+                    <TextBlock Visibility="Hidden" Style="{DynamicResource TextBlock}" Background="Transparent" x:Name="points" HorizontalAlignment="Center"
+                    VerticalAlignment="Top" Height="40" Width="116"
+                    TextWrapping="Wrap" Text="0p" TextAlignment="Center"/>
+                    <TextBox BorderThickness="0" x:Name="TimerTextBox" Style="{DynamicResource TextBox2}" VerticalAlignment="Center" Background="Transparent" Text="00:00"/>
+                    <Button Style="{DynamicResource Button1}" Content="Pauze" VerticalAlignment="Top" HorizontalAlignment="Right" Click="ButtonPause" FontSize="26" Width="110"/>
+                </Grid>
+                <Grid Margin="100,0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" TextOptions.TextFormattingMode="Display">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.OpacityMask>
+                        <LinearGradientBrush EndPoint="1,0"
+                             StartPoint="0,0">
+                            <GradientStop Color="Transparent"
+                                              Offset="0" />
+                            <GradientStop Color="White" 
+                                              Offset="0.02"/>
+                            <GradientStop Color="White"
+                                              Offset="0.98" />
+                            <GradientStop Color="Transparent" 
+                                              Offset="1"/>
+                        </LinearGradientBrush>
+                    </Grid.OpacityMask>
+                    <Grid  Grid.Column="0">
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="50" x:Name="WordOverlayCorrect" Text="{Binding WordOverlayCorrect}" Foreground="Green"/>
+                    </Grid>
+                    <Border Grid.Column="1" BorderThickness="3, 0, 0, 0">
+                        <Border.BorderBrush>
+                            <DrawingBrush Viewport="0,0,8,22" ViewportUnits="Absolute" TileMode="Tile">
+                                <DrawingBrush.Drawing>
+                                    <DrawingGroup>
+                                        <GeometryDrawing Brush="{DynamicResource TextColor}">
+                                            <GeometryDrawing.Geometry>
+                                                <GeometryGroup>
+                                                    <RectangleGeometry Rect="0,0,50,50" />
+                                                    <RectangleGeometry Rect="50,50,0,50" />
+                                                </GeometryGroup>
+                                            </GeometryDrawing.Geometry>
+                                        </GeometryDrawing>
+                                    </DrawingGroup>
+                                </DrawingBrush.Drawing>
+                            </DrawingBrush>
+                        </Border.BorderBrush>
+                        <Grid>
+                            <Label FontSize="50" x:Name="WordOverlay" Content="{Binding WordOverlay }" Foreground="{DynamicResource TextColor}"/>
+                            <Label FontSize="50" x:Name="WordOverlayWrong" Content="{Binding WordOverlayWrong}" Foreground="Red"/>
+                        </Grid>
+                    </Border>
+                </Grid>
+                <Grid Grid.Row="2">
+                    <ProgressBar Background="{DynamicResource Color4}" Template="{DynamicResource ProgressBar}" 
                          VerticalAlignment="Bottom" Height="20" Minimum="0" 
                          Maximum="{Binding MaxLetters}" 
                          Value="{Binding LettersTyped, Mode=OneWay}"/>
-            <TextBox x:Name="TimerTextBox" Style="{DynamicResource TextBox2}" VerticalAlignment="Top" Background="Transparent"  Text="00:00" Height="53"  Margin="10,11,133,0"/>
-            <Button Style="{DynamicResource Button1}" Content="Pauze" VerticalAlignment="Top" HorizontalAlignment="Right" Click="ButtonPause" FontSize="26" Margin="0,11,10,0"  Height="54" Width="110"/>
-        </Grid>
-        <Border CornerRadius="80" Background="Transparent" BorderBrush="#2a3b57" 
-                BorderThickness="5" Height="91" Margin="0,82,0,0" 
-                Name="Border1" VerticalAlignment="Top" HorizontalAlignment="Center" Width="136">
-            <TextBlock Style="{DynamicResource TextBlock}" Background="Transparent" x:Name="points" HorizontalAlignment="Center"
-                       VerticalAlignment="Center" Height="40" Width="116"
-                       TextWrapping="Wrap" Text="0p" TextAlignment="Center">
-
-            </TextBlock>
+                </Grid>
+            </Grid>
         </Border>
     </Grid>
 </local:JumpPage>
