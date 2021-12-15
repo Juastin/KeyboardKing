@@ -17,6 +17,9 @@
     <None Remove="resources\audio\music\Sunday.wav" />
     <None Remove="resources\audio\music\There Was A King.wav" />
     <None Remove="resources\audio\music\Underdog.wav" />
+    <None Remove="resources\images\badges\1.png" />
+    <None Remove="resources\images\badges\2.png" />
+    <None Remove="resources\images\badges\3.png" />
     <None Remove="resources\images\blur_background_4K.png" />
     <None Remove="resources\images\blur_hellobeertje_background.png" />
     <None Remove="resources\Images\blur_kk_background_christmas.png" />
@@ -68,6 +71,15 @@
     </Content>
     <Content Include="resources\audio\music\Underdog.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\images\blur_background_4K.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
