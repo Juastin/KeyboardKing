@@ -232,23 +232,6 @@ namespace Controller
             return DBHandler.Query(cmd);
         }
 
-        public static List<MatchProgress> GetOpponentProgress(int user_id, int match_id)
-        {
-            SqlCommand cmd = new SqlCommand("SELECT TOP 4 username, progress FROM [dbo].[MatchProgress] mp LEFT JOIN [dbo].[User] u ON mp.userid=u.id WHERE userid != @userid AND matchid = @matchid ORDER BY progress DESC");
-
-            SqlParameter q_user_id = new SqlParameter("@userid", SqlDbType.Int, 255);
-            SqlParameter q_match_id = new SqlParameter("@matchid", SqlDbType.Int, 255);
-
-            q_user_id.Value = user_id;
-            q_match_id.Value = match_id;
-
-            cmd.Parameters.Add(q_user_id);
-            cmd.Parameters.Add(q_match_id);
-
-            List<List<string>> result = DBHandler.SelectQuery(cmd);
-            return MatchProgress.ParseSimpleProgress(result);
-        }
-
         public static int AddMatch(int episodeid, User user)
         {
             SqlCommand cmd = new SqlCommand("INSERT INTO [dbo].[Match] (episodeid, creatorid) output INSERTED.id VALUES(@episodeid, @creatorid)");
@@ -282,18 +265,34 @@ namespace Controller
             return DBHandler.Query(cmd);
         }
 
-        public static List<MatchProgress> GetMatchProgress(int matchid)
+        public static Match GetMatchById(int matchId)
         {
-            SqlCommand cmd = new SqlCommand("SELECT mp.matchid, u.username, e.name, mp.progress, mp.score, mp.mistakes, mp.lettersperminute, mp.time, m.creatorid, m.episodeid, m.state, mp.userid " +
+            SqlCommand cmd = new SqlCommand("SELECT m.id, m.state, u.id, u.username, e.id, e.name " +
+                "FROM [dbo].[Match] m " +
+                "LEFT JOIN [dbo].[User] u ON m.creatorid = u.id " +
+                "LEFT JOIN [dbo].[Episode] e ON e.id = m.episodeid " +
+                "WHERE m.id = @matchid");
+
+            SqlParameter id = new SqlParameter("@matchid", SqlDbType.Int, 255);
+            id.Value = matchId;
+            cmd.Parameters.Add(id);
+
+            List<List<string>> result = DBHandler.SelectQuery(cmd);
+            return Match.ParseMatch(result);
+        }
+
+        public static List<MatchProgress> GetMatchProgress(int matchId)
+        {
+            SqlCommand cmd = new SqlCommand("SELECT u.id, u.username, mp.progress, mp.score, mp.mistakes, mp.lettersperminute, mp.time " +
              "FROM [dbo].[MatchProgress] mp " +
              "LEFT JOIN [dbo].[Match] m ON mp.matchid = m.id " +
              "LEFT JOIN [dbo].[Episode] e ON m.episodeid = e.id " +
              "LEFT JOIN [dbo].[User] u ON mp.userid = u.id " +
              "WHERE mp.matchid = @matchid");
 
-            SqlParameter matchId = new SqlParameter("@matchid", SqlDbType.Int, 255);
-            matchId.Value = matchid;
-            cmd.Parameters.Add(matchId);
+            SqlParameter id = new SqlParameter("@matchid", SqlDbType.Int, 255);
+            id.Value = matchId;
+            cmd.Parameters.Add(id);
 
             List<List<string>> result = DBHandler.SelectQuery(cmd);
             return MatchProgress.ParseMatchProgress(result);

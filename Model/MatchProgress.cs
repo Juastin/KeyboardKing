@@ -22,13 +22,13 @@ namespace Model
 
         public static List<MatchProgress> ParseMatchProgress(List<List<string>> input)
         {
-            return input.Select(p => new MatchProgress(int.Parse(p[11]), p[1])
+            return input.Select(p => new MatchProgress(int.Parse(p[0]), p[1])
             {
-                Progress = int.Parse(p[3]),
-                Score = int.Parse(p[4]),
-                Mistakes = int.Parse(p[5]),
-                LPM = int.Parse(p[6]),
-                Time = TimeSpan.FromTicks(long.Parse(p[7])),
+                Progress = int.Parse(p[2]),
+                Score = int.Parse(p[3]),
+                Mistakes = int.Parse(p[4]),
+                LPM = int.Parse(p[5]),
+                Time = TimeSpan.FromTicks(long.Parse(p[6])),
             }).ToList();
         }
 

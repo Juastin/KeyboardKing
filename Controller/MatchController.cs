@@ -37,8 +37,8 @@ namespace Controller
         public static void Initialize(Match match)
         {
             CurrentMatch = match;
-            Episode episode = EC.ParseEpisode(match.Episode.Id);
-            EC.Initialise(episode, true);
+            CurrentMatch.Episode = EC.ParseEpisode(match.Episode.Id);
+            EC.Initialise(CurrentMatch.Episode, true);
         }
 
         public static void Start() => EC.Start();
@@ -112,14 +112,8 @@ namespace Controller
         {
             User student = (User)Session.Get("student");
             int matchId = DBQueries.AddMatch(episodeId, student);
-            Initialize(new Match()
-            {
-                Id = matchId,
-                Episode = new Episode() { Id = episodeId },
-                Host = new User() { Id = student.Id, Username = student.Username }
-            });
+            Initialize(DBQueries.GetMatchById(matchId));
             DBQueries.AddMatchProgress(matchId, student);
-            NavigationController.NavigateToPage(Pages.MatchLobbyPage);
         }
 
         /// <summary>
@@ -143,6 +137,7 @@ namespace Controller
         /// </summary>
         public static List<MatchProgress> GetMatchProgressInfo()
         {
+            CurrentMatch = DBQueries.GetMatchById(CurrentMatch.Id);
             _matchProgress = DBQueries.GetMatchProgress(CurrentMatch.Id);
             return _matchProgress;
         }
