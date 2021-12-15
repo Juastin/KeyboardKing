@@ -29,7 +29,7 @@
                                     <RowDefinition Height="25"/>
                                 </Grid.RowDefinitions>
                                 <ProgressBar Background="{DynamicResource Color5}" Grid.Row="0" Template="{DynamicResource ProgressBar}" Value="{Binding Progress}"/>
-                                <Label Content="{Binding Username}" HorizontalAlignment="Center" FontWeight="Bold" Foreground="{DynamicResource TextColor}"></Label>
+                                <Label Content="{Binding User.Username}" HorizontalAlignment="Center" FontWeight="Bold" Foreground="{DynamicResource TextColor}"></Label>
                             </Grid>
                         </Border>
                     </ControlTemplate>
