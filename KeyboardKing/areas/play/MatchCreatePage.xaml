@@ -30,7 +30,7 @@
                         <GroupStyle>
                             <GroupStyle.HeaderTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding EpisodeName}"/>
+                                    <TextBlock Text="{Binding Name}" FontWeight="Bold"/>
                                 </DataTemplate>
                             </GroupStyle.HeaderTemplate>
                         </GroupStyle>
