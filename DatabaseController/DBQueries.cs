@@ -116,18 +116,7 @@ namespace Controller
             cmd.Parameters.Add(emailParam);
 
             List<List<string>> result = DBHandler.SelectQuery(cmd);
-            if (result.Count > 0)
-                return new User()
-                {
-                    Id = int.Parse(result[0][0]),
-                    Username = result[0][1],
-                    Email = result[0][2],
-                    Password = result[0][3],
-                    Salt = result[0][4],
-                    SkillLevel = (SkillLevel)Enum.Parse(typeof(SkillLevel), result[0][5])
-                };
-
-            return null;
+            return User.ParseUser(result);
         }
 
         public static List<Episode> GetAllEpisodes(User user)

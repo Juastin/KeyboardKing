@@ -23,5 +23,22 @@ namespace Model
         {
             return input.Select(u => new User() { Id = int.Parse(u[0]) }).ToList();
         }
+
+        public static User ParseUser(List<List<string>> input)
+        {
+            if (input.Any())
+            {
+                return new User()
+                {
+                    Id = int.Parse(input[0][0]),
+                    Username = input[0][1],
+                    Email = input[0][2],
+                    Password = input[0][3],
+                    Salt = input[0][4],
+                    SkillLevel = (SkillLevel)Enum.Parse(typeof(SkillLevel), input[0][5])
+                };
+            }
+            return null;
+        }
     }
 }
