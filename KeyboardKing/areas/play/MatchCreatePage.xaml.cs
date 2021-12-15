@@ -15,7 +15,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Model;
 
-// Source: https://stackoverflow.com/questions/561166/binding-a-wpf-combobox-to-a-custom-list
+/*  Sources: https://stackoverflow.com/questions/561166/binding-a-wpf-combobox-to-a-custom-list
+    https://stackoverflow.com/questions/3585017/grouping-items-in-a-combobox
+*/
 
 namespace KeyboardKing.areas.play
 {
@@ -29,7 +31,6 @@ namespace KeyboardKing.areas.play
             InitializeComponent();
         }
 
-        //https://stackoverflow.com/questions/3585017/grouping-items-in-a-combobox
         public override void OnLoad()
         {
             if (MatchController.CheckIfUserExists())
@@ -40,8 +41,8 @@ namespace KeyboardKing.areas.play
 
             UList user = (UList)Session.Get("student");
             List<List<string>> episodes = DBQueries.GetAllEpisodes(user);
-            int counter = 0;
             List<EpisodeData> listData = new List<EpisodeData>();
+            int counter = 0;
 
             while (counter < episodes.Count)
             {
@@ -53,8 +54,6 @@ namespace KeyboardKing.areas.play
 
             CBEpisode.ItemsSource = lcv;
             CBEpisode.SelectedValuePath = "EpisodeId";
-
-            // Saving for style in XAML: <ComboBox ScrollViewer.VerticalScrollBarVisibility="Hidden" Name="CBEpisode" HorizontalAlignment="Center" ItemContainerStyle="{DynamicResource ComboBoxItem}" Template="{DynamicResource ComboBox}" VerticalAlignment="Top" Width="336" Height="42" FontSize="18" Margin="0,90,0,0"/>
         }
 
         public override void OnShadow()
@@ -73,6 +72,5 @@ namespace KeyboardKing.areas.play
                 NavigationController.NavigateToPage(Pages.MatchLobbyPage);
             }
         }
-
     }
 }
