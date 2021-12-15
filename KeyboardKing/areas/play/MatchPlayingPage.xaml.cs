@@ -115,11 +115,8 @@ namespace KeyboardKing.areas.play
             MatchController.RemoveUserInMatchProgress();
 
             int matchId = MatchController.GetMatchId();
-
             if (!DBQueries.GetMatchProgress(matchId).Any())
-            {
                 DBQueries.DeleteMatch(matchId);
-            }
 
             MusicPlayer.PlayNextFrom("menu_music");
             NavigationController.NavigateToPage(Pages.ChaptersPage);

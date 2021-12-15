@@ -29,9 +29,9 @@ namespace KeyboardKing.areas.play
 
         public override void OnLoad()
         {
-            int user_id = ((UList)Session.Get("student")).Get<int>(0);
+            User student = (User)Session.Get("student");
             int match_id = MatchController.GetMatchId();
-            DBQueries.UpdateMatchProgress(100, user_id, match_id);
+            DBQueries.UpdateMatchProgress(100, student.Id, match_id);
         }
 
         public override void OnShadow()

@@ -50,13 +50,13 @@ namespace KeyboardKing.areas.main
             this.Dispatcher.Invoke(() =>
             {
                 // Get logged in user data for the GetAllEpisodes query and set it to the itemsource of the overview ListBox.
-                UList User = (UList)Session.Get("student");
-                List<List<string>> Episodes = DBQueries.GetAllEpisodes(User);
+                User user = (User)Session.Get("student");
+                List<Episode> Episodes = DBQueries.GetAllEpisodes(user);
                 EpOverview.ItemsSource = Episodes;
 
                 // Add a GroupDescription so that the chapters with it's episodes will be split.
                 CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(EpOverview.ItemsSource);
-                PropertyGroupDescription groupDescription = new PropertyGroupDescription("[0]");
+                PropertyGroupDescription groupDescription = new PropertyGroupDescription("ChapterName");
                 view.GroupDescriptions.Add(groupDescription);
                 EpOverview.Items.Refresh();
             });
@@ -68,14 +68,14 @@ namespace KeyboardKing.areas.main
         private void EpOverview_PlayClick(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;
-            if (button.DataContext is List<string>)
+            if (button.DataContext is Episode)
             {
                 //Gets the selected row data
-                List<string> row = (List<string>)button.DataContext;
+                Episode row = (Episode)button.DataContext;
 
                 //When the episode is finished this event will trigger.
                 //Since we can only call Navigate() inside the View this is needed.
-                Episode episode = EpisodeController.ParseEpisode(int.Parse(row[3]));
+                Episode episode = EpisodeController.ParseEpisode(row.Id);
                 EpisodeController.Initialise(episode, false);
 
                 NavigationController.NavigateToPage(Pages.EpisodeReadyUpPage);

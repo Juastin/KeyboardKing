@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 using Model;
 
@@ -6,16 +7,6 @@ namespace Controller
 {
     public static class DBQueries
     {
-        /// <summary>
-        /// Example query.
-        /// </summary>
-        /// 
-
-        public static List<List<string>> GetAllUsers()
-        {
-            return DBHandler.SelectQuery(new MySqlCommand("SELECT id, username FROM User"));
-        }
-
         public static bool AddUser(string username, string email, string password, string salt)
         {
             MySqlCommand cmd = new MySqlCommand("INSERT INTO User (username, email, password, salt) VALUES (@username, @email, @password, @salt)");
@@ -38,7 +29,7 @@ namespace Controller
             return DBHandler.Query(cmd);
         }
 
-        public static bool AddSkill(string skilllevel, UList data)
+        public static bool AddSkill(string skilllevel, User user)
         {
             MySqlCommand cmd = new MySqlCommand("UPDATE UserSettings set skilllevel = @skill WHERE userid = @id");
 
@@ -46,7 +37,7 @@ namespace Controller
             MySqlParameter idParam = new MySqlParameter("@id", MySqlDbType.Int32, 0);
 
             skilllevelParam.Value = skilllevel;
-            idParam.Value = data.Get<int>(0);
+            idParam.Value = user.Id;
 
             cmd.Parameters.Add(skilllevelParam);
             cmd.Parameters.Add(idParam);
@@ -112,7 +103,7 @@ namespace Controller
             return DBHandler.Query(cmd);
         }
 
-        public static List<List<string>> GetUserInfo(string email)
+        public static User GetUserInfo(string email)
         {
             MySqlCommand cmd = new MySqlCommand("SELECT id, username, email, password, salt, skilllevel " +
                                             "FROM User " +
@@ -125,10 +116,10 @@ namespace Controller
             cmd.Parameters.Add(emailParam);
 
             List<List<string>> result = DBHandler.SelectQuery(cmd);
-            return result.Count == 1 && result[0].Count == 6 ? result : new List<List<string>>();
+            return User.ParseUser(result);
         }
 
-        public static List<List<string>> GetAllEpisodes(UList user)
+        public static List<Episode> GetAllEpisodes(User user)
         {
             MySqlCommand cmd = new MySqlCommand("SELECT c.name, episode, e.name, e.id, " +
                 "CASE WHEN er.userid IS NULL THEN 'False' ELSE 'True' END AS completed, " +
@@ -142,14 +133,15 @@ namespace Controller
                 "GROUP BY c.name, episode, e.name, e.id, er.userid");
 
             MySqlParameter UserIdParam = new MySqlParameter("@userid", MySqlDbType.Int32, 0);
-            UserIdParam.Value = user.Get<int>(0);
+            UserIdParam.Value = user.Id;
 
             cmd.Parameters.Add(UserIdParam);
 
-            return DBHandler.SelectQuery(cmd);
+            List<List<string>> result = DBHandler.SelectQuery(cmd);
+            return Episode.ParseEpisodes(result);
         }
 
-        public static List<List<string>> GetAllEpisodeStepsFromEpisode(int id)
+        public static List<EpisodeStep> GetAllEpisodeStepsFromEpisode(int id)
         {
             MySqlCommand cmd = new MySqlCommand("SELECT word " +
                 "FROM EpisodeStep " +
@@ -159,32 +151,37 @@ namespace Controller
             MySqlParameter episodeIdParam = new MySqlParameter("@id", MySqlDbType.Int32, 255);
             episodeIdParam.Value = id;
             cmd.Parameters.Add(episodeIdParam);
-
-            return DBHandler.SelectQuery(cmd);
+            
+            List<List<string>> result = DBHandler.SelectQuery(cmd);
+            return EpisodeStep.ParseEpisodeSteps(result);
         }
 
-        public static List<List<string>> GetAllActiveMatches()
+        public static List<Match> GetAllActiveMatches()
         {
-            MySqlCommand cmd = new MySqlCommand("SELECT COUNT(mp.id) playercount, u.username as host, m.id, e.name " +
+            MySqlCommand cmd = new MySqlCommand("SELECT COUNT(mp.id) playercount, u.id, u.username as host, m.id, m.state, e.id, e.name " +
                 "FROM MatchLobby m " +
                 "LEFT JOIN MatchProgress mp ON m.id = mp.matchid " +
                 "LEFT JOIN User u ON m.creatorid = u.id " +
                 "LEFT JOIN Episode e ON m.episodeid = e.id " +
                 "WHERE m.state = 0 " + 
-                "GROUP BY m.id, u.username, m.id, e.name");
-            return DBHandler.SelectQuery(cmd);
+                "GROUP BY m.id, m.state, u.id, u.username, m.id, e.id, e.name");
+
+            List<List<string>> result = DBHandler.SelectQuery(cmd);
+            return Match.ParseMatches(result);
         }
 
-        public static List<List<string>> GetAllUsersInMatch()
+        public static List<User> GetAllUsersInMatch()
         {
             MySqlCommand cmd = new MySqlCommand("SELECT userid " +
                                             "FROM MatchLobby m " +
                                             "RIGHT JOIN MatchProgress mp ON m.id = mp.matchid " +
                                             "WHERE m.state != 2 ");
-            return DBHandler.SelectQuery(cmd);
+
+            List<List<string>> result = DBHandler.SelectQuery(cmd);
+            return User.ParseUserIds(result);
         }
 
-        public static bool SetPlayState(int matchid, int state)
+        public static bool SetPlayState(int matchid, MatchState state)
         {
             MySqlCommand cmd = new MySqlCommand("UPDATE MatchLobby set state = @state WHERE id = @matchid ");
 
@@ -219,23 +216,7 @@ namespace Controller
             return DBHandler.Query(cmd);
         }
 
-        public static List<List<string>> GetOpponentProgress(int user_id, int match_id)
-        {
-            MySqlCommand cmd = new MySqlCommand("SELECT username, progress FROM MatchProgress mp LEFT JOIN User u ON mp.userid=u.id WHERE userid != @userid AND matchid = @matchid ORDER BY progress DESC LIMIT 4");
-
-            MySqlParameter q_user_id = new MySqlParameter("@userid", MySqlDbType.Int32, 255);
-            MySqlParameter q_match_id = new MySqlParameter("@matchid", MySqlDbType.Int32, 255);
-
-            q_user_id.Value = user_id;
-            q_match_id.Value = match_id;
-
-            cmd.Parameters.Add(q_user_id);
-            cmd.Parameters.Add(q_match_id);
-
-            return DBHandler.SelectQuery(cmd);
-        }
-
-        public static int AddMatch(int episodeid, UList user)
+        public static int AddMatch(int episodeid, User user)
         {
             MySqlCommand cmd = new MySqlCommand("INSERT INTO MatchLobby (episodeid, creatorid) VALUES (@episodeid, @creatorid)");
 
@@ -243,7 +224,7 @@ namespace Controller
             MySqlParameter creatorId = new MySqlParameter("@creatorid", MySqlDbType.Int32, 0);
 
             episodeId.Value = episodeid;
-            creatorId.Value = user.Get<int>(0);
+            creatorId.Value = user.Id;
 
             cmd.Parameters.Add(episodeId);
             cmd.Parameters.Add(creatorId);
@@ -251,7 +232,7 @@ namespace Controller
             return DBHandler.InsertAndGet(cmd);
         }
 
-        public static bool AddMatchProgress(int matchid, UList user)
+        public static bool AddMatchProgress(int matchid, User user)
         {
             MySqlCommand cmd = new MySqlCommand("INSERT INTO MatchProgress (matchid, userid) " +
                                             "VALUES (@matchid, @userid)");
@@ -260,7 +241,7 @@ namespace Controller
             MySqlParameter userId = new MySqlParameter("@userid", MySqlDbType.Int32, 0);
 
             matchId.Value = matchid;
-            userId.Value = user.Get<int>(0);
+            userId.Value = user.Id;
 
             cmd.Parameters.Add(matchId);
             cmd.Parameters.Add(userId);
@@ -268,22 +249,40 @@ namespace Controller
             return DBHandler.Query(cmd);
         }
 
-        public static List<List<string>> GetMatchProgress(int matchid)
+        public static Match GetMatchById(int matchId)
         {
-            MySqlCommand cmd = new MySqlCommand("SELECT mp.matchid, u.username, e.name, mp.progress, mp.score, mp.mistakes, mp.lettersperminute, mp.time, m.creatorid, m.episodeid, m.state, mp.userid " +
+            MySqlCommand cmd = new MySqlCommand("SELECT m.id, m.state, u.id, u.username, e.id, e.name " +
+                "FROM MatchLobby m " +
+                "LEFT JOIN User u ON m.creatorid = u.id " +
+                "LEFT JOIN Episode e ON e.id = m.episodeid " +
+                "WHERE m.id = @matchid");
+
+            MySqlParameter id = new MySqlParameter("@matchid", MySqlDbType.Int32, 255);
+            id.Value = matchId;
+            cmd.Parameters.Add(id);
+
+            List<List<string>> result = DBHandler.SelectQuery(cmd);
+            return Match.ParseMatch(result);
+        }
+
+        public static List<MatchProgress> GetMatchProgress(int matchId)
+        {
+            MySqlCommand cmd = new MySqlCommand("SELECT u.id, u.username, mp.progress, mp.score, mp.mistakes, mp.lettersperminute, mp.time " +
              "FROM MatchProgress mp " +
              "LEFT JOIN MatchLobby m ON mp.matchid = m.id " +
              "LEFT JOIN Episode e ON m.episodeid = e.id " +
              "LEFT JOIN User u ON mp.userid = u.id " +
              "WHERE mp.matchid = @matchid");
 
-            MySqlParameter matchId = new MySqlParameter("@matchid", MySqlDbType.Int32, 255);
-            matchId.Value = matchid;
-            cmd.Parameters.Add(matchId);
-            return DBHandler.SelectQuery(cmd);
+            MySqlParameter id = new MySqlParameter("@matchid", MySqlDbType.Int32, 255);
+            id.Value = matchId;
+            cmd.Parameters.Add(id);
+
+            List<List<string>> result = DBHandler.SelectQuery(cmd);
+            return MatchProgress.ParseMatchProgress(result);
         }
 
-        public static bool RemoveUserInMatch(int matchid, UList user)
+        public static bool RemoveUserInMatch(int matchid, User user)
         {
             MySqlCommand cmd = new MySqlCommand("DELETE FROM MatchProgress WHERE matchid = @matchid AND userid = @userid");
 
@@ -291,7 +290,7 @@ namespace Controller
             MySqlParameter userId = new MySqlParameter("@userid", MySqlDbType.Int32, 0);
 
             matchId.Value = matchid;
-            userId.Value = user.Get<int>(0);
+            userId.Value = user.Id;
 
             cmd.Parameters.Add(matchId);
             cmd.Parameters.Add(userId);
@@ -325,7 +324,7 @@ namespace Controller
             return DBHandler.Query(cmd);
         }
 
-        public static List<List<string>> GetScoresOrderByHighest(int matchid)
+        public static List<MatchProgress> GetScoresOrderByHighest(int matchid)
         {
             MySqlCommand cmd = new MySqlCommand("SELECT u.username, mp.score " +
             "FROM MatchProgress mp " +
@@ -339,21 +338,8 @@ namespace Controller
 
             cmd.Parameters.Add(matchId);
 
-            return DBHandler.SelectQuery(cmd);
+            List<List<string>> result = DBHandler.SelectQuery(cmd);
+            return MatchProgress.ParseSimpleProgress(result);
         }
-
-        public static List<List<string>> GetAllProgress(int match_id)
-        {
-            MySqlCommand cmd = new MySqlCommand("SELECT progress FROM MatchProgress WHERE matchid = @matchid");
-
-            MySqlParameter q_match_id = new MySqlParameter("@matchid", MySqlDbType.Int32, 255);
-
-            q_match_id.Value = match_id;
-
-            cmd.Parameters.Add(q_match_id);
-
-            return DBHandler.SelectQuery(cmd);
-        }
-
     }
 }

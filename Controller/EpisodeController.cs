@@ -142,18 +142,13 @@ namespace Controller
         /// <returns></returns>
         public static Episode ParseEpisode(int episodeId)
         {
-            List<List<string>> results = DBQueries.GetAllEpisodeStepsFromEpisode(episodeId);
+            List<EpisodeStep> steps = DBQueries.GetAllEpisodeStepsFromEpisode(episodeId);
 
             Session.Remove("episodeId");
             Session.Add("episodeId", episodeId);
 
             Episode episode = new Episode();
-
-            foreach (List<string> word in results)
-            {
-                EpisodeStep es = new EpisodeStep() { Word = word[0] };
-                episode.EpisodeSteps.Enqueue(es);
-            }
+            steps.ForEach(s => episode.EpisodeSteps.Enqueue(s));
 
             return episode;
         }
@@ -184,12 +179,10 @@ namespace Controller
         public static void OnEpisodeFinished(object sender, EventArgs e)
         {
             StopAndSetEpisodeResult();
-            UList student = (UList)Session.Get("student");
 
-            int userId = student.Get<int>(0);
+            User student = (User)Session.Get("student");
             int episodeId = (int)Session.Get("episodeId");
-
-            DBQueries.SaveResult(CurrentEpisodeResult, episodeId, userId);
+            DBQueries.SaveResult(CurrentEpisodeResult, episodeId, student.Id);
 
             EpisodeResultUpdated?.Invoke(null, EventArgs.Empty);
             NavigationController.NavigateToPage(Pages.EpisodeResultPage);
