@@ -86,10 +86,24 @@ namespace KeyboardKing.areas.play
                 LvMatch.SelectedIndex = selectedItem;
                 lEpisodeMatch.Content = _matchInfoLoad[0][2];
                 startbtn.Visibility = MatchController.CheckUserIsCreator() ? Visibility.Visible : Visibility.Hidden;
+
+                GridViewColumn lastColumn = ((GridView)LvMatch.View).Columns.Last();
+                ResizeGridViewColumn(lastColumn);
             });
         }
 
-        private void BExitMatch(object sender, EventArgs e)
+        // Resize specific column to the width of the largest column item
+        private void ResizeGridViewColumn(GridViewColumn column)
+        {
+            if (double.IsNaN(column.Width))
+            {
+                column.Width = column.ActualWidth;
+            }
+
+            column.Width = double.NaN;
+        }
+
+            private void BExitMatch(object sender, EventArgs e)
         {
             _checkIfLeft = true;
             if (MatchController.CheckUserIsCreator())
