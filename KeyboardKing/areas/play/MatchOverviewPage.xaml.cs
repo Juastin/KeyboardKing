@@ -68,7 +68,8 @@ namespace KeyboardKing.areas.play
                 Button button = (Button)sender;
                 if (button.DataContext is Match match)
                 {
-                    MatchController.AddUserInMatchProgress(match.Id);
+                    MatchController.Initialize(match);
+                    MatchController.AddUserInMatchProgress();
                     NavigationController.NavigateToPage(Pages.MatchLobbyPage);
                 }
             }

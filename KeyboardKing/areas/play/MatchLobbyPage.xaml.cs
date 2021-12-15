@@ -72,19 +72,19 @@ namespace KeyboardKing.areas.play
             int counter = 0;
             while (counter < _matchInfoLoad.Count)
             {
-                string symbol = MatchController.CheckUserIsCreator(_matchInfoLoad[counter].UserId) ? "\u2654" : string.Empty;
-                items.Add(new MatchLobbyData() { Logo = symbol, Username = $"{_matchInfoLoad[counter].Username}" });;
+                string symbol = MatchController.CheckUserIsCreator(_matchInfoLoad[counter].User.Id) ? "\u2654" : string.Empty;
+                items.Add(new MatchLobbyData() { Logo = symbol, Username = $"{_matchInfoLoad[counter].User.Username}" });;
                 counter++;
             }
 
-            if (_matchInfoLoad[0].MatchState == MatchState.Started) StartGame();
+            if (MatchController.CurrentMatch.State == MatchState.Started) StartGame();
 
             this.Dispatcher.Invoke(() =>
             {
                 int selectedItem = LvMatch.SelectedIndex;
                 LvMatch.ItemsSource = items;
                 LvMatch.SelectedIndex = selectedItem;
-                lEpisodeMatch.Content = _matchInfoLoad[0].EpisodeName;
+                lEpisodeMatch.Content = MatchController.CurrentMatch.Episode.Name;
                 startbtn.Visibility = MatchController.CheckUserIsCreator() ? Visibility.Visible : Visibility.Hidden;
             });
         }

@@ -174,13 +174,13 @@ namespace Controller
 
         public static List<Match> GetAllActiveMatches()
         {
-            SqlCommand cmd = new SqlCommand("SELECT COUNT(mp.id) playercount, u.username as host, m.id, e.name " +
+            SqlCommand cmd = new SqlCommand("SELECT COUNT(mp.id) playercount, u.id, u.username as host, m.id, m.state, e.id, e.name " +
                 "FROM [dbo].[Match] m " +
                 "LEFT JOIN [dbo].[MatchProgress] mp ON m.id = mp.matchid " +
                 "LEFT JOIN [dbo].[User] u ON m.creatorid = u.id " +
                 "LEFT JOIN [dbo].[Episode] e ON m.episodeid = e.id " +
                 "WHERE m.state = 0 " + 
-                "GROUP BY m.id, u.username, m.id, e.name");
+                "GROUP BY m.id, m.state, u.id, u.username, m.id, e.id, e.name");
 
             List<List<string>> result = DBHandler.SelectQuery(cmd);
             return Match.ParseMatches(result);
@@ -357,19 +357,6 @@ namespace Controller
 
             List<List<string>> result = DBHandler.SelectQuery(cmd);
             return MatchProgress.ParseSimpleProgress(result);
-        }
-
-        public static List<MatchProgress> GetAllProgress(int match_id)
-        {
-            SqlCommand cmd = new SqlCommand("SELECT progress FROM [dbo].[MatchProgress] WHERE matchid = @matchid");
-
-            SqlParameter q_match_id = new SqlParameter("@matchid", SqlDbType.Int, 255);
-            q_match_id.Value = match_id;
-
-            cmd.Parameters.Add(q_match_id);
-
-            List<List<string>> result = DBHandler.SelectQuery(cmd);
-            return result.Select(p => new MatchProgress() { Progress = int.Parse(p[0]) }).ToList();
         }
     }
 }
