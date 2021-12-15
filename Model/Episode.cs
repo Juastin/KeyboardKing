@@ -9,7 +9,7 @@ namespace Model
     public class Episode
     {
         public string ChapterName { get; set; }
-        public int ChapterId { get; set; }
+        public int ChapterEpisodeId { get; set; }
         public string Name { get; set; }
         public int Id { get; set; }
         public bool Completed { get; set; }
@@ -29,7 +29,7 @@ namespace Model
             input.ForEach(e => episodes.Add(new Episode()
             {
                 ChapterName = e[0],
-                ChapterId = int.Parse(e[1]),
+                ChapterEpisodeId = int.Parse(e[1]),
                 Name = e[2],
                 Id = int.Parse(e[3]),
                 Completed = bool.Parse(e[4]),
