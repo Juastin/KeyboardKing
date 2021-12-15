@@ -47,11 +47,11 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <TextBox x:Name="UserInput" Background="Transparent" Foreground="Transparent" CaretBrush="Transparent" Grid.Column="0" LostKeyboardFocus="UserInput_LostFocus" Text="" TextChanged="UserInput_TextChanged" SelectionBrush="{x:Null}" BorderThickness="0,0,0,0"/>
-                <Grid Grid.Row="0" Grid.RowSpan="3">
-                    <ListBox x:Name="OpponentListBox" ItemContainerStyle="{DynamicResource ListBoxItemTemplate}" Background="Transparent" BorderThickness="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,200">
+                <Grid Grid.Row="1" Grid.RowSpan="2">
+                    <ListBox MaxWidth="800" x:Name="OpponentListBox" ItemContainerStyle="{DynamicResource ListBoxItemTemplate}" Background="Transparent" BorderThickness="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,30,0,0">
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <UniformGrid Columns="2"/>
+                                <WrapPanel HorizontalAlignment="Center"/>
                             </ItemsPanelTemplate>
                         </ListBox.ItemsPanel>
                     </ListBox>

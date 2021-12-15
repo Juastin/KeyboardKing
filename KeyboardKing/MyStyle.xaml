@@ -182,15 +182,18 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Grid x:Name="grid" Background="Transparent">
+                    <Grid x:Name="grid" Background="Transparent" ToolTipService.InitialShowDelay="0">
                         <Border Name="border" 
                         BorderThickness="1"
                         Padding="4,2" 
                         BorderBrush="{DynamicResource Color4}" 
                         CornerRadius="3" 
                         Background="{TemplateBinding Background}">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
+                        <Grid.ToolTip>
+                            <ToolTip Style="{DynamicResource NavBarToolTip}" Content="{TemplateBinding ToolTip}"/>
+                        </Grid.ToolTip>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
@@ -1090,4 +1093,43 @@
         </Style.Triggers>
     </Style>
 
+
+    <!-- NavBarToolTip Template -->
+    <Style x:Key="NavBarToolTip" TargetType="ToolTip">
+        <Setter Property="OverridesDefaultStyle"
+          Value="true" />
+        <Setter Property="HasDropShadow"
+          Value="True" />
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Placement" Value="Center"/>
+        <Setter Property="VerticalOffset" Value="60"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToolTip">
+                    <Border Name="Border"
+                BorderThickness="1"
+                Width="{TemplateBinding Width}"
+                Height="{TemplateBinding Height}"
+                            Background="{DynamicResource Color5}">
+                        <ContentPresenter Margin="4"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="HasDropShadow"
+                   Value="true">
+                            <Setter TargetName="Border"
+                    Property="CornerRadius"
+                    Value="3" />
+                            <Setter TargetName="Border"
+                    Property="SnapsToDevicePixels"
+                    Value="true" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
 </ResourceDictionary>

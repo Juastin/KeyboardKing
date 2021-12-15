@@ -3,7 +3,7 @@
 
     <!-- IMAGES -->
     <BitmapImage x:Key="Wallpaper" UriSource="/resources/images/space_theme_background.png"/>
-    <BitmapImage x:Key="MessageWallpaper" UriSource="/resources/images/space_theme_background.png"/>
+    <BitmapImage x:Key="MessageWallpaper" UriSource="/resources/images/blur_space_theme_background.png"/>
 
     <!-- COLOR SCHEMES -->
     <Color x:Key="SColor1">#000814</Color>

@@ -18,12 +18,18 @@
     <None Remove="resources\audio\music\There Was A King.wav" />
     <None Remove="resources\audio\music\Underdog.wav" />
     <None Remove="resources\images\blur_background_4K.png" />
+    <None Remove="resources\images\blur_hellobeertje_background.png" />
+    <None Remove="resources\Images\blur_kk_background_christmas.png" />
+    <None Remove="resources\images\blur_kk_background_dark.png" />
+    <None Remove="resources\images\blur_paint_theme_background.png" />
+    <None Remove="resources\images\blur_red_chinese_background.png" />
+    <None Remove="resources\images\blur_space_theme_background.png" />
+    <None Remove="resources\images\hellobeertje_background_4k.png" />
     <None Remove="resources\images\icon.png" />
     <None Remove="resources\images\kingbackground.png" />
     <None Remove="resources\images\kk_background_1080.png" />
     <None Remove="resources\images\kk_background_4K.png" />
     <None Remove="resources\Images\kk_background_christmas.png" />
-    <None Remove="resources\Images\kk_background_christmas_blur.png" />
     <None Remove="resources\images\kk_background_dark.png" />
     <None Remove="resources\images\obsidian_theme_background.png" />
     <None Remove="resources\images\paint_theme_background.png" />
@@ -66,6 +72,24 @@
     <Content Include="resources\images\blur_background_4K.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="resources\images\blur_hellobeertje_background.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\blur_kk_background_dark.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\blur_paint_theme_background.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\blur_red_chinese_background.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\blur_space_theme_background.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\hellobeertje_background_4k.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="resources\images\icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -81,7 +105,7 @@
     <Content Include="resources\Images\kk_background_christmas.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="resources\Images\kk_background_christmas_blur.png">
+    <Content Include="resources\Images\blur_kk_background_christmas.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\images\kk_background_dark.png">
@@ -117,6 +141,9 @@
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>
     <Page Update="resources\themes\PaintTheme.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="resources\themes\HelloBeertjeTheme.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>
     <Page Update="resources\themes\ThemeTemplate.xaml">

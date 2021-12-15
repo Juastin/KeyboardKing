@@ -25,6 +25,7 @@ namespace Model
             return input.Select(p => new MatchProgress(int.Parse(p[0]), p[1])
             {
                 Progress = int.Parse(p[2]),
+                //Temporary fix because default values are not set to 0 
                 Score = int.Parse(p[3]),
                 Mistakes = int.Parse(p[4]),
                 LPM = int.Parse(p[5]),
