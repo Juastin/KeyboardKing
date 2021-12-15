@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Common;
-using System.Data.SqlClient;
+﻿using System.Collections.Generic;
+using MySql.Data.MySqlClient;
 using System.Configuration;
 using Cryptography;
+using System;
 
 namespace Controller
 {
@@ -27,10 +25,10 @@ namespace Controller
         ///     {"3", "Username3"}
         /// }
         /// </summary>    
-        public static List<List<string>> SelectQuery(SqlCommand cmd)
+        public static List<List<string>> SelectQuery(MySqlCommand cmd)
         {
-            SqlConnection connection = null;
-            SqlDataReader rdr = null;
+            MySqlConnection connection = null;
+            MySqlDataReader rdr = null;
             List<List<string>> result = new List<List<string>>();
 
             try
@@ -57,9 +55,9 @@ namespace Controller
         }
 
         // Query for Insert, Update and Delete
-        public static bool Query(SqlCommand cmd)
+        public static bool Query(MySqlCommand cmd)
         {
-            SqlConnection connection = null;
+            MySqlConnection connection = null;
             try
             {
                 connection = OpenConnection(_connection);
@@ -77,18 +75,20 @@ namespace Controller
                 connection?.Close();
             }
         }
-        // Query for scalar queries
-        public static T QueryScalar<T>(SqlCommand cmd)
+
+        // Query for INSERTs that returns the inserted id
+        public static int InsertAndGet(MySqlCommand cmd)
         {
-            SqlConnection connection = null;
+            MySqlConnection connection = null;
             try
             {
                 connection = OpenConnection(_connection);
                 cmd.Connection = connection;
                 cmd.Prepare();
-                return (T)cmd.ExecuteScalar();
+                cmd.ExecuteNonQuery();
+                return (int)cmd.LastInsertedId;
             }
-            catch
+            catch (Exception e)
             {
                 return default;
             }
@@ -98,9 +98,9 @@ namespace Controller
             }
         }
 
-        public static SqlConnection OpenConnection(string connectionString)
+        public static MySqlConnection OpenConnection(string connectionString)
         {
-            SqlConnection connection = new SqlConnection(TripleDES.Decrypt(connectionString, "332cc6da-d757-4e80-a726-0bf6b615df09"));
+            MySqlConnection connection = new MySqlConnection(TripleDES.Decrypt(connectionString, "730cec9c-b95d-4647-b4a9-e7642b15c239"));
             connection.Open();
             return connection;
         }

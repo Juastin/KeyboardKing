@@ -2,15 +2,15 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!-- IMAGES -->
-    <BitmapImage x:Key="Wallpaper" UriSource="/resources/images/paint_theme_background.png"/>
-    <BitmapImage x:Key="MessageWallpaper" UriSource="/resources/images/blur_paint_theme_background.png"/>
+    <BitmapImage x:Key="Wallpaper" UriSource="/resources/images/hellobeertje_background_4k.png"/>
+    <BitmapImage x:Key="MessageWallpaper" UriSource="/resources/images/blur_hellobeertje_background.png"/>
 
     <!-- COLOR SCHEMES -->
     <Color x:Key="SColor1">#000814</Color>
     <Color x:Key="SColor2">#001D3D</Color>
     <Color x:Key="SColor3">#003566</Color>
-    <Color x:Key="SColor4">#e1b4ff</Color>
-    <Color x:Key="SColor5">#ffc0ad</Color>
+    <Color x:Key="SColor4">#FFC8DD</Color>
+    <Color x:Key="SColor5">#FFAFCC</Color>
 
     <!-- Tints -->
     <Color x:Key="SColor6">#FFFFFF</Color>
@@ -21,8 +21,8 @@
     <Color x:Key="SBackground">White</Color>
     <Color x:Key="SBorder">Black</Color>
 
-    <SolidColorBrush x:Key="Succes" Color="#6691ff"/>
-    <SolidColorBrush x:Key="Failed" Color="#ff9666"/>
+    <SolidColorBrush x:Key="Succes" Color="#70AD47"/>
+    <SolidColorBrush x:Key="Failed" Color="#FFD9534F"/>
 
 
     <!-- BRUSHES (DO NOT CHANGE THESE VALUES!) -->

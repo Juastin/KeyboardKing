@@ -3,7 +3,7 @@
 
     <!-- IMAGES -->
     <BitmapImage x:Key="Wallpaper" UriSource="/resources/images/kk_background_dark.png"/>
-    <BitmapImage x:Key="MessageWallpaper" UriSource="/resources/images/kk_background_dark.png"/>
+    <BitmapImage x:Key="MessageWallpaper" UriSource="/resources/images/blur_kk_background_dark.png"/>
 
     <!-- COLOR SCHEMES -->
     <Color x:Key="SColor1">#000814</Color>
