@@ -19,29 +19,39 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListBoxItem">
-                        <Border Margin="50" Height="250" Width="200" BorderThickness="0" CornerRadius="5" Background="{DynamicResource BackgroundColor}">
+                        <Border Margin="30" Height="200" Width="150" BorderThickness="0" CornerRadius="5">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition />
                                     <RowDefinition Height="50"/>
                                 </Grid.RowDefinitions>
-                                <Grid Grid.Row="0">
-                                    
-                                </Grid>
-                                <Grid Background="Gray" Grid.Row="1">
-                                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
-                                        <Image Source="/KeyBoardking;component/resources/images/icons/coin.png"/>
-                                        <Label VerticalAlignment="Center" Content="test"/>
-                                    </StackPanel>
-                                </Grid>
+                                <Border Grid.Row="0" Padding="10">
+                                    <Grid>
+                                        <Button Tag="{Binding [1]}" Style="{DynamicResource ImageButtonTemplate}"/>
+                                        <Label Name="Purchased" Visibility="Hidden" VerticalAlignment="Center" HorizontalAlignment="Center" Content="✔" Foreground="{DynamicResource Succes}" FontSize="90"/>
+                                    </Grid>
+                                </Border>
+                                <Border Grid.Row="1" Background="#FFC08637" Padding="0,5" CornerRadius="10">
+                                    <Grid>
+                                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+                                            <Image Source="/KeyBoardking;component/resources/images/icons/coin.png"/>
+                                            <Label Style="{DynamicResource H3}" Foreground="White" Margin="0,-2,0,0" Content="{Binding [2]}"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
                             </Grid>
                         </Border>
+                        <ControlTemplate.Triggers>
+                            <DataTrigger Binding="{Binding [3]}" Value="True">
+                                <Setter TargetName="Purchased" Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
             <Setter Property="Border.Effect">
                 <Setter.Value>
-                    <DropShadowEffect ShadowDepth="0" BlurRadius="20" Color="#e8e8e8" />
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="20" Opacity="0.8" Color="Black"/>
                 </Setter.Value>
             </Setter>
         </Style>
@@ -59,23 +69,26 @@
                     <Label Style="{DynamicResource H1}" Content="Winkel" HorizontalAlignment="Left"/>
                 </Grid>
                 <Grid Grid.Row="1">
-                    <ListBox ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemContainerStyle="{DynamicResource ListBoxItemTemplate}" Background="#FFB35B31">
+                    <ListBox x:Name="LbShop" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemContainerStyle="{DynamicResource ListBoxItemTemplate}" Background="#FF6C4006">
+                        <ListBox.OpacityMask>
+                            <LinearGradientBrush EndPoint="0,1"
+                             StartPoint="0,0">
+                                <GradientStop Color="Transparent"
+                                              Offset="0" />
+                                <GradientStop Color="White"
+                                              Offset="0.02" />
+                                <GradientStop Color="White"
+                                              Offset="0.98" />
+                                <GradientStop Color="Transparent" 
+                                              Offset="1"/>
+                            </LinearGradientBrush>
+                        </ListBox.OpacityMask>
+                        
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <WrapPanel HorizontalAlignment="Center"/>
                             </ItemsPanelTemplate>
                         </ListBox.ItemsPanel>
-                        <ListBoxItem></ListBoxItem>
-                        <ListBoxItem></ListBoxItem>
-                        <ListBoxItem></ListBoxItem>
-                        <ListBoxItem></ListBoxItem>
-                        <ListBoxItem></ListBoxItem>
-                        <ListBoxItem></ListBoxItem>
-                        <ListBoxItem></ListBoxItem>
-                        <ListBoxItem></ListBoxItem>
-                        <ListBoxItem></ListBoxItem>
-                        <ListBoxItem></ListBoxItem>
-                        <ListBoxItem></ListBoxItem>
                     </ListBox>
                 </Grid>
                 <Grid Grid.Row="2" HorizontalAlignment="Center">

@@ -24,7 +24,7 @@
         <Setter Property="FontSize" Value="26"/>
         <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
     </Style>
-
+        
     <SolidColorBrush x:Key="Info" Color="#FF0051FF"/>
     <SolidColorBrush x:Key="InfoLight" Color="#FF3374FF"/>
 
@@ -1131,5 +1131,28 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
+
+    <!-- Image button template -->
+    <Style x:Key="ImageButtonTemplate" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Border x:Name="MainBorder">
+                            <Image Source="{Binding Path=Tag, RelativeSource={RelativeSource TemplatedParent}}"/>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="MainBorder" Property="Padding" Value="5"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="MainBorder" Property="Padding" Value="0"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>
