@@ -76,11 +76,11 @@ namespace KeyboardKing.areas.play
                     }
                     else
                     {
-                        MessageBox.Show("Match is verwijderd");
+                        MessageController.Show(Pages.MessagePage, "De match is verwijderd", Pages.MatchOverviewPage, 5);
                     }
                 }
             }
-            else { MessageBox.Show("Je zit al in een match"); }
+            else { MessageController.Show(Pages.MessagePage, "De match is verwijderd", Pages.MatchOverviewPage, 5); }
         }
     }
 }
