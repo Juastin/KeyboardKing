@@ -76,7 +76,7 @@ namespace KeyboardKing.areas.play
                     }
                     else
                     {
-                        MessageBox.Show("GEEN CHINEESEN TOEGESTAAN");
+                        MessageBox.Show("Match is verwijderd");
                     }
                 }
             }
