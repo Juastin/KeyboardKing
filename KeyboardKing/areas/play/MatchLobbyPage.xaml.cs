@@ -103,7 +103,7 @@ namespace KeyboardKing.areas.play
             column.Width = double.NaN;
         }
 
-            private void BExitMatch(object sender, EventArgs e)
+        private void BExitMatch(object sender, EventArgs e)
         {
             _checkIfLeft = true;
             if (MatchController.CheckUserIsCreator())
