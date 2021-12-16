@@ -38,9 +38,9 @@ namespace KeyboardKing.areas.play
             }
 
             User user = (User)Session.Get("student");
-
-            CBEpisode.ItemsSource = DBQueries.GetAllEpisodes(user);
-            CBEpisode.DisplayMemberPath = "Name";
+            ListCollectionView lcv = new ListCollectionView(DBQueries.GetAllEpisodes(user));
+            lcv.GroupDescriptions.Add(new PropertyGroupDescription("ChapterName"));
+            CBEpisode.ItemsSource = lcv;
             CBEpisode.SelectedValuePath = "Id";
         }
 
