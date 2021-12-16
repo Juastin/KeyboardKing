@@ -16,7 +16,7 @@ namespace Model
         RegisterPage,
         RegisterSkillPage,
         ChaptersPage,
-        FavoritesPage,
+        ShoppingPage,
         SettingsPage,
         EpisodeReadyUpPage,
         EpisodePage,
@@ -26,6 +26,7 @@ namespace Model
         MatchOverviewPage,
         MatchPlayingPage,
         MatchResultPage,
-        MatchWaitingResultPage
+        MatchWaitingResultPage,
+        FavoritesPage
     }
 }

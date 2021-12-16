@@ -76,7 +76,7 @@ namespace KeyboardKing
 
                 // main area
                 {Pages.ChaptersPage, new ChaptersPage(this)},
-                {Pages.FavoritesPage, new FavoritesPage(this)},
+                {Pages.ShoppingPage, new ShoppingPage(this)},
                 {Pages.SettingsPage, new SettingsPage(this)},
 
                 // play area

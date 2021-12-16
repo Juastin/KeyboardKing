@@ -26,6 +26,7 @@
     <None Remove="resources\images\blur_space_theme_background.png" />
     <None Remove="resources\images\hellobeertje_background_4k.png" />
     <None Remove="resources\images\icon.png" />
+    <None Remove="resources\images\icons\coin.png" />
     <None Remove="resources\images\kingbackground.png" />
     <None Remove="resources\images\kk_background_1080.png" />
     <None Remove="resources\images\kk_background_4K.png" />
@@ -92,6 +93,9 @@
     </Content>
     <Content Include="resources\images\icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\icons\coin.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\images\kingbackground.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
