@@ -31,16 +31,18 @@ namespace Controller
 
         public static string Word { get => CurrentEpisodeStep?.Word; }
 
-        public static int Points { get; set; }
-        private static int _pointsCalculation;
         public static int Difficulty { get; set; }
+
         private static bool _repeatMistake;
+
         public static string WordOverlayCorrect { get =>CurrentEpisodeStep?.Word.Substring(0, _wordIndex); }
         public static string WordOverlay { get => CurrentEpisodeStep?.Word.Substring(_wordIndex); }
         public static string WordOverlayWrong { get =>CurrentEpisodeStep?.Word.Substring(_wordIndex, _wrongIndex); }
         public static bool IsStarted { get; private set; }
 
-        public static bool Coins { get; private set; }
+        public static int Coins { get; private set; }
+
+        private static bool _checkFinished;
       
         public static void Start()
         {
@@ -72,11 +74,12 @@ namespace Controller
             CurrentEpisodeResult = new EpisodeResult();
             _stopwatch = new Stopwatch();
             _repeatMistake = false;
+            _checkFinished = false;
             Difficulty = 30;
             _wordIndex = 0;
             _wrongIndex = 0;
             LettersTyped = 0;
-            Points = 0;
+            Coins = 0;
             CurrentEpisodeResult.MaxScore = CalculateTotalLetters(episode);
             NextEpisodeStep();
 
@@ -94,9 +97,15 @@ namespace Controller
             _wordIndex = 0;
             _wrongIndex = 0;
             if (_currentEpisode.EpisodeSteps.TryDequeue(out EpisodeStep step))
-                CurrentEpisodeStep = step;
+            {
+                CurrentEpisodeStep = step; 
+            }
             else
+            {
                 EpisodeFinished?.Invoke(null, EventArgs.Empty);
+                EpisodeFinished -= OnEpisodeFinished;
+            }
+                
 
             WordChanged?.Invoke(null, new EventArgs());
         }
@@ -114,17 +123,15 @@ namespace Controller
                 _wordIndex++;
                 LettersTyped++;
                 _wrongIndex = 0;
-                Points += 10;
                 _repeatMistake = false;
             }
 
             else
             {
                 _wrongIndex = 1;
-                CurrentEpisodeResult.Mistakes++;
                 if (_repeatMistake == false)
                 {
-                    Points -= Difficulty;
+                    CurrentEpisodeResult.Mistakes++;
                     _repeatMistake = true;
                 }
             }
@@ -184,13 +191,32 @@ namespace Controller
         public static void OnEpisodeFinished(object sender, EventArgs e)
         {
             StopAndSetEpisodeResult();
+           
 
             User student = (User)Session.Get("student");
             int episodeId = (int)Session.Get("episodeId");
+            GiveCoins(CurrentEpisodeResult.Score, student, episodeId);
             DBQueries.SaveResult(CurrentEpisodeResult, episodeId, student.Id);
 
             EpisodeResultUpdated?.Invoke(null, EventArgs.Empty);
             NavigationController.NavigateToPage(Pages.EpisodeResultPage);
+        }
+
+        private static void GiveCoins(int score, User student, int episodeId)
+        {
+            int highscore = DBQueries.GetHighscoreEpisode(student, episodeId); //5550
+
+            if(CurrentEpisodeResult.Score > highscore)
+            {
+                Coins = (CurrentEpisodeResult.Score - highscore) / 100;
+            }
+
+            DBQueries.UpdateCoins(Coins, student);
+        }
+        
+        public static string GetCoins(User student)
+        {
+            return DBQueries.GetCoinsOffUser(student);
         }
 
         /// <summary>
@@ -211,10 +237,8 @@ namespace Controller
         /// <returns></returns>
         public static double CalculateScore(double LettersPerMinute, int totalLetters, int mistakes)
         {
-            double totall = totalLetters;
-            double mis = mistakes;
-
-            return (LettersPerMinute * totall * 10 - mis * Difficulty)  / (400 * totall* 10) * 10000;
+            double score = LettersPerMinute * (totalLetters * 10 - mistakes * Difficulty) / (400 * totalLetters * 10) * 10000;
+            return score >= 0 ? score : 0;
         }
 
         /// <summary>

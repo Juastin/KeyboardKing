@@ -30,6 +30,7 @@ namespace KeyboardKing.areas.main
 
         public override void OnLoad()
         {
+            Coin.Content = EpisodeController.GetCoins((User)Session.Get("student"));
             LoadAllEpisodes();
         }
 
@@ -39,6 +40,7 @@ namespace KeyboardKing.areas.main
 
         public override void OnTick()
         {
+
         }
 
         /// <summary>

@@ -24,7 +24,7 @@
                     <Label Style="{DynamicResource H1}" Content="Favorieten" HorizontalAlignment="Left"/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                         <Image Width="50" Source="/KeyBoardking;component/resources/images/coin.png"/>
-                        <Label Style="{DynamicResource H1}" Content="10.000"/>
+                        <Label Style="{DynamicResource H1}" x:Name="Coin" Content=""/>
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Row="1" VerticalAlignment="Top">

@@ -1,4 +1,6 @@
-﻿using KeyboardKing.core;
+﻿using Controller;
+using Model;
+using KeyboardKing.core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +30,7 @@ namespace KeyboardKing.areas.main
 
         public override void OnLoad()
         {
+            Coin.Content = EpisodeController.GetCoins((User)Session.Get("student"));
         }
 
         public override void OnShadow()

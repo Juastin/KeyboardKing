@@ -93,7 +93,6 @@ namespace KeyboardKing.areas.play
             {
                 EpisodeController.CheckInput(txt[0]);
             }
-            points.Text = EpisodeController.Points.ToString() + "p";
             this.UserInput.Clear();
         }
 

@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Model;
+using Controller;
 
 namespace KeyboardKing.areas.main
 {
@@ -28,6 +30,7 @@ namespace KeyboardKing.areas.main
 
         public override void OnLoad()
         {
+            Coin.Content = EpisodeController.GetCoins((User)Session.Get("student"));
         }
 
         public override void OnShadow()
