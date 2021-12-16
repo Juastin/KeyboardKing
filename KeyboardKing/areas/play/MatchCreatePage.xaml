@@ -54,7 +54,7 @@
                     </ComboBox.GroupStyle>
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding EpisodeName}"/>
+                            <TextBlock Text="{Binding Name}"/>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
