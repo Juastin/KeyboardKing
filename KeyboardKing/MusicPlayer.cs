@@ -21,7 +21,6 @@ namespace KeyboardKing
                 _shouldplay = value;
                 if (!value) {Stop();}
             }
-
         }
 
         public static Dictionary<string, Dictionary<string, double>> Playlists {get;set;} = new Dictionary<string, Dictionary<string, double>>() {
@@ -49,6 +48,13 @@ namespace KeyboardKing
                 new Dictionary<string, double>()
                 {
                     {"break", 2.1},
+                }
+            },
+            {
+                "shop",
+                new Dictionary<string, double>()
+                {
+                    {"Merchant", 126},
                 }
             }
         };
