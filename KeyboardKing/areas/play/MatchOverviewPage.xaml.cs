@@ -73,7 +73,11 @@ namespace KeyboardKing.areas.play
                         MatchController.Initialize(match);
                         MatchController.AddUserInMatchProgress();
                         NavigationController.NavigateToPage(Pages.MatchLobbyPage);
-                    } 
+                    }
+                    else
+                    {
+                        MessageBox.Show("GEEN CHINEESEN TOEGESTAAN");
+                    }
                 }
             }
             else { MessageBox.Show("Je zit al in een match"); }
