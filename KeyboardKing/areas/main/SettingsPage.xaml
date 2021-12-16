@@ -24,6 +24,7 @@
                     <Label Style="{DynamicResource H1}" Content="Instellingen" HorizontalAlignment="Left"/>
                 </Grid>
                 <Grid Grid.Row="1" VerticalAlignment="Top">
+                    <ComboBox  x:Name="CBTheme" VerticalAlignment="Center" Width="150" ItemContainerStyle="{DynamicResource ComboBoxItem}" Template="{DynamicResource ComboBox}" SelectionChanged="CBTheme_SelectionChanged"/>
                 </Grid>
                 <Grid Grid.Row="2" HorizontalAlignment="Center">
                     <Components:Navbar CurrentPage="SettingsPage"/>
