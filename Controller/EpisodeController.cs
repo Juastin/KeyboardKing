@@ -32,12 +32,15 @@ namespace Controller
         public static string Word { get => CurrentEpisodeStep?.Word; }
 
         public static int Points { get; set; }
+        private static int _pointsCalculation;
         public static int Difficulty { get; set; }
         private static bool _repeatMistake;
         public static string WordOverlayCorrect { get =>CurrentEpisodeStep?.Word.Substring(0, _wordIndex); }
         public static string WordOverlay { get => CurrentEpisodeStep?.Word.Substring(_wordIndex); }
         public static string WordOverlayWrong { get =>CurrentEpisodeStep?.Word.Substring(_wordIndex, _wrongIndex); }
         public static bool IsStarted { get; private set; }
+
+        public static bool Coins { get; private set; }
       
         public static void Start()
         {
@@ -68,13 +71,13 @@ namespace Controller
             _currentEpisode = episode;
             CurrentEpisodeResult = new EpisodeResult();
             _stopwatch = new Stopwatch();
-            Difficulty = 30;
             _repeatMistake = false;
+            Difficulty = 30;
             _wordIndex = 0;
             _wrongIndex = 0;
             LettersTyped = 0;
             Points = 0;
-            CurrentEpisodeResult.MaxScore = CalculateMaxScore(episode);
+            CurrentEpisodeResult.MaxScore = CalculateTotalLetters(episode);
             NextEpisodeStep();
 
             if (isMatch)
@@ -98,6 +101,7 @@ namespace Controller
             WordChanged?.Invoke(null, new EventArgs());
         }
 
+
         /// <summary>
         /// <para>Processes the given bool.</para>
         /// Will call <see cref="NextEpisodeStep"/> once the word has been correctly and fully typed.
@@ -118,7 +122,7 @@ namespace Controller
             {
                 _wrongIndex = 1;
                 CurrentEpisodeResult.Mistakes++;
-                if (_repeatMistake == false && Points >= Difficulty)
+                if (_repeatMistake == false)
                 {
                     Points -= Difficulty;
                     _repeatMistake = true;
@@ -150,6 +154,7 @@ namespace Controller
             Episode episode = new Episode();
             steps.ForEach(s => episode.EpisodeSteps.Enqueue(s));
 
+
             return episode;
         }
 
@@ -173,7 +178,7 @@ namespace Controller
             CurrentEpisodeResult.Time = _stopwatch.Elapsed;
             CurrentEpisodeResult.Accuracy = CalculateAccuracy(CurrentEpisodeResult.MaxScore, CurrentEpisodeResult.Mistakes);
             CurrentEpisodeResult.LettersPerMinute = CalculateLetterPerMinute(CurrentEpisodeResult.Time, CurrentEpisodeResult.MaxScore);
-            CurrentEpisodeResult.Score = CalculateScore(CurrentEpisodeResult.LettersPerMinute);
+            CurrentEpisodeResult.Score = (int)CalculateScore(CurrentEpisodeResult.LettersPerMinute, CurrentEpisodeResult.MaxScore, CurrentEpisodeResult.Mistakes);
         }
 
         public static void OnEpisodeFinished(object sender, EventArgs e)
@@ -204,9 +209,12 @@ namespace Controller
         /// </summary>
         /// <param name="LettersPerMinute"></param>
         /// <returns></returns>
-        public static int CalculateScore(double LettersPerMinute)
+        public static double CalculateScore(double LettersPerMinute, int totalLetters, int mistakes)
         {
-            return (int)(Points * LettersPerMinute);
+            double totall = totalLetters;
+            double mis = mistakes;
+
+            return (LettersPerMinute * totall * 10 - mis * Difficulty)  / (400 * totall* 10) * 10000;
         }
 
         /// <summary>
@@ -214,7 +222,7 @@ namespace Controller
         /// </summary>
         /// <param name="episode"></param>
         /// <returns></returns>
-        public static int CalculateMaxScore(Episode episode)
+        public static int CalculateTotalLetters(Episode episode)
         {
             return episode.EpisodeSteps.Sum(episodeStep => episodeStep.Word.Length);
         }
@@ -228,5 +236,11 @@ namespace Controller
         {
             return Math.Round(letters / time.TotalMinutes);
         }
+
+        public static void UpdateCoins(int punten)
+        {
+
+        }
+
     }
 }

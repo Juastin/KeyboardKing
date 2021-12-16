@@ -68,6 +68,7 @@
     <Grid Margin="25">
         <Border Style="{DynamicResource GridBorder}" Padding="30">
             <Grid>
+
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition/>
@@ -75,6 +76,10 @@
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0" VerticalAlignment="Center">
                     <Label Style="{DynamicResource H1}" Content="Chapters" HorizontalAlignment="Left"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Image Width="50" Source="/KeyBoardking;component/resources/images/coin.png"/>
+                        <Label Style="{DynamicResource H1}" Content="10.000"/>
+                    </StackPanel>
                 </Grid>
                 <Grid Grid.Row="1" VerticalAlignment="Top">
                     <!-- Chapter overview ListBox -->
