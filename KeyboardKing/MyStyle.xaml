@@ -13,7 +13,7 @@
 
     <!-- H2 template -->
     <Style x:Key="H2" TargetType="{x:Type Label}">
-        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="FontSize" Value="26"/>
         <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
     </Style>
@@ -21,7 +21,7 @@
 
     <!-- H3 template -->
     <Style x:Key="H3" TargetType="{x:Type Label}">
-        <Setter Property="FontSize" Value="26"/>
+        <Setter Property="FontSize" Value="24"/>
         <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
     </Style>
         
@@ -1135,20 +1135,42 @@
 
     <!-- Image button template -->
     <Style x:Key="ImageButtonTemplate" TargetType="{x:Type Button}">
+        <Setter Property="RenderTransform">
+            <Setter.Value>
+                <TranslateTransform/>
+            </Setter.Value>
+        </Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Grid>
-                        <Border x:Name="MainBorder">
+                    <Grid Background="Transparent">
+                        <Border Background="Transparent" x:Name="MainBorder">
                             <Image Source="{Binding Path=Tag, RelativeSource={RelativeSource TemplatedParent}}"/>
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="MainBorder" Property="Padding" Value="5"/>
+                            <Setter TargetName="MainBorder" Property="Padding" Value="0">
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)" To="-10" Duration="00:00:00.100" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)" To="0" Duration="00:00:00.100" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter TargetName="MainBorder" Property="Padding" Value="0"/>
+                            <Setter TargetName="MainBorder" Property="Padding" Value="5"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
