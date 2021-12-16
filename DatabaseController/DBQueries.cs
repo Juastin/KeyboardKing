@@ -197,6 +197,7 @@ namespace Controller
             return DBHandler.Query(cmd);
         }
 
+
         public static bool UpdateMatchProgress(int progress, int user_id, int match_id)
         {
             MySqlCommand cmd = new MySqlCommand("UPDATE MatchProgress set progress = @progress WHERE userid = @userid AND matchid = @matchid ");
@@ -264,6 +265,21 @@ namespace Controller
             List<List<string>> result = DBHandler.SelectQuery(cmd);
             return Match.ParseMatch(result);
         }
+
+        public static int CheckIfMatchExists(int matchId)
+        {
+            MySqlCommand cmd = new MySqlCommand("SELECT COUNT(id) " +
+                                                "FROM MatchLobby m " +
+                                                "WHERE m.id = @matchid");
+
+            MySqlParameter id = new MySqlParameter("@matchid", MySqlDbType.Int32, 255);
+            id.Value = matchId;
+            cmd.Parameters.Add(id);
+
+            List<List<string>> result = DBHandler.SelectQuery(cmd);
+            return int.Parse(result[0][0]);
+        }
+
 
         public static List<MatchProgress> GetMatchProgress(int matchId)
         {

@@ -68,12 +68,19 @@ namespace KeyboardKing.areas.play
                 Button button = (Button)sender;
                 if (button.DataContext is Match match)
                 {
-                    MatchController.Initialize(match);
-                    MatchController.AddUserInMatchProgress();
-                    NavigationController.NavigateToPage(Pages.MatchLobbyPage);
+                    if (MatchController.CheckIfMatchExists(match.Id))
+                    {
+                        MatchController.Initialize(match);
+                        MatchController.AddUserInMatchProgress();
+                        NavigationController.NavigateToPage(Pages.MatchLobbyPage);
+                    }
+                    else
+                    {
+                        MessageController.Show(Pages.MessagePage, "De match is verwijderd", Pages.MatchOverviewPage, 5);
+                    }
                 }
             }
-            else { MessageBox.Show("Je zit al in een match"); }
+            else { MessageController.Show(Pages.MessagePage, "De match is verwijderd", Pages.MatchOverviewPage, 5); }
         }
     }
 }

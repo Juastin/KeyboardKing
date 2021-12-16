@@ -163,6 +163,11 @@ namespace Controller
             return CurrentMatch.Host.Id == userId;
         }
 
+        public static bool CheckIfMatchExists(int matchid)
+        {
+            return DBQueries.CheckIfMatchExists(matchid) > 0;
+        }
+
         public static void DeleteMatch()
         {
             DBQueries.RemoveUserInMatch(CurrentMatch.Id, (User)Session.Get("student"));
