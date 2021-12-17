@@ -5,19 +5,39 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:KeyboardKing.areas.info"
              mc:Ignorable="d">
-    <Grid Background="#90000000" Name="MainGrid" Visibility="{Binding Visibility}">
+
+    <Grid Background="#99000000" Name="MainGrid" Visibility="{Binding Visibility}">
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Border Grid.Row="0" Padding="30" VerticalAlignment="Center">
+        <Border Grid.Row="0" Padding="30,30,30,10" VerticalAlignment="Center">
             <Grid>
-                <Image x:Name="ItemImage"/>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Image x:Name="ItemImage"/>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Label x:Name="Title" Style="{DynamicResource H1}" Foreground="White" HorizontalContentAlignment="Center"/>
+                </Grid>
+                <Grid Grid.Row="2">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Image Source="/KeyBoardking;component/resources/images/icons/coin.png"/>
+                        <Label x:Name="Price" Style="{DynamicResource H2}" Foreground="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                    </StackPanel>
+                </Grid>
             </Grid>
         </Border>
         <Border Grid.Row="1" Padding="30,0,30,30" VerticalAlignment="Center">
             <Grid>
-                <Button Style="{DynamicResource Button1}"  Width="200" Content="Close" Click="Close_Click"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Style="{DynamicResource Button1}" Margin="20,0" Width="200" Content="Kopen" Click="Close_Click"/>
+                    <Button Style="{DynamicResource Button1}" Margin="20,0" Width="200" Content="Terug" Click="Close_Click"/>
+                </StackPanel>
             </Grid>
         </Border>
     </Grid>
