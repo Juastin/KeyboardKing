@@ -21,14 +21,14 @@
                     <ControlTemplate TargetType="ListBoxItem">
                         <Border Margin="60,10,60,20" Height="200" Width="150" BorderThickness="0" CornerRadius="5" ToolTipService.InitialShowDelay="0">
                             <Border.ToolTip>
-                                <ToolTip VerticalOffset="30" Style="{DynamicResource NavBarToolTip}" Content="{Binding [0]}"/>
+                                <ToolTip VerticalOffset="30" Style="{DynamicResource NavBarToolTip}" Content="{Binding Name}"/>
                             </Border.ToolTip>
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition />
                                     <RowDefinition Height="50"/>
                                 </Grid.RowDefinitions>
-                                <Border Grid.RowSpan="2" VerticalAlignment="Bottom" Margin="-100,0" Padding="0,5">
+                                <Border Grid.RowSpan="2" VerticalAlignment="Bottom" Margin="-100,0" Padding="0,3">
                                     <Grid>
                                         <Image Height="100" Stretch="Fill" Source="/KeyBoardking;component/resources/images/shopping_shelf.png"/>
                                     </Grid>
@@ -38,7 +38,7 @@
                                         <DropShadowEffect ShadowDepth="0" BlurRadius="20" Opacity="0.5" Color="Black"/>
                                     </Border.Effect>
                                     <Grid>
-                                        <Button Padding="10" Tag="{Binding [1]}" Style="{DynamicResource ShoppingItemTemplate}"/>
+                                        <Button  Padding="10" Tag="{Binding Path}" Style="{DynamicResource ShoppingItemTemplate}" Click="Item_Click"/>
                                         <Label Width="150" Height="150" Name="Purchased" Visibility="Hidden" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="✔" Foreground="{DynamicResource Succes}" FontSize="50"/>
                                     </Grid>
                                 </Border>
@@ -50,7 +50,7 @@
                                         <Label Style="{DynamicResource H3}" Foreground="White" HorizontalAlignment="Left" Margin="0,-4,0,0" Content="•"/>
                                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
                                             <Image Source="/KeyBoardking;component/resources/images/icons/coin.png"/>
-                                            <Label FontSize="20" Foreground="White" VerticalContentAlignment="Center" Margin="0,-2,0,0" Content="{Binding [2]}"/>
+                                            <Label FontSize="20" Foreground="White" VerticalContentAlignment="Center" Margin="0,-2,0,0" Content="{Binding Price}"/>
                                         </StackPanel>
                                         <Label Style="{DynamicResource H3}" Foreground="White" HorizontalAlignment="Right" Margin="0,-4,0,0" Content="•"/>
                                     </Grid>
@@ -58,7 +58,7 @@
                             </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
-                            <DataTrigger Binding="{Binding [3]}" Value="True">
+                            <DataTrigger Binding="{Binding Purchased}" Value="True">
                                 <Setter TargetName="Purchased" Property="Visibility" Value="Visible"/>
                             </DataTrigger>
                         </ControlTemplate.Triggers>
@@ -73,31 +73,51 @@
         <Border Style="{DynamicResource GridBorder}" Padding="30">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
                     <RowDefinition/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <Grid Grid.Row="0" VerticalAlignment="Center">
-                    <Label Style="{DynamicResource H1}" Content="Winkel" HorizontalAlignment="Left"/>
-                </Grid>
-                <Grid Grid.Row="1">
-                    <ListBox x:Name="LbShop" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemContainerStyle="{DynamicResource ListBoxItemTemplate}" Background="#FF6C4006" 
+                <Grid Grid.Row="0" Margin="10">
+                    <DockPanel>
+                        <Grid Background="#c6750d" Width="20" Margin="0,0,0,-10" DockPanel.Dock="Left"/>
+                        <Grid Background="#c6750d" Width="20" Margin="0,0,0,-10" DockPanel.Dock="Right"/>
+                        <Grid Background="#c6750d" Height="20" Margin="-30,0" DockPanel.Dock="Bottom">
+                            <Grid.Effect>
+                                <DropShadowEffect ShadowDepth="0" BlurRadius="20" Opacity="0.5" Color="Black"/>
+                            </Grid.Effect>
+                        </Grid>
+                        <Grid Background="#c6750d" Height="20" Margin="-30,0" DockPanel.Dock="Top">
+                            <Grid.Effect>
+                                <DropShadowEffect ShadowDepth="0" BlurRadius="20" Opacity="0.5" Color="Black"/>
+                            </Grid.Effect>
+                        </Grid>
+
+                        <Grid>
+                            <ListBox x:Name="LbShop" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemContainerStyle="{DynamicResource ListBoxItemTemplate}" Background="#FF6C4006" 
                              VirtualizingPanel.IsVirtualizing="true" 
                              VirtualizingPanel.VirtualizationMode="Recycling" >
-                        <ListBox.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            </ItemsPanelTemplate>
-                        </ListBox.ItemsPanel>
-                    </ListBox>
-                    <Button x:Name="PreviousPage" Margin="10" HorizontalAlignment="Left" Width="50" Height="50" Style="{DynamicResource PlayButtonTemplate}" Content="Test" RenderTransformOrigin="0.5,0.5" Click="PreviousPage_Click">
-                        <Button.RenderTransform>
-                            <ScaleTransform ScaleX="-1"/>
-                        </Button.RenderTransform>
-                    </Button>
-                    <Button x:Name="NextPage" Click="NextPage_Click" Margin="10" HorizontalAlignment="Right" Width="50" Height="50" Style="{DynamicResource PlayButtonTemplate}" Content="Test"/>
+                                <ListBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel VerticalAlignment="Top" HorizontalAlignment="Center"/>
+                                    </ItemsPanelTemplate>
+                                </ListBox.ItemsPanel>
+                            </ListBox>
+
+                            <Button x:Name="PreviousPage" Margin="10" HorizontalAlignment="Left" Width="50" Height="50" Style="{DynamicResource PlayButtonTemplate}" Content="Test" RenderTransformOrigin="0.5,0.5" Click="PreviousPage_Click">
+                                <Button.RenderTransform>
+                                    <ScaleTransform ScaleX="-1"/>
+                                </Button.RenderTransform>
+                            </Button>
+                            <Button x:Name="NextPage" Click="NextPage_Click" Margin="10" HorizontalAlignment="Right" Width="50" Height="50" Style="{DynamicResource PlayButtonTemplate}" Content="Test"/>
+                        </Grid>
+                    </DockPanel>
+                    <Grid VerticalAlignment="Top" Margin="0,-20,0,0" Width="150" Height="50" Background="#c6750d">
+                        <Label HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FF6C4006" Style="{DynamicResource H2}" Content="Winkel"/>
+                        <Grid.Effect>
+                            <DropShadowEffect ShadowDepth="0" BlurRadius="20" Opacity="0.5" Color="Black"/>
+                        </Grid.Effect>
+                    </Grid>
                 </Grid>
-                <Grid Grid.Row="2" HorizontalAlignment="Center">
+                <Grid Grid.Row="1" HorizontalAlignment="Center">
                     <Components:Navbar CurrentPage="FavoritesPage"/>
                 </Grid>
             </Grid>
