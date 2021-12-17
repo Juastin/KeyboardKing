@@ -1133,8 +1133,8 @@
     </Style>
 
 
-    <!-- Image button template -->
-    <Style x:Key="ImageButtonTemplate" TargetType="{x:Type Button}">
+    <!-- ShoppingItem template -->
+    <Style x:Key="ShoppingItemTemplate" TargetType="{x:Type Button}">
         <Setter Property="RenderTransform">
             <Setter.Value>
                 <TranslateTransform/>
@@ -1145,7 +1145,7 @@
                 <ControlTemplate TargetType="Button">
                     <Grid Background="Transparent">
                         <Border Background="Transparent" x:Name="MainBorder">
-                            <Image Source="{Binding Path=Tag, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <Image VerticalAlignment="Bottom" Source="{Binding Path=Tag, RelativeSource={RelativeSource TemplatedParent}}"/>
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>

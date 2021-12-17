@@ -21,7 +21,7 @@
                     <ControlTemplate TargetType="ListBoxItem">
                         <Border Margin="60,10,60,20" Height="200" Width="150" BorderThickness="0" CornerRadius="5" ToolTipService.InitialShowDelay="0">
                             <Border.ToolTip>
-                                <ToolTip Style="{DynamicResource NavBarToolTip}" Content="{Binding [0]}"/>
+                                <ToolTip VerticalOffset="30" Style="{DynamicResource NavBarToolTip}" Content="{Binding [0]}"/>
                             </Border.ToolTip>
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -33,13 +33,13 @@
                                         <Image Height="100" Stretch="Fill" Source="/KeyBoardking;component/resources/images/shopping_shelf.png"/>
                                     </Grid>
                                 </Border>
-                                <Border Grid.Row="0">
+                                <Border Grid.Row="0" Padding="0,0,0,30">
                                     <Border.Effect>
                                         <DropShadowEffect ShadowDepth="0" BlurRadius="20" Opacity="0.5" Color="Black"/>
                                     </Border.Effect>
                                     <Grid>
-                                        <Button Padding="10" Tag="{Binding [1]}" Style="{DynamicResource ImageButtonTemplate}"/>
-                                        <Label Name="Purchased" Visibility="Hidden" VerticalAlignment="Center" HorizontalAlignment="Center" Content="✔" Foreground="{DynamicResource Succes}" FontSize="90"/>
+                                        <Button Padding="10" Tag="{Binding [1]}" Style="{DynamicResource ShoppingItemTemplate}"/>
+                                        <Label Width="150" Height="150" Name="Purchased" Visibility="Hidden" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="✔" Foreground="{DynamicResource Succes}" FontSize="50"/>
                                     </Grid>
                                 </Border>
                                 <Border Grid.Row="1" Background="#FF895E22" Padding="0,5" CornerRadius="30">
@@ -90,12 +90,12 @@
                             </ItemsPanelTemplate>
                         </ListBox.ItemsPanel>
                     </ListBox>
-                    <Button Margin="10" HorizontalAlignment="Left" Width="50" Height="50" Style="{DynamicResource PlayButtonTemplate}" Content="Test" RenderTransformOrigin="0.5,0.5">
+                    <Button x:Name="PreviousPage" Margin="10" HorizontalAlignment="Left" Width="50" Height="50" Style="{DynamicResource PlayButtonTemplate}" Content="Test" RenderTransformOrigin="0.5,0.5" Click="PreviousPage_Click">
                         <Button.RenderTransform>
                             <ScaleTransform ScaleX="-1"/>
                         </Button.RenderTransform>
                     </Button>
-                    <Button Margin="10" HorizontalAlignment="Right" Width="50" Height="50" Style="{DynamicResource PlayButtonTemplate}" Content="Test"/>
+                    <Button x:Name="NextPage" Click="NextPage_Click" Margin="10" HorizontalAlignment="Right" Width="50" Height="50" Style="{DynamicResource PlayButtonTemplate}" Content="Test"/>
                 </Grid>
                 <Grid Grid.Row="2" HorizontalAlignment="Center">
                     <Components:Navbar CurrentPage="FavoritesPage"/>
