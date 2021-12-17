@@ -36,7 +36,7 @@ namespace KeyboardKing.areas.play
         {
             MusicPlayer.Stop();
             AudioPlayer.Play(AudioPlayer.Sound.congratulations);
-            Coin.Content = EpisodeController.GetCoins((User)Session.Get("student"));
+            Coin.Content = ShowCoins();
         }
 
         public override void OnShadow()
@@ -47,5 +47,13 @@ namespace KeyboardKing.areas.play
         public override void OnTick()
         {
         }
+
+        private static string ShowCoins()
+        {
+            int coins = int.Parse(EpisodeController.GetCoins((User)Session.Get("student"))) - EpisodeController.Coins;
+
+            return $"{coins} + {EpisodeController.Coins}";
+        }
+
     }
 }

@@ -42,7 +42,6 @@ namespace Controller
 
         public static int Coins { get; private set; }
 
-        private static bool _checkFinished;
       
         public static void Start()
         {
@@ -74,7 +73,6 @@ namespace Controller
             CurrentEpisodeResult = new EpisodeResult();
             _stopwatch = new Stopwatch();
             _repeatMistake = false;
-            _checkFinished = false;
             Difficulty = 30;
             _wordIndex = 0;
             _wrongIndex = 0;
