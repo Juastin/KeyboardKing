@@ -15,32 +15,32 @@
     <Grid Margin="25">
         <Border Style="{DynamicResource GridBorder}" Padding="30">
             <Grid>
-            <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0" VerticalAlignment="Center">
                     <Label Style="{DynamicResource H1}" Content="Instellingen" HorizontalAlignment="Left"/>
                 </Grid>
                 <Grid Grid.Row="1" VerticalAlignment="Top">
-                    <Grid VerticalAlignment="Top">
-                        <Label Style="{DynamicResource H3}" Content="Themas" Margin="0,0,250,91"/>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid VerticalAlignment="Top" Grid.Column="0">
+                        <Label Style="{DynamicResource H3}" Content="Themas" Margin="0,0,0,91"/>
                         <ComboBox  x:Name="CBTheme" HorizontalAlignment="Left" Width="250" Margin="0,50,0,50" ItemContainerStyle="{DynamicResource ComboBoxItem}" Template="{DynamicResource ComboBox}" SelectionChanged="CBTheme_SelectionChanged"/>
                     </Grid>
-                    <Grid VerticalAlignment="Top" Height="136" Margin="0,136,0,0">
-                        <Label Style="{DynamicResource H3}"  Content="Account" Margin="0,0,250,91"/>
-                        <Button Style="{DynamicResource DeclineButton}" Margin="0,50,250,50" Width="250" HorizontalAlignment="Left" Content="Account verwijderen" Click="DeleteAccountClick"/>
+                    <Grid VerticalAlignment="Top" Grid.Column="1">
+                        <Label Style="{DynamicResource H3}"  Content="Account" Margin="0,0,0,91"/>
+                        <Button Style="{DynamicResource DeclineButton}" Margin="0,50,0,50" Width="250" HorizontalAlignment="Left" Content="Account verwijderen" Click="DeleteAccountClick"/>
                     </Grid>
                 </Grid>
-                <Grid Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                <Grid Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                    <Components:Navbar CurrentPage="SettingsPage"/>
                 </Grid>
             </Grid>
-            <Grid>
-                <Components:Navbar CurrentPage="SettingsPage"/>
-            </Grid>
-        </Grid>
         </Border>
     </Grid>
 </local:JumpPage>
