@@ -259,10 +259,5 @@ namespace Controller
             return Math.Round(letters / time.TotalMinutes);
         }
 
-        public static void UpdateCoins(int punten)
-        {
-
-        }
-
     }
 }
