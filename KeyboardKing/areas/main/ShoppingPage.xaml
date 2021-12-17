@@ -5,17 +5,17 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:KeyboardKing.core"
       xmlns:Components="clr-namespace:KeyboardKing.components"
+      xmlns:uc="clr-namespace:KeyboardKing.areas.info"
       mc:Ignorable="d" 
       Title="ShoppingPage"
       MinHeight="450"
-      MinWidth="400"
-      MaxWidth="1420"
-      MaxHeight="750">
+      MinWidth="400">
 
     <!-- STYLING TEMPLATES -->
     <Page.Resources>
         <!-- ListBoxItem template -->
         <Style x:Key="ListBoxItemTemplate" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListBoxItem">
@@ -68,59 +68,64 @@
 
         </Style>
     </Page.Resources>
-    
-    <Grid Margin="25">
-        <Border Style="{DynamicResource GridBorder}" Padding="30">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Grid Grid.Row="0" Margin="10">
-                    <DockPanel>
-                        <Grid Background="#c6750d" Width="20" Margin="0,0,0,-10" DockPanel.Dock="Left"/>
-                        <Grid Background="#c6750d" Width="20" Margin="0,0,0,-10" DockPanel.Dock="Right"/>
-                        <Grid Background="#c6750d" Height="20" Margin="-30,0" DockPanel.Dock="Bottom">
+
+    <Grid>
+        <Grid Margin="25"
+              MaxWidth="1420"
+              MaxHeight="750">
+            <Border Style="{DynamicResource GridBorder}" Padding="30">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" Margin="10">
+                        <DockPanel>
+                            <Grid Background="#c6750d" Width="20" Margin="0,0,0,-10" DockPanel.Dock="Left"/>
+                            <Grid Background="#c6750d" Width="20" Margin="0,0,0,-10" DockPanel.Dock="Right"/>
+                            <Grid Background="#c6750d" Height="20" Margin="-30,0" DockPanel.Dock="Bottom">
+                                <Grid.Effect>
+                                    <DropShadowEffect ShadowDepth="0" BlurRadius="20" Opacity="0.5" Color="Black"/>
+                                </Grid.Effect>
+                            </Grid>
+                            <Grid Background="#c6750d" Height="20" Margin="-30,0" DockPanel.Dock="Top">
+                                <Grid.Effect>
+                                    <DropShadowEffect ShadowDepth="0" BlurRadius="20" Opacity="0.5" Color="Black"/>
+                                </Grid.Effect>
+                            </Grid>
+
+                            <Grid>
+                                <ListBox x:Name="LbShop" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemContainerStyle="{DynamicResource ListBoxItemTemplate}" Background="#FF6C4006" 
+                                 VirtualizingPanel.IsVirtualizing="true" 
+                                 VirtualizingPanel.VirtualizationMode="Recycling" >
+                                    <ListBox.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel VerticalAlignment="Top" HorizontalAlignment="Center"/>
+                                        </ItemsPanelTemplate>
+                                    </ListBox.ItemsPanel>
+                                </ListBox>
+
+                                <Button x:Name="PreviousPage" Margin="10" HorizontalAlignment="Left" Width="50" Height="50" Style="{DynamicResource PlayButtonTemplate}" Content="Test" RenderTransformOrigin="0.5,0.5" Click="PreviousPage_Click">
+                                    <Button.RenderTransform>
+                                        <ScaleTransform ScaleX="-1"/>
+                                    </Button.RenderTransform>
+                                </Button>
+                                <Button x:Name="NextPage" Click="NextPage_Click" Margin="10" HorizontalAlignment="Right" Width="50" Height="50" Style="{DynamicResource PlayButtonTemplate}" Content="Test"/>
+                            </Grid>
+                        </DockPanel>
+                        <Grid VerticalAlignment="Top" Margin="0,-20,0,0" Width="150" Height="50" Background="#c6750d">
+                            <Label HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FF6C4006" Style="{DynamicResource H2}" Content="Winkel"/>
                             <Grid.Effect>
                                 <DropShadowEffect ShadowDepth="0" BlurRadius="20" Opacity="0.5" Color="Black"/>
                             </Grid.Effect>
                         </Grid>
-                        <Grid Background="#c6750d" Height="20" Margin="-30,0" DockPanel.Dock="Top">
-                            <Grid.Effect>
-                                <DropShadowEffect ShadowDepth="0" BlurRadius="20" Opacity="0.5" Color="Black"/>
-                            </Grid.Effect>
-                        </Grid>
-
-                        <Grid>
-                            <ListBox x:Name="LbShop" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemContainerStyle="{DynamicResource ListBoxItemTemplate}" Background="#FF6C4006" 
-                             VirtualizingPanel.IsVirtualizing="true" 
-                             VirtualizingPanel.VirtualizationMode="Recycling" >
-                                <ListBox.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <WrapPanel VerticalAlignment="Top" HorizontalAlignment="Center"/>
-                                    </ItemsPanelTemplate>
-                                </ListBox.ItemsPanel>
-                            </ListBox>
-
-                            <Button x:Name="PreviousPage" Margin="10" HorizontalAlignment="Left" Width="50" Height="50" Style="{DynamicResource PlayButtonTemplate}" Content="Test" RenderTransformOrigin="0.5,0.5" Click="PreviousPage_Click">
-                                <Button.RenderTransform>
-                                    <ScaleTransform ScaleX="-1"/>
-                                </Button.RenderTransform>
-                            </Button>
-                            <Button x:Name="NextPage" Click="NextPage_Click" Margin="10" HorizontalAlignment="Right" Width="50" Height="50" Style="{DynamicResource PlayButtonTemplate}" Content="Test"/>
-                        </Grid>
-                    </DockPanel>
-                    <Grid VerticalAlignment="Top" Margin="0,-20,0,0" Width="150" Height="50" Background="#c6750d">
-                        <Label HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FF6C4006" Style="{DynamicResource H2}" Content="Winkel"/>
-                        <Grid.Effect>
-                            <DropShadowEffect ShadowDepth="0" BlurRadius="20" Opacity="0.5" Color="Black"/>
-                        </Grid.Effect>
+                    </Grid>
+                    <Grid Grid.Row="1" HorizontalAlignment="Center">
+                        <Components:Navbar CurrentPage="ShoppingPage"/>
                     </Grid>
                 </Grid>
-                <Grid Grid.Row="1" HorizontalAlignment="Center">
-                    <Components:Navbar CurrentPage="FavoritesPage"/>
-                </Grid>
-            </Grid>
-        </Border>
+            </Border>
+        </Grid>
+        <uc:ItemPage x:Name="Popup"/>
     </Grid>
 </local:JumpPage>

@@ -84,8 +84,7 @@ namespace KeyboardKing.areas.main
             if (button.DataContext is Item item)
             {
                 ShopController.CurrentItem = item;
-                MatchController.AddUserInMatchProgress();
-                NavigationController.NavigateToPage(Pages.MatchLobbyPage);
+                Popup.ShowHandlerDialog();
             }
         }
     }

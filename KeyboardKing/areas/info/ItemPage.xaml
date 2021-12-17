@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="KeyboardKing.areas.info.ItemPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:KeyboardKing.areas.info"
+             mc:Ignorable="d">
+    <Grid Background="#90000000" Name="MainGrid" Visibility="{Binding Visibility}">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Padding="30" VerticalAlignment="Center">
+            <Grid>
+                <Image x:Name="ItemImage"/>
+            </Grid>
+        </Border>
+        <Border Grid.Row="1" Padding="30,0,30,30" VerticalAlignment="Center">
+            <Grid>
+                <Button Style="{DynamicResource Button1}"  Width="200" Content="Close" Click="Close_Click"/>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>
