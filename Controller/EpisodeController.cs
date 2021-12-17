@@ -174,6 +174,7 @@ namespace Controller
             CurrentEpisodeResult.Accuracy = CalculateAccuracy(CurrentEpisodeResult.MaxScore, CurrentEpisodeResult.Mistakes);
             CurrentEpisodeResult.LettersPerMinute = CalculateLetterPerMinute(CurrentEpisodeResult.Time, CurrentEpisodeResult.MaxScore);
             CurrentEpisodeResult.Score = CalculateScore(CurrentEpisodeResult.LettersPerMinute);
+            CurrentEpisodeResult.Passed = CheckIfPassedEpisode();
         }
 
         public static void OnEpisodeFinished(object sender, EventArgs e)
@@ -228,5 +229,13 @@ namespace Controller
         {
             return Math.Round(letters / time.TotalMinutes);
         }
+
+        public static bool CheckIfPassedEpisode()
+        {
+            int threshold = DBQueries.Getpassthreshold((int)Session.Get("episodeId"));
+            return CurrentEpisodeResult.Accuracy >= threshold;
+        }
+
+
     }
 }
