@@ -79,5 +79,10 @@ public SettingsPage(MainWindow w) : base(w)
         public override void OnTick()
         {
         }
+
+        private void DeleteAccountClick(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
