@@ -88,7 +88,7 @@ namespace Controller
                 cmd.ExecuteNonQuery();
                 return (int)cmd.LastInsertedId;
             }
-            catch (Exception e)
+            catch
             {
                 return default;
             }
