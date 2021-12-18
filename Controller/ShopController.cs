@@ -9,6 +9,9 @@ namespace Controller
 {
     public static class ShopController
     {
+        public delegate void ItemChange();
+        public static event ItemChange CurrentItemChanged;
+
         public static int CurrentPage { get; set; }
         public static int itemsPerPage { get; private set; }
 
@@ -60,6 +63,12 @@ namespace Controller
                          .Take(ShopController.itemsPerPage);
 
             return query.ToList();
+        }
+
+        public static void SetCurrentItem(Item item)
+        {
+            CurrentItem = item;
+            CurrentItemChanged?.Invoke();
         }
 
     }

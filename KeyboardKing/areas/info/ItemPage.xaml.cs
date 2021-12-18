@@ -31,10 +31,6 @@ namespace KeyboardKing.areas.info
         public void ShowOverlay()
         {
             Visibility = Visibility.Visible;
-            Item item = ShopController.CurrentItem;
-            ItemImage.Source = new BitmapImage(new Uri(item.Path, UriKind.Relative));
-            Title.Content = item.Name;
-            Price.Content = item.Price;
         }
 
         private void Close_Click(object sender, RoutedEventArgs e)

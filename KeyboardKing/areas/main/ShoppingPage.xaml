@@ -38,7 +38,7 @@
                                         <DropShadowEffect ShadowDepth="0" BlurRadius="20" Opacity="0.5" Color="Black"/>
                                     </Border.Effect>
                                     <Grid>
-                                        <Button  Padding="10" Tag="{Binding Path}" Style="{DynamicResource ShoppingItemTemplate}" Click="Item_Click"/>
+                                        <Button  Padding="10" Tag="{Binding Path}" Style="{StaticResource ShoppingItemTemplate}" Click="Item_Click"/>
                                         <Label Width="150" Height="150" Name="Purchased" Visibility="Hidden" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="✔" Foreground="{DynamicResource Succes}" FontSize="50"/>
                                     </Grid>
                                 </Border>
@@ -95,7 +95,7 @@
                             </Grid>
 
                             <Grid>
-                                <ListBox x:Name="LbShop" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemContainerStyle="{DynamicResource ListBoxItemTemplate}" Background="#FF6C4006" 
+                                <ListBox x:Name="LbShop" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemContainerStyle="{StaticResource ListBoxItemTemplate}" Background="#FF6C4006" 
                                  VirtualizingPanel.IsVirtualizing="true" 
                                  VirtualizingPanel.VirtualizationMode="Recycling" >
                                     <ListBox.ItemsPanel>

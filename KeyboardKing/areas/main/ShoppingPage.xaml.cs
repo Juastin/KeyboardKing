@@ -83,7 +83,7 @@ namespace KeyboardKing.areas.main
             Button button = (Button)sender;
             if (button.DataContext is Item item)
             {
-                ShopController.CurrentItem = item;
+                ShopController.SetCurrentItem(item);
                 Popup.ShowOverlay();
             }
         }
