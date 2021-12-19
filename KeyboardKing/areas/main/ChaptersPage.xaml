@@ -76,10 +76,7 @@
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0" VerticalAlignment="Center">
                     <Label Style="{DynamicResource H1}" Content="Chapters" HorizontalAlignment="Left"/>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Image Width="50" Source="/KeyBoardking;component/resources/images/coin.png"/>
-                        <Label Style="{DynamicResource H1}" x:Name="Coin" Content=""/>
-                    </StackPanel>
+                    <Components:CoinsComp CurrentPage2="ChaptersPage"/>
                 </Grid>
                 <Grid Grid.Row="1" VerticalAlignment="Top">
                     <!-- Chapter overview ListBox -->
@@ -133,7 +130,7 @@
                     </ListBox>
                 </Grid>
                 <Grid Grid.Row="2" HorizontalAlignment="Center">
-                    <Components:Navbar CurrentPage="ChaptersPage"/>
+                     <Components:Navbar CurrentPage="ChaptersPage"/> 
                 </Grid>
             </Grid>
         </Border>
