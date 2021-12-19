@@ -13,22 +13,25 @@ namespace Controller
         public static event ItemChange CurrentItemChanged;
 
         public static int CurrentPage { get; set; }
-        public static int itemsPerPage { get; private set; }
+        public static int itemsPerPage { get; set; }
 
         public static Item CurrentItem { get; set; }
-        public static List<Item> AllItems { get; private set; }
+        public static List<Item> AllItems { get; set; }
 
         public static void Initialize()
         {
             CurrentPage = 1;
             itemsPerPage = 8;
-            GetAllItems();
+            AllItems = GetAllItems();
         }
 
-        public static void GetAllItems()
+        // Get all data and return it as a List<Item>
+        public static List<Item> GetAllItems()
         {
-            List<List<string>> Items = new List<List<string>>();
-            Items = new List<List<string>> {
+            List<List<string>> items = new List<List<string>>();
+
+            // Get all the items data (Dummy data at the moment)
+            items = new List<List<string>> {
                 new List<string> {"1", "KeyboardKing Light", "/KeyBoardking;component/resources/images/kk_background_4K.png", "10", "Theme", "True" },
                 new List<string> {"2", "KeyboardKing Dark", "/KeyBoardking;component/resources/images/kk_background_dark.png", "20", "Theme", "True" },
                 new List<string> {"3", "Space", "/KeyBoardking;component/resources/images/space_theme_background.png", "50", "Theme", "True" },
@@ -41,10 +44,11 @@ namespace Controller
                 new List<string> {"10", "Crown", "/KeyBoardking;component/resources/images/icon.png", "5000", "Theme", "False" },
                 new List<string> {"11", "A Coin", "/KeyBoardking;component/resources/images/icons/coin.png", "10000", "Theme", "False" },
             };
-            List<Item> allItems = Item.ParseItems(Items);
-            AllItems = allItems;
+
+            return Item.ParseItems(items);
         }
 
+        // Load the Items at a certain page with a certain items per page it can show.
         public static List<Item> GetPageItems(int page)
         {
             var query = (from pageItem in AllItems
@@ -55,16 +59,13 @@ namespace Controller
             return query.ToList();
         }
 
+        // Load the Items at its current page.
         public static List<Item> GetPageItems()
         {
-            var query = (from pageItem in AllItems
-                         select pageItem)
-                         .Skip(ShopController.itemsPerPage * (CurrentPage - 1))
-                         .Take(ShopController.itemsPerPage);
-
-            return query.ToList();
+            return GetPageItems(CurrentPage);
         }
 
+        // Change current item and invoke the delegate CurrentItemChanged;
         public static void SetCurrentItem(Item item)
         {
             CurrentItem = item;

@@ -37,5 +37,11 @@ namespace KeyboardKing.areas.info
         {
             Visibility = Visibility.Hidden;
         }
+
+        private void Buy_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Process buy item here");
+            Visibility = Visibility.Hidden;
+        }
     }
 }

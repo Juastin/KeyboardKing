@@ -11,21 +11,19 @@ namespace KeyboardKing.data_context
 {
     public class ShopItemDataContext : INotifyPropertyChanged
     {
-        public Item CurrentItem { get => ShopController.CurrentItem; }
+        public Item CurrentItem { get; private set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public ShopItemDataContext()
         {
-            ShopController.CurrentItemChanged += ItemChanged;
+            ShopController.CurrentItemChanged += OnItemChanged;
         }
 
-        private void ItemChanged()
+        private void OnItemChanged()
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(""));
-            }
+            CurrentItem = ShopController.CurrentItem;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(""));
         }
     }
 }

@@ -38,7 +38,7 @@
         <Border Grid.Row="1" Padding="30,0,30,30" VerticalAlignment="Center">
             <Grid>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Button Style="{DynamicResource Button1}" Margin="20,0" Width="200" Content="Kopen" Click="Close_Click"/>
+                    <Button Style="{DynamicResource Button1}" Margin="20,0" Width="200" Content="Kopen" Click="Buy_Click"/>
                     <Button Style="{DynamicResource Button1}" Margin="20,0" Width="200" Content="Terug" Click="Close_Click"/>
                 </StackPanel>
             </Grid>

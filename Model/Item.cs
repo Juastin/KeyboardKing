@@ -11,7 +11,7 @@ namespace Model
         Theme
     }
 
-    public class Item
+    public class Item : IEquatable<Item>
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -43,6 +43,15 @@ namespace Model
             input.ForEach(e => items.Add(ParseItem(e)));
 
             return items;
+        }
+
+        public bool Equals(Item other)
+        {
+            if (object.ReferenceEquals(this, other)) return true;
+
+            if (object.ReferenceEquals(this, null) || object.ReferenceEquals(other, null)) return false;
+
+            return this.Id == other.Id && this.Name == other.Name && this.Price == other.Price && this.Type == other.Type;
         }
     }
 }

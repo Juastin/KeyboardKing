@@ -47,12 +47,12 @@
                                         <DropShadowEffect ShadowDepth="0" BlurRadius="20" Opacity="0.5" Color="Black"/>
                                     </Border.Effect>
                                     <Grid>
-                                        <Label Style="{DynamicResource H3}" Foreground="White" HorizontalAlignment="Left" Margin="0,-4,0,0" Content="•"/>
+                                        <Label Style="{DynamicResource H3}" Foreground="{DynamicResource Color7}" HorizontalAlignment="Left" Margin="0,-4,0,0" Content="•"/>
                                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
                                             <Image Source="/KeyBoardking;component/resources/images/icons/coin.png"/>
                                             <Label FontSize="20" Foreground="White" VerticalContentAlignment="Center" Margin="0,-2,0,0" Content="{Binding Price}"/>
                                         </StackPanel>
-                                        <Label Style="{DynamicResource H3}" Foreground="White" HorizontalAlignment="Right" Margin="0,-4,0,0" Content="•"/>
+                                        <Label Style="{DynamicResource H3}" Foreground="{DynamicResource Color7}" HorizontalAlignment="Right" Margin="0,-4,0,0" Content="•"/>
                                     </Grid>
                                 </Border>
                             </Grid>
@@ -87,11 +87,15 @@
                                 <Grid.Effect>
                                     <DropShadowEffect ShadowDepth="0" BlurRadius="20" Opacity="0.5" Color="Black"/>
                                 </Grid.Effect>
+                                <Label Padding="18,0" HorizontalAlignment="Left" VerticalContentAlignment="Center" Foreground="{DynamicResource Color7}" Content="•"/>
+                                <Label Padding="18,0" HorizontalAlignment="Right" VerticalContentAlignment="Center" Foreground="{DynamicResource Color7}" Content="•"/>
                             </Grid>
                             <Grid Background="#c6750d" Height="20" Margin="-30,0" DockPanel.Dock="Top">
                                 <Grid.Effect>
                                     <DropShadowEffect ShadowDepth="0" BlurRadius="20" Opacity="0.5" Color="Black"/>
                                 </Grid.Effect>
+                                <Label Padding="18,0" HorizontalAlignment="Left" VerticalContentAlignment="Center" Foreground="{DynamicResource Color7}" Content="•"/>
+                                <Label Padding="18,0" HorizontalAlignment="Right" VerticalContentAlignment="Center" Foreground="{DynamicResource Color7}" Content="•"/>
                             </Grid>
 
                             <Grid>

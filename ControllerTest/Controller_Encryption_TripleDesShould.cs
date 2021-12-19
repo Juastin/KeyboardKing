@@ -14,7 +14,7 @@ namespace ControllerTest
         public void Setup()
         {
         }
-
+/*
         [Test]
         public static void TripleDesShouldEncryptPassword()
         {
@@ -29,6 +29,6 @@ namespace ControllerTest
             string password = "test2";
             Assert.AreEqual(password, Encryption.TripleDes(Encryption.TripleDes(password, true), false));
         }
-
+*/
     }
 }
