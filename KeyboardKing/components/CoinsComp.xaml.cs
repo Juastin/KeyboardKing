@@ -13,30 +13,17 @@ namespace KeyboardKing.components
     
     public partial class CoinsComp : UserControl
     {
-        public event EventHandler Load;
-        public Pages CurrentPage2 { get; set; } = Pages.Empty;
-
         public CoinsComp()
         {
             InitializeComponent();
-            CoinsChange();
+            Session.PropertyChanged += OnCoinsChange;
         }
 
-        private void UserControl1_Load(Object sender, EventArgs e)
+        public void OnCoinsChange(object sender, EventArgs e)
         {
-
-            MessageBox.Show("You are in the UserControl.Load event.");
-        }
-
-        public void CoinsChange()
-        {
-            if(CurrentPage2 == Pages.ChaptersPage)
-            {
-                Coins.Content = EpisodeController.GetCoins((User)Session.Get("student"));
-            }else
-            {
-                Coins.Content = "2";
-            }
+            User user = (User)Session.Get("student");
+            if (user != null)
+                Coins.Content = user.Coins;
         }
     }
 }

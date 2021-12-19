@@ -50,7 +50,7 @@ namespace KeyboardKing.areas.play
 
         private static string ShowCoins()
         {
-            int coins = int.Parse(EpisodeController.GetCoins((User)Session.Get("student"))) - EpisodeController.Coins;
+            int coins = EpisodeController.GetCoins((User)Session.Get("student")) - EpisodeController.Coins;
 
             return $"{coins} + {EpisodeController.Coins}";
         }
