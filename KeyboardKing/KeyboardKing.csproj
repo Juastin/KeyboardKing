@@ -39,6 +39,7 @@
     <None Remove="resources\images\shopping_shelf.png" />
     <None Remove="resources\images\shop_overlay.png" />
     <None Remove="resources\images\space_theme_background.png" />
+    <None Remove="resources\images\wooden_arrow.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -132,11 +133,11 @@
     <Content Include="resources\images\shopping_shelf.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="resources\images\shop_overlay.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="resources\images\space_theme_background.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\wooden_arrow.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <ProjectReference Include="..\Controller\Controller.csproj" />
     <ProjectReference Include="..\Model\Model.csproj" />

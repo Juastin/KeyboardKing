@@ -81,6 +81,7 @@
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0" Margin="10">
                         <DockPanel>
+                            <!-- Overlay Layout Styling -->
                             <Grid Background="#c6750d" Width="20" Margin="0,0,0,-10" DockPanel.Dock="Left"/>
                             <Grid Background="#c6750d" Width="20" Margin="0,0,0,-10" DockPanel.Dock="Right"/>
                             <Grid Background="#c6750d" Height="20" Margin="-30,0" DockPanel.Dock="Bottom">
@@ -97,8 +98,10 @@
                                 <Label Padding="18,0" HorizontalAlignment="Left" VerticalContentAlignment="Center" Foreground="{DynamicResource Color7}" Content="•"/>
                                 <Label Padding="18,0" HorizontalAlignment="Right" VerticalContentAlignment="Center" Foreground="{DynamicResource Color7}" Content="•"/>
                             </Grid>
-
+                            
+                            <!-- Shopping Layout Styling -->
                             <Grid>
+                                <!-- ListBox Shop -->
                                 <ListBox x:Name="LbShop" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemContainerStyle="{StaticResource ListBoxItemTemplate}" Background="#FF6C4006" 
                                  VirtualizingPanel.IsVirtualizing="true" 
                                  VirtualizingPanel.VirtualizationMode="Recycling" >
@@ -109,14 +112,25 @@
                                     </ListBox.ItemsPanel>
                                 </ListBox>
 
-                                <Button x:Name="PreviousPage" Margin="10" HorizontalAlignment="Left" Width="50" Height="50" Style="{DynamicResource PlayButtonTemplate}" Content="Test" RenderTransformOrigin="0.5,0.5" Click="PreviousPage_Click">
+                                <!-- PreviousPage Button -->
+                                <Button RenderOptions.BitmapScalingMode="HighQuality" x:Name="PreviousPage" Tag="/KeyBoardking;component/resources/images/wooden_arrow.png" Margin="10" HorizontalAlignment="Left" Width="75" Height="75" Style="{DynamicResource ImageButtonTemplate}" RenderTransformOrigin="0.5,0.5" Click="PreviousPage_Click">
                                     <Button.RenderTransform>
                                         <ScaleTransform ScaleX="-1"/>
                                     </Button.RenderTransform>
+                                    <Button.Effect>
+                                        <DropShadowEffect ShadowDepth="0" BlurRadius="20" Opacity="0.5" Color="Black"/>
+                                    </Button.Effect>
                                 </Button>
-                                <Button x:Name="NextPage" Click="NextPage_Click" Margin="10" HorizontalAlignment="Right" Width="50" Height="50" Style="{DynamicResource PlayButtonTemplate}" Content="Test"/>
+
+                                <!-- NextPage Button -->
+                                <Button RenderOptions.BitmapScalingMode="HighQuality" x:Name="NextPage" Tag="/KeyBoardking;component/resources/images/wooden_arrow.png" Click="NextPage_Click" Margin="10" HorizontalAlignment="Right" Width="75" Height="75" Style="{DynamicResource ImageButtonTemplate}">
+                                    <Button.Effect>
+                                        <DropShadowEffect ShadowDepth="0" BlurRadius="20" Opacity="0.5" Color="Black"/>
+                                    </Button.Effect>
+                                </Button>
                             </Grid>
                         </DockPanel>
+                        
                         <Grid VerticalAlignment="Top" Margin="0,-20,0,0" Width="150" Height="50" Background="#c6750d">
                             <Label HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FF6C4006" Style="{DynamicResource H2}" Content="Winkel"/>
                             <Grid.Effect>
@@ -124,6 +138,7 @@
                             </Grid.Effect>
                         </Grid>
                     </Grid>
+                    
                     <Grid Grid.Row="1" HorizontalAlignment="Center">
                         <Components:Navbar CurrentPage="ShoppingPage"/>
                     </Grid>

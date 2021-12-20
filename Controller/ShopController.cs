@@ -19,6 +19,7 @@ namespace Controller
         public static Item CurrentItem { get; set; }
         public static List<Item> AllItems { get; set; }
 
+        // Initialize the properties in the controller.
         public static void Initialize()
         {
             CurrentPage = 1;
@@ -67,18 +68,20 @@ namespace Controller
             return GetPageItems(CurrentPage);
         }
 
-        // Change current item and invoke the delegate CurrentItemChanged;
+        // Change current item and invoke the delegate CurrentItemChanged.
         public static void SetCurrentItem(Item item)
         {
             CurrentItem = item;
             CurrentItemChanged?.Invoke();
         }
 
+        // Calulates the MaxPage the current list of all items has.
         public static int CalculateMaxPage()
         {
-            return (int)Math.Ceiling(((decimal)AllItems.Count / itemsPerPage));
+            return (int)Math.Ceiling((decimal)AllItems.Count / itemsPerPage);
         }
 
+        // Updating the current page by incrementing given int.
         public static void UpdatePage(int page)
         {
             CurrentPage += page;

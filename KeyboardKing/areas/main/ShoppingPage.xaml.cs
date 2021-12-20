@@ -42,16 +42,19 @@ namespace KeyboardKing.areas.main
         {
         }
 
+        // Go to next page and update. 
         private void NextPage_Click(object sender, RoutedEventArgs e)
         {
             UpdateShop(1);
         }
 
+        // Go to previous page and update.  
         private void PreviousPage_Click(object sender, RoutedEventArgs e)
         {
             UpdateShop(-1);
         }
 
+        // Show item preview on item click.
         private void Item_Click(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;
@@ -62,6 +65,7 @@ namespace KeyboardKing.areas.main
             }
         }
 
+        // Call all methods necessary for proper view. 
         public void UpdateShop(int page)
         {
             ShopController.UpdatePage(page);
@@ -69,7 +73,7 @@ namespace KeyboardKing.areas.main
             UpdateButtonVisibility();
         }
 
-
+        // Update ListBox with given list
         public void LoadItems(List<Item> items)
         {
             this.Dispatcher.Invoke(() =>
@@ -79,6 +83,7 @@ namespace KeyboardKing.areas.main
             });
         }
 
+        // Updating button visibility according to its current page.
         public void UpdateButtonVisibility()
         {
             PreviousPage.Visibility = ShopController.CurrentPage > 1 ? Visibility.Visible : Visibility.Hidden;
