@@ -31,8 +31,7 @@ namespace KeyboardKing.areas.main
         public override void OnLoad()
         {
             ShopController.Initialize();
-            LoadItems(ShopController.GetPageItems());
-            UpdateButtonVisibility();
+            UpdateShop(0);
         }
 
         public override void OnShadow()
@@ -43,39 +42,14 @@ namespace KeyboardKing.areas.main
         {
         }
 
-        public void LoadItems(List<Item> items)
-        {
-            this.Dispatcher.Invoke(() =>
-            {
-                LbShop.ItemsSource = items;
-                LbShop.Items.Refresh();
-            });
-        }
-
         private void NextPage_Click(object sender, RoutedEventArgs e)
         {
-            if (ShopController.GetPageItems(ShopController.CurrentPage + 1).Any())
-            {
-                ShopController.CurrentPage++;
-                LoadItems(ShopController.GetPageItems());
-                UpdateButtonVisibility();
-            }
+            UpdateShop(1);
         }
 
         private void PreviousPage_Click(object sender, RoutedEventArgs e)
         {
-            if (ShopController.CurrentPage - 1 > 0)
-            {
-                ShopController.CurrentPage--;
-                LoadItems(ShopController.GetPageItems());
-                UpdateButtonVisibility();
-            }
-        }
-
-        public void UpdateButtonVisibility()
-        {
-            PreviousPage.Visibility = ShopController.CurrentPage > 1 ? Visibility.Visible : Visibility.Hidden;
-            NextPage.Visibility = ShopController.GetPageItems(ShopController.CurrentPage + 1).Any() ? Visibility.Visible : Visibility.Hidden;
+            UpdateShop(-1);
         }
 
         private void Item_Click(object sender, RoutedEventArgs e)
@@ -87,5 +61,29 @@ namespace KeyboardKing.areas.main
                 Popup.ShowOverlay();
             }
         }
+
+        public void UpdateShop(int page)
+        {
+            ShopController.UpdatePage(page);
+            LoadItems(ShopController.GetPageItems());
+            UpdateButtonVisibility();
+        }
+
+
+        public void LoadItems(List<Item> items)
+        {
+            this.Dispatcher.Invoke(() =>
+            {
+                LbShop.ItemsSource = items;
+                LbShop.Items.Refresh();
+            });
+        }
+
+        public void UpdateButtonVisibility()
+        {
+            PreviousPage.Visibility = ShopController.CurrentPage > 1 ? Visibility.Visible : Visibility.Hidden;
+            NextPage.Visibility = ShopController.CurrentPage != ShopController.MaxPage ? Visibility.Visible : Visibility.Hidden;
+        }
+
     }
 }

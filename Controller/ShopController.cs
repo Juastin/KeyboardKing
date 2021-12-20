@@ -13,6 +13,7 @@ namespace Controller
         public static event ItemChange CurrentItemChanged;
 
         public static int CurrentPage { get; set; }
+        public static int MaxPage { get; set; }
         public static int itemsPerPage { get; set; }
 
         public static Item CurrentItem { get; set; }
@@ -23,6 +24,7 @@ namespace Controller
             CurrentPage = 1;
             itemsPerPage = 8;
             AllItems = GetAllItems();
+            MaxPage = CalculateMaxPage();
         }
 
         // Get all data and return it as a List<Item>
@@ -70,6 +72,24 @@ namespace Controller
         {
             CurrentItem = item;
             CurrentItemChanged?.Invoke();
+        }
+
+        public static int CalculateMaxPage()
+        {
+            return (int)Math.Ceiling(((decimal)AllItems.Count / itemsPerPage));
+        }
+
+        public static void UpdatePage(int page)
+        {
+            CurrentPage += page;
+            if (CurrentPage < 1)
+            {
+                CurrentPage = 1;
+            }
+            else if (CurrentPage > MaxPage)
+            {
+                CurrentPage = MaxPage;
+            }
         }
 
     }

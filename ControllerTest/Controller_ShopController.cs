@@ -56,7 +56,7 @@ namespace ControllerTest
                 new List<string> {"8", "Christmas", "/KeyBoardking;component/resources/images/kk_background_christmas.png", "1000", "Theme", "False" },
             });
 
-            Assert.IsTrue(result.SequenceEqual(expectedResult));  
+            Assert.IsTrue(result.SequenceEqual(expectedResult));
         }
 
         [Test]
@@ -112,5 +112,31 @@ namespace ControllerTest
             ShopController.SetCurrentItem(item);
             Assert.AreEqual(item, ShopController.CurrentItem);
         }
+
+        [TestCase(1, 11)]
+        [TestCase(2, 6)]
+        [TestCase(3, 4)]
+        [TestCase(4, 3)]
+        [TestCase(8, 2)]
+        [TestCase(11, 1)]
+        [TestCase(20, 1)]
+        public void GetPageItems_CalculateMaxPage_ReturnCorrectInt(int itemsPerPage, int expectedMaxPage)
+        {
+            ShopController.itemsPerPage = itemsPerPage;
+            Assert.AreEqual(expectedMaxPage, ShopController.CalculateMaxPage());
+        }
+
+        [TestCase(1, 2)]
+        [TestCase(2, 2)]
+        [TestCase(3, 2)]
+        [TestCase(-1, 1)]
+        [TestCase(-2, 1)]
+        [TestCase(-3, 1)]
+        public void GetPageItems_UpdatePage_ReturnCorrectInt(int page, int expectedCurrentPage)
+        {
+            ShopController.UpdatePage(page);
+            Assert.AreEqual(expectedCurrentPage, ShopController.CurrentPage);
+        }
+
     }
 }
