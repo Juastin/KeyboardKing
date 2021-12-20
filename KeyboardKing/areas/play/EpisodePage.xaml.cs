@@ -46,10 +46,12 @@ namespace KeyboardKing.areas.play
             UpdateTimerView();
             this.UserInput.Focus();
         }
+
         public override void OnShadow()
         {
 
         }
+
         public override void OnTick()
         {
             UpdateTimerView();

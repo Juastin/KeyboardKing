@@ -16,8 +16,6 @@
         <dataContext:EpisodePageDataContext/>
     </local:JumpPage.DataContext>
 
-
-
     <Grid x:Name="Container" Margin="25">
         <Border Style="{DynamicResource GridBorder}">
             <Grid>
