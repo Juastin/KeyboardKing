@@ -58,10 +58,9 @@ namespace Cryptography
 
         /// <summary>
         /// Static method used to quickly encrypt or decrypt data using a set key.
-        /// Pass true to encrypt and false to decrypt.
         /// </summary>
         /// <param name="source"></param>
-        /// <param name="encrypt"></param>
+        /// <param name="encrypt">Pass true to encrypt and false to decrypt.</param>
         /// <returns></returns>
         public static string EncryptOrDecrypt(string source, bool encrypt)
         {
