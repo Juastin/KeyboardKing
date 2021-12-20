@@ -12,7 +12,7 @@
       Title="MatchPlayingPage" PreviewKeyDown="PreventTab_PreviewKeyDown" ForceCursor="True" Cursor="Arrow">
 
     <local:JumpPage.DataContext>
-        <dataContext:MatchPageDataContext/>
+        <dataContext:EpisodePageDataContext/>
     </local:JumpPage.DataContext>
 
     <Page.Resources>
@@ -39,6 +39,7 @@
             </Setter>
         </Style>
     </Page.Resources>
+    
     <Grid x:Name="Container" Margin="25">
         <Border Style="{DynamicResource GridBorder}">
             <Grid>
