@@ -36,6 +36,7 @@
                         <Label Foreground="#5e5e5e" Content="KeyboardKing" FontWeight="Bold"/>
                     </StackPanel>
                     <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+
                         <Button FontSize="20" Width="45" Height="25" Content="–" 
                                 Style="{DynamicResource TitleBarButtonTemplate}" Click="ButtonMinimize_Click"/>
                         <Button FontSize="20" Width="45" Height="25" Content="☐"

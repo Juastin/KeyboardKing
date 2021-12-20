@@ -39,8 +39,6 @@ namespace KeyboardKing
         /// </summary>
         private Dictionary<Pages, JumpPage> _pages {get;set;}
 
-
-
         public MainWindow()
         {
             InitializeComponent();
@@ -63,11 +61,6 @@ namespace KeyboardKing
                 {Pages.RegisterPage, new RegisterPage(this)},
                 {Pages.RegisterSkillPage, new RegisterSkillPage(this)},
 
-                // main area
-                {Pages.ChaptersPage, new ChaptersPage(this)},
-                {Pages.ShoppingPage, new ShoppingPage(this)},
-                {Pages.SettingsPage, new SettingsPage(this)},
-
                 // play area
                 {Pages.EpisodeReadyUpPage, new EpisodeReadyUpPage(this)},
                 {Pages.EpisodePage, new EpisodePage(this)},
@@ -77,10 +70,13 @@ namespace KeyboardKing
                 {Pages.MatchLobbyPage, new MatchLobbyPage(this)},
                 {Pages.MatchPlayingPage, new MatchPlayingPage(this)},
                 {Pages.MatchResultPage, new MatchResultPage(this)},
-                { Pages.MatchWaitingResultPage, new MatchWaitingResultPage(this) },
-            };
+                {Pages.MatchWaitingResultPage, new MatchWaitingResultPage(this)},
 
-            
+                // main area
+                {Pages.ChaptersPage, new ChaptersPage(this)},
+                {Pages.ShoppingPage, new ShoppingPage(this)},
+                {Pages.SettingsPage, new SettingsPage(this)} // This page should be at the bottom of the list.
+            };
 
             // Navigate to the first view.
             NavigationController.Navigate += OnNavigate;
@@ -89,7 +85,6 @@ namespace KeyboardKing
    
         public void OnNavigate(NavigateEventArgs e)
         {
-
             if (e.OldPage != Pages.Empty)
                 _pages[e.OldPage].OnShadow();
 

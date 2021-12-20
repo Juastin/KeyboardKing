@@ -16,12 +16,10 @@ namespace KeyboardKing.areas.main
         private Dictionary<string, Theme> _themes;
         private ResourceDictionary themeDictionary = Application.Current.Resources.MergedDictionaries[0];
 
-        
-
-public SettingsPage(MainWindow w) : base(w)
+        public SettingsPage(MainWindow w) : base(w)
         {
             InitializeComponent();
-            
+
             _themes = new Dictionary<string, Theme>
             {
                 { "Light", new Theme("Light Theme", "resources/themes/LightTheme.xaml") },
