@@ -19,7 +19,9 @@ namespace Controller
         public static Item CurrentItem { get; set; }
         public static List<Item> AllItems { get; set; }
 
-        // Initialize the properties in the controller.
+        /// <summary>
+        /// Initialize the properties in the controller.
+        /// </summary>
         public static void Initialize()
         {
             CurrentPage = 1;
@@ -28,7 +30,10 @@ namespace Controller
             MaxPage = CalculateMaxPage();
         }
 
-        // Get all data and return it as a List<Item>
+        /// <summary>
+        /// Get all data and return it as a List<Item>
+        /// </summary>
+        /// <returns></returns>
         public static List<Item> GetAllItems()
         {
             List<List<string>> items = new List<List<string>>();
@@ -51,7 +56,11 @@ namespace Controller
             return Item.ParseItems(items);
         }
 
-        // Load the Items at a certain page with a certain items per page it can show.
+        /// <summary>
+        /// Load the Items at a certain page with a certain items per page it can show.
+        /// </summary>
+        /// <param name="page"></param>
+        /// <returns></returns>
         public static List<Item> GetPageItems(int page)
         {
             var query = (from pageItem in AllItems
@@ -62,26 +71,38 @@ namespace Controller
             return query.ToList();
         }
 
-        // Load the Items at its current page.
+        /// <summary>
+        /// Load the Items at its current page.
+        /// </summary>
+        /// <returns></returns>
         public static List<Item> GetPageItems()
         {
             return GetPageItems(CurrentPage);
         }
 
-        // Change current item and invoke the delegate CurrentItemChanged.
+        /// <summary>
+        /// Change current item and invoke the delegate CurrentItemChanged.
+        /// </summary>
+        /// <param name="item"></param>
         public static void SetCurrentItem(Item item)
         {
             CurrentItem = item;
             CurrentItemChanged?.Invoke();
         }
 
-        // Calulates the MaxPage the current list of all items has.
+        /// <summary>
+        /// Calulates the MaxPage the current list of all items has.
+        /// </summary>
+        /// <returns></returns>
         public static int CalculateMaxPage()
         {
             return (int)Math.Ceiling((decimal)AllItems.Count / itemsPerPage);
         }
 
-        // Updating the current page by incrementing given int.
+        /// <summary>
+        /// Updating the current page by incrementing given int.
+        /// </summary>
+        /// <param name="page"></param>
         public static void UpdatePage(int page)
         {
             CurrentPage += page;

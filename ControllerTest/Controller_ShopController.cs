@@ -89,7 +89,7 @@ namespace ControllerTest
         }
 
         [Test]
-        public void GetPageItems_ItemsPerPage_ReturnCorrectItems()
+        public void ItemsPerPage_List_ReturnCorrectItems()
         {
             ShopController.CurrentPage = 0;
             ShopController.itemsPerPage = 4;
@@ -106,7 +106,7 @@ namespace ControllerTest
         }
 
         [Test]
-        public void GetPageItems_SetCurrentItem_ReturnCorrectItem()
+        public void SetCurrentItem_CurrentItem_ReturnCorrectItem()
         {
             Item item = Item.ParseItem(new List<string> { "1", "KeyboardKing Light", "/KeyBoardking;component/resources/images/kk_background_4K.png", "10", "Theme", "True" });
             ShopController.SetCurrentItem(item);
@@ -120,7 +120,7 @@ namespace ControllerTest
         [TestCase(8, 2)]
         [TestCase(11, 1)]
         [TestCase(20, 1)]
-        public void GetPageItems_CalculateMaxPage_ReturnCorrectInt(int itemsPerPage, int expectedMaxPage)
+        public void CalculateMaxPage_MaxPage_ReturnCorrectInt(int itemsPerPage, int expectedMaxPage)
         {
             ShopController.itemsPerPage = itemsPerPage;
             Assert.AreEqual(expectedMaxPage, ShopController.CalculateMaxPage());
@@ -132,7 +132,7 @@ namespace ControllerTest
         [TestCase(-1, 1)]
         [TestCase(-2, 1)]
         [TestCase(-3, 1)]
-        public void GetPageItems_UpdatePage_ReturnCorrectInt(int page, int expectedCurrentPage)
+        public void UpdatePage_CurrentPage_ReturnCorrectInt(int page, int expectedCurrentPage)
         {
             ShopController.UpdatePage(page);
             Assert.AreEqual(expectedCurrentPage, ShopController.CurrentPage);
