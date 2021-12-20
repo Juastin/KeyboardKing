@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Controller;
 using KeyboardKing.core;
 using Model;
@@ -56,6 +44,9 @@ namespace KeyboardKing.areas.info
 
         private void RedirectApproved(object sender, RoutedEventArgs e)
         {
+            // This check can probably be improved by creating some sort of musicNavigation controller.
+            if (new List<Pages>(){Pages.ChaptersPage, Pages.MatchOverviewPage, Pages.SettingsPage}.Contains(_targetLocation))
+                MusicPlayer.PlayNextFrom("menu_music");
             NavigationController.NavigateToPage(_targetLocation);
         }
 

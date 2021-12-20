@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Controller;
 
-namespace Model
+namespace KeyboardKing.data_context
 {
     public class EpisodePageDataContext : INotifyPropertyChanged
     {

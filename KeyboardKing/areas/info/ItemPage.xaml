@@ -3,7 +3,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:KeyboardKing.areas.info"
-             xmlns:data_context="clr-namespace:KeyboardKing.data_context" xmlns:Internal="clr-namespace:K4os.Compression.LZ4.Internal;assembly=K4os.Compression.LZ4" x:Class="KeyboardKing.areas.info.ItemPage"
+             xmlns:data_context="clr-namespace:KeyboardKing.data_context"
+             xmlns:Internal="clr-namespace:K4os.Compression.LZ4.Internal;assembly=K4os.Compression.LZ4" x:Class="KeyboardKing.areas.info.ItemPage"
              mc:Ignorable="d">
 
     <Grid Background="#99000000" x:Name="MainGrid" Visibility="{Binding Visibility}">
