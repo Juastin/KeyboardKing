@@ -22,7 +22,7 @@ public SettingsPage(MainWindow w) : base(w)
         {
             InitializeComponent();
             
-            _themes = new()
+            _themes = new Dictionary<string, Theme>
             {
                 { "Light", new Theme("Light Theme", "resources/themes/LightTheme.xaml") },
                 { "Dark", new Theme("Dark Theme", "resources/themes/DarkTheme.xaml") },
@@ -39,24 +39,24 @@ public SettingsPage(MainWindow w) : base(w)
             CBTheme.DisplayMemberPath = "Value.ThemeTitle";
             CBTheme.SelectedValuePath = "Key";
         }
-        //Switch from theme according to the given paths.
+        /// <summary>
+        /// Changes application theme when given theme param is found in the dictionary
+        /// </summary>
+        /// <param name="theme">All themes are defined in the theme dictionary</param>
         private void ChangeTheme(Theme theme)
         {
             themeDictionary.Clear();
             themeDictionary.MergedDictionaries.Add(new ResourceDictionary() { Source = theme.ThemeUri });
             NavigationController.ChangeTheme();
         }
-
         private void CBTheme_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             object value = CBTheme.SelectedValue;
-            Theme theme;
-            if (_themes.TryGetValue((string)value, out theme))
+            if (_themes.TryGetValue((string)value, out var theme))
             {
                 ChangeTheme(theme);
             }
         }
-
         public override void OnLoad()
         {
         }
