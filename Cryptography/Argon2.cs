@@ -8,16 +8,15 @@ namespace Cryptography
 {
     /// <summary>
     /// Argon2 class used to generate salt, hash data and verify hash data.
+    /// Source:https://github.com/kmaragon/Konscious.Security.Cryptography
     /// </summary>
     public static class Argon2
     {
-        // Source:https://github.com/kmaragon/Konscious.Security.Cryptography
-
         /// <summary>
-        /// Password will be hashed with the parameter salt and return in a encrypted string
+        /// Password will be hashed with salt and returned in a encrypted string.
         /// </summary>
         /// <param name="password"></param>
-        /// <param name="salt"></param>
+        /// <param name="salt">generated salt from CreateSalt()</param>
         /// <returns></returns>
         public static string HashPassword(string password, string salt)
         {
@@ -30,12 +29,11 @@ namespace Cryptography
         }
 
         /// <summary>
-        /// Password will be compared with the other password. First and second parameter is for hashing password for verify password. 
-        /// It returns a bool if the passwords are equal.
+        /// Password compared with another password and returns true if they are equal.
         /// </summary>
-        /// <param name="loginPw"></param>
-        /// <param name="salt"></param>
-        /// <param name="userPw"></param>
+        /// <param name="loginPw">input data</param>
+        /// <param name="salt">generated salt from CreateSalt()</param>
+        /// <param name="userPw">hashed data</param>
         /// <returns></returns>
         public static bool VerifyHash(string loginPw, string salt, string userPw)
         {
@@ -45,7 +43,7 @@ namespace Cryptography
         }
 
         /// <summary>
-        /// Salt generated with the RNGCryptoServiceProvider and return it encrypted
+        /// Salt generated with the RNGCryptoServiceProvider and returns encrypted.
         /// </summary>
         /// <returns></returns>
         public static string CreateSalt()
