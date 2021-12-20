@@ -57,7 +57,8 @@ namespace Cryptography
         }
 
         /// <summary>
-        /// Static bool method used to quickly encrypt or decrypt data using a set key.
+        /// Static method used to quickly encrypt or decrypt data using a set key.
+        /// Pass true to encrypt and false to decrypt.
         /// </summary>
         /// <param name="source"></param>
         /// <param name="encrypt"></param>
