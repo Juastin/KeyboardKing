@@ -105,7 +105,7 @@ namespace Controller
 
         public static User GetUserInfo(string email)
         {
-            MySqlCommand cmd = new MySqlCommand("SELECT id, username, email, password, salt, skilllevel " +
+            MySqlCommand cmd = new MySqlCommand("SELECT id, username, email, password, salt, skilllevel, coins " +
                                             "FROM User " +
                                             "LEFT JOIN UserSettings " +
                                             "ON User.id = UserSettings.userid " +
@@ -156,12 +156,12 @@ namespace Controller
 
             List<List<string>> result = DBHandler.SelectQuery(cmd);
    
-            return !String.IsNullOrEmpty(result[0][0]) ? int.Parse(result[0][0]) : 0;
+            return !string.IsNullOrEmpty(result[0][0]) ? int.Parse(result[0][0]) : 0;
         }
 
         public static void UpdateCoins(int coins, User user)
         {
-            MySqlCommand cmd = new MySqlCommand("UPDATE User set coins = coins + @coins WHERE id = @userid");
+            MySqlCommand cmd = new MySqlCommand("UPDATE User SET coins = coins + @coins WHERE id = @userid");
 
             MySqlParameter CoinsIdParam = new MySqlParameter("@coins", MySqlDbType.Int32, 0);
             MySqlParameter UserIdParam = new MySqlParameter("@userid", MySqlDbType.Int32, 0);
@@ -175,7 +175,7 @@ namespace Controller
             DBHandler.Query(cmd);
         }
 
-        public static string GetCoinsOffUser(User user)
+        public static int GetCoinsOffUser(User user)
         {
             MySqlCommand cmd = new MySqlCommand("SELECT coins From User WHERE id = @userid");
 
@@ -187,7 +187,7 @@ namespace Controller
 
             List<List<string>> result = DBHandler.SelectQuery(cmd);
 
-            return result[0][0];
+            return int.Parse(result[0][0]);
         }
 
 

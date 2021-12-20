@@ -30,7 +30,6 @@ namespace KeyboardKing.areas.main
 
         public override void OnLoad()
         {
-            Coin.Content = EpisodeController.GetCoins((User)Session.Get("student"));
         }
 
         public override void OnShadow()

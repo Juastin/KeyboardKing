@@ -190,29 +190,29 @@ namespace Controller
         {
             StopAndSetEpisodeResult();
            
-
             User student = (User)Session.Get("student");
             int episodeId = (int)Session.Get("episodeId");
-            GiveCoins(CurrentEpisodeResult.Score, student, episodeId);
+            GiveCoins(student, episodeId);
             DBQueries.SaveResult(CurrentEpisodeResult, episodeId, student.Id);
 
             EpisodeResultUpdated?.Invoke(null, EventArgs.Empty);
             NavigationController.NavigateToPage(Pages.EpisodeResultPage);
         }
 
-        private static void GiveCoins(int score, User student, int episodeId)
+        private static void GiveCoins(User student, int episodeId)
         {
             int highscore = DBQueries.GetHighscoreEpisode(student, episodeId); //5550
 
             if(CurrentEpisodeResult.Score > highscore)
-            {
                 Coins = (CurrentEpisodeResult.Score - highscore) / 100;
-            }
 
             DBQueries.UpdateCoins(Coins, student);
+
+            student.Coins = DBQueries.GetCoinsOffUser(student);
+            Session.Add("student", student);
         }
         
-        public static string GetCoins(User student)
+        public static int GetCoins(User student)
         {
             return DBQueries.GetCoinsOffUser(student);
         }

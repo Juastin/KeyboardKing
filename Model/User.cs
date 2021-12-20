@@ -18,6 +18,7 @@ namespace Model
         public string Password { get; set; }
         public string Salt { get; set; }
         public SkillLevel SkillLevel { get; set; }
+        public int Coins { get; set; }
 
         public static List<User> ParseUserIds(List<List<string>> input)
         {
@@ -35,7 +36,8 @@ namespace Model
                     Email = input[0][2],
                     Password = input[0][3],
                     Salt = input[0][4],
-                    SkillLevel = (SkillLevel)Enum.Parse(typeof(SkillLevel), input[0][5])
+                    SkillLevel = (SkillLevel)Enum.Parse(typeof(SkillLevel), input[0][5]),
+                    Coins = int.Parse(input[0][6])
                 };
             }
             return null;
