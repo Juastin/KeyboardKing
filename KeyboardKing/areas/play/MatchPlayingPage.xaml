@@ -50,7 +50,7 @@
                 </Grid.RowDefinitions>
                 <TextBox x:Name="UserInput" Background="Transparent" Foreground="Transparent" CaretBrush="Transparent" Grid.Column="0" LostKeyboardFocus="UserInput_LostFocus" Text="" TextChanged="UserInput_TextChanged" SelectionBrush="{x:Null}" BorderThickness="0,0,0,0"/>
                 <Grid Grid.Row="1" Grid.RowSpan="2">
-                    <ListBox MaxWidth="800" x:Name="OpponentListBox" ItemContainerStyle="{DynamicResource ListBoxItemTemplate}" Background="Transparent" BorderThickness="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,30,0,0">
+                    <ListBox MaxWidth="800" ScrollViewer.HorizontalScrollBarVisibility= "Disabled" x:Name="OpponentListBox" ItemContainerStyle="{DynamicResource ListBoxItemTemplate}" Background="Transparent" BorderThickness="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,30,0,0">
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <WrapPanel HorizontalAlignment="Center"/>
