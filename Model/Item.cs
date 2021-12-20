@@ -8,7 +8,7 @@ namespace Model
 {
     public enum ItemType
     {
-        Theme
+        Theme, Song, Icon, Chapter
     }
 
     public class Item : IEquatable<Item>
