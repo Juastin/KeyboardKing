@@ -23,7 +23,7 @@
                 <Grid Grid.Row="0" VerticalAlignment="Center">
                     <Label Style="{DynamicResource H1}" Content="Instellingen" HorizontalAlignment="Left"/>
                 </Grid>
-                <ScrollViewer Grid.Row="1" VerticalAlignment="Top" VerticalScrollBarVisibility="Hidden">
+                <ScrollViewer Grid.Row="1" VerticalAlignment="Center" VerticalScrollBarVisibility="Hidden">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
@@ -32,15 +32,17 @@
                         <Grid VerticalAlignment="Top" Grid.Column="0">
                             <StackPanel Orientation="Vertical">
                                 <Label Style="{DynamicResource H3}" HorizontalAlignment="Center" Content="Themas"/>
-                                <ComboBox  x:Name="CBTheme" HorizontalAlignment="Center" Width="250" Height="35" ItemContainerStyle="{DynamicResource ComboBoxItem}" Template="{DynamicResource ComboBox}" SelectionChanged="CBTheme_SelectionChanged"/>
+                                    <ComboBox  x:Name="CBTheme" HorizontalAlignment="Center" Width="250" Height="35" ItemContainerStyle="{DynamicResource ComboBoxItem}" Template="{DynamicResource ComboBox}" SelectionChanged="CBTheme_SelectionChanged"/>
                                 <Label Style="{DynamicResource H3}" Content="Dyslexie" HorizontalAlignment="Center"/>
-                                <CheckBox HorizontalAlignment="Center"/>
+                                    <CheckBox HorizontalAlignment="Center"/>
                             </StackPanel>
                         </Grid>
                         <Grid VerticalAlignment="Top" Grid.Column="1">
                             <StackPanel Orientation="Vertical" >
                                 <Label Style="{DynamicResource H3}"  Content="Account" HorizontalAlignment="Center"/>
-                                <Button Style="{DynamicResource DeclineButton}" Width="250" Height="35" HorizontalAlignment="Center" Content="Account verwijderen" Click="DeleteAccountClick"/>
+                                    <Button Style="{DynamicResource DeclineButton}" Width="250" Height="35" HorizontalAlignment="Center" Content="Account verwijderen" Click="DeleteAccountClick"/>
+                                <Label Style="{DynamicResource H3}" Content="Audio mute" HorizontalAlignment="Center"/>
+                                    <CheckBox HorizontalAlignment="Center"/>
                             </StackPanel>
                         </Grid>
                     </Grid>
