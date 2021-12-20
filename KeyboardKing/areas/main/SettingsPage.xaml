@@ -23,20 +23,28 @@
                 <Grid Grid.Row="0" VerticalAlignment="Center">
                     <Label Style="{DynamicResource H1}" Content="Instellingen" HorizontalAlignment="Left"/>
                 </Grid>
-                <Grid Grid.Row="1" VerticalAlignment="Top">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Grid VerticalAlignment="Top" Grid.Column="0">
-                        <Label Style="{DynamicResource H3}" HorizontalAlignment="Center" Content="Themas" Margin="0,0,0,91"/>
-                        <ComboBox  x:Name="CBTheme" HorizontalAlignment="Center" Width="250" Margin="0,50,0,50" ItemContainerStyle="{DynamicResource ComboBoxItem}" Template="{DynamicResource ComboBox}" SelectionChanged="CBTheme_SelectionChanged"/>
+                <ScrollViewer Grid.Row="1" VerticalAlignment="Top" VerticalScrollBarVisibility="Hidden">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid VerticalAlignment="Top" Grid.Column="0">
+                            <StackPanel Orientation="Vertical">
+                                <Label Style="{DynamicResource H3}" HorizontalAlignment="Center" Content="Themas"/>
+                                <ComboBox  x:Name="CBTheme" HorizontalAlignment="Center" Width="250" Height="35" ItemContainerStyle="{DynamicResource ComboBoxItem}" Template="{DynamicResource ComboBox}" SelectionChanged="CBTheme_SelectionChanged"/>
+                                <Label Style="{DynamicResource H3}" Content="Dyslexie" HorizontalAlignment="Center"/>
+                                <CheckBox HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Grid>
+                        <Grid VerticalAlignment="Top" Grid.Column="1">
+                            <StackPanel Orientation="Vertical" >
+                                <Label Style="{DynamicResource H3}"  Content="Account" HorizontalAlignment="Center"/>
+                                <Button Style="{DynamicResource DeclineButton}" Width="250" Height="35" HorizontalAlignment="Center" Content="Account verwijderen" Click="DeleteAccountClick"/>
+                            </StackPanel>
+                        </Grid>
                     </Grid>
-                    <Grid VerticalAlignment="Top" Grid.Column="1">
-                        <Label Style="{DynamicResource H3}"  Content="Account" HorizontalAlignment="Center" Margin="0,0,0,91"/>
-                        <Button Style="{DynamicResource DeclineButton}" Margin="0,50,0,50" Width="250" HorizontalAlignment="Center" Content="Account verwijderen" Click="DeleteAccountClick"/>
-                    </Grid>
-                </Grid>
+                </ScrollViewer>
                 <Grid Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom">
                     <Components:Navbar CurrentPage="SettingsPage"/>
                 </Grid>
