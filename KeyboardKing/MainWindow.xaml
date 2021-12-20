@@ -36,7 +36,6 @@
                         <Label Foreground="#5e5e5e" Content="KeyboardKing" FontWeight="Bold"/>
                     </StackPanel>
                     <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-                        <ComboBox  x:Name="CBTheme" VerticalAlignment="Center" Width="150" ItemContainerStyle="{DynamicResource ComboBoxItem}" Template="{DynamicResource ComboBox}" SelectionChanged="CBTheme_SelectionChanged"/>
                         <Button FontSize="20" Width="45" Height="25" Content="–" 
                                 Style="{DynamicResource TitleBarButtonTemplate}" Click="ButtonMinimize_Click"/>
                         <Button FontSize="20" Width="45" Height="25" Content="☐"
