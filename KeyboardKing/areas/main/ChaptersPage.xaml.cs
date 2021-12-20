@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using Controller;
-using KeyboardKing.data_context;
+using Model;
 using DatabaseController;
 
 namespace KeyboardKing.areas.main

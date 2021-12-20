@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using DatabaseController;
-using KeyboardKing.data_context;
+using Model;
 
 namespace Controller
 {

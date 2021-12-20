@@ -1,5 +1,6 @@
 ﻿using Controller;
 using System.ComponentModel;
+using Model;
 
 namespace KeyboardKing.data_context
 {

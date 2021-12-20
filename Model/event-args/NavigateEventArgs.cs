@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace KeyboardKing.data_context.event_args
+namespace Model.event_args
 {
     public delegate void NavigateHandler(NavigateEventArgs args);
 

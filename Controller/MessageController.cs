@@ -1,4 +1,4 @@
-﻿using KeyboardKing.data_context;
+﻿using Model;
 
 namespace Controller
 {

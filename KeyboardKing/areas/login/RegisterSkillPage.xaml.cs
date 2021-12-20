@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using Controller;
-using KeyboardKing.data_context;
+using Model;
 using DatabaseController;
 
 namespace KeyboardKing.areas.login

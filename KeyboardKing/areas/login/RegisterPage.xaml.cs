@@ -2,7 +2,7 @@
 using System;
 using System.Windows;
 using Controller;
-using KeyboardKing.data_context;
+using Model;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 using Cryptography;

@@ -1,5 +1,5 @@
 ﻿using Controller;
-using KeyboardKing.data_context;
+using Model;
 using System;
 using System.Windows.Controls;
 using System.Windows.Media;

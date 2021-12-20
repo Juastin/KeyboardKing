@@ -1,5 +1,5 @@
 ﻿using KeyboardKing.core;
-using KeyboardKing.data_context;
+using Model;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;

@@ -1,13 +1,12 @@
 ﻿using Controller;
 using DatabaseController;
 using KeyboardKing.core;
-using KeyboardKing.data_context;
+using Model;
 using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Threading;
 
 namespace KeyboardKing.areas.play
 {

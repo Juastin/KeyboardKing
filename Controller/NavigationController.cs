@@ -1,6 +1,6 @@
 ﻿using System;
-using KeyboardKing.data_context;
-using KeyboardKing.data_context.event_args;
+using Model;
+using Model.event_args;
 
 namespace Controller
 {

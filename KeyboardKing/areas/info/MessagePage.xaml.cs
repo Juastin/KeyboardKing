@@ -1,8 +1,7 @@
 ﻿using Controller;
 using KeyboardKing.core;
-using KeyboardKing.data_context;
+using Model;
 using System;
-using System.Windows;
 
 namespace KeyboardKing.areas.info
 {

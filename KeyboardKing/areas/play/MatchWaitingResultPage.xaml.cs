@@ -1,7 +1,7 @@
 ﻿using Controller;
 using DatabaseController;
 using KeyboardKing.core;
-using KeyboardKing.data_context;
+using Model;
 
 namespace KeyboardKing.areas.play
 {

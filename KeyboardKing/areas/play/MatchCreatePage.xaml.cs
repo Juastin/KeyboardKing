@@ -2,7 +2,7 @@
 using Controller;
 using System.Windows;
 using System.Windows.Data;
-using KeyboardKing.data_context;
+using Model;
 using DatabaseController;
 
 // Source: https://stackoverflow.com/questions/561166/binding-a-wpf-combobox-to-a-custom-list
