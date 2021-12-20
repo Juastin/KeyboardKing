@@ -12,11 +12,16 @@
     <None Remove="resources\audio\music\break.wav" />
     <None Remove="resources\audio\music\Coffee.wav" />
     <None Remove="resources\audio\music\Fiber.wav" />
+    <None Remove="resources\audio\music\Merchant.wav" />
     <None Remove="resources\audio\music\Page.wav" />
     <None Remove="resources\audio\music\Riverside.wav" />
     <None Remove="resources\audio\music\Sunday.wav" />
     <None Remove="resources\audio\music\There Was A King.wav" />
     <None Remove="resources\audio\music\Underdog.wav" />
+    <None Remove="resources\audio\shop_enter.wav" />
+    <None Remove="resources\audio\shop_exit.wav" />
+    <None Remove="resources\audio\shop_preview.wav" />
+    <None Remove="resources\audio\shop_purchase.wav" />
     <None Remove="resources\images\blur_background_4K.png" />
     <None Remove="resources\images\blur_hellobeertje_background.png" />
     <None Remove="resources\Images\blur_kk_background_christmas.png" />
@@ -58,6 +63,9 @@
     <Content Include="resources\audio\music\Fiber.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="resources\audio\music\Merchant.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="resources\audio\music\Page.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -71,6 +79,18 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\audio\music\Underdog.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\audio\shop_enter.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\audio\shop_exit.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\audio\shop_preview.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\audio\shop_purchase.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\images\blur_background_4K.png">

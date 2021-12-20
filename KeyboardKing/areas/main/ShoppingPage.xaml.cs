@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using Controller;
+using System.Threading.Tasks;
+using System;
 
 namespace KeyboardKing.areas.main
 {
@@ -12,19 +14,52 @@ namespace KeyboardKing.areas.main
     /// </summary>
     public partial class ShoppingPage : JumpPage
     {
+        private DateTime _tickCheck {get;set;} = DateTime.Now;
+        private bool isSwitching {get;set;} = false;
+
         public ShoppingPage(MainWindow w) : base(w)
         {
             InitializeComponent();
+            ShopController.Initialize();
         }
 
         public override void OnLoad()
         {
-            ShopController.Initialize();
             UpdateShop(0);
+
+            // AUDIO
+            if (!isSwitching)
+                AudioPlayer.Play(AudioPlayer.Sound.shop_enter);
+                var t = Task.Factory.StartNew(async () =>
+                {
+                    isSwitching = true;
+                    await Task.Delay(1000);
+                    MusicPlayer.PlayNextFrom("shop");
+                    isSwitching = false;
+                });
+
+            // FETCH ITEMS
+            DateTime now = DateTime.Now;
+            if (_tickCheck.AddMinutes(5) < now)
+            {
+                _tickCheck = now;
+                ShopController.Initialize();
+                UpdateShop(0);
+            }
         }
 
         public override void OnShadow()
         {
+            // AUDIO
+            if (!isSwitching)
+                AudioPlayer.Play(AudioPlayer.Sound.shop_exit);
+                var t = Task.Factory.StartNew(async () =>
+                {
+                    isSwitching = true;
+                    await Task.Delay(1000);
+                    MusicPlayer.PlayNextFrom("menu_music");
+                    isSwitching = false;
+                });
         }
 
         public override void OnTick()

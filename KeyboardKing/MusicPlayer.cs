@@ -75,13 +75,16 @@ namespace KeyboardKing
 
         private static void _tick(object sender, EventArgs e)
         {
-            if (Seconds>=Playlists[CurrentPlaylist][CurrentSong])
+            try
             {
-                PlayNext();
-            } else
-            {
-                Seconds += 0.100;
-            }
+                if (Seconds>=Playlists[CurrentPlaylist][CurrentSong])
+                {
+                    PlayNext();
+                } else
+                {
+                    Seconds += 0.100;
+                }
+            } catch {}
         }
 
         public static void NextIndex()
