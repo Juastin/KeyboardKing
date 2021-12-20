@@ -4,7 +4,7 @@ using System.Configuration;
 using Cryptography;
 using System;
 
-namespace Controller
+namespace DatabaseController
 {
     /// !!! NEVER USE THIS CLASS DIRECTLY, ONLY THROUGH DBQueries !!!
     internal static class DBHandler
