@@ -6,6 +6,9 @@ using System.Text;
 
 namespace Cryptography
 {
+    /// <summary>
+    /// Argon2 class used to generate salt, hash data and verify hash data.
+    /// </summary>
     public static class Argon2
     {
         // Source:https://github.com/kmaragon/Konscious.Security.Cryptography
