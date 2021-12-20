@@ -1,6 +1,6 @@
 ﻿using Controller;
 using KeyboardKing.core;
-using Model;
+using KeyboardKing.data_context;
 using System;
 
 namespace KeyboardKing.areas.info

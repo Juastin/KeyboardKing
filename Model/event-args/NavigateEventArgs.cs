@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Model.event_args
+namespace KeyboardKing.data_context.event_args
 {
     public delegate void NavigateHandler(NavigateEventArgs args);
 

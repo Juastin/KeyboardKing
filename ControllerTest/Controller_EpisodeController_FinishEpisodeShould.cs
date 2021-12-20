@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using Controller;
-using Model;
+using KeyboardKing.data_context;
 
 namespace ControllerTest
 {

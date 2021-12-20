@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Model
+namespace KeyboardKing.data_context
 {
     /// <summary>
     /// Uniquely Typed List, list of objects that can be of any type.

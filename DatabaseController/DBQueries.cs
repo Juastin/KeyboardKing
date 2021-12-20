@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
-using Model;
+using KeyboardKing.data_context;
 
 namespace DatabaseController
 {

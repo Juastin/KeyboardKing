@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Controller;
 using KeyboardKing.core;
-using Model;
+using KeyboardKing.data_context;
 
 namespace KeyboardKing.areas.info
 {

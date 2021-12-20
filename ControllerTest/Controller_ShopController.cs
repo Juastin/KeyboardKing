@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Controller;
-using Model;
+using KeyboardKing.data_context;
 using System.Diagnostics.CodeAnalysis;
 
 namespace ControllerTest
