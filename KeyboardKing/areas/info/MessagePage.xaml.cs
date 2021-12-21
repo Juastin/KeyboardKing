@@ -2,7 +2,6 @@
 using KeyboardKing.core;
 using Model;
 using System;
-using System.Windows;
 
 namespace KeyboardKing.areas.info
 {

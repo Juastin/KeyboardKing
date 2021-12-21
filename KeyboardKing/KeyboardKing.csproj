@@ -12,11 +12,16 @@
     <None Remove="resources\audio\music\break.wav" />
     <None Remove="resources\audio\music\Coffee.wav" />
     <None Remove="resources\audio\music\Fiber.wav" />
+    <None Remove="resources\audio\music\Merchant.wav" />
     <None Remove="resources\audio\music\Page.wav" />
     <None Remove="resources\audio\music\Riverside.wav" />
     <None Remove="resources\audio\music\Sunday.wav" />
     <None Remove="resources\audio\music\There Was A King.wav" />
     <None Remove="resources\audio\music\Underdog.wav" />
+    <None Remove="resources\audio\shop_enter.wav" />
+    <None Remove="resources\audio\shop_exit.wav" />
+    <None Remove="resources\audio\shop_preview.wav" />
+    <None Remove="resources\audio\shop_purchase.wav" />
     <None Remove="resources\images\blur_background_4K.png" />
     <None Remove="resources\images\blur_hellobeertje_background.png" />
     <None Remove="resources\Images\blur_kk_background_christmas.png" />
@@ -27,6 +32,7 @@
     <None Remove="resources\images\coin.png" />
     <None Remove="resources\images\hellobeertje_background_4k.png" />
     <None Remove="resources\images\icon.png" />
+    <None Remove="resources\images\icons\coin.png" />
     <None Remove="resources\images\kingbackground.png" />
     <None Remove="resources\images\kk_background_1080.png" />
     <None Remove="resources\images\kk_background_4K.png" />
@@ -36,7 +42,10 @@
     <None Remove="resources\images\paint_theme_background.png" />
     <None Remove="resources\images\play-button.png" />
     <None Remove="resources\images\red_chinese_background.png" />
+    <None Remove="resources\images\shopping_shelf.png" />
+    <None Remove="resources\images\shop_overlay.png" />
     <None Remove="resources\images\space_theme_background.png" />
+    <None Remove="resources\images\wooden_arrow.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -55,6 +64,9 @@
     <Content Include="resources\audio\music\Fiber.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="resources\audio\music\Merchant.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="resources\audio\music\Page.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -68,6 +80,18 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\audio\music\Underdog.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\audio\shop_enter.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\audio\shop_exit.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\audio\shop_preview.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\audio\shop_purchase.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\images\blur_background_4K.png">
@@ -96,6 +120,9 @@
     </Content>
     <Content Include="resources\images\icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\icons\coin.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\images\kingbackground.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -127,8 +154,14 @@
     <Content Include="resources\images\red_chinese_background.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="resources\images\shopping_shelf.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="resources\images\space_theme_background.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\wooden_arrow.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <ProjectReference Include="..\Controller\Controller.csproj" />
     <ProjectReference Include="..\Model\Model.csproj" />

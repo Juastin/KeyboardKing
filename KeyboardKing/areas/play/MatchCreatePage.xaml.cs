@@ -1,19 +1,9 @@
 ﻿using KeyboardKing.core;
 using Controller;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Model;
+using DatabaseController;
 
 // Source: https://stackoverflow.com/questions/561166/binding-a-wpf-combobox-to-a-custom-list
 
@@ -38,9 +28,9 @@ namespace KeyboardKing.areas.play
             }
 
             User user = (User)Session.Get("student");
-
-            CBEpisode.ItemsSource = DBQueries.GetAllEpisodes(user);
-            CBEpisode.DisplayMemberPath = "Name";
+            ListCollectionView lcv = new ListCollectionView(DBQueries.GetAllEpisodes(user));
+            lcv.GroupDescriptions.Add(new PropertyGroupDescription("ChapterName"));
+            CBEpisode.ItemsSource = lcv;
             CBEpisode.SelectedValuePath = "Id";
         }
 

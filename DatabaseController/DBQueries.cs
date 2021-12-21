@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 using Model;
 
-namespace Controller
+namespace DatabaseController
 {
     public static class DBQueries
     {
@@ -47,14 +47,15 @@ namespace Controller
 
         public static bool SaveResult(EpisodeResult es, int episodeId, int userId)
         {
-            MySqlCommand cmd = new MySqlCommand("INSERT INTO EpisodeResult (episodeid, userid, score, mistakes, lettersperminute, time) " +
-                                            "VALUES (@episodeid, @userid, @score, @mistakes, @lpm, @time)");
+            MySqlCommand cmd = new MySqlCommand("INSERT INTO EpisodeResult (episodeid, userid, score, mistakes, lettersperminute, time, passed) " +
+                                            "VALUES (@episodeid, @userid, @score, @mistakes, @lpm, @time, @passed)");
             MySqlParameter episodeidParam = new MySqlParameter("@episodeid", MySqlDbType.Int32, 0);
             MySqlParameter useridParam = new MySqlParameter("@userid", MySqlDbType.Int32, 0);
             MySqlParameter scoreParam = new MySqlParameter("@score", MySqlDbType.Int32, 0);
             MySqlParameter mistakesParam = new MySqlParameter("@mistakes", MySqlDbType.Int32, 0);
             MySqlParameter lpmParam = new MySqlParameter("@lpm", MySqlDbType.Int32, 0);
             MySqlParameter timeParam = new MySqlParameter("@time", MySqlDbType.Int32, 0);
+            MySqlParameter passedParam = new MySqlParameter("@passed", MySqlDbType.Bit, 0);
 
             episodeidParam.Value = episodeId;
             useridParam.Value = userId;
@@ -62,13 +63,15 @@ namespace Controller
             scoreParam.Value = es.Score;
             lpmParam.Value = es.LettersPerMinute;
             timeParam.Value = es.Time.Ticks;
+            passedParam.Value = es.Passed;
 
             cmd.Parameters.Add(episodeidParam);
             cmd.Parameters.Add(useridParam);
             cmd.Parameters.Add(mistakesParam);
             cmd.Parameters.Add(scoreParam);
             cmd.Parameters.Add(lpmParam);
-            cmd.Parameters.Add(timeParam);
+            cmd.Parameters.Add(timeParam); 
+            cmd.Parameters.Add(passedParam);
 
             return DBHandler.Query(cmd);
         }
@@ -122,7 +125,7 @@ namespace Controller
         public static List<Episode> GetAllEpisodes(User user)
         {
             MySqlCommand cmd = new MySqlCommand("SELECT c.name, episode, e.name, e.id, " +
-                "CASE WHEN er.userid IS NULL THEN 'False' ELSE 'True' END AS completed, " +
+                "CASE WHEN er.userid IS NULL OR er.passed = 0 THEN 'False' ELSE 'True' END AS completed, " +
                 "MAX(er.score) AS highscore " +
                 "FROM Episode e " +
                 "LEFT JOIN Chapter c " +
@@ -204,6 +207,21 @@ namespace Controller
             
             List<List<string>> result = DBHandler.SelectQuery(cmd);
             return EpisodeStep.ParseEpisodeSteps(result);
+        }
+
+        public static int Getpassthreshold(int id)
+        {
+            MySqlCommand cmd = new MySqlCommand("SELECT passthreshold " +
+               "FROM Chapter c " +
+               "LEFT JOIN Episode e ON c.id = e.chapterid " +
+               "WHERE e.id = @id");
+
+            MySqlParameter episodeIdParam = new MySqlParameter("@id", MySqlDbType.Int32, 255);
+            episodeIdParam.Value = id;
+            cmd.Parameters.Add(episodeIdParam);
+
+            List<List<string>> result = DBHandler.SelectQuery(cmd);
+            return int.Parse(result[0][0]);
         }
 
         public static List<Match> GetAllActiveMatches()
