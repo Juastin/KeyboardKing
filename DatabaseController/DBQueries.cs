@@ -390,5 +390,22 @@ namespace DatabaseController
             List<List<string>> result = DBHandler.SelectQuery(cmd);
             return result;
         }
+
+        public static List<List<string>> GetAllScoresOrderByHighest(int matchid)
+        {
+            MySqlCommand cmd = new MySqlCommand("SELECT ep.name, u.username, mp.score, mp.mistakes, mp.lettersperminute, mp.time " +
+            "FROM Episode ep " +
+            "LEFT JOIN MatchLobby ml ON ml.episodeid = ep.id " +
+            "LEFT JOIN MatchProgress mp ON ml.id = mp.matchid " +
+            "LEFT JOIN User u ON mp.userid = u.id " +
+            "WHERE mp.matchid = @matchid " +
+            "ORDER BY mp.score DESC");
+
+            MySqlParameter matchId = new MySqlParameter("@matchid", MySqlDbType.Int32, 255);
+            matchId.Value = matchid;
+            cmd.Parameters.Add(matchId);
+
+            return DBHandler.SelectQuery(cmd);
+        }
     }
 }

@@ -14,18 +14,25 @@ namespace KeyboardKing.areas.play
     /// </summary>
     public partial class MatchHistoryPage : JumpPage
     {
-        private DateTime _tickCheck {get;set;} = DateTime.Now;
+        private DateTime _tickCheck {get;set;} = DateTime.MinValue;
         private List<List<string>> _currentHistory {get;set;}
 
         public MatchHistoryPage(MainWindow w) : base(w)
         {
             InitializeComponent();
+            MatchHistoryList.AddHandler(GridViewRowPresenter.MouseLeftButtonDownEvent, new RoutedEventHandler(MatchHistory_InfoClick), true);
         }
 
         public override void OnLoad()
         {
-            LoadAllMatches();
-            MatchHistoryList.AddHandler(GridViewRowPresenter.MouseLeftButtonDownEvent, new RoutedEventHandler(MatchHistory_InfoClick), true);
+            // FETCH ITEMS
+            DateTime now = DateTime.Now;
+            if (_tickCheck.AddMinutes(5) < now || (int?)Session.Get("MatchHasBeenPlayed")==13)
+            {
+                _tickCheck = now;
+                Session.Remove("MatchHasBeenPlayed");
+                LoadAllMatches();
+            }
         }
 
         public override void OnShadow()
@@ -67,7 +74,14 @@ namespace KeyboardKing.areas.play
 
         private void MatchHistory_InfoClick(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(_currentHistory[MatchHistoryList.SelectedIndex][0]);
+            if (MatchHistoryList.SelectedIndex>=0)
+            {
+                int selected_matchid = int.Parse(_currentHistory[MatchHistoryList.SelectedIndex][0]);
+                Session.Add("MatchHistorySelectedMatch", selected_matchid);
+                NavigationController.NavigateToPage(Pages.MatchHistoryLeaderboardPage);
+                MatchHistoryList.SelectedIndex = -1;
+                return;
+            }
         }
     }
 }
