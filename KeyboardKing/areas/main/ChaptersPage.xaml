@@ -111,16 +111,18 @@
                                                 <ControlTemplate>
                                                     <Expander Background="{DynamicResource BackgroundColor}" Margin="0, 10" BorderThickness="2" BorderBrush="{DynamicResource Color4}" IsExpanded="False" Padding="10">
                                                         <Expander.Header>
-                                                            <StackPanel Orientation="Horizontal" >
-                                                                <Rectangle Width="60" Height="70" RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased">
-                                                                    <Rectangle.Fill>
-                                                                        <ImageBrush ImageSource="{Binding Path=Name, Converter={StaticResource ChapterBadgeConverter}}"/>
-                                                                    </Rectangle.Fill>
-                                                                </Rectangle>
-                                                                <Label Style="{DynamicResource H3}" Content="{Binding Name}" FontWeight="Bold"/>
-                                                                <Label Style="{DynamicResource H3}" Content="-"/>
-                                                                <Label Style="{DynamicResource H3}" Content="{Binding ItemCount}" FontStyle="Italic"/>
-                                                                <Label Style="{DynamicResource H3}" Content="episode(s)" FontStyle="Italic"/>
+                                                                <StackPanel Orientation="Horizontal">
+                                                                    <Rectangle Width="60" Height="70" RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased">
+                                                                        <Rectangle.Fill>
+                                                                            <ImageBrush ImageSource="{Binding Path=Name, Converter={StaticResource ChapterBadgeConverter}}"/>
+                                                                        </Rectangle.Fill>
+                                                                    </Rectangle>
+                                                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                                    <Label Style="{DynamicResource H3}" Content="{Binding Name}" FontWeight="Bold"/>
+                                                                    <Label Style="{DynamicResource H3}" Content="-"/>
+                                                                    <Label Style="{DynamicResource H3}" Content="{Binding ItemCount}" FontStyle="Italic"/>
+                                                                    <Label Style="{DynamicResource H3}" Content="episode(s)" FontStyle="Italic"/>
+                                                                </StackPanel>
                                                             </StackPanel>
                                                         </Expander.Header>
                                                         <ItemsPresenter />
