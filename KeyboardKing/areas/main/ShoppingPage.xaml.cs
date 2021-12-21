@@ -25,7 +25,7 @@ namespace KeyboardKing.areas.main
 
         public override void OnLoad()
         {
-            UpdateShop(0);
+            ResetPageIndex();
 
             // AUDIO
             if (!isSwitching)
@@ -114,5 +114,11 @@ namespace KeyboardKing.areas.main
             NextPage.Visibility = ShopController.CurrentPage != ShopController.MaxPage ? Visibility.Visible : Visibility.Hidden;
         }
 
+        // Changes the shop back to page 1
+        public void ResetPageIndex()
+        {
+            ShopController.CurrentPage = 0;
+            UpdateShop(0);
+        }
     }
 }
