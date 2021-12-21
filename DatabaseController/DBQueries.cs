@@ -144,6 +144,23 @@ namespace DatabaseController
             return Episode.ParseEpisodes(result);
         }
 
+        public static List<Item> GetAllItems(User user)
+        {
+            MySqlCommand cmd = new MySqlCommand("SELECT i.id, i.name, i.price, i.type, " +
+                "CASE WHEN ui.userid IS NULL THEN 'False' ELSE 'True' END AS completed " +
+                "FROM Item i " +
+                "LEFT JOIN Useritem ui ON i.id = ui.itemid " +
+                "AND ui.userid = @userid");
+
+            MySqlParameter UserIdParam = new MySqlParameter("@userid", MySqlDbType.Int32, 0);
+            UserIdParam.Value = user.Id;
+
+            cmd.Parameters.Add(UserIdParam);
+
+            List<List<string>> result = DBHandler.SelectQuery(cmd);
+            return Item.ParseItems(result);
+        }
+
         public static List<EpisodeStep> GetAllEpisodeStepsFromEpisode(int id)
         {
             MySqlCommand cmd = new MySqlCommand("SELECT word " +

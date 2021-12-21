@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Model
 {
@@ -12,26 +13,56 @@ namespace Model
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Path { get; set; }
+
+        private string _iconPath;
+        public string IconPath
+        {
+            get => _iconPath;
+            set
+            {
+                string path = $"/KeyBoardking;component/resources/images/itemIcons/{value.Replace(" ", "_")}.png";
+                _iconPath = PathController.IsValidPath(path) ?  path : $"/KeyBoardking;component/resources/images/itemIcons/icon.png";
+            }
+        }
+
+        private string _imagePath;
+        public string ImagePath
+        {
+            get => _imagePath;
+            set
+            {
+                string itemname = value.Replace(" ", "_").ToLower();
+                string path;
+                switch (Type)
+                {
+                    case ItemType.Theme:
+                        path = $"/KeyBoardking;component/resources/images/itemImages/{Type.ToString().ToLower()}/{itemname}.png";
+                        break;
+                    default:
+                        path = $"/KeyBoardking;component/resources/images/itemIcons/{itemname}.png";
+                        break;
+                }
+                _imagePath = PathController.IsValidPath(path) ? path : $"/KeyBoardking;component/resources/images/itemIcons/icon.png";
+
+            }
+        }
         public int Price { get; set; }
         public ItemType Type { get; set; }
         public string Purchased { get; set; }
 
-        public Item(int id, string name, string path, int price, ItemType type, string purchased)
+        public Item(int id, string name, int price, ItemType type, string purchased)
         {
             Id = id;
-            Name = name;
-            Path = path;
-            Price = price;
             Type = type;
+            Name = IconPath = ImagePath = name;
+            Price = price;   
             Purchased = purchased;
         }
 
         public static Item ParseItem(List<string> input)
         {
-            ItemType Type = (ItemType)Enum.Parse(typeof(ItemType), input[4]);
-
-            return new Item(int.Parse(input[0]), input[1], input[2], int.Parse(input[3]), Type, input[5]);
+            ItemType Type = (ItemType)Enum.Parse(typeof(ItemType), input[3]);
+            return new Item(int.Parse(input[0]), input[1], int.Parse(input[2]), Type, input[4]);
         }
 
         public static List<Item> ParseItems(List<List<string>> input)
@@ -49,6 +80,18 @@ namespace Model
             if (object.ReferenceEquals(this, null) || object.ReferenceEquals(other, null)) return false;
 
             return this.Id == other.Id && this.Name == other.Name && this.Price == other.Price && this.Type == other.Type;
+        }
+    }
+
+    public static class PathController
+    {
+        public static bool IsValidPath(string path)
+        {
+
+   
+           return new Uri(path, UriKind.Relative).IsFile;
+
+
         }
     }
 }

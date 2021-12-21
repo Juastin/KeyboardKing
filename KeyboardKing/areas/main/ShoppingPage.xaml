@@ -38,7 +38,7 @@
                                         <DropShadowEffect ShadowDepth="0" BlurRadius="20" Opacity="0.5" Color="Black"/>
                                     </Border.Effect>
                                     <Grid>
-                                        <Button  Padding="10" Tag="{Binding Path}" Style="{StaticResource ShoppingItemTemplate}" Click="Item_Click"/>
+                                        <Button Padding="10" Tag="{Binding IconPath}" Style="{StaticResource ShoppingItemTemplate}" Click="Item_Click"/>
                                         <Label Width="150" Height="150" Name="Purchased" Visibility="Hidden" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="✔" Foreground="{DynamicResource Succes}" FontSize="50"/>
                                     </Grid>
                                 </Border>
