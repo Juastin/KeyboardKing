@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using Controller;
 using Model;
+using DatabaseController;
 
 namespace KeyboardKing.areas.main
 {
@@ -65,6 +66,25 @@ namespace KeyboardKing.areas.main
 
         public override void OnTick()
         {
+        }
+
+        private void OnAudioCheckClick(object sender, RoutedEventArgs e)
+        {
+            if (sender is CheckBox box)
+            {
+                User user = (User)Session.Get("student");
+                if ((bool)box.IsChecked)
+                {
+                    MusicPlayer.ShouldPlay = false;
+                    AudioPlayer.ShouldPlay = false;
+                    DBQueries.UpdateAudioSetting(user.Id, 0);
+                } else
+                {
+                    MusicPlayer.ShouldPlay = true;
+                    AudioPlayer.ShouldPlay = true;
+                    DBQueries.UpdateAudioSetting(user.Id, 1);
+                }
+            }
         }
     }
 }

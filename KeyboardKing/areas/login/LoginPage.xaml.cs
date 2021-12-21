@@ -53,6 +53,11 @@ namespace KeyboardKing.areas.login
                         user.Password = user.Salt = null;
                         Session.Add("student", user);
 
+                        // Set audio preference based on UserSettings
+                        MusicPlayer.ShouldPlay = user.AudioOn;
+                        AudioPlayer.ShouldPlay = user.AudioOn;
+                        MusicPlayer.PlayNextFrom("menu_music");
+
                         if (user.SkillLevel == SkillLevel.none)
                         {
                             NavigationController.NavigateToPage(Pages.RegisterSkillPage);
@@ -60,7 +65,6 @@ namespace KeyboardKing.areas.login
                         }
                         else
                         {
-                            MusicPlayer.PlayNextFrom("menu_music");
                             NavigationController.NavigateToPage(Pages.ChaptersPage);
                             return;
                         }
