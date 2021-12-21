@@ -11,10 +11,20 @@ namespace Model
 
     public class Item : IEquatable<Item>
     {
-        private const string defaultIcon = "/KeyBoardking;component/resources/images/itemIcons/icon.png";
-        private const string defaultImage = "/KeyBoardking;component/resources/images/itemIcons/icon.png";
+        private readonly List<string> defaultIcons = new List<string>
+        {
+            {"/KeyBoardking;component/resources/images/itemIcons/defaultIcons/box.png"},
+            {"/KeyBoardking;component/resources/images/itemIcons/defaultIcons/star.png"},
+            {"/KeyBoardking;component/resources/images/itemIcons/defaultIcons/grass_block.png"},
+            {"/KeyBoardking;component/resources/images/itemIcons/defaultIcons/present.png"},
+            {"/KeyBoardking;component/resources/images/itemIcons/defaultIcons/shopping_bag.png"},
+            {"/KeyBoardking;component/resources/images/itemIcons/defaultIcons/ruby.png"}
+        };
+        
         private const string itemIconsPath = "/resources/images/itemIcons/";
-        private const string itemImagePath = "/resources/images/itemImage/";
+        private const string itemImagePath = "/resources/images/itemImages/";
+
+        private static Random _random = new Random();
 
         public int Id { get; set; }
         public string Name { get; set; }
@@ -25,9 +35,9 @@ namespace Model
             get => _iconPath;
             set
             {
-                string itemname = $"{value.Replace(" ", "_").ToLower()}.png";
+                string itemname = ConvertToItemImageName(value);
                 string path = $"{itemIconsPath}{itemname}";
-                _iconPath = PathController.IsValidPath(path) ? path : defaultIcon;
+                _iconPath = PathController.IsValidPath(path) ? path : defaultIcons[_random.Next(defaultIcons.Count)];
             }
         }
 
@@ -37,7 +47,7 @@ namespace Model
             get => _imagePath;
             set
             {
-                string itemname = $"{value.Replace(" ", "_").ToLower()}.png";
+                string itemname = ConvertToItemImageName(value);
                 string path;
                 switch (Type)
                 {
@@ -45,10 +55,10 @@ namespace Model
                         path = $"{itemImagePath}{Type.ToString().ToLower()}/{itemname}";
                         break;
                     default:
-                        path = $"{itemIconsPath}{itemname}";
+                        path = IconPath;
                         break;
                 }
-                _imagePath = PathController.IsValidPath(path) ? path : defaultImage;
+                _imagePath = PathController.IsValidPath(path) ? path : IconPath;
 
             }
         }
@@ -60,7 +70,8 @@ namespace Model
         {
             Id = id;
             Type = type;
-            Name = IconPath = ImagePath = name;
+            Name = IconPath = name;
+            ImagePath = name;
             Price = price;   
             Purchased = purchased;
         }
@@ -86,6 +97,11 @@ namespace Model
             if (object.ReferenceEquals(this, null) || object.ReferenceEquals(other, null)) return false;
 
             return this.Id == other.Id && this.Name == other.Name && this.Price == other.Price && this.Type == other.Type;
+        }
+
+        public static string ConvertToItemImageName(string itemName)
+        {
+            return $"{itemName.Replace(" ", "_").ToLower()}.png";
         }
     }
 

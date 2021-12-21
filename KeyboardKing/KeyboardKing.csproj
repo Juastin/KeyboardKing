@@ -33,6 +33,12 @@
     <None Remove="resources\images\icon.png" />
     <None Remove="resources\images\icons\coin.png" />
     <None Remove="resources\images\itemIcons\coin.png" />
+    <None Remove="resources\images\itemIcons\defaultIcons\box.png" />
+    <None Remove="resources\images\itemIcons\defaultIcons\grass_block.png" />
+    <None Remove="resources\images\itemIcons\defaultIcons\present.png" />
+    <None Remove="resources\images\itemIcons\defaultIcons\ruby.png" />
+    <None Remove="resources\images\itemIcons\defaultIcons\shopping_bag.png" />
+    <None Remove="resources\images\itemIcons\defaultIcons\star.png" />
     <None Remove="resources\images\itemIcons\icon.png" />
     <None Remove="resources\images\itemIcons\space.png" />
     <None Remove="resources\images\kingbackground.png" />
@@ -95,6 +101,24 @@
     </Content>
     <Content Include="resources\audio\shop_purchase.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\itemIcons\defaultIcons\box.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\itemIcons\defaultIcons\grass_block.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\itemIcons\defaultIcons\present.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\itemIcons\defaultIcons\ruby.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\itemIcons\defaultIcons\shopping_bag.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\itemIcons\defaultIcons\star.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\images\itemIcons\icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
