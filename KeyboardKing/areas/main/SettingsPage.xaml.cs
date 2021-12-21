@@ -19,6 +19,7 @@ namespace KeyboardKing.areas.main
         public SettingsPage(MainWindow w) : base(w)
         {
             InitializeComponent();
+            SettingsController.Initialise();
 
             _themes = new Dictionary<string, Theme>
             {
