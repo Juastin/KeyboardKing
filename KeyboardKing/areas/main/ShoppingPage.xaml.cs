@@ -14,19 +14,16 @@ namespace KeyboardKing.areas.main
     /// </summary>
     public partial class ShoppingPage : JumpPage
     {
-        private DateTime _tickCheck {get;set;} = DateTime.Now;
+        private DateTime _tickCheck {get;set;} = DateTime.MinValue;
         private bool isSwitching {get;set;} = false;
 
         public ShoppingPage(MainWindow w) : base(w)
         {
             InitializeComponent();
-            ShopController.Initialize();
         }
 
         public override void OnLoad()
         {
-            ResetPageIndex();
-
             // AUDIO
             if (!isSwitching)
                 AudioPlayer.Play(AudioPlayer.Sound.shop_enter);
@@ -41,11 +38,10 @@ namespace KeyboardKing.areas.main
             // FETCH ITEMS
             DateTime now = DateTime.Now;
             if (_tickCheck.AddMinutes(5) < now)
-            {
                 _tickCheck = now;
                 ShopController.Initialize();
-                UpdateShop(0);
-            }
+
+            ResetPageIndex();
         }
 
         public override void OnShadow()
@@ -117,8 +113,8 @@ namespace KeyboardKing.areas.main
         // Changes the shop back to page 1
         public void ResetPageIndex()
         {
-            ShopController.CurrentPage = 0;
             UpdateShop(0);
+            ShopController.CurrentPage = 0;
         }
     }
 }
