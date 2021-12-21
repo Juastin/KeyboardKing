@@ -100,7 +100,7 @@
                 </StackPanel>
             </Grid>
             <Grid Grid.Row="2" VerticalAlignment="Bottom">
-                <Components:NavigationButton ToPage="ChaptersPage" Style="{DynamicResource Button1}" HorizontalAlignment="Left" Content="Leave Match"/>
+                <Components:NavigationButton ToPage="MatchOverviewPage" Style="{DynamicResource Button1}" HorizontalAlignment="Left" Content="Leave Match"/>
             </Grid>
         </Grid>
     </Border>

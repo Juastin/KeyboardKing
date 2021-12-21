@@ -18,6 +18,7 @@
         MatchLobbyPage,
         MatchCreatePage,
         MatchOverviewPage,
+        MatchHistoryPage,
         MatchPlayingPage,
         MatchResultPage,
         MatchWaitingResultPage,
