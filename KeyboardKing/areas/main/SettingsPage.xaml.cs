@@ -59,6 +59,10 @@ namespace KeyboardKing.areas.main
 
         public override void OnLoad()
         {
+            if ((bool)Session.Get("DeleteUser"))
+            {
+                DeleteAccount();
+            }
         }
 
         public override void OnShadow()
@@ -71,7 +75,11 @@ namespace KeyboardKing.areas.main
 
         private void DeleteAccount(object sender, RoutedEventArgs e)
         {
-            //MessageController.ShowConfirmation(Pages.ConfirmationPage, "Weet je het zeker?", Pages.SettingsPage, Pages.LoginPage);
+            MessageController.ShowConfirmation(Pages.ConfirmationPage, "Weet je het zeker?", Pages.SettingsPage, Pages.SettingsPage);
+        }
+
+        private static void DeleteAccount()
+        {
             if (DBQueries.DeleteUserAccount((User)Session.Get("student")))
             {
                 MessageController.Show(Pages.MessagePage, "Je account is verwijderd", Pages.LoginPage, -1);

@@ -44,6 +44,9 @@ namespace KeyboardKing.areas.info
 
         private void RedirectApproved(object sender, RoutedEventArgs e)
         {
+            if (_previousLocation == Pages.SettingsPage)
+                Session.Remove("DeleteUser");
+                Session.Add("DeleteUser", true);
             // This check can probably be improved by creating some sort of musicNavigation controller.
             if (new List<Pages>(){Pages.ChaptersPage, Pages.MatchOverviewPage, Pages.SettingsPage}.Contains(_targetLocation))
                 MusicPlayer.PlayNextFrom("menu_music");
