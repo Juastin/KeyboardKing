@@ -3,8 +3,6 @@ using System;
 using System.Windows;
 using Controller;
 using Model;
-using System.ComponentModel.DataAnnotations;
-using System.Text.RegularExpressions;
 using Cryptography;
 using DatabaseController;
 
@@ -42,43 +40,33 @@ namespace KeyboardKing.areas.login
 
             string password = password1.Password;
             string passwordcheck = password2.Password;
+            string message = "Error: ";
 
-            if(!string.IsNullOrEmpty(password) && !string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(username)) //Checking if user has entered all the information
+            if(!string.IsNullOrEmpty(password) && !string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(username)) //Checks if user has entered all the information
             {
-                if (new EmailAddressAttribute().IsValid(email)) //Checking if the given email has emailformat
+                if (AuthenticationController.IsEmail(email))
                 {
-                    if (password.Equals(passwordcheck, StringComparison.Ordinal)) //Checking if the user has entered the password correctly
+                    if (password.Equals(passwordcheck, StringComparison.Ordinal)) // Checks if user entered password correct
                     {
-                        if (IsPasswordValid(password))
+                        if (AuthenticationController.IsPasswordValid(password))
                         {
                             if (username.Length <= 20)
                             {
-                                string salt = Argon2.CreateSalt();
-                                string passHashed = Argon2.HashPassword(password, salt); //Hashing the password
-                                bool Adduser = DBQueries.AddUser(username, email, passHashed, salt); //Adding new user to database
-                                if (Adduser)
-                                    NavigationController.NavigateToPage(Pages.LoginPage); //Returning to loginpage
-                                else { error.Text = "Error: Service onbereikbaar / Bestaande gebruiker"; }
+                                string[] passwordHashed = AuthenticationController.HashPassword(password);
+                                if (AuthenticationController.AddUser(username, email, passwordHashed[0], passwordHashed[1]))
+                                    NavigationController.NavigateToPage(Pages.LoginPage);
+                                else {  message += "Service onbereikbaar / Bestaande gebruiker"; }
                             }
-                            else { error.Text = "Error: Gebruikersnaam is te lang (max 20 tekens)"; }
+                            else { message += "Gebruikersnaam is te lang (max 20 tekens)"; }
                         }
-                        else { error.Text = "Error: Wachtwoord bevat geen kleine of grote letter, nummer of minstens 8 tekens"; }
+                        else { message += "Wachtwoord bevat geen kleine of grote letter, nummer of minstens 8 tekens"; }
                     }
-                    else { error.Text = "Error: Wachtwoorden komen niet overeen"; }
+                    else { message += "Wachtwoorden komen niet overeen"; }
                 }
-                else { error.Text = "Error: Geen geldige E-mail"; }
+                else { message += "e-mail is niet geldig"; }
             }
-            else { error.Text = "Error: Lege velden"; }
-        }
-
-        private static bool IsPasswordValid(string password)
-        {
-            Regex containNumber = new(@"[0-9]+");
-            Regex containUpperCase = new(@"[A-Z]+");
-            Regex containLowerCase = new(@"[a-z]+");
-            Regex containMinLength8Char = new(@".{8,}");
-
-            return containNumber.IsMatch(password) && containUpperCase.IsMatch(password) && containLowerCase.IsMatch(password) && containMinLength8Char.IsMatch(password);
+            else { message += "Lege velden"; }
+            error.Text = message;
         }
 
     }

@@ -41,14 +41,14 @@ namespace KeyboardKing.areas.login
         {
             string email = txtEmail.Text.ToString();
             string message = "Error: ";
+
             if (!email.Equals("", StringComparison.Ordinal) && email != null
-                && !boxPassword.Password.Equals("", StringComparison.Ordinal) && boxPassword.Password != null)
+                && !boxPassword.Password.Equals("", StringComparison.Ordinal) && boxPassword.Password != null) // Checks if fields isn't empty
             {
-                User user = DBQueries.GetUserInfo(email);
+                User user = AuthenticationController.GetUserInfo(email);
                 if (user != null)
                 {
-                    bool passwordResult = Argon2.VerifyHash(boxPassword.Password, user.Salt, user.Password);
-                    if (passwordResult)
+                    if (AuthenticationController.VerifyPassword(user, boxPassword.Password))
                     {
                         user.Password = user.Salt = null;
                         Session.Add("student", user);
