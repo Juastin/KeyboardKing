@@ -1,6 +1,9 @@
 ﻿using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using DatabaseController;
+using Model;
+using Controller;
 
 namespace KeyboardKing.areas.info
 {
@@ -9,6 +12,9 @@ namespace KeyboardKing.areas.info
     /// </summary>
     public partial class ItemPage : UserControl
     {
+        public delegate void Bought();
+        public static event Bought ItemBought;
+
         public ItemPage()
         {
             InitializeComponent();
@@ -27,13 +33,23 @@ namespace KeyboardKing.areas.info
 
         private void Buy_Click(object sender, RoutedEventArgs e)
         {
-            AudioPlayer.Play(AudioPlayer.Sound.shop_purchase);
-            var t = Task.Factory.StartNew(async () =>
+            
+            if (ShopController.CheckItemExists())
             {
-                await Task.Delay(1000);
-                MusicPlayer.PlayNextFrom("shop");
-            });
-            MessageBox.Show("Process buy item here");
+                AudioPlayer.Play(AudioPlayer.Sound.shop_purchase);
+                var t = Task.Factory.StartNew(async () =>
+                {
+                    await Task.Delay(1000);
+                    MusicPlayer.PlayNextFrom("shop");
+                });
+
+                ShopController.AddItemToPlayer();
+            } 
+            else
+            {
+                MessageBox.Show("Het product bestaat niet.");
+            }
+            ItemBought?.Invoke();
             Visibility = Visibility.Hidden;
         }
     }

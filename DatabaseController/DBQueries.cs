@@ -161,6 +161,22 @@ namespace DatabaseController
             return Item.ParseItems(result);
         }
 
+        public static bool AddItemToPlayer(User user, Item item)
+        {
+            MySqlCommand cmd = new MySqlCommand("INSERT INTO Useritem VALUES(@userid, @itemid)");
+
+            MySqlParameter userId = new MySqlParameter("@userid", MySqlDbType.Int32, 0);
+            MySqlParameter itemID = new MySqlParameter("@itemid", MySqlDbType.Int32, 0);
+
+            userId.Value = user.Id;
+            itemID.Value = item.Id;
+
+            cmd.Parameters.Add(userId);
+            cmd.Parameters.Add(itemID);
+
+            return DBHandler.Query(cmd);
+        }
+
         public static List<EpisodeStep> GetAllEpisodeStepsFromEpisode(int id)
         {
             MySqlCommand cmd = new MySqlCommand("SELECT word " +
@@ -310,6 +326,20 @@ namespace DatabaseController
             MySqlParameter id = new MySqlParameter("@matchid", MySqlDbType.Int32, 255);
             id.Value = matchId;
             cmd.Parameters.Add(id);
+
+            List<List<string>> result = DBHandler.SelectQuery(cmd);
+            return int.Parse(result[0][0]);
+        }
+
+        public static int CheckIfItemExists(Item item)
+        {
+            MySqlCommand cmd = new MySqlCommand("SELECT COUNT(id) " +
+                                                "FROM Item i " +
+                                                "WHERE i.id = @itemId");
+
+            MySqlParameter itemId = new MySqlParameter("@itemId", MySqlDbType.Int32, 255);
+            itemId.Value = item.Id;
+            cmd.Parameters.Add(itemId);
 
             List<List<string>> result = DBHandler.SelectQuery(cmd);
             return int.Parse(result[0][0]);

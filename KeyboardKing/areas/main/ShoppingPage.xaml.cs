@@ -19,13 +19,14 @@ namespace KeyboardKing.areas.main
         public ShoppingPage(MainWindow w) : base(w)
         {
             InitializeComponent();
+            info.ItemPage.ItemBought += OnItemBought;
         }
 
         public override void OnLoad()
         {
             // FETCH ITEMS
             ShopController.Initialize();
-            UpdateShop(0);
+            UpdateShop();
 
             // AUDIO
             if (!isSwitching)
@@ -88,6 +89,12 @@ namespace KeyboardKing.areas.main
             UpdateButtonVisibility();
         }
 
+        // Call all methods necessary for proper view. 
+        public void UpdateShop()
+        {
+            UpdateShop(0);
+        }
+
         // Update ListBox with given list
         public void LoadItems(List<Item> items)
         {
@@ -109,7 +116,13 @@ namespace KeyboardKing.areas.main
         public void ResetPageIndex()
         {
             ShopController.CurrentPage = 1;
-            UpdateShop(0);
+            UpdateShop();
+        }
+
+        public void OnItemBought()
+        {
+            ShopController.Initialize();
+            UpdateShop();
         }
     }
 }

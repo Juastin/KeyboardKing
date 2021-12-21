@@ -100,5 +100,15 @@ namespace Controller
         {
             return (int)Math.Ceiling((decimal)AllItems.Count / itemsPerPage);
         }
+
+        public static bool CheckItemExists()
+        {
+            return DBQueries.CheckIfItemExists(ShopController.CurrentItem) > 0;
+        }
+
+        public static void AddItemToPlayer()
+        {
+            DBQueries.AddItemToPlayer((User)Session.Get("student"), ShopController.CurrentItem);
+        }
     }
 }

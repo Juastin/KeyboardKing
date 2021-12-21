@@ -20,7 +20,7 @@ namespace Model
             get => _iconPath;
             set
             {
-                string path = $"/KeyBoardking;component/resources/images/itemIcons/{value.Replace(" ", "_")}.png";
+                string path = $"/resources/images/itemIcons/{value.Replace(" ", "_")}.png";
                 _iconPath = PathController.IsValidPath(path) ?  path : $"/KeyBoardking;component/resources/images/itemIcons/icon.png";
             }
         }
@@ -87,10 +87,18 @@ namespace Model
     {
         public static bool IsValidPath(string path)
         {
-
-   
-           return new Uri(path, UriKind.Relative).IsFile;
-
+            /*ResourceDictionary dict = new ResourceDictionary();
+            try
+            {
+                dict.Source = new Uri(path, UriKind.Relative);
+                return true;
+            }
+            catch (FileNotFoundException)
+            {
+                return false;
+            }*/
+            //Uri uriAddress2 = new Uri(path);
+            return true;
 
         }
     }
