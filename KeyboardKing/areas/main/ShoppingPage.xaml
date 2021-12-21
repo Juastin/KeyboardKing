@@ -70,10 +70,8 @@
     </Page.Resources>
 
     <Grid>
-        <Grid Margin="25"
-              MaxWidth="1420"
-              MaxHeight="750">
-            <Border Style="{DynamicResource GridBorder}" Padding="30">
+        <Grid Margin="25">
+            <Border MaxWidth="1370" MaxHeight="700" Style="{DynamicResource GridBorder}" Padding="30">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition/>
