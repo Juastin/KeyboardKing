@@ -21,10 +21,13 @@ namespace KeyboardKing.areas.main
         public ShoppingPage(MainWindow w) : base(w)
         {
             InitializeComponent();
+            ShopController.Initialize();
         }
 
         public override void OnLoad()
         {
+            ResetPageIndex();
+
             // AUDIO
             if (!_isSwitching)
                 AudioPlayer.Play(AudioPlayer.Sound.shop_enter);
@@ -42,8 +45,8 @@ namespace KeyboardKing.areas.main
                 _tickCheck = now;
                 _lastFetchedByUserId = ((User)Session.Get("student")).Id;
                 ShopController.Initialize();
-
-            ResetPageIndex();
+                UpdateShop(0);
+            }
         }
 
         public override void OnShadow()
@@ -115,8 +118,8 @@ namespace KeyboardKing.areas.main
         // Changes the shop back to page 1
         public void ResetPageIndex()
         {
-            UpdateShop(0);
             ShopController.CurrentPage = 0;
+            UpdateShop(0);
         }
     }
 }
