@@ -37,7 +37,7 @@ namespace Model
             {
                 string itemname = ConvertToItemImageName(value);
                 string path = $"{itemIconsPath}{itemname}";
-                _iconPath = PathController.IsValidPath(path) ? path : defaultIcons[_random.Next(defaultIcons.Count)];
+                _iconPath = IsValidPath(path) ? path : defaultIcons[_random.Next(defaultIcons.Count)];
             }
         }
 
@@ -58,7 +58,7 @@ namespace Model
                         path = IconPath;
                         break;
                 }
-                _imagePath = PathController.IsValidPath(path) ? path : IconPath;
+                _imagePath = IsValidPath(path) ? path : IconPath;
 
             }
         }
@@ -103,10 +103,7 @@ namespace Model
         {
             return $"{itemName.Replace(" ", "_").ToLower()}.png";
         }
-    }
 
-    public static class PathController
-    {
         public static bool IsValidPath(string path)
         {
             string currentDirectory = Directory.GetCurrentDirectory();
