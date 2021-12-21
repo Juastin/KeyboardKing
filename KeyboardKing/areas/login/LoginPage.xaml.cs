@@ -53,6 +53,8 @@ namespace KeyboardKing.areas.login
                         user.Password = user.Salt = null;
                         Session.Add("student", user);
 
+                        //
+
                         if (user.SkillLevel == SkillLevel.none)
                         {
                             NavigationController.NavigateToPage(Pages.RegisterSkillPage);

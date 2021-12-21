@@ -16,6 +16,7 @@ namespace Model
         public string Password { get; set; }
         public string Salt { get; set; }
         public SkillLevel SkillLevel { get; set; }
+        public bool Dyslectic { get; set; }
 
         public static List<User> ParseUserIds(List<List<string>> input)
         {

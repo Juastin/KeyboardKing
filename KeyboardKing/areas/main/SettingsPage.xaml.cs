@@ -66,5 +66,15 @@ namespace KeyboardKing.areas.main
         public override void OnTick()
         {
         }
+
+        private void CheckedDyslectic(object sender, RoutedEventArgs e)
+        {
+            SettingsController.ChangeDyslectic(true);
+        }
+
+        private void UncheckedDyslectic(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }

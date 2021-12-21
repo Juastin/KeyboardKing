@@ -375,5 +375,22 @@ namespace DatabaseController
             List<List<string>> result = DBHandler.SelectQuery(cmd);
             return MatchProgress.ParseSimpleProgress(result);
         }
+
+        public static bool UpdateDyslecticSettings(int userid, bool dyslectic)
+        {
+            MySqlCommand cmd = new MySqlCommand("UPDATE UserSettings SET dyslectic = @dyslectic WHERE userid = @userid");
+
+            MySqlParameter dyslecticParam = new MySqlParameter("@dyslectic", MySqlDbType.Int32, 255);
+            MySqlParameter userId = new MySqlParameter("@userid", MySqlDbType.Int32, 0);
+
+            dyslecticParam.Value = dyslectic;
+            userId.Value = userid;
+
+            cmd.Parameters.Add(userId);
+            cmd.Parameters.Add(dyslecticParam);
+
+            return DBHandler.Query(cmd);
+
+        }
     }
 }
