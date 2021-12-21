@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using Controller;
 using Model;
+using DatabaseController;
 
 namespace KeyboardKing.areas.main
 {
@@ -55,6 +56,7 @@ namespace KeyboardKing.areas.main
                 ChangeTheme(theme);
             }
         }
+
         public override void OnLoad()
         {
         }
@@ -65,6 +67,15 @@ namespace KeyboardKing.areas.main
 
         public override void OnTick()
         {
+        }
+
+        private void DeleteAccount(object sender, RoutedEventArgs e)
+        {
+            //MessageController.ShowConfirmation(Pages.ConfirmationPage, "Weet je het zeker?", Pages.SettingsPage, Pages.LoginPage);
+            if (DBQueries.DeleteUserAccount((User)Session.Get("student")))
+            {
+                MessageController.Show(Pages.MessagePage, "Je account is verwijderd", Pages.LoginPage, -1);
+            }
         }
     }
 }

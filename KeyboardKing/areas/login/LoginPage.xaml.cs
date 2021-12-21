@@ -67,7 +67,7 @@ namespace KeyboardKing.areas.login
                     }
                     else { message += "Wachtwoord is incorrect"; }
                 }
-                else { message += "Email is incorrect"; }
+                else { message += "Email is niet bekend"; }
             }
             else { message += "Email of wachtwoord is niet ingevuld"; }
             error.Text = message;

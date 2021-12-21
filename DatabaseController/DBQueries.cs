@@ -375,5 +375,15 @@ namespace DatabaseController
             List<List<string>> result = DBHandler.SelectQuery(cmd);
             return MatchProgress.ParseSimpleProgress(result);
         }
+        public static bool DeleteUserAccount(User user)
+        {
+            MySqlCommand cmd = new MySqlCommand("UPDATE User SET email = NULL, password = NULL, salt = NULL WHERE id = @userid;");
+
+            MySqlParameter userId = new MySqlParameter("@userid", MySqlDbType.Int32, 255);
+            userId.Value = user.Id;
+            cmd.Parameters.Add(userId);
+
+            return DBHandler.Query(cmd);
+        }
     }
 }
