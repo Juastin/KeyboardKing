@@ -15,7 +15,8 @@ namespace KeyboardKing.areas.main
     public partial class ShoppingPage : JumpPage
     {
         private DateTime _tickCheck {get;set;} = DateTime.MinValue;
-        private bool isSwitching {get;set;} = false;
+        private bool _isSwitching {get;set;} = false;
+        private int _lastFetchedByUserId {get;set;} = 0;
 
         public ShoppingPage(MainWindow w) : base(w)
         {
@@ -25,20 +26,21 @@ namespace KeyboardKing.areas.main
         public override void OnLoad()
         {
             // AUDIO
-            if (!isSwitching)
+            if (!_isSwitching)
                 AudioPlayer.Play(AudioPlayer.Sound.shop_enter);
                 var t = Task.Factory.StartNew(async () =>
                 {
-                    isSwitching = true;
+                    _isSwitching = true;
                     await Task.Delay(1000);
                     MusicPlayer.PlayNextFrom("shop");
-                    isSwitching = false;
+                    _isSwitching = false;
                 });
 
             // FETCH ITEMS
             DateTime now = DateTime.Now;
-            if (_tickCheck.AddMinutes(5) < now)
+            if (_tickCheck.AddMinutes(5) < now || _lastFetchedByUserId != ((User)Session.Get("student")).Id)
                 _tickCheck = now;
+                _lastFetchedByUserId = ((User)Session.Get("student")).Id;
                 ShopController.Initialize();
 
             ResetPageIndex();
@@ -47,14 +49,14 @@ namespace KeyboardKing.areas.main
         public override void OnShadow()
         {
             // AUDIO
-            if (!isSwitching)
+            if (!_isSwitching)
                 AudioPlayer.Play(AudioPlayer.Sound.shop_exit);
                 var t = Task.Factory.StartNew(async () =>
                 {
-                    isSwitching = true;
+                    _isSwitching = true;
                     await Task.Delay(1000);
                     MusicPlayer.PlayNextFrom("menu_music");
-                    isSwitching = false;
+                    _isSwitching = false;
                 });
         }
 
