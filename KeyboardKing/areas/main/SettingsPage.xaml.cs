@@ -19,7 +19,6 @@ namespace KeyboardKing.areas.main
         public SettingsPage(MainWindow w) : base(w)
         {
             InitializeComponent();
-            SettingsController.Initialise();
 
             _themes = new Dictionary<string, Theme>
             {
@@ -58,6 +57,7 @@ namespace KeyboardKing.areas.main
         }
         public override void OnLoad()
         {
+            SettingsController.Initialise();
         }
 
         public override void OnShadow()
@@ -75,7 +75,7 @@ namespace KeyboardKing.areas.main
 
         private void UncheckedDyslectic(object sender, RoutedEventArgs e)
         {
-            
+            SettingsController.ChangeDyslectic(false);
         }
     }
 }
