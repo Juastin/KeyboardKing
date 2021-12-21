@@ -119,9 +119,9 @@ namespace Controller
             return User.ParseUser(result);
         }
 
-        public static List<Episode> GetAllEpisodes(User user)
+        public static List<Chapter> GetAllChapters(User user)
         {
-            MySqlCommand cmd = new MySqlCommand("SELECT c.name, episode, e.name, e.id, " +
+            MySqlCommand cmd = new MySqlCommand("SELECT c.id, c.name, episode, e.name, e.id, " +
                 "CASE WHEN er.userid IS NULL THEN 'False' ELSE 'True' END AS completed, " +
                 "MAX(er.score) AS highscore " +
                 "FROM Episode e " +
@@ -134,11 +134,10 @@ namespace Controller
 
             MySqlParameter UserIdParam = new MySqlParameter("@userid", MySqlDbType.Int32, 0);
             UserIdParam.Value = user.Id;
-
             cmd.Parameters.Add(UserIdParam);
 
             List<List<string>> result = DBHandler.SelectQuery(cmd);
-            return Episode.ParseEpisodes(result);
+            return Chapter.ParseAllChapters(result);
         }
 
         public static List<EpisodeStep> GetAllEpisodeStepsFromEpisode(int id)

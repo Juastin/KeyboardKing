@@ -39,7 +39,7 @@ namespace KeyboardKing.areas.play
 
             User user = (User)Session.Get("student");
 
-            CBEpisode.ItemsSource = DBQueries.GetAllEpisodes(user);
+            CBEpisode.ItemsSource = EpisodeController.Chapters.SelectMany(c => c.Episodes).ToList();
             CBEpisode.DisplayMemberPath = "Name";
             CBEpisode.SelectedValuePath = "Id";
         }

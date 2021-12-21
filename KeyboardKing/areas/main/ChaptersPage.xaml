@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:KeyboardKing.core"
+      xmlns:self="clr-namespace:KeyboardKing.areas.main"
       xmlns:Components="clr-namespace:KeyboardKing.components"
       mc:Ignorable="d" 
       Title="ChaptersPage"
@@ -14,6 +15,7 @@
 
     <!-- STYLING TEMPLATES -->
     <Page.Resources>
+        <self:ChapterBadgeConverter x:Key="ChapterBadgeConverter"/>
         <!-- ListBoxItem template -->
         <Style x:Key="ListBoxItemTemplate" TargetType="{x:Type ListBoxItem}">
             <Setter Property="Template">
@@ -112,8 +114,7 @@
                                                             <StackPanel Orientation="Horizontal" >
                                                                 <Rectangle Width="50" Height="50">
                                                                     <Rectangle.Fill>
-                                                                        <!-- Forgot how to do it without ../../ TODO ask the WPF wizard 🧙 (@CamielYang)-->
-                                                                        <ImageBrush ImageSource="../../resources/images/badges/1.png"/>
+                                                                        <ImageBrush ImageSource="{Binding Path=Name, Converter={StaticResource ChapterBadgeConverter}}"/>
                                                                     </Rectangle.Fill>
                                                                 </Rectangle>
                                                                 <Label Style="{DynamicResource H3}" Content="{Binding Name}" FontWeight="Bold"/>

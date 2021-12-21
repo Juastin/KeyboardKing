@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Controller;
 using Model;
+using System.Globalization;
 
 namespace KeyboardKing.areas.main
 {
@@ -51,8 +52,8 @@ namespace KeyboardKing.areas.main
             {
                 // Get logged in user data for the GetAllEpisodes query and set it to the itemsource of the overview ListBox.
                 User user = (User)Session.Get("student");
-                List<Episode> Episodes = DBQueries.GetAllEpisodes(user);
-                EpOverview.ItemsSource = Episodes;
+                EpisodeController.RetrieveChapters();
+                EpOverview.ItemsSource = EpisodeController.Chapters.SelectMany(c => c.Episodes).ToList();
 
                 // Add a GroupDescription so that the chapters with it's episodes will be split.
                 CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(EpOverview.ItemsSource);
@@ -80,6 +81,21 @@ namespace KeyboardKing.areas.main
 
                 NavigationController.NavigateToPage(Pages.EpisodeReadyUpPage);
             }
+        }
+    }
+
+    public class ChapterBadgeConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            Chapter chapter = EpisodeController.Chapters.Find(c => c.Name == value.ToString());
+            
+            return $"/KeyboardKing;component/resources/images/badges/{chapter.Badge}.png";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return default;
         }
     }
 }
