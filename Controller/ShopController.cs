@@ -32,7 +32,7 @@ namespace Controller
             }
         }
         public static int MaxPage { get; set; }
-        public static int itemsPerPage { get; set; }
+        public static int ItemsPerPage { get; set; }
 
         public static Item CurrentItem { get; set; }
         public static List<Item> AllItems { get; set; }
@@ -43,7 +43,7 @@ namespace Controller
         public static void Initialize()
         {
             CurrentPage = 1;
-            itemsPerPage = 8;
+            ItemsPerPage = 8;
             AllItems = GetAllItems();
             MaxPage = CalculateMaxPage();
         }
@@ -67,8 +67,8 @@ namespace Controller
         {
             var query = (from pageItem in AllItems
                          select pageItem)
-                         .Skip(ShopController.itemsPerPage * (page - 1))
-                         .Take(ShopController.itemsPerPage);
+                         .Skip(ItemsPerPage * (page - 1))
+                         .Take(ItemsPerPage);
 
             return query.ToList();
         }
@@ -98,7 +98,7 @@ namespace Controller
         /// <returns></returns>
         public static int CalculateMaxPage()
         {
-            return (int)Math.Ceiling((decimal)AllItems.Count / itemsPerPage);
+            return (int)Math.Ceiling((decimal)AllItems.Count / ItemsPerPage);
         }
 
         public static bool CheckItemExists()

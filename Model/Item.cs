@@ -11,6 +11,11 @@ namespace Model
 
     public class Item : IEquatable<Item>
     {
+        private const string defaultIcon = "/KeyBoardking;component/resources/images/itemIcons/icon.png";
+        private const string defaultImage = "/KeyBoardking;component/resources/images/itemIcons/icon.png";
+        private const string itemIconsPath = "/resources/images/itemIcons/";
+        private const string itemImagePath = "/resources/images/itemImage/";
+
         public int Id { get; set; }
         public string Name { get; set; }
 
@@ -20,8 +25,9 @@ namespace Model
             get => _iconPath;
             set
             {
-                string path = $"/resources/images/itemIcons/{value.Replace(" ", "_")}.png";
-                _iconPath = PathController.IsValidPath(path) ?  path : $"/KeyBoardking;component/resources/images/itemIcons/icon.png";
+                string itemname = $"{value.Replace(" ", "_").ToLower()}.png";
+                string path = $"{itemIconsPath}{itemname}";
+                _iconPath = PathController.IsValidPath(path) ? path : defaultIcon;
             }
         }
 
@@ -31,18 +37,18 @@ namespace Model
             get => _imagePath;
             set
             {
-                string itemname = value.Replace(" ", "_").ToLower();
+                string itemname = $"{value.Replace(" ", "_").ToLower()}.png";
                 string path;
                 switch (Type)
                 {
                     case ItemType.Theme:
-                        path = $"/KeyBoardking;component/resources/images/itemImages/{Type.ToString().ToLower()}/{itemname}.png";
+                        path = $"{itemImagePath}{Type.ToString().ToLower()}/{itemname}";
                         break;
                     default:
-                        path = $"/KeyBoardking;component/resources/images/itemIcons/{itemname}.png";
+                        path = $"{itemIconsPath}{itemname}";
                         break;
                 }
-                _imagePath = PathController.IsValidPath(path) ? path : $"/KeyBoardking;component/resources/images/itemIcons/icon.png";
+                _imagePath = PathController.IsValidPath(path) ? path : defaultImage;
 
             }
         }
@@ -87,19 +93,8 @@ namespace Model
     {
         public static bool IsValidPath(string path)
         {
-            /*ResourceDictionary dict = new ResourceDictionary();
-            try
-            {
-                dict.Source = new Uri(path, UriKind.Relative);
-                return true;
-            }
-            catch (FileNotFoundException)
-            {
-                return false;
-            }*/
-            //Uri uriAddress2 = new Uri(path);
-            return true;
-
+            string currentDirectory = Directory.GetCurrentDirectory();
+            return File.Exists($"{currentDirectory}/{path}");
         }
     }
 }
