@@ -16,7 +16,7 @@ namespace Model
             get
             {
                 if (Episodes.Where(e => !e.Completed).Any())
-                    return $"{Id}_gray";
+                    return $"{Id}_grey";
 
                 return $"{Id}";
             } 

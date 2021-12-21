@@ -112,7 +112,7 @@
                                                     <Expander Background="{DynamicResource BackgroundColor}" Margin="0, 10" BorderThickness="2" BorderBrush="{DynamicResource Color4}" IsExpanded="False" Padding="10">
                                                         <Expander.Header>
                                                             <StackPanel Orientation="Horizontal" >
-                                                                <Rectangle Width="50" Height="50">
+                                                                <Rectangle Width="60" Height="70" RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased">
                                                                     <Rectangle.Fill>
                                                                         <ImageBrush ImageSource="{Binding Path=Name, Converter={StaticResource ChapterBadgeConverter}}"/>
                                                                     </Rectangle.Fill>
