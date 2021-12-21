@@ -134,7 +134,7 @@ namespace ControllerTest
         [TestCase(-3, 1)]
         public void UpdatePage_CurrentPage_ReturnCorrectInt(int page, int expectedCurrentPage)
         {
-            ShopController.UpdatePage(page);
+            ShopController.CurrentPage += page;
             Assert.AreEqual(expectedCurrentPage, ShopController.CurrentPage);
         }
 

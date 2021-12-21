@@ -12,7 +12,24 @@ namespace Controller
         public delegate void ItemChange();
         public static event ItemChange CurrentItemChanged;
 
-        public static int CurrentPage { get; set; }
+        private static int _currentPage;
+        public static int CurrentPage { get
+            {
+                return _currentPage;
+            }
+            set
+            {
+                _currentPage = value;
+                if (_currentPage < 1)
+                {
+                    _currentPage = 1;
+                }
+                else if (_currentPage > MaxPage)
+                {
+                    _currentPage = MaxPage;
+                }
+            }
+        }
         public static int MaxPage { get; set; }
         public static int itemsPerPage { get; set; }
 
@@ -98,23 +115,5 @@ namespace Controller
         {
             return (int)Math.Ceiling((decimal)AllItems.Count / itemsPerPage);
         }
-
-        /// <summary>
-        /// Updating the current page by incrementing given int.
-        /// </summary>
-        /// <param name="page"></param>
-        public static void UpdatePage(int page)
-        {
-            CurrentPage += page;
-            if (CurrentPage < 1)
-            {
-                CurrentPage = 1;
-            }
-            else if (CurrentPage > MaxPage)
-            {
-                CurrentPage = MaxPage;
-            }
-        }
-
     }
 }

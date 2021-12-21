@@ -57,7 +57,7 @@ namespace KeyboardKing.areas.main
         // Call all methods necessary for proper view. 
         public void UpdateShop(int page)
         {
-            ShopController.UpdatePage(page);
+            ShopController.CurrentPage += page;
             LoadItems(ShopController.GetPageItems());
             UpdateButtonVisibility();
         }
