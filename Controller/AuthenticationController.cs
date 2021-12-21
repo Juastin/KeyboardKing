@@ -34,6 +34,11 @@ namespace Controller
             return new EmailAddressAttribute().IsValid(email);
         }
 
+        /// <summary>
+        /// Get userdata from database with email
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         public static User GetUserInfo(string email)
         {
             return DBQueries.GetUserInfo(email);
@@ -75,17 +80,15 @@ namespace Controller
         }
 
         /// <summary>
-        /// Checks if password is correct.
+        /// Checks if password is correct from user data.
         /// </summary>
-        /// <param name="user"></param>
+        /// <param name="user">use user for get Salt en Password</param>
         /// <param name="passwordInput"></param>
         /// <returns></returns>
         public static bool VerifyPassword(User user, string passwordInput)
         {
             return Argon2.VerifyHash(passwordInput, user.Salt, user.Password);
         }
-
-
 
     }
 }
