@@ -46,7 +46,6 @@ namespace KeyboardKing.areas.main
                 _lastFetchedByUserId = ((User)Session.Get("student")).Id;
                 ShopController.Initialize();
                 UpdateShop(0);
-            }
         }
 
         public override void OnShadow()
