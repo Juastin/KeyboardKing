@@ -38,7 +38,7 @@ namespace Model
                     Coins = int.Parse(input[0][3]),
                     Password = input[0][4],
                     Salt = input[0][5],
-                    SkillLevel = input[0][5] == string.Empty ? SkillLevel.none : (SkillLevel)Enum.Parse(typeof(SkillLevel), input[0][6]),
+                    SkillLevel = input[0][6] == string.Empty ? SkillLevel.none : (SkillLevel)Enum.Parse(typeof(SkillLevel), input[0][6]),
                     AudioOn = Convert.ToBoolean(int.Parse(input[0][7]))
                 };
             }
