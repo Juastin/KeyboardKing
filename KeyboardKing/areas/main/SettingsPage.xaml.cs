@@ -93,12 +93,19 @@ namespace KeyboardKing.areas.main
 
         private void CheckedDyslectic(object sender, RoutedEventArgs e)
         {
-            SettingsController.ChangeDyslectic(true);
-        }
-
-        private void UncheckedDyslectic(object sender, RoutedEventArgs e)
-        {
-            SettingsController.ChangeDyslectic(false);
+            if (sender is CheckBox box)
+            {
+                User user = (User)Session.Get("student");
+                if ((bool)box.IsChecked)
+                {
+                    user.Dyslectic = true;
+                }
+                else
+                {
+                    user.Dyslectic = false;
+                }
+                Session.Add("student", user);
+            }
         }
     }
 }

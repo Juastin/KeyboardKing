@@ -39,7 +39,7 @@
                                 <Label Style="{DynamicResource H3}" HorizontalAlignment="Center" Content="Thema's"/>
                                 <ComboBox  x:Name="CBTheme" HorizontalAlignment="Center" Width="250" Height="35" ItemContainerStyle="{DynamicResource ComboBoxItem}" Template="{DynamicResource ComboBox}" SelectionChanged="CBTheme_SelectionChanged"/>
                                 <Label Style="{DynamicResource H3}" Content="Dyslexie" HorizontalAlignment="Center"/>
-                                <CheckBox x:Name="DyslecticBox" IsChecked="{Binding Dyslectic, Mode=OneWay}" Checked="CheckedDyslectic" Unchecked="UncheckedDyslectic" HorizontalAlignment="Center"/>
+                                <CheckBox x:Name="DyslecticBox" IsChecked="{Binding Dyslectic, Mode=OneWay}" Click="CheckedDyslectic"  HorizontalAlignment="Center"/>
                             </StackPanel>
                         </Grid>
                         <Grid VerticalAlignment="Top" Grid.Column="1">
@@ -47,7 +47,7 @@
                                 <Label Style="{DynamicResource H3}"  Content="Account" HorizontalAlignment="Center"/>
                                 <Button Style="{DynamicResource DeclineButton}" Width="250" Height="35" HorizontalAlignment="Center" Content="Account verwijderen"/>
                                 <Label Style="{DynamicResource H3}" Content="Geluid dempen" HorizontalAlignment="Center"/>
-                                    <CheckBox x:Name="AudioCheckBox" HorizontalAlignment="Center" Click="OnAudioCheckClick"/>
+                                    <CheckBox x:Name="AudioCheckBox" IsChecked="{Binding AudioOn, Mode=OneWay}" HorizontalAlignment="Center" Click="OnAudioCheckClick"/>
                             </StackPanel>
                         </Grid>
                     </Grid>

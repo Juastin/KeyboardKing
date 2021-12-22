@@ -12,7 +12,8 @@ namespace KeyboardKing.data_context
     public class SettingsPageDataContext : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        public string Dyslectic { get => $"{SettingsController.Student?.Dyslectic ?? false}" ; }
+        public string Dyslectic { get => $"{((User)Session.Get("student"))?.Dyslectic ?? false}" ; }
+        public string AudioOn { get => $"{((User)Session.Get("student"))?.AudioOn ?? false}"; }
 
         public SettingsPageDataContext()
         {
