@@ -174,17 +174,17 @@ namespace KeyboardKing
         {
             // Save audio before quitting.
             User user = (User)Session.Get("student");
-            if (user is not null && user.AudioOn!=user.AudioOnAtLogin)
+            if (user is not null)
             {
-                if (user.AudioOn)
+                if (user.AudioOn != user.AudioOnAtLogin)
                 {
-                    DBQueries.UpdateAudioSetting(user.Id, 1);
-                } else
+                    DBQueries.UpdateAudioSetting(user.Id, user.AudioOn);
+                }
+                if (user.Dyslectic != user.DyslecticAtLogin)
                 {
-                    DBQueries.UpdateAudioSetting(user.Id, 0);
+                    DBQueries.UpdateDyslecticSettings(user.Id, user.Dyslectic);
                 }
             }
-
             if (NavigationController.CurrentPage == Pages.MatchLobbyPage || NavigationController.CurrentPage == Pages.MatchPlayingPage)
             {
                 MatchController.RemoveUserInMatchProgress();

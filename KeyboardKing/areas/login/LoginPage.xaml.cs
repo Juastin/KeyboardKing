@@ -24,17 +24,16 @@ namespace KeyboardKing.areas.login
             MusicPlayer.Stop();
 
             User user = (User)Session.Get("student");
-            if (user is not null) {
+            if (user is not null) 
+            {
                 // Save audio settings if they were changed.
-                if (user.AudioOn!=user.AudioOnAtLogin)
+                if (user.AudioOn != user.AudioOnAtLogin)
                 {
-                    if (user.AudioOn)
-                    {
-                        DBQueries.UpdateAudioSetting(user.Id, 1);
-                    } else
-                    {
-                        DBQueries.UpdateAudioSetting(user.Id, 0);
-                    }
+                    DBQueries.UpdateAudioSetting(user.Id, user.AudioOn);
+                }
+                if (user.Dyslectic != user.DyslecticAtLogin)
+                {
+                    DBQueries.UpdateDyslecticSettings(user.Id, user.Dyslectic);
                 }
                 // Flush the session if the user was logged in when entering the login page.
                 Session.Flush();
@@ -66,6 +65,7 @@ namespace KeyboardKing.areas.login
                     {
                         user.Password = user.Salt = null;
                         user.AudioOnAtLogin = user.AudioOn;
+                        user.DyslecticAtLogin = user.Dyslectic;
 
                         Session.Add("student", user);
 

@@ -408,7 +408,7 @@ namespace DatabaseController
             return DBHandler.SelectQuery(cmd);
         }
       
-        public static bool UpdateAudioSetting(int userid, int state)
+        public static bool UpdateAudioSetting(int userid, bool state)
         {
             MySqlCommand cmd = new MySqlCommand("UPDATE UserSettings set audio = @state WHERE userid = @userid ");
 
