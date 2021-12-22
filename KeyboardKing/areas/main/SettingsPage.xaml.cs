@@ -98,14 +98,7 @@ namespace KeyboardKing.areas.main
             if (sender is CheckBox box)
             {
                 User user = (User)Session.Get("student");
-                if ((bool)box.IsChecked)
-                {
-                    user.Dyslectic = true;
-                }
-                else
-                {
-                    user.Dyslectic = false;
-                }
+                user.Dyslectic = (bool)box.IsChecked;
                 Session.Add("student", user);
             }
         }
@@ -115,6 +108,9 @@ namespace KeyboardKing.areas.main
             MessageController.ShowConfirmation(Pages.ConfirmationPage, "Weet je het zeker?", Pages.SettingsPage, Pages.SettingsPage);
         }
 
+        /// <summary>
+        /// Checks if user has confirmed to delete account and delete the account
+        /// </summary>
         private static void CheckDeleteAccount()
         {
             if (Session.Get("deleteUser") != null && (bool)Session.Get("deleteUser"))
