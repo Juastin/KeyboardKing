@@ -115,10 +115,14 @@ namespace KeyboardKing.areas.main
         {
             if (Session.Get("deleteUser") != null && (bool)Session.Get("deleteUser"))
             {
-                if (DBQueries.DeleteUserAccount((User)Session.Get("student")))
+                if (SettingsController.DeleteAccount())
+                {
                     MessageController.Show(Pages.MessagePage, "Je account is verwijderd", Pages.LoginPage, -1);
+                }
                 else
+                {
                     MessageController.Show(Pages.MessagePage, "Je account kan op dit moment niet worden verwijderd", Pages.SettingsPage, -1);
+                }
             }
         }
 
