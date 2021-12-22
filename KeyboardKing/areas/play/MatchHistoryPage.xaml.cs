@@ -67,7 +67,7 @@ namespace KeyboardKing.areas.play
                 } else
                 {
                     // IF NO DATA IS PRESENT, DISPLAY A PLACEHOLDER
-                    actual_matches = new List<object>(){new {Matchid = "", Time = "Je hebt nog geen match gespeeld.", Score = "", Mistakes = "", LPM = "", TimeSpend = ""}};
+                    actual_matches = new List<object>(){new {Matchid = "-1", Time = "Je hebt nog geen match gespeeld.", Score = "", Mistakes = "", LPM = "", TimeSpend = ""}};
                 }
 
                 _currentHistory = actual_matches;
@@ -82,10 +82,14 @@ namespace KeyboardKing.areas.play
             if (MatchHistoryList.SelectedValue is not null)
             {
                 int selected_matchid = int.Parse((string)MatchHistoryList.SelectedValue);
-                Session.Add("MatchHistorySelectedMatch", selected_matchid);
-                NavigationController.NavigateToPage(Pages.MatchHistoryLeaderboardPage);
-                MatchHistoryList.SelectedIndex = -1;
-                return;
+
+                if (selected_matchid!=-1)
+                {
+                    Session.Add("MatchHistorySelectedMatch", selected_matchid);
+                    NavigationController.NavigateToPage(Pages.MatchHistoryLeaderboardPage);
+                    MatchHistoryList.SelectedIndex = -1;
+                    return;
+                }
             }
         }
     }
