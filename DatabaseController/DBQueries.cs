@@ -108,7 +108,7 @@ namespace DatabaseController
 
         public static User GetUserInfo(string email)
         {
-            MySqlCommand cmd = new MySqlCommand("SELECT id, username, email, password, salt, skilllevel " +
+            MySqlCommand cmd = new MySqlCommand("SELECT id, username, email, password, salt, skilllevel, audio " +
                                             "FROM User " +
                                             "LEFT JOIN UserSettings " +
                                             "ON User.id = UserSettings.userid " +
@@ -406,6 +406,22 @@ namespace DatabaseController
             cmd.Parameters.Add(matchId);
 
             return DBHandler.SelectQuery(cmd);
+        }
+      
+        public static bool UpdateAudioSetting(int userid, int state)
+        {
+            MySqlCommand cmd = new MySqlCommand("UPDATE UserSettings set audio = @state WHERE userid = @userid ");
+
+            MySqlParameter q_userid = new MySqlParameter("@userid", MySqlDbType.Int32, 255);
+            MySqlParameter q_state = new MySqlParameter("@state", MySqlDbType.Int32, 255);
+
+            q_userid.Value = userid;
+            q_state.Value = state;
+
+            cmd.Parameters.Add(q_userid);
+            cmd.Parameters.Add(q_state);
+
+            return DBHandler.Query(cmd);
         }
     }
 }

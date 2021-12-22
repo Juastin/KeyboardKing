@@ -14,6 +14,7 @@ using Model;
 using Model.event_args;
 using KeyboardKing.areas.info;
 using System.ComponentModel;
+using DatabaseController;
 
 namespace KeyboardKing
 {
@@ -171,6 +172,19 @@ namespace KeyboardKing
         //Closes open matches when closing application
         private void CheckBefore_Closing(object sender, CancelEventArgs e)
         {
+            // Save audio before quitting.
+            User user = (User)Session.Get("student");
+            if (user.AudioOn!=user.AudioOnAtLogin)
+            {
+                if (user.AudioOn)
+                {
+                    DBQueries.UpdateAudioSetting(user.Id, 1);
+                } else
+                {
+                    DBQueries.UpdateAudioSetting(user.Id, 0);
+                }
+            }
+
             if (NavigationController.CurrentPage == Pages.MatchLobbyPage || NavigationController.CurrentPage == Pages.MatchPlayingPage)
             {
                 MatchController.RemoveUserInMatchProgress();
