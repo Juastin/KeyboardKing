@@ -13,6 +13,9 @@ namespace Controller
         public delegate void ItemChange();
         public static event ItemChange CurrentItemChanged;
 
+        public delegate void PropertyChanged();
+        public static event PropertyChanged ShopDataChanged;
+
         private static int _currentPage;
         public static int CurrentPage { get
             {
@@ -101,14 +104,33 @@ namespace Controller
             return (int)Math.Ceiling((decimal)AllItems.Count / ItemsPerPage);
         }
 
+        /// <summary>
+        /// Checks if the item exists before doing something with it.
+        /// </summary>
+        /// <returns>Returns a boolean if item still exists in database.</returns>
         public static bool CheckItemExists()
         {
             return DBQueries.CheckIfItemExists(ShopController.CurrentItem) > 0;
         }
 
-        public static void AddItemToPlayer()
+        /// <summary>
+        /// Calls the methods needed to complete the step of adding 
+        /// </summary>
+        public static void BuyItem()
         {
-            DBQueries.AddItemToPlayer((User)Session.Get("student"), ShopController.CurrentItem);
+            User student = (User)Session.Get("student");
+            Item item = CurrentItem;
+
+            DBQueries.AddItem(student, item);
+            DBQueries.UpdateCoins(student, item);
+        }
+
+        public static void UpdateItemsList()
+        {
+            AllItems = GetAllItems();
+            MaxPage = CalculateMaxPage();
+
+            ShopDataChanged?.Invoke();
         }
     }
 }

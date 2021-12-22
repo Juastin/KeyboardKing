@@ -19,7 +19,7 @@ namespace KeyboardKing.areas.main
         public ShoppingPage(MainWindow w) : base(w)
         {
             InitializeComponent();
-            info.ItemPage.ItemBought += OnItemBought;
+            ShopController.ShopDataChanged += OnItemListChanged;
         }
 
         public override void OnLoad()
@@ -89,7 +89,7 @@ namespace KeyboardKing.areas.main
             UpdateButtonVisibility();
         }
 
-        // Call all methods necessary for proper view. 
+        // Call all methods necessary for proper view without param (update on current page). 
         public void UpdateShop()
         {
             UpdateShop(0);
@@ -119,9 +119,8 @@ namespace KeyboardKing.areas.main
             UpdateShop();
         }
 
-        public void OnItemBought()
+        public void OnItemListChanged()
         {
-            ShopController.Initialize();
             UpdateShop();
         }
     }

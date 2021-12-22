@@ -161,12 +161,12 @@ namespace DatabaseController
             return Item.ParseItems(result);
         }
 
-        public static bool AddItemToPlayer(User user, Item item)
+        public static bool AddItem(User user, Item item)
         {
-            MySqlCommand cmd = new MySqlCommand("INSERT INTO Useritem VALUES(@userid, @itemid)");
+            MySqlCommand cmd = new MySqlCommand("INSERT INTO Useritem VALUES(@userId, @itemId)");
 
-            MySqlParameter userId = new MySqlParameter("@userid", MySqlDbType.Int32, 0);
-            MySqlParameter itemID = new MySqlParameter("@itemid", MySqlDbType.Int32, 0);
+            MySqlParameter userId = new MySqlParameter("@userId", MySqlDbType.Int32, 0);
+            MySqlParameter itemID = new MySqlParameter("@itemId", MySqlDbType.Int32, 0);
 
             userId.Value = user.Id;
             itemID.Value = item.Id;
@@ -175,6 +175,37 @@ namespace DatabaseController
             cmd.Parameters.Add(itemID);
 
             return DBHandler.Query(cmd);
+        }
+
+        public static bool UpdateCoins(User user, Item item)
+        {
+            MySqlCommand cmd = new MySqlCommand("UPDATE User SET coins = coins - @itemPrice " +
+                                                "WHERE id = @userId");
+
+            MySqlParameter userId = new MySqlParameter("@userId", MySqlDbType.Int32, 0);
+            MySqlParameter itemPrice = new MySqlParameter("@itemPrice", MySqlDbType.Int32, 0);
+
+            userId.Value = user.Id;
+            itemPrice.Value = item.Price;
+
+            cmd.Parameters.Add(userId);
+            cmd.Parameters.Add(itemPrice);
+
+            return DBHandler.Query(cmd);
+        }
+
+        public static int CheckIfItemExists(Item item)
+        {
+            MySqlCommand cmd = new MySqlCommand("SELECT COUNT(id) " +
+                                                "FROM Item i " +
+                                                "WHERE i.id = @itemId");
+
+            MySqlParameter itemId = new MySqlParameter("@itemId", MySqlDbType.Int32, 255);
+            itemId.Value = item.Id;
+            cmd.Parameters.Add(itemId);
+
+            List<List<string>> result = DBHandler.SelectQuery(cmd);
+            return int.Parse(result[0][0]);
         }
 
         public static List<EpisodeStep> GetAllEpisodeStepsFromEpisode(int id)
@@ -330,21 +361,6 @@ namespace DatabaseController
             List<List<string>> result = DBHandler.SelectQuery(cmd);
             return int.Parse(result[0][0]);
         }
-
-        public static int CheckIfItemExists(Item item)
-        {
-            MySqlCommand cmd = new MySqlCommand("SELECT COUNT(id) " +
-                                                "FROM Item i " +
-                                                "WHERE i.id = @itemId");
-
-            MySqlParameter itemId = new MySqlParameter("@itemId", MySqlDbType.Int32, 255);
-            itemId.Value = item.Id;
-            cmd.Parameters.Add(itemId);
-
-            List<List<string>> result = DBHandler.SelectQuery(cmd);
-            return int.Parse(result[0][0]);
-        }
-
 
         public static List<MatchProgress> GetMatchProgress(int matchId)
         {

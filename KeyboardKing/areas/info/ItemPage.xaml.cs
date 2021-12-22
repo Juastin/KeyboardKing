@@ -12,9 +12,6 @@ namespace KeyboardKing.areas.info
     /// </summary>
     public partial class ItemPage : UserControl
     {
-        public delegate void Bought();
-        public static event Bought ItemBought;
-
         public ItemPage()
         {
             InitializeComponent();
@@ -33,7 +30,7 @@ namespace KeyboardKing.areas.info
 
         private void Buy_Click(object sender, RoutedEventArgs e)
         {
-            
+            // Still needs a check if user has sufficient amount of coins.
             if (ShopController.CheckItemExists())
             {
                 AudioPlayer.Play(AudioPlayer.Sound.shop_purchase);
@@ -43,13 +40,13 @@ namespace KeyboardKing.areas.info
                     MusicPlayer.PlayNextFrom("shop");
                 });
 
-                ShopController.AddItemToPlayer();
+                ShopController.BuyItem();
             } 
             else
             {
                 MessageBox.Show("Het product bestaat niet.");
             }
-            ItemBought?.Invoke();
+            ShopController.UpdateItemsList();
             Visibility = Visibility.Hidden;
         }
     }
