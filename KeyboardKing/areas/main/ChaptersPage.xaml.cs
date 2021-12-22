@@ -30,6 +30,7 @@ namespace KeyboardKing.areas.main
 
         public override void OnTick()
         {
+
         }
 
         /// <summary>

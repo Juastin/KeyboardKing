@@ -116,9 +116,8 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
-    
-    <!-- ProgressBar template -->
+
+<!-- ProgressBar template -->
     <ControlTemplate x:Key="ProgressBar" TargetType="{x:Type ProgressBar}">
         <Grid x:Name="TemplateRoot">
             <VisualStateManager.VisualStateGroups>

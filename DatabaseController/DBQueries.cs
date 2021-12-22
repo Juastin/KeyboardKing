@@ -108,7 +108,7 @@ namespace DatabaseController
 
         public static User GetUserInfo(string email)
         {
-            MySqlCommand cmd = new MySqlCommand("SELECT id, username, email, password, salt, skilllevel, audio " +
+            MySqlCommand cmd = new MySqlCommand("SELECT id, username, email, coins, password, salt, skilllevel, audio " +
                                             "FROM User " +
                                             "LEFT JOIN UserSettings " +
                                             "ON User.id = UserSettings.userid " +
@@ -142,6 +142,55 @@ namespace DatabaseController
 
             List<List<string>> result = DBHandler.SelectQuery(cmd);
             return Episode.ParseEpisodes(result);
+        }
+        public static int GetHighscoreEpisode(User user, int episodeId)
+        {
+            MySqlCommand cmd = new MySqlCommand("SELECT MAX(score) FROM EpisodeResult WHERE episodeid = @episodeid AND userid = @userid");
+
+
+            MySqlParameter EpisodeIdParam = new MySqlParameter("@episodeid", MySqlDbType.Int32, 0);
+            MySqlParameter UserIdParam = new MySqlParameter("@userid", MySqlDbType.Int32, 0);
+
+            EpisodeIdParam.Value = episodeId;
+            UserIdParam.Value = user.Id;
+
+            cmd.Parameters.Add(EpisodeIdParam);
+            cmd.Parameters.Add(UserIdParam);
+
+            List<List<string>> result = DBHandler.SelectQuery(cmd);
+   
+            return !string.IsNullOrEmpty(result[0][0]) ? int.Parse(result[0][0]) : 0;
+        }
+
+        public static void UpdateCoins(int coins, User user)
+        {
+            MySqlCommand cmd = new MySqlCommand("UPDATE User SET coins = coins + @coins WHERE id = @userid");
+
+            MySqlParameter CoinsIdParam = new MySqlParameter("@coins", MySqlDbType.Int32, 0);
+            MySqlParameter UserIdParam = new MySqlParameter("@userid", MySqlDbType.Int32, 0);
+
+            CoinsIdParam.Value = coins;
+            UserIdParam.Value = user.Id;
+
+            cmd.Parameters.Add(CoinsIdParam);
+            cmd.Parameters.Add(UserIdParam);
+
+            DBHandler.Query(cmd);
+        }
+
+        public static int GetCoinsOfUser(User user)
+        {
+            MySqlCommand cmd = new MySqlCommand("SELECT coins From User WHERE id = @userid");
+
+            MySqlParameter UserIdParam = new MySqlParameter("@userid", MySqlDbType.Int32, 0);
+
+            UserIdParam.Value = user.Id;
+
+            cmd.Parameters.Add(UserIdParam);
+
+            List<List<string>> result = DBHandler.SelectQuery(cmd);
+
+            return int.Parse(result[0][0]);
         }
 
         public static List<EpisodeStep> GetAllEpisodeStepsFromEpisode(int id)

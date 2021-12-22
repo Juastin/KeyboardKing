@@ -28,7 +28,7 @@ namespace ControllerTest
             Episode.EpisodeSteps.Enqueue(e1);
             Episode.EpisodeSteps.Enqueue(e2);
 
-            //EpisodeController.CurrentEpisodeResult.MaxScore = EpisodeController.CalculateMaxScore(Episode);
+            //EpisodeController.CurrentEpisodeResult.MaxScore = EpisodeController.CalculateTotalLetters(Episode);
 
             //User User = new User();
             //Session.Add("student",User);
