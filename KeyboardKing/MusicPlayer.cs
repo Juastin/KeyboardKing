@@ -21,7 +21,6 @@ namespace KeyboardKing
                 _shouldplay = value;
                 if (!value) {Stop();}
             }
-
         }
 
         public static Dictionary<string, Dictionary<string, double>> Playlists {get;set;} = new Dictionary<string, Dictionary<string, double>>() {
@@ -50,6 +49,13 @@ namespace KeyboardKing
                 {
                     {"break", 2.1},
                 }
+            },
+            {
+                "shop",
+                new Dictionary<string, double>()
+                {
+                    {"Merchant", 126},
+                }
             }
         };
 
@@ -69,13 +75,16 @@ namespace KeyboardKing
 
         private static void _tick(object sender, EventArgs e)
         {
-            if (Seconds>=Playlists[CurrentPlaylist][CurrentSong])
+            try
             {
-                PlayNext();
-            } else
-            {
-                Seconds += 0.100;
-            }
+                if (Seconds>=Playlists[CurrentPlaylist][CurrentSong])
+                {
+                    PlayNext();
+                } else
+                {
+                    Seconds += 0.100;
+                }
+            } catch {}
         }
 
         public static void NextIndex()

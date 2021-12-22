@@ -11,7 +11,7 @@
         <DockPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" DockPanel.Dock="Bottom" Height="92" Background="{x:Null}" Margin="0,0,0,10">
                 <Components:NavigationButton ToolTip="Chapters" ToPage="ChaptersPage" Style="{DynamicResource NavButton}" x:Name="Button_ChaptersPage" Content="▶" FontSize="36"/>
-                <Components:NavigationButton ToolTip="Favorieten" ToPage="FavoritesPage" Style="{DynamicResource NavButton}" x:Name="Button_FavoritesPage" Content="🔄" FontSize="30"/>
+                <Components:NavigationButton ToolTip="Winkel" ToPage="ShoppingPage" Style="{DynamicResource NavButton}" x:Name="Button_FavoritesPage" Content="🛒" FontSize="30"/>
                 <Components:NavigationButton ToolTip="Matches" ToPage="MatchOverviewPage" Style="{DynamicResource NavButton}" x:Name="Button_MatchOverviewPage" Content="⚔" FontSize="30"/>
                 <Components:NavigationButton ToolTip="Instellingen" ToPage="SettingsPage" Style="{DynamicResource NavButton}" x:Name="Button_SettingsPage" Content="⚙" FontSize="30"/>
                 <Components:NavigationButton ToolTip="Uitloggen" ToPage="LoginPage" Style="{DynamicResource NavButton}" Content="🚪" FontSize="30"/>

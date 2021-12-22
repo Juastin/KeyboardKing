@@ -4,7 +4,7 @@ using System.Configuration;
 using Cryptography;
 using System;
 
-namespace Controller
+namespace DatabaseController
 {
     /// !!! NEVER USE THIS CLASS DIRECTLY, ONLY THROUGH DBQueries !!!
     internal static class DBHandler
@@ -88,7 +88,7 @@ namespace Controller
                 cmd.ExecuteNonQuery();
                 return (int)cmd.LastInsertedId;
             }
-            catch (Exception e)
+            catch
             {
                 return default;
             }

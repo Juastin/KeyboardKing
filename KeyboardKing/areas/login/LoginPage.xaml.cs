@@ -1,21 +1,11 @@
 ﻿using KeyboardKing.core;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Controller;
 using Model;
 using Cryptography;
+using DatabaseController;
 
 namespace KeyboardKing.areas.login
 {
@@ -51,14 +41,14 @@ namespace KeyboardKing.areas.login
         {
             string email = txtEmail.Text.ToString();
             string message = "Error: ";
+
             if (!email.Equals("", StringComparison.Ordinal) && email != null
-                && !boxPassword.Password.Equals("", StringComparison.Ordinal) && boxPassword.Password != null)
+                && !boxPassword.Password.Equals("", StringComparison.Ordinal) && boxPassword.Password != null) // Checks if fields isn't empty
             {
-                User user = DBQueries.GetUserInfo(email);
+                User user = AuthenticationController.GetUserInfo(email);
                 if (user != null)
                 {
-                    bool passwordResult = Argon2.VerifyHash(boxPassword.Password, user.Salt, user.Password);
-                    if (passwordResult)
+                    if (AuthenticationController.VerifyPassword(user, boxPassword.Password))
                     {
                         user.Password = user.Salt = null;
                         Session.Add("student", user);

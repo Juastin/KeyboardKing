@@ -3,14 +3,16 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:KeyboardKing.core" xmlns:model="clr-namespace:Model" d:DataContext="{d:DesignInstance Type=model:MatchPageDataContext}"
+      xmlns:local="clr-namespace:KeyboardKing.core" 
+      xmlns:dataContext="clr-namespace:KeyboardKing.data_context"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       MaxHeight="750"
       MaxWidth="1450"
       Title="MatchPlayingPage" PreviewKeyDown="PreventTab_PreviewKeyDown" ForceCursor="True" Cursor="Arrow">
+
     <local:JumpPage.DataContext>
-        <model:MatchPageDataContext/>
+        <dataContext:EpisodePageDataContext/>
     </local:JumpPage.DataContext>
 
     <Page.Resources>
@@ -37,7 +39,7 @@
             </Setter>
         </Style>
     </Page.Resources>
-
+    
     <Grid x:Name="Container" Margin="25">
         <Border Style="{DynamicResource GridBorder}">
             <Grid>
@@ -48,7 +50,7 @@
                 </Grid.RowDefinitions>
                 <TextBox x:Name="UserInput" Background="Transparent" Foreground="Transparent" CaretBrush="Transparent" Grid.Column="0" LostKeyboardFocus="UserInput_LostFocus" Text="" TextChanged="UserInput_TextChanged" SelectionBrush="{x:Null}" BorderThickness="0,0,0,0"/>
                 <Grid Grid.Row="1" Grid.RowSpan="2">
-                    <ListBox MaxWidth="800" x:Name="OpponentListBox" ItemContainerStyle="{DynamicResource ListBoxItemTemplate}" Background="Transparent" BorderThickness="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,30,0,0">
+                    <ListBox MaxWidth="800" ScrollViewer.HorizontalScrollBarVisibility= "Disabled" x:Name="OpponentListBox" ItemContainerStyle="{DynamicResource ListBoxItemTemplate}" Background="Transparent" BorderThickness="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,30,0,0">
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <WrapPanel HorizontalAlignment="Center"/>

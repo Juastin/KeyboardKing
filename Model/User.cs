@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Model
 {
@@ -35,7 +33,7 @@ namespace Model
                     Email = input[0][2],
                     Password = input[0][3],
                     Salt = input[0][4],
-                    SkillLevel = (SkillLevel)Enum.Parse(typeof(SkillLevel), input[0][5])
+                    SkillLevel = input[0][5] == string.Empty ? SkillLevel.none : (SkillLevel)Enum.Parse(typeof(SkillLevel), input[0][5])
                 };
             }
             return null;

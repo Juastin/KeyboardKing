@@ -20,7 +20,11 @@ namespace KeyboardKing
         public enum Sound
         {
             congratulations,
-            failure
+            failure,
+            shop_enter,
+            shop_exit,
+            shop_preview,
+            shop_purchase,
         }
 
         /// <summary>

@@ -24,8 +24,40 @@
                 <Components:NavigationButton Style="{DynamicResource Button1}" Content="Ga terug" ToPage="MatchOverviewPage" Height="45" Width="111" FontSize="18" HorizontalAlignment="Right"/>
             </Grid>
             <Grid Grid.Row="1" VerticalAlignment="Center">
-                <Label Style="{DynamicResource H2}" Content="Selecteer een episode" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top" Width="254" Height="52"/>
-                <ComboBox ScrollViewer.VerticalScrollBarVisibility="Hidden" Name="CBEpisode" HorizontalAlignment="Center" ItemContainerStyle="{DynamicResource ComboBoxItem}" Template="{DynamicResource ComboBox}" VerticalAlignment="Top" Width="336" Height="42" FontSize="18" Margin="0,90,0,0"/>
+                <Grid.Resources>
+                    <Style x:Key="GroupChapter" TargetType="{x:Type GroupItem}">
+                        <Setter Property="Margin" Value="0,0,0,5"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type GroupItem}">
+                                    <Expander IsExpanded="False">
+                                        <Expander.Header>
+                                            <DockPanel>
+                                                <TextBlock Text="{Binding Name}" FontWeight="Bold" Margin="2,5,0,2" FontSize="18"/>
+                                            </DockPanel>
+                                        </Expander.Header>
+                                        <Expander.Content>
+                                            <Border Margin="5,0,0,0">
+                                                <ItemsPresenter />
+                                            </Border>
+                                        </Expander.Content>
+                                    </Expander>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Grid.Resources>
+                <Label Style="{DynamicResource H2}" HorizontalContentAlignment="Center" Content="Selecteer een episode" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top" Width="305" Height="52"/>
+                <ComboBox ScrollViewer.VerticalScrollBarVisibility="Hidden" x:Name="CBEpisode" HorizontalAlignment="Center" ItemContainerStyle="{DynamicResource ComboBoxItem}" Template="{DynamicResource ComboBox}" VerticalAlignment="Top" Width="336" Height="42" FontSize="18" Margin="0,90,0,0">
+                    <ComboBox.GroupStyle>
+                        <GroupStyle ContainerStyle="{StaticResource GroupChapter}"/>
+                    </ComboBox.GroupStyle>
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
             </Grid>
             <Grid Grid.Row="2" VerticalAlignment="Bottom">
                 <Button Style="{DynamicResource Button1}" Content="Maak een match" HorizontalAlignment="Center" Click="BCreateMatch" Margin="0,0,0,0" Height="53" Width="200" FontSize="20" VerticalAlignment="Top"/>

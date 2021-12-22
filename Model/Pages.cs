@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Model
+﻿namespace Model
 {
     public enum Pages
     {
@@ -16,7 +10,7 @@ namespace Model
         RegisterPage,
         RegisterSkillPage,
         ChaptersPage,
-        FavoritesPage,
+        ShoppingPage,
         SettingsPage,
         EpisodeReadyUpPage,
         EpisodePage,
@@ -26,6 +20,7 @@ namespace Model
         MatchOverviewPage,
         MatchPlayingPage,
         MatchResultPage,
-        MatchWaitingResultPage
+        MatchWaitingResultPage,
+        FavoritesPage
     }
 }

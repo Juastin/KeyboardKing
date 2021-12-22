@@ -2,9 +2,8 @@
 using Model;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using EC = Controller.EpisodeController;
+using DatabaseController;
 
 namespace Controller
 {
@@ -161,6 +160,11 @@ namespace Controller
         public static bool CheckUserIsCreator(int userId)
         {
             return CurrentMatch.Host.Id == userId;
+        }
+
+        public static bool CheckIfMatchExists(int matchid)
+        {
+            return DBQueries.CheckIfMatchExists(matchid) > 0;
         }
 
         public static void DeleteMatch()
