@@ -1,11 +1,10 @@
-﻿using Controller;
-using Model;
-using KeyboardKing.core;
+﻿using KeyboardKing.core;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using Controller;
 using Model;
+using DatabaseController;
 
 namespace KeyboardKing.areas.main
 {
@@ -59,6 +58,8 @@ namespace KeyboardKing.areas.main
         }
         public override void OnLoad()
         {
+            User user = (User)Session.Get("student");
+            AudioCheckBox.IsChecked = !user.AudioOn;
         }
 
         public override void OnShadow()
@@ -67,6 +68,26 @@ namespace KeyboardKing.areas.main
 
         public override void OnTick()
         {
+        }
+
+        private void OnAudioCheckClick(object sender, RoutedEventArgs e)
+        {
+            if (sender is CheckBox box)
+            {
+                User user = (User)Session.Get("student");
+                if ((bool)box.IsChecked)
+                {
+                    user.AudioOn = false;
+                    MusicPlayer.ShouldPlay = false;
+                    AudioPlayer.ShouldPlay = false;
+                } else
+                {
+                    user.AudioOn = true;
+                    MusicPlayer.ShouldPlay = true;
+                    AudioPlayer.ShouldPlay = true;
+                }
+                Session.Add("student", user);
+            }
         }
     }
 }

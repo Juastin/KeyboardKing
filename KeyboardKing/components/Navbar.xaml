@@ -14,7 +14,7 @@
                 <Components:NavigationButton ToolTip="Winkel" ToPage="ShoppingPage" Style="{DynamicResource NavButton}" x:Name="Button_FavoritesPage" Content="🛒" FontSize="30"/>
                 <Components:NavigationButton ToolTip="Matches" ToPage="MatchOverviewPage" Style="{DynamicResource NavButton}" x:Name="Button_MatchOverviewPage" Content="⚔" FontSize="30"/>
                 <Components:NavigationButton ToolTip="Instellingen" ToPage="SettingsPage" Style="{DynamicResource NavButton}" x:Name="Button_SettingsPage" Content="⚙" FontSize="30"/>
-                <Components:NavigationButton ToolTip="Uitloggen" ToPage="LoginPage" Style="{DynamicResource NavButton}" Content="🚪" FontSize="30"/>
+                <Components:NavigationButton ToolTip="Uitloggen" ToPage="LoginPage" Style="{DynamicResource NavButton}" Content="［🡆  " FontSize="30"/>
             </StackPanel>
             <StackPanel></StackPanel>
         </DockPanel>

@@ -11,7 +11,7 @@
       MaxWidth="1420"
       MaxHeight="750"
       Title="MatchOverviewPage">
-    
+
     <Page.Resources>
         <!-- ListBoxItem template -->
         <Style x:Key="ListBoxItemTemplate" TargetType="{x:Type ListBoxItem}">
@@ -51,11 +51,8 @@
         </Style>
     </Page.Resources>
 
-    
-    
-        <Grid Margin="25">
-        <Border Style="{DynamicResource GridBorder}"
-            Padding="30">
+    <Grid Margin="25">
+        <Border Style="{DynamicResource GridBorder}" Padding="30">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -67,10 +64,7 @@
                     <Components:NavigationButton ToPage="MatchCreatePage" Style="{DynamicResource Button1}"
                                                  Content="Klik hier om een match te maken" HorizontalAlignment="Center"
                                                  VerticalAlignment="Center" Background="#FF363636" BorderBrush="White" Foreground="White" FontSize="14"/>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Image Width="50" Source="/KeyBoardking;component/resources/images/coin.png"/>
-                        <Label Style="{DynamicResource H1}" x:Name="Coin" Content=""/>
-                    </StackPanel>
+                    <Components:NavigationButton Style="{DynamicResource Button1}" Content="Geschiedenis" ToPage="MatchHistoryPage" Height="Auto" Width="132" FontSize="14" HorizontalAlignment="Right" Margin="0,4,0,4"/>
                 </Grid>
                 <Grid Grid.Row="1" VerticalAlignment="Top">
                     <!-- Match* overview ListBox -->
