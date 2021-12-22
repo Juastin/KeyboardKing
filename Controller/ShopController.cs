@@ -16,8 +16,16 @@ namespace Controller
         public delegate void PropertyChanged();
         public static event PropertyChanged ShopDataChanged;
 
-        private static int _currentPage;
-        public static int CurrentPage { get
+        public static int MaxPage { get; set; }
+        public static int ItemsPerPage { get; set; } = 8;
+
+        public static Item CurrentItem { get; set; }
+        public static List<Item> AllItems { get; set; }
+
+        private static int _currentPage = 1;
+        public static int CurrentPage
+        {
+            get
             {
                 return _currentPage;
             }
@@ -34,11 +42,6 @@ namespace Controller
                 }
             }
         }
-        public static int MaxPage { get; set; }
-        public static int ItemsPerPage { get; set; }
-
-        public static Item CurrentItem { get; set; }
-        public static List<Item> AllItems { get; set; }
 
         /// <summary>
         /// Initialize the properties in the controller.
@@ -46,7 +49,6 @@ namespace Controller
         public static void Initialize()
         {
             CurrentPage = 1;
-            ItemsPerPage = 8;
             AllItems = GetAllItems();
             MaxPage = CalculateMaxPage();
         }
