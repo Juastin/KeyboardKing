@@ -28,6 +28,7 @@ namespace KeyboardKing.areas.main
         {
             // AUDIO
             if (!_isSwitching)
+            {
                 AudioPlayer.Play(AudioPlayer.Sound.shop_enter);
                 var t = Task.Factory.StartNew(async () =>
                 {
@@ -36,20 +37,25 @@ namespace KeyboardKing.areas.main
                     MusicPlayer.PlayNextFrom("shop");
                     _isSwitching = false;
                 });
+            }
+
 
             // FETCH ITEMS
             DateTime now = DateTime.Now;
             if (_tickCheck.AddMinutes(5) < now || _lastFetchedByUserId != ((User)Session.Get("student")).Id)
+            {
                 _tickCheck = now;
                 _lastFetchedByUserId = ((User)Session.Get("student")).Id;
                 ShopController.Initialize();
                 UpdateShop();
+            }
         }
 
         public override void OnShadow()
         {
             // AUDIO
             if (!_isSwitching)
+            {
                 AudioPlayer.Play(AudioPlayer.Sound.shop_exit);
                 var t = Task.Factory.StartNew(async () =>
                 {
@@ -58,6 +64,7 @@ namespace KeyboardKing.areas.main
                     MusicPlayer.PlayNextFrom("menu_music");
                     _isSwitching = false;
                 });
+            }
         }
 
         public override void OnTick()
