@@ -42,7 +42,7 @@
                                 <Label Style="{DynamicResource H3}"  Content="Account" HorizontalAlignment="Center"/>
                                     <Button Style="{DynamicResource DeclineButton}" Width="250" Height="35" HorizontalAlignment="Center" Content="Account verwijderen"/>
                                 <Label Style="{DynamicResource H3}" Content="Geluid dempen" HorizontalAlignment="Center"/>
-                                    <CheckBox HorizontalAlignment="Center"/>
+                                    <CheckBox x:Name="AudioCheckBox" HorizontalAlignment="Center" Click="OnAudioCheckClick"/>
                             </StackPanel>
                         </Grid>
                     </Grid>
