@@ -14,7 +14,9 @@ namespace KeyboardKing.areas.main
     /// </summary>
     public partial class ShoppingPage : JumpPage
     {
-        private bool isSwitching {get;set;} = false;
+        private DateTime _tickCheck {get;set;} = DateTime.MinValue;
+        private bool _isSwitching {get;set;} = false;
+        private int _lastFetchedByUserId {get;set;} = 0;
 
         public ShoppingPage(MainWindow w) : base(w)
         {
@@ -24,33 +26,37 @@ namespace KeyboardKing.areas.main
 
         public override void OnLoad()
         {
-            // FETCH ITEMS
-            ShopController.Initialize();
-            UpdateShop();
-
             // AUDIO
-            if (!isSwitching)
+            if (!_isSwitching)
                 AudioPlayer.Play(AudioPlayer.Sound.shop_enter);
                 var t = Task.Factory.StartNew(async () =>
                 {
-                    isSwitching = true;
+                    _isSwitching = true;
                     await Task.Delay(1000);
                     MusicPlayer.PlayNextFrom("shop");
-                    isSwitching = false;
+                    _isSwitching = false;
                 });
+
+            // FETCH ITEMS
+            DateTime now = DateTime.Now;
+            if (_tickCheck.AddMinutes(5) < now || _lastFetchedByUserId != ((User)Session.Get("student")).Id)
+                _tickCheck = now;
+                _lastFetchedByUserId = ((User)Session.Get("student")).Id;
+                ShopController.Initialize();
+                UpdateShop();
         }
 
         public override void OnShadow()
         {
             // AUDIO
-            if (!isSwitching)
+            if (!_isSwitching)
                 AudioPlayer.Play(AudioPlayer.Sound.shop_exit);
                 var t = Task.Factory.StartNew(async () =>
                 {
-                    isSwitching = true;
+                    _isSwitching = true;
                     await Task.Delay(1000);
                     MusicPlayer.PlayNextFrom("menu_music");
-                    isSwitching = false;
+                    _isSwitching = false;
                 });
         }
 
