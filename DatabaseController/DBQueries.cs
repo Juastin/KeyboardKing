@@ -125,7 +125,7 @@ namespace DatabaseController
         public static List<Chapter> GetAllChapters(User user)
         {
             MySqlCommand cmd = new MySqlCommand("SELECT c.id, c.name, episode, e.name, e.id, " +
-                "CASE WHEN er.userid IS NULL OR er.passed = 0 THEN 'False' ELSE 'True' END AS completed, " +
+                "CASE WHEN er.passed IS NULL THEN 'False' ELSE 'True' END AS completed, " +
                 "MAX(er.score) AS highscore " +
                 "FROM Episode e " +
                 "LEFT JOIN Chapter c " +
@@ -133,7 +133,8 @@ namespace DatabaseController
                 "LEFT JOIN EpisodeResult er " +
                 "ON er.episodeid = e.id " +
                 "AND er.userid = @userid " +
-                "GROUP BY c.name, episode, e.name, e.id, er.userid");
+                "AND er.passed = 1 " +
+                "GROUP BY e.id");
 
             MySqlParameter UserIdParam = new MySqlParameter("@userid", MySqlDbType.Int32, 0);
             UserIdParam.Value = user.Id;
