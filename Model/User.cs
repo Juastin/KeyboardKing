@@ -35,7 +35,7 @@ namespace Model
                     Id = int.Parse(input[0][0]),
                     Username = input[0][1],
                     Email = input[0][2],
-                    Coins = int.Parse(input[0][3])
+                    Coins = int.Parse(input[0][3]),
                     Password = input[0][4],
                     Salt = input[0][5],
                     SkillLevel = input[0][5] == string.Empty ? SkillLevel.none : (SkillLevel)Enum.Parse(typeof(SkillLevel), input[0][6]),

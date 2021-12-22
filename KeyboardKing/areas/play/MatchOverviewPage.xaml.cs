@@ -25,7 +25,6 @@ namespace KeyboardKing.areas.play
         public override void OnLoad()
         {
             LoadAllMatches();
-            Coin.Content = EpisodeController.GetCoins((User)Session.Get("student"));
         }
 
         public override void OnShadow()
