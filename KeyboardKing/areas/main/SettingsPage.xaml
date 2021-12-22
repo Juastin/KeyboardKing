@@ -39,7 +39,7 @@
                                 <Label Style="{DynamicResource H3}" HorizontalAlignment="Center" Content="Thema's"/>
                                 <ComboBox  x:Name="CBTheme" HorizontalAlignment="Center" Width="250" Height="35" ItemContainerStyle="{DynamicResource ComboBoxItem}" Template="{DynamicResource ComboBox}" SelectionChanged="CBTheme_SelectionChanged"/>
                                 <Label Style="{DynamicResource H3}" Content="Dyslexie" HorizontalAlignment="Center"/>
-                                <CheckBox IsChecked="{Binding Dyslectic, Mode=OneWay}" Checked="CheckedDyslectic" Unchecked="UncheckedDyslectic" HorizontalAlignment="Center"/>
+                                <CheckBox x:Name="DyslecticBox" IsChecked="{Binding Dyslectic, Mode=OneWay}" Checked="CheckedDyslectic" Unchecked="UncheckedDyslectic" HorizontalAlignment="Center"/>
                             </StackPanel>
                         </Grid>
                         <Grid VerticalAlignment="Top" Grid.Column="1">
