@@ -32,11 +32,11 @@
                     <ListView Name="MatchHistoryList" Style="{DynamicResource ListViewTemplate}" ItemContainerStyle="{DynamicResource ListViewItemTemplate}" Margin="6,20,0,0" Grid.RowSpan="2">
                         <ListView.View>
                             <GridView ColumnHeaderContainerStyle="{DynamicResource ListViewHeader}">
-                                <GridViewColumn Header="  Datum" DisplayMemberBinding="{Binding [1]}" Width="200"/>
-                                <GridViewColumn Header="  Score" DisplayMemberBinding="{Binding [2]}" Width="75"/>
-                                <GridViewColumn Header="  Fouten" DisplayMemberBinding="{Binding [3]}" Width="75"/>
-                                <GridViewColumn Header="  LPM" DisplayMemberBinding="{Binding [4]}" Width="75"/>
-                                <GridViewColumn Header="  Tijd" DisplayMemberBinding="{Binding [5]}" Width="200"/>
+                                <GridViewColumn Header="  Datum" DisplayMemberBinding="{Binding Time}" Width="200"/>
+                                <GridViewColumn Header="  Score" DisplayMemberBinding="{Binding Score}" Width="75"/>
+                                <GridViewColumn Header="  Fouten" DisplayMemberBinding="{Binding Mistakes}" Width="75"/>
+                                <GridViewColumn Header="  LPM" DisplayMemberBinding="{Binding LPM}" Width="75"/>
+                                <GridViewColumn Header="  Tijd" DisplayMemberBinding="{Binding TimeSpend}" Width="200"/>
                             </GridView>
                         </ListView.View>
                     </ListView>
