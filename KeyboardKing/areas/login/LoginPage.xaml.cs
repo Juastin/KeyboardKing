@@ -22,7 +22,20 @@ namespace KeyboardKing.areas.login
         public override void OnLoad()
         {
             MusicPlayer.Stop();
-            if (Session.Get("student") is not null) {
+
+            User user = (User)Session.Get("student");
+            if (user is not null) 
+            {
+                // Save audio settings if they were changed.
+                if (user.AudioOn != user.AudioOnAtLogin)
+                {
+                    DBQueries.UpdateAudioSetting(user.Id, user.AudioOn);
+                }
+                if (user.Dyslectic != user.DyslecticAtLogin)
+                {
+                    DBQueries.UpdateDyslecticSettings(user.Id, user.Dyslectic);
+                }
+                // Flush the session if the user was logged in when entering the login page.
                 Session.Flush();
             }
         }
@@ -41,17 +54,25 @@ namespace KeyboardKing.areas.login
         {
             string email = txtEmail.Text.ToString();
             string message = "Error: ";
+
             if (!email.Equals("", StringComparison.Ordinal) && email != null
-                && !boxPassword.Password.Equals("", StringComparison.Ordinal) && boxPassword.Password != null)
+                && !boxPassword.Password.Equals("", StringComparison.Ordinal) && boxPassword.Password != null) // Checks if fields isn't empty
             {
-                User user = DBQueries.GetUserInfo(email);
+                User user = AuthenticationController.GetUserInfo(email);
                 if (user != null)
                 {
-                    bool passwordResult = Argon2.VerifyHash(boxPassword.Password, user.Salt, user.Password);
-                    if (passwordResult)
+                    if (AuthenticationController.VerifyPassword(user, boxPassword.Password))
                     {
                         user.Password = user.Salt = null;
+                        user.AudioOnAtLogin = user.AudioOn;
+                        user.DyslecticAtLogin = user.Dyslectic;
+
                         Session.Add("student", user);
+
+                        // Set audio preference based on UserSettings
+                        MusicPlayer.ShouldPlay = user.AudioOn;
+                        AudioPlayer.ShouldPlay = user.AudioOn;
+                        MusicPlayer.PlayNextFrom("menu_music");
 
                         if (user.SkillLevel == SkillLevel.none)
                         {
@@ -60,7 +81,6 @@ namespace KeyboardKing.areas.login
                         }
                         else
                         {
-                            MusicPlayer.PlayNextFrom("menu_music");
                             NavigationController.NavigateToPage(Pages.ChaptersPage);
                             return;
                         }
