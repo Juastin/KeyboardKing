@@ -108,7 +108,7 @@ namespace DatabaseController
 
         public static User GetUserInfo(string email)
         {
-            MySqlCommand cmd = new MySqlCommand("SELECT id, username, email, coins, password, salt, skilllevel, audio " +
+            MySqlCommand cmd = new MySqlCommand("SELECT id, username, email, coins, password, salt, skilllevel, audio, dyslectic " +
                                             "FROM User " +
                                             "LEFT JOIN UserSettings " +
                                             "ON User.id = UserSettings.userid " +
@@ -457,7 +457,7 @@ namespace DatabaseController
             return DBHandler.SelectQuery(cmd);
         }
       
-        public static bool UpdateAudioSetting(int userid, int state)
+        public static bool UpdateAudioSetting(int userid, bool state)
         {
             MySqlCommand cmd = new MySqlCommand("UPDATE UserSettings set audio = @state WHERE userid = @userid ");
 
@@ -471,6 +471,23 @@ namespace DatabaseController
             cmd.Parameters.Add(q_state);
 
             return DBHandler.Query(cmd);
+        }
+
+        public static bool UpdateDyslecticSettings(int userid, bool dyslectic)
+        {
+            MySqlCommand cmd = new MySqlCommand("UPDATE UserSettings SET dyslectic = @dyslectic WHERE userid = @userid");
+
+            MySqlParameter dyslecticParam = new MySqlParameter("@dyslectic", MySqlDbType.Int32, 255);
+            MySqlParameter userId = new MySqlParameter("@userid", MySqlDbType.Int32, 0);
+
+            dyslecticParam.Value = dyslectic;
+            userId.Value = userid;
+
+            cmd.Parameters.Add(userId);
+            cmd.Parameters.Add(dyslecticParam);
+
+            return DBHandler.Query(cmd);
+
         }
     }
 }

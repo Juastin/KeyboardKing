@@ -58,6 +58,7 @@ namespace KeyboardKing.areas.main
         }
         public override void OnLoad()
         {
+            SettingsController.Initialise();
             User user = (User)Session.Get("student");
             AudioCheckBox.IsChecked = !user.AudioOn;
         }
@@ -85,6 +86,23 @@ namespace KeyboardKing.areas.main
                     user.AudioOn = true;
                     MusicPlayer.ShouldPlay = true;
                     AudioPlayer.ShouldPlay = true;
+                }
+                Session.Add("student", user);
+            }
+        }
+
+        private void CheckedDyslectic(object sender, RoutedEventArgs e)
+        {
+            if (sender is CheckBox box)
+            {
+                User user = (User)Session.Get("student");
+                if ((bool)box.IsChecked)
+                {
+                    user.Dyslectic = true;
+                }
+                else
+                {
+                    user.Dyslectic = false;
                 }
                 Session.Add("student", user);
             }
