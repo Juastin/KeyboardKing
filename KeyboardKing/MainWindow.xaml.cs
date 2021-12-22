@@ -174,7 +174,7 @@ namespace KeyboardKing
         {
             // Save audio before quitting.
             User user = (User)Session.Get("student");
-            if (user.AudioOn!=user.AudioOnAtLogin)
+            if (user is not null && user.AudioOn!=user.AudioOnAtLogin)
             {
                 if (user.AudioOn)
                 {
