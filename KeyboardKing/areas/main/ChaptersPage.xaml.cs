@@ -1,5 +1,6 @@
-﻿using KeyboardKing.core;
-using System.Collections.Generic;
+﻿using System;
+using System.Linq;
+using KeyboardKing.core;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;

@@ -3,7 +3,8 @@ using Controller;
 using System.Windows;
 using System.Windows.Data;
 using Model;
-using DatabaseController;
+using System.Linq;
+using System.Collections.Generic;
 
 // Source: https://stackoverflow.com/questions/561166/binding-a-wpf-combobox-to-a-custom-list
 
