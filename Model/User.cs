@@ -34,7 +34,8 @@ namespace Model
                     Email = input[0][2],
                     Password = input[0][3],
                     Salt = input[0][4],
-                    SkillLevel = (SkillLevel)Enum.Parse(typeof(SkillLevel), input[0][5])
+                    SkillLevel = (SkillLevel)Enum.Parse(typeof(SkillLevel), input[0][5]),
+                    Dyslectic = Convert.ToBoolean(int.Parse(input[0][6])),
                 };
             }
             return null;

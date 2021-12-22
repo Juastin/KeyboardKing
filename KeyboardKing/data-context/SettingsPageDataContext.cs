@@ -10,6 +10,7 @@ namespace KeyboardKing.data_context
 {
     public class SettingsPageDataContext
     {
-        public User User { get => SettingsController.Student; }
+        public User Student { get => SettingsController.Student; }
+        public string Dyslectic { get => $"{SettingsController.Student?.Dyslectic ?? false}" ; }
     }
 }
