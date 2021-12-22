@@ -58,6 +58,8 @@ namespace KeyboardKing.areas.main
         }
         public override void OnLoad()
         {
+            User user = (User)Session.Get("student");
+            AudioCheckBox.IsChecked = !user.AudioOn;
         }
 
         public override void OnShadow()
@@ -75,15 +77,16 @@ namespace KeyboardKing.areas.main
                 User user = (User)Session.Get("student");
                 if ((bool)box.IsChecked)
                 {
+                    user.AudioOn = false;
                     MusicPlayer.ShouldPlay = false;
                     AudioPlayer.ShouldPlay = false;
-                    DBQueries.UpdateAudioSetting(user.Id, 0);
                 } else
                 {
+                    user.AudioOn = true;
                     MusicPlayer.ShouldPlay = true;
                     AudioPlayer.ShouldPlay = true;
-                    DBQueries.UpdateAudioSetting(user.Id, 1);
                 }
+                Session.Add("student", user);
             }
         }
     }

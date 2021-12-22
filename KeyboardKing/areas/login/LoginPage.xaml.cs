@@ -22,7 +22,17 @@ namespace KeyboardKing.areas.login
         public override void OnLoad()
         {
             MusicPlayer.Stop();
-            if (Session.Get("student") is not null) {
+
+            // Save audio settings and get rid of the session if the user was logged in.
+            User user = (User)Session.Get("student");
+            if (user is not null) {
+                if (user.AudioOn)
+                {
+                    DBQueries.UpdateAudioSetting(user.Id, 1);
+                } else
+                {
+                    DBQueries.UpdateAudioSetting(user.Id, 0);
+                }
                 Session.Flush();
             }
         }
