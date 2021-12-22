@@ -172,12 +172,15 @@ namespace KeyboardKing
         {
             // Save audio before quitting.
             User user = (User)Session.Get("student");
-            if (user.AudioOn)
+            if (user.AudioOn!=user.AudioOnAtLogin)
             {
-                DBQueries.UpdateAudioSetting(user.Id, 1);
-            } else
-            {
-                DBQueries.UpdateAudioSetting(user.Id, 0);
+                if (user.AudioOn)
+                {
+                    DBQueries.UpdateAudioSetting(user.Id, 1);
+                } else
+                {
+                    DBQueries.UpdateAudioSetting(user.Id, 0);
+                }
             }
 
             if (NavigationController.CurrentPage == Pages.MatchLobbyPage || NavigationController.CurrentPage == Pages.MatchPlayingPage)

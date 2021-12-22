@@ -23,16 +23,20 @@ namespace KeyboardKing.areas.login
         {
             MusicPlayer.Stop();
 
-            // Save audio settings and get rid of the session if the user was logged in.
             User user = (User)Session.Get("student");
             if (user is not null) {
-                if (user.AudioOn)
+                // Save audio settings if they were changed.
+                if (user.AudioOn!=user.AudioOnAtLogin)
                 {
-                    DBQueries.UpdateAudioSetting(user.Id, 1);
-                } else
-                {
-                    DBQueries.UpdateAudioSetting(user.Id, 0);
+                    if (user.AudioOn)
+                    {
+                        DBQueries.UpdateAudioSetting(user.Id, 1);
+                    } else
+                    {
+                        DBQueries.UpdateAudioSetting(user.Id, 0);
+                    }
                 }
+                // Flush the session if the user was logged in when entering the login page.
                 Session.Flush();
             }
         }
@@ -61,6 +65,8 @@ namespace KeyboardKing.areas.login
                     if (passwordResult)
                     {
                         user.Password = user.Salt = null;
+                        user.AudioOnAtLogin = user.AudioOn;
+
                         Session.Add("student", user);
 
                         // Set audio preference based on UserSettings

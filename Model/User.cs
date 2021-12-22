@@ -18,6 +18,7 @@ namespace Model
         public string Salt { get; set; }
         public SkillLevel SkillLevel { get; set; }
         public bool AudioOn { get; set; }
+        public bool AudioOnAtLogin { get; set; }
 
         public static List<User> ParseUserIds(List<List<string>> input)
         {
