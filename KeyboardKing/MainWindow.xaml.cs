@@ -67,6 +67,8 @@ namespace KeyboardKing
                 {Pages.EpisodePage, new EpisodePage(this)},
                 {Pages.EpisodeResultPage, new EpisodeResultPage(this)},
                 {Pages.MatchOverviewPage, new MatchOverviewPage(this)},
+                {Pages.MatchHistoryPage, new MatchHistoryPage(this)},
+                {Pages.MatchHistoryLeaderboardPage, new MatchHistoryLeaderboardPage(this)},
                 {Pages.MatchCreatePage, new MatchCreatePage(this)},
                 {Pages.MatchLobbyPage, new MatchLobbyPage(this)},
                 {Pages.MatchPlayingPage, new MatchPlayingPage(this)},

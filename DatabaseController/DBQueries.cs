@@ -253,17 +253,20 @@ namespace DatabaseController
 
         public static bool AddMatchProgress(int matchid, User user)
         {
-            MySqlCommand cmd = new MySqlCommand("INSERT INTO MatchProgress (matchid, userid) " +
-                                            "VALUES (@matchid, @userid)");
+            MySqlCommand cmd = new MySqlCommand("INSERT INTO MatchProgress (matchid, userid, startdate) " +
+                                            "VALUES (@matchid, @userid, @startdate)");
 
             MySqlParameter matchId = new MySqlParameter("@matchid", MySqlDbType.Int32, 255);
             MySqlParameter userId = new MySqlParameter("@userid", MySqlDbType.Int32, 0);
+            MySqlParameter startDate = new MySqlParameter("@startdate", MySqlDbType.VarChar, 0);
 
             matchId.Value = matchid;
             userId.Value = user.Id;
+            startDate.Value = DateTime.Now.ToString("HH:mm dd-MM-yyyy");
 
             cmd.Parameters.Add(matchId);
             cmd.Parameters.Add(userId);
+            cmd.Parameters.Add(startDate);
 
             return DBHandler.Query(cmd);
         }
@@ -376,6 +379,35 @@ namespace DatabaseController
             return MatchProgress.ParseSimpleProgress(result);
         }
 
+        public static List<List<string>> GetMatchProgressesWithUser(int userid)
+        {
+            MySqlCommand cmd = new MySqlCommand("SELECT matchid, startdate, score, mistakes, lettersperminute, time FROM MatchProgress WHERE progress = 100 AND userid = @userid ORDER BY id DESC LIMIT 10");
+
+            MySqlParameter userId = new MySqlParameter("@userid", MySqlDbType.Int32, 255);
+            userId.Value = userid;
+            cmd.Parameters.Add(userId);
+
+            List<List<string>> result = DBHandler.SelectQuery(cmd);
+            return result;
+        }
+
+        public static List<List<string>> GetAllScoresOrderByHighest(int matchid)
+        {
+            MySqlCommand cmd = new MySqlCommand("SELECT ep.name, u.username, mp.score, mp.mistakes, mp.lettersperminute, mp.time " +
+            "FROM Episode ep " +
+            "LEFT JOIN MatchLobby ml ON ml.episodeid = ep.id " +
+            "LEFT JOIN MatchProgress mp ON ml.id = mp.matchid " +
+            "LEFT JOIN User u ON mp.userid = u.id " +
+            "WHERE mp.matchid = @matchid " +
+            "ORDER BY mp.score DESC");
+
+            MySqlParameter matchId = new MySqlParameter("@matchid", MySqlDbType.Int32, 255);
+            matchId.Value = matchid;
+            cmd.Parameters.Add(matchId);
+
+            return DBHandler.SelectQuery(cmd);
+        }
+      
         public static bool UpdateAudioSetting(int userid, int state)
         {
             MySqlCommand cmd = new MySqlCommand("UPDATE UserSettings set audio = @state WHERE userid = @userid ");
