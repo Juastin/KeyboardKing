@@ -178,7 +178,7 @@ namespace DatabaseController
             DBHandler.Query(cmd);
         }
 
-        public static int GetCoinsOffUser(User user)
+        public static int GetCoinsOfUser(User user)
         {
             MySqlCommand cmd = new MySqlCommand("SELECT coins From User WHERE id = @userid");
 

@@ -205,13 +205,13 @@ namespace Controller
 
             DBQueries.UpdateCoins(Coins, student);
 
-            student.Coins = DBQueries.GetCoinsOffUser(student);
+            student.Coins = DBQueries.GetCoinsOfUser(student);
             Session.Add("student", student);
         }
         
         public static int GetCoins(User student)
         {
-            return DBQueries.GetCoinsOffUser(student);
+            return DBQueries.GetCoinsOfUser(student);
         }
 
         /// <summary>
