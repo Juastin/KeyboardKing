@@ -20,6 +20,7 @@ namespace KeyboardKing
             {
                 _shouldplay = value;
                 if (!value) {Stop();}
+                else {PlayNext();}
             }
         }
 

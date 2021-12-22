@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Controller;
+using Model;
 
 namespace KeyboardKing.areas.play
 {
@@ -35,6 +36,7 @@ namespace KeyboardKing.areas.play
         {
             MusicPlayer.Stop();
             AudioPlayer.Play(AudioPlayer.Sound.congratulations);
+            Coin.Content = ShowCoins();
         }
 
         public override void OnShadow()
@@ -45,5 +47,13 @@ namespace KeyboardKing.areas.play
         public override void OnTick()
         {
         }
+
+        private static string ShowCoins()
+        {
+            int coins = EpisodeController.GetCoins((User)Session.Get("student")) - EpisodeController.Coins;
+
+            return $"{coins} + {EpisodeController.Coins}";
+        }
+
     }
 }

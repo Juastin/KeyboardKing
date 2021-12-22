@@ -8,7 +8,10 @@ namespace Controller
 {
     public static class Session
     {
-        private static Dictionary<string, object> Data {get;set;} = new Dictionary<string, object>();
+
+        public static event EventHandler PropertyChanged;
+
+        private static Dictionary<string, object> Data { get; set; } = new Dictionary<string, object>();
 
         public static object Get(string key)
         {
@@ -21,7 +24,8 @@ namespace Controller
                 Data.Remove(key);
 
             Data.Add(key, o);
-                return true;
+            PropertyChanged?.Invoke(null, EventArgs.Empty);
+            return true;
         }
 
         public static bool Remove(string key)

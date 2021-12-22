@@ -58,6 +58,7 @@
     <None Remove="resources\images\blur_paint_theme_background.png" />
     <None Remove="resources\images\blur_red_chinese_background.png" />
     <None Remove="resources\images\blur_space_theme_background.png" />
+    <None Remove="resources\images\coin.png" />
     <None Remove="resources\images\hellobeertje_background_4k.png" />
     <None Remove="resources\images\icon.png" />
     <None Remove="resources\images\icons\coin.png" />
@@ -225,6 +226,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\images\blur_space_theme_background.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\coin.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\images\hellobeertje_background_4k.png">

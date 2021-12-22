@@ -1,16 +1,21 @@
-﻿<local:JumpPage x:Class="KeyboardKing.areas.main.SettingsPage"
+﻿<local:JumpPage
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:KeyboardKing.core"
       xmlns:Components="clr-namespace:KeyboardKing.components"
+      xmlns:data_context="clr-namespace:KeyboardKing.data_context" x:Class="KeyboardKing.areas.main.SettingsPage"
       mc:Ignorable="d" 
       Title="SettingsPage"
       MinHeight="450"
       MinWidth="400"
       MaxWidth="1420"
       MaxHeight="750" d:DesignWidth="805">
+
+    <local:JumpPage.DataContext>
+        <data_context:SettingsPageDataContext/>
+    </local:JumpPage.DataContext>
 
     <Grid Margin="25">
         <Border Style="{DynamicResource GridBorder}" Padding="30">
@@ -32,17 +37,17 @@
                         <Grid VerticalAlignment="Top" Grid.Column="0">
                             <StackPanel Orientation="Vertical">
                                 <Label Style="{DynamicResource H3}" HorizontalAlignment="Center" Content="Thema's"/>
-                                    <ComboBox  x:Name="CBTheme" HorizontalAlignment="Center" Width="250" Height="35" ItemContainerStyle="{DynamicResource ComboBoxItem}" Template="{DynamicResource ComboBox}" SelectionChanged="CBTheme_SelectionChanged"/>
+                                <ComboBox  x:Name="CBTheme" HorizontalAlignment="Center" Width="250" Height="35" ItemContainerStyle="{DynamicResource ComboBoxItem}" Template="{DynamicResource ComboBox}" SelectionChanged="CBTheme_SelectionChanged"/>
                                 <Label Style="{DynamicResource H3}" Content="Dyslexie" HorizontalAlignment="Center"/>
-                                    <CheckBox HorizontalAlignment="Center"/>
+                                <CheckBox x:Name="DyslecticBox" IsChecked="{Binding Dyslectic, Mode=OneWay}" Click="CheckedDyslectic"  HorizontalAlignment="Center"/>
                             </StackPanel>
                         </Grid>
                         <Grid VerticalAlignment="Top" Grid.Column="1">
                             <StackPanel Orientation="Vertical" >
                                 <Label Style="{DynamicResource H3}"  Content="Account" HorizontalAlignment="Center"/>
-                                    <Button Style="{DynamicResource DeclineButton}" Width="250" Height="35" HorizontalAlignment="Center" Content="Account verwijderen"/>
+                                <Button Style="{DynamicResource DeclineButton}" Width="250" Height="35" HorizontalAlignment="Center" Content="Account verwijderen"/>
                                 <Label Style="{DynamicResource H3}" Content="Geluid dempen" HorizontalAlignment="Center"/>
-                                    <CheckBox HorizontalAlignment="Center"/>
+                                    <CheckBox x:Name="AudioCheckBox" IsChecked="{Binding AudioOn, Mode=OneWay}" HorizontalAlignment="Center" Click="OnAudioCheckClick"/>
                             </StackPanel>
                         </Grid>
                     </Grid>
