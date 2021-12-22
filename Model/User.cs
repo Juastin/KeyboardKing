@@ -34,7 +34,7 @@ namespace Model
                     Email = input[0][2],
                     Password = input[0][3],
                     Salt = input[0][4],
-                    SkillLevel = input[0][5] == string.Empty ? SkillLevel.none : (SkillLevel)Enum.Parse(typeof(SkillLevel), input[0][5])
+                    SkillLevel = input[0][5] == string.Empty ? SkillLevel.none : (SkillLevel)Enum.Parse(typeof(SkillLevel), input[0][5]),
                     Dyslectic = Convert.ToBoolean(int.Parse(input[0][6])),
                 };
             }
