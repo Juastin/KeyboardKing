@@ -79,6 +79,8 @@ namespace Controller
 
             DBQueries.SaveMatchResult(EC.CurrentEpisodeResult, CurrentMatch.Id, student.Id);
             SetWinners();
+
+            Session.Add("MatchHistorySelectedMatch", CurrentMatch.Id);
         }
 
         public static void MultiplayerFetch()
