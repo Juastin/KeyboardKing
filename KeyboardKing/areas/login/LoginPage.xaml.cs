@@ -22,7 +22,21 @@ namespace KeyboardKing.areas.login
         public override void OnLoad()
         {
             MusicPlayer.Stop();
-            if (Session.Get("student") is not null) {
+
+            User user = (User)Session.Get("student");
+            if (user is not null) {
+                // Save audio settings if they were changed.
+                if (user.AudioOn!=user.AudioOnAtLogin)
+                {
+                    if (user.AudioOn)
+                    {
+                        DBQueries.UpdateAudioSetting(user.Id, 1);
+                    } else
+                    {
+                        DBQueries.UpdateAudioSetting(user.Id, 0);
+                    }
+                }
+                // Flush the session if the user was logged in when entering the login page.
                 Session.Flush();
             }
         }
@@ -51,9 +65,14 @@ namespace KeyboardKing.areas.login
                     if (AuthenticationController.VerifyPassword(user, boxPassword.Password))
                     {
                         user.Password = user.Salt = null;
+                        user.AudioOnAtLogin = user.AudioOn;
+
                         Session.Add("student", user);
 
-                        //
+                        // Set audio preference based on UserSettings
+                        MusicPlayer.ShouldPlay = user.AudioOn;
+                        AudioPlayer.ShouldPlay = user.AudioOn;
+                        MusicPlayer.PlayNextFrom("menu_music");
 
                         if (user.SkillLevel == SkillLevel.none)
                         {
@@ -62,7 +81,6 @@ namespace KeyboardKing.areas.login
                         }
                         else
                         {
-                            MusicPlayer.PlayNextFrom("menu_music");
                             NavigationController.NavigateToPage(Pages.ChaptersPage);
                             return;
                         }
