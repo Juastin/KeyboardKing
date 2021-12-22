@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using Controller;
 using Model;
 using DatabaseController;
+using System;
 
 namespace KeyboardKing.areas.main
 {
@@ -59,10 +60,7 @@ namespace KeyboardKing.areas.main
 
         public override void OnLoad()
         {
-            if ((bool)Session.Get("DeleteUser"))
-            {
-                DeleteAccount();
-            }
+            CheckDeleteAccount();
         }
 
         public override void OnShadow()
@@ -78,12 +76,16 @@ namespace KeyboardKing.areas.main
             MessageController.ShowConfirmation(Pages.ConfirmationPage, "Weet je het zeker?", Pages.SettingsPage, Pages.SettingsPage);
         }
 
-        private static void DeleteAccount()
+        private static void CheckDeleteAccount()
         {
-            if (DBQueries.DeleteUserAccount((User)Session.Get("student")))
+            if (Session.Get("deleteUser") != null && (bool)Session.Get("deleteUser"))
             {
-                MessageController.Show(Pages.MessagePage, "Je account is verwijderd", Pages.LoginPage, -1);
+                if (DBQueries.DeleteUserAccount((User)Session.Get("student")))
+                    MessageController.Show(Pages.MessagePage, "Je account is verwijderd", Pages.LoginPage, -1);
+                else
+                    MessageController.Show(Pages.MessagePage, "Je account kan op dit moment niet worden verwijderd", Pages.SettingsPage, -1);
             }
         }
+
     }
 }

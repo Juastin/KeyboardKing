@@ -52,7 +52,6 @@ namespace KeyboardKing.areas.login
                     {
                         user.Password = user.Salt = null;
                         Session.Add("student", user);
-                        Session.Add("DeleteUser", false);
 
                         if (user.SkillLevel == SkillLevel.none)
                         {
