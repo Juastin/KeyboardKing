@@ -25,11 +25,7 @@
                     <Components:NavigationButton Style="{DynamicResource Button1}" Content="Ga Terug" ToPage="MatchOverviewPage" Height="Auto" Width="132" FontSize="18" HorizontalAlignment="Right" Margin="0,4,0,4"/>
                 </Grid>
                 <Grid Grid.Row="1" VerticalAlignment="Top">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="17*"/>
-                        <RowDefinition Height="7*"/>
-                    </Grid.RowDefinitions>
-                    <ListView Name="MatchHistoryList" Style="{DynamicResource ListViewTemplate}" ItemContainerStyle="{DynamicResource ListViewItemTemplate}" Margin="6,20,0,0" Grid.RowSpan="2">
+                    <ListView Name="MatchHistoryList" Style="{DynamicResource ListViewTemplate}" ItemContainerStyle="{DynamicResource ListViewItemTemplate}" Margin="6,20,0,0">
                         <ListView.View>
                             <GridView ColumnHeaderContainerStyle="{DynamicResource ListViewHeader}">
                                 <GridViewColumn Header="  Datum" DisplayMemberBinding="{Binding Time}" Width="200"/>
