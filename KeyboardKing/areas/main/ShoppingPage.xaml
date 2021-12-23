@@ -109,7 +109,7 @@
                                         </ItemsPanelTemplate>
                                     </ListBox.ItemsPanel>
                                 </ListBox>
-
+                                <Components:CoinsComp HorizontalAlignment="Right" VerticalAlignment="Top"/>
                                 <!-- PreviousPage Button -->
                                 <Button RenderOptions.BitmapScalingMode="HighQuality" x:Name="PreviousPage" Tag="/KeyBoardking;component/resources/images/wooden_arrow.png" Margin="10" HorizontalAlignment="Left" Width="75" Height="75" Style="{DynamicResource ImageButtonTemplate}" RenderTransformOrigin="0.5,0.5" Click="PreviousPage_Click">
                                     <Button.RenderTransform>

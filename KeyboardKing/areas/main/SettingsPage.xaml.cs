@@ -57,9 +57,60 @@ namespace KeyboardKing.areas.main
         private void CBTheme_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             object value = CBTheme.SelectedValue;
-            if (value != null && _themes.TryGetValue((string)value, out var theme))
+            if (_themes.TryGetValue((string)value, out var theme))
             {
                 ChangeTheme(theme);
+            }
+        }
+        public override void OnLoad()
+        {
+            SettingsController.Initialise();
+            User user = (User)Session.Get("student");
+            AudioCheckBox.IsChecked = !user.AudioOn;
+        }
+
+        public override void OnShadow()
+        {
+        }
+
+        public override void OnTick()
+        {
+        }
+
+        private void OnAudioCheckClick(object sender, RoutedEventArgs e)
+        {
+            if (sender is CheckBox box)
+            {
+                User user = (User)Session.Get("student");
+                if ((bool)box.IsChecked)
+                {
+                    user.AudioOn = false;
+                    MusicPlayer.ShouldPlay = false;
+                    AudioPlayer.ShouldPlay = false;
+                } else
+                {
+                    user.AudioOn = true;
+                    MusicPlayer.ShouldPlay = true;
+                    AudioPlayer.ShouldPlay = true;
+                }
+                Session.Add("student", user);
+            }
+        }
+
+        private void CheckedDyslectic(object sender, RoutedEventArgs e)
+        {
+            if (sender is CheckBox box)
+            {
+                User user = (User)Session.Get("student");
+                if ((bool)box.IsChecked)
+                {
+                    user.Dyslectic = true;
+                }
+                else
+                {
+                    user.Dyslectic = false;
+                }
+                Session.Add("student", user);
             }
         }
         public override void OnLoad()

@@ -14,6 +14,7 @@ using Model;
 using Model.event_args;
 using KeyboardKing.areas.info;
 using System.ComponentModel;
+using DatabaseController;
 
 namespace KeyboardKing
 {
@@ -66,6 +67,8 @@ namespace KeyboardKing
                 {Pages.EpisodePage, new EpisodePage(this)},
                 {Pages.EpisodeResultPage, new EpisodeResultPage(this)},
                 {Pages.MatchOverviewPage, new MatchOverviewPage(this)},
+                {Pages.MatchHistoryPage, new MatchHistoryPage(this)},
+                {Pages.MatchHistoryLeaderboardPage, new MatchHistoryLeaderboardPage(this)},
                 {Pages.MatchCreatePage, new MatchCreatePage(this)},
                 {Pages.MatchLobbyPage, new MatchLobbyPage(this)},
                 {Pages.MatchPlayingPage, new MatchPlayingPage(this)},
@@ -169,6 +172,19 @@ namespace KeyboardKing
         //Closes open matches when closing application
         private void CheckBefore_Closing(object sender, CancelEventArgs e)
         {
+            // Save audio before quitting.
+            User user = (User)Session.Get("student");
+            if (user is not null)
+            {
+                if (user.AudioOn != user.AudioOnAtLogin)
+                {
+                    DBQueries.UpdateAudioSetting(user.Id, user.AudioOn);
+                }
+                if (user.Dyslectic != user.DyslecticAtLogin)
+                {
+                    DBQueries.UpdateDyslecticSettings(user.Id, user.Dyslectic);
+                }
+            }
             if (NavigationController.CurrentPage == Pages.MatchLobbyPage || NavigationController.CurrentPage == Pages.MatchPlayingPage)
             {
                 MatchController.RemoveUserInMatchProgress();
