@@ -26,19 +26,19 @@
                 </Grid>
                 <Grid Grid.Row="1" VerticalAlignment="Top" Margin="10,10,0,0">
 
-                    <Button Name="InfiniteMode" Click="SelectGamemode" Background="{DynamicResource Color4}" BorderBrush="{DynamicResource Color5}" Height="40" FontSize="14" BorderThickness="40,1,1,1" Margin="-10,-50,0,0" HorizontalAlignment="Center">
-                        <Grid Width="538">
-                            <Label Foreground="{DynamicResource BackgroundColor}" Margin="-39,0,0,0" FontSize="18" FontWeight="Bold">🔁</Label>
-                            <Label Foreground="{DynamicResource BackgroundColor}" Margin="6,0,0,0" FontSize="18" FontWeight="Bold">Oneindig Typen</Label>
-                            <Label Name="InfiniteModeScore" Foreground="{DynamicResource BackgroundColor}" HorizontalAlignment="Right" Margin="0,0,8,0" FontSize="18" FontWeight="Bold">0</Label>
-                        </Grid>
-                    </Button>
-                    
-                    <Button Name="ThreeLifesMode" Click="SelectGamemode" Background="{DynamicResource Color4}" BorderBrush="{DynamicResource Color5}" Height="40" FontSize="14" BorderThickness="40,1,1,1" Margin="-10,50,0,0" HorizontalAlignment="Center">
+                    <Button Name="ThreeLifesMode" Click="SelectGamemode" Background="{DynamicResource Color4}" BorderBrush="{DynamicResource Color5}" Height="40" FontSize="14" BorderThickness="40,1,1,1" Margin="-10,-50,0,0" HorizontalAlignment="Center">
                         <Grid Width="538">
                             <Label Foreground="{DynamicResource BackgroundColor}" Margin="-39,0,0,0" FontSize="18" FontWeight="Bold">❤</Label>
                             <Label Foreground="{DynamicResource BackgroundColor}" Margin="6,0,0,0" FontSize="18" FontWeight="Bold">3 Levens</Label>
                             <Label Name="ThreeLifesModeScore" Foreground="{DynamicResource BackgroundColor}" HorizontalAlignment="Right" Margin="0,0,8,0" FontSize="18" FontWeight="Bold">0</Label>
+                        </Grid>
+                    </Button>
+                    
+                    <Button Name="InfiniteMode" Click="SelectGamemode" Background="{DynamicResource Color4}" BorderBrush="{DynamicResource Color5}" Height="40" FontSize="14" BorderThickness="40,1,1,1" Margin="-10,50,0,0" HorizontalAlignment="Center">
+                        <Grid Width="538">
+                            <Label Foreground="{DynamicResource BackgroundColor}" Margin="-39,0,0,0" FontSize="18" FontWeight="Bold">🔁</Label>
+                            <Label Foreground="{DynamicResource BackgroundColor}" Margin="6,0,0,0" FontSize="18" FontWeight="Bold">Oneindig Typen</Label>
+                            <Label Name="InfiniteModeScore" Foreground="{DynamicResource BackgroundColor}" HorizontalAlignment="Right" Margin="0,0,8,0" FontSize="18" FontWeight="Bold">0</Label>
                         </Grid>
                     </Button>
 
