@@ -1,0 +1,52 @@
+﻿<local:JumpPage x:Class="KeyboardKing.areas.gamemodes.GamemodesOverviewPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:KeyboardKing.core"
+      xmlns:Components="clr-namespace:KeyboardKing.components"
+      mc:Ignorable="d" 
+      Title="GamemodesOverviewPage"
+      MinHeight="450"
+      MinWidth="400"
+      MaxWidth="1420"
+      MaxHeight="750">
+
+    <Grid Margin="25">
+        <Border Style="{DynamicResource GridBorder}" Padding="30">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" VerticalAlignment="Center">
+                    <Label Style="{DynamicResource H1}" Content="Uitdagingen" HorizontalAlignment="Center"/>
+                    <Components:CoinsComp/>
+                </Grid>
+                <Grid Grid.Row="1" VerticalAlignment="Top" Margin="10,10,0,0">
+
+                    <Button Name="InfiniteMode" Click="SelectGamemode" Background="{DynamicResource Color4}" BorderBrush="{DynamicResource Color5}" Height="40" FontSize="14" BorderThickness="40,1,1,1" Margin="-10,-50,0,0" HorizontalAlignment="Center">
+                        <Grid Width="538">
+                            <Label Foreground="{DynamicResource BackgroundColor}" Margin="-39,0,0,0" FontSize="18" FontWeight="Bold">🔁</Label>
+                            <Label Foreground="{DynamicResource BackgroundColor}" Margin="6,0,0,0" FontSize="18" FontWeight="Bold">Oneindig Typen</Label>
+                            <Label Name="InfiniteModeScore" Foreground="{DynamicResource BackgroundColor}" HorizontalAlignment="Right" Margin="0,0,8,0" FontSize="18" FontWeight="Bold">0</Label>
+                        </Grid>
+                    </Button>
+                    
+                    <Button Name="ThreeLifesMode" Click="SelectGamemode" Background="{DynamicResource Color4}" BorderBrush="{DynamicResource Color5}" Height="40" FontSize="14" BorderThickness="40,1,1,1" Margin="-10,50,0,0" HorizontalAlignment="Center">
+                        <Grid Width="538">
+                            <Label Foreground="{DynamicResource BackgroundColor}" Margin="-39,0,0,0" FontSize="18" FontWeight="Bold">❤</Label>
+                            <Label Foreground="{DynamicResource BackgroundColor}" Margin="6,0,0,0" FontSize="18" FontWeight="Bold">3 Levens</Label>
+                            <Label Name="ThreeLifesModeScore" Foreground="{DynamicResource BackgroundColor}" HorizontalAlignment="Right" Margin="0,0,8,0" FontSize="18" FontWeight="Bold">0</Label>
+                        </Grid>
+                    </Button>
+
+                </Grid>
+                <Grid Grid.Row="2" HorizontalAlignment="Center">
+                    <Components:Navbar CurrentPage="GamemodesOverviewPage"/>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</local:JumpPage>

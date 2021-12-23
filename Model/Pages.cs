@@ -23,6 +23,6 @@
         MatchPlayingPage,
         MatchResultPage,
         MatchWaitingResultPage,
-        FavoritesPage
+        GamemodesOverviewPage
     }
 }

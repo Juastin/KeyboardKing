@@ -68,6 +68,7 @@ namespace KeyboardKing.areas.login
                         user.DyslecticAtLogin = user.Dyslectic;
 
                         Session.Add("student", user);
+                        Session.Add("FetchGamemodeScores", true);
 
                         // Set audio preference based on UserSettings
                         MusicPlayer.ShouldPlay = user.AudioOn;

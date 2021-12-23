@@ -15,6 +15,7 @@ using Model.event_args;
 using KeyboardKing.areas.info;
 using System.ComponentModel;
 using DatabaseController;
+using KeyboardKing.areas.gamemodes;
 
 namespace KeyboardKing
 {
@@ -66,6 +67,8 @@ namespace KeyboardKing
                 {Pages.EpisodeReadyUpPage, new EpisodeReadyUpPage(this)},
                 {Pages.EpisodePage, new EpisodePage(this)},
                 {Pages.EpisodeResultPage, new EpisodeResultPage(this)},
+
+                // match area
                 {Pages.MatchOverviewPage, new MatchOverviewPage(this)},
                 {Pages.MatchHistoryPage, new MatchHistoryPage(this)},
                 {Pages.MatchHistoryLeaderboardPage, new MatchHistoryLeaderboardPage(this)},
@@ -74,6 +77,9 @@ namespace KeyboardKing
                 {Pages.MatchPlayingPage, new MatchPlayingPage(this)},
                 {Pages.MatchResultPage, new MatchResultPage(this)},
                 {Pages.MatchWaitingResultPage, new MatchWaitingResultPage(this)},
+
+                // gamemodes area
+                {Pages.GamemodesOverviewPage, new GamemodesOverviewPage(this)},
 
                 // main area
                 {Pages.ChaptersPage, new ChaptersPage(this)},

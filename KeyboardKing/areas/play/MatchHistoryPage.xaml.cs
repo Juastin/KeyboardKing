@@ -28,10 +28,10 @@ namespace KeyboardKing.areas.play
         {
             // FETCH ITEMS
             DateTime now = DateTime.Now;
-            if (_tickCheck.AddMinutes(5) < now || (int?)Session.Get("MatchHasBeenPlayed")==13)
+            if (_tickCheck.AddMinutes(5) < now || (Session.Get("FetchMatches") is not null && (bool)Session.Get("FetchMatches")))
             {
                 _tickCheck = now;
-                Session.Remove("MatchHasBeenPlayed");
+                Session.Remove("FetchMatches");
                 LoadAllMatches();
             }
         }
