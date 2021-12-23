@@ -108,7 +108,7 @@ namespace DatabaseController
 
         public static User GetUserInfo(string email)
         {
-            MySqlCommand cmd = new MySqlCommand("SELECT id, username, email, coins, password, salt, skilllevel, audio, dyslectic " +
+            MySqlCommand cmd = new MySqlCommand("SELECT id, username, email, coins, password, salt, skilllevel, audio, dyslectic, theme " +
                                             "FROM User " +
                                             "LEFT JOIN UserSettings " +
                                             "ON User.id = UserSettings.userid " +

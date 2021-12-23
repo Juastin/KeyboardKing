@@ -22,6 +22,7 @@ namespace Model
         public bool Dyslectic { get; set; }
         public bool DyslecticAtLogin { get; set; }
         public int Coins { get; set; }
+        public string Theme { get; set; }
 
         public static List<User> ParseUserIds(List<List<string>> input)
         {
@@ -42,7 +43,8 @@ namespace Model
                     Salt = input[0][5],
                     SkillLevel = input[0][6] == string.Empty ? SkillLevel.none : (SkillLevel)Enum.Parse(typeof(SkillLevel), input[0][6]),
                     AudioOn = Convert.ToBoolean(int.Parse(input[0][7])),
-                    Dyslectic = Convert.ToBoolean(int.Parse(input[0][8]))
+                    Dyslectic = Convert.ToBoolean(int.Parse(input[0][8])),
+                    Theme = input[0][9]
                 };
             }
             return null;

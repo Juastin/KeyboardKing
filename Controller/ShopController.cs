@@ -13,8 +13,7 @@ namespace Controller
         public delegate void ItemChange();
         public static event ItemChange CurrentItemChanged;
 
-        public delegate void PropertyChanged();
-        public static event PropertyChanged ShopDataChanged;
+        public static event EventHandler ShopDataChanged;
 
         public static int MaxPage { get; set; }
         public static int ItemsPerPage { get; set; } = 8;
@@ -118,13 +117,36 @@ namespace Controller
         /// <summary>
         /// Calls the methods needed to complete the step of adding 
         /// </summary>
-        public static void BuyItem()
+        public static bool BuyItem()
         {
+            bool buyCompleted = false;
             User student = (User)Session.Get("student");
-            Item item = CurrentItem;
+            int currentCoins =  DBQueries.GetCoinsOfUser(student);
+            
+            if (CheckSufficientCoins(currentCoins))
+            {
+                Item item = CurrentItem;
+                DBQueries.AddItem(student, item);
+                DBQueries.UpdateCoins(student, item);
+                buyCompleted = true;
+                student.Coins = currentCoins - CurrentItem.Price;
+            }
+            else
+            {
+                student.Coins = currentCoins;
+            }
 
-            DBQueries.AddItem(student, item);
-            DBQueries.UpdateCoins(student, item);
+            Session.Add("student", student);
+            return buyCompleted;
+        }
+
+        public static bool CheckSufficientCoins(int coins)
+        {
+            if (coins >= CurrentItem.Price)
+            {
+                return true;
+            }
+            return false;
         }
 
         public static void UpdateItemsList()
@@ -132,7 +154,7 @@ namespace Controller
             AllItems = GetAllItems();
             MaxPage = CalculateMaxPage();
 
-            ShopDataChanged?.Invoke();
+            ShopDataChanged?.Invoke(null, EventArgs.Empty);
         }
     }
 }

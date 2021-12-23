@@ -67,6 +67,13 @@ namespace KeyboardKing.areas.main
             SettingsController.Initialise();
             User user = (User)Session.Get("student");
             AudioCheckBox.IsChecked = !user.AudioOn;
+
+            SetUserThemes();
+            UpdateComboBox();
+
+            //Set theme to theme the student has as his default.
+            SetTheme(((User)Session.Get("student")).Theme);
+
         }
 
         public override void OnShadow()
@@ -112,23 +119,6 @@ namespace KeyboardKing.areas.main
                 }
                 Session.Add("student", user);
             }
-        }
-        public override void OnLoad()
-        {
-            SetUserThemes();
-            UpdateComboBox();
-
-            /* Set theme to theme the student has as his default.
-            SetTheme(((User)Session.Get("student")).Theme);
-            */
-        }
-
-        public override void OnShadow()
-        {
-        }
-
-        public override void OnTick()
-        {
         }
 
         public static void SetUserThemes()

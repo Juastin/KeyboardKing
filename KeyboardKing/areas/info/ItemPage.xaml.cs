@@ -30,17 +30,26 @@ namespace KeyboardKing.areas.info
 
         private void Buy_Click(object sender, RoutedEventArgs e)
         {
+            bool itemExist = ShopController.CheckItemExists();
+
+
             // Still needs a check if user has sufficient amount of coins.
             if (ShopController.CheckItemExists())
             {
-                AudioPlayer.Play(AudioPlayer.Sound.shop_purchase);
-                var t = Task.Factory.StartNew(async () =>
+                if (ShopController.BuyItem())
                 {
-                    await Task.Delay(1000);
-                    MusicPlayer.PlayNextFrom("shop");
-                });
-
-                ShopController.BuyItem();
+                    AudioPlayer.Play(AudioPlayer.Sound.shop_purchase);
+                    var t = Task.Factory.StartNew(async () =>
+                    {
+                        await Task.Delay(1000);
+                        MusicPlayer.PlayNextFrom("shop");
+                    });
+                }
+                else
+                {
+                    int insufficientAmount = ShopController.CurrentItem.Price - ((User)Session.Get("student")).Coins;
+                    MessageBox.Show($"Je komt {insufficientAmount} coins tekort");
+                }
             } 
             else
             {

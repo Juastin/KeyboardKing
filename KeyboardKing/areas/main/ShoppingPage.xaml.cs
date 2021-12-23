@@ -132,7 +132,7 @@ namespace KeyboardKing.areas.main
             UpdateShop();
         }
 
-        public void OnItemListChanged()
+        public void OnItemListChanged(object sender, EventArgs e)
         {
             UpdateShop();
         }
