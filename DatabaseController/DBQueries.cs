@@ -122,10 +122,10 @@ namespace DatabaseController
             return User.ParseUser(result);
         }
 
-        public static List<Episode> GetAllEpisodes(User user)
+        public static List<Chapter> GetAllChapters(User user)
         {
-            MySqlCommand cmd = new MySqlCommand("SELECT c.name, episode, e.name, e.id, " +
-                "CASE WHEN er.userid IS NULL OR er.passed = 0 THEN 'False' ELSE 'True' END AS completed, " +
+            MySqlCommand cmd = new MySqlCommand("SELECT c.id, c.name, episode, e.name, e.id, " +
+                "CASE WHEN er.passed IS NULL THEN 'False' ELSE 'True' END AS completed, " +
                 "MAX(er.score) AS highscore " +
                 "FROM Episode e " +
                 "LEFT JOIN Chapter c " +
@@ -133,16 +133,17 @@ namespace DatabaseController
                 "LEFT JOIN EpisodeResult er " +
                 "ON er.episodeid = e.id " +
                 "AND er.userid = @userid " +
-                "GROUP BY c.name, episode, e.name, e.id, er.userid");
+                "AND er.passed = 1 " +
+                "GROUP BY e.id");
 
             MySqlParameter UserIdParam = new MySqlParameter("@userid", MySqlDbType.Int32, 0);
             UserIdParam.Value = user.Id;
-
             cmd.Parameters.Add(UserIdParam);
 
             List<List<string>> result = DBHandler.SelectQuery(cmd);
-            return Episode.ParseEpisodes(result);
+            return Chapter.ParseAllChapters(result);
         }
+
         public static int GetHighscoreEpisode(User user, int episodeId)
         {
             MySqlCommand cmd = new MySqlCommand("SELECT MAX(score) FROM EpisodeResult WHERE episodeid = @episodeid AND userid = @userid");
@@ -264,7 +265,6 @@ namespace DatabaseController
             return DBHandler.Query(cmd);
         }
 
-
         public static bool UpdateMatchProgress(int progress, int user_id, int match_id)
         {
             MySqlCommand cmd = new MySqlCommand("UPDATE MatchProgress set progress = @progress WHERE userid = @userid AND matchid = @matchid ");
@@ -349,7 +349,6 @@ namespace DatabaseController
             List<List<string>> result = DBHandler.SelectQuery(cmd);
             return int.Parse(result[0][0]);
         }
-
 
         public static List<MatchProgress> GetMatchProgress(int matchId)
         {
