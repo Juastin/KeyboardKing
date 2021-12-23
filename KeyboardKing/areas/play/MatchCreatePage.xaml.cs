@@ -3,7 +3,8 @@ using Controller;
 using System.Windows;
 using System.Windows.Data;
 using Model;
-using DatabaseController;
+using System.Linq;
+using System.Collections.Generic;
 
 // Source: https://stackoverflow.com/questions/561166/binding-a-wpf-combobox-to-a-custom-list
 
@@ -28,7 +29,8 @@ namespace KeyboardKing.areas.play
             }
 
             User user = (User)Session.Get("student");
-            ListCollectionView lcv = new ListCollectionView(DBQueries.GetAllEpisodes(user));
+            List<Episode> episodes = EpisodeController.Chapters.SelectMany(c => c.Episodes).ToList();
+            ListCollectionView lcv = new ListCollectionView(episodes);
             lcv.GroupDescriptions.Add(new PropertyGroupDescription("ChapterName"));
             CBEpisode.ItemsSource = lcv;
             CBEpisode.SelectedValuePath = "Id";

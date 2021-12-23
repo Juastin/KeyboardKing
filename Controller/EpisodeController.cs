@@ -13,6 +13,7 @@ namespace Controller
     public static class EpisodeController
     {
         private static Episode _currentEpisode;
+        public static List<Chapter> Chapters { get; private set; }
         public static EpisodeStep CurrentEpisodeStep { get; private set; }
         public static EpisodeResult CurrentEpisodeResult { get; private set; }
         public static int LettersTyped { get; private set; }
@@ -157,6 +158,13 @@ namespace Controller
 
 
             return episode;
+        }
+
+        public static List<Chapter> RetrieveChapters()
+        {
+            User user = (User)Session.Get("student");
+            Chapters = DBQueries.GetAllChapters(user);
+            return Chapters;
         }
 
         /// <summary>
