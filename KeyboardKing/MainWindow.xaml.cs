@@ -184,6 +184,10 @@ namespace KeyboardKing
                 {
                     DBQueries.UpdateDyslecticSettings(user.Id, user.Dyslectic);
                 }
+                if (user.Theme != ThemeController.CurrentTheme)
+                {
+                    ThemeController.UpdateDefaultTheme();
+                }
             }
             if (NavigationController.CurrentPage == Pages.MatchLobbyPage || NavigationController.CurrentPage == Pages.MatchPlayingPage)
             {

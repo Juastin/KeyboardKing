@@ -554,5 +554,22 @@ public static List<Item> GetAllItems(User user)
             return DBHandler.Query(cmd);
 
         }
+
+        public static bool UpdateDefaultTheme(User user, string theme)
+        {
+            MySqlCommand cmd = new MySqlCommand("UPDATE UserSettings SET theme = @theme WHERE userid = @userid");
+
+            MySqlParameter defaultTheme = new MySqlParameter("@theme", MySqlDbType.VarChar, 255);
+            MySqlParameter userId = new MySqlParameter("@userid", MySqlDbType.Int32, 0);
+
+            defaultTheme.Value = theme;
+            userId.Value = user.Id;
+
+            cmd.Parameters.Add(userId);
+            cmd.Parameters.Add(defaultTheme);
+
+            return DBHandler.Query(cmd);
+
+        }
     }
 }

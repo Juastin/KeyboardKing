@@ -1,0 +1,90 @@
+﻿using DatabaseController;
+using Model;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Controller
+{
+    public static class ThemeController
+    {
+        public delegate void UserChange();
+        public static event UserChange UserChanged;
+
+        public static readonly Dictionary<string, Theme> DefaultThemes = new Dictionary<string, Theme>()
+        {
+             { "Light", new Theme("Light Theme", "resources/themes/LightTheme.xaml") },
+             { "Dark", new Theme("Dark Theme", "resources/themes/DarkTheme.xaml") },
+        };
+
+        public static readonly Dictionary<string, Theme> Themes = new Dictionary<string, Theme>
+            {
+                { "Light", new Theme("Light Theme", "resources/themes/LightTheme.xaml") },
+                { "Dark", new Theme("Dark Theme", "resources/themes/DarkTheme.xaml") },
+                { "Space", new Theme("Space Theme", "resources/themes/SpaceTheme.xaml") },
+                { "Chinese", new Theme("Chinese Theme", "resources/themes/ChineseTheme.xaml") },
+                { "Paint", new Theme("Paint Theme", "resources/themes/PaintTheme.xaml") },
+                { "Obsidian", new Theme("Obsidian Theme", "resources/themes/ObsidianTheme.xaml") },
+                { "Hello beertje", new Theme("Hello beertje", "resources/themes/HelloBeertjeTheme.xaml") },
+                { "Christmas", new Theme("Christmas Theme", "resources/themes/ChristmasTheme.xaml") },
+            };
+
+        public static Dictionary<string, Theme> UserThemes { get; private set; }
+
+        public static string CurrentTheme;
+
+        public static void Initialize()
+        {
+            ClearUserThemes();
+            ShopController.ShopDataChanged += OnShopDataChanged;
+        }
+
+        public static void SetUserThemes()
+        {
+            ClearUserThemes();
+            List<Item> allItems = DBQueries.GetAllItems((User)Session.Get("student"));
+            List<string> userItems = (from item in allItems
+                                      where item.Type is ItemType.Theme
+                                      && item.Purchased is "True"
+                                      select item.Name).ToList();
+
+            foreach (string item in userItems)
+            {
+                if (Themes.ContainsKey(item))
+                {
+                    KeyValuePair<string, Theme> theme = new KeyValuePair<string, Theme>(item, Themes[item]);
+                    UserThemes.Add(theme.Key, theme.Value);
+                }
+            }
+        }
+
+        public static void ClearUserThemes()
+        {
+            UserThemes = new Dictionary<string, Theme>(DefaultThemes);
+        }
+
+        public static void OnShopDataChanged(object sender, EventArgs e)
+        {
+            SetUserThemes();
+        }
+
+        public static void SetDefaultTheme()
+        {
+            UserChanged?.Invoke();
+        }
+
+        public static void SetUserThemeData()
+        {
+            ClearUserThemes();
+            SetUserThemes();
+            SetDefaultTheme();
+        }
+
+        public static void UpdateDefaultTheme()
+        {
+            DBQueries.UpdateDefaultTheme((User)Session.Get("student"), CurrentTheme);
+        }
+    }
+}
