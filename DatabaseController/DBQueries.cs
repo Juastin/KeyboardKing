@@ -144,7 +144,7 @@ namespace DatabaseController
             return Episode.ParseEpisodes(result);
         }
 
-public static List<Item> GetAllItems(User user)
+        public static List<Item> GetAllItems(User user)
         {
             MySqlCommand cmd = new MySqlCommand("SELECT i.id, i.name, i.price, i.type, " +
                 "CASE WHEN ui.userid IS NULL THEN 'False' ELSE 'True' END AS completed " +
@@ -202,6 +202,23 @@ public static List<Item> GetAllItems(User user)
 
             MySqlParameter itemId = new MySqlParameter("@itemId", MySqlDbType.Int32, 255);
             itemId.Value = item.Id;
+            cmd.Parameters.Add(itemId);
+
+            List<List<string>> result = DBHandler.SelectQuery(cmd);
+            return int.Parse(result[0][0]);
+        }
+
+        public static int CheckIfItemAlreadyBought(User user, Item item)
+        {
+            MySqlCommand cmd = new MySqlCommand("SELECT COUNT(itemid) FROM Useritem " +
+                                                "WHERE userid = @userid " +
+                                                "AND itemid = @itemid ");
+
+            MySqlParameter userId = new MySqlParameter("@userId", MySqlDbType.Int32, 0);
+            MySqlParameter itemId = new MySqlParameter("@itemId", MySqlDbType.Int32, 0);
+            userId.Value = user.Id;
+            itemId.Value = item.Id;
+            cmd.Parameters.Add(userId);
             cmd.Parameters.Add(itemId);
 
             List<List<string>> result = DBHandler.SelectQuery(cmd);

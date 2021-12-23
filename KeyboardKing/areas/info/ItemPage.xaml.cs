@@ -36,19 +36,26 @@ namespace KeyboardKing.areas.info
             // Still needs a check if user has sufficient amount of coins.
             if (ShopController.CheckItemExists())
             {
-                if (ShopController.BuyItem())
+                if (!ShopController.CheckItemAlreadyBought())
                 {
-                    AudioPlayer.Play(AudioPlayer.Sound.shop_purchase);
-                    var t = Task.Factory.StartNew(async () =>
+                    if (ShopController.BuyItem())
                     {
-                        await Task.Delay(1000);
-                        MusicPlayer.PlayNextFrom("shop");
-                    });
+                        AudioPlayer.Play(AudioPlayer.Sound.shop_purchase);
+                        var t = Task.Factory.StartNew(async () =>
+                        {
+                            await Task.Delay(1000);
+                            MusicPlayer.PlayNextFrom("shop");
+                        });
+                    }
+                    else
+                    {
+                        int insufficientAmount = ShopController.CurrentItem.Price - ((User)Session.Get("student")).Coins;
+                        MessageBox.Show($"Je komt {insufficientAmount} munten tekort.");
+                    }
                 }
                 else
                 {
-                    int insufficientAmount = ShopController.CurrentItem.Price - ((User)Session.Get("student")).Coins;
-                    MessageBox.Show($"Je komt {insufficientAmount} coins tekort");
+                    MessageBox.Show($"Product is al gekocht.");
                 }
             } 
             else

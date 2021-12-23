@@ -111,7 +111,16 @@ namespace Controller
         /// <returns>Returns a boolean if item still exists in database.</returns>
         public static bool CheckItemExists()
         {
-            return DBQueries.CheckIfItemExists(ShopController.CurrentItem) > 0;
+            return DBQueries.CheckIfItemExists(CurrentItem) > 0;
+        }
+
+        /// <summary>
+        /// Checks if the item is already bought.
+        /// </summary>
+        /// <returns>Returns a boolean if item still exists in database.</returns>
+        public static bool CheckItemAlreadyBought()
+        {
+            return DBQueries.CheckIfItemAlreadyBought((User)Session.Get("student"), CurrentItem) > 0;
         }
 
         /// <summary>

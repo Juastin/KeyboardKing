@@ -41,6 +41,9 @@ namespace Controller
             ShopController.ShopDataChanged += OnShopDataChanged;
         }
 
+        /// <summary>
+        /// Set all the themes the current user logged in owns.
+        /// </summary>
         public static void SetUserThemes()
         {
             ClearUserThemes();
@@ -60,21 +63,35 @@ namespace Controller
             }
         }
 
+        /// <summary>
+        /// Clear the userthemes dictionary and create new one with the default themes.
+        /// </summary>
         public static void ClearUserThemes()
         {
             UserThemes = new Dictionary<string, Theme>(DefaultThemes);
         }
 
+        /// <summary>
+        /// If for example a new theme is bought, reset the userthemes dictionary.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public static void OnShopDataChanged(object sender, EventArgs e)
         {
             SetUserThemes();
         }
 
+        /// <summary>
+        /// Inboke the event to set the default theme of the user.
+        /// </summary>
         public static void SetDefaultTheme()
         {
             UserChanged?.Invoke();
         }
 
+        /// <summary>
+        /// Methods that are called to prepare themedata of the current user.
+        /// </summary>
         public static void SetUserThemeData()
         {
             ClearUserThemes();
@@ -82,6 +99,9 @@ namespace Controller
             SetDefaultTheme();
         }
 
+        /// <summary>
+        /// Update the default theme of the user.
+        /// </summary>
         public static void UpdateDefaultTheme()
         {
             DBQueries.UpdateDefaultTheme((User)Session.Get("student"), CurrentTheme);
