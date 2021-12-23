@@ -81,7 +81,6 @@ namespace Controller
             SetWinners();
 
             Session.Add("MatchHistorySelectedMatch", CurrentMatch.Id);
-            Session.Add("ContextPage", Pages.MatchResultPage);
         }
 
         public static void MultiplayerFetch()
