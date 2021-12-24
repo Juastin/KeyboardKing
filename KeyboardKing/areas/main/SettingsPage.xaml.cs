@@ -58,7 +58,7 @@ namespace KeyboardKing.areas.main
         }
         public override void OnLoad()
         {
-            SettingsController.Initialise();
+            SettingsController.RefreshWpf();
             User user = (User)Session.Get("student");
             AudioCheckBox.IsChecked = !user.AudioOn;
         }

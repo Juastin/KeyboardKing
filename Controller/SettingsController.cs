@@ -13,13 +13,16 @@ namespace Controller
         
         public static void Initialise()
         {
-            Refresh?.Invoke(null,EventArgs.Empty);
-
             _fonts = new Dictionary<string, Font>
             {
                 { "SegoeUI", new Font("SegoeUI", "resources/fonts/SegoeUI.xaml") },
                 { "Verdana", new Font("Verdana", "resources/fonts/Verdana.xaml") },
             };
+        }
+
+        public static void RefreshWpf()
+        {
+            Refresh?.Invoke(null, EventArgs.Empty);
         }
         private static void ChangeFont(Font font)
         {
