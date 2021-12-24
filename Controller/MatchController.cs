@@ -201,11 +201,11 @@ namespace Controller
         public static void SetPlayingState(MatchState matchState)
         {
             DBQueries.SetPlayState(CurrentMatch.Id, matchState);
-            CurrentMatch.State = matchState;
         }
 
         public static bool CheckForcedFinished()
         {
+            GetMatchProgressInfo();
             return CurrentMatch.State == MatchState.Finished;
         }
     }
