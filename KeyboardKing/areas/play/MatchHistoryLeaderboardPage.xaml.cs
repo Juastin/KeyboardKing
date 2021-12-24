@@ -23,6 +23,15 @@ namespace KeyboardKing.areas.play
             int selected_matchid = (int)Session.Get("MatchHistorySelectedMatch");
             Session.Remove("MatchHistorySelectedMatch");
 
+            if (NavigationController.PreviousPage == Pages.MatchResultPage)
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    BackButton.Content = "Beëindigen";
+                    BackButton.ToPage = Pages.MatchOverviewPage;
+                });
+            }
+
             List<List<string>> raw_result = DBQueries.GetAllScoresOrderByHighest(selected_matchid);
 
             // Prevent non-existed matches from being loaded
