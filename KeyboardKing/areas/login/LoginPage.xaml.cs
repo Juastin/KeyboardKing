@@ -69,6 +69,8 @@ namespace KeyboardKing.areas.login
 
                         Session.Add("student", user);
 
+                        SettingsController.Initialise();
+                        SettingsController.ChangeDyslecticFont(user.Dyslectic);
                         // Set audio preference based on UserSettings
                         MusicPlayer.ShouldPlay = user.AudioOn;
                         AudioPlayer.ShouldPlay = user.AudioOn;
