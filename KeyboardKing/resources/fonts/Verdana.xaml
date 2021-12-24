@@ -1,0 +1,15 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <FontFamily x:Key="Font">
+        Verdana
+    </FontFamily>
+    <Style TargetType="{x:Type TextBlock}">
+        <Setter Property="FontFamily" Value="{DynamicResource Font}"/>
+    </Style>
+    <Style x:Key="WordOverlay" TargetType="{x:Type TextBlock}">
+        <Setter Property="Margin" Value="0,0,10,0"/>
+        <Setter Property="FontFamily" Value="{DynamicResource Font}"/>
+    </Style>
+
+</ResourceDictionary>
