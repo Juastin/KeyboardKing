@@ -24,7 +24,7 @@ namespace KeyboardKing.areas.play
             int match_id = MatchController.GetMatchId();
             DBQueries.UpdateMatchProgress(100, student.Id, match_id);
 
-            if (MatchController.CheckUserIsCreator())
+            if (MatchController.CheckUserIsCreator() && !MatchController.CheckIfEverybodyDone())
             {
                 StopMatch.Visibility = Visibility.Visible;
                 _timeLeft = 30;
