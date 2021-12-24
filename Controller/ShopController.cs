@@ -17,6 +17,7 @@ namespace Controller
 
         public static int MaxPage { get; set; }
         public static int ItemsPerPage { get; set; } = 8;
+        public static bool DoResetPage { get; set; } = true;
 
         public static Item CurrentItem { get; set; }
         public static List<Item> AllItems { get; set; }
@@ -59,7 +60,17 @@ namespace Controller
         public static List<Item> GetAllItems()
         {
             // Get all the items data (Dummy data at the moment)
-            return DBQueries.GetAllItems((User)Session.Get("student")); ;
+            List<List<string>> items = new List<List<string>>()
+            {
+                new List<string> {"6", "sdf", "250", "Theme", "True" },
+                new List<string> {"7", "dsfdsf Beertje", "500", "Theme", "False" },
+                new List<string> {"8", "fdsfdfs", "1000", "Theme", "False" },
+                new List<string> {"9", "A fsdf on a shelf", "5000", "Theme", "False" },
+                new List<string> {"10", "sdfdsf", "5000", "Theme", "False" },
+                new List<string> {"11", "A sdCoin", "10000", "Theme", "False" },
+            };
+            List<Item> itemss = Item.ParseItems(items).Concat(DBQueries.GetAllItems((User)Session.Get("student"))).ToList();
+            return itemss;
         }
 
         /// <summary>

@@ -30,8 +30,7 @@ namespace KeyboardKing.areas.info
 
         private void Buy_Click(object sender, RoutedEventArgs e)
         {
-            bool itemExist = ShopController.CheckItemExists();
-
+            ShopController.DoResetPage = false;
 
             // Still needs a check if user has sufficient amount of coins.
             if (ShopController.CheckItemExists())
@@ -50,17 +49,17 @@ namespace KeyboardKing.areas.info
                     else
                     {
                         int insufficientAmount = ShopController.CurrentItem.Price - ((User)Session.Get("student")).Coins;
-                        MessageBox.Show($"Je komt {insufficientAmount} munten tekort.");
+                        MessageController.Show(Pages.MessagePage, $"Je komt {insufficientAmount} munten tekort.", Pages.ShoppingPage, -1);
                     }
                 }
                 else
                 {
-                    MessageBox.Show($"Product is al gekocht.");
+                    MessageController.Show(Pages.MessagePage, "Het product is al gekocht.", Pages.ShoppingPage, -1);
                 }
             } 
             else
             {
-                MessageBox.Show("Het product bestaat niet.");
+                MessageController.Show(Pages.MessagePage, "Het product bestaat niet.", Pages.ShoppingPage, -1);
             }
             ShopController.UpdateItemsList();
             Visibility = Visibility.Hidden;

@@ -53,6 +53,11 @@ namespace KeyboardKing.areas.main
 
         public override void OnShadow()
         {
+            if (ShopController.DoResetPage)
+            {
+                ResetPageIndex();
+            }
+
             // AUDIO
             if (!_isSwitching)
             {
@@ -128,6 +133,7 @@ namespace KeyboardKing.areas.main
         // Changes the shop back to page 1
         public void ResetPageIndex()
         {
+            ShopController.DoResetPage = true;
             ShopController.CurrentPage = 1;
             UpdateShop();
         }
