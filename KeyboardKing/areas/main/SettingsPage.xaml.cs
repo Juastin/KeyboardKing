@@ -15,8 +15,8 @@ namespace KeyboardKing.areas.main
     /// </summary>
     public partial class SettingsPage : JumpPage
     {
-        private static ResourceDictionary themeDictionary = Application.Current.Resources.MergedDictionaries[0];
-        private static ResourceDictionary fontDictionary = Application.Current.Resources.MergedDictionaries[1];
+        private static ResourceDictionary _themeDictionary = Application.Current.Resources.MergedDictionaries[0];
+        private static ResourceDictionary _fontDictionary = Application.Current.Resources.MergedDictionaries[1];
 
         public SettingsPage(MainWindow w) : base(w)
         {
@@ -34,8 +34,8 @@ namespace KeyboardKing.areas.main
         {
             if (themeName != null && ThemeController.Themes.TryGetValue(themeName, out var theme))
             {
-                themeDictionary.Clear();
-                themeDictionary.MergedDictionaries.Add(new ResourceDictionary() { Source = theme.ThemeUri });
+                _themeDictionary.Clear();
+                _themeDictionary.MergedDictionaries.Add(new ResourceDictionary() { Source = theme.ThemeUri });
                 NavigationController.ChangeTheme();
 
                 ThemeController.CurrentTheme = themeName;
@@ -47,8 +47,8 @@ namespace KeyboardKing.areas.main
         /// <param name="font"></param>
         public static void ChangeFont(Font font)
         {
-            fontDictionary.Clear();
-            fontDictionary.MergedDictionaries.Add(new ResourceDictionary() { Source = font.FontUri });
+            _fontDictionary.Clear();
+            _fontDictionary.MergedDictionaries.Add(new ResourceDictionary() { Source = font.FontUri });
         }
         /// <summary>
         /// Changes font based on the dyslectic bool of the user. If true the font Verdana will be showed, otherwise SegeoUI will be showed.
