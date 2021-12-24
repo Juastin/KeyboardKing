@@ -23,7 +23,7 @@
                     <RowDefinition Height="50"/>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
-                    <Image Source="{Binding CurrentItem.Path}" x:Name="ItemImage"/>
+                    <Image Source="{Binding CurrentItem.ImagePath}" x:Name="ItemImage"/>
                 </Grid>
                 <Grid Grid.Row="1">
                     <Label Content="{Binding CurrentItem.Name}" x:Name="Title" Style="{DynamicResource H1}" Foreground="White" HorizontalContentAlignment="Center"/>

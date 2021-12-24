@@ -1,4 +1,4 @@
-﻿using KeyboardKing.core;
+using KeyboardKing.core;
 using System;
 using System.Windows;
 using System.Windows.Input;
@@ -35,6 +35,9 @@ namespace KeyboardKing.areas.login
                 {
                     DBQueries.UpdateDyslecticSettings(user.Id, user.Dyslectic);
                 }
+                if (user.Theme != ThemeController.CurrentTheme) {
+                    ThemeController.UpdateDefaultTheme();
+                }
                 // Flush the session if the user was logged in when entering the login page.
                 Session.Flush();
             }
@@ -68,6 +71,8 @@ namespace KeyboardKing.areas.login
                         user.DyslecticAtLogin = user.Dyslectic;
 
                         Session.Add("student", user);
+                        Session.Add("FetchGamemodeScores", true);
+                        Session.Add("FetchMatchHistory", true);
 
                         SettingsController.Initialise();
                         SettingsController.ChangeDyslecticFont(user.Dyslectic);
@@ -75,6 +80,9 @@ namespace KeyboardKing.areas.login
                         MusicPlayer.ShouldPlay = user.AudioOn;
                         AudioPlayer.ShouldPlay = user.AudioOn;
                         MusicPlayer.PlayNextFrom("menu_music");
+
+                        // Set default Theme based on UserSettings
+                        ThemeController.SetUserThemeData();
 
                         if (user.SkillLevel == SkillLevel.none)
                         {
@@ -89,7 +97,7 @@ namespace KeyboardKing.areas.login
                     }
                     else { message += "Wachtwoord is incorrect"; }
                 }
-                else { message += "Email is incorrect"; }
+                else { message += "Email is niet bekend"; }
             }
             else { message += "Email of wachtwoord is niet ingevuld"; }
             error.Text = message;

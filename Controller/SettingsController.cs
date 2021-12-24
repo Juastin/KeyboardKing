@@ -53,5 +53,10 @@ namespace Controller
                 ChangeFont(font);
             }
         }
+
+        public static bool DeleteAccount()
+        {
+            return DBQueries.DeleteUserAccount((User)Session.Get("student"));
+        }
     }
 }

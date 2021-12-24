@@ -12,7 +12,7 @@ namespace Controller
     /// </summary>
     public static class EpisodeController
     {
-        private static Episode _currentEpisode;
+        public static Episode CurrentEpisode { get; private set; }
         public static List<Chapter> Chapters { get; private set; }
         public static EpisodeStep CurrentEpisodeStep { get; private set; }
         public static EpisodeResult CurrentEpisodeResult { get; private set; }
@@ -66,7 +66,7 @@ namespace Controller
         /// <param name="episode">The episode that is going to be played</param>
         public static void Initialise(Episode episode, bool isMatch)
         {
-            _currentEpisode = episode;
+            CurrentEpisode = episode;
             CurrentEpisodeResult = new EpisodeResult();
             _stopwatch = new Stopwatch();
             _repeatMistake = false;
@@ -91,7 +91,7 @@ namespace Controller
         {
             _wordIndex = 0;
             _wrongIndex = 0;
-            if (_currentEpisode.EpisodeSteps.TryDequeue(out EpisodeStep step))
+            if (CurrentEpisode.EpisodeSteps.TryDequeue(out EpisodeStep step))
             {
                 CurrentEpisodeStep = step; 
             }
@@ -101,7 +101,6 @@ namespace Controller
                 EpisodeFinished -= OnEpisodeFinished;
             }
                 
-
             WordChanged?.Invoke(null, new EventArgs());
         }
 
@@ -270,6 +269,9 @@ namespace Controller
             return CurrentEpisodeResult.Accuracy >= threshold;
         }
 
-
+        public static void StopEpisode()
+        {
+            EpisodeFinished?.Invoke(null, EventArgs.Empty);
+        }
     }
 }

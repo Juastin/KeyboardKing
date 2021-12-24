@@ -9,7 +9,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <Image Width="50" Source="/KeyBoardking;component/resources/images/coin.png"/>
+            <Image Width="50" Source="/KeyBoardking;component/resources/images/icons/coin.png"/>
             <Label Style="{DynamicResource H1}" x:Name="Coins" Content=""/>
         </StackPanel>
     </Grid>

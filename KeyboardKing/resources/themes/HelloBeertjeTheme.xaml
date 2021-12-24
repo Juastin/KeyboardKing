@@ -2,8 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!-- IMAGES -->
-    <BitmapImage x:Key="Wallpaper" UriSource="/resources/images/hellobeertje_background_4k.png"/>
-    <BitmapImage x:Key="MessageWallpaper" UriSource="/resources/images/blur_hellobeertje_background.png"/>
+    <BitmapImage x:Key="Wallpaper" UriSource="/resources/images/itemImages/theme/hello_beertje.png"/>
+    <BitmapImage x:Key="MessageWallpaper" UriSource="/resources/images/itemImages/theme/blur_hello_beertje.png"/>
 
     <!-- COLOR SCHEMES -->
     <Color x:Key="SColor1">#000814</Color>
