@@ -122,10 +122,10 @@ namespace DatabaseController
             return User.ParseUser(result);
         }
 
-        public static List<Episode> GetAllEpisodes(User user)
+        public static List<Chapter> GetAllChapters(User user)
         {
-            MySqlCommand cmd = new MySqlCommand("SELECT c.name, episode, e.name, e.id, " +
-                "CASE WHEN er.userid IS NULL OR er.passed = 0 THEN 'False' ELSE 'True' END AS completed, " +
+            MySqlCommand cmd = new MySqlCommand("SELECT c.id, c.name, episode, e.name, e.id, " +
+                "CASE WHEN er.passed IS NULL THEN 'False' ELSE 'True' END AS completed, " +
                 "MAX(er.score) AS highscore " +
                 "FROM Episode e " +
                 "LEFT JOIN Chapter c " +
@@ -133,15 +133,15 @@ namespace DatabaseController
                 "LEFT JOIN EpisodeResult er " +
                 "ON er.episodeid = e.id " +
                 "AND er.userid = @userid " +
-                "GROUP BY c.name, episode, e.name, e.id, er.userid");
+                "AND er.passed = 1 " +
+                "GROUP BY e.id");
 
             MySqlParameter UserIdParam = new MySqlParameter("@userid", MySqlDbType.Int32, 0);
             UserIdParam.Value = user.Id;
-
             cmd.Parameters.Add(UserIdParam);
 
             List<List<string>> result = DBHandler.SelectQuery(cmd);
-            return Episode.ParseEpisodes(result);
+            return Chapter.ParseAllChapters(result);
         }
 
         public static List<Item> GetAllItems(User user)
@@ -346,7 +346,6 @@ namespace DatabaseController
             return DBHandler.Query(cmd);
         }
 
-
         public static bool UpdateMatchProgress(int progress, int user_id, int match_id)
         {
             MySqlCommand cmd = new MySqlCommand("UPDATE MatchProgress set progress = @progress WHERE userid = @userid AND matchid = @matchid ");
@@ -431,7 +430,6 @@ namespace DatabaseController
             List<List<string>> result = DBHandler.SelectQuery(cmd);
             return int.Parse(result[0][0]);
         }
-
 
         public static List<MatchProgress> GetMatchProgress(int matchId)
         {
@@ -569,7 +567,6 @@ namespace DatabaseController
             cmd.Parameters.Add(dyslecticParam);
 
             return DBHandler.Query(cmd);
-
         }
 
         public static bool UpdateDefaultTheme(User user, string theme)
@@ -586,7 +583,63 @@ namespace DatabaseController
             cmd.Parameters.Add(defaultTheme);
 
             return DBHandler.Query(cmd);
+        }
 
+        public static List<List<string>> GetAllGamemodeScores(int userid)
+        {
+            MySqlCommand cmd = new MySqlCommand("SELECT infinitemode, 3lifesmode " +
+            "FROM GamemodeResult " +
+            "WHERE userid = @userid " +
+            "LIMIT 1");
+
+            MySqlParameter userId = new MySqlParameter("@userid", MySqlDbType.Int32, 255);
+            userId.Value = userid;
+            cmd.Parameters.Add(userId);
+
+            return DBHandler.SelectQuery(cmd);
+        }
+
+        public static bool UpdateScoreInfiniteMode(int userid, int score)
+        {
+            MySqlCommand cmd = new MySqlCommand("UPDATE GamemodeResult set infinitemode = @score WHERE userid = @userid");
+
+            MySqlParameter q_userid = new MySqlParameter("@userid", MySqlDbType.Int32, 255);
+            MySqlParameter q_score = new MySqlParameter("@score", MySqlDbType.Int32, 255);
+
+            q_userid.Value = userid;
+            q_score.Value = score;
+
+            cmd.Parameters.Add(q_userid);
+            cmd.Parameters.Add(q_score);
+
+            return DBHandler.Query(cmd);
+        }
+
+        public static bool UpdateScore3LifesMode(int userid, int score)
+        {
+            MySqlCommand cmd = new MySqlCommand("UPDATE GamemodeResult set 3lifesmode = @score WHERE userid = @userid");
+
+            MySqlParameter q_userid = new MySqlParameter("@userid", MySqlDbType.Int32, 255);
+            MySqlParameter q_score = new MySqlParameter("@score", MySqlDbType.Int32, 255);
+
+            q_userid.Value = userid;
+            q_score.Value = score;
+
+            cmd.Parameters.Add(q_userid);
+            cmd.Parameters.Add(q_score);
+
+            return DBHandler.Query(cmd);
+        }
+
+        public static bool DeleteUserAccount(User user)
+        {
+            MySqlCommand cmd = new MySqlCommand("UPDATE User SET username = 'Deleted', email = NULL, password = NULL, salt = NULL WHERE id = @userid;");
+
+            MySqlParameter userId = new MySqlParameter("@userid", MySqlDbType.Int32, 255);
+            userId.Value = user.Id;
+            cmd.Parameters.Add(userId);
+
+            return DBHandler.Query(cmd);
         }
     }
 }

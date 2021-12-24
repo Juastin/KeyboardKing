@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:KeyboardKing.core"
+      xmlns:self="clr-namespace:KeyboardKing.areas.main"
       xmlns:Components="clr-namespace:KeyboardKing.components"
       mc:Ignorable="d" 
       Title="ChaptersPage"
@@ -14,6 +15,7 @@
 
     <!-- STYLING TEMPLATES -->
     <Page.Resources>
+        <self:ChapterBadgeConverter x:Key="ChapterBadgeConverter"/>
         <!-- ListBoxItem template -->
         <Style x:Key="ListBoxItemTemplate" TargetType="{x:Type ListBoxItem}">
             <Setter Property="Template">
@@ -111,11 +113,18 @@
                                                 <ControlTemplate>
                                                     <Expander Background="{DynamicResource BackgroundColor}" Margin="0, 10" BorderThickness="2" BorderBrush="{DynamicResource Color4}" IsExpanded="False" Padding="10">
                                                         <Expander.Header>
-                                                            <StackPanel Orientation="Horizontal" >
-                                                                <Label Style="{DynamicResource H3}" Content="{Binding Name}" FontWeight="Bold"/>
-                                                                <Label Style="{DynamicResource H3}" Content="-"/>
-                                                                <Label Style="{DynamicResource H3}" Content="{Binding ItemCount}" FontStyle="Italic"/>
-                                                                <Label Style="{DynamicResource H3}" Content="episode(s)" FontStyle="Italic"/>
+                                                                <StackPanel Orientation="Horizontal">
+                                                                    <Rectangle Width="60" Height="70" RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased">
+                                                                        <Rectangle.Fill>
+                                                                            <ImageBrush ImageSource="{Binding Path=Name, Converter={StaticResource ChapterBadgeConverter}}"/>
+                                                                        </Rectangle.Fill>
+                                                                    </Rectangle>
+                                                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                                    <Label Style="{DynamicResource H3}" Content="{Binding Name}" FontWeight="Bold"/>
+                                                                    <Label Style="{DynamicResource H3}" Content="-"/>
+                                                                    <Label Style="{DynamicResource H3}" Content="{Binding ItemCount}" FontStyle="Italic"/>
+                                                                    <Label Style="{DynamicResource H3}" Content="episode(s)" FontStyle="Italic"/>
+                                                                </StackPanel>
                                                             </StackPanel>
                                                         </Expander.Header>
                                                         <ItemsPresenter />

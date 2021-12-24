@@ -20,7 +20,7 @@ namespace KeyboardKing.areas.main
         public SettingsPage(MainWindow w) : base(w)
         {
             InitializeComponent();
-
+            
             ThemeController.Initialize();
             ThemeController.UserChanged += OnUserChanged;
         }
@@ -118,6 +118,29 @@ namespace KeyboardKing.areas.main
 
             //Set theme to the default theme the user has.
             SetDefaultTheme(((User)Session.Get("student")).Theme);
+        }
+
+        private void DeleteAccount(object sender, RoutedEventArgs e)
+        {
+            MessageController.ShowConfirmation(Pages.ConfirmationPage, "Weet je het zeker?", Pages.SettingsPage, Pages.SettingsPage);
+        }
+
+        /// <summary>
+        /// Checks if user has confirmed to delete account and delete the account
+        /// </summary>
+        private static void CheckDeleteAccount()
+        {
+            if (Session.Get("deleteUser") != null && (bool)Session.Get("deleteUser"))
+            {
+                if (SettingsController.DeleteAccount())
+                {
+                    MessageController.Show(Pages.MessagePage, "Je account is verwijderd", Pages.LoginPage, -1);
+                }
+                else
+                {
+                    MessageController.Show(Pages.MessagePage, "Je account kan op dit moment niet worden verwijderd", Pages.SettingsPage, -1);
+                }
+            }
         }
     }
 }

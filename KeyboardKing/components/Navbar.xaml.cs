@@ -35,13 +35,17 @@ namespace KeyboardKing.components
                     Button_ChaptersPage.Background = _backgroundColor;
                     Button_ChaptersPage.Foreground = _foregroundColor;
                     break;
-                case Pages.ShoppingPage:
-                    Button_ShoppingPage.Background = _backgroundColor;
-                    Button_ShoppingPage.Foreground = _foregroundColor;
+                case Pages.GamemodesOverviewPage:
+                    Button_GamemodesOverviewPage.Background = _backgroundColor;
+                    Button_GamemodesOverviewPage.Foreground = _foregroundColor;
                     break;
                 case Pages.MatchOverviewPage:
                     Button_MatchOverviewPage.Background = _backgroundColor;
                     Button_MatchOverviewPage.Foreground = _foregroundColor;
+                    break;
+                case Pages.ShoppingPage:
+                    Button_ShoppingPage.Background = _backgroundColor;
+                    Button_ShoppingPage.Foreground = _foregroundColor;
                     break;
                 case Pages.SettingsPage:
                     Button_SettingsPage.Background = _backgroundColor;

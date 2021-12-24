@@ -18,6 +18,35 @@
     <None Remove="resources\audio\music\Sunday.wav" />
     <None Remove="resources\audio\music\There Was A King.wav" />
     <None Remove="resources\audio\music\Underdog.wav" />
+    <None Remove="resources\images\badges\0.png" />
+    <None Remove="resources\images\badges\1.png" />
+    <None Remove="resources\images\badges\10.png" />
+    <None Remove="resources\images\badges\10_grey.png" />
+    <None Remove="resources\images\badges\11.png" />
+    <None Remove="resources\images\badges\11_grey.png" />
+    <None Remove="resources\images\badges\12.png" />
+    <None Remove="resources\images\badges\12_grey.png" />
+    <None Remove="resources\images\badges\13.png" />
+    <None Remove="resources\images\badges\13_grey.png" />
+    <None Remove="resources\images\badges\14.png" />
+    <None Remove="resources\images\badges\14_grey.png" />
+    <None Remove="resources\images\badges\1_grey.png" />
+    <None Remove="resources\images\badges\2.png" />
+    <None Remove="resources\images\badges\2_grey.png" />
+    <None Remove="resources\images\badges\3.png" />
+    <None Remove="resources\images\badges\3_grey.png" />
+    <None Remove="resources\images\badges\4.png" />
+    <None Remove="resources\images\badges\4_grey.png" />
+    <None Remove="resources\images\badges\5.png" />
+    <None Remove="resources\images\badges\5_grey.png" />
+    <None Remove="resources\images\badges\6.png" />
+    <None Remove="resources\images\badges\6_grey.png" />
+    <None Remove="resources\images\badges\7.png" />
+    <None Remove="resources\images\badges\7_grey.png" />
+    <None Remove="resources\images\badges\8.png" />
+    <None Remove="resources\images\badges\8_grey.png" />
+    <None Remove="resources\images\badges\9.png" />
+    <None Remove="resources\images\badges\9_grey.png" />
     <None Remove="resources\audio\shop_enter.wav" />
     <None Remove="resources\audio\shop_exit.wav" />
     <None Remove="resources\audio\shop_preview.wav" />
@@ -102,6 +131,92 @@
     </Content>
     <Content Include="resources\audio\shop_purchase.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Content Include="resources\images\badges\0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\10.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\10_grey.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\11.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\11_grey.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\12.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\12_grey.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\13.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\13_grey.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\14.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\14_grey.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\1_grey.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\2_grey.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\3_grey.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\4.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\4_grey.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\5.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\5_grey.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\6.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\6_grey.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\7.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\7_grey.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\8.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\8_grey.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\9.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\9_grey.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\images\itemIcons\defaultIcons\box.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
