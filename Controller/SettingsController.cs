@@ -21,6 +21,7 @@ namespace Controller
         }
         /// <summary>
         /// Refresh event that fires to refresh wpf checkboxes to show actual values.
+        /// Subscription is found in SettingsPageDataContext.
         /// </summary>
         public static void RefreshWpf()
         {

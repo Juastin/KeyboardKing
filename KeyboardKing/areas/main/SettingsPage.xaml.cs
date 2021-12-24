@@ -62,7 +62,6 @@ namespace KeyboardKing.areas.main
             User user = (User)Session.Get("student");
             AudioCheckBox.IsChecked = !user.AudioOn;
         }
-
         public override void OnShadow()
         {
         }
