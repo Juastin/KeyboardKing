@@ -3,7 +3,7 @@
 
     <FontFamily x:Key="Font">
         <!-- Segoe UI -->
-        <!-- Commented due to margin changed when font added -->
+        <!-- Commented due to margin changed when font actually added -->
     </FontFamily>
     <Style TargetType="{x:Type TextBlock}">
         <Setter Property="FontFamily" Value="{DynamicResource Font}"/>
