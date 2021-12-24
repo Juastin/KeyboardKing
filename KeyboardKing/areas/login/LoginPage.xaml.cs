@@ -6,6 +6,7 @@ using Controller;
 using Model;
 using Cryptography;
 using DatabaseController;
+using KeyboardKing.areas.main;
 
 namespace KeyboardKing.areas.login
 {
@@ -75,7 +76,7 @@ namespace KeyboardKing.areas.login
                         Session.Add("FetchMatchHistory", true);
 
                         SettingsController.Initialise();
-                        SettingsController.ChangeDyslecticFont(user.Dyslectic);
+                        SettingsPage.ChangeDyslecticFont(user.Dyslectic);
                         // Set audio preference based on UserSettings
                         MusicPlayer.ShouldPlay = user.AudioOn;
                         AudioPlayer.ShouldPlay = user.AudioOn;

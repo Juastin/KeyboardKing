@@ -16,6 +16,7 @@ namespace KeyboardKing.areas.main
     public partial class SettingsPage : JumpPage
     {
         private static ResourceDictionary themeDictionary = Application.Current.Resources.MergedDictionaries[0];
+        private static ResourceDictionary fontDictionary = Application.Current.Resources.MergedDictionaries[1];
 
         public SettingsPage(MainWindow w) : base(w)
         {
@@ -40,7 +41,32 @@ namespace KeyboardKing.areas.main
                 ThemeController.CurrentTheme = themeName;
             }
         }
-
+        /// <summary>
+        /// Changes font based on the given Font.
+        /// </summary>
+        /// <param name="font"></param>
+        public static void ChangeFont(Font font)
+        {
+            fontDictionary.Clear();
+            fontDictionary.MergedDictionaries.Add(new ResourceDictionary() { Source = font.FontUri });
+        }
+        /// <summary>
+        /// Changes font based on the dyslectic bool of the user. If true the font Verdana will be showed, otherwise SegeoUI will be showed.
+        /// </summary>
+        /// <param name="dyslectic"></param>
+        public static void ChangeDyslecticFont(bool dyslectic)
+        {
+            if (dyslectic)
+            {
+                SettingsController.Fonts.TryGetValue("Verdana", out var font);
+                ChangeFont(font);
+            }
+            else
+            {
+                SettingsController.Fonts.TryGetValue("SegoeUI", out var font);
+                ChangeFont(font);
+            }
+        }
         private void CBTheme_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ChangeTheme((string)CBTheme.SelectedValue);
@@ -88,7 +114,7 @@ namespace KeyboardKing.areas.main
             {
                 User user = (User)Session.Get("student");
                 user.Dyslectic = (bool)box.IsChecked;
-                SettingsController.ChangeDyslecticFont(user.Dyslectic);
+                ChangeDyslecticFont(user.Dyslectic);
                 Session.Add("student", user);
             }
         }
