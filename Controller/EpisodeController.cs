@@ -12,7 +12,7 @@ namespace Controller
     /// </summary>
     public static class EpisodeController
     {
-        public static Episode CurrentEpisode;
+        public static Episode CurrentEpisode { get; private set; }
         public static List<Chapter> Chapters { get; private set; }
         public static EpisodeStep CurrentEpisodeStep { get; private set; }
         public static EpisodeResult CurrentEpisodeResult { get; private set; }
