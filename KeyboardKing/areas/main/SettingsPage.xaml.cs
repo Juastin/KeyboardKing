@@ -15,7 +15,8 @@ namespace KeyboardKing.areas.main
     /// </summary>
     public partial class SettingsPage : JumpPage
     {
-        private static ResourceDictionary themeDictionary = Application.Current.Resources.MergedDictionaries[0];
+        private static ResourceDictionary _themeDictionary = Application.Current.Resources.MergedDictionaries[0];
+        private static ResourceDictionary _fontDictionary = Application.Current.Resources.MergedDictionaries[1];
 
         public SettingsPage(MainWindow w) : base(w)
         {
@@ -33,14 +34,39 @@ namespace KeyboardKing.areas.main
         {
             if (themeName != null && ThemeController.Themes.TryGetValue(themeName, out var theme))
             {
-                themeDictionary.Clear();
-                themeDictionary.MergedDictionaries.Add(new ResourceDictionary() { Source = theme.ThemeUri });
+                _themeDictionary.Clear();
+                _themeDictionary.MergedDictionaries.Add(new ResourceDictionary() { Source = theme.ThemeUri });
                 NavigationController.ChangeTheme();
 
                 ThemeController.CurrentTheme = themeName;
             }
         }
-
+        /// <summary>
+        /// Changes font based on the given Font.
+        /// </summary>
+        /// <param name="font"></param>
+        public static void ChangeFont(Font font)
+        {
+            _fontDictionary.Clear();
+            _fontDictionary.MergedDictionaries.Add(new ResourceDictionary() { Source = font.FontUri });
+        }
+        /// <summary>
+        /// Changes font based on the dyslectic bool of the user. If true the font Verdana will be showed, otherwise SegeoUI will be showed.
+        /// </summary>
+        /// <param name="dyslectic"></param>
+        public static void ChangeDyslecticFont(bool dyslectic)
+        {
+            if (dyslectic)
+            {
+                SettingsController.Fonts.TryGetValue("Verdana", out var font);
+                ChangeFont(font);
+            }
+            else
+            {
+                SettingsController.Fonts.TryGetValue("SegoeUI", out var font);
+                ChangeFont(font);
+            }
+        }
         private void CBTheme_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ChangeTheme((string)CBTheme.SelectedValue);
@@ -48,13 +74,12 @@ namespace KeyboardKing.areas.main
 
         public override void OnLoad()
         {
-            SettingsController.Initialise();
+            SettingsController.RefreshWpf();
             User user = (User)Session.Get("student");
             AudioCheckBox.IsChecked = !user.AudioOn;
 
             UpdateComboBox();
         }
-
         public override void OnShadow()
         {
         }
@@ -88,14 +113,8 @@ namespace KeyboardKing.areas.main
             if (sender is CheckBox box)
             {
                 User user = (User)Session.Get("student");
-                if ((bool)box.IsChecked)
-                {
-                    user.Dyslectic = true;
-                }
-                else
-                {
-                    user.Dyslectic = false;
-                }
+                user.Dyslectic = (bool)box.IsChecked;
+                ChangeDyslecticFont(user.Dyslectic);
                 Session.Add("student", user);
             }
         }

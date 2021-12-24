@@ -12,6 +12,11 @@
                         <ResourceDictionary Source="/KeyboardKing;component/resources/themes/LightTheme.xaml"/>
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
+                <ResourceDictionary x:Name="FontDictionary">
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="/KeyboardKing;component/resources/fonts/SegoeUI.xaml"/>
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
                 <ResourceDictionary Source="/KeyboardKing;component/MyStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
