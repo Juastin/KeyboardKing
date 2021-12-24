@@ -1,4 +1,4 @@
-﻿using KeyboardKing.core;
+using KeyboardKing.core;
 using System;
 using System.Windows;
 using System.Windows.Input;
@@ -69,6 +69,7 @@ namespace KeyboardKing.areas.login
 
                         Session.Add("student", user);
                         Session.Add("FetchGamemodeScores", true);
+                        Session.Add("MatchHasBeenPlayed", true);
 
                         // Set audio preference based on UserSettings
                         MusicPlayer.ShouldPlay = user.AudioOn;
@@ -88,7 +89,7 @@ namespace KeyboardKing.areas.login
                     }
                     else { message += "Wachtwoord is incorrect"; }
                 }
-                else { message += "Email is incorrect"; }
+                else { message += "Email is niet bekend"; }
             }
             else { message += "Email of wachtwoord is niet ingevuld"; }
             error.Text = message;
