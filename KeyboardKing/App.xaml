@@ -14,7 +14,7 @@
                 </ResourceDictionary>
                 <ResourceDictionary x:Name="Fonts">
                     <ResourceDictionary.MergedDictionaries>
-                        <ResourceDictionary Source="/KeyboardKing;component/resources/fonts/Verdana.xaml"/>
+                        <ResourceDictionary Source="/KeyboardKing;component/resources/fonts/SegoeUI.xaml"/>
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
                 <ResourceDictionary Source="/KeyboardKing;component/MyStyle.xaml"/>
