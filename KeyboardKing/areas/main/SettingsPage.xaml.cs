@@ -96,14 +96,7 @@ namespace KeyboardKing.areas.main
             if (sender is CheckBox box)
             {
                 User user = (User)Session.Get("student");
-                if ((bool)box.IsChecked)
-                {
-                    user.Dyslectic = true;
-                }
-                else
-                {
-                    user.Dyslectic = false;
-                }
+                user.Dyslectic = (bool)box.IsChecked;
                 Session.Add("student", user);
             }
         }
