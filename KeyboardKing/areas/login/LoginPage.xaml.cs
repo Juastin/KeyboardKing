@@ -69,7 +69,7 @@ namespace KeyboardKing.areas.login
 
                         Session.Add("student", user);
                         Session.Add("FetchGamemodeScores", true);
-                        Session.Add("MatchHasBeenPlayed", true);
+                        Session.Add("FetchMatchHistory", true);
 
                         // Set audio preference based on UserSettings
                         MusicPlayer.ShouldPlay = user.AudioOn;

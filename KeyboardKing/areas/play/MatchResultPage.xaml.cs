@@ -25,8 +25,7 @@ namespace KeyboardKing.areas.play
             MusicPlayer.Stop();
             AudioPlayer.Play(AudioPlayer.Sound.congratulations);
 
-            Session.Add("FetchMatches", true);
-            Session.Add("MatchHasBeenPlayed", true);
+            Session.Add("FetchMatchHistory", true);
         }
 
         public override void OnShadow()
