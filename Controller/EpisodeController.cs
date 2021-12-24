@@ -270,6 +270,23 @@ namespace Controller
             return CurrentEpisodeResult.Accuracy >= threshold;
         }
 
+        public static int CalculateNumberOfNotDone()
+        {
+            return CurrentEpisodeResult.MaxScore - LettersTyped + CurrentEpisodeResult.Mistakes;
+        }
+
+        public static void ForcedStopAndSetEpisodeResult()
+        {
+            _stopwatch.Stop();
+            IsStarted = false;
+            CurrentEpisodeResult.Time = _stopwatch.Elapsed;
+            int totalMistakes = CalculateNumberOfNotDone();
+
+            CurrentEpisodeResult.Accuracy = CalculateAccuracy(CurrentEpisodeResult.MaxScore, totalMistakes);
+            CurrentEpisodeResult.LettersPerMinute = CalculateLetterPerMinute(CurrentEpisodeResult.Time, CurrentEpisodeResult.MaxScore);
+            CurrentEpisodeResult.Score = (int)CalculateScore(CurrentEpisodeResult.LettersPerMinute, CurrentEpisodeResult.MaxScore, totalMistakes);
+            CurrentEpisodeResult.Passed = CheckIfPassedEpisode();
+        }
 
     }
 }

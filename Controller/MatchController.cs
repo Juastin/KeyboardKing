@@ -52,8 +52,21 @@ namespace Controller
         {
             FinishMatch();
             EC.EpisodeFinished -= OnEpisodeFinished;
-            DBQueries.SetPlayState(CurrentMatch.Id, MatchState.Finished);
             NavigationController.NavigateToPage(Pages.MatchWaitingResultPage);
+        }
+
+        public static void MatchForcedFinished()
+        {
+            EC.ForcedStopAndSetEpisodeResult();
+            User student = (User)Session.Get("student");
+
+            DBQueries.SaveMatchResult(EC.CurrentEpisodeResult, CurrentMatch.Id, student.Id);
+            SetWinners();
+
+            Session.Add("MatchHistorySelectedMatch", CurrentMatch.Id);
+
+            EC.EpisodeFinished -= OnEpisodeFinished;
+            NavigationController.NavigateToPage(Pages.MatchResultPage);
         }
 
         public static void SetWinners()
@@ -185,9 +198,15 @@ namespace Controller
 
         public static int GetMatchId() { return CurrentMatch.Id; }
 
-        public static void SetPlayingState()
+        public static void SetPlayingState(MatchState matchState)
         {
-            DBQueries.SetPlayState(CurrentMatch.Id, MatchState.Started);
+            DBQueries.SetPlayState(CurrentMatch.Id, matchState);
+            CurrentMatch.State = matchState;
+        }
+
+        public static bool CheckForcedFinished()
+        {
+            return CurrentMatch.State == MatchState.Finished;
         }
     }
 }

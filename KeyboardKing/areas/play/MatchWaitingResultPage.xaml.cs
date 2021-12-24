@@ -42,7 +42,8 @@ namespace KeyboardKing.areas.play
             {
                 if (MatchController.CheckIfEverybodyDone())
                 {
-                NavigationController.NavigateToPage(Pages.MatchResultPage);
+                    MatchController.SetPlayingState(MatchState.Finished);
+                    NavigationController.NavigateToPage(Pages.MatchResultPage);
                 }
             });
 
@@ -63,10 +64,10 @@ namespace KeyboardKing.areas.play
 
         private void StopMatch_Click(object sender, RoutedEventArgs e)
         {
-            if (_timeLeft < 0)
+            if (_timeLeft < 1)
             {
-                // Add logics to stop match
-                MessageBox.Show("Stop match logics");
+                MatchController.SetPlayingState(MatchState.Finished);
+                //MessageBox.Show("Stop match logics");
             }
         }
     }
