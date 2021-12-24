@@ -488,5 +488,16 @@ namespace DatabaseController
             return DBHandler.Query(cmd);
 
         }
+
+        public static bool DeleteUserAccount(User user)
+        {
+            MySqlCommand cmd = new MySqlCommand("UPDATE User SET username = 'Deleted', email = NULL, password = NULL, salt = NULL WHERE id = @userid;");
+
+            MySqlParameter userId = new MySqlParameter("@userid", MySqlDbType.Int32, 255);
+            userId.Value = user.Id;
+            cmd.Parameters.Add(userId);
+
+            return DBHandler.Query(cmd);
+        }
     }
 }

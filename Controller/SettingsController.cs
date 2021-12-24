@@ -15,5 +15,10 @@ namespace Controller
         {
             Refresh?.Invoke(null,EventArgs.Empty);
         }
+
+        public static bool DeleteAccount()
+        {
+            return DBQueries.DeleteUserAccount((User)Session.Get("student"));
+        }
     }
 }
