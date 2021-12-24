@@ -11,7 +11,7 @@ namespace KeyboardKing.areas.info
     public partial class MessagePage : JumpPage
     {
         private Pages TargetLocation {get;set;}
-        
+
         private int AutoRedirectTime {get;set;}
 
         public MessagePage(MainWindow w) : base(w)

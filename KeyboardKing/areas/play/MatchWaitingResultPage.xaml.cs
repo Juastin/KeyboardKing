@@ -2,6 +2,7 @@
 using DatabaseController;
 using KeyboardKing.core;
 using Model;
+using System.Windows;
 
 namespace KeyboardKing.areas.play
 {
@@ -10,6 +11,8 @@ namespace KeyboardKing.areas.play
     /// </summary>
     public partial class MatchWaitingResultPage : JumpPage
     {
+        private int _timeLeft { get; set; }
+
         public MatchWaitingResultPage(MainWindow w) : base(w)
         {
             InitializeComponent();
@@ -20,11 +23,17 @@ namespace KeyboardKing.areas.play
             User student = (User)Session.Get("student");
             int match_id = MatchController.GetMatchId();
             DBQueries.UpdateMatchProgress(100, student.Id, match_id);
+
+            if (MatchController.CheckUserIsCreator())
+            {
+                StopMatch.Visibility = Visibility.Visible;
+                _timeLeft = 30;
+                UpdateButtonText();
+            }
         }
 
         public override void OnShadow()
         {
-
         }
 
         public override void OnTick()
@@ -32,10 +41,33 @@ namespace KeyboardKing.areas.play
             Dispatcher.Invoke(() =>
             {
                 if (MatchController.CheckIfEverybodyDone())
-            {
+                {
                 NavigationController.NavigateToPage(Pages.MatchResultPage);
-            }
+                }
             });
+
+            if (_timeLeft > -1)
+            {
+                UpdateButtonText();
+                _timeLeft--;
+            }
+        }
+
+        public void UpdateButtonText()
+        {
+            Dispatcher.Invoke(() =>
+            {
+                StopMatch.Content = (_timeLeft > 1) ? $"Stop match ({_timeLeft - 1})" : "Stop match";
+            });
+        }
+
+        private void StopMatch_Click(object sender, RoutedEventArgs e)
+        {
+            if (_timeLeft < 0)
+            {
+                // Add logics to stop match
+                MessageBox.Show("Stop match logics");
+            }
         }
     }
 }
