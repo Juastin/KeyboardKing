@@ -129,8 +129,9 @@
     <Content Include="resources\audio\shop_preview.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="resources\audio\shop_purchase.wav">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	<Content Include="resources\audio\shop_purchase.wav">
+		<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	</Content>
     <Content Include="resources\images\badges\0.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
