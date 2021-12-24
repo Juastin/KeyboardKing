@@ -25,7 +25,7 @@ namespace KeyboardKing.areas.play
             MusicPlayer.Stop();
             AudioPlayer.Play(AudioPlayer.Sound.congratulations);
             // Used by MatchHistoryPage to determine if a match has been played.
-            Session.Add("MatchHasBeenPlayed", 13);
+            Session.Add("MatchHasBeenPlayed", true);
         }
 
         public override void OnShadow()

@@ -28,7 +28,7 @@ namespace KeyboardKing.areas.play
         {
             // FETCH ITEMS
             DateTime now = DateTime.Now;
-            if (_tickCheck.AddMinutes(5) < now || (int?)Session.Get("MatchHasBeenPlayed")==13)
+            if (_tickCheck.AddMinutes(5) < now || (bool)Session.Get("MatchHasBeenPlayed"))
             {
                 _tickCheck = now;
                 Session.Remove("MatchHasBeenPlayed");
