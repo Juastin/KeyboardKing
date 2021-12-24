@@ -36,8 +36,8 @@ namespace KeyboardKing.components
                     Button_ChaptersPage.Foreground = _foregroundColor;
                     break;
                 case Pages.ShoppingPage:
-                    Button_FavoritesPage.Background = _backgroundColor;
-                    Button_FavoritesPage.Foreground = _foregroundColor;
+                    Button_ShoppingPage.Background = _backgroundColor;
+                    Button_ShoppingPage.Foreground = _foregroundColor;
                     break;
                 case Pages.MatchOverviewPage:
                     Button_MatchOverviewPage.Background = _backgroundColor;
