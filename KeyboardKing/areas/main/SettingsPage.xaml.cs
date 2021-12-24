@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using Controller;
 using Model;
+using System.Linq;
 using DatabaseController;
 
 namespace KeyboardKing.areas.main
@@ -14,47 +15,35 @@ namespace KeyboardKing.areas.main
     /// </summary>
     public partial class SettingsPage : JumpPage
     {
-        private Dictionary<string, Theme> _themes;
-        private ResourceDictionary themeDictionary = Application.Current.Resources.MergedDictionaries[0];
+        private static ResourceDictionary themeDictionary = Application.Current.Resources.MergedDictionaries[0];
 
         public SettingsPage(MainWindow w) : base(w)
         {
             InitializeComponent();
-
-            _themes = new Dictionary<string, Theme>
-            {
-                { "Light", new Theme("Light Theme", "resources/themes/LightTheme.xaml") },
-                { "Dark", new Theme("Dark Theme", "resources/themes/DarkTheme.xaml") },
-                { "Space", new Theme("Space Theme", "resources/themes/SpaceTheme.xaml") },
-                { "Chinese", new Theme("Chinese Theme", "resources/themes/ChineseTheme.xaml") },
-                { "Paint", new Theme("Paint Theme", "resources/themes/PaintTheme.xaml") },
-                { "Obsidian", new Theme("Obsidian Theme", "resources/themes/ObsidianTheme.xaml") },
-                { "Hello beertje", new Theme("Hello beertje", "resources/themes/HelloBeertjeTheme.xaml") },
-                { "Christmas", new Theme("Christmas Theme", "resources/themes/ChristmasTheme.xaml") },
-            };
-
-            CBTheme.ItemsSource = _themes;
-            CBTheme.SelectedValue = "Light";
-            CBTheme.DisplayMemberPath = "Value.ThemeTitle";
-            CBTheme.SelectedValuePath = "Key";
+            
+            ThemeController.Initialize();
+            ThemeController.UserChanged += OnUserChanged;
         }
+
         /// <summary>
         /// Changes application theme when given theme param is found in the dictionary
         /// </summary>
         /// <param name="theme">All themes are defined in the theme dictionary</param>
-        private void ChangeTheme(Theme theme)
+        private static void ChangeTheme(string themeName)
         {
-            themeDictionary.Clear();
-            themeDictionary.MergedDictionaries.Add(new ResourceDictionary() { Source = theme.ThemeUri });
-            NavigationController.ChangeTheme();
+            if (themeName != null && ThemeController.Themes.TryGetValue(themeName, out var theme))
+            {
+                themeDictionary.Clear();
+                themeDictionary.MergedDictionaries.Add(new ResourceDictionary() { Source = theme.ThemeUri });
+                NavigationController.ChangeTheme();
+
+                ThemeController.CurrentTheme = themeName;
+            }
         }
+
         private void CBTheme_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            object value = CBTheme.SelectedValue;
-            if (_themes.TryGetValue((string)value, out var theme))
-            {
-                ChangeTheme(theme);
-            }
+            ChangeTheme((string)CBTheme.SelectedValue);
         }
 
         public override void OnLoad()
@@ -62,7 +51,8 @@ namespace KeyboardKing.areas.main
             SettingsController.Initialise();
             User user = (User)Session.Get("student");
             AudioCheckBox.IsChecked = !user.AudioOn;
-            CheckDeleteAccount();
+
+            UpdateComboBox();
         }
 
         public override void OnShadow()
@@ -98,9 +88,36 @@ namespace KeyboardKing.areas.main
             if (sender is CheckBox box)
             {
                 User user = (User)Session.Get("student");
-                user.Dyslectic = (bool)box.IsChecked;
+                if ((bool)box.IsChecked)
+                {
+                    user.Dyslectic = true;
+                }
+                else
+                {
+                    user.Dyslectic = false;
+                }
                 Session.Add("student", user);
             }
+        }
+
+        public void UpdateComboBox()
+        {
+            CBTheme.ItemsSource = ThemeController.UserThemes;
+            CBTheme.DisplayMemberPath = "Value.ThemeTitle";
+            CBTheme.SelectedValuePath = "Key";
+        }
+
+        public void SetDefaultTheme(string theme)
+        {
+            CBTheme.SelectedValue = theme;
+        }
+
+        public void OnUserChanged()
+        {
+            UpdateComboBox();
+
+            //Set theme to the default theme the user has.
+            SetDefaultTheme(((User)Session.Get("student")).Theme);
         }
 
         private void DeleteAccount(object sender, RoutedEventArgs e)
@@ -125,6 +142,5 @@ namespace KeyboardKing.areas.main
                 }
             }
         }
-
     }
 }

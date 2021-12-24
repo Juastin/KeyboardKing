@@ -2,8 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!-- IMAGES -->
-    <BitmapImage x:Key="Wallpaper" UriSource="/resources/images/paint_theme_background.png"/>
-    <BitmapImage x:Key="MessageWallpaper" UriSource="/resources/images/blur_paint_theme_background.png"/>
+    <BitmapImage x:Key="Wallpaper" UriSource="/resources/images/itemImages/theme/paint.png"/>
+    <BitmapImage x:Key="MessageWallpaper" UriSource="/resources/images/itemImages/theme/blur_paint.png"/>
 
     <!-- COLOR SCHEMES -->
     <Color x:Key="SColor1">#000814</Color>
