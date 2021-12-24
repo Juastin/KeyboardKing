@@ -1,4 +1,4 @@
-﻿using KeyboardKing.core;
+using KeyboardKing.core;
 using System;
 using System.Windows;
 using System.Windows.Input;
@@ -68,7 +68,8 @@ namespace KeyboardKing.areas.login
                         user.DyslecticAtLogin = user.Dyslectic;
 
                         Session.Add("student", user);
-                        Session.Add("MatchHasBeenPlayed", true);
+                        Session.Add("FetchGamemodeScores", true);
+                        Session.Add("FetchMatchHistory", true);
 
                         // Set audio preference based on UserSettings
                         MusicPlayer.ShouldPlay = user.AudioOn;
