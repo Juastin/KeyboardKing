@@ -8,7 +8,7 @@
         <Setter Property="FontFamily" Value="{DynamicResource Font}"/>
     </Style>
     <Style x:Key="WordOverlay" TargetType="{x:Type TextBlock}">
-        <Setter Property="Margin" Value="0,0,10,0"/>
+        <Setter Property="Margin" Value="0,0,5,0"/>
         <Setter Property="FontFamily" Value="{DynamicResource Font}"/>
     </Style>
 
