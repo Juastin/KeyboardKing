@@ -45,13 +45,12 @@ namespace KeyboardKing.areas.play
                     MatchController.SetPlayingState(MatchState.Finished);
                     NavigationController.NavigateToPage(Pages.MatchResultPage);
                 }
+                if (_timeLeft > -1)
+                {
+                    UpdateButtonText();
+                    _timeLeft--;
+                }
             });
-
-            if (_timeLeft > -1)
-            {
-                UpdateButtonText();
-                _timeLeft--;
-            }
         }
 
         public void UpdateButtonText()
