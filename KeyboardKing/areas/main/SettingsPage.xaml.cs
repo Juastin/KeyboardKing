@@ -97,6 +97,7 @@ namespace KeyboardKing.areas.main
             {
                 User user = (User)Session.Get("student");
                 user.Dyslectic = (bool)box.IsChecked;
+                SettingsController.ChangeDyslecticFont(user.Dyslectic);
                 Session.Add("student", user);
             }
         }
