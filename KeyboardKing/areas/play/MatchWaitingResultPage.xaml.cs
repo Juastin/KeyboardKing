@@ -67,7 +67,7 @@ namespace KeyboardKing.areas.play
             if (_timeLeft < 1)
             {
                 MatchController.SetPlayingState(MatchState.Finished);
-                //MessageBox.Show("Stop match logics");
+                NavigationController.NavigateToPage(Pages.MatchResultPage);
             }
         }
     }

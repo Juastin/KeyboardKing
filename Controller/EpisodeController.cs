@@ -270,7 +270,7 @@ namespace Controller
             return CurrentEpisodeResult.Accuracy >= threshold;
         }
 
-        public static int CalculateNumberOfNotDone()
+        public static int CalculateNumberOfMistakes()
         {
             return CurrentEpisodeResult.MaxScore - LettersTyped + CurrentEpisodeResult.Mistakes;
         }
@@ -280,7 +280,7 @@ namespace Controller
             _stopwatch.Stop();
             IsStarted = false;
             CurrentEpisodeResult.Time = _stopwatch.Elapsed;
-            int totalMistakes = CalculateNumberOfNotDone();
+            int totalMistakes = CalculateNumberOfMistakes();
 
             CurrentEpisodeResult.Accuracy = CalculateAccuracy(CurrentEpisodeResult.MaxScore, totalMistakes);
             CurrentEpisodeResult.LettersPerMinute = CalculateLetterPerMinute(CurrentEpisodeResult.Time, CurrentEpisodeResult.MaxScore);
