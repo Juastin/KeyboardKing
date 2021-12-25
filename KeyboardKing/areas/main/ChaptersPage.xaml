@@ -78,7 +78,7 @@
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0" VerticalAlignment="Center">
                     <Label Style="{DynamicResource H1}" Content="Chapters" HorizontalAlignment="Left"/>
-                    <Components:CoinsComp/>
+                    <Components:CoinsComp HorizontalAlignment="Right"/>
                 </Grid>
                 <Grid Grid.Row="1" VerticalAlignment="Top">
                     <!-- Chapter overview ListBox -->
