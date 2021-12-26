@@ -50,23 +50,20 @@ namespace Controller
 
         public static void OnEpisodeFinished(object sender, EventArgs e)
         {
-            FinishMatch();
-            EC.EpisodeFinished -= OnEpisodeFinished;
-            NavigationController.NavigateToPage(Pages.MatchWaitingResultPage);
-        }
-
-        public static void MatchForcedFinished()
-        {
-            EC.ForcedStopAndSetEpisodeResult();
-            User student = (User)Session.Get("student");
-
-            DBQueries.SaveMatchResult(EC.CurrentEpisodeResult, CurrentMatch.Id, student.Id);
-            SetWinners();
-
-            Session.Add("MatchHistorySelectedMatch", CurrentMatch.Id);
+            Pages page;
+            if (EC.IsFinished())
+            {
+                FinishMatch();
+                page = Pages.MatchWaitingResultPage;
+            }
+            else
+            {
+                MatchForcedFinished();
+                page = Pages.MatchResultPage;
+            }
 
             EC.EpisodeFinished -= OnEpisodeFinished;
-            NavigationController.NavigateToPage(Pages.MatchResultPage);
+            NavigationController.NavigateToPage(page);
         }
 
         public static void SetWinners()
@@ -88,6 +85,17 @@ namespace Controller
         public static void FinishMatch()
         {
             EC.StopAndSetEpisodeResult();
+            User student = (User)Session.Get("student");
+
+            DBQueries.SaveMatchResult(EC.CurrentEpisodeResult, CurrentMatch.Id, student.Id);
+            SetWinners();
+
+            Session.Add("MatchHistorySelectedMatch", CurrentMatch.Id);
+        }
+
+        public static void MatchForcedFinished()
+        {
+            EC.ForcedStopAndSetEpisodeResult();
             User student = (User)Session.Get("student");
 
             DBQueries.SaveMatchResult(EC.CurrentEpisodeResult, CurrentMatch.Id, student.Id);

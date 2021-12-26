@@ -275,6 +275,17 @@ namespace Controller
             return CurrentEpisodeResult.MaxScore - LettersTyped + CurrentEpisodeResult.Mistakes;
         }
 
+        public static bool IsFinished()
+        {
+            return CurrentEpisodeResult.MaxScore == LettersTyped;
+        }
+
+        public static void FinishAbruptEpisode()
+        {
+            EpisodeFinished?.Invoke(null, EventArgs.Empty);
+        }
+
+
         public static void ForcedStopAndSetEpisodeResult()
         {
             _stopwatch.Stop();
