@@ -109,7 +109,7 @@
                                         </ItemsPanelTemplate>
                                     </ListBox.ItemsPanel>
                                 </ListBox>
-                                <Components:CoinsComp HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                               
                                 <!-- PreviousPage Button -->
                                 <Button RenderOptions.BitmapScalingMode="HighQuality" x:Name="PreviousPage" Tag="/KeyBoardking;component/resources/images/wooden_arrow.png" Margin="10" HorizontalAlignment="Left" Width="75" Height="75" Style="{DynamicResource ImageButtonTemplate}" RenderTransformOrigin="0.5,0.5" Click="PreviousPage_Click">
                                     <Button.RenderTransform>
@@ -128,13 +128,23 @@
                                 </Button>
                             </Grid>
                         </DockPanel>
-                        
-                        <Grid VerticalAlignment="Top" Margin="0,-20,0,0" Width="150" Height="50" Background="#c6750d">
-                            <Label HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FF6C4006" Style="{DynamicResource H2}" Content="Winkel"/>
+
+                        <Grid VerticalAlignment="Top" Margin="0,-20,0,0" Width="175" Height="60" Background="#c6750d">
+                            <Label HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FF6C4006" Style="{DynamicResource H1}" Content="Winkel"/>
+                            
                             <Grid.Effect>
                                 <DropShadowEffect ShadowDepth="0" BlurRadius="20" Opacity="0.5" Color="Black"/>
                             </Grid.Effect>
                         </Grid>
+
+                        <Border Padding="5" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,-20,30,0" Height="60" Background="#c6750d">
+                            <Grid>
+                                <Components:CoinsComp HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                            </Grid>
+                            <Border.Effect>
+                                <DropShadowEffect ShadowDepth="0" BlurRadius="20" Opacity="0.5" Color="Black"/>
+                            </Border.Effect>
+                        </Border>
                     </Grid>
                     
                     <Grid Grid.Row="1" HorizontalAlignment="Center">
