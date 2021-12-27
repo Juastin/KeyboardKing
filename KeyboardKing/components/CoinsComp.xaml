@@ -3,13 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:gif="http://wpfanimatedgif.codeplex.com"
              xmlns:Components="clr-namespace:KeyboardKing.components"
              mc:Ignorable="d" 
              x:Name="root">
     <Grid>
-        <StackPanel Orientation="Horizontal">
-            <Image Width="50" Source="/KeyBoardking;component/resources/images/icons/coin.png"/>
-            <Label Style="{DynamicResource H1}" Padding="5,3,5,0" x:Name="Coins"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <Image gif:ImageBehavior.AnimatedSource="/KeyBoardking;component/resources/images/icons/coin_shining.gif"
+                   RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"
+                   Width="60"/>
+            <Label VerticalAlignment="Center" Style="{DynamicResource H1}" x:Name="Coins" Padding="5,3,5,0"/>
         </StackPanel>
     </Grid>
 </UserControl>

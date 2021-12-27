@@ -14,13 +14,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViewTest", "ViewTest\ViewTe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModelTest", "ModelTest\ModelTest.csproj", "{9FF4A169-6573-41F9-9891-E218C69BCDD2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseController", "DatabaseController\DatabaseController.csproj", "{BEA2980C-72BC-4DF7-87E7-ACA054F4F739}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DatabaseController", "DatabaseController\DatabaseController.csproj", "{BEA2980C-72BC-4DF7-87E7-ACA054F4F739}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseControllerTest", "DatabaseControllerTest\DatabaseControllerTest.csproj", "{8A2FF0E7-0955-4115-99F4-612A608417FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DatabaseControllerTest", "DatabaseControllerTest\DatabaseControllerTest.csproj", "{8A2FF0E7-0955-4115-99F4-612A608417FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cryptography", "Cryptography\Cryptography.csproj", "{584A0FB1-0440-4FF2-8294-1E3D5961FC92}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cryptography", "Cryptography\Cryptography.csproj", "{584A0FB1-0440-4FF2-8294-1E3D5961FC92}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptographyTest", "CryptographyTest\CryptographyTest.csproj", "{690B89DC-0202-4F66-9762-2828C87AB19E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CryptographyTest", "CryptographyTest\CryptographyTest.csproj", "{690B89DC-0202-4F66-9762-2828C87AB19E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
