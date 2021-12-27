@@ -9,7 +9,7 @@
              x:Name="root">
     <Grid>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <Image gif:ImageBehavior.AnimatedSource="{}/KeyBoardking;component/resources/images/icons/coin_shining.gif"
+            <Image gif:ImageBehavior.AnimatedSource="/KeyBoardking;component/resources/images/icons/coin_shining.gif"
                    RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"
                    Width="60"/>
             <Label VerticalAlignment="Center" Style="{DynamicResource H1}" x:Name="Coins" Padding="5,3,5,0"/>
