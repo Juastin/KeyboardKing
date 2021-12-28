@@ -17,6 +17,19 @@ namespace KeyboardKing.data_context
         public string Accuracy { get => $"{EpisodeController.CurrentEpisodeResult?.Accuracy ?? 0}%"; }
         public string Time { get => FormatTimespan(); }
         public double LettersPerMinute { get => EpisodeController.CurrentEpisodeResult?.LettersPerMinute ?? 0; }
+        public string HighScore { 
+            get 
+            {
+                return EpisodeController.CurrentEpisodeResult?.Score > EpisodeController.CurrentEpisode?.HighScore
+                    ? "Nieuwe highscore!"
+                    : $"Highscore: {EpisodeController.CurrentEpisode?.HighScore}";
+            }
+        }
+
+        public string RequiredAccuracy { get => $"{EpisodeController.CurrentEpisode?.PassThreshold ?? 0}%"; }
+        public string PassedAccuracy { get => EpisodeController.CurrentEpisodeResult?.Passed == true ? "✔" : "❌"; }
+
+
         public EpisodeResultPageDataContext()
         {
             EpisodeController.EpisodeResultUpdated += OnEpisodeFinished;
