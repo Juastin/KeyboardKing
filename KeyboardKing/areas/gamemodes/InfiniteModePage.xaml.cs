@@ -13,9 +13,6 @@ namespace KeyboardKing.areas.gamemodes
     /// </summary>
     public partial class InfiniteModePage : JumpPage
     {
-        private int? _allowedMistakes {get;set;}
-        private string? _selectedGamemode {get;set;}
-
         public InfiniteModePage(MainWindow w) : base(w)
         {
             InitializeComponent();
@@ -23,24 +20,33 @@ namespace KeyboardKing.areas.gamemodes
 
         public override void OnLoad()
         {
-            _selectedGamemode = ((UList)Session.Get("InfiniteMode")).Get<string>(0);
-            _allowedMistakes = ((UList)Session.Get("InfiniteMode")).Get<int>(1);
+            string selected_gamemode = ((UList)Session.Get("InfiniteMode")).Get<string>(0);
+            int allowed_mistakes = ((UList)Session.Get("InfiniteMode")).Get<int>(1);
+
+            if (!InfiniteModeController.IsStarted)
+            {
+                InfiniteModeController.Initialise(allowed_mistakes, selected_gamemode);
+            }
 
             if (!EpisodeController.IsStarted)
                 MusicPlayer.PlayNextFrom("intense_music");
 
             EpisodeController.Start();
+            UpdateTimerView();
             this.UserInput.Focus();
         }
 
         public override void OnShadow()
         {
-
         }
 
         public override void OnTick()
         {
+            UpdateTimerView();
         }
+
+        private void UpdateTimerView() => Dispatcher.Invoke(() => TimerTextBox.Text = EpisodeController.GetTimeFormat());
+        private void UpdateScoreView() => Dispatcher.Invoke(() => ScoreTextBox.Text = InfiniteModeController.Score.ToString());
 
         /// <summary>
         /// <para>Event that fires each time when focus of window has been lost.</para>
@@ -63,17 +69,24 @@ namespace KeyboardKing.areas.gamemodes
         private void UserInput_TextChanged(object sender, TextChangedEventArgs e)
         {
             string txt = this.UserInput.Text;
+
             if (txt.Length > 0)
             {
+                // Increase score if the typed character matches the expected character.
+                if (EpisodeController.IsInputCorrect(txt[0]))
+                {
+                    InfiniteModeController.Score++;
+                    UpdateScoreView();
+                } else
+                {
+                    InfiniteModeController.Mistakes++;
+                }
                 EpisodeController.CheckInput(txt[0]);
             }
-            this.UserInput.Clear();
 
-            // Exit the gamemode if the set amount of mistakes was made.
-            if (EpisodeController.CurrentEpisodeResult.Mistakes==_allowedMistakes)
-            {
-                EpisodeController.StopAndSetEpisodeResult();
-            }
+            InfiniteModeController.Checks();
+
+            this.UserInput.Clear();
         }
 
         /// <summary>
@@ -89,12 +102,7 @@ namespace KeyboardKing.areas.gamemodes
 
         private void ButtonPause(object sender, EventArgs e)
         {
-            EpisodeController.Pause();
-        }
-
-        private void ExitGamemode()
-        {
-            Session.Remove("InfiniteModeAllowedMistakes");
+            EpisodeController.Pause(Pages.InfiniteModePage, Pages.GamemodesOverviewPage);
         }
     }
 }

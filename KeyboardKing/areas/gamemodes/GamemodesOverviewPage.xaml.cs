@@ -39,13 +39,16 @@ namespace KeyboardKing.areas.gamemodes
         {
             switch(((Button)sender).Name)
             {
+                case "ThreeLifesMode":
+                    MessageController.Show(Model.Pages.MessagePage, "Deze uitdaging is nog niet beschikbaar.", Model.Pages.GamemodesOverviewPage, 10);
+                    //Session.Add("InfiniteMode", new UList(new object[]{"ThreeLifesMode", 3}));
+                    //InfiniteModeController.SetRandomEpisode();
+                    //NavigationController.NavigateToPage(Pages.InfiniteModePage);
+                    break;
                 case "InfiniteMode":
                     Session.Add("InfiniteMode", new UList(new object[]{"InfiniteMode", -1}));
-                    MessageController.Show(Model.Pages.MessagePage, "Deze uitdaging is nog niet beschikbaar.", Model.Pages.GamemodesOverviewPage, 10);
-                    break;
-                case "ThreeLifesMode":
-                    Session.Add("InfiniteMode", new UList(new object[]{"ThreeLifesMode", 3}));
-                    MessageController.Show(Model.Pages.MessagePage, "Deze uitdaging is nog niet beschikbaar.", Model.Pages.GamemodesOverviewPage, 10);
+                    InfiniteModeController.SetRandomEpisode();
+                    NavigationController.NavigateToPage(Pages.InfiniteModePage);
                     break;
                 default:
                     break;

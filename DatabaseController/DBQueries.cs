@@ -599,9 +599,16 @@ namespace DatabaseController
             return DBHandler.SelectQuery(cmd);
         }
 
+        public static int GetTotalEpisodeAmount()
+        {
+            MySqlCommand cmd = new MySqlCommand("SELECT COUNT(id) FROM Episode");
+
+            return int.Parse(DBHandler.SelectQuery(cmd)[0][0]);
+        }
+
         public static bool UpdateScoreInfiniteMode(int userid, int score)
         {
-            MySqlCommand cmd = new MySqlCommand("UPDATE GamemodeResult set infinitemode = @score WHERE userid = @userid");
+            MySqlCommand cmd = new MySqlCommand("UPDATE GamemodeResult set infinitemode = @score WHERE userid = @userid AND infinitemode < @score");
 
             MySqlParameter q_userid = new MySqlParameter("@userid", MySqlDbType.Int32, 255);
             MySqlParameter q_score = new MySqlParameter("@score", MySqlDbType.Int32, 255);
@@ -617,7 +624,7 @@ namespace DatabaseController
 
         public static bool UpdateScore3LifesMode(int userid, int score)
         {
-            MySqlCommand cmd = new MySqlCommand("UPDATE GamemodeResult set 3lifesmode = @score WHERE userid = @userid");
+            MySqlCommand cmd = new MySqlCommand("UPDATE GamemodeResult set 3lifesmode = @score WHERE userid = @userid AND 3lifesmode < @score");
 
             MySqlParameter q_userid = new MySqlParameter("@userid", MySqlDbType.Int32, 255);
             MySqlParameter q_score = new MySqlParameter("@score", MySqlDbType.Int32, 255);

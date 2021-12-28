@@ -9,9 +9,9 @@ namespace Controller
             Session.Add("MessagePageInfo", new UList(new object[]{message, redirectPage, time}));
             NavigationController.NavigateToPage(infoPage);
         }
-        public static void ShowPause(Pages pausePage,string message, Pages redirectPage)
+        public static void ShowPause(Pages pausePage,string message, Pages redirectPageBack, Pages redirectPageForward)
         {
-            Session.Add("PausePageInfo", new UList(new object[] {message, redirectPage}));
+            Session.Add("PausePageInfo", new UList(new object[] {message, redirectPageBack, redirectPageForward}));
             NavigationController.NavigateToPage(pausePage);
         }
         public static void ShowConfirmation(Pages confirmPage, string message, Pages previousPage, Pages approvedPage)
