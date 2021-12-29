@@ -20,7 +20,7 @@
             Padding="30, 17, 30, 30" 
             HorizontalAlignment="Center" 
             VerticalAlignment="Center" 
-            Height="550" Width="1000">
+            Height="400" Width="750">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>

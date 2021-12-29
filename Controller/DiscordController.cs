@@ -22,7 +22,7 @@ namespace Controller
 			SetPresence("Just browsing", "Learning to type");
 		}
 
-		public static void SetPresence(string state, string details)
+		public static void SetPresence(string state, string details, bool timestamp = false)
         {
 			client.SetPresence(new RichPresence()
 			{
@@ -32,7 +32,8 @@ namespace Controller
 				{
 					LargeImageKey = "kk_icon",
 					LargeImageText = "KeyboardKing",
-				}
+				},
+				Timestamps = timestamp ? new Timestamps() { Start = DateTime.UtcNow } : null
 			});
 		}
 
@@ -41,10 +42,13 @@ namespace Controller
 			switch (e.NewPage)
             {
 				case Pages.EpisodePage:
-					SetPresence($"Playing episode: {EpisodeController.CurrentEpisode.Name}", "Learning to type");
+					SetPresence(EpisodeController.CurrentEpisode.Name, "Playing episode", true);
+					break;
+				case Pages.MatchLobbyPage:
+					SetPresence(EpisodeController.CurrentEpisode.Name, "Waiting in a match lobby");
 					break;
 				case Pages.MatchPlayingPage:
-					SetPresence($"Playing an online match, episode: {EpisodeController.CurrentEpisode.Name}", "Learning to type");
+					SetPresence(EpisodeController.CurrentEpisode.Name, "Playing an online match", true);
 					break;
 				default:
 					SetPresence("Just browsing", "Learning to type");
