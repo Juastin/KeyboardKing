@@ -66,7 +66,7 @@ namespace Controller
         public static void OnEpisodeFinished(object sender, EventArgs e)
         {
             EC.EpisodeFinished -= OnEpisodeFinished;
-            if (EC.IsFinished())
+            if (!EC.IsFinished())
                 EC.CurrentEpisodeResult.Mistakes = EC.CalculateNumberOfMistakes();
 
             SaveMatchProgressResult();
