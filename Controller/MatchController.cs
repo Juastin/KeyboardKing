@@ -54,7 +54,10 @@ namespace Controller
             {
                 FinishMatch();
             }
-            else { MatchForcedFinished(); }
+            else
+            {
+                MatchForcedFinished(); 
+            }
 
             EC.EpisodeFinished -= OnEpisodeFinished;
             NavigationController.NavigateToPage(Pages.MatchWaitingResultPage);

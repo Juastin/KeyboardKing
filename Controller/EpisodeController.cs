@@ -291,11 +291,11 @@ namespace Controller
             _stopwatch.Stop();
             IsStarted = false;
             CurrentEpisodeResult.Time = _stopwatch.Elapsed;
-            int totalMistakes = CalculateNumberOfMistakes();
+            CurrentEpisodeResult.Mistakes = CalculateNumberOfMistakes();
 
-            CurrentEpisodeResult.Accuracy = CalculateAccuracy(CurrentEpisodeResult.MaxScore, totalMistakes);
+            CurrentEpisodeResult.Accuracy = CalculateAccuracy(CurrentEpisodeResult.MaxScore, CurrentEpisodeResult.Mistakes);
             CurrentEpisodeResult.LettersPerMinute = CalculateLetterPerMinute(CurrentEpisodeResult.Time, CurrentEpisodeResult.MaxScore);
-            CurrentEpisodeResult.Score = (int)CalculateScore(CurrentEpisodeResult.LettersPerMinute, CurrentEpisodeResult.MaxScore, totalMistakes);
+            CurrentEpisodeResult.Score = (int)CalculateScore(CurrentEpisodeResult.LettersPerMinute, CurrentEpisodeResult.MaxScore, CurrentEpisodeResult.Mistakes);
             CurrentEpisodeResult.Passed = CheckIfPassedEpisode();
         }
 
