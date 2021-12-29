@@ -44,7 +44,7 @@ namespace Controller
 					SetPresence($"Playing episode: {EpisodeController.CurrentEpisode.Name}", "Learning to type");
 					break;
 				case Pages.MatchPlayingPage:
-					SetPresence($"Playing an online match {EpisodeController.CurrentEpisode.Name}", "Learning to type");
+					SetPresence($"Playing an online match, episode: {EpisodeController.CurrentEpisode.Name}", "Learning to type");
 					break;
 				default:
 					SetPresence("Just browsing", "Learning to type");
