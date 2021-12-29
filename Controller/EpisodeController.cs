@@ -145,16 +145,14 @@ namespace Controller
         /// </summary>
         /// <param name="episodeId">episode id from the requested episode</param>
         /// <returns></returns>
-        public static Episode ParseEpisode(int episodeId)
+        public static Episode ParseEpisode(Episode episode)
         {
-            List<EpisodeStep> steps = DBQueries.GetAllEpisodeStepsFromEpisode(episodeId);
+            List<EpisodeStep> steps = DBQueries.GetAllEpisodeStepsFromEpisode(episode.Id);
 
             Session.Remove("episodeId");
-            Session.Add("episodeId", episodeId);
+            Session.Add("episodeId", episode.Id);
 
-            Episode episode = new Episode();
             steps.ForEach(s => episode.EpisodeSteps.Enqueue(s));
-
 
             return episode;
         }

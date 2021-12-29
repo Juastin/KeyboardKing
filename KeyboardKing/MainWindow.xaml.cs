@@ -44,6 +44,7 @@ namespace KeyboardKing
         public MainWindow()
         {
             InitializeComponent();
+            DiscordController.Initialize();
 
             _timer = new Timer();
             _timer.Elapsed += new ElapsedEventHandler(Tick);
