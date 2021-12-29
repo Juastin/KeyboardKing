@@ -47,7 +47,7 @@
                         </Setter>
                     </Style>
                 </Grid.Resources>
-                <Label Style="{DynamicResource H2}" HorizontalContentAlignment="Center" Content="Selecteer een episode" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top" Width="305" Height="52"/>
+                <Label Style="{DynamicResource H2}" HorizontalContentAlignment="Center" Content="Selecteer een episode" HorizontalAlignment="Center" Margin="0,26,0,0" VerticalAlignment="Top"/>
                 <ComboBox ScrollViewer.VerticalScrollBarVisibility="Hidden" x:Name="CBEpisode" HorizontalAlignment="Center" ItemContainerStyle="{DynamicResource ComboBoxItem}" Template="{DynamicResource ComboBox}" VerticalAlignment="Top" Width="336" Height="42" FontSize="18" Margin="0,90,0,0">
                     <ComboBox.GroupStyle>
                         <GroupStyle ContainerStyle="{StaticResource GroupChapter}"/>

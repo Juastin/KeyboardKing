@@ -79,6 +79,7 @@ namespace KeyboardKing.areas.main
             AudioCheckBox.IsChecked = !user.AudioOn;
 
             UpdateComboBox();
+            CheckDeleteAccount();
         }
         public override void OnShadow()
         {
@@ -141,6 +142,7 @@ namespace KeyboardKing.areas.main
 
         private void DeleteAccount(object sender, RoutedEventArgs e)
         {
+            // Confirms if user wants to delete account 
             MessageController.ShowConfirmation(Pages.ConfirmationPage, "Weet je het zeker?", Pages.SettingsPage, Pages.SettingsPage);
         }
 
@@ -157,6 +159,7 @@ namespace KeyboardKing.areas.main
                 }
                 else
                 {
+                    Session.Remove("deleteUser");
                     MessageController.Show(Pages.MessagePage, "Je account kan op dit moment niet worden verwijderd", Pages.SettingsPage, -1);
                 }
             }

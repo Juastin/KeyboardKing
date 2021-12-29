@@ -34,7 +34,6 @@ namespace KeyboardKing.areas.play
 
         public override void OnShadow()
         {
-            
         }
 
         public override void OnTick()
@@ -47,7 +46,7 @@ namespace KeyboardKing.areas.play
 
         private void EpOverview_PlayClick(object sender, RoutedEventArgs e)
         {
-            MatchController.SetPlayingState();
+            MatchController.SetPlayingState(MatchState.Started);
         }
 
         private void StartGame()

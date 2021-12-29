@@ -33,6 +33,10 @@ namespace Controller
         public static int Score2 { get; private set; }
         public static int Score3 { get; private set; }
 
+        /// <summary>
+        /// This method initialise the match and episode 
+        /// </summary>
+        /// <param name="match"></param>
         public static void Initialize(Match match)
         {
             CurrentMatch = match;
@@ -40,22 +44,38 @@ namespace Controller
             EC.Initialise(CurrentMatch.Episode, true);
         }
 
+        /// <summary>
+        /// This method starts the episode from the match
+        /// </summary>
         public static void Start() => EC.Start();
 
+        /// <summary>
+        /// This method starts the match
+        /// </summary>
         public static void StartGame()
         {
             MultiplayerFetch();
             NavigationController.NavigateToPage(Pages.MatchPlayingPage);
         }
 
+        /// <summary>
+        /// Method will be called when match is finished or is forced stopped
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public static void OnEpisodeFinished(object sender, EventArgs e)
         {
-            FinishMatch();
             EC.EpisodeFinished -= OnEpisodeFinished;
-            DBQueries.SetPlayState(CurrentMatch.Id, MatchState.Finished);
+            if (!EC.IsFinished())
+                EC.CurrentEpisodeResult.Mistakes = EC.CalculateNumberOfMistakes();
+
+            SaveMatchProgressResult();
             NavigationController.NavigateToPage(Pages.MatchWaitingResultPage);
         }
 
+        /// <summary>
+        /// This method set the winners from the match by getting matchprogress
+        /// </summary>
         public static void SetWinners()
         {
             List<MatchProgress> players = DBQueries.GetScoresOrderByHighest(CurrentMatch.Id);
@@ -72,7 +92,10 @@ namespace Controller
             Refresh?.Invoke(null, new EventArgs());
         }
 
-        public static void FinishMatch()
+        /// <summary>
+        /// Saves matchprogress result in database and set the current winners
+        /// </summary>
+        public static void SaveMatchProgressResult()
         {
             EC.StopAndSetEpisodeResult();
             User student = (User)Session.Get("student");
@@ -83,6 +106,10 @@ namespace Controller
             Session.Add("MatchHistorySelectedMatch", CurrentMatch.Id);
         }
 
+
+        /// <summary>
+        /// update current matchprogress of user and gets matchprogress from current match
+        /// </summary>
         public static void MultiplayerFetch()
         {
             // PUSH THIS CLIENT'S PROGRESS
@@ -118,7 +145,7 @@ namespace Controller
         }
 
         /// <summary>
-        /// <para>This method will add a user in MatchProgress to the database</para>
+        /// This method will add a user in MatchProgress to the database
         /// It does this by getting the id of the chosen Match and inserting it in MatchProgressr.
         /// </summary>
         public static void AddUserInMatchProgress()
@@ -127,13 +154,13 @@ namespace Controller
         }
 
         /// <summary>
-        /// <para>This method will remove a user in MatchProgress to the database</para>
+        /// This method will remove a user in MatchProgress to the database
         /// It does this by giving the Match and User id to the method to delete the MatchProgress.
         /// </summary>
         public static void RemoveUserInMatchProgress() => DBQueries.RemoveUserInMatch(CurrentMatch.Id, (User)Session.Get("student"));
 
         /// <summary>
-        /// <para>This method get current MatchProgressInfo</para>
+        /// This method get current MatchProgressInfo
         /// It does this by giving the Match id to get info from MatchProgress.
         /// </summary>
         public static List<MatchProgress> GetMatchProgressInfo()
@@ -144,50 +171,90 @@ namespace Controller
         }
 
         /// <summary>
-        /// <para>This method will update in Match a new Userid, who joined the match, as creator</para>
+        /// This method will update in Match a new Userid, who joined the match, as creator
         /// It does this by giving the Matchid and the id of the user who first joined after the current creator.
         /// </summary>
         public static void UpdateCreatorInMatch() => DBQueries.UpdateNewCreatorInMatch(CurrentMatch.Id, _matchProgress[1].User.Id);
 
         /// <summary>
-        /// <para>This method will check if the user is the creator</para>
+        /// This method will check if the user is the creator
         /// It does this by checking if the userid is the same as the creatorid
         /// </summary>
+        /// <returns></returns>
         public static bool CheckUserIsCreator()
         {
             User student = (User)Session.Get("student");
             return student.Id == CurrentMatch.Host.Id;
         }
 
+        /// <summary>
+        /// Checks is user is creator
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public static bool CheckUserIsCreator(int userId)
         {
             return CurrentMatch.Host.Id == userId;
         }
 
+        /// <summary>
+        /// Checks if the match still exists
+        /// </summary>
+        /// <param name="matchid"></param>
+        /// <returns></returns>
         public static bool CheckIfMatchExists(int matchid)
         {
             return DBQueries.CheckIfMatchExists(matchid) > 0;
         }
 
+        /// <summary>
+        /// Deletes match and creator in matchprogress 
+        /// </summary>
         public static void DeleteMatch()
         {
             DBQueries.RemoveUserInMatch(CurrentMatch.Id, (User)Session.Get("student"));
             DBQueries.DeleteMatch(CurrentMatch.Id);
         }
 
+        /// <summary>
+        /// Checks if the creator from the match is alone in the matchlobby
+        /// </summary>
+        /// <returns></returns>
         public static bool CheckCreatorIsAloneInMatch() { return _matchProgress.Count == 1; }
 
+        /// <summary>
+        /// Checks if all participants are done with playing
+        /// </summary>
+        /// <returns></returns>
         public static bool CheckIfEverybodyDone()
         {
             GetMatchProgressInfo();
             return _matchProgress.Select(p => p.Progress).All(p => p == 100);
         }
 
+        /// <summary>
+        /// returns current match id
+        /// </summary>
+        /// <returns></returns>
         public static int GetMatchId() { return CurrentMatch.Id; }
 
-        public static void SetPlayingState()
+        /// <summary>
+        /// Set matchstate from match in database
+        /// </summary>
+        /// <param name="matchState"></param>
+        public static void SetPlayingState(MatchState matchState)
         {
-            DBQueries.SetPlayState(CurrentMatch.Id, MatchState.Started);
+            DBQueries.SetPlayState(CurrentMatch.Id, matchState);
+        }
+
+        /// <summary>
+        /// Checks if the match is forced stopped
+        /// </summary>
+        /// <returns></returns>
+        public static bool CheckForcedStop()
+        {
+            GetMatchProgressInfo();
+            return CurrentMatch.State == MatchState.Finished;
         }
     }
 }

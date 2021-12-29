@@ -272,9 +272,20 @@ namespace Controller
             return CurrentEpisodeResult.Score >= CurrentEpisode.PassThreshold;
         }
 
+        public static int CalculateNumberOfMistakes()
+        {
+            return CurrentEpisodeResult.MaxScore - LettersTyped + CurrentEpisodeResult.Mistakes;
+        }
+
+        public static bool IsFinished()
+        {
+            return CurrentEpisodeResult.MaxScore == LettersTyped;
+        }
+
         public static void StopEpisode()
         {
             EpisodeFinished?.Invoke(null, EventArgs.Empty);
         }
+
     }
 }
