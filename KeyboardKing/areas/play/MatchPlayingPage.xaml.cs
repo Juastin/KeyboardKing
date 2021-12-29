@@ -43,7 +43,13 @@ namespace KeyboardKing.areas.play
             UpdateOpponentProgress();
             UpdateTimerView();
             if (MatchController.CheckForcedFinished())
+            {
                 EpisodeController.FinishAbruptEpisode();
+                this.Dispatcher.Invoke(() =>
+                {
+                    NavigationController.NavigateToPage(Pages.MatchWaitingResultPage);
+                });
+            }
         }
 
         public void UpdateOpponentProgress()

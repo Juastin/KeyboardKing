@@ -53,14 +53,14 @@ namespace Controller
             if (EC.IsFinished())
             {
                 FinishMatch();
+                EC.EpisodeFinished -= OnEpisodeFinished;
+                NavigationController.NavigateToPage(Pages.MatchWaitingResultPage);
             }
             else
             {
-                MatchForcedFinished(); 
+                MatchForcedFinished();
+                EC.EpisodeFinished -= OnEpisodeFinished;
             }
-
-            EC.EpisodeFinished -= OnEpisodeFinished;
-            NavigationController.NavigateToPage(Pages.MatchWaitingResultPage);
         }
 
         public static void SetWinners()
