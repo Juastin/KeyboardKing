@@ -71,6 +71,9 @@ namespace Controller
                 case "ThreeLifesMode":
                     HighScore = int.Parse(((List<List<string>>)Session.Get("GamemodeScores"))[0][1]);
                     break;
+                case "OneLifeMode":
+                    HighScore = int.Parse(((List<List<string>>)Session.Get("GamemodeScores"))[0][2]);
+                    break;
                 default:
                     break;
             }
@@ -94,6 +97,9 @@ namespace Controller
                     break;
                 case "ThreeLifesMode":
                     DBQueries.UpdateScore3LifesMode(user.Id, Score);
+                    break;
+                case "OneLifeMode":
+                    DBQueries.UpdateScore1LifeMode(user.Id, Score);
                     break;
                 default:
                     break;

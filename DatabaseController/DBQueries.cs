@@ -587,7 +587,7 @@ namespace DatabaseController
 
         public static List<List<string>> GetAllGamemodeScores(int userid)
         {
-            MySqlCommand cmd = new MySqlCommand("SELECT infinitemode, 3lifesmode " +
+            MySqlCommand cmd = new MySqlCommand("SELECT infinitemode, 3lifesmode, 1lifemode " +
             "FROM GamemodeResult " +
             "WHERE userid = @userid " +
             "LIMIT 1");
@@ -625,6 +625,22 @@ namespace DatabaseController
         public static bool UpdateScore3LifesMode(int userid, int score)
         {
             MySqlCommand cmd = new MySqlCommand("UPDATE GamemodeResult set 3lifesmode = @score WHERE userid = @userid AND 3lifesmode < @score");
+
+            MySqlParameter q_userid = new MySqlParameter("@userid", MySqlDbType.Int32, 255);
+            MySqlParameter q_score = new MySqlParameter("@score", MySqlDbType.Int32, 255);
+
+            q_userid.Value = userid;
+            q_score.Value = score;
+
+            cmd.Parameters.Add(q_userid);
+            cmd.Parameters.Add(q_score);
+
+            return DBHandler.Query(cmd);
+        }
+
+        public static bool UpdateScore1LifeMode(int userid, int score)
+        {
+            MySqlCommand cmd = new MySqlCommand("UPDATE GamemodeResult set 1lifemode = @score WHERE userid = @userid AND 1lifemode < @score");
 
             MySqlParameter q_userid = new MySqlParameter("@userid", MySqlDbType.Int32, 255);
             MySqlParameter q_score = new MySqlParameter("@score", MySqlDbType.Int32, 255);
