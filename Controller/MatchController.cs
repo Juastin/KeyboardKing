@@ -65,17 +65,18 @@ namespace Controller
         /// <param name="e"></param>
         public static void OnEpisodeFinished(object sender, EventArgs e)
         {
+            EC.EpisodeFinished -= OnEpisodeFinished;
+
             if (EC.IsFinished())
             {
-                FinishMatch();
-                EC.EpisodeFinished -= OnEpisodeFinished;
-                NavigationController.NavigateToPage(Pages.MatchWaitingResultPage);
+                EC.StopAndSetEpisodeResult();
             }
             else
             {
-                MatchForcedStop();
-                EC.EpisodeFinished -= OnEpisodeFinished;
+                EC.ForcedStopAndSetEpisodeResult();
             }
+            SaveMatchProgressResult();
+            NavigationController.NavigateToPage(Pages.MatchWaitingResultPage);
         }
 
         /// <summary>
@@ -98,9 +99,9 @@ namespace Controller
         }
 
         /// <summary>
-        /// This method stops the match when user is done with playing
+        /// Saves matchprogress result in database and set the current winners
         /// </summary>
-        public static void FinishMatch()
+        public static void SaveMatchProgressResult()
         {
             EC.StopAndSetEpisodeResult();
             User student = (User)Session.Get("student");
@@ -111,19 +112,6 @@ namespace Controller
             Session.Add("MatchHistorySelectedMatch", CurrentMatch.Id);
         }
 
-        /// <summary>
-        /// This method stops the match while user is not done 
-        /// </summary>
-        public static void MatchForcedStop()
-        {
-            EC.ForcedStopAndSetEpisodeResult();
-            User student = (User)Session.Get("student");
-
-            DBQueries.SaveMatchResult(EC.CurrentEpisodeResult, CurrentMatch.Id, student.Id);
-            SetWinners();
-
-            Session.Add("MatchHistorySelectedMatch", CurrentMatch.Id);
-        }
 
         /// <summary>
         /// update current matchprogress of user and gets matchprogress from current match
