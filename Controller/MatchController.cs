@@ -66,15 +66,9 @@ namespace Controller
         public static void OnEpisodeFinished(object sender, EventArgs e)
         {
             EC.EpisodeFinished -= OnEpisodeFinished;
-
             if (EC.IsFinished())
-            {
-                EC.StopAndSetEpisodeResult();
-            }
-            else
-            {
-                EC.ForcedStopAndSetEpisodeResult();
-            }
+                EC.CurrentEpisodeResult.Mistakes = EC.CalculateNumberOfMistakes();
+
             SaveMatchProgressResult();
             NavigationController.NavigateToPage(Pages.MatchWaitingResultPage);
         }

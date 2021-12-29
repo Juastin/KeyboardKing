@@ -279,19 +279,6 @@ namespace Controller
             return CurrentEpisodeResult.MaxScore == LettersTyped;
         }
 
-        public static void ForcedStopAndSetEpisodeResult()
-        {
-            _stopwatch.Stop();
-            IsStarted = false;
-            CurrentEpisodeResult.Time = _stopwatch.Elapsed;
-            CurrentEpisodeResult.Mistakes = CalculateNumberOfMistakes();
-
-            CurrentEpisodeResult.Accuracy = CalculateAccuracy(CurrentEpisodeResult.MaxScore, CurrentEpisodeResult.Mistakes);
-            CurrentEpisodeResult.LettersPerMinute = CalculateLetterPerMinute(CurrentEpisodeResult.Time, CurrentEpisodeResult.MaxScore);
-            CurrentEpisodeResult.Score = (int)CalculateScore(CurrentEpisodeResult.LettersPerMinute, CurrentEpisodeResult.MaxScore, CurrentEpisodeResult.Mistakes);
-            CurrentEpisodeResult.Passed = CheckIfPassedEpisode();
-        }
-
         public static void StopEpisode()
         {
             EpisodeFinished?.Invoke(null, EventArgs.Empty);
