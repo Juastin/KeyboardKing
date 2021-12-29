@@ -50,20 +50,14 @@ namespace Controller
 
         public static void OnEpisodeFinished(object sender, EventArgs e)
         {
-            Pages page;
             if (EC.IsFinished())
             {
                 FinishMatch();
-                page = Pages.MatchWaitingResultPage;
             }
-            else
-            {
-                MatchForcedFinished();
-                page = Pages.MatchResultPage;
-            }
+            else { MatchForcedFinished(); }
 
             EC.EpisodeFinished -= OnEpisodeFinished;
-            NavigationController.NavigateToPage(page);
+            NavigationController.NavigateToPage(Pages.MatchWaitingResultPage);
         }
 
         public static void SetWinners()

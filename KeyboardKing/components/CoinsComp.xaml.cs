@@ -23,7 +23,10 @@ namespace KeyboardKing.components
         {
             User user = (User)Session.Get("student");
             if (user != null)
-                Coins.Content = user.Coins;
+                Dispatcher.Invoke(() =>
+                {
+                    Coins.Content = user.Coins;
+                });
         }
     }
 }
