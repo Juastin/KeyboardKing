@@ -8,6 +8,7 @@
       xmlns:dataContext="clr-namespace:KeyboardKing.data_context" x:Class="KeyboardKing.areas.play.EpisodeResultPage"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
+      MaxHeight="750" MaxWidth="1450"
       Title="EpisodeResultPage" HorizontalAlignment="Center" VerticalAlignment="Center">
 
 
@@ -19,7 +20,7 @@
             Padding="30, 17, 30, 30" 
             HorizontalAlignment="Center" 
             VerticalAlignment="Center" 
-            Height="400" Width="750">
+            Height="550" Width="1000">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -39,13 +40,18 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Grid VerticalAlignment="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <StackPanel VerticalAlignment="Center" Grid.Column="0" Orientation="Vertical">
-                        <Label  Style="{DynamicResource H3}" Content="Score:" 
+                    <Label Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0" Style="{DynamicResource H3}" Content="{Binding HighScore}" HorizontalAlignment="Left"/>
+                    <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Bottom"  Orientation="Vertical">
+                        <Label Style="{DynamicResource H3}" Content="Score:" 
                                VerticalAlignment="Center"/>
                         <Label  Style="{DynamicResource H3}" Content="Tijd:" 
                                VerticalAlignment="Center"/>
@@ -56,7 +62,7 @@
                         <Label  Style="{DynamicResource H3}" Content="LPM:" 
                                VerticalAlignment="Center"/>
                     </StackPanel>
-                    <StackPanel VerticalAlignment="Center" Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left">
+                    <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Orientation="Vertical" HorizontalAlignment="Left">
                         <Label Style="{DynamicResource H3}" Content="{Binding Score}" HorizontalAlignment="Left"/>
                         <Label Style="{DynamicResource H3}" Content="{Binding Time}" HorizontalAlignment="Left"/>
                         <Label Style="{DynamicResource H3}" Content="{Binding Accuracy}" HorizontalAlignment="Left"/>
@@ -65,42 +71,25 @@
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Column="1" HorizontalAlignment="Center">
-                    <Grid VerticalAlignment="Top" HorizontalAlignment="Center">
-                        <Label Content="{Binding HighScore}" Style="{DynamicResource H3}"/>
-                    </Grid>
-                    <StackPanel Orientation="Vertical" VerticalAlignment="Bottom">
-                        <Label Content="vereist:" Style="{DynamicResource H3}"/>
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-
-                            <Grid Grid.Row="0" Grid.Column="0">
-                                <Label Content="Goed:"/>
-                            </Grid>
-                            <Grid Grid.Row="0" Grid.Column="1">
-                                <Label Content="{Binding RequiredAccuracy}"/>
-                            </Grid>
-                            <Grid Grid.Row="0" Grid.Column="2">
-                                <Label Content="{Binding PassedAccuracy}"/>
-                            </Grid>
-
-                            <Grid Grid.Row="1" Grid.Column="0">
-                                <Label Content="LPM:"/>
-                            </Grid>
-                            <Grid Grid.Row="1" Grid.Column="1">
-                                <Label Content="0"/>
-                            </Grid>
-                            <Grid Grid.Row="1" Grid.Column="2">
-                                <Label Content="✔"/>
-                            </Grid>
-                        </Grid>
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Label Content="Behaald:" Style="{DynamicResource H3}"/>
+                        <Label FontSize="200" HorizontalAlignment="Center">
+                            <Label.Style>
+                                <Style TargetType="{x:Type Label}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding PassedScore}" Value="True">
+                                            <Setter Property="Content" Value="✔"/>
+                                            <Setter Property="Foreground" Value="{DynamicResource Succes}"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding PassedScore}" Value="False">
+                                            <Setter Property="Content" Value="❌"/>
+                                            <Setter Property="Foreground" Value="{DynamicResource Failed}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Label.Style>
+                        </Label>
+                        <Label HorizontalAlignment="Center" Content="{Binding RequiredScore}"/>
                     </StackPanel>
                 </Grid>
             </Grid>

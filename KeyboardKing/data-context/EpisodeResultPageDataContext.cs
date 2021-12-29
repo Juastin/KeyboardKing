@@ -26,8 +26,8 @@ namespace KeyboardKing.data_context
             }
         }
 
-        public string RequiredAccuracy { get => $"{EpisodeController.CurrentEpisode?.PassThreshold ?? 0}%"; }
-        public string PassedAccuracy { get => EpisodeController.CurrentEpisodeResult?.Passed == true ? "✔" : "❌"; }
+        public string RequiredScore { get => $"Vereiste score: {EpisodeController.CurrentEpisode?.PassThreshold ?? 0}"; }
+        public bool PassedScore { get => EpisodeController.CurrentEpisodeResult?.Passed == true; }
 
 
         public EpisodeResultPageDataContext()

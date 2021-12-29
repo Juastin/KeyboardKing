@@ -268,7 +268,7 @@ namespace Controller
 
         public static bool CheckIfPassedEpisode()
         {
-            return CurrentEpisodeResult.Accuracy >= CurrentEpisode.PassThreshold;
+            return CurrentEpisodeResult.Score >= CurrentEpisode.PassThreshold;
         }
 
         public static void StopEpisode()
