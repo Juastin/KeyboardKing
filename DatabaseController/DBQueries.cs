@@ -108,7 +108,7 @@ namespace DatabaseController
 
         public static User GetUserInfo(string email)
         {
-            MySqlCommand cmd = new MySqlCommand("SELECT id, username, email, coins, password, salt, skilllevel, audio, dyslectic " +
+            MySqlCommand cmd = new MySqlCommand("SELECT id, username, email, coins, password, salt, skilllevel, audio, dyslectic, theme " +
                                             "FROM User " +
                                             "LEFT JOIN UserSettings " +
                                             "ON User.id = UserSettings.userid " +
@@ -142,6 +142,87 @@ namespace DatabaseController
 
             List<List<string>> result = DBHandler.SelectQuery(cmd);
             return Chapter.ParseAllChapters(result);
+        }
+
+        public static List<Item> GetAllItems(User user)
+        {
+            MySqlCommand cmd = new MySqlCommand("SELECT i.id, i.name, i.price, i.type, " +
+                "CASE WHEN ui.userid IS NULL THEN 'False' ELSE 'True' END AS completed " +
+                "FROM Item i " +
+                "LEFT JOIN Useritem ui ON i.id = ui.itemid " +
+                "AND ui.userid = @userid");
+
+            MySqlParameter UserIdParam = new MySqlParameter("@userid", MySqlDbType.Int32, 0);
+            UserIdParam.Value = user.Id;
+
+            cmd.Parameters.Add(UserIdParam);
+
+            List<List<string>> result = DBHandler.SelectQuery(cmd);
+            return Item.ParseItems(result);
+        }
+
+        public static bool AddItem(User user, Item item)
+        {
+            MySqlCommand cmd = new MySqlCommand("INSERT INTO Useritem VALUES(@userId, @itemId)");
+
+            MySqlParameter userId = new MySqlParameter("@userId", MySqlDbType.Int32, 0);
+            MySqlParameter itemID = new MySqlParameter("@itemId", MySqlDbType.Int32, 0);
+
+            userId.Value = user.Id;
+            itemID.Value = item.Id;
+
+            cmd.Parameters.Add(userId);
+            cmd.Parameters.Add(itemID);
+
+            return DBHandler.Query(cmd);
+        }
+
+        public static bool UpdateCoins(User user, Item item)
+        {
+            MySqlCommand cmd = new MySqlCommand("UPDATE User SET coins = coins - @itemPrice " +
+                                                "WHERE id = @userId");
+
+            MySqlParameter userId = new MySqlParameter("@userId", MySqlDbType.Int32, 0);
+            MySqlParameter itemPrice = new MySqlParameter("@itemPrice", MySqlDbType.Int32, 0);
+
+            userId.Value = user.Id;
+            itemPrice.Value = item.Price;
+
+            cmd.Parameters.Add(userId);
+            cmd.Parameters.Add(itemPrice);
+
+            return DBHandler.Query(cmd);
+        }
+
+        public static int CheckIfItemExists(Item item)
+        {
+            MySqlCommand cmd = new MySqlCommand("SELECT COUNT(id) " +
+                                                "FROM Item i " +
+                                                "WHERE i.id = @itemId");
+
+            MySqlParameter itemId = new MySqlParameter("@itemId", MySqlDbType.Int32, 255);
+            itemId.Value = item.Id;
+            cmd.Parameters.Add(itemId);
+
+            List<List<string>> result = DBHandler.SelectQuery(cmd);
+            return int.Parse(result[0][0]);
+        }
+
+        public static int CheckIfItemAlreadyBought(User user, Item item)
+        {
+            MySqlCommand cmd = new MySqlCommand("SELECT COUNT(itemid) FROM Useritem " +
+                                                "WHERE userid = @userid " +
+                                                "AND itemid = @itemid ");
+
+            MySqlParameter userId = new MySqlParameter("@userId", MySqlDbType.Int32, 0);
+            MySqlParameter itemId = new MySqlParameter("@itemId", MySqlDbType.Int32, 0);
+            userId.Value = user.Id;
+            itemId.Value = item.Id;
+            cmd.Parameters.Add(userId);
+            cmd.Parameters.Add(itemId);
+
+            List<List<string>> result = DBHandler.SelectQuery(cmd);
+            return int.Parse(result[0][0]);
         }
 
         public static int GetHighscoreEpisode(User user, int episodeId)
@@ -486,7 +567,68 @@ namespace DatabaseController
             cmd.Parameters.Add(dyslecticParam);
 
             return DBHandler.Query(cmd);
+        }
 
+        public static bool UpdateDefaultTheme(User user, string theme)
+        {
+            MySqlCommand cmd = new MySqlCommand("UPDATE UserSettings SET theme = @theme WHERE userid = @userid");
+
+            MySqlParameter defaultTheme = new MySqlParameter("@theme", MySqlDbType.VarChar, 255);
+            MySqlParameter userId = new MySqlParameter("@userid", MySqlDbType.Int32, 0);
+
+            defaultTheme.Value = theme;
+            userId.Value = user.Id;
+
+            cmd.Parameters.Add(userId);
+            cmd.Parameters.Add(defaultTheme);
+
+            return DBHandler.Query(cmd);
+        }
+
+        public static List<List<string>> GetAllGamemodeScores(int userid)
+        {
+            MySqlCommand cmd = new MySqlCommand("SELECT infinitemode, 3lifesmode " +
+            "FROM GamemodeResult " +
+            "WHERE userid = @userid " +
+            "LIMIT 1");
+
+            MySqlParameter userId = new MySqlParameter("@userid", MySqlDbType.Int32, 255);
+            userId.Value = userid;
+            cmd.Parameters.Add(userId);
+
+            return DBHandler.SelectQuery(cmd);
+        }
+
+        public static bool UpdateScoreInfiniteMode(int userid, int score)
+        {
+            MySqlCommand cmd = new MySqlCommand("UPDATE GamemodeResult set infinitemode = @score WHERE userid = @userid");
+
+            MySqlParameter q_userid = new MySqlParameter("@userid", MySqlDbType.Int32, 255);
+            MySqlParameter q_score = new MySqlParameter("@score", MySqlDbType.Int32, 255);
+
+            q_userid.Value = userid;
+            q_score.Value = score;
+
+            cmd.Parameters.Add(q_userid);
+            cmd.Parameters.Add(q_score);
+
+            return DBHandler.Query(cmd);
+        }
+
+        public static bool UpdateScore3LifesMode(int userid, int score)
+        {
+            MySqlCommand cmd = new MySqlCommand("UPDATE GamemodeResult set 3lifesmode = @score WHERE userid = @userid");
+
+            MySqlParameter q_userid = new MySqlParameter("@userid", MySqlDbType.Int32, 255);
+            MySqlParameter q_score = new MySqlParameter("@score", MySqlDbType.Int32, 255);
+
+            q_userid.Value = userid;
+            q_score.Value = score;
+
+            cmd.Parameters.Add(q_userid);
+            cmd.Parameters.Add(q_score);
+
+            return DBHandler.Query(cmd);
         }
 
         public static bool DeleteUserAccount(User user)

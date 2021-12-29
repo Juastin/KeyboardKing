@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DatabaseController;
 
 namespace Controller
 {
@@ -12,12 +13,35 @@ namespace Controller
         public delegate void ItemChange();
         public static event ItemChange CurrentItemChanged;
 
-        public static int CurrentPage { get; set; }
+        public static event EventHandler ShopDataChanged;
+
         public static int MaxPage { get; set; }
-        public static int itemsPerPage { get; set; }
+        public static int ItemsPerPage { get; set; } = 8;
+        public static bool DoResetPage { get; set; } = true;
 
         public static Item CurrentItem { get; set; }
         public static List<Item> AllItems { get; set; }
+
+        private static int _currentPage = 1;
+        public static int CurrentPage
+        {
+            get
+            {
+                return _currentPage;
+            }
+            set
+            {
+                _currentPage = value;
+                if (_currentPage < 1)
+                {
+                    _currentPage = 1;
+                }
+                else if (_currentPage > MaxPage)
+                {
+                    _currentPage = MaxPage;
+                }
+            }
+        }
 
         /// <summary>
         /// Initialize the properties in the controller.
@@ -25,7 +49,6 @@ namespace Controller
         public static void Initialize()
         {
             CurrentPage = 1;
-            itemsPerPage = 8;
             AllItems = GetAllItems();
             MaxPage = CalculateMaxPage();
         }
@@ -36,24 +59,7 @@ namespace Controller
         /// <returns></returns>
         public static List<Item> GetAllItems()
         {
-            List<List<string>> items = new List<List<string>>();
-
-            // Get all the items data (Dummy data at the moment)
-            items = new List<List<string>> {
-                new List<string> {"1", "KeyboardKing Light", "/KeyBoardking;component/resources/images/kk_background_4K.png", "10", "Theme", "True" },
-                new List<string> {"2", "KeyboardKing Dark", "/KeyBoardking;component/resources/images/kk_background_dark.png", "20", "Theme", "True" },
-                new List<string> {"3", "Space", "/KeyBoardking;component/resources/images/space_theme_background.png", "50", "Theme", "True" },
-                new List<string> {"4", "Chinese", "/KeyBoardking;component/resources/images/red_chinese_background.png", "50", "Theme", "True" },
-                new List<string> {"5", "Paint", "/KeyBoardking;component/resources/images/paint_theme_background.png", "100", "Theme", "False" },
-                new List<string> {"6", "Obsidian", "/KeyBoardking;component/resources/images/obsidian_theme_background.png", "250", "Theme", "True" },
-                new List<string> {"7", "Hello Beertje", "/KeyBoardking;component/resources/images/hellobeertje_background_4k.png", "500", "Theme", "False" },
-                new List<string> {"8", "Christmas", "/KeyBoardking;component/resources/images/kk_background_christmas.png", "1000", "Theme", "False" },
-                new List<string> {"9", "A Shelf on a shelf", "/KeyBoardking;component/resources/images/shopping_shelf.png", "5000", "Theme", "False" },
-                new List<string> {"10", "Crown", "/KeyBoardking;component/resources/images/icon.png", "5000", "Theme", "False" },
-                new List<string> {"11", "A Coin", "/KeyBoardking;component/resources/images/icons/coin.png", "10000", "Theme", "False" },
-            };
-
-            return Item.ParseItems(items);
+            return DBQueries.GetAllItems((User)Session.Get("student"));
         }
 
         /// <summary>
@@ -65,8 +71,8 @@ namespace Controller
         {
             var query = (from pageItem in AllItems
                          select pageItem)
-                         .Skip(ShopController.itemsPerPage * (page - 1))
-                         .Take(ShopController.itemsPerPage);
+                         .Skip(ItemsPerPage * (page - 1))
+                         .Take(ItemsPerPage);
 
             return query.ToList();
         }
@@ -96,25 +102,68 @@ namespace Controller
         /// <returns></returns>
         public static int CalculateMaxPage()
         {
-            return (int)Math.Ceiling((decimal)AllItems.Count / itemsPerPage);
+            return (int)Math.Ceiling((decimal)AllItems.Count / ItemsPerPage);
         }
 
         /// <summary>
-        /// Updating the current page by incrementing given int.
+        /// Checks if the item exists before doing something with it.
         /// </summary>
-        /// <param name="page"></param>
-        public static void UpdatePage(int page)
+        /// <returns>Returns a boolean if item still exists in database.</returns>
+        public static bool CheckItemExists()
         {
-            CurrentPage += page;
-            if (CurrentPage < 1)
-            {
-                CurrentPage = 1;
-            }
-            else if (CurrentPage > MaxPage)
-            {
-                CurrentPage = MaxPage;
-            }
+            return DBQueries.CheckIfItemExists(CurrentItem) > 0;
         }
 
+        /// <summary>
+        /// Checks if the item is already bought.
+        /// </summary>
+        /// <returns>Returns a boolean if item still exists in database.</returns>
+        public static bool CheckItemAlreadyBought()
+        {
+            return DBQueries.CheckIfItemAlreadyBought((User)Session.Get("student"), CurrentItem) > 0;
+        }
+
+        /// <summary>
+        /// Calls the methods needed to complete the step of adding 
+        /// </summary>
+        public static bool BuyItem()
+        {
+            bool buyCompleted = false;
+            User student = (User)Session.Get("student");
+            int currentCoins =  DBQueries.GetCoinsOfUser(student);
+            
+            if (CheckSufficientCoins(currentCoins))
+            {
+                Item item = CurrentItem;
+                DBQueries.AddItem(student, item);
+                DBQueries.UpdateCoins(student, item);
+                buyCompleted = true;
+                student.Coins = currentCoins - CurrentItem.Price;
+            }
+            else
+            {
+                student.Coins = currentCoins;
+            }
+
+            Session.Add("student", student);
+            return buyCompleted;
+        }
+
+        public static bool CheckSufficientCoins(int coins)
+        {
+            if (coins >= CurrentItem.Price)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public static void UpdateItemsList()
+        {
+            AllItems = GetAllItems();
+            MaxPage = CalculateMaxPage();
+
+            ShopDataChanged?.Invoke(null, EventArgs.Empty);
+        }
     }
 }

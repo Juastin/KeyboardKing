@@ -1,4 +1,4 @@
-﻿using KeyboardKing.core;
+using KeyboardKing.core;
 using System;
 using System.Windows;
 using System.Windows.Input;
@@ -6,6 +6,7 @@ using Controller;
 using Model;
 using Cryptography;
 using DatabaseController;
+using KeyboardKing.areas.main;
 
 namespace KeyboardKing.areas.login
 {
@@ -34,6 +35,9 @@ namespace KeyboardKing.areas.login
                 if (user.Dyslectic != user.DyslecticAtLogin)
                 {
                     DBQueries.UpdateDyslecticSettings(user.Id, user.Dyslectic);
+                }
+                if (user.Theme != ThemeController.CurrentTheme) {
+                    ThemeController.UpdateDefaultTheme();
                 }
                 // Flush the session if the user was logged in when entering the login page.
                 Session.Flush();
@@ -68,12 +72,18 @@ namespace KeyboardKing.areas.login
                         user.DyslecticAtLogin = user.Dyslectic;
 
                         Session.Add("student", user);
-                        Session.Add("MatchHasBeenPlayed", true);
+                        Session.Add("FetchGamemodeScores", true);
+                        Session.Add("FetchMatchHistory", true);
 
+                        SettingsController.Initialise();
+                        SettingsPage.ChangeDyslecticFont(user.Dyslectic);
                         // Set audio preference based on UserSettings
                         MusicPlayer.ShouldPlay = user.AudioOn;
                         AudioPlayer.ShouldPlay = user.AudioOn;
                         MusicPlayer.PlayNextFrom("menu_music");
+
+                        // Set default Theme based on UserSettings
+                        ThemeController.SetUserThemeData();
 
                         if (user.SkillLevel == SkillLevel.none)
                         {

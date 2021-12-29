@@ -44,7 +44,7 @@ namespace KeyboardKing.areas.play
             UpdateTimerView();
             if (MatchController.CheckForcedFinished())
             {
-                EpisodeController.FinishAbruptEpisode();
+                EpisodeController.StopEpisode();
                 this.Dispatcher.Invoke(() =>
                 {
                     NavigationController.NavigateToPage(Pages.MatchWaitingResultPage);

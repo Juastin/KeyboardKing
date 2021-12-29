@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:gif="http://wpfanimatedgif.codeplex.com"
              xmlns:local="clr-namespace:KeyboardKing.areas.info"
              xmlns:data_context="clr-namespace:KeyboardKing.data_context"
              xmlns:Internal="clr-namespace:K4os.Compression.LZ4.Internal;assembly=K4os.Compression.LZ4" x:Class="KeyboardKing.areas.info.ItemPage"
@@ -23,14 +24,15 @@
                     <RowDefinition Height="50"/>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0">
-                    <Image Source="{Binding CurrentItem.Path}" x:Name="ItemImage"/>
+                    <Image Source="{Binding CurrentItem.ImagePath}" x:Name="ItemImage"/>
                 </Grid>
                 <Grid Grid.Row="1">
                     <Label Content="{Binding CurrentItem.Name}" x:Name="Title" Style="{DynamicResource H1}" Foreground="White" HorizontalContentAlignment="Center"/>
                 </Grid>
                 <Grid Grid.Row="2">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Image Source="/KeyBoardking;component/resources/images/icons/coin.png"/>
+                        <Image Width="50" Height="50" gif:ImageBehavior.AnimatedSource="/KeyBoardking;component/resources/images/icons/coin_shining.gif"
+                               RenderOptions.EdgeMode="Aliased" RenderOptions.BitmapScalingMode="HighQuality"/>
                         <Label Content="{Binding CurrentItem.Price}" x:Name="Price" Style="{DynamicResource H2}" Foreground="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
                     </StackPanel>
                 </Grid>

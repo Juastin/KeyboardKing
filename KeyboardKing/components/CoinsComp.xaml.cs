@@ -17,6 +17,7 @@ namespace KeyboardKing.components
         {
             InitializeComponent();
             Session.PropertyChanged += OnCoinsChange;
+            ShopController.ShopDataChanged += OnCoinsChange;
         }
 
         public void OnCoinsChange(object sender, EventArgs e)

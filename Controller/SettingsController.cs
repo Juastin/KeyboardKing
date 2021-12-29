@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
 using DatabaseController;
 using Model;
 
@@ -11,11 +9,25 @@ namespace Controller
     public static class SettingsController
     {
         public static event EventHandler Refresh;
+        public static Dictionary<string, Font> Fonts;
+
         public static void Initialise()
         {
-            Refresh?.Invoke(null,EventArgs.Empty);
+            Fonts = new Dictionary<string, Font>
+            {
+                { "SegoeUI", new Font("SegoeUI", "resources/fonts/SegoeUI.xaml") },
+                { "Verdana", new Font("Verdana", "resources/fonts/Verdana.xaml") },
+            };
         }
-
+        /// <summary>
+        /// Refresh event that fires to refresh wpf checkboxes to show actual values.
+        /// Subscription is found in SettingsPageDataContext.
+        /// </summary>
+        public static void RefreshWpf()
+        {
+            Refresh?.Invoke(null, EventArgs.Empty);
+        }
+        
         public static bool DeleteAccount()
         {
             return DBQueries.DeleteUserAccount((User)Session.Get("student"));

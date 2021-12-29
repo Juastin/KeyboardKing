@@ -29,7 +29,7 @@
             <Grid Grid.Row="0" VerticalAlignment="Center">
                 <Label Style="{DynamicResource H1}" HorizontalAlignment="Left" Content="Results"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Image Width="50" Source="/KeyBoardking;component/resources/images/coin.png"/>
+                    <Image Width="50" Source="/KeyBoardking;component/resources/images/icons/coin.png"/>
                     <Label Style="{DynamicResource H1}" x:Name="Coin" Content=""/>
                 </StackPanel>
             </Grid>

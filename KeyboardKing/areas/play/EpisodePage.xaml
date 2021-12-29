@@ -51,7 +51,18 @@
                         </LinearGradientBrush>
                     </Grid.OpacityMask>
                     <Grid  Grid.Column="0">
-                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="50" x:Name="WordOverlayCorrect" Text="{Binding WordOverlayCorrect}" Foreground="Green"/>
+                        <ItemsControl ItemsSource="{Binding WordOverlayCorrect}" VerticalAlignment="Center" HorizontalAlignment="Right">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Style="{DynamicResource WordOverlay}" Foreground="Green" x:Name="WordOverlayCorrect" FontSize="50" Text="{Binding}" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
                     </Grid>
                     <Border Grid.Column="1" BorderThickness="3, 0, 0, 0">
                         <Border.BorderBrush>
@@ -71,8 +82,30 @@
                             </DrawingBrush>
                         </Border.BorderBrush>
                         <Grid>
-                            <Label FontSize="50" x:Name="WordOverlay" Content="{Binding WordOverlay }" Foreground="{DynamicResource TextColor}"/>
-                            <Label FontSize="50" x:Name="WordOverlayWrong" Content="{Binding WordOverlayWrong}" Foreground="Red"/>
+                            <ItemsControl ItemsSource="{Binding WordOverlay}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Style="{DynamicResource WordOverlay}" Foreground="{DynamicResource TextColor}" x:Name="WordOverlay" FontSize="50" Text="{Binding}" />
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                            <ItemsControl ItemsSource="{Binding WordOverlayWrong}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Style="{DynamicResource WordOverlay}" Foreground="Red" x:Name="WordOverlayWrong" FontSize="50" Text="{Binding}" />
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
                         </Grid>
                     </Border>
                 </Grid>

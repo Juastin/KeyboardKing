@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:gif="http://wpfanimatedgif.codeplex.com"
       xmlns:local="clr-namespace:KeyboardKing.core"
       xmlns:Components="clr-namespace:KeyboardKing.components"
       xmlns:uc="clr-namespace:KeyboardKing.areas.info"
@@ -19,9 +20,9 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListBoxItem">
-                        <Border Margin="60,10,60,20" Height="200" Width="150" BorderThickness="0" CornerRadius="5" ToolTipService.InitialShowDelay="0">
+                        <Border Margin="60,20,60,20" Height="200" Width="150" BorderThickness="0" CornerRadius="5" ToolTipService.InitialShowDelay="0">
                             <Border.ToolTip>
-                                <ToolTip VerticalOffset="30" Style="{DynamicResource NavBarToolTip}" Content="{Binding Name}"/>
+                                <ToolTip VerticalOffset="30" Foreground="{DynamicResource Color6}" Style="{DynamicResource NavBarToolTip}" Content="{Binding Name}"/>
                             </Border.ToolTip>
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -33,12 +34,12 @@
                                         <Image Height="100" Stretch="Fill" Source="/KeyBoardking;component/resources/images/shopping_shelf.png"/>
                                     </Grid>
                                 </Border>
-                                <Border Grid.Row="0" Padding="0,0,0,30">
+                                <Border Grid.Row="0" Padding="0,0,0,15">
                                     <Border.Effect>
                                         <DropShadowEffect ShadowDepth="0" BlurRadius="20" Opacity="0.5" Color="Black"/>
                                     </Border.Effect>
                                     <Grid>
-                                        <Button  Padding="10" Tag="{Binding Path}" Style="{StaticResource ShoppingItemTemplate}" Click="Item_Click"/>
+                                        <Button Padding="10" Tag="{Binding IconPath}" Style="{StaticResource ShoppingItemTemplate}" Click="Item_Click"/>
                                         <Label Width="150" Height="150" Name="Purchased" Visibility="Hidden" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="✔" Foreground="{DynamicResource Succes}" FontSize="50"/>
                                     </Grid>
                                 </Border>
@@ -49,7 +50,7 @@
                                     <Grid>
                                         <Label Style="{DynamicResource H3}" Foreground="{DynamicResource Color7}" HorizontalAlignment="Left" Margin="0,-4,0,0" Content="•"/>
                                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
-                                            <Image Source="/KeyBoardking;component/resources/images/icons/coin.png"/>
+                                            <Image gif:ImageBehavior.AnimatedSource="/KeyBoardking;component/resources/images/icons/coin_shining.gif" RenderOptions.BitmapScalingMode="HighQuality"/>
                                             <Label FontSize="20" Foreground="White" VerticalContentAlignment="Center" Margin="0,-2,0,0" Content="{Binding Price}"/>
                                         </StackPanel>
                                         <Label Style="{DynamicResource H3}" Foreground="{DynamicResource Color7}" HorizontalAlignment="Right" Margin="0,-4,0,0" Content="•"/>
@@ -109,7 +110,7 @@
                                         </ItemsPanelTemplate>
                                     </ListBox.ItemsPanel>
                                 </ListBox>
-                                <Components:CoinsComp HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                               
                                 <!-- PreviousPage Button -->
                                 <Button RenderOptions.BitmapScalingMode="HighQuality" x:Name="PreviousPage" Tag="/KeyBoardking;component/resources/images/wooden_arrow.png" Margin="10" HorizontalAlignment="Left" Width="75" Height="75" Style="{DynamicResource ImageButtonTemplate}" RenderTransformOrigin="0.5,0.5" Click="PreviousPage_Click">
                                     <Button.RenderTransform>
@@ -128,13 +129,23 @@
                                 </Button>
                             </Grid>
                         </DockPanel>
-                        
-                        <Grid VerticalAlignment="Top" Margin="0,-20,0,0" Width="150" Height="50" Background="#c6750d">
-                            <Label HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FF6C4006" Style="{DynamicResource H2}" Content="Winkel"/>
+
+                        <Grid VerticalAlignment="Top" Margin="0,-20,0,0" Width="175" Height="60" Background="#c6750d">
+                            <Label HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Foreground="#FF6C4006" Style="{DynamicResource H1}" Content="Winkel"/>
+                            
                             <Grid.Effect>
                                 <DropShadowEffect ShadowDepth="0" BlurRadius="20" Opacity="0.5" Color="Black"/>
                             </Grid.Effect>
                         </Grid>
+
+                        <Border Padding="5" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,-20,30,0" Height="60" Background="#c6750d">
+                            <Grid>
+                                <Components:CoinsComp HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                            </Grid>
+                            <Border.Effect>
+                                <DropShadowEffect ShadowDepth="0" BlurRadius="20" Opacity="0.5" Color="Black"/>
+                            </Border.Effect>
+                        </Border>
                     </Grid>
                     
                     <Grid Grid.Row="1" HorizontalAlignment="Center">

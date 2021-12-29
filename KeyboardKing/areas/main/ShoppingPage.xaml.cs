@@ -21,15 +21,14 @@ namespace KeyboardKing.areas.main
         public ShoppingPage(MainWindow w) : base(w)
         {
             InitializeComponent();
-            ShopController.Initialize();
+            ShopController.ShopDataChanged += OnItemListChanged;
         }
 
         public override void OnLoad()
         {
-            ResetPageIndex();
-
             // AUDIO
             if (!_isSwitching)
+            {
                 AudioPlayer.Play(AudioPlayer.Sound.shop_enter);
                 var t = Task.Factory.StartNew(async () =>
                 {
@@ -38,20 +37,30 @@ namespace KeyboardKing.areas.main
                     MusicPlayer.PlayNextFrom("shop");
                     _isSwitching = false;
                 });
+            }
+
 
             // FETCH ITEMS
             DateTime now = DateTime.Now;
             if (_tickCheck.AddMinutes(5) < now || _lastFetchedByUserId != ((User)Session.Get("student")).Id)
+            {
                 _tickCheck = now;
                 _lastFetchedByUserId = ((User)Session.Get("student")).Id;
                 ShopController.Initialize();
-                UpdateShop(0);
+                UpdateShop();
+            }
         }
 
         public override void OnShadow()
         {
+            if (ShopController.DoResetPage)
+            {
+                ResetPageIndex();
+            }
+
             // AUDIO
             if (!_isSwitching)
+            {
                 AudioPlayer.Play(AudioPlayer.Sound.shop_exit);
                 var t = Task.Factory.StartNew(async () =>
                 {
@@ -60,6 +69,7 @@ namespace KeyboardKing.areas.main
                     MusicPlayer.PlayNextFrom("menu_music");
                     _isSwitching = false;
                 });
+            }
         }
 
         public override void OnTick()
@@ -92,9 +102,15 @@ namespace KeyboardKing.areas.main
         // Call all methods necessary for proper view. 
         public void UpdateShop(int page)
         {
-            ShopController.UpdatePage(page);
+            ShopController.CurrentPage += page;
             LoadItems(ShopController.GetPageItems());
             UpdateButtonVisibility();
+        }
+
+        // Call all methods necessary for proper view without param (update on current page). 
+        public void UpdateShop()
+        {
+            UpdateShop(0);
         }
 
         // Update ListBox with given list
@@ -117,8 +133,14 @@ namespace KeyboardKing.areas.main
         // Changes the shop back to page 1
         public void ResetPageIndex()
         {
-            ShopController.CurrentPage = 0;
-            UpdateShop(0);
+            ShopController.DoResetPage = true;
+            ShopController.CurrentPage = 1;
+            UpdateShop();
+        }
+
+        public void OnItemListChanged(object sender, EventArgs e)
+        {
+            UpdateShop();
         }
     }
 }
