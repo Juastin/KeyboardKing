@@ -33,7 +33,7 @@
                                     <Expander IsExpanded="False">
                                         <Expander.Header>
                                             <DockPanel>
-                                                <TextBlock Text="{Binding Name}" FontWeight="Bold" Margin="2,5,0,2" FontSize="18"/>
+                                                <TextBlock Foreground="{DynamicResource TextColor}" Text="{Binding Name}" FontWeight="Bold" Margin="2,5,0,2" FontSize="18"/>
                                             </DockPanel>
                                         </Expander.Header>
                                         <Expander.Content>

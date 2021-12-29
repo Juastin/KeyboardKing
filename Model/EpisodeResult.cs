@@ -8,11 +8,8 @@ namespace Model
         public int Score { get; set; }
         private int _accuracy;
         public int Accuracy
-        { 
-            get 
-            { 
-                return _accuracy; 
-            } 
+        {
+            get => _accuracy;
             set 
             { 
                 if (value >= 0 || value <= 100)
