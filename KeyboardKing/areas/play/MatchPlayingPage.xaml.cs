@@ -42,7 +42,7 @@ namespace KeyboardKing.areas.play
             MatchController.MultiplayerFetch();
             UpdateOpponentProgress();
             UpdateTimerView();
-            if (MatchController.CheckForcedFinished())
+            if (MatchController.CheckForcedStop())
             {
                 EpisodeController.StopEpisode();
                 this.Dispatcher.Invoke(() =>

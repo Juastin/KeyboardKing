@@ -142,6 +142,7 @@ namespace KeyboardKing.areas.main
 
         private void DeleteAccount(object sender, RoutedEventArgs e)
         {
+            // Confirms if user wants to delete account 
             MessageController.ShowConfirmation(Pages.ConfirmationPage, "Weet je het zeker?", Pages.SettingsPage, Pages.SettingsPage);
         }
 
