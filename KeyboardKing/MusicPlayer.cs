@@ -126,9 +126,12 @@ namespace KeyboardKing
 
         public static void PlayNextFrom(string playlist_name)
         {
-            CurrentPlaylist = playlist_name;
-            RandomizeIndex();
-            PlayNext();
+            if (CurrentPlaylist!=playlist_name && ShouldPlay)
+            {
+                CurrentPlaylist = playlist_name;
+                RandomizeIndex();
+                PlayNext();
+            }
         }
 
         public static void Stop()

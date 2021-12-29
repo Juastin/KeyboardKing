@@ -1,16 +1,18 @@
 ﻿using DatabaseController;
 using Model;
 using System;
+using System.Collections.Generic;
 
 namespace Controller
 {
     public static class InfiniteModeController
     {
         public static bool IsStarted {get;set;}
-        public static int? AllowedMistakes {get;set;}
+        public static int AllowedMistakes {get;set;}
         public static int Mistakes {get;set;}
         public static string SelectedGamemode {get;set;}
         public static int Score {get;set;}
+        public static int HighScore {get;set;}
 
         public static void Initialise(int allowed_mistakes, string selected_gamemode)
         {
@@ -43,11 +45,39 @@ namespace Controller
         public static void Checks()
         {
             // Exit the gamemode if the set amount of mistakes was made.
-            if (Mistakes==AllowedMistakes)
+            if (Mistakes==AllowedMistakes && IsStarted)
+            {
+                IsStarted = false;
+                Leave();
                 Exit();
+                return;
+            }
+
             // Refill episode steps if no steps are left.
             else if (EpisodeController.CurrentEpisode.EpisodeSteps.Count==1)
                 SetRandomEpisode();
+        }
+
+        /// <summary>
+        /// Used to display the result page.
+        /// </summary>
+        public static void Leave()
+        {
+            switch (SelectedGamemode)
+            {
+                case "InfiniteMode":
+                    HighScore = int.Parse(((List<List<string>>)Session.Get("GamemodeScores"))[0][0]);
+                    break;
+                case "ThreeLifesMode":
+                    HighScore = int.Parse(((List<List<string>>)Session.Get("GamemodeScores"))[0][1]);
+                    break;
+                default:
+                    break;
+            }
+
+            string message = "Je hebt " + Score + " letters getyped";
+            message += (Score>HighScore) ? "\nJe hebt je score van " + HighScore + " verbroken!" : "\nJe highscore is nog steeds " + HighScore;
+            MessageController.Show(Pages.MessagePage, message, Pages.GamemodesOverviewPage, -1);
         }
 
         /// <summary>
@@ -71,7 +101,7 @@ namespace Controller
 
             // Reset class properties.
             IsStarted = false;
-            AllowedMistakes = null;
+            AllowedMistakes = 0;
             Mistakes = 0;
             SelectedGamemode = null;
             Score = 0;

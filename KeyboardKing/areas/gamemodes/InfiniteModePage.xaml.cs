@@ -31,13 +31,24 @@ namespace KeyboardKing.areas.gamemodes
             if (!EpisodeController.IsStarted)
                 MusicPlayer.PlayNextFrom("intense_music");
 
+            if (selected_gamemode=="InfiniteMode") {LifeLabel.Visibility = Visibility.Hidden;}
+            else {LifeLabel.Visibility = Visibility.Visible;}
+
             EpisodeController.Start();
             UpdateTimerView();
+            UpdateHearts();
+
             this.UserInput.Focus();
         }
 
         public override void OnShadow()
         {
+            if (!InfiniteModeController.IsStarted)
+            {
+                Dispatcher.Invoke(() => ScoreTextBox.Text = 0.ToString());
+                MusicPlayer.Stop();
+                AudioPlayer.Play(AudioPlayer.Sound.congratulations);
+            }
         }
 
         public override void OnTick()
@@ -85,6 +96,7 @@ namespace KeyboardKing.areas.gamemodes
             }
 
             InfiniteModeController.Checks();
+            UpdateHearts();
 
             this.UserInput.Clear();
         }
@@ -103,6 +115,20 @@ namespace KeyboardKing.areas.gamemodes
         private void ButtonPause(object sender, EventArgs e)
         {
             EpisodeController.Pause(Pages.InfiniteModePage, Pages.GamemodesOverviewPage);
+        }
+
+        private void UpdateHearts()
+        {
+            if (InfiniteModeController.AllowedMistakes>0)
+            {
+                Dispatcher.Invoke(() => {
+                    LifeLabel.Content = "";
+                    for (int i = 0; i<InfiniteModeController.AllowedMistakes-InfiniteModeController.Mistakes; i++)
+                    {
+                        LifeLabel.Content += "♡";
+                    }
+                });
+            }
         }
     }
 }

@@ -47,10 +47,17 @@ namespace KeyboardKing.areas.info
             // This check can probably be improved by creating some sort of musicNavigation controller.
             if (_previousLocation == Pages.SettingsPage && _targetLocation == Pages.SettingsPage)
                 Session.Add("deleteUser", true);
-            if (new List<Pages>(){Pages.ChaptersPage, Pages.MatchOverviewPage, Pages.SettingsPage, Pages.GamemodesOverviewPage}.Contains(_targetLocation))
+            if (new List<Pages>(){Pages.ChaptersPage, Pages.MatchOverviewPage, Pages.SettingsPage}.Contains(_targetLocation))
                 MusicPlayer.PlayNextFrom("menu_music");
             if (_previousLocation==Pages.PausePage && _targetLocation == Pages.GamemodesOverviewPage)
+            {
+                MusicPlayer.Stop();
+                AudioPlayer.Play(AudioPlayer.Sound.congratulations);
+
+                InfiniteModeController.Leave();
                 InfiniteModeController.Exit();
+                return;
+            }
 
             NavigationController.NavigateToPage(_targetLocation);
         }
