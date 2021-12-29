@@ -147,14 +147,19 @@ namespace Controller
         /// <returns></returns>
         public static Episode ParseEpisode(int episodeId)
         {
+            User user = (User)Session.Get("student");
+
             List<EpisodeStep> steps = DBQueries.GetAllEpisodeStepsFromEpisode(episodeId);
+            //TODO make the GetAllChapters query return the correct highscore.
+            int highscore = DBQueries.GetHighscoreEpisode(user, episodeId);
+            int threshold = DBQueries.Getpassthreshold(episodeId);
+
 
             Session.Remove("episodeId");
             Session.Add("episodeId", episodeId);
 
-            Episode episode = new Episode();
+            Episode episode = new Episode() { HighScore = highscore, PassThreshold = threshold };
             steps.ForEach(s => episode.EpisodeSteps.Enqueue(s));
-
 
             return episode;
         }
@@ -205,10 +210,8 @@ namespace Controller
 
         private static void GiveCoins(User student, int episodeId)
         {
-            int highscore = DBQueries.GetHighscoreEpisode(student, episodeId); //5550
-
-            if(CurrentEpisodeResult.Score > highscore)
-                Coins = (CurrentEpisodeResult.Score - highscore) / 100;
+            if(CurrentEpisodeResult.Score > CurrentEpisode.HighScore)
+                Coins = (CurrentEpisodeResult.Score - CurrentEpisode.HighScore) / 100;
 
             DBQueries.UpdateCoins(Coins, student);
 
@@ -265,8 +268,7 @@ namespace Controller
 
         public static bool CheckIfPassedEpisode()
         {
-            int threshold = DBQueries.Getpassthreshold((int)Session.Get("episodeId"));
-            return CurrentEpisodeResult.Accuracy >= threshold;
+            return CurrentEpisodeResult.Score >= CurrentEpisode.PassThreshold;
         }
 
         public static void StopEpisode()
