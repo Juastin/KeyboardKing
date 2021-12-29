@@ -42,6 +42,14 @@ namespace KeyboardKing.areas.play
             MatchController.MultiplayerFetch();
             UpdateOpponentProgress();
             UpdateTimerView();
+            if (MatchController.CheckForcedStop())
+            {
+                EpisodeController.StopEpisode();
+                this.Dispatcher.Invoke(() =>
+                {
+                    NavigationController.NavigateToPage(Pages.MatchWaitingResultPage);
+                });
+            }
         }
 
         public void UpdateOpponentProgress()

@@ -16,6 +16,7 @@
             Height="400" Width="750" >
         <Grid>
             <Label Style="{DynamicResource H1}" Content="Wachten op andere spelers..." HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Button Style="{DynamicResource Button1}" x:Name="StopMatch" Click="StopMatch_Click" Visibility="Hidden" HorizontalAlignment="Center" Margin="0,250,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" RenderTransformOrigin="0.261,0.75"/>
         </Grid>
     </Border>
 </local:JumpPage>

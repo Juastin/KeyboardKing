@@ -19,6 +19,7 @@ namespace Controller
                 { "Verdana", new Font("Verdana", "resources/fonts/Verdana.xaml") },
             };
         }
+
         /// <summary>
         /// Refresh event that fires to refresh wpf checkboxes to show actual values.
         /// Subscription is found in SettingsPageDataContext.
@@ -27,7 +28,11 @@ namespace Controller
         {
             Refresh?.Invoke(null, EventArgs.Empty);
         }
-        
+
+        /// <summary>
+        /// User account that will be deleted
+        /// </summary>
+        /// <returns></returns>
         public static bool DeleteAccount()
         {
             return DBQueries.DeleteUserAccount((User)Session.Get("student"));
