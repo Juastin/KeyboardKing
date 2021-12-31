@@ -9,6 +9,7 @@
         LoginPage,
         RegisterPage,
         RegisterSkillPage,
+        ExplanationPage,
         ChaptersPage,
         ShoppingPage,
         SettingsPage,
