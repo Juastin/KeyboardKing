@@ -54,7 +54,7 @@ namespace DatabaseController
             MySqlParameter scoreParam = new MySqlParameter("@score", MySqlDbType.Int32, 0);
             MySqlParameter mistakesParam = new MySqlParameter("@mistakes", MySqlDbType.Int32, 0);
             MySqlParameter lpmParam = new MySqlParameter("@lpm", MySqlDbType.Int32, 0);
-            MySqlParameter timeParam = new MySqlParameter("@time", MySqlDbType.Int32, 0);
+            MySqlParameter timeParam = new MySqlParameter("@time", MySqlDbType.Int64, 0);
             MySqlParameter passedParam = new MySqlParameter("@passed", MySqlDbType.Bit, 0);
 
             episodeidParam.Value = episodeId;
