@@ -87,7 +87,7 @@ namespace DatabaseController
             MySqlParameter scoreParam = new MySqlParameter("@score", MySqlDbType.Int32, 0);
             MySqlParameter mistakesParam = new MySqlParameter("@mistakes", MySqlDbType.Int32, 0);
             MySqlParameter lpmParam = new MySqlParameter("@lpm", MySqlDbType.Int32, 0);
-            MySqlParameter timeParam = new MySqlParameter("@time", MySqlDbType.Int32, 0);
+            MySqlParameter timeParam = new MySqlParameter("@time", MySqlDbType.Int64, 0);
 
             matchidParam.Value = matchId;
             useridParam.Value = userId;

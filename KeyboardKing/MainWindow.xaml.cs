@@ -101,7 +101,7 @@ namespace KeyboardKing
             if (e.OldPage != Pages.Empty)
                 _pages[e.OldPage].OnShadow();
 
-            _mainFrame.Navigate(_pages[e.NewPage]);
+            Dispatcher.Invoke(() => _mainFrame.Navigate(_pages[e.NewPage])); 
             _pages[e.NewPage].OnLoad();
         }
 
