@@ -54,8 +54,8 @@ namespace KeyboardKing.areas.info
                 MusicPlayer.Stop();
                 AudioPlayer.Play(AudioPlayer.Sound.congratulations);
 
-                InfiniteModeController.Leave();
-                InfiniteModeController.Exit();
+                GamemodeController.Leave();
+                GamemodeController.Exit();
                 return;
             }
 

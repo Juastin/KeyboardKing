@@ -23,9 +23,9 @@ namespace KeyboardKing.areas.gamemodes
             string selected_gamemode = ((UList)Session.Get("InfiniteMode")).Get<string>(0);
             int allowed_mistakes = ((UList)Session.Get("InfiniteMode")).Get<int>(1);
 
-            if (!InfiniteModeController.IsStarted)
+            if (!GamemodeController.IsStarted)
             {
-                InfiniteModeController.Initialise(allowed_mistakes, selected_gamemode);
+                GamemodeController.Initialise(allowed_mistakes, selected_gamemode);
             }
 
             if (!EpisodeController.IsStarted)
@@ -43,7 +43,7 @@ namespace KeyboardKing.areas.gamemodes
 
         public override void OnShadow()
         {
-            if (!InfiniteModeController.IsStarted)
+            if (!GamemodeController.IsStarted)
             {
                 Dispatcher.Invoke(() => ScoreTextBox.Text = 0.ToString());
                 MusicPlayer.Stop();
@@ -57,7 +57,7 @@ namespace KeyboardKing.areas.gamemodes
         }
 
         private void UpdateTimerView() => Dispatcher.Invoke(() => TimerTextBox.Text = EpisodeController.GetTimeFormat());
-        private void UpdateScoreView() => Dispatcher.Invoke(() => ScoreTextBox.Text = InfiniteModeController.Score.ToString());
+        private void UpdateScoreView() => Dispatcher.Invoke(() => ScoreTextBox.Text = GamemodeController.Score.ToString());
 
         /// <summary>
         /// <para>Event that fires each time when focus of window has been lost.</para>
@@ -86,16 +86,16 @@ namespace KeyboardKing.areas.gamemodes
                 // Increase score if the typed character matches the expected character.
                 if (EpisodeController.IsInputCorrect(txt[0]))
                 {
-                    InfiniteModeController.Score++;
+                    GamemodeController.Score++;
                     UpdateScoreView();
                 } else
                 {
-                    InfiniteModeController.Mistakes++;
+                    GamemodeController.Mistakes++;
                 }
                 EpisodeController.CheckInput(txt[0]);
             }
 
-            InfiniteModeController.Checks();
+            GamemodeController.Checks();
             UpdateHearts();
 
             this.UserInput.Clear();
@@ -119,11 +119,11 @@ namespace KeyboardKing.areas.gamemodes
 
         private void UpdateHearts()
         {
-            if (InfiniteModeController.AllowedMistakes>0)
+            if (GamemodeController.AllowedMistakes>0)
             {
                 Dispatcher.Invoke(() => {
                     LifeLabel.Content = "";
-                    for (int i = 0; i<InfiniteModeController.AllowedMistakes-InfiniteModeController.Mistakes; i++)
+                    for (int i = 0; i<GamemodeController.AllowedMistakes-GamemodeController.Mistakes; i++)
                     {
                         LifeLabel.Content += "♡";
                     }

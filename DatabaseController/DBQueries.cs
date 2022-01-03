@@ -585,7 +585,7 @@ namespace DatabaseController
             return DBHandler.Query(cmd);
         }
 
-        public static List<List<string>> GetAllGamemodeScores(int userid)
+        public static List<string> GetAllGamemodeScores(int userid)
         {
             MySqlCommand cmd = new MySqlCommand("SELECT infinitemode, 3lifesmode, 1lifemode " +
             "FROM GamemodeResult " +
@@ -596,7 +596,7 @@ namespace DatabaseController
             userId.Value = userid;
             cmd.Parameters.Add(userId);
 
-            return DBHandler.SelectQuery(cmd);
+            return DBHandler.SelectQuery(cmd)[0];
         }
 
         public static int GetTotalEpisodeAmount()

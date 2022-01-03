@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Controller
 {
-    public static class InfiniteModeController
+    public static class GamemodeController
     {
         public static bool IsStarted {get;set;}
         public static int AllowedMistakes {get;set;}

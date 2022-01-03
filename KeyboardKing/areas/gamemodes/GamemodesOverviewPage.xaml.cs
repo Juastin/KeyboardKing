@@ -41,17 +41,17 @@ namespace KeyboardKing.areas.gamemodes
             {
                 case "ThreeLifesMode":
                     Session.Add("InfiniteMode", new UList(new object[]{"ThreeLifesMode", 3}));
-                    InfiniteModeController.SetRandomEpisode();
+                    GamemodeController.SetRandomEpisode();
                     NavigationController.NavigateToPage(Pages.InfiniteModePage);
                     break;
                 case "OneLifeMode":
                     Session.Add("InfiniteMode", new UList(new object[]{"OneLifeMode", 1}));
-                    InfiniteModeController.SetRandomEpisode();
+                    GamemodeController.SetRandomEpisode();
                     NavigationController.NavigateToPage(Pages.InfiniteModePage);
                     break;
                 case "InfiniteMode":
                     Session.Add("InfiniteMode", new UList(new object[]{"InfiniteMode", -1}));
-                    InfiniteModeController.SetRandomEpisode();
+                    GamemodeController.SetRandomEpisode();
                     NavigationController.NavigateToPage(Pages.InfiniteModePage);
                     break;
                 default:
@@ -62,12 +62,12 @@ namespace KeyboardKing.areas.gamemodes
         public void FetchScores()
         {
             User user = (User)Session.Get("student");
-            List<List<string>> result = DBQueries.GetAllGamemodeScores(user.Id);
+            List<string> result = DBQueries.GetAllGamemodeScores(user.Id);
 
             // Display the fetched data
-            InfiniteModeScore.Content = result[0][0];
-            ThreeLifesModeScore.Content = result[0][1];
-            OneLifeModeScore.Content = result[0][2];
+            InfiniteModeScore.Content = result[0];
+            ThreeLifesModeScore.Content = result[1];
+            OneLifeModeScore.Content = result[2];
 
             Session.Add("GamemodeScores", result);
         }
