@@ -40,7 +40,7 @@ namespace Controller
         public static void Initialize(Match match)
         {
             CurrentMatch = match;
-            CurrentMatch.Episode = EC.ParseEpisode(match.Episode.Id);
+            CurrentMatch.Episode = EC.ParseEpisode(match.Episode);
             EC.Initialise(CurrentMatch.Episode, true);
         }
 

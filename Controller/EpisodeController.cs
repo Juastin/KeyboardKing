@@ -145,21 +145,22 @@ namespace Controller
         /// </summary>
         /// <param name="episodeId">episode id from the requested episode</param>
         /// <returns></returns>
-        public static Episode ParseEpisode(int episodeId)
+        public static Episode ParseEpisode(Episode episode)
         {
             User user = (User)Session.Get("student");
 
-            List<EpisodeStep> steps = DBQueries.GetAllEpisodeStepsFromEpisode(episodeId);
+            List<EpisodeStep> steps = DBQueries.GetAllEpisodeStepsFromEpisode(episode.Id);
             //TODO make the GetAllChapters query return the correct highscore.
-            int highscore = DBQueries.GetHighscoreEpisode(user, episodeId);
-            int threshold = DBQueries.Getpassthreshold(episodeId);
+            int highscore = DBQueries.GetHighscoreEpisode(user, episode.Id);
+            int threshold = DBQueries.Getpassthreshold(episode.Id);
 
 
             Session.Remove("episodeId");
-            Session.Add("episodeId", episodeId);
+            Session.Add("episodeId", episode.Id);
 
-            Episode episode = new Episode() { HighScore = highscore, PassThreshold = threshold };
             steps.ForEach(s => episode.EpisodeSteps.Enqueue(s));
+            episode.HighScore = highscore;
+            episode.PassThreshold = threshold;
 
             return episode;
         }

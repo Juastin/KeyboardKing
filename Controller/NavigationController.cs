@@ -7,6 +7,7 @@ namespace Controller
     public static class NavigationController
     {
         public static event NavigateHandler Navigate;
+        public static event NavigateHandler AfterNavigate;
         public static event EventHandler ThemeChange;
 
         public static Pages PreviousPage { get; set; } = Pages.Empty;
@@ -17,6 +18,7 @@ namespace Controller
             PreviousPage = CurrentPage;
             Navigate?.Invoke(new NavigateEventArgs(CurrentPage, newPage));
             CurrentPage = newPage;
+            AfterNavigate?.Invoke(new NavigateEventArgs(CurrentPage, newPage));
         }
 
         public static void ChangeTheme()
