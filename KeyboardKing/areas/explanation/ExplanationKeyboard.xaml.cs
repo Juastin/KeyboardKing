@@ -12,6 +12,7 @@ namespace KeyboardKing.areas.explanation
     public partial class ExplanationKeyboard : JumpPage
     {
         //Backslash and LeftAlt not working, LeftAlt probably because of windows limitation
+        private Window _window;
         private readonly Key[] LeftPinkyKeys = { Key.OemTilde, Key.D1, Key.Tab, Key.Q, Key.CapsLock, Key.A, Key.LeftShift, Key.LeftCtrl, Key.Z };
         private readonly Key[] LeftRingKeys = { Key.D2, Key.W, Key.S, Key.X };
         private readonly Key[] LeftMiddleKeys = { Key.D3, Key.E, Key.D, Key.C };
@@ -32,8 +33,8 @@ namespace KeyboardKing.areas.explanation
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
-            var window = Window.GetWindow(this);
-            window.PreviewKeyDown += Explanation_KeyDown;
+            _window = Window.GetWindow(this);
+            _window.PreviewKeyDown += Explanation_KeyDown;
         }
 
         public override void OnLoad()
@@ -43,6 +44,7 @@ namespace KeyboardKing.areas.explanation
 
         public override void OnShadow()
         {
+            _window.PreviewKeyDown -= Explanation_KeyDown;
         }
 
         public override void OnTick()

@@ -91,7 +91,7 @@ namespace KeyboardKing
 
             // Navigate to the first view.
             NavigationController.Navigate += OnNavigate;
-            NavigationController.NavigateToPage(Pages.ExplanationPage);
+            NavigationController.NavigateToPage(Pages.LoginPage);
         }
    
         public void OnNavigate(NavigateEventArgs e)

@@ -32,8 +32,13 @@ namespace KeyboardKing.areas.login
         private void Button_Click_Skill(object sender, RoutedEventArgs e) 
         {
             User user = (User)Session.Get("student");
-            DBQueries.AddSkill(((Button)sender).Tag.ToString(), user);
-            NavigationController.NavigateToPage(Pages.ChaptersPage);
+            string tag = ((Button)sender).Tag.ToString();
+            DBQueries.AddSkill(tag, user);
+
+            if (tag.Equals("beginner"))
+                NavigationController.NavigateToPage(Pages.ExplanationPage);
+            else
+                NavigationController.NavigateToPage(Pages.ChaptersPage);
         }
     }
 }
