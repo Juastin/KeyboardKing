@@ -59,6 +59,18 @@
     <None Remove="resources\images\blur_red_chinese_background.png" />
     <None Remove="resources\images\blur_space_theme_background.png" />
     <None Remove="resources\images\coin.png" />
+    <None Remove="resources\images\explanation\keyboard.png" />
+    <None Remove="resources\images\explanation\keyboard_hands.png" />
+    <None Remove="resources\images\explanation\left_index.png" />
+    <None Remove="resources\images\explanation\left_middle.png" />
+    <None Remove="resources\images\explanation\left_pinky.png" />
+    <None Remove="resources\images\explanation\left_ring.png" />
+    <None Remove="resources\images\explanation\left_thumb.png" />
+    <None Remove="resources\images\explanation\right_index.png" />
+    <None Remove="resources\images\explanation\right_middle.png" />
+    <None Remove="resources\images\explanation\right_pinky.png" />
+    <None Remove="resources\images\explanation\right_ring.png" />
+    <None Remove="resources\images\explanation\right_thumb.png" />
     <None Remove="resources\images\hellobeertje_background_4k.png" />
     <None Remove="resources\images\icon.png" />
     <None Remove="resources\images\icons\coin.png" />
@@ -220,6 +232,42 @@
     <Content Include="resources\images\badges\9_grey.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="resources\images\explanation\keyboard.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\explanation\keyboard_hands.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\explanation\left_index.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\explanation\left_middle.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\explanation\left_pinky.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\explanation\left_ring.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\explanation\left_thumb.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\explanation\right_index.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\explanation\right_middle.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\explanation\right_pinky.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\explanation\right_ring.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\explanation\right_thumb.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="resources\images\icons\coin_shining.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -319,6 +367,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Update="areas\explanation\ExplanationKeyboard.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
     <Page Update="resources\themes\ChineseTheme.xaml">
 		<XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
 	</Page>

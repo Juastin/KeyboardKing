@@ -16,6 +16,7 @@ using KeyboardKing.areas.info;
 using System.ComponentModel;
 using DatabaseController;
 using KeyboardKing.areas.gamemodes;
+using KeyboardKing.areas.explanation;
 
 namespace KeyboardKing
 {
@@ -63,6 +64,7 @@ namespace KeyboardKing
                 {Pages.LoginPage, new LoginPage(this)},
                 {Pages.RegisterPage, new RegisterPage(this)},
                 {Pages.RegisterSkillPage, new RegisterSkillPage(this)},
+                {Pages.ExplanationPage, new ExplanationKeyboard(this)},
 
                 // play area
                 {Pages.EpisodeReadyUpPage, new EpisodeReadyUpPage(this)},
