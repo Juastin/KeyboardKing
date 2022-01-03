@@ -154,7 +154,6 @@ namespace Controller
             int highscore = DBQueries.GetHighscoreEpisode(user, episode.Id);
             int threshold = DBQueries.Getpassthreshold(episode.Id);
 
-
             Session.Remove("episodeId");
             Session.Add("episodeId", episode.Id);
 

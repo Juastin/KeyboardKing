@@ -31,7 +31,7 @@ namespace Controller
             int total_episode_amount = DBQueries.GetTotalEpisodeAmount();
             int random_episode_id = new Random().Next(1, total_episode_amount+1);
 
-            Episode episode = EpisodeController.ParseEpisode(random_episode_id);
+            Episode episode = EpisodeController.ParseEpisode(new Episode() { Id = random_episode_id });
             EpisodeController.CurrentEpisode = episode;
         }
 
@@ -39,7 +39,7 @@ namespace Controller
         {
             int total_episode_amount = DBQueries.GetTotalEpisodeAmount();
             int random_episode_id = new Random().Next(1, total_episode_amount+1);
-            return EpisodeController.ParseEpisode(random_episode_id);
+            return EpisodeController.ParseEpisode(new Episode() { Id = random_episode_id });
         }
 
         public static void Checks()
@@ -66,13 +66,13 @@ namespace Controller
             switch (SelectedGamemode)
             {
                 case "InfiniteMode":
-                    HighScore = int.Parse(((List<List<string>>)Session.Get("GamemodeScores"))[0][0]);
+                    HighScore = int.Parse(((List<string>)Session.Get("GamemodeScores"))[0]);
                     break;
                 case "ThreeLifesMode":
-                    HighScore = int.Parse(((List<List<string>>)Session.Get("GamemodeScores"))[0][1]);
+                    HighScore = int.Parse(((List<string>)Session.Get("GamemodeScores"))[1]);
                     break;
                 case "OneLifeMode":
-                    HighScore = int.Parse(((List<List<string>>)Session.Get("GamemodeScores"))[0][2]);
+                    HighScore = int.Parse(((List<string>)Session.Get("GamemodeScores"))[2]);
                     break;
                 default:
                     break;
