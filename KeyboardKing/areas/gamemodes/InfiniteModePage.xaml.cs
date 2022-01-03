@@ -45,7 +45,7 @@ namespace KeyboardKing.areas.gamemodes
         {
             if (!GamemodeController.IsStarted)
             {
-                Dispatcher.Invoke(() => ScoreTextBox.Text = 0.ToString());
+                Dispatcher.Invoke(() => ScoreTextBox.Text = "0");
                 MusicPlayer.Stop();
                 AudioPlayer.Play(AudioPlayer.Sound.congratulations);
             }
