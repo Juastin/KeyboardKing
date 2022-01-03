@@ -196,7 +196,7 @@ namespace Controller
             IsStarted = false;
             CurrentEpisodeResult.Time = _stopwatch.Elapsed;
             CurrentEpisodeResult.Accuracy = CalculateAccuracy(CurrentEpisodeResult.MaxScore, CurrentEpisodeResult.Mistakes);
-            CurrentEpisodeResult.LettersPerMinute = CalculateLetterPerMinute(CurrentEpisodeResult.Time, CurrentEpisodeResult.MaxScore);
+            CurrentEpisodeResult.LettersPerMinute = CalculateLetterPerMinute(CurrentEpisodeResult.Time, LettersTyped);
             CurrentEpisodeResult.Score = (int)CalculateScore(CurrentEpisodeResult.LettersPerMinute, CurrentEpisodeResult.MaxScore, CurrentEpisodeResult.Mistakes);
             CurrentEpisodeResult.Passed = CheckIfPassedEpisode();
         }
