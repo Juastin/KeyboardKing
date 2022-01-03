@@ -13,9 +13,6 @@ namespace KeyboardKing.areas.gamemodes
     /// </summary>
     public partial class InfiniteModePage : JumpPage
     {
-        private int? _allowedMistakes {get;set;}
-        private string? _selectedGamemode {get;set;}
-
         public InfiniteModePage(MainWindow w) : base(w)
         {
             InitializeComponent();
@@ -23,24 +20,44 @@ namespace KeyboardKing.areas.gamemodes
 
         public override void OnLoad()
         {
-            _selectedGamemode = ((UList)Session.Get("InfiniteMode")).Get<string>(0);
-            _allowedMistakes = ((UList)Session.Get("InfiniteMode")).Get<int>(1);
+            string selected_gamemode = ((UList)Session.Get("InfiniteMode")).Get<string>(0);
+            int allowed_mistakes = ((UList)Session.Get("InfiniteMode")).Get<int>(1);
+
+            if (!GamemodeController.IsStarted)
+            {
+                GamemodeController.Initialise(allowed_mistakes, selected_gamemode);
+            }
 
             if (!EpisodeController.IsStarted)
                 MusicPlayer.PlayNextFrom("intense_music");
 
+            if (selected_gamemode=="InfiniteMode") {LifeLabel.Visibility = Visibility.Hidden;}
+            else {LifeLabel.Visibility = Visibility.Visible;}
+
             EpisodeController.Start();
+            UpdateTimerView();
+            UpdateHearts();
+
             this.UserInput.Focus();
         }
 
         public override void OnShadow()
         {
-
+            if (!GamemodeController.IsStarted)
+            {
+                Dispatcher.Invoke(() => ScoreTextBox.Text = "0");
+                MusicPlayer.Stop();
+                AudioPlayer.Play(AudioPlayer.Sound.congratulations);
+            }
         }
 
         public override void OnTick()
         {
+            UpdateTimerView();
         }
+
+        private void UpdateTimerView() => Dispatcher.Invoke(() => TimerTextBox.Text = EpisodeController.GetTimeFormat());
+        private void UpdateScoreView() => Dispatcher.Invoke(() => ScoreTextBox.Text = GamemodeController.Score.ToString());
 
         /// <summary>
         /// <para>Event that fires each time when focus of window has been lost.</para>
@@ -63,17 +80,25 @@ namespace KeyboardKing.areas.gamemodes
         private void UserInput_TextChanged(object sender, TextChangedEventArgs e)
         {
             string txt = this.UserInput.Text;
+
             if (txt.Length > 0)
             {
+                // Increase score if the typed character matches the expected character.
+                if (EpisodeController.IsInputCorrect(txt[0]))
+                {
+                    GamemodeController.Score++;
+                    UpdateScoreView();
+                } else
+                {
+                    GamemodeController.Mistakes++;
+                }
                 EpisodeController.CheckInput(txt[0]);
             }
-            this.UserInput.Clear();
 
-            // Exit the gamemode if the set amount of mistakes was made.
-            if (EpisodeController.CurrentEpisodeResult.Mistakes==_allowedMistakes)
-            {
-                EpisodeController.StopAndSetEpisodeResult();
-            }
+            GamemodeController.Checks();
+            UpdateHearts();
+
+            this.UserInput.Clear();
         }
 
         /// <summary>
@@ -89,12 +114,21 @@ namespace KeyboardKing.areas.gamemodes
 
         private void ButtonPause(object sender, EventArgs e)
         {
-            EpisodeController.Pause();
+            EpisodeController.Pause(Pages.InfiniteModePage, Pages.GamemodesOverviewPage);
         }
 
-        private void ExitGamemode()
+        private void UpdateHearts()
         {
-            Session.Remove("InfiniteModeAllowedMistakes");
+            if (GamemodeController.AllowedMistakes>0)
+            {
+                Dispatcher.Invoke(() => {
+                    LifeLabel.Content = "";
+                    for (int i = 0; i<GamemodeController.AllowedMistakes-GamemodeController.Mistakes; i++)
+                    {
+                        LifeLabel.Content += "♡";
+                    }
+                });
+            }
         }
     }
 }

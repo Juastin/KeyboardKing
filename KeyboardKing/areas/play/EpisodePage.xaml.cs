@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Controller;
+using Model;
 
 namespace KeyboardKing.areas.play
 {
@@ -86,7 +87,7 @@ namespace KeyboardKing.areas.play
 
         private void ButtonPause(object sender, EventArgs e)
         {
-            EpisodeController.Pause();
+            EpisodeController.Pause(Pages.EpisodePage, Pages.ChaptersPage);
 
             //MusicPlayer.PlayNextFrom("menu_music");
             //NavigationController.NavigateToPage(Pages.ChaptersPage);

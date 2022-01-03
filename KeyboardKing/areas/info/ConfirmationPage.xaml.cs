@@ -44,11 +44,21 @@ namespace KeyboardKing.areas.info
 
         private void RedirectApproved(object sender, RoutedEventArgs e)
         {
+            // This check can probably be improved by creating some sort of musicNavigation controller.
             if (_previousLocation == Pages.SettingsPage && _targetLocation == Pages.SettingsPage)
                 Session.Add("deleteUser", true);
-            // This check can probably be improved by creating some sort of musicNavigation controller.
             if (new List<Pages>(){Pages.ChaptersPage, Pages.MatchOverviewPage, Pages.SettingsPage}.Contains(_targetLocation))
                 MusicPlayer.PlayNextFrom("menu_music");
+            if (_previousLocation==Pages.PausePage && _targetLocation == Pages.GamemodesOverviewPage)
+            {
+                MusicPlayer.Stop();
+                AudioPlayer.Play(AudioPlayer.Sound.congratulations);
+
+                GamemodeController.Leave();
+                GamemodeController.Exit();
+                return;
+            }
+
             NavigationController.NavigateToPage(_targetLocation);
         }
 

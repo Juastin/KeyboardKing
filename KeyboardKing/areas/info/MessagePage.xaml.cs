@@ -2,6 +2,7 @@
 using KeyboardKing.core;
 using Model;
 using System;
+using System.Collections.Generic;
 
 namespace KeyboardKing.areas.info
 {
@@ -36,8 +37,8 @@ namespace KeyboardKing.areas.info
             {
                 TitleLabel.Text = "";
                 TargetLocation = Pages.Empty;
-                Session.Remove("MessagePageInfo");
             });
+            Session.Remove("MessagePageInfo");
         }
 
         public override void OnTick()
@@ -67,6 +68,9 @@ namespace KeyboardKing.areas.info
 
         public void Redirect(object sender, EventArgs e)
         {
+            if (new List<Pages>(){Pages.ChaptersPage, Pages.MatchOverviewPage, Pages.SettingsPage, Pages.GamemodesOverviewPage}.Contains(TargetLocation))
+                MusicPlayer.PlayNextFrom("menu_music");
+
             NavigationController.NavigateToPage(TargetLocation);
         }
     }

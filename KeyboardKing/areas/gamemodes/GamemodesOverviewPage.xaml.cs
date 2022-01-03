@@ -39,13 +39,20 @@ namespace KeyboardKing.areas.gamemodes
         {
             switch(((Button)sender).Name)
             {
-                case "InfiniteMode":
-                    Session.Add("InfiniteMode", new UList(new object[]{"InfiniteMode", -1}));
-                    MessageController.Show(Model.Pages.MessagePage, "Deze uitdaging is nog niet beschikbaar.", Model.Pages.GamemodesOverviewPage, 10);
-                    break;
                 case "ThreeLifesMode":
                     Session.Add("InfiniteMode", new UList(new object[]{"ThreeLifesMode", 3}));
-                    MessageController.Show(Model.Pages.MessagePage, "Deze uitdaging is nog niet beschikbaar.", Model.Pages.GamemodesOverviewPage, 10);
+                    GamemodeController.SetRandomEpisode();
+                    NavigationController.NavigateToPage(Pages.InfiniteModePage);
+                    break;
+                case "OneLifeMode":
+                    Session.Add("InfiniteMode", new UList(new object[]{"OneLifeMode", 1}));
+                    GamemodeController.SetRandomEpisode();
+                    NavigationController.NavigateToPage(Pages.InfiniteModePage);
+                    break;
+                case "InfiniteMode":
+                    Session.Add("InfiniteMode", new UList(new object[]{"InfiniteMode", -1}));
+                    GamemodeController.SetRandomEpisode();
+                    NavigationController.NavigateToPage(Pages.InfiniteModePage);
                     break;
                 default:
                     break;
@@ -55,11 +62,14 @@ namespace KeyboardKing.areas.gamemodes
         public void FetchScores()
         {
             User user = (User)Session.Get("student");
-            List<List<string>> result = DBQueries.GetAllGamemodeScores(user.Id);
+            List<string> result = DBQueries.GetAllGamemodeScores(user.Id);
 
             // Display the fetched data
-            InfiniteModeScore.Content = result[0][0];
-            ThreeLifesModeScore.Content = result[0][1];
+            InfiniteModeScore.Content = result[0];
+            ThreeLifesModeScore.Content = result[1];
+            OneLifeModeScore.Content = result[2];
+
+            Session.Add("GamemodeScores", result);
         }
     }
 }

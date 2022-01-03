@@ -81,6 +81,7 @@ namespace KeyboardKing
 
                 // gamemodes area
                 {Pages.GamemodesOverviewPage, new GamemodesOverviewPage(this)},
+                {Pages.InfiniteModePage, new InfiniteModePage(this)},
 
                 // main area
                 {Pages.ChaptersPage, new ChaptersPage(this)},

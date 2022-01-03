@@ -10,7 +10,7 @@
       MaxHeight="750"
       MaxWidth="1450"
       Title="EpisodePage" PreviewKeyDown="PreventTab_PreviewKeyDown" ForceCursor="True" Cursor="Arrow">
-    
+
     <local:JumpPage.DataContext>
         <dataContext:EpisodePageDataContext/>
     </local:JumpPage.DataContext>
@@ -28,8 +28,12 @@
                     <TextBlock Visibility="Hidden" Style="{DynamicResource TextBlock}" Background="Transparent" x:Name="points" HorizontalAlignment="Center"
                     VerticalAlignment="Top" Height="40" Width="116"
                     TextWrapping="Wrap" Text="0p" TextAlignment="Center"/>
-                    <TextBox BorderThickness="0" x:Name="GamemodeLabel" Style="{DynamicResource TextBox2}" VerticalAlignment="Center" Background="Transparent" Text=""/>
+                    <TextBox BorderThickness="0" x:Name="TimerTextBox" Style="{DynamicResource TextBox2}" VerticalAlignment="Center" Background="Transparent" Text="00:00"/>
+                    <TextBox BorderThickness="0" x:Name="ScoreTextBox" Style="{DynamicResource TextBox2}" TextAlignment="Center" VerticalAlignment="Center" Background="Transparent" Text="0"/>
                     <Button Style="{DynamicResource Button1}" Content="Pauze" VerticalAlignment="Top" HorizontalAlignment="Right" Click="ButtonPause" FontSize="26" Width="110"/>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <Label Name="LifeLabel" Content="" HorizontalContentAlignment="Center" Margin="0,0,0,0" Grid.Row="1" FontSize="54" Foreground="Red"/>
                 </Grid>
                 <Grid Margin="100,0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" TextOptions.TextFormattingMode="Display">
                     <Grid.ColumnDefinitions>
@@ -76,7 +80,7 @@
                     </Border>
                 </Grid>
                 <Grid Grid.Row="2">
-                    <ProgressBar Background="{DynamicResource Color4}" Template="{DynamicResource ProgressBar}" 
+                    <ProgressBar Visibility="Hidden" Background="{DynamicResource Color4}" Template="{DynamicResource ProgressBar}" 
                          VerticalAlignment="Bottom" Height="20" Minimum="0" 
                          Maximum="{Binding MaxLetters}" 
                          Value="{Binding LettersTyped, Mode=OneWay}"/>

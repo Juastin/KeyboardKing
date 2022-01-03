@@ -23,6 +23,7 @@
         MatchPlayingPage,
         MatchResultPage,
         MatchWaitingResultPage,
-        GamemodesOverviewPage
+        GamemodesOverviewPage,
+        InfiniteModePage
     }
 }

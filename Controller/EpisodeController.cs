@@ -12,7 +12,7 @@ namespace Controller
     /// </summary>
     public static class EpisodeController
     {
-        public static Episode CurrentEpisode { get; private set; }
+        public static Episode CurrentEpisode { get; set; }
         public static List<Chapter> Chapters { get; private set; }
         public static EpisodeStep CurrentEpisodeStep { get; private set; }
         public static EpisodeResult CurrentEpisodeResult { get; private set; }
@@ -46,15 +46,15 @@ namespace Controller
             IsStarted = true;
         }
 
-        public static void Pause()
+        public static void Pause(Pages pageBack, Pages pageForward)
         {
             _stopwatch.Stop();
-            MessageController.ShowPause(Pages.PausePage, "De episode is gepauzeerd.", Pages.EpisodePage);
+            MessageController.ShowPause(Pages.PausePage, "De episode is gepauzeerd.", pageBack, pageForward);
         }
 
-        public static void Exit()
+        public static void Exit(Pages page)
         {
-            MessageController.ShowConfirmation(Pages.ConfirmationPage, "Weet je zeker dat je de episode wilt afsluiten?", Pages.PausePage, Pages.ChaptersPage);
+            MessageController.ShowConfirmation(Pages.ConfirmationPage, "Weet je zeker dat je de episode wilt afsluiten?", Pages.PausePage, page);
         }
 
         /// <summary>
@@ -178,8 +178,14 @@ namespace Controller
         /// <param name="input">Input from the user</param>
         public static void CheckInput(char input)
         {
-            NextLetter(CurrentEpisodeStep.Word[_wordIndex].Equals(input));
+            NextLetter(IsInputCorrect(input));
         }
+
+        public static bool IsInputCorrect(char input)
+        {
+            return CurrentEpisodeStep.Word[_wordIndex].Equals(input);
+        }
+
         public static string GetTimeFormat()
         {
             return _stopwatch?.Elapsed.ToString("mm\\:ss");
