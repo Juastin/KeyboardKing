@@ -5,7 +5,7 @@ namespace ModelTest
 {
     public class Tests
     {
-        private UList List;
+        private UList List { get; set; }
 
         [SetUp]
         public void Setup()
