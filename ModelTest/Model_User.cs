@@ -63,16 +63,16 @@ namespace ModelTest
             {
                 new List<string>()
                 {
-                    "13",
-                    "Tom",
-                    "tom-online@test.com",
-                    "110",
-                    "",
-                    "",
-                    "",
-                    "0",
-                    "1",
-                    "light_theme"
+                    "13",                    // Id
+                    "Tom",                   // Username
+                    "tom-online@test.com",   // Email
+                    "110",                   // Coins
+                    "",                      // PW
+                    "",                      // Salt
+                    "",                      // SkillLevel
+                    "0",                     // AudioOn
+                    "1",                     // Dyslectic
+                    "light_theme"            // Theme
                 },
             };
             User result = User.ParseUser(user_id_list);
