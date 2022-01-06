@@ -20,7 +20,7 @@
             Padding="30, 17, 30, 30" 
             HorizontalAlignment="Center" 
             VerticalAlignment="Center" 
-            Height="400" Width="750">
+            Height="410" Width="750">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -73,7 +73,7 @@
                 <Grid Grid.Column="1" HorizontalAlignment="Center">
                     <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
                         <Label Content="Behaald:" Style="{DynamicResource H3}"/>
-                        <Label FontSize="150" HorizontalAlignment="Center">
+                        <Label FontSize="125" HorizontalAlignment="Center">
                             <Label.Style>
                                 <Style TargetType="{x:Type Label}">
                                     <Style.Triggers>
@@ -89,7 +89,7 @@
                                 </Style>
                             </Label.Style>
                         </Label>
-                        <Label HorizontalAlignment="Center" Content="{Binding RequiredScore}"/>
+                        <Label HorizontalAlignment="Center" Content="{Binding RequiredScore}" Style="{DynamicResource H3}" FontSize="15"/>
                     </StackPanel>
                 </Grid>
             </Grid>
