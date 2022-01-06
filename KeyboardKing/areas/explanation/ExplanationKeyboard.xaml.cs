@@ -11,7 +11,12 @@ namespace KeyboardKing.areas.explanation
     /// </summary>
     public partial class ExplanationKeyboard : JumpPage
     {
-        //Backslash and LeftAlt not working, LeftAlt probably because of windows limitation
+        /**
+         * Backslash and LeftAlt not working, probably because of windows limitation
+         * These arrays specify which keys are pressed with witch finger. 
+         * The only duplicate keys are `Key.Space` in Left and Right Thumb.
+         */
+
         private Window _window;
         private readonly Key[] LeftPinkyKeys = { Key.OemTilde, Key.D1, Key.Tab, Key.Q, Key.CapsLock, Key.A, Key.LeftShift, Key.LeftCtrl, Key.Z };
         private readonly Key[] LeftRingKeys = { Key.D2, Key.W, Key.S, Key.X };
@@ -39,7 +44,7 @@ namespace KeyboardKing.areas.explanation
 
         public override void OnLoad()
         {
-            ShowIndicators(Key.None);
+            SetIndicatorsHidden();
         }
 
         public override void OnShadow()
@@ -54,7 +59,16 @@ namespace KeyboardKing.areas.explanation
         private void Explanation_KeyDown(object sender, KeyEventArgs e)
         {
             e.Handled = true;
+            SetIndicatorsHidden();
             ShowIndicators(e.Key);
+        }
+
+        private void SetIndicatorsHidden()
+        {
+            //Set all indicators hidden
+            LeftPinky.Visibility = LeftRing.Visibility = LeftMiddle.Visibility = LeftIndex.Visibility = LeftThumb.Visibility =
+            RightThumb.Visibility = RightIndex.Visibility = RightMiddle.Visibility = RightRing.Visibility = RightPinky.Visibility
+            = Visibility.Hidden;
         }
 
         /// <summary>
@@ -63,39 +77,35 @@ namespace KeyboardKing.areas.explanation
         /// <param name="key">This will determine which indicator will be shown</param>
         private void ShowIndicators(Key key)
         {
-            //Set all indicators hidden
-            LeftPinky.Visibility = LeftRing.Visibility = LeftMiddle.Visibility = LeftIndex.Visibility = LeftThumb.Visibility =
-            RightThumb.Visibility = RightIndex.Visibility = RightMiddle.Visibility = RightRing.Visibility = RightPinky.Visibility
-            = Visibility.Hidden;
-
-            if (LeftPinkyKeys.Contains(key))
-                LeftPinky.Visibility = Visibility.Visible;
-
-            if (LeftRingKeys.Contains(key))
-                LeftRing.Visibility = Visibility.Visible;
-
-            if (LeftMiddleKeys.Contains(key))
-                LeftMiddle.Visibility = Visibility.Visible;
-
-            if (LeftIndexKeys.Contains(key))
-                LeftIndex.Visibility = Visibility.Visible;
-
+            //Thumbs are not in the else if since you can press the spacebar with both thumbs.
             if (LeftThumbKeys.Contains(key))
                 LeftThumb.Visibility = Visibility.Visible;
 
             if (RightThumbKeys.Contains(key))
                 RightThumb.Visibility = Visibility.Visible;
 
-            if (RightIndexKeys.Contains(key))
+            else if (LeftPinkyKeys.Contains(key))
+                LeftPinky.Visibility = Visibility.Visible;
+
+            else if(LeftRingKeys.Contains(key))
+                LeftRing.Visibility = Visibility.Visible;
+
+            else if (LeftMiddleKeys.Contains(key))
+                LeftMiddle.Visibility = Visibility.Visible;
+
+            else if (LeftIndexKeys.Contains(key))
+                LeftIndex.Visibility = Visibility.Visible;
+
+            else if (RightIndexKeys.Contains(key))
                 RightIndex.Visibility = Visibility.Visible;
 
-            if (RightMiddleKeys.Contains(key))
+            else if (RightMiddleKeys.Contains(key))
                 RightMiddle.Visibility = Visibility.Visible;
 
-            if (RightRingKeys.Contains(key))
+            else if (RightRingKeys.Contains(key))
                 RightRing.Visibility = Visibility.Visible;
 
-            if (RightPinkyKeys.Contains(key))
+            else if (RightPinkyKeys.Contains(key))
                 RightPinky.Visibility = Visibility.Visible;
         }
     }
