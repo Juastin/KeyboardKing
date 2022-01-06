@@ -23,7 +23,7 @@
             </Grid.RowDefinitions>
             <Grid Grid.Row="0" VerticalAlignment="Center">
                 <Label Style="{DynamicResource H1}" Content="Lobby" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <Button Style="{DynamicResource Button1}" Content="Verlaat match" HorizontalAlignment="Right" Click="BExitMatch" Height="50" Width="150"/>
+                <Button Style="{DynamicResource Button1}" Content="Verlaat match" HorizontalAlignment="Right" Click="BExitMatch" Height="50" FontSize="18"/>
             </Grid>
             <Grid Grid.Row="1" VerticalAlignment="Center">
                 <Label Style="{DynamicResource H2}" Name="lEpisodeMatch" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Top" Width="306" Height="50" Margin="0,-95,0,0"/>
