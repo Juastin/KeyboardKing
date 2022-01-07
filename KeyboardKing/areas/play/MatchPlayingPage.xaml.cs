@@ -28,7 +28,7 @@ namespace KeyboardKing.areas.play
         {
             Initialize();
             MusicPlayer.PlayNextFrom("intense_music");
-            MatchController.Start();
+            EpisodeController.Start();
             this.UserInput.Focus();
             UpdateOpponentProgress();
         }

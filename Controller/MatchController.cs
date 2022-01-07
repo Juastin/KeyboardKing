@@ -45,11 +45,6 @@ namespace Controller
         }
 
         /// <summary>
-        /// This method starts the episode from the match
-        /// </summary>
-        public static void Start() => EC.Start();
-
-        /// <summary>
         /// This method starts the match
         /// </summary>
         public static void StartGame()
