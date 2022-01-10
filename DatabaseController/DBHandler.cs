@@ -12,7 +12,7 @@ namespace DatabaseController
         /// <summary>
         /// Database connection.
         /// </summary>
-        private static string _connection { get; set; } = ConfigurationManager.AppSettings["connectionString"];
+        private static string _connection { get; set; } = ConfigurationManager.AppSettings["cnnctn"];
 
         /// <summary>
         /// Used to query the DB.
@@ -100,7 +100,7 @@ namespace DatabaseController
 
         public static MySqlConnection OpenConnection(string connectionString)
         {
-            MySqlConnection connection = new MySqlConnection(TripleDES.Decrypt(connectionString, "730cec9c-b95d-4647-b4a9-e7642b15c239"));
+            MySqlConnection connection = new MySqlConnection(TripleDES.Decrypt(connectionString, "b5b7913e-face-444a-88c2-b40e292e1fbc-d9c7d650-f24d-4a6f-88f0-e1164a3dcfb9"));
             connection.Open();
             return connection;
         }
