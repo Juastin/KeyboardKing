@@ -34,7 +34,7 @@
                                         <Image Height="100" Stretch="Fill" Source="/KeyBoardking;component/resources/images/shopping_shelf.png"/>
                                     </Grid>
                                 </Border>
-                                <Border Grid.Row="0" Padding="0,0,0,15">
+                                <Border Grid.Row="0" Padding="0,15,0,15">
                                     <Border.Effect>
                                         <DropShadowEffect ShadowDepth="0" BlurRadius="20" Opacity="0.5" Color="Black"/>
                                     </Border.Effect>
