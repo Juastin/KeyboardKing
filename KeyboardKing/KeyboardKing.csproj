@@ -75,6 +75,7 @@
     <None Remove="resources\images\icon.png" />
     <None Remove="resources\images\icons\coin.png" />
     <None Remove="resources\images\icons\coin_shining.gif" />
+    <None Remove="resources\images\itemIcons\chinese.png" />
     <None Remove="resources\images\itemIcons\coin.png" />
     <None Remove="resources\images\itemIcons\defaultIcons\box.png" />
     <None Remove="resources\images\itemIcons\defaultIcons\grass_block.png" />
@@ -83,7 +84,8 @@
     <None Remove="resources\images\itemIcons\defaultIcons\shopping_bag.png" />
     <None Remove="resources\images\itemIcons\defaultIcons\star.png" />
     <None Remove="resources\images\itemIcons\icon.png" />
-    <None Remove="resources\images\itemIcons\space.png" />
+    <None Remove="resources\images\itemIcons\obsidian.png" />
+    <None Remove="resources\images\itemIcons\paint.png" />
     <None Remove="resources\images\kingbackground.png" />
     <None Remove="resources\images\kk_background_1080.png" />
     <None Remove="resources\images\kk_background_4K.png" />
@@ -271,6 +273,9 @@
     <Content Include="resources\images\icons\coin_shining.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="resources\images\itemIcons\chinese.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="resources\images\itemIcons\defaultIcons\box.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -292,7 +297,10 @@
     <Content Include="resources\images\itemIcons\icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="resources\images\itemIcons\space.png">
+    <Content Include="resources\images\itemIcons\obsidian.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\itemIcons\paint.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\images\itemImages\theme\blur_background_4K.png">
