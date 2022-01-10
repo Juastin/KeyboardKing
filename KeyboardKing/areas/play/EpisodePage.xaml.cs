@@ -1,22 +1,10 @@
 ﻿using KeyboardKing.core;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Model;
 using Controller;
+using Model;
 
 namespace KeyboardKing.areas.play
 {
@@ -29,23 +17,35 @@ namespace KeyboardKing.areas.play
         /// Constructor of <see cref="EpisodePage"/>
         /// </summary>
         /// <param name="w"></param>
+        /// 
+
         public EpisodePage(MainWindow w) : base(w)
         {
             InitializeComponent();
-            this.UserInput.Focus();
         }
 
         public override void OnLoad()
         {
+            if (!EpisodeController.IsStarted)
+                MusicPlayer.PlayNextFrom("intense_music");
+
+            EpisodeController.Start();
+            UpdateTimerView();
+            this.UserInput.Focus();
         }
 
         public override void OnShadow()
         {
+
         }
 
         public override void OnTick()
         {
+            UpdateTimerView();
         }
+
+        private void UpdateTimerView() => Dispatcher.Invoke(() => TimerTextBox.Text = EpisodeController.GetTimeFormat());
+
         /// <summary>
         /// <para>Event that fires each time when focus of window has been lost.</para>
         /// This way the UserInput field is always focused and can always be filled in.
@@ -68,8 +68,9 @@ namespace KeyboardKing.areas.play
         {
             string txt = this.UserInput.Text;
             if (txt.Length > 0)
+            {
                 EpisodeController.CheckInput(txt[0]);
-
+            }
             this.UserInput.Clear();
         }
 
@@ -82,6 +83,14 @@ namespace KeyboardKing.areas.play
         {
             if (e.Key == Key.Tab)
                 e.Handled = true;
+        }
+
+        private void ButtonPause(object sender, EventArgs e)
+        {
+            EpisodeController.Pause(Pages.EpisodePage, Pages.ChaptersPage);
+
+            //MusicPlayer.PlayNextFrom("menu_music");
+            //NavigationController.NavigateToPage(Pages.ChaptersPage);
         }
     }
 }

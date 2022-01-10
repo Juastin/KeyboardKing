@@ -1,19 +1,12 @@
-﻿using KeyboardKing.core;
+using KeyboardKing.core;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Controller;
+using Model;
+using Cryptography;
+using DatabaseController;
+using KeyboardKing.areas.main;
 
 namespace KeyboardKing.areas.login
 {
@@ -29,11 +22,32 @@ namespace KeyboardKing.areas.login
 
         public override void OnLoad()
         {
+            MusicPlayer.Stop();
+
+            User user = (User)Session.Get("student");
+            if (user is not null) 
+            {
+                // Save audio settings if they were changed.
+                if (user.AudioOn != user.AudioOnAtLogin)
+                {
+                    DBQueries.UpdateAudioSetting(user.Id, user.AudioOn);
+                }
+                if (user.Dyslectic != user.DyslecticAtLogin)
+                {
+                    DBQueries.UpdateDyslecticSettings(user.Id, user.Dyslectic);
+                }
+                if (user.Theme != ThemeController.CurrentTheme) {
+                    ThemeController.UpdateDefaultTheme();
+                }
+                // Flush the session if the user was logged in when entering the login page.
+                Session.Flush();
+            }
         }
 
         public override void OnShadow()
         {
-            Console.WriteLine("test");
+            txtEmail.Clear();
+            error.Text = "";
         }
 
         public override void OnTick()
@@ -44,46 +58,55 @@ namespace KeyboardKing.areas.login
         {
             string email = txtEmail.Text.ToString();
             string message = "Error: ";
-            if (!email.Equals("", StringComparison.Ordinal) && email != null
-                && !boxPassword.Password.Equals("", StringComparison.Ordinal) && boxPassword.Password != null)
-            {
-                List<List<string>> results = DBQueries.GetUserInfo(email);
-                if (results.Any())
-                {
-                    bool passwordResult = Encryption.VerifyHash(boxPassword.Password, results[0][4], results[0][3]);
-                    if (passwordResult)
-                    {
-                        ClearText();
-                        string[] Items = {results[0][0], results[0][1], results[0][2], results[0][5]};
-                        Session.Add("student", Items);
 
-                        if (results[0][5] == string.Empty)
+            if (!email.Equals("", StringComparison.Ordinal) && email != null
+                && !boxPassword.Password.Equals("", StringComparison.Ordinal) && boxPassword.Password != null) // Checks if fields isn't empty
+            {
+                User user = AuthenticationController.GetUserInfo(email);
+                if (user != null)
+                {
+                    if (AuthenticationController.VerifyPassword(user, boxPassword.Password))
+                    {
+                        user.Password = user.Salt = null;
+                        user.AudioOnAtLogin = user.AudioOn;
+                        user.DyslecticAtLogin = user.Dyslectic;
+
+                        Session.Add("student", user);
+                        Session.Add("FetchGamemodeScores", true);
+                        Session.Add("FetchMatchHistory", true);
+
+                        SettingsController.Initialise();
+                        SettingsPage.ChangeDyslecticFont(user.Dyslectic);
+                        // Set audio preference based on UserSettings
+                        MusicPlayer.ShouldPlay = user.AudioOn;
+                        AudioPlayer.ShouldPlay = user.AudioOn;
+                        MusicPlayer.PlayNextFrom("menu_music");
+
+                        // Set default Theme based on UserSettings
+                        ThemeController.SetUserThemeData();
+
+                        if (user.SkillLevel == SkillLevel.none)
                         {
-                            Navigate("RegisterSkillPage");
+                            NavigationController.NavigateToPage(Pages.RegisterSkillPage);
+                            return;
                         }
                         else
                         {
-                            Navigate("ChaptersPage");
+                            NavigationController.NavigateToPage(Pages.ChaptersPage);
+                            return;
                         }
                     }
                     else { message += "Wachtwoord is incorrect"; }
                 }
-                else { message += "Email is incorrect"; }
+                else { message += "Email is niet bekend"; }
             }
             else { message += "Email of wachtwoord is niet ingevuld"; }
             error.Text = message;
         }
 
-        public void BToRegistration(object sender, RoutedEventArgs e)
+        private void OnKeyDownLogin(object sender, KeyEventArgs e)
         {
-            ClearText();
-            ButtonNavigate(sender, e);
-        }
-
-        private void ClearText()
-        {
-            txtEmail.Clear();
-            error.Text = "";
+            if (e.Key == Key.Enter) { BLogin(null, new RoutedEventArgs()); }
         }
     }
 }

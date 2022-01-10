@@ -4,40 +4,24 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:KeyboardKing.core"
+      xmlns:self="clr-namespace:KeyboardKing.areas.main"
+      xmlns:Components="clr-namespace:KeyboardKing.components"
       mc:Ignorable="d" 
       Title="ChaptersPage"
       MinHeight="450"
-      MinWidth="400">
+      MinWidth="400"
+      MaxWidth="1420"
+      MaxHeight="750">
+
     <!-- STYLING TEMPLATES -->
     <Page.Resources>
-        <!-- Play button template -->
-        <Style x:Key="PlayButtonTemplate" TargetType="{x:Type Button}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Grid>
-                            <Ellipse x:Name="Ellipse_PlayButton" Fill="LightGray"/>
-                            <Image HorizontalAlignment="Center" Width="25" Source="../../images/play-button.png" VerticalAlignment="Center" Panel.ZIndex="100" OpacityMask="White"/>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Ellipse_PlayButton" Property="Fill" Value="#FFA3A3A3"/>
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="Ellipse_PlayButton" Property="Fill" Value="Gray"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
+        <self:ChapterBadgeConverter x:Key="ChapterBadgeConverter"/>
         <!-- ListBoxItem template -->
         <Style x:Key="ListBoxItemTemplate" TargetType="{x:Type ListBoxItem}">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListBoxItem">
-                        <Border Margin="10" Height="75" Width="300" BorderThickness="0" CornerRadius="5" Background="White">
+                        <Border Margin="10" Height="75" Width="300" BorderThickness="0" CornerRadius="5" Background="{DynamicResource BackgroundColor}">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="75*"/>
@@ -48,73 +32,117 @@
                                     <RowDefinition/>
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
-                                <Border x:Name="EpisodeNumberBox" CornerRadius="5, 0, 0, 5" Width="75" Grid.RowSpan="3" HorizontalAlignment="Left" Background="#FFD9534F">
-                                    <TextBlock Text="{Binding [1]}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="48" Foreground="White"/>
+                                <Border x:Name="EpisodeNumberBox" CornerRadius="5, 0, 0, 5" Width="75" Grid.RowSpan="3" HorizontalAlignment="Left" Background="{DynamicResource Failed}">
+                                    <TextBlock Text="{Binding ChapterEpisodeId}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="48" Foreground="White"/>
                                 </Border>
-                                <TextBlock Text="{Binding [2]}" Grid.Column="1" Grid.RowSpan="3" Margin="10, 0, 0, 0" FontSize="16" VerticalAlignment="Center" Foreground="Black"/>
-                                <TextBlock x:Name="HighscoreBlock" Visibility="Hidden" Grid.Column="1" Grid.Row="2" Margin="10, 0, 0, 0" FontSize="12" VerticalAlignment="Top" Foreground="Black">
-                                    <Run Text="Highscore: "/>
-                                    <Run x:Name="Highscore"/>
+                                <TextBlock Text="{Binding Name}" Grid.Column="1" Grid.RowSpan="3" Margin="10, 0, 0, 0" FontSize="16" VerticalAlignment="Center" Foreground="{DynamicResource TextColor}"/>
+                                <TextBlock x:Name="HighscoreBlock" Visibility="Hidden" Grid.Column="1" Grid.Row="2" Margin="10, 0, 0, 0" FontSize="12" VerticalAlignment="Top" Foreground="{DynamicResource TextColor}">
+                                        <Run Text="Highscore: "/>
+                                        <Run x:Name="Highscore"/>
                                 </TextBlock>
-                                <Button Click="EpOverview_PlayClick" Grid.Column="1" Grid.RowSpan="3"  Width="50" Height="50" HorizontalAlignment="Right" Margin="0,0,10,0" Style="{DynamicResource PlayButtonTemplate}"/>
+                                <Button Style="{DynamicResource PlayButtonTemplate}" Click="EpOverview_PlayClick" Grid.Column="1" Grid.RowSpan="3"  Width="50" Height="50" HorizontalAlignment="Right" Margin="0,0,10,0"/>
                             </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
-                            <DataTrigger Binding="{Binding [4]}"
-                             Value="True">
+                            <DataTrigger Binding="{Binding Completed}"
+                                 Value="True">
                                 <Setter TargetName="EpisodeNumberBox" Property="Background"
-                            Value="#70AD47" />
+                                Value="{DynamicResource Succes}" />
                                 <Setter TargetName="HighscoreBlock" Property="Visibility"
-                            Value="Visible" />
+                                Value="Visible" />
                                 <Setter TargetName="Highscore" Property="Text"
-                            Value="{Binding [5]}" />
+                                Value="{Binding HighScore}" />
                             </DataTrigger>
                         </ControlTemplate.Triggers>
+
                     </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Border.Effect">
+                <Setter.Value>
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="20" Color="#e8e8e8" />
                 </Setter.Value>
             </Setter>
         </Style>
     </Page.Resources>
 
     <!-- CONTENT -->
-    <Grid>
-        <Label Content="ChaptersPage" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"/>
+    <Grid Margin="25">
+        <Border Style="{DynamicResource GridBorder}" Padding="30">
+            <Grid>
 
-        <!-- Chapter overview ListBox -->
-        <ListBox Name="EpOverview" Margin="49,114,49,49" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" 
-                 HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch"
-                 ItemContainerStyle="{DynamicResource ListBoxItemTemplate}">
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel/>
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" VerticalAlignment="Center">
+                    <Label Style="{DynamicResource H1}" Content="Chapters" HorizontalAlignment="Left"/>
+                    <Components:NavigationButton ToPage="ExplanationPage" Content="?" Style="{DynamicResource NavButton}" HorizontalAlignment="Center" Width="40" Height="40" FontSize="20" ToolTip="Vinger positionering"/>
+                    <Components:CoinsComp HorizontalAlignment="Right"/>
+                </Grid>
+                <Grid Grid.Row="1" VerticalAlignment="Top">
+                    <!-- Chapter overview ListBox -->
+                    <ListBox Background="{DynamicResource BackgroundColor}" Name="EpOverview" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderBrush="{x:Null}" Foreground="{DynamicResource BackgroundColor}" 
+                             HorizontalContentAlignment="Stretch" ItemContainerStyle="{DynamicResource ListBoxItemTemplate}" Margin="-2, 0">
+                        <ListBox.OpacityMask>
+                            <LinearGradientBrush EndPoint="0,1"
+                             StartPoint="0,0">
+                                <GradientStop Color="Transparent"
+                                              Offset="0" />
+                                <GradientStop Color="White"
+                                              Offset="0.02" />
+                                <GradientStop Color="White"
+                                              Offset="0.98" />
+                                <GradientStop Color="Transparent" 
+                                              Offset="1"/>
+                            </LinearGradientBrush>
+                        </ListBox.OpacityMask>
 
-            <ListBox.GroupStyle>
-                <GroupStyle>
-                    <GroupStyle.ContainerStyle>
-                        <Style TargetType="{x:Type GroupItem}">
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate>
-                                        <Expander IsExpanded="False" Background="#FFD6D6D6" Padding="10">
-                                            <Expander.Header>
-                                                <StackPanel Orientation="Horizontal" >
-                                                    <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="22"/>
-                                                    <TextBlock Text=" - " FontSize="22"/>
-                                                    <TextBlock Text="{Binding ItemCount}" FontSize="22" FontStyle="Italic"/>
-                                                    <TextBlock Text=" episode(s) " FontSize="22" FontStyle="Italic"/>
-                                                </StackPanel>
-                                            </Expander.Header>
-                                            <ItemsPresenter />
-                                        </Expander>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </GroupStyle.ContainerStyle>
-                </GroupStyle>
-            </ListBox.GroupStyle>
-        </ListBox>
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel HorizontalAlignment="Left"/>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+
+                        <ListBox.GroupStyle>
+                            <GroupStyle>
+                                <GroupStyle.ContainerStyle>
+                                    <Style TargetType="{x:Type GroupItem}">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate>
+                                                    <Expander Background="{DynamicResource BackgroundColor}" Margin="0, 10" BorderThickness="2" BorderBrush="{DynamicResource Color4}" IsExpanded="False" Padding="10">
+                                                        <Expander.Header>
+                                                                <StackPanel Orientation="Horizontal">
+                                                                    <Rectangle Width="60" Height="70" RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased">
+                                                                        <Rectangle.Fill>
+                                                                            <ImageBrush ImageSource="{Binding Path=Name, Converter={StaticResource ChapterBadgeConverter}}"/>
+                                                                        </Rectangle.Fill>
+                                                                    </Rectangle>
+                                                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                                    <Label Style="{DynamicResource H3}" Content="{Binding Name}" FontWeight="Bold"/>
+                                                                    <Label Style="{DynamicResource H3}" Content="-"/>
+                                                                    <Label Style="{DynamicResource H3}" Content="{Binding ItemCount}" FontStyle="Italic"/>
+                                                                    <Label Style="{DynamicResource H3}" Content="episode(s)" FontStyle="Italic"/>
+                                                                </StackPanel>
+                                                            </StackPanel>
+                                                        </Expander.Header>
+                                                        <ItemsPresenter />
+                                                    </Expander>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </GroupStyle.ContainerStyle>
+                            </GroupStyle>
+                        </ListBox.GroupStyle>
+                    </ListBox>
+                </Grid>
+                <Grid Grid.Row="2" HorizontalAlignment="Center">
+                     <Components:Navbar CurrentPage="ChaptersPage"/> 
+                </Grid>
+            </Grid>
+        </Border>
     </Grid>
 </local:JumpPage>

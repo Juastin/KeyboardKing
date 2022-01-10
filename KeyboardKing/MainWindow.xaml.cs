@@ -6,18 +6,17 @@ using KeyboardKing.core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Model;
+using Model.event_args;
+using KeyboardKing.areas.info;
+using System.ComponentModel;
+using DatabaseController;
+using KeyboardKing.areas.gamemodes;
+using KeyboardKing.areas.explanation;
 
 namespace KeyboardKing
 {
@@ -41,11 +40,12 @@ namespace KeyboardKing
         /// <summary>
         /// Dictionary of pages that are used in the app.
         /// </summary>
-        private Dictionary<string, JumpPage> _pages {get;set;}
+        private Dictionary<Pages, JumpPage> _pages {get;set;}
 
         public MainWindow()
         {
             InitializeComponent();
+            DiscordController.Initialize();
 
             _timer = new Timer();
             _timer.Elapsed += new ElapsedEventHandler(Tick);
@@ -55,45 +55,59 @@ namespace KeyboardKing
             _mainFrame = MainFrame;
             _pages = new()
             {
-                // login area
-                {"LoginPage", new LoginPage(this)},
-                {"RegisterPage", new RegisterPage(this)},
-                {"RegisterSkillPage", new RegisterSkillPage(this)},
+                // info area
+                {Pages.MessagePage, new MessagePage(this)},
+                {Pages.ConfirmationPage, new ConfirmationPage(this)},
+                {Pages.PausePage, new PausePage(this)},
 
-                // main area
-                {"ChaptersPage", new ChaptersPage(this)},
-                {"FavoritesPage", new FavoritesPage(this)},
-                {"SettingsPage", new SettingsPage(this)},
+                // login area
+                {Pages.LoginPage, new LoginPage(this)},
+                {Pages.RegisterPage, new RegisterPage(this)},
+                {Pages.RegisterSkillPage, new RegisterSkillPage(this)},
+                {Pages.ExplanationPage, new ExplanationKeyboard(this)},
 
                 // play area
-                {"EpisodePage", new EpisodePage(this)},
-                {"EpisodeResultPage", new EpisodeResultPage(this)},
-                {"MatchLobbyPage", new MatchLobbyPage(this)},
-                {"MatchPlayingPage", new MatchPlayingPage(this)},
-                {"MatchResultPage", new MatchResultPage(this)},
+                {Pages.EpisodeReadyUpPage, new EpisodeReadyUpPage(this)},
+                {Pages.EpisodePage, new EpisodePage(this)},
+                {Pages.EpisodeResultPage, new EpisodeResultPage(this)},
+
+                // match area
+                {Pages.MatchOverviewPage, new MatchOverviewPage(this)},
+                {Pages.MatchHistoryPage, new MatchHistoryPage(this)},
+                {Pages.MatchHistoryLeaderboardPage, new MatchHistoryLeaderboardPage(this)},
+                {Pages.MatchCreatePage, new MatchCreatePage(this)},
+                {Pages.MatchLobbyPage, new MatchLobbyPage(this)},
+                {Pages.MatchPlayingPage, new MatchPlayingPage(this)},
+                {Pages.MatchResultPage, new MatchResultPage(this)},
+                {Pages.MatchWaitingResultPage, new MatchWaitingResultPage(this)},
+
+                // gamemodes area
+                {Pages.GamemodesOverviewPage, new GamemodesOverviewPage(this)},
+                {Pages.InfiniteModePage, new InfiniteModePage(this)},
+
+                // main area
+                {Pages.ChaptersPage, new ChaptersPage(this)},
+                {Pages.ShoppingPage, new ShoppingPage(this)},
+                {Pages.SettingsPage, new SettingsPage(this)} // This page should be at the bottom of the list.
             };
 
             // Navigate to the first view.
-            Navigate("LoginPage");
+            NavigationController.Navigate += OnNavigate;
+            NavigationController.NavigateToPage(Pages.LoginPage);
         }
-
-        public void Navigate(string pageName)
+   
+        public void OnNavigate(NavigateEventArgs e)
         {
-            _mainFrame.Navigate(_pages[pageName]);
-            _currentPage = pageName;
-        }
+            if (e.OldPage != Pages.Empty)
+                _pages[e.OldPage].OnShadow();
 
-        public void Navigate(JumpPage oldPage, string pageName)
-        {
-            oldPage.OnShadow();
-            _mainFrame.Navigate(_pages[pageName]);
-            _pages[pageName].OnLoad();
-            _currentPage = pageName;
+            Dispatcher.Invoke(() => _mainFrame.Navigate(_pages[e.NewPage])); 
+            _pages[e.NewPage].OnLoad();
         }
 
         private void Tick(object sender, EventArgs e)
         {
-            _pages[_currentPage].OnTick();
+            _pages[NavigationController.CurrentPage].OnTick();
         }
 
         // Switch between minimized and maximized window with the right values.
@@ -164,5 +178,39 @@ namespace KeyboardKing
         {
             Application.Current.Shutdown();
         }
+
+        //Closes open matches when closing application
+        private void CheckBefore_Closing(object sender, CancelEventArgs e)
+        {
+            // Save audio before quitting.
+            User user = (User)Session.Get("student");
+            if (user is not null)
+            {
+                if (user.AudioOn != user.AudioOnAtLogin)
+                {
+                    DBQueries.UpdateAudioSetting(user.Id, user.AudioOn);
+                }
+                if (user.Dyslectic != user.DyslecticAtLogin)
+                {
+                    DBQueries.UpdateDyslecticSettings(user.Id, user.Dyslectic);
+                }
+                if (user.Theme != ThemeController.CurrentTheme)
+                {
+                    ThemeController.UpdateDefaultTheme();
+                }
+            }
+            if (NavigationController.CurrentPage == Pages.MatchLobbyPage || NavigationController.CurrentPage == Pages.MatchPlayingPage)
+            {
+                MatchController.RemoveUserInMatchProgress();
+
+                if (!MatchController.GetMatchProgressInfo().Any())
+                {
+                    MatchController.DeleteMatch();
+                }
+
+            }
+        }
+
+
     }
 }

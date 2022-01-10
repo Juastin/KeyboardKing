@@ -7,31 +7,395 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="audio\click.wav" />
-    <None Remove="audio\congratulations.wav" />
-    <None Remove="audio\failure.wav" />
-    <None Remove="images\icon.png" />
-    <None Remove="images\play-button.png" />
+    <None Remove="resources\audio\congratulations.wav" />
+    <None Remove="resources\audio\failure.wav" />
+    <None Remove="resources\audio\music\break.wav" />
+    <None Remove="resources\audio\music\Coffee.wav" />
+    <None Remove="resources\audio\music\Fiber.wav" />
+    <None Remove="resources\audio\music\Merchant.wav" />
+    <None Remove="resources\audio\music\Page.wav" />
+    <None Remove="resources\audio\music\Riverside.wav" />
+    <None Remove="resources\audio\music\Sunday.wav" />
+    <None Remove="resources\audio\music\There Was A King.wav" />
+    <None Remove="resources\audio\music\Underdog.wav" />
+    <None Remove="resources\images\badges\0.png" />
+    <None Remove="resources\images\badges\1.png" />
+    <None Remove="resources\images\badges\10.png" />
+    <None Remove="resources\images\badges\10_grey.png" />
+    <None Remove="resources\images\badges\11.png" />
+    <None Remove="resources\images\badges\11_grey.png" />
+    <None Remove="resources\images\badges\12.png" />
+    <None Remove="resources\images\badges\12_grey.png" />
+    <None Remove="resources\images\badges\13.png" />
+    <None Remove="resources\images\badges\13_grey.png" />
+    <None Remove="resources\images\badges\14.png" />
+    <None Remove="resources\images\badges\14_grey.png" />
+    <None Remove="resources\images\badges\1_grey.png" />
+    <None Remove="resources\images\badges\2.png" />
+    <None Remove="resources\images\badges\2_grey.png" />
+    <None Remove="resources\images\badges\3.png" />
+    <None Remove="resources\images\badges\3_grey.png" />
+    <None Remove="resources\images\badges\4.png" />
+    <None Remove="resources\images\badges\4_grey.png" />
+    <None Remove="resources\images\badges\5.png" />
+    <None Remove="resources\images\badges\5_grey.png" />
+    <None Remove="resources\images\badges\6.png" />
+    <None Remove="resources\images\badges\6_grey.png" />
+    <None Remove="resources\images\badges\7.png" />
+    <None Remove="resources\images\badges\7_grey.png" />
+    <None Remove="resources\images\badges\8.png" />
+    <None Remove="resources\images\badges\8_grey.png" />
+    <None Remove="resources\images\badges\9.png" />
+    <None Remove="resources\images\badges\9_grey.png" />
+    <None Remove="resources\audio\shop_enter.wav" />
+    <None Remove="resources\audio\shop_exit.wav" />
+    <None Remove="resources\audio\shop_preview.wav" />
+    <None Remove="resources\audio\shop_purchase.wav" />
+    <None Remove="resources\images\blur_background_4K.png" />
+    <None Remove="resources\images\blur_hellobeertje_background.png" />
+    <None Remove="resources\Images\blur_kk_background_christmas.png" />
+    <None Remove="resources\images\blur_kk_background_dark.png" />
+    <None Remove="resources\images\blur_paint_theme_background.png" />
+    <None Remove="resources\images\blur_red_chinese_background.png" />
+    <None Remove="resources\images\blur_space_theme_background.png" />
+    <None Remove="resources\images\coin.png" />
+    <None Remove="resources\images\explanation\keyboard.png" />
+    <None Remove="resources\images\explanation\keyboard_hands.png" />
+    <None Remove="resources\images\explanation\left_index.png" />
+    <None Remove="resources\images\explanation\left_middle.png" />
+    <None Remove="resources\images\explanation\left_pinky.png" />
+    <None Remove="resources\images\explanation\left_ring.png" />
+    <None Remove="resources\images\explanation\left_thumb.png" />
+    <None Remove="resources\images\explanation\right_index.png" />
+    <None Remove="resources\images\explanation\right_middle.png" />
+    <None Remove="resources\images\explanation\right_pinky.png" />
+    <None Remove="resources\images\explanation\right_ring.png" />
+    <None Remove="resources\images\explanation\right_thumb.png" />
+    <None Remove="resources\images\hellobeertje_background_4k.png" />
+    <None Remove="resources\images\icon.png" />
+    <None Remove="resources\images\icons\coin.png" />
+    <None Remove="resources\images\icons\coin_shining.gif" />
+    <None Remove="resources\images\itemIcons\chinese.png" />
+    <None Remove="resources\images\itemIcons\coin.png" />
+    <None Remove="resources\images\itemIcons\defaultIcons\box.png" />
+    <None Remove="resources\images\itemIcons\defaultIcons\grass_block.png" />
+    <None Remove="resources\images\itemIcons\defaultIcons\present.png" />
+    <None Remove="resources\images\itemIcons\defaultIcons\ruby.png" />
+    <None Remove="resources\images\itemIcons\defaultIcons\shopping_bag.png" />
+    <None Remove="resources\images\itemIcons\defaultIcons\star.png" />
+    <None Remove="resources\images\itemIcons\icon.png" />
+    <None Remove="resources\images\itemIcons\obsidian.png" />
+    <None Remove="resources\images\itemIcons\paint.png" />
+    <None Remove="resources\images\kingbackground.png" />
+    <None Remove="resources\images\kk_background_1080.png" />
+    <None Remove="resources\images\kk_background_4K.png" />
+    <None Remove="resources\Images\kk_background_christmas.png" />
+    <None Remove="resources\images\kk_background_dark.png" />
+    <None Remove="resources\images\obsidian_theme_background.png" />
+    <None Remove="resources\images\paint_theme_background.png" />
+    <None Remove="resources\images\play-button.png" />
+    <None Remove="resources\images\red_chinese_background.png" />
+    <None Remove="resources\images\shopping_shelf.png" />
+    <None Remove="resources\images\shop_overlay.png" />
+    <None Remove="resources\images\space_theme_background.png" />
+    <None Remove="resources\images\wooden_arrow.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="audio\click.wav">
+    <Content Include="resources\audio\congratulations.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="audio\congratulations.wav">
+    <Content Include="resources\audio\failure.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="audio\failure.wav">
+    <Content Include="resources\audio\music\break.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="images\icon.png">
+    <Content Include="resources\audio\music\Coffee.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="images\play-button.png">
+    <Content Include="resources\audio\music\Fiber.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="resources\audio\music\Merchant.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\audio\music\Page.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\audio\music\Riverside.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\audio\music\Sunday.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\audio\music\There Was A King.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\audio\music\Underdog.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\audio\shop_enter.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\audio\shop_exit.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\audio\shop_preview.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+	<Content Include="resources\audio\shop_purchase.wav">
+		<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	</Content>
+    <Content Include="resources\images\badges\0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\10.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\10_grey.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\11.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\11_grey.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\12.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\12_grey.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\13.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\13_grey.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\14.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\14_grey.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\1_grey.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\2_grey.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\3_grey.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\4.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\4_grey.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\5.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\5_grey.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\6.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\6_grey.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\7.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\7_grey.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\8.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\8_grey.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\9.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\badges\9_grey.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\explanation\keyboard.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\explanation\keyboard_hands.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\explanation\left_index.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\explanation\left_middle.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\explanation\left_pinky.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\explanation\left_ring.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\explanation\left_thumb.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\explanation\right_index.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\explanation\right_middle.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\explanation\right_pinky.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\explanation\right_ring.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\explanation\right_thumb.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\icons\coin_shining.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\itemIcons\chinese.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\itemIcons\defaultIcons\box.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\itemIcons\defaultIcons\grass_block.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\itemIcons\defaultIcons\present.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\itemIcons\defaultIcons\ruby.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\itemIcons\defaultIcons\shopping_bag.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\itemIcons\defaultIcons\star.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\itemIcons\icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\itemIcons\obsidian.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\itemIcons\paint.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\itemImages\theme\blur_background_4K.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\itemImages\theme\blur_hello_beertje.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\itemImages\theme\blur_kk_background_dark.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\itemImages\theme\blur_paint.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\itemImages\theme\blur_chinese.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\itemImages\theme\blur_space.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\itemImages\theme\hello_beertje.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\icons\coin.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\itemImages\theme\kingbackground.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\itemImages\theme\kk_background_1080.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\itemImages\theme\kk_background_4K.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\itemImages\theme\christmas.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\itemImages\theme\blur_christmas.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\itemImages\theme\kk_background_dark.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\itemImages\theme\obsidian.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\itemImages\theme\paint.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\play-button.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\itemImages\theme\chinese.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\shopping_shelf.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\itemImages\theme\space.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\images\wooden_arrow.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <PackageReference Include="WpfAnimatedGif" Version="2.0.2" />
     <ProjectReference Include="..\Controller\Controller.csproj" />
     <ProjectReference Include="..\Model\Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="areas\explanation\ExplanationKeyboard.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="resources\themes\ChineseTheme.xaml">
+		<XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+	</Page>
+    <Page Update="resources\themes\ChristmasTheme.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="resources\themes\ObsidianTheme.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="resources\themes\PaintTheme.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="resources\themes\HelloBeertjeTheme.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="resources\themes\ThemeTemplate.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
   </ItemGroup>
 
 </Project>

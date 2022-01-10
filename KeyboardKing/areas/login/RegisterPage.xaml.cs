@@ -1,21 +1,10 @@
 ﻿using KeyboardKing.core;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Controller;
-using System.ComponentModel.DataAnnotations;
-using System.Text.RegularExpressions;
+using Model;
+using Cryptography;
+using DatabaseController;
 
 namespace KeyboardKing.areas.login
 {
@@ -35,6 +24,9 @@ namespace KeyboardKing.areas.login
 
         public override void OnShadow()
         {
+            txtemail.Clear();
+            txtusername.Clear();
+            error.Text = "";
         }
 
         public override void OnTick()
@@ -48,58 +40,33 @@ namespace KeyboardKing.areas.login
 
             string password = password1.Password;
             string passwordcheck = password2.Password;
+            string message = "Error: ";
 
-            if(!string.IsNullOrEmpty(password) && !string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(username)) //Checking if user has entered all the information
+            if(!string.IsNullOrEmpty(password) && !string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(username)) //Checks if user has entered all the information
             {
-                if (new EmailAddressAttribute().IsValid(email)) //Checking if the given email has emailformat
+                if (AuthenticationController.IsEmail(email))
                 {
-                    if (password.Equals(passwordcheck, StringComparison.Ordinal)) //Checking if the user has entered the password correctly
+                    if (password.Equals(passwordcheck, StringComparison.Ordinal)) // Checks if user entered password correct
                     {
-                        if (IsPasswordValid(password))
+                        if (AuthenticationController.IsPasswordValid(password))
                         {
-                            string salt = Encryption.CreateSalt();
-                            string passHashed = Encryption.HashPassword(password, salt); //Hashing the password
-                            bool Adduser = DBQueries.AddUser(username, email, passHashed, salt); //Adding new user to database
-                            if (Adduser)
+                            if (username.Length <= 20)
                             {
-                                ClearText();
-                                Navigate("LoginPage"); //Returning to loginpage
+                                string[] passwordHashed = AuthenticationController.HashPassword(password);
+                                if (AuthenticationController.AddUser(username, email, passwordHashed[0], passwordHashed[1]))
+                                    NavigationController.NavigateToPage(Pages.LoginPage);
+                                else {  message += "Service onbereikbaar / Bestaande gebruiker"; }
                             }
-                            else { error.Text = "Error: Service onbereikbaar / Bestaande gebruiker"; }
+                            else { message += "Gebruikersnaam is te lang (max 20 tekens)"; }
                         }
-                        else
-                        {
-                            error.Text = "Error: Wachtwoord bevat geen kleine of grote letter, nummer of minstens 8 tekens";
-                        }
+                        else { message += "Wachtwoord bevat geen kleine of grote letter, nummer of minstens 8 tekens"; }
                     }
-                    else { error.Text = "Error: Wachtwoorden komen niet overeen"; }
+                    else { message += "Wachtwoorden komen niet overeen"; }
                 }
-                else { error.Text = "Error: Geen geldige E-mail"; }
+                else { message += "e-mail is niet geldig"; }
             }
-            else { error.Text = "Error: Lege velden"; }
-        }
-
-        private static bool IsPasswordValid(string password)
-        {
-            Regex containNumber = new(@"[0-9]+");
-            Regex containUpperCase = new(@"[A-Z]+");
-            Regex containLowerCase = new(@"[a-z]+");
-            Regex containMinLength8Char = new(@".{8,}");
-
-            return containNumber.IsMatch(password) && containUpperCase.IsMatch(password) && containLowerCase.IsMatch(password) && containMinLength8Char.IsMatch(password);
-        }
-
-        private void BToLogin(object sender, RoutedEventArgs e)
-        {
-            ClearText();
-            ButtonNavigate(sender, e);
-        }
-
-        private void ClearText()
-        {
-            txtemail.Clear();
-            txtusername.Clear();
-            error.Text = "";
+            else { message += "Lege velden"; }
+            error.Text = message;
         }
 
     }

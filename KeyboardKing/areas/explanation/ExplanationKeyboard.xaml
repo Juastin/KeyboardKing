@@ -1,0 +1,41 @@
+﻿<local:JumpPage x:Class="KeyboardKing.areas.explanation.ExplanationKeyboard"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:KeyboardKing.core" 
+      xmlns:Components="clr-namespace:KeyboardKing.components"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="750"
+      MaxHeight="600" MaxWidth="900"
+      Title="ExplanationKeyboard">
+    <Border Style="{DynamicResource GridBorder}"
+            Padding="30" 
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Text="Hier onder zie je hoe je je handen moet positioneren op het toetsenbord." Style="{DynamicResource TextBlock}" TextAlignment="Center" FontSize="20" TextWrapping="Wrap"/>
+            <Grid Grid.Row="1">
+                <Image x:Name="KeyboardHands" Source="/KeyboardKing;component/resources/images/explanation/keyboard_hands.png"/>
+                <Image x:Name="LeftPinky" Source="/KeyboardKing;component/resources/images/explanation/left_pinky.png"/>
+                <Image x:Name="LeftRing" Source="/KeyboardKing;component/resources/images/explanation/left_ring.png"/>
+                <Image x:Name="LeftMiddle" Source="/KeyboardKing;component/resources/images/explanation/left_middle.png"/>
+                <Image x:Name="LeftIndex" Source="/KeyboardKing;component/resources/images/explanation/left_index.png"/>
+                <Image x:Name="LeftThumb" Source="/KeyboardKing;component/resources/images/explanation/left_thumb.png"/>
+                <Image x:Name="RightThumb" Source="/KeyboardKing;component/resources/images/explanation/right_thumb.png"/>
+                <Image x:Name="RightIndex" Source="/KeyboardKing;component/resources/images/explanation/right_index.png"/>
+                <Image x:Name="RightMiddle" Source="/KeyboardKing;component/resources/images/explanation/right_middle.png"/>
+                <Image x:Name="RightRing" Source="/KeyboardKing;component/resources/images/explanation/right_ring.png"/>
+                <Image x:Name="RightPinky" Source="/KeyboardKing;component/resources/images/explanation/right_pinky.png"/>
+            </Grid>
+            <Label Grid.Row="2" Style="{DynamicResource H3}" FontSize="15" Content="Druk een toets in om te zien met welke vinger je deze moet typen."/>
+            <Components:NavigationButton ToPage="ChaptersPage" Grid.Row="3" Style="{DynamicResource Button1}" Content="Volgende" HorizontalAlignment="Right"/>
+        </Grid>
+    </Border>
+</local:JumpPage>

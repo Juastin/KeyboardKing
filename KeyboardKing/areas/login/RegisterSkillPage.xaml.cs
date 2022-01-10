@@ -1,20 +1,9 @@
 ﻿using KeyboardKing.core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Controller;
-
+using Model;
+using DatabaseController;
 
 namespace KeyboardKing.areas.login
 {
@@ -42,9 +31,14 @@ namespace KeyboardKing.areas.login
 
         private void Button_Click_Skill(object sender, RoutedEventArgs e) 
         {
-            string[] result = (string[])Session.Get("student");
-            DBQueries.AddSkill(((Button)sender).Tag.ToString(), result);
-            Navigate("ChaptersPage");
+            User user = (User)Session.Get("student");
+            string tag = ((Button)sender).Tag.ToString();
+            DBQueries.AddSkill(tag, user);
+
+            if (tag.Equals("beginner"))
+                NavigationController.NavigateToPage(Pages.ExplanationPage);
+            else
+                NavigationController.NavigateToPage(Pages.ChaptersPage);
         }
     }
 }

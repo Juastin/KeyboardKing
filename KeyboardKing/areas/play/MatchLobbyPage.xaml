@@ -3,12 +3,42 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:KeyboardKing.core"
+      xmlns:local="clr-namespace:KeyboardKing.core" xmlns:Components="clr-namespace:KeyboardKing.components"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="MatchLobbyPage">
-
-    <Grid>
-        <Label Content="MatchLobbyPage" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top" Foreground="White" FontSize="36"/>
-    </Grid>
+      Title="MatchLobbyPage"
+      MinHeight="450"
+      MinWidth="400"
+      MaxWidth="1420"
+      MaxHeight="750">
+    <Border Style="{DynamicResource GridBorder}"
+            Padding="30" 
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center" 
+            Height="400" Width="750" >
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" VerticalAlignment="Center">
+                <Label Style="{DynamicResource H1}" Content="Lobby" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Button Style="{DynamicResource Button1}" Content="Verlaat match" HorizontalAlignment="Right" Click="BExitMatch" Height="50" FontSize="18"/>
+            </Grid>
+            <Grid Grid.Row="1" VerticalAlignment="Center">
+                <Label Style="{DynamicResource H2}" Name="lEpisodeMatch" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Top" Width="306" Height="50" Margin="0,-95,0,0"/>
+                <ListView Name="LvMatch" Width="470" HorizontalAlignment="Left" Style="{DynamicResource ListViewTemplate}" ItemContainerStyle="{DynamicResource ListViewItemTemplate}" Margin="110,-40,0,30">
+                    <ListView.View>
+                        <GridView ColumnHeaderContainerStyle="{DynamicResource ListViewHeader}">
+                            <GridViewColumn Width="25" DisplayMemberBinding="{Binding Logo}"/>
+                            <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Username}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+            <Grid Grid.Row="2" VerticalAlignment="Bottom">
+                <Button Style="{DynamicResource Button1}" x:Name="startbtn" Content="Start match" Click="EpOverview_PlayClick" Height="50" Width="150"/>
+            </Grid>
+        </Grid>
+    </Border>
 </local:JumpPage>

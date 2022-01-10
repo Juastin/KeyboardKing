@@ -4,28 +4,98 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:KeyboardKing.core"
-      xmlns:Model="clr-namespace:Model" x:Class="KeyboardKing.areas.play.EpisodeResultPage"
+      xmlns:Components="clr-namespace:KeyboardKing.components"
+      xmlns:dataContext="clr-namespace:KeyboardKing.data_context" x:Class="KeyboardKing.areas.play.EpisodeResultPage"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="EpisodeResultPage">
+      MaxHeight="750" MaxWidth="1450"
+      Title="EpisodeResultPage" HorizontalAlignment="Center" VerticalAlignment="Center">
+
 
     <local:JumpPage.DataContext>
-        <Model:EpisodeResultPageDataContext/>
+        <dataContext:EpisodeResultPageDataContext/>
     </local:JumpPage.DataContext>
 
-    <Grid>
-        <Grid Margin="0,0,400,0">
-            <Label Content="Score" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top" Foreground="White" FontSize="28"></Label>
-            <Label Content="Tijd" HorizontalAlignment="Left" Margin="49,114,0,0" VerticalAlignment="Top" Foreground="White" FontSize="28"></Label>
-            <Label Content="Fouten" HorizontalAlignment="Left" Margin="49,177,0,0" VerticalAlignment="Top" Foreground="White" FontSize="28"></Label>
-            <Label Content="Letters per minuut" HorizontalAlignment="Left" Margin="49,240,0,0" VerticalAlignment="Top" Foreground="White" FontSize="28"></Label>
+    <Border Style="{DynamicResource GridBorder}"
+            Padding="30, 17, 30, 30" 
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center" 
+            Height="410" Width="750">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" VerticalAlignment="Center">
+                <Label Style="{DynamicResource H1}" HorizontalAlignment="Left" Content="Results"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Image Width="50" Source="/KeyBoardking;component/resources/images/icons/coin.png"/>
+                    <Label Style="{DynamicResource H1}" x:Name="Coin" Content=""/>
+                </StackPanel>
+            </Grid>
+            <Grid VerticalAlignment="Center" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid VerticalAlignment="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0" Style="{DynamicResource H3}" Content="{Binding HighScore}" HorizontalAlignment="Left"/>
+                    <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Bottom"  Orientation="Vertical">
+                        <Label Style="{DynamicResource H3}" Content="Score:" 
+                               VerticalAlignment="Center"/>
+                        <Label  Style="{DynamicResource H3}" Content="Tijd:" 
+                               VerticalAlignment="Center"/>
+                        <Label  Style="{DynamicResource H3}" Content="Goed:" 
+                               VerticalAlignment="Center"/>
+                        <Label  Style="{DynamicResource H3}" Content="Fouten:" 
+                               VerticalAlignment="Center"/>
+                        <Label  Style="{DynamicResource H3}" Content="LPM:" 
+                               VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Orientation="Vertical" HorizontalAlignment="Left">
+                        <Label Style="{DynamicResource H3}" Content="{Binding Score}" HorizontalAlignment="Left"/>
+                        <Label Style="{DynamicResource H3}" Content="{Binding Time}" HorizontalAlignment="Left"/>
+                        <Label Style="{DynamicResource H3}" Content="{Binding Accuracy}" HorizontalAlignment="Left"/>
+                        <Label Style="{DynamicResource H3}" Content="{Binding Mistakes}" HorizontalAlignment="Left"/>
+                        <Label Style="{DynamicResource H3}" Content="{Binding LettersPerMinute}" HorizontalAlignment="Left"/>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Column="1" HorizontalAlignment="Center">
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Label Content="Behaald:" Style="{DynamicResource H3}"/>
+                        <Label FontSize="125" HorizontalAlignment="Center">
+                            <Label.Style>
+                                <Style TargetType="{x:Type Label}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding PassedScore}" Value="True">
+                                            <Setter Property="Content" Value="✔"/>
+                                            <Setter Property="Foreground" Value="{DynamicResource Succes}"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding PassedScore}" Value="False">
+                                            <Setter Property="Content" Value="❌"/>
+                                            <Setter Property="Foreground" Value="{DynamicResource Failed}"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Label.Style>
+                        </Label>
+                        <Label HorizontalAlignment="Center" Content="{Binding RequiredScore}" Style="{DynamicResource H3}" FontSize="15"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="2" VerticalAlignment="Bottom" Margin="0,10,0,0">
+                <Components:NavigationButton ToPage="ChaptersPage" Style="{DynamicResource Button1}" HorizontalAlignment="Right" Content="Voltooi episode"/>
+            </Grid>
         </Grid>
-        <Grid Margin="400,0,0,0">
-            <Label Content="{Binding Score}" HorizontalAlignment="Left" Margin="49,51,0,0" VerticalAlignment="Top" Foreground="White" FontSize="28"/>
-            <Label Content="{Binding Time}" HorizontalAlignment="Left" Margin="49,114,0,0" VerticalAlignment="Top" Foreground="White" FontSize="28"></Label>
-            <Label Content="{Binding Mistakes}" HorizontalAlignment="Left" Margin="49,177,0,0" VerticalAlignment="Top" Foreground="White" FontSize="28"></Label>
-            <Label Content="{Binding LettersPerMinute}" HorizontalAlignment="Left" Margin="49,240,0,0" VerticalAlignment="Top" Foreground="White" FontSize="28"></Label>
-            <Button Content="Voltooi episode" Tag="ChaptersPage" Click="ButtonNavigate" HorizontalAlignment="Center" Margin="0,331,0,0" VerticalAlignment="Top" Height="51" Width="164" Background="#FF363636" BorderBrush="White" Foreground="White" FontSize="20"/>
-        </Grid>
-    </Grid>
+    </Border>
 </local:JumpPage>

@@ -1,20 +1,12 @@
-﻿using KeyboardKing.core;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using KeyboardKing.core;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Controller;
 using Model;
+using System.Globalization;
 
 namespace KeyboardKing.areas.main
 {
@@ -39,6 +31,7 @@ namespace KeyboardKing.areas.main
 
         public override void OnTick()
         {
+
         }
 
         /// <summary>
@@ -50,13 +43,13 @@ namespace KeyboardKing.areas.main
             this.Dispatcher.Invoke(() =>
             {
                 // Get logged in user data for the GetAllEpisodes query and set it to the itemsource of the overview ListBox.
-                string[] User = (string[])Session.Get("student");
-                List<List<string>> Episodes = DBQueries.GetAllEpisodes(User);
-                EpOverview.ItemsSource = Episodes;
+                User user = (User)Session.Get("student");
+                EpisodeController.RetrieveChapters();
+                EpOverview.ItemsSource = EpisodeController.Chapters.SelectMany(c => c.Episodes).ToList();
 
                 // Add a GroupDescription so that the chapters with it's episodes will be split.
                 CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(EpOverview.ItemsSource);
-                PropertyGroupDescription groupDescription = new PropertyGroupDescription("[0]");
+                PropertyGroupDescription groupDescription = new PropertyGroupDescription("ChapterName");
                 view.GroupDescriptions.Add(groupDescription);
                 EpOverview.Items.Refresh();
             });
@@ -68,25 +61,33 @@ namespace KeyboardKing.areas.main
         private void EpOverview_PlayClick(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;
-            if (button.DataContext is List<string>)
+            if (button.DataContext is Episode)
             {
                 //Gets the selected row data
-                List<string> row = (List<string>)button.DataContext;
+                Episode row = (Episode)button.DataContext;
 
                 //When the episode is finished this event will trigger.
                 //Since we can only call Navigate() inside the View this is needed.
-                EpisodeController.EpisodeFinished += OnEpisodeFinished;
-                Episode episode = EpisodeController.ParseEpisode(row[3]);
-                EpisodeController.Initialise(episode);
+                Episode episode = EpisodeController.ParseEpisode(row);
+                EpisodeController.Initialise(episode, false);
 
-                Navigate("EpisodePage");
+                NavigationController.NavigateToPage(Pages.EpisodeReadyUpPage);
             }
         }
+    }
 
-        private void OnEpisodeFinished(object sender, EventArgs e)
+    public class ChapterBadgeConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            EpisodeController.EpisodeFinished -= OnEpisodeFinished;
-            Navigate("EpisodeResultPage");
+            Chapter chapter = EpisodeController.Chapters.Find(c => c.Name == value.ToString());
+            
+            return $"/KeyboardKing;component/resources/images/badges/{chapter.Badge}.png";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return default;
         }
     }
 }

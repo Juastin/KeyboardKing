@@ -5,12 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-	<PackageReference Include="Konscious.Security.Cryptography.Argon2" Version="1.2.1" />
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.0" />
-    <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
+    <PackageReference Include="DiscordRichPresence" Version="1.0.175" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Cryptography\Cryptography.csproj" />
+    <ProjectReference Include="..\DatabaseController\DatabaseController.csproj" />
     <ProjectReference Include="..\Model\Model.csproj" />
   </ItemGroup>
 
