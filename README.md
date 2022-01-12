@@ -21,6 +21,7 @@ In order to pass an episode you'll need to get a minimum amount of points. Didn'
 
 # Shop 🛒
 Playing episodes will earn you coins. These coins can be spend in the shop to require new themes. In the future the shop will be filled with even more content like more music 🎵.
+![Shop Display](Resources/shop_display.gif)
 
 # Themes 🖌️
 There are plenty of themes to stand out from th croud. Using the coins you earn by playing episodes you can equip yourself with a whole arsenal of themes. Once you've unlocked them you can use them forever.
