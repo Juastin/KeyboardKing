@@ -24,7 +24,7 @@ Playing episodes will earn you coins. These coins can be spend in the shop to re
 ![Shop Display](Resources/shop_display.gif)
 
 # Themes 🖌️
-There are plenty of themes to stand out from th croud. Using the coins you earn by playing episodes you can equip yourself with a whole arsenal of themes. Once you've unlocked them you can use them forever.
+There are plenty of themes to stand out from the crowd. Using the coins you earn by playing episodes you can equip yourself with a whole arsenal of themes. Once you've unlocked them you can use them forever.
 
 ![Screenshots Themes](Resources/themes_overview.png)
 
