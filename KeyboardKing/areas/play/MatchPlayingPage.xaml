@@ -65,26 +65,37 @@
                     <TextBox BorderThickness="0" x:Name="TimerTextBox" Style="{DynamicResource TextBox2}" VerticalAlignment="Center" Background="Transparent"  Text="00:00"/>
                     <Button Style="{DynamicResource Button1}" Content="Afsluiten" VerticalAlignment="Top" HorizontalAlignment="Right" Click="ButtonExit" FontSize="26"/>
                 </Grid>
-                <Grid Margin="100,0" Grid.Row="1" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" TextOptions.TextFormattingMode="Display">
+                <Grid Margin="100,0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" TextOptions.TextFormattingMode="Display">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Grid.OpacityMask>
                         <LinearGradientBrush EndPoint="1,0"
-                                 StartPoint="0,0">
+                             StartPoint="0,0">
                             <GradientStop Color="Transparent"
-                                                  Offset="0" />
+                                              Offset="0" />
                             <GradientStop Color="White" 
-                                                  Offset="0.02"/>
+                                              Offset="0.02"/>
                             <GradientStop Color="White"
-                                                  Offset="0.98" />
+                                              Offset="0.98" />
                             <GradientStop Color="Transparent" 
-                                                  Offset="1"/>
+                                              Offset="1"/>
                         </LinearGradientBrush>
                     </Grid.OpacityMask>
-                    <Grid>
-                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="50" x:Name="WordOverlayCorrect" Text="{Binding WordOverlayCorrect}" Foreground="Green"/>
+                    <Grid  Grid.Column="0">
+                        <ItemsControl ItemsSource="{Binding WordOverlayCorrect}" VerticalAlignment="Center">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Style="{DynamicResource WordOverlay}" Foreground="Green" x:Name="WordOverlayCorrect" FontSize="50" Text="{Binding}" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
                     </Grid>
                     <Border Grid.Column="1" BorderThickness="3, 0, 0, 0">
                         <Border.BorderBrush>
@@ -104,10 +115,38 @@
                             </DrawingBrush>
                         </Border.BorderBrush>
                         <Grid>
-                            <Label FontSize="50" x:Name="WordOverlay" Content="{Binding WordOverlay }" Foreground="{DynamicResource TextColor}"/>
-                            <Label FontSize="50" x:Name="WordOverlayWrong" Content="{Binding WordOverlayWrong}" Foreground="Red"/>
+                            <ItemsControl ItemsSource="{Binding WordOverlay}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Style="{DynamicResource WordOverlay}" Foreground="{DynamicResource TextColor}" x:Name="WordOverlay" FontSize="50" Text="{Binding}" />
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                            <ItemsControl ItemsSource="{Binding WordOverlayWrong}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Style="{DynamicResource WordOverlay}" Foreground="Red" x:Name="WordOverlayWrong" FontSize="50" Text="{Binding}" />
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
                         </Grid>
                     </Border>
+                </Grid>
+                <Grid Grid.Row="2">
+                    <ProgressBar Background="{DynamicResource Color4}" Template="{DynamicResource ProgressBar}" 
+                         VerticalAlignment="Bottom" Height="20" Minimum="0" 
+                         Maximum="{Binding MaxLetters}" 
+                         Value="{Binding LettersTyped, Mode=OneWay}"/>
                 </Grid>
                 <Grid Grid.Row="2">
                     <ProgressBar Background="{DynamicResource Color4}" Template="{DynamicResource ProgressBar}" VerticalAlignment="Bottom" Height="20" Minimum="0" Maximum="{Binding MaxLetters}" Value="{Binding LettersTyped, Mode=OneWay}"/>

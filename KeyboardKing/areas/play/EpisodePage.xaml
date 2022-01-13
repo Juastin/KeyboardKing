@@ -51,10 +51,10 @@
                         </LinearGradientBrush>
                     </Grid.OpacityMask>
                     <Grid  Grid.Column="0">
-                        <ItemsControl ItemsSource="{Binding WordOverlayCorrect}" VerticalAlignment="Center" HorizontalAlignment="Right">
+                        <ItemsControl ItemsSource="{Binding WordOverlayCorrect}" VerticalAlignment="Center">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
-                                    <StackPanel Orientation="Horizontal" />
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"/>
                                 </ItemsPanelTemplate>
                             </ItemsControl.ItemsPanel>
                             <ItemsControl.ItemTemplate>
