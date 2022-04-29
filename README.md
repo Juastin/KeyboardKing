@@ -1,11 +1,11 @@
 # 👑 KeyboardKing 👑
 Learn to type fast and correct with KeyboardKing!  
-This application was made for a school project in year 2 during the minor OOSDD on Windesheim HBO-ICT.
+This application was made for a school project in year 2 on Windesheim HBO-ICT during the minor Object-Oriënted Software Design & Development.
 
 ![Screenshots Application](Resources/screen_overview.png)
 
 This application will teach you to type fast and flawlessly without looking at the keyboard.  
-It doesn't matter if you're a beginner or advanced user, you'll find KeyboardKing will enhance your skills.
+It doesn't matter if you're a beginner or advanced user, you'll find that KeyboardKing will enhance your skills.
 
 ### A few things you can do in the application:
 
