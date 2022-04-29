@@ -1,6 +1,6 @@
 # 👑 KeyboardKing 👑
 Learn to type fast and correct with KeyboardKing!  
-This application was made for a school project in year 2 on Windesheim HBO-ICT during the minor Object-Oriënted Software Design & Development.
+This application was made for a school project for the minor Object-Oriënted Software Design & Development on Windesheim HBO-ICT.
 
 ![Screenshots Application](Resources/screen_overview.png)
 
